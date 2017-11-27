@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QString>
+#include "source/ltiff.h"
 
 class NutilApplication
 {
@@ -15,6 +16,7 @@ public:
 
 private:
     bool RotateTiff();
+    bool Transform();
     void PrintUsage();
 
 };

@@ -2,53 +2,79 @@
 
 #include <string>
 #include <iostream>
+#include <QElapsedTimer>
+#include "source/util/util.h"
 
 using namespace std;
 
 class Counter {
 
-  int ticks;
-  int Max;
-  int current, currentTick;
-  int percent;
-  bool outputClams;
- public:
-  Counter(int m, string s, bool output) {
-    outputClams = output;
-    if (outputClams) 
-      cout << s << endl;
-    Init(m);
-  }
-
-  Counter(int m, string s) {
-    outputClams = true;
-    cout << s << endl;
-    Init(m);
-  }
-
-
-  void Init(int m) {
-    ticks = 2;
-    Max = m;
-    current = 0;
-    currentTick = -1;
-    if (outputClams) 
-      cout << "[";
-    
-  }
-
-  void Tick() {
-    percent = (current*100)/Max;
-    //cout << percent << endl;
-    if (percent % ticks==0 && percent!=currentTick) {
-      currentTick = percent;
-      cout << ".";
-      cout.flush();
-      if (percent==100-ticks)
-	if (outputClams)
-	  cout << "]" << endl;;
+    int ticks;
+    float Max;
+    int current, currentTick;
+    float percent;
+    string str;
+    bool outputClams;
+    long prevTime;
+    long startTime;
+    QElapsedTimer ttimer;
+public:
+    Counter(int m, string s, bool output) {
+        outputClams = output;
+        if (outputClams)
+            cout << s << endl;
+        Init(m);
     }
-    current++;
-  }
+
+    Counter(int m, string s) {
+        str = s;
+        outputClams = true;
+        cout << s << endl;
+        Init(m);
+
+        ttimer.start();
+        prevTime = ttimer.elapsed();
+        startTime = ttimer.elapsed();
+    }
+
+
+    void Init(int m) {
+        ticks = 2;
+        Max = m;
+        current = 0;
+        currentTick = -1;
+        if (outputClams)
+            cout << "[";
+        ttimer.start();
+        prevTime = ttimer.elapsed();
+        startTime = ttimer.elapsed();
+
+    }
+
+
+
+
+    void Tick() {
+
+        int dt = ttimer.elapsed() - prevTime;
+        prevTime = ttimer.elapsed();
+        percent = (current*100.0)/(float)Max;
+
+        int totalTime = (ttimer.elapsed() - startTime)/(percent/100.0);
+
+        int timeLeft = (ttimer.elapsed());
+
+        //cout << percent << endl;
+        //if (percent % ticks==0 && percent!=currentTick)
+        {
+            currentTick = percent;
+            cout << "\r" <<str << " " << QString::number( percent,'f',1).toStdString() << "%" << "    " << Util:: MilisecondToString(timeLeft).toStdString() << " of total "  <<Util::MilisecondToString(totalTime).toStdString() << "                                                  ";
+            cout.flush();
+            if (percent==100-ticks)
+                if (outputClams)
+                    cout << "]" << endl;;
+        }
+        current++;
+    }
 
 };
