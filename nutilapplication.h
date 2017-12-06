@@ -18,7 +18,7 @@ private:
     bool RotateTiff();
     bool Transform();
     void PrintUsage();
-
+    bool Batch();
 };
 
 #endif // NUTILAPPLICATION_H

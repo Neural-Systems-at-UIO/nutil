@@ -12,13 +12,13 @@ class Counter {
     int ticks;
     float Max;
     int current, currentTick;
-    float percent;
     string str;
     bool outputClams;
     long prevTime;
     long startTime;
     QElapsedTimer ttimer;
 public:
+    float percent;
     Counter(int m, string s, bool output) {
         outputClams = output;
         if (outputClams)
@@ -66,6 +66,7 @@ public:
 
         //cout << percent << endl;
         //if (percent % ticks==0 && percent!=currentTick)
+        if (outputClams)
         {
             currentTick = percent;
             cout << "\r" <<str << " " << QString::number( percent,'f',1).toStdString() << "%" << "    " << Util:: MilisecondToString(timeLeft).toStdString() << " of total "  <<Util::MilisecondToString(totalTime).toStdString() << "                                                  ";

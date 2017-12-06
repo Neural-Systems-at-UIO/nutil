@@ -13,6 +13,7 @@ TEMPLATE      = app
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 QMAKE_CXXFLAGS += -openmp
+QMAKE_CXXFLAGS += -O3
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,36 +25,30 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 
 SOURCES += main.cpp \
-    source/util/buffer2d.cpp \
     source/util/util.cpp \
-    source/tinytiff/tinytiffhighrestimer.cpp \
-    source/tinytiff/tinytiffreader.cpp \
-    source/tinytiff/tinytiffwriter.cpp \
-    nutilapplication.cpp \
     source/util/buffer2d.cpp \
-    source/util/util.cpp \
     main.cpp \
     nutilapplication.cpp \
     mainwindow.cpp \
     node.cpp \
-    source/ltiff.cpp
+    source/ltiff.cpp \
+    source/nauto.cpp \
+    source/nutilprocess.cpp \
+    processmanager.cpp
 
 HEADERS += \
-    source/util/buffer2d.h \
     source/util/random.h \
     source/util/util.h \
     nutilapplication.h \
-    source/tinytiff/tinytiffhighrestimer.h \
-    source/tinytiff/tinytiffreader.h \
-    source/tinytiff/tinytiffwriter.h \
     source/util/buffer2d.h \
-    source/util/random.h \
-    source/util/util.h \
-    nutilapplication.h \
     source/util/counter.h \
     mainwindow.h \
     node.h \
-    source/ltiff.h
+    source/ltiff.h \
+    source/util/cinifile.h \
+    source/nauto.h \
+    source/nutilprocess.h \
+    processmanager.h
 
 FORMS    += mainwindow.ui
 
@@ -68,3 +63,10 @@ unix|win32: LIBS += -L$$PWD/lib/ -llibtiff
 
 INCLUDEPATH += $$PWD/lib/libtiff
 DEPENDPATH += $$PWD/lib/libtiff
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxld
+else:unix: LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
+
+INCLUDEPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
+DEPENDPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp

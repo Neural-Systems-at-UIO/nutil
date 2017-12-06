@@ -1,0 +1,61 @@
+//
+// Project - Definition - File created by PBUILD Version  1.90.355
+// Date: 17.01.2014 Time: 14:29:22
+//
+
+[PROJECT]
+    COMPILE       = xpp
+    COMPILE_FLAGS = /q /w /wi /wl /wu
+    DEBUG         = yes
+    GUI           = yes
+    LINKER        = alink
+    LINK_FLAGS    = 
+    RC_COMPILE    = arc
+    RC_FLAGS      = /v
+    PROJECT.XPJ
+
+[PROJECT.XPJ]
+    TEST1.EXE
+    TEST2.EXE
+
+[TEST1.EXE]
+// $START-AUTODEPEND
+    HBLIBXL.OBJ
+    TEST1.OBJ
+    STD.CH
+    SET.CH
+    NATMSG.CH
+    GET.CH
+    PROMPT.CH
+    MEMVAR.CH
+    COLLAT.CH
+    GRA.CH
+    XBP.CH
+    COMMON.CH
+    OT4XB.CH
+    HBLIBXL.CH
+    INKEY.CH
+// $STOP-AUTODEPEND
+    HBLIBXL.PRG
+    TEST1.PRG
+
+[TEST2.EXE]
+// $START-AUTODEPEND
+    HBLIBXL.OBJ
+    TEST2.OBJ
+    STD.CH
+    SET.CH
+    NATMSG.CH
+    GET.CH
+    PROMPT.CH
+    MEMVAR.CH
+    COLLAT.CH
+    GRA.CH
+    XBP.CH
+    COMMON.CH
+    OT4XB.CH
+    HBLIBXL.CH
+    INKEY.CH
+// $STOP-AUTODEPEND
+    HBLIBXL.PRG
+    TEST2.PRG

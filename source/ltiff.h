@@ -56,20 +56,26 @@ public:
         return nullptr;
     }
 
+    void UpdateBuffer() {
+        while (stack.length()>=buffers.length()/2) {
+            LTiffBuffer* b = stack[0];
+            b->m_x=-1;
+            b->m_y=-1;
+            stack.remove(0);
+        }
+    }
+
     LTiffBuffer* getBuffer(int x, int y, TIFF* tif) {
         for (LTiffBuffer* tbuf : stack) {
             if (tbuf->m_x == x && tbuf->m_y==y)
                 return tbuf;
         }
-        if (stack.length()>=buffers.length()) {
-            LTiffBuffer* b = stack[0];
-            b->m_x=-1;
-            b->m_y=-1;
-            stack.remove(0);
-
-        }
 
         LTiffBuffer* b = getFree();
+        if (b==nullptr) {
+            qDebug() << "Error: could not find free buffer";
+            exit(1);
+        }
         b->m_x = x;
         b->m_y = y;
         TIFFReadTile(tif, b->m_buf, x, y, 0,0);
@@ -91,9 +97,14 @@ public:
     uint32 m_tileWidth, m_tileHeight;
     uint32 m_noTilesX, m_noTilesY;
     TIFF* m_tif;
-    tdata_t m_buf;
-    int m_currentTileX, m_currentTileY;
-    short m_samplesPerPixel, m_bitsPerSample, m_photo, m_config;
+    float m_progress = 0;
+    QVector<tdata_t> m_buf;
+    QVector<int> m_currentTileX, m_currentTileY;
+    short m_samplesPerPixel, m_bitsPerSample, m_photo, m_config, m_compression;
+
+    const QString m_compressionTypes[11] = {"not specified", "none", "CCITT RLE", "CCITT G3", "CCITT G4", "LZW", "JPEG", "JPEG New Style", "Deflate (adobe)", "9","10"};
+
+    static const int max_thread_num = 16;
 
     LTiffBufferList bufferStack;
 
@@ -101,14 +112,17 @@ public:
     ~LTiff();
     bool Open(QString filename);
     void New(QString filename);
-    void WriteBuffer(int x, int y);
-    void ReadBuffer(int x, int y);
+    void WriteBuffer(int x, int y, int thread_num);
+    void ReadBuffer(int x, int y, int thread_num);
     void ApplyParameters();
-    void CreateFromMeta(LTiff& oTiff);
+    void CreateFromMeta(LTiff& oTiff, short compression);
     void CopyAllData(LTiff& oTiff);
-    void AllocateBuffer();
+    void AllocateBuffers();
     void Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QColor background);
-    QColor GetTiledRGB(int x, int y);
+    QColor GetTiledRGB(int x, int y, int thread_num);
+    void SetupBuffers();
+    void PrintImageInfo();
+
 
     void Close();
 };

@@ -3,6 +3,8 @@
 //#include <QtGlobal>
 
 QString Util::path = "";
+QElapsedTimer Util::globalTimer;
+
 
 void Util::Tokenize(const string& str,
                       vector<string>& tokens,

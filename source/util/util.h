@@ -17,6 +17,7 @@
 #include <QElapsedTimer>
 #include <QTextStream>
 #include <QDebug>
+#include <QElapsedTimer>
 
 //#include "random.h"
 
@@ -29,7 +30,9 @@
    qDebug() << (name) << " took "<< QString::number(ttimer.elapsed()/1000.0) << " seconds"; \
 }
 
-
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
 
 
 using namespace std;
@@ -37,6 +40,9 @@ using namespace std;
 class Util {
 
 public:
+
+    static QElapsedTimer globalTimer;
+
     static void Tokenize(const string& str,
                          vector<string>& tokens,
                          const string& delimiters = " ");
@@ -51,6 +57,8 @@ public:
     static bool verify_file_bool(string filename);
     static string trim(string s);
     static QString path;
+
+
     static float floatRandom(const float & min, const float & max) {
         static std::mt19937 generator;
         std::uniform_real_distribution<float> distribution(min, max);
