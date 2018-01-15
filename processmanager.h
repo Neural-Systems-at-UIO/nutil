@@ -8,8 +8,10 @@ class ProcessItem {
 public:
     QString m_inFile;
     QString m_outFile;
+    QString m_infoText;
     float m_angle;
     float m_scale;
+
 
     ProcessItem() {
 
@@ -29,6 +31,8 @@ class ProcessManager
 {
 public:
     ProcessManager();
+
+    bool m_processFinished;
 
     QVector<ProcessItem*> m_processItems;
     QVector<NutilProcess*> m_processes;

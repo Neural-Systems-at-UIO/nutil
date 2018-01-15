@@ -13,7 +13,7 @@ TEMPLATE      = app
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 QMAKE_CXXFLAGS += -openmp
-QMAKE_CXXFLAGS += -O3
+QMAKE_CXXFLAGS += -O2
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,7 +34,8 @@ SOURCES += main.cpp \
     source/ltiff.cpp \
     source/nauto.cpp \
     source/nutilprocess.cpp \
-    processmanager.cpp
+    processmanager.cpp \
+    source/util/lmessage.cpp
 
 HEADERS += \
     source/util/random.h \
@@ -48,7 +49,8 @@ HEADERS += \
     source/util/cinifile.h \
     source/nauto.h \
     source/nutilprocess.h \
-    processmanager.h
+    processmanager.h \
+    source/util/lmessage.h
 
 FORMS    += mainwindow.ui
 
@@ -65,7 +67,7 @@ INCLUDEPATH += $$PWD/lib/libtiff
 DEPENDPATH += $$PWD/lib/libtiff
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxld
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
 else:unix: LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
 
 INCLUDEPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp

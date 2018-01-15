@@ -13,6 +13,16 @@ int main(int argc, char *argv[])
     }
     else {
         NutilApplication a(argc, argv);
-        return a.exec();
+        a.exec();
     }
 }
+
+
+
+
+
+
+
+
+
+

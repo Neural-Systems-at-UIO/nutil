@@ -3,11 +3,8 @@
 
 #include <QMainWindow>
 #include "source/nauto.h"
+#include "source/util/lmessage.h"
 #include <QThread>
-
-
-
-
 
 namespace Ui {
     class MainWindow;
@@ -21,22 +18,23 @@ public:
     bool quit = false;
     void Init(Nauto* n) {
         m_nauto = n;
-
     }
 
     Q_OBJECT
     void run() override {
 
         while (!quit) {
-            msleep(100);
+            msleep(25);
 
             m_nauto->BuildInfo();
             emit TextChanged(m_nauto->m_mainInfo);
+            emit MessageChanged(LMessage::lMessage.Build());
         }
 
     }
 signals:
     void TextChanged(QString);
+    void MessageChanged(QString);
 
 };
 
@@ -71,19 +69,21 @@ private slots:
     void on_btnStart_clicked();
 
 
+    void on_btnStop_clicked();
+
 private:
     Nauto m_nauto;
     UpdateThread* m_updateThread;
     WorkerThread* m_workerThread = nullptr;
 
-    void Error(QString q);
-    void UpdateError();
-    void Update();
     void AppQuit();
+    void Abort();
+    void FillSheetCombo();
     void closeEvent(QCloseEvent * event) override;
 
 public slots:
     void OnInfoTextChanged(QString);
+    void OnMessageTextChanged(QString);
 };
 
 

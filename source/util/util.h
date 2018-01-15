@@ -52,6 +52,7 @@ public:
     static string toString(double d, string param);
     static string toString(double d);
     static string toString(int d);
+    static bool CancelSignal;
     static const char* read_textfile(string filename);
     static void verify_file(string filename);
     static bool verify_file_bool(string filename);
@@ -71,6 +72,15 @@ public:
 
     static QVector3D floor(const QVector3D v) {
         return QVector3D( max(0.0f, v.x()), max(0.0f,v.y()), max(0.0f,v.z())  );
+    }
+
+    static QVector3D Rotate2D(QVector3D point, QVector3D center, float angle) {
+        QVector3D rot;
+        point = point - center;
+        rot.setX(point.x()*cos(angle)-point.y()*sin(angle));
+        rot.setY(point.y()*cos(angle)+point.x()*sin(angle));
+        return rot + center;
+
     }
 
     static bool IntersectSphere(QVector3D o, QVector3D d, QVector3D r,QVector3D& isp1,QVector3D& isp2, double& t0, double& t1) {

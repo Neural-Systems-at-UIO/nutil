@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_updateThread = new UpdateThread();
     connect(m_updateThread, SIGNAL(TextChanged(QString)), this, SLOT(OnInfoTextChanged(QString)));
+    connect(m_updateThread, SIGNAL(MessageChanged(QString)), this, SLOT(OnMessageTextChanged(QString)));
     m_updateThread->Init(&m_nauto);
     m_updateThread->start();
 
@@ -26,55 +27,31 @@ void MainWindow::on_btnLoad_clicked()
 
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("Open Excel document"), "..\\TestData\\", tr("Excel Files (*.xls)"));
-
+    if (fileName=="")
+        return;
     m_nauto.Load(fileName);
-    UpdateError();
-
+    FillSheetCombo();
 }
 
 void MainWindow::on_btnStart_clicked()
 {
     if (!m_nauto.m_book) {
-        Error("No file loaded!");
+        LMessage::lMessage.Error("No file loaded!");
         return;
     }
 
-    int sheetNo = ui->lneSheet->text().toInt();
-    m_nauto.m_sheetIndex = sheetNo;
-    //m_nauto.Execute();
+    m_nauto.m_sheetIndex = ui->cmbSheets->currentIndex();;
+    //m_nauto.Execute(); // Non-threaded
     m_workerThread = new WorkerThread();
     m_workerThread->Init(&m_nauto);
     m_workerThread->start();
-    UpdateError();
-
-
 }
 
-void MainWindow::Error(QString q)
-{
-    m_nauto.m_error = q;
-    UpdateError();
-
-}
-
-
-
-void MainWindow::UpdateError()
-{
-    if (m_nauto.m_error!="")
-        ui->txtError->setText(m_nauto.m_error);
-    m_nauto.m_error = "";
-}
-
-void MainWindow::Update()
-{
-    //m_nauto.BuildInfo();
-    //ui->txtInfo->setText(m_nauto.m_mainInfo);
-}
 
 void MainWindow::AppQuit()
 {
     close();
+    Abort();
     //Wait maximum 1 second
     if (m_updateThread) {
         m_updateThread->quit = true;
@@ -90,7 +67,34 @@ void MainWindow::AppQuit()
         }
 
     }
+    m_nauto.Release();
     QApplication::quit();
+}
+
+void MainWindow::Abort()
+{
+    if (m_workerThread) {
+
+        Util::CancelSignal = true;
+
+        if (m_nauto.m_status != Nauto::Status::Idle) {
+
+            while (!m_nauto.m_pm.m_processFinished) {
+                m_workerThread->wait(200);
+            }
+            m_workerThread->terminate();
+        }
+        delete m_workerThread;
+        m_workerThread = nullptr;
+        m_nauto.m_status = Nauto::Status::Idle;
+    }
+
+}
+
+void MainWindow::FillSheetCombo()
+{
+    ui->cmbSheets->clear();
+    ui->cmbSheets->addItems(m_nauto.getSheetList());
 }
 
 void MainWindow::closeEvent(QCloseEvent * event)
@@ -100,4 +104,15 @@ void MainWindow::closeEvent(QCloseEvent * event)
 void MainWindow::OnInfoTextChanged(QString info)
 {
     ui->txtInfo->setText(info);
+}
+
+void MainWindow::OnMessageTextChanged(QString msg)
+{
+    ui->txtError->setText(msg);
+}
+
+
+void MainWindow::on_btnStop_clicked()
+{
+    Abort();
 }

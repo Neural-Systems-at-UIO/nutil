@@ -93,6 +93,7 @@ class LTiff
 {
 public:
 
+    QString m_filename;
     uint32 m_width, m_height;
     uint32 m_tileWidth, m_tileHeight;
     uint32 m_noTilesX, m_noTilesY;
@@ -108,6 +109,8 @@ public:
 
     LTiffBufferList bufferStack;
 
+    QVector3D m_boundsMin, m_boundsMax;
+
     LTiff();
     ~LTiff();
     bool Open(QString filename);
@@ -115,13 +118,15 @@ public:
     void WriteBuffer(int x, int y, int thread_num);
     void ReadBuffer(int x, int y, int thread_num);
     void ApplyParameters();
-    void CreateFromMeta(LTiff& oTiff, short compression);
+    void CreateFromMeta(LTiff& oTiff, short compression, float rotationAngle, QColor background);
     void CopyAllData(LTiff& oTiff);
     void AllocateBuffers();
     void Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QColor background);
     QColor GetTiledRGB(int x, int y, int thread_num);
     void SetupBuffers();
     void PrintImageInfo();
+    void FindBoundsOld(QColor background);
+    void ClipToCurrentBorders(short compression, QColor background);
 
 
     void Close();

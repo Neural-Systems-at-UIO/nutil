@@ -11,6 +11,7 @@
 class NutilProcess
 {
 public:
+    QString m_infoText;
     NutilProcess();
     int m_id;
     float getProgress();

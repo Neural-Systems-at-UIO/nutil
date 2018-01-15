@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>818</width>
-    <height>615</height>
+    <width>962</width>
+    <height>759</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,19 +31,19 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>100</y>
-      <width>751</width>
-      <height>371</height>
+      <y>80</y>
+      <width>901</width>
+      <height>391</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="btnStart">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>300</x>
       <y>480</y>
       <width>93</width>
-      <height>28</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
@@ -53,30 +53,14 @@
    <widget class="QPushButton" name="btnStop">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>490</y>
+      <x>410</x>
+      <y>480</y>
       <width>93</width>
-      <height>28</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
      <string>Stop</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lneSheet">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>480</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="inputMask">
-     <string>999</string>
-    </property>
-    <property name="text">
-     <string>0</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="txtError">
@@ -84,7 +68,36 @@
      <rect>
       <x>30</x>
       <y>530</y>
-      <width>751</width>
+      <width>901</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>20</y>
+      <width>441</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Courier</family>
+      <pointsize>50</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Nutil 0.03</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cmbSheets">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>480</y>
+      <width>251</width>
       <height>31</height>
      </rect>
     </property>
@@ -95,7 +108,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>818</width>
+     <width>962</width>
      <height>26</height>
     </rect>
    </property>
@@ -107,8 +120,9 @@
    </widget>
    <widget class="QMenu" name="menuJadda">
     <property name="title">
-     <string>Jadda</string>
+     <string>Help</string>
     </property>
+    <addaction name="actionAbout_Nutil"/>
    </widget>
    <addaction name="menuTest"/>
    <addaction name="menuJadda"/>
@@ -117,6 +131,11 @@
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionAbout_Nutil">
+   <property name="text">
+    <string>About Nutil</string>
    </property>
   </action>
  </widget>

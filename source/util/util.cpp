@@ -4,6 +4,7 @@
 
 QString Util::path = "";
 QElapsedTimer Util::globalTimer;
+bool Util::CancelSignal = false;
 
 
 void Util::Tokenize(const string& str,
