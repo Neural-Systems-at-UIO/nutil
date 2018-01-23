@@ -8,7 +8,7 @@
 using namespace std;
 
 class Counter {
-
+public:
     int ticks;
     float Max;
     int current, currentTick;
@@ -19,6 +19,7 @@ class Counter {
     QElapsedTimer ttimer;
 public:
     float percent;
+    Counter() {}
     Counter(int m, string s, bool output) {
         outputClams = output;
         if (outputClams)
@@ -32,9 +33,6 @@ public:
         cout << s << endl;
         Init(m);
 
-        ttimer.start();
-        prevTime = ttimer.elapsed();
-        startTime = ttimer.elapsed();
     }
 
 
@@ -45,6 +43,7 @@ public:
         currentTick = -1;
         if (outputClams)
             cout << "[";
+
         ttimer.start();
         prevTime = ttimer.elapsed();
         startTime = ttimer.elapsed();

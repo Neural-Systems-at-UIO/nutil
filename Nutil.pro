@@ -35,7 +35,10 @@ SOURCES += main.cpp \
     source/nauto.cpp \
     source/nutilprocess.cpp \
     processmanager.cpp \
-    source/util/lmessage.cpp
+    source/util/lmessage.cpp \
+    source/util/limage.cpp \
+    source/util/area.cpp \
+    source/util/atlaslabel.cpp
 
 HEADERS += \
     source/util/random.h \
@@ -50,7 +53,10 @@ HEADERS += \
     source/nauto.h \
     source/nutilprocess.h \
     processmanager.h \
-    source/util/lmessage.h
+    source/util/lmessage.h \
+    source/util/limage.h \
+    source/util/area.h \
+    source/util/atlaslabel.h
 
 FORMS    += mainwindow.ui
 

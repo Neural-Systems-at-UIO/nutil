@@ -49,6 +49,10 @@ public:
     }
 
     LTiffBuffer* getFree() {
+        if (buffers.size()==0) {
+            qDebug() << "Error: buffers not initialized. ";
+            exit(1);
+        }
         for (LTiffBuffer *b : buffers)
             if (b->m_x== -1)
                 return b;
@@ -73,7 +77,8 @@ public:
 
         LTiffBuffer* b = getFree();
         if (b==nullptr) {
-            qDebug() << "Error: could not find free buffer";
+            qDebug() << "Error: could not find free buffer for: " << x << ", " << y;
+            qDebug() << "Did you remember to call updatebuffer? (dust)";
             exit(1);
         }
         b->m_x = x;
@@ -121,13 +126,13 @@ public:
     void CreateFromMeta(LTiff& oTiff, short compression, float rotationAngle, QColor background);
     void CopyAllData(LTiff& oTiff);
     void AllocateBuffers();
-    void Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QColor background);
+    void Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QColor background, Counter* counter);
     QColor GetTiledRGB(int x, int y, int thread_num);
     void SetupBuffers();
     void PrintImageInfo();
     void FindBoundsOld(QColor background);
-    void ClipToCurrentBorders(short compression, QColor background);
-
+    QString ClipToCurrentBorders(short compression, QColor background, Counter* counter);
+    void ReleaseBuffers();
 
     void Close();
 };

@@ -79,7 +79,7 @@ void MainWindow::Abort()
 
         if (m_nauto.m_status != Nauto::Status::Idle) {
 
-            while (!m_nauto.m_pm.m_processFinished) {
+            while (!m_nauto.m_pm->m_processFinished) {
                 m_workerThread->wait(200);
             }
             m_workerThread->terminate();

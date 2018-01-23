@@ -59,78 +59,58 @@ void Nauto::Execute()
         LMessage::lMessage.Error(m_book->errorMessage());
     }
 
-    ReadeHeader();
+    ReadHeader();
 
     m_status = Status::Working;
     Util::CancelSignal = false;
 
+    if (m_pm!=nullptr)
+        delete m_pm;
 
-    if (m_type.toLower()=="rotation")
-        ExecuteTransformation();
-    else
+    m_pm = ProcessManagerFactory::CreateProcessManager(m_type);
+
+    if (m_pm == nullptr) {
         LMessage::lMessage.Error("Unknown command: " + m_type);
+        m_status = Status::Idle;
+        return;
+    }
+
+    m_pm->ReadHeader(m_sheet);
+    if (m_pm->Build(m_sheet))
+        m_pm->Execute();
+    else
+        m_status = Status::Idle;
+
+    // Execute stuff
 
     if (m_status != Status::Idle)
         m_status = Status::Finished;
 }
 
-void Nauto::ExecuteTransformation()
-{
-    bool ok = false;
-    int y = 8;
-    int x = 2;
-
-    m_pm.m_processItems.clear();
-
-
-    bool isJente = false;
-
-
-    while (!ok) {
-        QString inFile = QString::fromWCharArray(m_sheet->readStr(y,x));
-        if (inFile == "") {
-            ok = true;
-            break;
-        }
-        inFile += ".tif";
-
-        QFile test(m_inputDir+inFile);
-        if(!test.exists()) {
-            LMessage::lMessage.Error("Could not find file '" + inFile + "' for processing. Please fix input data and try again.");
-            m_status = Status::Idle;
-            return;
-        }
-
-        QString outFile = QString::fromWCharArray(m_sheet->readStr(y,x+1)) + ".tif";
-        float angle = m_sheet->readNum(y,x+2);
-
-        angle = angle/360*(2*M_PI);
-
-        float scale = 1;//QString::fromWCharArray(m_sheet->readStr(y,x+3)).toFloat();
-        m_pm.m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, angle, scale));
-        y++;
-        qDebug() << "Added " << inFile << " to " << outFile;
-    }
-
-    m_pm.ExecuteTransform(m_compression, m_background);
-
-
-
-}
-
-void Nauto::ReadeHeader()
+void Nauto::ReadHeader()
 {
     m_type = QString::fromWCharArray(m_sheet->readStr(0,1));
     m_batchName = QString::fromWCharArray(m_sheet->readStr(1,1));
-    m_compression = QString::fromWCharArray(m_sheet->readStr(2,1));
-    m_inputDir = QString::fromWCharArray(m_sheet->readStr(4,1));
-    m_outputDir = QString::fromWCharArray(m_sheet->readStr(5,1));
-    float col_r = m_sheet->readNum(3,1);
-    float col_g = m_sheet->readNum(3,2);
-    float col_b = m_sheet->readNum(3,3);
-    m_background = QColor(col_r, col_g, col_b);
 
 }
+
+
+/*void Nauto::ExecuteAutoContrast()
+{
+    m_pm.m_processItems.clear();
+    QDirIterator it(m_inputDir, QStringList() << "*.tif", QDir::Files);
+    while (it.hasNext()) {
+        QString inFileFull = it.next();
+        QStringList l = inFileFull.split('/');
+        QString inFile = l[l.length()-1];
+        m_pm.m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ inFile, 0, 0, "", "m_outputDir"));
+        qDebug() << "Added " << inFile << " for AutoContrast processing";
+    }
+    m_pm.ExecuteAutoContrast(m_compression, m_background);
+
+}
+*/
+
 
 void Nauto::BuildInfo()
 {
@@ -143,35 +123,33 @@ void Nauto::BuildInfo()
 
     QString t = "";
     t = t + "Batch <b>'" + m_batchName + "'</b> type <b>" + m_type + "</b><br>";
-    t = t + "Converting from <b>" + m_inputDir + "</b> to <b>"  + m_outputDir + "</b> with saved compression <b>" + m_compression + "</b><br>";
-    t = t + "Background color: (" + QString::number(m_background.red()) + ", " + QString::number(m_background.green()) + ", " + QString::number(m_background.blue()) + ")<br>";
+//    t = t + "Converting from <b>" + m_inputDir + "</b> to <b>"  + m_outputDir + "</b> with saved compression <b>" + m_compression + "</b><br>";
+//    t = t + "Background color: (" + QString::number(m_background.red()) + ", " + QString::number(m_background.green()) + ", " + QString::number(m_background.blue()) + ")<br>";
 
 //    t = t + "Total amou: " + QString::number(m_pm.m_processes.length()) + " \n";
 
     t = t +"<br>";
     float total = 0;
 
-    for (int i=0;i<m_pm.m_processes.length();i++) {
-        float progress = m_pm.m_processes[i]->getProgress();
+    for (int i=0;i<m_pm->m_processes.length();i++) {
+        float progress = m_pm->m_processes[i]->getProgress();
         total+=min(progress,100.0f);
-        if (progress<100 && progress >0) {
-            float degrees = m_pm.m_processItems[i]->m_angle;
-            t = t + "Worker " +QString::number(i) + ": " + m_pm.m_processItems[i]->m_inFile + " [ <b>" +  QString::number( progress, 'f', 1 ) + "% </b>] " + m_pm.m_processes[i]->m_infoText;
-            /*for (int j=0;j<progress;j++) {
-            t+="#";
-        }*/
+        if (progress<=100 && progress >=0)
+        {
+            //float degrees = m_pm.m_processItems[i]->m_angle;
+            t = t + "Worker " +QString::number(i) + ": " + m_pm->m_processItems[i]->m_inFile + " [ <b>" +  QString::number( progress, 'f', 1 ) + "% </b>] " + m_pm->m_processes[i]->m_infoText;
             t = t + "<br>";
         }
     }
     if (m_status == Status::Working)
         m_elapsedTime = Util::globalTimer.elapsed();
 
-    total/=m_pm.m_processes.length();
+    total/=m_pm->m_processes.length();
     int totalTime = (m_elapsedTime )/(total/100.0);
 
 
     t+="Total: [ <b><font size=\"+1\">"+ QString::number(total,'f', 1)+ "% </font></b>] <br>";
-    t+="Elapsed: "+ Util::MilisecondToString(m_elapsedTime) +" / <b>" + Util::MilisecondToString(totalTime) + "</b> <br>";
+    t+="Elapsed: "+ Util::MilisecondToString(m_elapsedTime) +" / <b> <br>";// + Util::MilisecondToString(totalTime) + "</b> <br>";
 
     if (m_status == Status::Finished) {
         t+="<br>Job is finished and Nutil can be safely closed!<br>";

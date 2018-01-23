@@ -113,34 +113,33 @@ void LTiff::FindBoundsOld(QColor background)
 /*
  * BOUNDS MUST BE SET
  * */
-void LTiff::ClipToCurrentBorders(short compression, QColor background)
+QString LTiff::ClipToCurrentBorders(short compression, QColor background, Counter* counter)
 {
-    qDebug() << "Before split " << m_filename << endl;
     QStringList split = m_filename.split('.');
 
 
 
 
     LTiff otif;
-    otif.New(split[0] + "_clip" + "." + split[1]);
-    qDebug() << "Clipped file: "<<otif.m_filename;
+    QString filename = split[0] + "_clip" + "." + split[1];
+    otif.New(filename);
     otif.m_boundsMax = m_boundsMax;
     otif.m_boundsMin = m_boundsMin;
     otif.CreateFromMeta(*this, compression, 0, background);
 
-    qDebug() << "new bounds (in): " << m_boundsMin << ", " << m_boundsMax;
+/*    qDebug() << "new bounds (in): " << m_boundsMin << ", " << m_boundsMax;
     qDebug() << "new bounds (out): " << otif.m_boundsMin << ", " << otif.m_boundsMax;
 
 
     qDebug() << "new width (in): " << m_width << ", " << m_height;
     qDebug() << "new width (out): " << otif.m_width << ", " << otif.m_height;
-
+*/
     SetupBuffers();
     otif.SetupBuffers();
     otif.AllocateBuffers();
 
-    Counter counter = Counter((int)(otif.m_width*otif.m_height),"Clipping tiff ", false);
-
+    *counter = Counter((int)(otif.m_width*otif.m_height/otif.m_tileHeight/otif.m_tileWidth),"Clipping tiff ", false);
+    //counter->current = 0;
     for (int y = 0; y < otif.m_height; y += otif.m_tileHeight) {
         for (int x = 0; x < otif.m_width; x += otif.m_tileWidth) {
 
@@ -158,21 +157,30 @@ void LTiff::ClipToCurrentBorders(short compression, QColor background)
                     ((unsigned char *)otif.m_buf[0])[3*(i + j*otif.m_tileWidth) + 0] = color.blue();
 
 
-                    counter.Tick();
-                    m_progress = counter.percent;
                }
             otif.WriteBuffer(x,y,0);
            // counter.Tick();
             bufferStack.UpdateBuffer();
-
+            counter->Tick();
+            m_progress = counter->percent;
+            //m_progress = rand()%100;
             if (Util::CancelSignal) {
-                return;
+                return "";
             }
 
         }
     }
 
     otif.Close();
+    return filename;
+}
+
+void LTiff::ReleaseBuffers()
+{
+    for (int i=0;i<m_buf.size();i++) {
+        _TIFFfree(m_buf[i]);
+    }
+    m_buf.clear();
 
 }
 
@@ -252,7 +260,7 @@ void LTiff::CreateFromMeta(LTiff &oTiff, short compression, float rotationAngle,
     m_width = m_boundsMax.x() - m_boundsMin.x();
     m_height = m_boundsMax.y() - m_boundsMin.y();
 
-    qDebug() << "New size: " << m_width << ", " << m_height;
+//    qDebug() << "New size: " << m_width << ", " << m_height;
 
 //    exit(1);
 
@@ -276,7 +284,7 @@ void LTiff::CopyAllData(LTiff &oTiff)
     float length = m_height/(float)m_tileHeight;
     float width = m_width/(float)m_tileWidth;
 
-    Counter counter = Counter((int)(length*width),"Copying tiff ", false);
+  //  Counter counter = Counter((int)(length*width),"Copying tiff ", false);
 
     for (int y = 0; y < m_height; y += m_tileHeight)
         for (int x = 0; x < m_width; x += m_tileWidth) {
@@ -284,7 +292,7 @@ void LTiff::CopyAllData(LTiff &oTiff)
             m_buf = oTiff.m_buf;
             //qDebug() << x << ", " << y;
             WriteBuffer(x,y,0);
-            counter.Tick();
+//            counter->Tick();
 
         }
 
@@ -332,12 +340,12 @@ void LTiff::SetupBuffers()
 }
 
 
-void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QColor background)
+void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QColor background, Counter* counter)
 {
     float length = m_height/(float)m_tileHeight;
     float width = m_width/(float)m_tileWidth;
 
-    Counter counter = Counter((int)(length*width),"Copying tiff ", false);
+    *counter = Counter((int)(length*width),"Copying tiff ", false);
     AllocateBuffers();
 
     int centerx = m_width/2;
@@ -350,8 +358,7 @@ void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QC
 
     m_boundsMax = QVector3D(0,0,0);
     m_boundsMin = QVector3D(m_width, m_height,0 );
-    float t = 5;
-    qDebug() << "COLOR: " << background.red();
+    float t = 10;
     for (int y = 0; y < m_height; y += m_tileHeight) {
         for (int x = 0; x < m_width; x += m_tileWidth) {
 
@@ -369,7 +376,7 @@ void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QC
                     float xr = xx*cos(angle)-yy*sin(angle) + ocenterx + tx;
                     float yr = yy*cos(angle)+xx*sin(angle) + ocentery + ty;
                     QColor color = background;
-                    if (xr>=0 && xr<oTiff.m_width-1 && yr>=0 && yr<oTiff.m_height-1) {
+                    if (xr>=0 && xr<oTiff.m_width && yr>=0 && yr<oTiff.m_height) {
                         color =  oTiff.GetTiledRGB(xr,yr,omp_get_thread_num());
                     };// else qDebug() << "OUTSIDE";
 
@@ -400,8 +407,8 @@ void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QC
 
 
             WriteBuffer(x,y,0);
-            counter.Tick();
-            m_progress = counter.percent;
+            counter->Tick();
+            m_progress = counter->percent;
             oTiff.bufferStack.UpdateBuffer();
 
 //            qDebug() << "Updated bounds: " << m_boundsMin << " , " << m_boundsMax;
@@ -420,7 +427,7 @@ void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QC
 
 void LTiff::AllocateBuffers()
 {
-    m_buf.clear();
+    ReleaseBuffers();
     for (int i=0;i<max_thread_num;i++) {
        tdata_t buf = _TIFFmalloc(TIFFTileSize(m_tif));
         m_buf.append(buf);
@@ -438,7 +445,6 @@ void LTiff::AllocateBuffers()
 
 void LTiff::Close()
 {
+    ReleaseBuffers();
     TIFFClose(m_tif);
-    //    if (m_buf)
-    //      _TIFFfree(m_buf);
 }

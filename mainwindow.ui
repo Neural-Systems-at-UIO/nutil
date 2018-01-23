@@ -89,7 +89,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Nutil 0.03</string>
+     <string>Nutil 0.04</string>
     </property>
    </widget>
    <widget class="QComboBox" name="cmbSheets">

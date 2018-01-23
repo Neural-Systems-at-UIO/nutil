@@ -19,29 +19,35 @@ public:
     enum Status { Idle, Working, Finished };
 
     Book* m_book = nullptr;
+
     Sheet* m_sheet = nullptr;
-    QColor m_background = QColor(255,255,255,255);
     QString m_filename;
     int m_sheetIndex;
     int m_elapsedTime;
-    ProcessManager m_pm;
+    ProcessManager* m_pm = nullptr;
+
+    Counter m_mainCounter;
 
     Status m_status = Status::Idle;
+    QString m_type;
+    QString m_batchName;
 
-    QString m_inputDir, m_outputDir;
-    QString m_type, m_batchName;
-    QString m_compression = "jpg";
+
     QString m_mainInfo;
-
 
 
     Nauto(QString filename, int shee);
     Nauto(QString filename);
     Nauto();
+
+
+
     void Load(QString filename);
     void Execute();
     void ExecuteTransformation();
-    void ReadeHeader();
+//    void ExecuteAutoContrast();
+    void ExecutePCounter();
+    void ReadHeader();
     void BuildInfo();
     void Abort();
     void Release();

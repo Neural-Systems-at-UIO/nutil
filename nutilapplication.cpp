@@ -103,7 +103,7 @@ bool NutilApplication::RotateTiff()
 
 
     qDebug() << "Transforming to file " << outFile << " with compression " << tif.m_compressionTypes[writeCompression];
-    otif.Transform(tif, angle, scale, 0,0, background);
+//    otif.Transform(tif, angle, scale, 0,0, background, m_);
 
     tif.Close();
     otif.Close();
