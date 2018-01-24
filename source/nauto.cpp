@@ -82,7 +82,7 @@ void Nauto::Execute()
         m_status = Status::Idle;
 
     // Execute stuff
-
+    qDebug() << "FINISHED!" << endl;
     if (m_status != Status::Idle)
         m_status = Status::Finished;
 }
@@ -134,7 +134,7 @@ void Nauto::BuildInfo()
     for (int i=0;i<m_pm->m_processes.length();i++) {
         float progress = m_pm->m_processes[i]->getProgress();
         total+=min(progress,100.0f);
-        if (progress<=100 && progress >=0)
+        if (progress<100 && progress >0)
         {
             //float degrees = m_pm.m_processItems[i]->m_angle;
             t = t + "Worker " +QString::number(i) + ": " + m_pm->m_processItems[i]->m_inFile + " [ <b>" +  QString::number( progress, 'f', 1 ) + "% </b>] " + m_pm->m_processes[i]->m_infoText;

@@ -59,13 +59,19 @@ public:
     static string trim(string s);
     static QString path;
 
+    static QString findFileInDirectory(QString search,QString dir, QString extension);
 
     static float floatRandom(const float & min, const float & max) {
         static std::mt19937 generator;
         std::uniform_real_distribution<float> distribution(min, max);
         return distribution(generator);
     }
-
+    static wchar_t* QStringToWchar(QString t) {
+        wchar_t* arr = new wchar_t[t.size()+1];
+        t.toWCharArray(arr);
+        arr[t.size()]=0;
+        return arr;
+    }
     static QVector3D fromSpherical(float r, float t, float p) {
         return QVector3D( r*sin(t)*cos(p), r*sin(t)*sin(p), r*cos(t)  );
     }

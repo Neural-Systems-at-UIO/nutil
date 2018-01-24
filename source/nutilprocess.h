@@ -9,6 +9,7 @@
 #include "source/util/util.h"
 #include "source/util/counter.h"
 #include "source/util/limage.h"
+#include "source/util/area.h"
 
 class NutilProcess
 {
@@ -20,6 +21,9 @@ public:
     Counter m_counter;
     LTiff otif;
 
+
+    QVector<Area> m_areas;
+
     LImage lImage;
     bool InitializeCounter(QString inFile, bool autoClip, int thumbnailSize);
     bool TransformTiff(QString inFile, QString outFile, QString compression, float angle, float scale, QColor background, bool autoClip);
@@ -27,7 +31,7 @@ public:
     bool GenerateThumbnail(QString inFile, QString outFile, int thumbnailSize);
     bool AutoAdjustImageLevels(QString inFile, QString outFile);
 
-    bool PCounter(QString inFile, QColor counter);
+    bool PCounter(QString inFile, QColor counter, QVector<Area>* areas);
 
 //    m_processes[i]->PCounter(+ pi->m_inFile, m_inputDir, m_background, pi->m_outFile, m_AtlasDir, m_labelFile);
 

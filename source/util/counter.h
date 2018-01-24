@@ -15,6 +15,8 @@ public:
     string str;
     bool outputClams;
     long prevTime;
+    float m_progress = 0;
+
     long startTime;
     QElapsedTimer ttimer;
 public:
@@ -41,6 +43,7 @@ public:
         Max = m;
         current = 0;
         currentTick = -1;
+        outputClams = false;
         if (outputClams)
             cout << "[";
 
@@ -62,6 +65,7 @@ public:
         int totalTime = (ttimer.elapsed() - startTime)/(percent/100.0);
 
         int timeLeft = (ttimer.elapsed());
+        m_progress = percent;
 
         //cout << percent << endl;
         //if (percent % ticks==0 && percent!=currentTick)

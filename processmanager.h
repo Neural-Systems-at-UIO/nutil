@@ -5,6 +5,7 @@
 #include "source/nutilprocess.h"
 #include "libxl.h"
 #include "source/util/lmessage.h"
+#include "source/util/atlaslabel.h"
 
 class ProcessItem {
 public:
@@ -14,9 +15,7 @@ public:
     QString m_outFolder;
     QString m_outFileSingle;
 
-    QString m_infoText;
-
-
+//    QString m_infoText;
 
     float m_angle;
     float m_scale;
@@ -78,13 +77,47 @@ public:
 
 };
 
+class Report {
+public:
+    QString m_filename;
+    QVector<int> m_IDs;
+    QVector<Area*> m_areasOfInterest;
+    Report() {}
+    Report(QString filename, QStringList& ids) {
+        m_filename = filename;
+        for (QString s : ids) {
+            m_IDs.push_back( s.simplified().toInt());
+        }
+    }
+
+    void FindAreasOfInterest(QVector<NutilProcess*>& processes);
+    void GenerateSheet(Book* b);
+};
+
+
+class Reports {
+public:
+
+    Book* m_book;
+    QString m_filename;
+    QVector<Report> m_reports;
+
+    void CreateBook(QString filename );
+    void CreateSheets( QVector<NutilProcess*>& processes);
+
+};
+
 class ProcessManagerPCounter : public ProcessManager {
 
 public:
 
+    AtlasLabels m_labels;
+
     QString m_inputDir, m_outputDir;
     QString m_atlasDir;
     QString m_labelFile;
+
+    Reports reports;
 
     bool Build(Sheet* m_sheet) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);

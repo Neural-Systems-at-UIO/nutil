@@ -73,7 +73,19 @@ string Util::trim(string strin)
   }
   else str.erase(str.begin(), str.end());
   return str;
-}    
+}
+
+QString Util::findFileInDirectory(QString search, QString dir, QString extension)
+{
+    QDirIterator it(dir, QStringList() << "*." + extension, QDir::Files);
+    while (it.hasNext()) {
+        QString f = it.next();
+        if (f.contains(search))
+            return f;
+    }
+    return "";
+
+}
 
 float Util::clamp(float val, const float mi, const float ma) {
     val = min(ma, val);

@@ -8,7 +8,7 @@ NutilProcess::NutilProcess()
 
 float NutilProcess::getProgress()
 {
-    return otif.m_progress;
+    return m_counter.m_progress;
 }
 
 bool NutilProcess::InitializeCounter(QString inFile, bool autoClip, int thumbnailSize)
@@ -126,7 +126,7 @@ bool NutilProcess::GenerateThumbnail(QString inFile, QString outFile, int thumbn
 
             tif.bufferStack.UpdateBuffer();
             m_counter.Tick();
-            otif.m_progress = m_counter.percent;
+            //otif.m_progress = m_counter.percent;
 
         }
 
@@ -144,16 +144,12 @@ bool NutilProcess::AutoAdjustImageLevels(QString inFile, QString outFile)
     return true;
 }
 
-bool NutilProcess::PCounter(QString inFile, QColor testColor)
+bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector<Area>* areas)
 {
     lImage.Load(inFile);
 
-    qDebug() << "File size: " << lImage.image().width();
-
     m_infoText = "Finding areas";
-    lImage.FindAreas(testColor);
-
-    qDebug() << "Found number of areas: " << lImage.areas().count();
+    lImage.FindAreas(testColor, &m_counter, areas);
 
     return true;
 }

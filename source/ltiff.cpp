@@ -162,7 +162,7 @@ QString LTiff::ClipToCurrentBorders(short compression, QColor background, Counte
            // counter.Tick();
             bufferStack.UpdateBuffer();
             counter->Tick();
-            m_progress = counter->percent;
+            //m_progress = counter->percent;
             //m_progress = rand()%100;
             if (Util::CancelSignal) {
                 return "";
@@ -408,7 +408,7 @@ void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QC
 
             WriteBuffer(x,y,0);
             counter->Tick();
-            m_progress = counter->percent;
+            //m_progress = counter->percent;
             oTiff.bufferStack.UpdateBuffer();
 
 //            qDebug() << "Updated bounds: " << m_boundsMin << " , " << m_boundsMax;

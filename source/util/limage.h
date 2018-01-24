@@ -9,6 +9,8 @@
 #include "source/util/area.h"
 #include "source/util/atlaslabel.h"
 #include "libxl.h"
+#include "source/util/counter.h"
+
 using namespace libxl;
 
 class LImage
@@ -20,32 +22,30 @@ private:
 
     QImage m_image;
     QImage m_index;
-    QVector<Area> m_areas;
+//    QVector<Area> m_areas;
 
     QColor unset = QColor(0,0,0,255);
     QColor set = QColor(255,255,255,255);
 
-    AtlasLabels labels;
 
 public:
 
     void Load(QString filename);
 
-    void FindAreas(QColor color);
+    void FindAreas(QColor color, Counter* counter, QVector<Area>* areas);
 
     void FillArea(Area& area, int i, int j, QColor& testColor);
-    void GenerateAreaReport(QString outExcelFile);
+//    void GenerateAreaReport(QString outExcelFile,Counter *counter);
 
-    void SaveAreasImage(QString filename);
+    void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas);
     //void RenderAreas(QImage& image, QColor color);
     LImage() {}
     LImage(QString f) {
         Load(f);
     }
 
-    void Anchor(QString filenameStripped, QString atlasDir, QString labelFile);
+    void Anchor(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas);
     QImage& image();
-    QVector<Area>& areas();
 };
 
 #endif // LIMAGE_H

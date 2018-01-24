@@ -12,7 +12,7 @@ void LImage::Load(QString filename)
 
 }
 
-void LImage::FindAreas(QColor testColor)
+void LImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas)
 {
 
 
@@ -24,30 +24,27 @@ void LImage::FindAreas(QColor testColor)
         for (int j=0;j<m_index.height();j++)
             m_index.setPixel(i,j, unset.rgba());
 
-  /*  qDebug() << "Index : " << QColor(m_index.pixel(5,0));
-    qDebug() << "Unset color: " << unset;
-    qDebug() << "Unset color: " << unset.rgba();
 
-    qDebug() << "Test color: " << testColor;
-*/
+    counter->Init(m_image.width()*m_image.height());
+
     for (int i=0;i<m_image.width();i++)
         for (int j=0;j<m_image.height();j++) {
+            counter->Tick();
+
             if (QColor(m_index.pixel(i,j)) == unset) {
-                // Then test if this is type color
 
                 if (QColor(m_image.pixel(i,j)) == testColor) {
-             /*       qDebug() << "Found untested area: " << m_areas.count();
-                    qDebug() << "Pixel value: " << QColor(m_image.pixel(i,j));
-                    qDebug() << "Text color value: " << testColor;*/
                     Area area;
                     FillArea(area, i,j, testColor);
                     area.CalculateStatistics();
-                    m_areas.append(area);
+                    m_areas->append(area);
+
 
                 }
             }
         }
 
+    qSort(m_areas->begin(), m_areas->end());
 
 }
 
@@ -71,13 +68,14 @@ void LImage::FillArea(Area &area, int i, int j, QColor& testColor)
     }
 }
 
-void LImage::GenerateAreaReport(QString outExcelFile)
+/*void LImage::GenerateAreaReport(QString outExcelFile,Counter *counter)
 {
-    qSort(m_areas.begin(), m_areas.end());
 //    for (Area a : m_areas)
   //      qDebug() <<" Area size: " << a.m_pixelArea << " center pixel " << a.m_center;
 
     Book* book = xlCreateBook(); // xlCreateXMLBook() for xlsx
+    if (counter!=nullptr)
+        counter->Init(m_areas.count());
     if(book)
     {
         Sheet* sheet = book->addSheet(L"Report");
@@ -93,7 +91,8 @@ void LImage::GenerateAreaReport(QString outExcelFile)
                 sheet->writeNum(2+i,0, m_areas[i].m_pixelArea);
                 sheet->writeNum(2+i,3, m_areas[i].m_center.x());
                 sheet->writeNum(2+i,4, m_areas[i].m_center.y());
-
+                if (counter)
+                    counter->Tick();
             }
         }
         wchar_t* arr = new wchar_t[outExcelFile.size()+1];
@@ -106,8 +105,8 @@ void LImage::GenerateAreaReport(QString outExcelFile)
     }
 
 }
-
-void LImage::SaveAreasImage(QString filename)
+*/
+void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas)
 {
     QRgb off = QColor(255,255,255,255).rgba();
 
@@ -116,7 +115,11 @@ void LImage::SaveAreasImage(QString filename)
         for (int j=0;j<m_index.height();j++)
             m_index.setPixel(i,j, off);
 
-    for (Area& a: m_areas) {
+
+    if (counter!=nullptr)
+        counter->Init(m_areas->count());
+
+    for (Area& a: *m_areas) {
         QRgb on = QColor(0,0,0,255).rgba();
         if (a.atlasLabel != nullptr) {
 //            if (rand()%100>90)
@@ -124,6 +127,8 @@ void LImage::SaveAreasImage(QString filename)
             on = QColor(a.atlasLabel->color.x(), a.atlasLabel->color.y(), a.atlasLabel->color.z(),255).rgba();
         }
 
+        if (counter)
+            counter->Tick();
         for (QPointF qp: a.m_points)
             m_index.setPixel(qp.x(), qp.y(), on);
     }
@@ -132,17 +137,18 @@ void LImage::SaveAreasImage(QString filename)
 
 }
 
-void LImage::Anchor(QString filenameStripped, QString atlasDir, QString labelFile)
+void LImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas)
 {
-    labels.Load(labelFile);
-    if (labels.atlases.count()==0) {
-        LMessage::lMessage.Error("Incorrect label file. Please check parameters in excel sheet.");
-        return;
-    }
     QImage refImage;
-    refImage.load(atlasDir + filenameStripped +".png" );
+//    refImage.load(atlasDir + filenameStripped +".png" );
+    refImage.load(atlasFile );
 
-    for (Area& a: m_areas) {
+    if (counter!=nullptr)
+        counter->Init(m_areas->count());
+
+    for (Area& a: *m_areas) {
+        if (counter)
+            counter->Tick();
         QPointF p = a.m_center;
         p.setX(p.x()/(float)m_image.width());
         p.setY(p.y()/(float)m_image.height());
@@ -162,7 +168,3 @@ void LImage::Anchor(QString filenameStripped, QString atlasDir, QString labelFil
 
 
 
-QVector<Area>& LImage::areas()
-{
-    return m_areas;
-}

@@ -103,7 +103,6 @@ public:
     uint32 m_tileWidth, m_tileHeight;
     uint32 m_noTilesX, m_noTilesY;
     TIFF* m_tif;
-    float m_progress = 0;
     QVector<tdata_t> m_buf;
     QVector<int> m_currentTileX, m_currentTileY;
     short m_samplesPerPixel, m_bitsPerSample, m_photo, m_config, m_compression;
