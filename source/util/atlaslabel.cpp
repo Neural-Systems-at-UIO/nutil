@@ -5,6 +5,13 @@ AtlasLabel::AtlasLabel()
 
 }
 
+AtlasLabel *AtlasLabels::get(long index)
+{
+    if (indexedID.contains(index))
+        return indexedID[index];
+    return nullptr;
+}
+
 void AtlasLabels::Load(QString filename)
 {
     Clear();
@@ -39,13 +46,16 @@ void AtlasLabels::BuildDictionary()
     }
 }
 
-AtlasLabel *AtlasLabels::getFromColor(QVector3D col)
+QVector<AtlasLabel*> AtlasLabels::getFromColor(QVector3D col)
 {
+    QVector<AtlasLabel*> labels;
     for (AtlasLabel* al: atlases)
         if ((al->color-col).length()<0.001)
-            return al;
+            labels.append(al);
 
-    return nullptr;
+//            return al;
+
+    return labels;
 }
 
 void AtlasLabels::Clear()

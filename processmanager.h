@@ -3,9 +3,10 @@
 
 #include <QVector>
 #include "source/nutilprocess.h"
-#include "libxl.h"
+//#include "libxl.h"
 #include "source/util/lmessage.h"
 #include "source/util/atlaslabel.h"
+#include "source/LBook/lbookxlnt.h".h"
 
 class ProcessItem {
 public:
@@ -49,9 +50,9 @@ public:
     Counter m_mainCounter;
     QColor m_background = QColor(255,255,255,255);
 
-    virtual bool Build(Sheet* m_sheet) = 0;
+    virtual bool Build(LSheet* m_sheet) = 0;
     virtual void Execute() = 0;
-    virtual void ReadHeader(Sheet* m_sheet) { }
+    virtual void ReadHeader(LSheet* m_sheet) { }
 
 //    void ExecuteAutoContrast(QString compression, QColor background);
 
@@ -71,39 +72,47 @@ public:
 
     int m_thumbnailSize;
 
-    bool Build(Sheet* m_sheet) override;
+    bool Build(LSheet* m_sheet) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
-    void ReadHeader(Sheet* m_sheet) override;
+    void ReadHeader(LSheet* m_sheet) override;
 
 };
 
 class Report {
 public:
     QString m_filename;
-    QVector<int> m_IDs;
+    QVector<long> m_IDs;
     QVector<Area*> m_areasOfInterest;
+    float m_totalPixelArea;
+    float m_regionPixelArea;
+
     Report() {}
     Report(QString filename, QStringList& ids) {
         m_filename = filename;
         for (QString s : ids) {
-            m_IDs.push_back( s.simplified().toInt());
+            bool ok;
+            long l = s.simplified().toDouble(&ok);
+            m_IDs.push_back( l);
         }
     }
 
     void FindAreasOfInterest(QVector<NutilProcess*>& processes);
-    void GenerateSheet(Book* b);
+    void GenerateSheet(LBook* b);
 };
 
 
 class Reports {
 public:
 
-    Book* m_book;
+    LBook* m_book;
     QString m_filename;
     QVector<Report> m_reports;
+    QVector<QVector<long>> getList();
 
+    void Calculate(AtlasLabels* atlasLabels);
     void CreateBook(QString filename );
-    void CreateSheets( QVector<NutilProcess*>& processes);
+    void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels);
+    void CreateSummary(AtlasLabels* atlasLabels);
 
 };
 
@@ -117,11 +126,14 @@ public:
     QString m_atlasDir;
     QString m_labelFile;
 
+    int m_pixelCutoff;
+
     Reports reports;
 
-    bool Build(Sheet* m_sheet) override;
+
+    bool Build(LSheet* m_sheet) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
-    void ReadHeader(Sheet* m_sheet) override;
+    void ReadHeader(LSheet* m_sheet) override;
 
 };
 

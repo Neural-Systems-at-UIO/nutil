@@ -24,21 +24,15 @@ Nauto::Nauto()
 
 void Nauto::Load(QString filename)
 {
+    if (m_book)
+        delete m_book;
+    m_book = new LBookXlnt();
     m_filename = filename;
-    m_book = xlCreateBook();
-    if(m_book)
-    {
-        wchar_t* arr = new wchar_t[m_filename.size()+1];
-        m_filename.toWCharArray(arr);
-        arr[m_filename.size()]=L'\0';
-        if(m_book->load(arr)) {
-            LMessage::lMessage.Message("File " + m_filename + " loaded.");
-        }
-        else
-        {
-            LMessage::lMessage.Error(m_book->errorMessage());
-        }
+    if (!QFileInfo(filename).exists()) {
+        LMessage::lMessage.Error("Could not find file " + filename);
+        return;
     }
+   m_book->Load(filename);
 }
 
 void Nauto::Execute()
@@ -53,12 +47,12 @@ void Nauto::Execute()
         LMessage::lMessage.Error("No excel document loaded.");
         return;
     }
-    m_sheet = m_book->getSheet(m_sheetIndex);
-    if(!m_sheet)
+    m_sheet = m_book->GetSheet(m_sheetIndex);
+/*    if(!m_sheet)
     {
         LMessage::lMessage.Error(m_book->errorMessage());
     }
-
+*/
     ReadHeader();
 
     m_status = Status::Working;
@@ -89,8 +83,9 @@ void Nauto::Execute()
 
 void Nauto::ReadHeader()
 {
-    m_type = QString::fromWCharArray(m_sheet->readStr(0,1));
-    m_batchName = QString::fromWCharArray(m_sheet->readStr(1,1));
+    xlnt::column_t t;
+    m_type = m_sheet->readStr(0,1);
+    m_batchName = m_sheet->readStr(1,1);
 
 }
 
@@ -170,23 +165,17 @@ void Nauto::Abort()
 void Nauto::Release()
 {
     if (m_book)
-        m_book->release();
+        delete m_book;
 
     m_book = nullptr;
 }
 
 QStringList Nauto::getSheetList()
 {
-    QStringList l;
-    for (int i=0;i<m_book->sheetCount();i++) {
-        l<< QString::fromWCharArray(m_book->getSheet(i)->name());
-    }
-    return l;
+    return m_book->sheet_titles();
 }
 
 Nauto::~Nauto()
 {
-    if (m_book)
-        m_book->release();
-
+    Release();
 }

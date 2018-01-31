@@ -38,7 +38,10 @@ SOURCES += main.cpp \
     source/util/lmessage.cpp \
     source/util/limage.cpp \
     source/util/area.cpp \
-    source/util/atlaslabel.cpp
+    source/util/atlaslabel.cpp \
+    source/util/flat2d.cpp \
+    source/LBook/lbook.cpp \
+    source/LBook/lbookxlnt.cpp
 
 HEADERS += \
     source/util/random.h \
@@ -56,7 +59,10 @@ HEADERS += \
     source/util/lmessage.h \
     source/util/limage.h \
     source/util/area.h \
-    source/util/atlaslabel.h
+    source/util/atlaslabel.h \
+    source/util/flat2d.h \
+    source/LBook/lbook.h \
+    source/LBook/lbookxlnt.h
 
 FORMS    += mainwindow.ui
 
@@ -70,7 +76,10 @@ FORMS    += mainwindow.ui
 unix|win32: LIBS += -L$$PWD/lib/ -llibtiff
 
 INCLUDEPATH += $$PWD/lib/libtiff
+INCLUDEPATH += C:\Users\leuat\Documents\GitHub\TestLibraries\xlnt-master\include
 DEPENDPATH += $$PWD/lib/libtiff
+
+LIBS += -L$$PWD/lib/ -lxlnt
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl

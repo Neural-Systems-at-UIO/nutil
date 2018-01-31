@@ -10,6 +10,7 @@
 #include "source/util/atlaslabel.h"
 #include "libxl.h"
 #include "source/util/counter.h"
+#include "source/util/flat2d.h"
 
 using namespace libxl;
 
@@ -27,17 +28,20 @@ private:
     QColor unset = QColor(0,0,0,255);
     QColor set = QColor(255,255,255,255);
 
+    QImage* m_testImage;
+
 
 public:
 
     void Load(QString filename);
 
-    void FindAreas(QColor color, Counter* counter, QVector<Area>* areas);
+    void FindAreas(QColor color, Counter* counter, QVector<Area>* areas, int pixelCutoff);
 
     void FillArea(Area& area, int i, int j, QColor& testColor);
 //    void GenerateAreaReport(QString outExcelFile,Counter *counter);
 
-    void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas);
+    void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, float scale);
+    void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas, QVector<QVector<long>>);
     //void RenderAreas(QImage& image, QColor color);
     LImage() {}
     LImage(QString f) {

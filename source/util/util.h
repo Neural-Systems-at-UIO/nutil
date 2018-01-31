@@ -59,6 +59,14 @@ public:
     static string trim(string s);
     static QString path;
 
+
+    static std::string c2x(int x, int y) {
+        std::string s;
+        s = char('A' + y);
+        s += std::to_string(x+1);
+        return s;
+    }
+
     static QString findFileInDirectory(QString search,QString dir, QString extension);
 
     static float floatRandom(const float & min, const float & max) {

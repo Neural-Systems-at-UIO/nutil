@@ -12,7 +12,7 @@ void LImage::Load(QString filename)
 
 }
 
-void LImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas)
+void LImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas,int pixelCutoff)
 {
 
 
@@ -37,16 +37,15 @@ void LImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_area
                     Area area;
                     FillArea(area, i,j, testColor);
                     area.CalculateStatistics();
-                    m_areas->append(area);
-
-
+                    if (area.m_pixelArea>=pixelCutoff)
+                        m_areas->append(area);
                 }
             }
         }
 
     qSort(m_areas->begin(), m_areas->end());
-
 }
+
 
 void LImage::FillArea(Area &area, int i, int j, QColor& testColor)
 {
@@ -66,6 +65,21 @@ void LImage::FillArea(Area &area, int i, int j, QColor& testColor)
                 FillArea(area, i, j-1, testColor);
         }
     }
+}
+
+void LImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale)
+{
+
+    for (int i=0;i<refImage.width();i++)
+        for (int j=0;j<refImage.height();j++) {
+            if (refImage.pixel(i,j)!=0) {
+                AtlasLabel* al =labels.get(refImage.pixel(i,j));
+                if (al!=nullptr) {
+                    al->area+=scale;
+                }
+            }
+        }
+
 }
 
 /*void LImage::GenerateAreaReport(QString outExcelFile,Counter *counter)
@@ -106,7 +120,7 @@ void LImage::FillArea(Area &area, int i, int j, QColor& testColor)
 
 }
 */
-void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas)
+void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList)
 {
     QRgb off = QColor(255,255,255,255).rgba();
 
@@ -131,6 +145,47 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
             counter->Tick();
         for (QPointF qp: a.m_points)
             m_index.setPixel(qp.x(), qp.y(), on);
+
+
+    }
+
+    if (m_testImage!=nullptr) {
+        for (int i=0;i<m_index.width();i++)
+            for (int j=0;j<m_index.height();j++) {
+                QPoint p((float)i/(float)m_index.width()*(float)m_testImage->width(),(float)j/(float)m_index.height()*(float)m_testImage->height());
+                if (p.x()<0) p.setX(0);
+                if (p.y()<0) p.setY(0);
+                if (p.x()>m_testImage->width()-1) p.setX(m_testImage->width()-1);
+                if (p.y()>m_testImage->height()-1) p.setY(m_testImage->height()-1);
+                QColor c = QColor(m_testImage->pixel(p.x(), p.y()));
+                QColor c2 =QColor(m_index.pixel(i,j));
+                if (c2.red()>=250 && c2.green()>=250 && c2.blue()>250 ) {
+                    c.setRed(min((int)(c.red()*0.7 + c2.red()*0),255));
+                    c.setGreen(min((int)(c.green()*0.7 + c2.green()*0),255));
+                    c.setBlue(min((int)(c.blue()*0.7 + c2.blue()*0),255));
+                    m_index.setPixel(i,j,c.rgba());
+                }
+            }
+        delete m_testImage;
+    }
+
+    // Then test reports
+
+    QColor cols[4] = { QColor(255,0,0), QColor(0,255,0), QColor(0,0,255), QColor(255,0,255) };
+    int idx=0;
+    for (QVector<long>& lst : reportList) {
+        QColor c = cols[idx % 4];
+        for (long i : lst) {
+            for (Area& a: *m_areas)
+                if (a.atlasLabel !=nullptr )
+                    if (a.atlasLabel->index == i)
+                        for (QPointF& q: a.m_points)
+                          m_index.setPixel(q.x(), q.y(), c.rgba() );
+
+
+        }
+        idx++;
+
     }
 
     m_index.save(filename);
@@ -139,9 +194,22 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
 
 void LImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas)
 {
-    QImage refImage;
-//    refImage.load(atlasDir + filenameStripped +".png" );
-    refImage.load(atlasFile );
+
+    Flat2D refImage;
+    refImage.Load(atlasFile);
+
+    m_testImage = refImage.toImage(labels);
+//    testImage->save(labelFile);
+ //   delete testImage;
+
+
+    // First, count all areas
+
+    float scale = m_image.width()*m_image.height()/ (float)(refImage.m_width*refImage.m_height);
+
+
+    CountAtlasArea(refImage, labels, scale);
+//    qDebug() << scale;
 
     if (counter!=nullptr)
         counter->Init(m_areas->count());
@@ -149,18 +217,22 @@ void LImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFi
     for (Area& a: *m_areas) {
         if (counter)
             counter->Tick();
-        QPointF p = a.m_center;
+        QPointF p = a.m_points[0];
         p.setX(p.x()/(float)m_image.width());
         p.setY(p.y()/(float)m_image.height());
 
-        QRgb idxVal = refImage.pixel(p.x()*refImage.width(),p.y()*refImage.height() );
-        QColor col = QColor(idxVal);
-        AtlasLabel* al = labels.getFromColor(QVector3D(col.red(), col.green(), col.blue()));
-        if (al!=nullptr) {
-            a.atlasLabel = al;
- //           qDebug() << "Found atlas : " << a.atlasLabel->color << " and name " << a.atlasLabel->name;
-         }
-        else qDebug() << "Error in label file: could not find atlas color " << QColor(idxVal);
+
+
+        long index = refImage.pixel(p.x()*refImage.width(),p.y()*refImage.height() );
+        //if (index!=0)
+        {
+            AtlasLabel* al = labels.get(index);
+
+            if (al!=nullptr) {
+                a.atlasLabel = al;
+            }
+        }
+//        else qDebug() << "Error in label file: could not find atlas color " << QColor(idxVal);
 
     }
 

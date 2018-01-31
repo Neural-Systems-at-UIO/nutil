@@ -4,10 +4,32 @@
 #include <QVector3D>
 #include <QImage>
 #include <QRgb>
+
+
+
 #ifdef USE_HEALPIX
 #include <healpix_map.h>
 #endif
 
+
+class Buffer2DShort {
+
+
+    void Load(QString fname) {
+/*    QFile file(fname);
+      if (!file.open(QIODevice::ReadOnly))
+          return;
+
+      QByteArray compressed = file.readAll();
+      qDebug() << "Compresed=" << compressed.size();
+
+      QByteArray uncompressed = qUncompress(compressed); // HERE I GET: qUncompress: Input data is corrupted
+      qDebug() << "UnCompresed=" << uncompressed.size();
+
+*/
+    }
+
+};
 
 class Buffer2D
 {

@@ -144,12 +144,12 @@ bool NutilProcess::AutoAdjustImageLevels(QString inFile, QString outFile)
     return true;
 }
 
-bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector<Area>* areas)
+bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector<Area>* areas, int pixelCutoff)
 {
     lImage.Load(inFile);
 
     m_infoText = "Finding areas";
-    lImage.FindAreas(testColor, &m_counter, areas);
+    lImage.FindAreas(testColor, &m_counter, areas, pixelCutoff);
 
     return true;
 }

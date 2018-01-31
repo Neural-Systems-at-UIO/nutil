@@ -11,21 +11,26 @@
 #include "source/util/lmessage.h"
 #include <QDebug>
 
+
 class AtlasLabel
 {
 public:
     AtlasLabel();
 
     QString name;
-    int index;
+    long index;
     QVector3D color;
     QVector3D extra;
     bool toggle;
     float maxval;
 
+
+    float area = 0;
+    float areaSum = 0;
+
     AtlasLabel (QStringList& s)
     {
-        index = s[0].toInt();
+        index = s[0].toLong();
         color.setX(s[1].toFloat());
         color.setY(s[2].toFloat());
         color.setZ(s[3].toFloat());
@@ -47,8 +52,10 @@ public:
 
 
 class AtlasLabels {
-public:
+private:
     QMap<int, AtlasLabel*> indexedID;
+
+public:
     //QMap<QVector3D, AtlasLabel*> indexedColor;
     QVector<AtlasLabel*> atlases;
 
@@ -56,12 +63,14 @@ public:
 
     }
 
+    AtlasLabel* get(long index);
+
     AtlasLabels(QString filename) {
         Load(filename);
     }
     void Load(QString filename);
     void BuildDictionary();
-    AtlasLabel* getFromColor(QVector3D col);
+    QVector<AtlasLabel*> getFromColor(QVector3D col);
 
     void Clear();
 

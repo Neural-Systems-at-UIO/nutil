@@ -4,9 +4,11 @@
 #include <QString>
 #include <QColor>
 #include <QStringList>
-#include "libxl.h"
+//#include "libxl.h"
 #include "processmanager.h"
 #include "source/util/lmessage.h"
+#include "source/LBook/lbook.h"
+#include "source/LBook/lbookxlnt.h"
 
 using namespace libxl;
 
@@ -18,9 +20,13 @@ public:
 
     enum Status { Idle, Working, Finished };
 
-    Book* m_book = nullptr;
+/*      Book* m_book = nullptr;
 
-    Sheet* m_sheet = nullptr;
+    Sheet* m_sheet = nullptr;*/
+    LBook *m_book = nullptr;
+    LSheet* m_sheet = nullptr;
+
+
     QString m_filename;
     int m_sheetIndex;
     int m_elapsedTime;

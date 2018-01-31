@@ -26,7 +26,7 @@ void MainWindow::on_btnLoad_clicked()
 {
 
     QString fileName = QFileDialog::getOpenFileName(this,
-                                                    tr("Open Excel document"), "..\\TestData\\", tr("Excel Files (*.xls)"));
+                                                    tr("Open Excel document"), "..\\TestData\\", tr("Excel Files (*.xlsx)"));
     if (fileName=="")
         return;
     m_nauto.Load(fileName);
