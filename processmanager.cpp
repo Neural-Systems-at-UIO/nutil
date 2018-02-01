@@ -145,7 +145,7 @@ QVector<QVector<long> > Reports::getList()
 bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 {
     m_processItems.clear();
-    QDirIterator it(m_inputDir, QStringList() << "*.png", QDir::Files);
+    /*QDirIterator it(m_inputDir, QStringList() << "*.png", QDir::Files);
     while (it.hasNext()) {
         QString inFileFull = it.next();
         QStringList l = inFileFull.split('/');
@@ -154,7 +154,35 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
         m_processItems.append(new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx", 0, 0, inFileSingle, m_outputDir));
 //        break;
 
+    }*/
+    int x = 1;
+    int y = 12;
+    bool done = false;
+    while (!done) {
+        QString name = m_sheet->readStr(y,x);
+        if (name!="") {
+            QString inFileFull = Util::findFileInDirectory(name,m_inputDir,"png");
+            if (inFileFull=="") {
+                LMessage::lMessage.Error("Error: Could not find file that contains: " + name);
+                m_processItems.clear();
+                return false;
+            }
+
+            QStringList l = inFileFull.split('/');
+            QString inFile = l[l.length()-1];
+            QString inFileSingle = inFile.split('.')[0];
+            ProcessItem* pi = new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx", 0, 0, inFileSingle, m_outputDir);
+            pi->m_pixelAreaScale = m_areaScale*m_sheet->readNum(y,x+1);
+            m_processItems.append(pi);
+        }
+        else {
+            done = true;
+        }
+        y++;
+
     }
+
+
     return true;
 
 }
@@ -188,14 +216,15 @@ void ProcessManagerPCounter::Execute()
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
 
-        //qDebug() << "Executing on " <<m_inputDir+  pi->m_inFile +".png";
+
+//        qDebug() << "Executing on " <<m_inputDir+  pi->m_inFile +".png";
         m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +".png", m_background, &m_processes[i]->m_areas, m_pixelCutoff);
         m_processes[i]->m_infoText = "Anchoring areas";
         // Find atlas file:
 
         QString atlasFile = Util::findFileInDirectory(pi->m_inFile.split('_')[3] + "_Segmentation", m_atlasDir, "flat");
 
-        m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas);
+        m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale);
 /*        m_processes[i]->m_infoText = "Generating Excel report";
         m_processes[i]->lImage.GenerateAreaReport(pi->m_outFile,&m_processes[i]->m_counter, &m_processes[i]->m_areas);
         m_processes[i]->m_infoText = "Saving test png file";
@@ -214,6 +243,9 @@ void ProcessManagerPCounter::Execute()
 
 }
 
+
+
+
 void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet)
 {
     ProcessManager::ReadHeader(m_sheet);
@@ -227,8 +259,14 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet)
     m_atlasDir = m_sheet->readStr(6,1);
     m_labelFile = m_sheet->readStr(7,1);
     m_pixelCutoff = m_sheet->readNum(9,1);
+    m_areaScale = m_sheet->readNum(10,1);
 
+    GenerateReports(m_sheet);
 
+}
+
+void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
+{
     bool found = false;
     int i = 4;
     while ((i<1000) && (found==false)) {
@@ -274,7 +312,6 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet)
         x++;
     }
 
-
 }
 
 void Report::GenerateSheet(LBook* book)
@@ -284,7 +321,7 @@ void Report::GenerateSheet(LBook* book)
     if(sheet)
     {
         sheet->writeStr(0,0, "Pixel count");
-        sheet->writeStr(0,1, "Area (not yet defined)");
+        sheet->writeStr(0,1, "Area");
 
         sheet->writeStr(0, 2, "object_area_units");
         sheet->writeStr(0, 3, "Center X");
@@ -293,6 +330,7 @@ void Report::GenerateSheet(LBook* book)
         sheet->writeStr(0, 6, "Area name");
         for (int i=0;i<m_areasOfInterest.count();i++) {
             sheet->writeNum(1+i,0, m_areasOfInterest[i]->m_pixelArea);
+            sheet->writeNum(1+i,1, m_areasOfInterest[i]->m_area);
             sheet->writeNum(1+i,3, m_areasOfInterest[i]->m_center.x());
             sheet->writeNum(1+i,4, m_areasOfInterest[i]->m_center.y());
             sheet->writeNum(1+i,5, m_areasOfInterest[i]->atlasLabel->index);
@@ -305,7 +343,6 @@ void Report::GenerateSheet(LBook* book)
 void Reports::CreateSummary(AtlasLabels* atlasLabels)
 {
     LSheet* sheet = m_book->CreateSheet("Summary");
-
     Calculate(atlasLabels);
 
     if (sheet) {
@@ -327,9 +364,10 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
         for (Report& r : m_reports) {
             sheet->writeStr(i,0, r.m_filename);
             sheet->writeNum(i,3, r.m_regionPixelArea);
+            sheet->writeNum(i,4, r.m_regionArea);
             sheet->writeNum(i,6, r.m_areasOfInterest.count());
             sheet->writeNum(i,8, r.m_totalPixelArea);
-            //sheet->writeNum(i,8, r.m_totalArea);
+            sheet->writeNum(i,9, r.m_totalArea);
             sheet->writeNum(i,11, r.m_totalPixelArea/(float)r.m_regionPixelArea);
 
 
@@ -362,13 +400,18 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
     for (Report& r: m_reports) {
         r.m_totalPixelArea = 0;
         r.m_regionPixelArea = 0;
+        r.m_totalArea = 0;
+        r.m_regionArea = 0;
         for (Area* a: r.m_areasOfInterest) {
             r.m_totalPixelArea+=a->m_pixelArea;
+            r.m_totalArea +=a->m_area;
         }
         for (int i: r.m_IDs) {
             AtlasLabel* al = atlasLabels->get(i);
-            if (al!=nullptr)
+            if (al!=nullptr) {
                 r.m_regionPixelArea += al->area;
+                r.m_regionArea += al->areaScaled;
+            }
         }
 
     }

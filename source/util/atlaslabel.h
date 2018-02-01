@@ -26,6 +26,7 @@ public:
 
 
     float area = 0;
+    float areaScaled = 0;
     float areaSum = 0;
 
     AtlasLabel (QStringList& s)

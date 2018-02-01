@@ -21,6 +21,8 @@ public:
     float m_angle;
     float m_scale;
 
+    float m_pixelAreaScale;
+
     ProcessItem() {
 
     }
@@ -83,8 +85,10 @@ public:
     QString m_filename;
     QVector<long> m_IDs;
     QVector<Area*> m_areasOfInterest;
-    float m_totalPixelArea;
-    float m_regionPixelArea;
+    float m_totalPixelArea = 0;
+    float m_totalArea = 0;
+    float m_regionPixelArea = 0;
+    float m_regionArea = 0;
 
     Report() {}
     Report(QString filename, QStringList& ids) {
@@ -127,6 +131,7 @@ public:
     QString m_labelFile;
 
     int m_pixelCutoff;
+    float m_areaScale = 1;
 
     Reports reports;
 
@@ -134,6 +139,8 @@ public:
     bool Build(LSheet* m_sheet) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
     void ReadHeader(LSheet* m_sheet) override;
+
+    void GenerateReports(LSheet* m_sheet);
 
 };
 

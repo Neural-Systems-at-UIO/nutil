@@ -67,7 +67,7 @@ void LImage::FillArea(Area &area, int i, int j, QColor& testColor)
     }
 }
 
-void LImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale)
+void LImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale)
 {
 
     for (int i=0;i<refImage.width();i++)
@@ -76,6 +76,7 @@ void LImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale)
                 AtlasLabel* al =labels.get(refImage.pixel(i,j));
                 if (al!=nullptr) {
                     al->area+=scale;
+                    al->areaScaled +=scale*areaScale;
                 }
             }
         }
@@ -192,7 +193,7 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
 
 }
 
-void LImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas)
+void LImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale)
 {
 
     Flat2D refImage;
@@ -208,7 +209,7 @@ void LImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFi
     float scale = m_image.width()*m_image.height()/ (float)(refImage.m_width*refImage.m_height);
 
 
-    CountAtlasArea(refImage, labels, scale);
+    CountAtlasArea(refImage, labels, scale, pixelAreaScale);
 //    qDebug() << scale;
 
     if (counter!=nullptr)
@@ -232,6 +233,9 @@ void LImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFi
                 a.atlasLabel = al;
             }
         }
+
+        a.m_area = a.m_pixelArea*pixelAreaScale;
+
 //        else qDebug() << "Error in label file: could not find atlas color " << QColor(idxVal);
 
     }
