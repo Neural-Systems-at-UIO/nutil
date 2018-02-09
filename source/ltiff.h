@@ -41,7 +41,22 @@ public:
     QVector<LTiffBuffer*> buffers;
     QVector<LTiffBuffer*> stack;
 
+    ~LTiffBufferList() {
+        Release();
+    }
+
+    void Release() {
+
+        for (int i=0;i<buffers.count();i++ ) {
+            _TIFFfree(buffers[i]->m_buf);
+            delete buffers[i];
+        }
+        buffers.clear();
+
+    }
+
     void Init(int count, uint32 size) {
+        Release();
         for (int i=0;i<count;i++) {
             tdata_t buf = _TIFFmalloc(size);
             buffers.append(new LTiffBuffer(buf, -1, -1));
@@ -62,6 +77,7 @@ public:
 
     void UpdateBuffer() {
         while (stack.length()>=buffers.length()/2) {
+            // Set free flag
             LTiffBuffer* b = stack[0];
             b->m_x=-1;
             b->m_y=-1;
@@ -102,8 +118,9 @@ public:
     uint32 m_width, m_height;
     uint32 m_tileWidth, m_tileHeight;
     uint32 m_noTilesX, m_noTilesY;
-    TIFF* m_tif;
+    TIFF* m_tif = nullptr;
     QVector<tdata_t> m_buf;
+    tdata_t m_writeBuf = nullptr;
     QVector<int> m_currentTileX, m_currentTileY;
     short m_samplesPerPixel, m_bitsPerSample, m_photo, m_config, m_compression;
 

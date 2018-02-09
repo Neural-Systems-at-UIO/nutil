@@ -49,6 +49,7 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
     m_processItems.clear();
 
 
+
     while (!ok) {
         QString inFile = m_sheet->readStr(y,x);
         if (inFile == "") {
@@ -74,6 +75,12 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
         y++;
 //        return true;
     }
+    if (!Verify()) {
+        m_processItems.clear();
+        return false;
+    }
+
+
 //    m_pm.ExecuteTransform(m_compression, m_background, m_autoClip.toLower()=="yes", m_thumbnailSize, m_thumbType);
 
 }
@@ -132,6 +139,22 @@ void ProcessManagerTransform::ReadHeader(LSheet* m_sheet)
     LMessage::lMessage.Message("Input dir: " + m_inputDir);
 }
 
+bool ProcessManagerTransform::Verify()
+{
+    // Verify that output files are NOT identical
+    for (int i=0;i<m_processItems.count();i++) {
+        QString testFile = m_processItems[i]->m_outFile;
+        for (int j=i+1;j<m_processItems.count();j++) {
+            if (testFile.toLower() == m_processItems[j]->m_outFile) {
+                LMessage::lMessage.Error("ERROR: Output filenams are identical: " + testFile);
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 
 QVector<QVector<long> > Reports::getList()
 {
@@ -164,6 +187,12 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
             QString inFileFull = Util::findFileInDirectory(name,m_inputDir,"png");
             if (inFileFull=="") {
                 LMessage::lMessage.Error("Error: Could not find file that contains: " + name);
+                m_processItems.clear();
+                return false;
+            }
+            QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat");
+            if (inFlatFull=="") {
+                LMessage::lMessage.Error("Error: Could not find FLAT files that contains: " + name + ". Did you remember to run the java binary file converter?");
                 m_processItems.clear();
                 return false;
             }
@@ -269,6 +298,7 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
 {
     bool found = false;
     int i = 4;
+    // Find hierarchy analysis list
     while ((i<1000) && (found==false)) {
         i++;
         QString t = m_sheet->readStr(i,1);
@@ -280,14 +310,12 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
     i++;
     bool hasNext = true;
     int x = 1;
-
+    // As long as a next one exist (x-axis reports)
     while (hasNext) {
 
         QString excelName = m_sheet->readStr(i,x);
-        qDebug() << excelName << i << " " << x;
+//        qDebug() << excelName << i << " " << x;
         if (excelName.simplified()!="") {
-
-
             QStringList ids;// = QString::fromWCharArray(m_sheet->readStr(i,3)).split(',');
             bool done = false;
             int j=i+1;
@@ -300,8 +328,8 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
                     done = true;
                 j++;
             }
-            qDebug() << excelName;
-            qDebug() << ids;
+//            qDebug() << excelName;
+//            qDebug() << ids;
 
 
             reports.m_reports.push_back(Report(excelName, ids));
@@ -342,7 +370,7 @@ void Report::GenerateSheet(LBook* book)
 
 void Reports::CreateSummary(AtlasLabels* atlasLabels)
 {
-    LSheet* sheet = m_book->CreateSheet("Summary");
+    LSheet* sheet = m_book->GetSheet(0);//CreateSheet("Summary");
     Calculate(atlasLabels);
 
     if (sheet) {
@@ -391,7 +419,7 @@ void Report::FindAreasOfInterest(QVector<NutilProcess *>& processes)
 
 
     }
-    qDebug() << "Found amount: " << m_areasOfInterest.count();
+//    qDebug() << "Found amount: " << m_areasOfInterest.count();
 
 }
 

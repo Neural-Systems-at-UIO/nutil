@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Load XLS</string>
+     <string>Load XLSX</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="txtInfo">
@@ -89,7 +89,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Nutil 0.04</string>
+     <string>Nutil 0.05</string>
     </property>
    </widget>
    <widget class="QComboBox" name="cmbSheets">

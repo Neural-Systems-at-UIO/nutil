@@ -41,7 +41,8 @@ SOURCES += main.cpp \
     source/util/atlaslabel.cpp \
     source/util/flat2d.cpp \
     source/LBook/lbook.cpp \
-    source/LBook/lbookxlnt.cpp
+    source/LBook/lbookxlnt.cpp \
+    source/unittest.cpp
 
 HEADERS += \
     source/util/random.h \
@@ -62,7 +63,8 @@ HEADERS += \
     source/util/atlaslabel.h \
     source/util/flat2d.h \
     source/LBook/lbook.h \
-    source/LBook/lbookxlnt.h
+    source/LBook/lbookxlnt.h \
+    source/unittest.h
 
 FORMS    += mainwindow.ui
 

@@ -48,7 +48,7 @@ float LSheetXlnt::readNum(int i, int j)
 {
 //    qDebug() << m_sheet->cell(Util::c2x(i,j));
     if (m_sheet->cell(Util::c2x(i,j)).data_type() != xlnt::cell::type::number) {
-        qDebug() << "ERROR: Cell " << i << ", " << j << "does not contain number";
+        //qDebug() << "ERROR: Cell " << i << ", " << j << "does not contain number";
         return 0;
     }
     return m_sheet->cell(Util::c2x(i,j)).value<float>();

@@ -16,8 +16,6 @@ public:
     QString m_outFolder;
     QString m_outFileSingle;
 
-//    QString m_infoText;
-
     float m_angle;
     float m_scale;
 
@@ -56,6 +54,7 @@ public:
     virtual void Execute() = 0;
     virtual void ReadHeader(LSheet* m_sheet) { }
 
+    virtual bool Verify() = 0;
 //    void ExecuteAutoContrast(QString compression, QColor background);
 
     void ClearProcesses();
@@ -77,6 +76,7 @@ public:
     bool Build(LSheet* m_sheet) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
     void ReadHeader(LSheet* m_sheet) override;
+    bool Verify() override;
 
 };
 
@@ -102,6 +102,7 @@ public:
 
     void FindAreasOfInterest(QVector<NutilProcess*>& processes);
     void GenerateSheet(LBook* b);
+
 };
 
 
@@ -141,6 +142,7 @@ public:
     void ReadHeader(LSheet* m_sheet) override;
 
     void GenerateReports(LSheet* m_sheet);
+    bool Verify() override { return true; }
 
 };
 

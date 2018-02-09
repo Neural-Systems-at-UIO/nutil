@@ -13,11 +13,17 @@ LTiff::LTiff()
 
 LTiff::~LTiff()
 {
-
+    Close();
 }
 
 bool LTiff::Open(QString filename)
 {
+    if (!QFile::exists(filename)) {
+        qDebug() << "ERROR: Could not find tiff file " << filename;
+        LMessage::lMessage.Error("ERROR: Could not find tiff file " + filename);
+        return false;
+    }
+
     m_filename = filename;
     m_tif = TIFFOpen(filename.toStdString().c_str(), "r");
     if (!m_tif) {
@@ -52,7 +58,7 @@ void LTiff::New(QString filename)
 
 void LTiff::WriteBuffer(int x, int y, int thread_num)
 {
-    TIFFWriteTile(m_tif, m_buf[thread_num], x, y, 0,0);
+    TIFFWriteTile(m_tif, m_writeBuf, x, y, 0,0);
 
 }
 
@@ -152,9 +158,9 @@ QString LTiff::ClipToCurrentBorders(short compression, QColor background, Counte
 
                     QColor color = GetTiledRGB(xx + m_boundsMin.x(),yy+ m_boundsMin.y(),omp_get_thread_num());
 
-                    ((unsigned char *)otif.m_buf[0])[3*(i + j*otif.m_tileWidth) + 2] = color.red();
-                    ((unsigned char *)otif.m_buf[0])[3*(i + j*otif.m_tileWidth) + 1] = color.green();
-                    ((unsigned char *)otif.m_buf[0])[3*(i + j*otif.m_tileWidth) + 0] = color.blue();
+                    ((unsigned char *)otif.m_writeBuf)[3*(i + j*otif.m_tileWidth) + 2] = color.red();
+                    ((unsigned char *)otif.m_writeBuf)[3*(i + j*otif.m_tileWidth) + 1] = color.green();
+                    ((unsigned char *)otif.m_writeBuf)[3*(i + j*otif.m_tileWidth) + 0] = color.blue();
 
 
                }
@@ -177,10 +183,14 @@ QString LTiff::ClipToCurrentBorders(short compression, QColor background, Counte
 
 void LTiff::ReleaseBuffers()
 {
-    for (int i=0;i<m_buf.size();i++) {
+/*    for (int i=0;i<m_buf.size();i++) {
         _TIFFfree(m_buf[i]);
-    }
+    }*/
     m_buf.clear();
+    if (m_writeBuf!=nullptr)
+        delete m_writeBuf;
+
+    m_writeBuf = nullptr;
 
 }
 
@@ -305,12 +315,14 @@ QColor LTiff::GetTiledRGB(int x, int y, int thread_num) {
     int ytile = (int)((y/(float)m_tileHeight));
 
     if (xtile != m_currentTileX[thread_num] || ytile!=m_currentTileY[thread_num]) {
-        //        qDebug() << "Reading NEW: " << xtile*m_tileWidth << " , " << ytile*m_tileHeight;
-        //ReadBuffer(xtile*m_tileWidth, ytile*m_tileHeight);
         LTiffBuffer* buf = bufferStack.getBuffer(xtile*m_tileWidth, ytile*m_tileHeight,m_tif);
         m_currentTileX[thread_num] = (int)((x/(float)m_tileWidth));
         m_currentTileY[thread_num] = (int)((y/(float)m_tileHeight));
-        m_buf[thread_num] = buf->m_buf;
+        if (buf==nullptr) {
+            qDebug() << "Buffer not initialized!";
+            exit(1);
+        }
+        m_buf[thread_num] = (buf->m_buf);
 
     }
 
@@ -324,7 +336,6 @@ QColor LTiff::GetTiledRGB(int x, int y, int thread_num) {
         qDebug() << "Mest sannsynlig Nicolaas sin feil. Kontakt!";
         exit(1);
     }
-
     c.setRed(((unsigned char*)m_buf[thread_num])[pos + 2]);
     c.setGreen(((unsigned char*)m_buf[thread_num])[pos + 1]);
     c.setBlue(((unsigned char*)m_buf[thread_num])[pos + 0]);
@@ -347,7 +358,6 @@ void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QC
 
     *counter = Counter((int)(length*width),"Copying tiff ", false);
     AllocateBuffers();
-
     int centerx = m_width/2;
     int centery = m_height/2;
 
@@ -399,9 +409,9 @@ void LTiff::Transform(LTiff &oTiff, float angle, float scale, int tx, int ty, QC
                         m_boundsMin.setY(min(m_boundsMin.y(), yy + centery));
                     }
 
-                    ((unsigned char *)m_buf[0])[3*(i + j*m_tileWidth) + 2] = color.red();
-                    ((unsigned char *)m_buf[0])[3*(i + j*m_tileWidth) + 1] = color.green();
-                    ((unsigned char *)m_buf[0])[3*(i + j*m_tileWidth) + 0] = color.blue();
+                    ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 2] = color.red();
+                    ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 1] = color.green();
+                    ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 0] = color.blue();
                 }
 
 
@@ -429,9 +439,12 @@ void LTiff::AllocateBuffers()
 {
     ReleaseBuffers();
     for (int i=0;i<max_thread_num;i++) {
-       tdata_t buf = _TIFFmalloc(TIFFTileSize(m_tif));
-        m_buf.append(buf);
+ //      tdata_t buf = _TIFFmalloc(TIFFTileSize(m_tif));
+        m_buf.append(nullptr);
     }
+
+    m_writeBuf = _TIFFmalloc(TIFFTileSize(m_tif));
+
 
     m_currentTileX.clear();
     m_currentTileY.clear();
@@ -446,5 +459,7 @@ void LTiff::AllocateBuffers()
 void LTiff::Close()
 {
     ReleaseBuffers();
-    TIFFClose(m_tif);
+    if (m_tif!=nullptr)
+        TIFFClose(m_tif);
+    m_tif = nullptr;
 }
