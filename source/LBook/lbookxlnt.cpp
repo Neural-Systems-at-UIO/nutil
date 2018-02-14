@@ -1,4 +1,6 @@
 #include "source/LBook/lbookxlnt.h"
+#include <QLockFile>
+#include "source/util/lmessage.h"
 
 void LBookXlnt::Load(QString filename)
 {
@@ -7,12 +9,23 @@ void LBookXlnt::Load(QString filename)
 
 void LBookXlnt::Save(QString filename)
 {
+   // QFileInfo()
+    if (!QFile(filename).open(QIODevice::WriteOnly)) {
+        LMessage::lMessage.Error("Report files are open in Excel! Please close all files before proceeding.");
+        return;
+    }
+
+    if (QFile::exists(filename))
+        QFile::remove(filename);
+
     m_book.save(filename.toStdString());
 }
 
 LSheet* LBookXlnt::CreateSheet(QString sheetName)
 {
     LSheet* l = new LSheetXlnt(m_book.create_sheet());
+    l->setName(sheetName);
+
     m_sheets.append(l);
     return l;
 }

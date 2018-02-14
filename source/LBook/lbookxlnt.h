@@ -23,6 +23,7 @@ public:
     QStringList sheet_titles() override;
 
 
+
 };
 
 class LSheetXlnt : public LSheet
@@ -37,6 +38,13 @@ public:
     QString readStr(int i, int j) override;
     void Set(int i,int j, float val) override;
     void Set(int i,int j, QString val) override;
+
+    void setName(QString name) override {
+        LSheet::setName(name);
+        if (m_sheet != nullptr) {
+            m_sheet->title(name.toStdString());
+        }
+    }
 
 
 };

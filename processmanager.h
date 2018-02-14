@@ -6,36 +6,10 @@
 //#include "libxl.h"
 #include "source/util/lmessage.h"
 #include "source/util/atlaslabel.h"
-#include "source/LBook/lbookxlnt.h".h"
-
-class ProcessItem {
-public:
-    QString m_inFile;
-    QString m_outFile;
-
-    QString m_outFolder;
-    QString m_outFileSingle;
-
-    float m_angle;
-    float m_scale;
-
-    float m_pixelAreaScale;
-
-    ProcessItem() {
-
-    }
-
-    ProcessItem(QString inFile, QString outFile, float angle, float scale, QString outFileSingle, QString outFolder) {
-        m_inFile = inFile;
-        m_outFile = outFile;
-        m_angle = angle;
-        m_scale = scale;
-        m_outFolder = outFolder;
-        m_outFileSingle = outFileSingle;
-    }
+#include "source/report.h"
+#include "source/processitem.h"
 
 
-};
 
 class ProcessManager
 {
@@ -61,6 +35,18 @@ public:
     void ClearItems();
 };
 
+class ProcessManagerAutoContrast : public ProcessManager {
+public:
+    QString m_inputDir, m_outputDir;
+    QString m_compression = "jpg";
+
+    bool Build(LSheet* m_sheet) override {return true;}
+    void Execute() override {  } //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
+    void ReadHeader(LSheet* m_sheet) override {return;}
+    bool Verify() override { return true; }
+
+};
+
 
 class ProcessManagerTransform : public ProcessManager {
 
@@ -77,47 +63,6 @@ public:
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
     void ReadHeader(LSheet* m_sheet) override;
     bool Verify() override;
-
-};
-
-class Report {
-public:
-    QString m_filename;
-    QVector<long> m_IDs;
-    QVector<Area*> m_areasOfInterest;
-    float m_totalPixelArea = 0;
-    float m_totalArea = 0;
-    float m_regionPixelArea = 0;
-    float m_regionArea = 0;
-
-    Report() {}
-    Report(QString filename, QStringList& ids) {
-        m_filename = filename;
-        for (QString s : ids) {
-            bool ok;
-            long l = s.simplified().toDouble(&ok);
-            m_IDs.push_back( l);
-        }
-    }
-
-    void FindAreasOfInterest(QVector<NutilProcess*>& processes);
-    void GenerateSheet(LBook* b);
-
-};
-
-
-class Reports {
-public:
-
-    LBook* m_book;
-    QString m_filename;
-    QVector<Report> m_reports;
-    QVector<QVector<long>> getList();
-
-    void Calculate(AtlasLabels* atlasLabels);
-    void CreateBook(QString filename );
-    void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels);
-    void CreateSummary(AtlasLabels* atlasLabels);
 
 };
 

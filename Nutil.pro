@@ -42,7 +42,10 @@ SOURCES += main.cpp \
     source/util/flat2d.cpp \
     source/LBook/lbook.cpp \
     source/LBook/lbookxlnt.cpp \
-    source/unittest.cpp
+    source/unittest.cpp \
+    source/util/shape.cpp \
+    source/report.cpp \
+    source/processitem.cpp
 
 HEADERS += \
     source/util/random.h \
@@ -64,7 +67,10 @@ HEADERS += \
     source/util/flat2d.h \
     source/LBook/lbook.h \
     source/LBook/lbookxlnt.h \
-    source/unittest.h
+    source/unittest.h \
+    source/util/shape.h \
+    source/report.h \
+    source/processitem.h
 
 FORMS    += mainwindow.ui
 

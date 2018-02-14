@@ -9,6 +9,7 @@
 class LSheet
 {
 public:
+    QString m_name;
     LSheet();
     virtual float readNum(int i, int j) = 0;
     virtual QString readStr(int i, int j) = 0;
@@ -20,6 +21,9 @@ public:
     }
     void writeNum(int i, int j, float val) {
         Set(i,j,val);
+    }
+    virtual void setName(QString name) {
+        m_name = name;
     }
 
 
