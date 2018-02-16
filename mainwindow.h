@@ -15,6 +15,8 @@ class UpdateThread : public QThread
 {
 public:
     Nauto* m_nauto;
+    float m_version = 0.06;
+
     bool quit = false;
     void Init(Nauto* n) {
         m_nauto = n;

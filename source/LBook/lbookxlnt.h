@@ -35,7 +35,8 @@ public:
 
     LSheetXlnt(xlnt::worksheet sheet);
     LSheetXlnt() {}
-    float readNum(int i, int j) override;
+    double readNum(int i, int j) override;
+    long readLong(int i, int j) override;
     QString readStr(int i, int j) override;
     QColor readCol(int i, int j) override;
 

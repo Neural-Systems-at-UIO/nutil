@@ -12,7 +12,8 @@ class LSheet
 public:
     QString m_name;
     LSheet();
-    virtual float readNum(int i, int j) = 0;
+    virtual double readNum(int i, int j) = 0;
+    virtual long readLong(int i, int j) = 0;
     virtual QString readStr(int i, int j) = 0;
     virtual QColor readCol(int i, int j) = 0;
     virtual void Set(int i,int j, float val) = 0;

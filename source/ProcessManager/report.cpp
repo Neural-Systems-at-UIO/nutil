@@ -3,7 +3,6 @@
 void Report::GenerateSheet(LBook* book)
 {
     LSheet* sheet = book->CreateSheet(m_filename);
-
     if(sheet)
     {
         sheet->writeStr(0,0, "Pixel count");
@@ -14,13 +13,20 @@ void Report::GenerateSheet(LBook* book)
         sheet->writeStr(0, 4, "Center Y");
         sheet->writeStr(0, 5, "Area ID");
         sheet->writeStr(0, 6, "Area name");
+
         for (int i=0;i<m_areasOfInterest.count();i++) {
+  //          qDebug() << i << " / " << m_areasOfInterest.count();
             sheet->writeNum(1+i,0, m_areasOfInterest[i]->m_pixelArea);
             sheet->writeNum(1+i,1, m_areasOfInterest[i]->m_area);
             sheet->writeNum(1+i,3, m_areasOfInterest[i]->m_center.x());
             sheet->writeNum(1+i,4, m_areasOfInterest[i]->m_center.y());
-            sheet->writeNum(1+i,5, m_areasOfInterest[i]->atlasLabel->index);
-            sheet->writeStr(1+i,6, m_areasOfInterest[i]->atlasLabel->name);
+            if (!m_areasOfInterest[i]->atlasLabel) {
+                LMessage::lMessage.Message("WARNING: Could not find atlasLabel coupling for area: " + QString::number(i) + " in sheet " + m_filename);
+            }
+            else {
+                sheet->writeNum(1+i,5, m_areasOfInterest[i]->atlasLabel->index);
+                sheet->writeStr(1+i,6, m_areasOfInterest[i]->atlasLabel->name);
+            }
         }
 
     }
@@ -101,9 +107,15 @@ void Report::FindAreasOfInterest(QVector<NutilProcess *>& processes)
     for (long i : m_IDs) {
         for (NutilProcess* np : processes)
             for (Area& a: np->m_areas)
-                if (a.atlasLabel!=nullptr)
-                    if (a.atlasLabel->index == i)
+                if (a.atlasLabel!=nullptr) {
+/*                    if (i==182305705)
+                        if (i>18230570)
+                        //if (a.atlasLabel->index>1000)
+                        qDebug() << "Check: " << i << " vs " << a.atlasLabel->index;*/
+                     if (a.atlasLabel->index == i)
+
                         m_areasOfInterest.append(&a);
+                }
 
 
     }
@@ -122,7 +134,7 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
             r.m_totalPixelArea+=a->m_pixelArea;
             r.m_totalArea +=a->m_area;
         }
-        for (int i: r.m_IDs) {
+        for (long i: r.m_IDs) {
             AtlasLabel* al = atlasLabels->get(i);
             if (al!=nullptr) {
                 r.m_regionPixelArea += al->area;
@@ -145,6 +157,8 @@ void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasL
 {
     if (!m_book)
         return;
+
+    qDebug() << "Finding areas of interest";
     for (Report& r: m_reports)
             r.FindAreasOfInterest(processes);
 
@@ -154,7 +168,9 @@ void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasL
     qDebug() << "Generating sheets ";
 
     for (Report& r: m_reports) {
+        qDebug() << r.m_filename;
         r.GenerateSheet(m_book);
+        qDebug() << "Done";
     }
     qDebug() << "Saving to " << m_filename;
     m_book->Save(m_filename);

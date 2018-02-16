@@ -23,6 +23,11 @@ void LBookXlnt::Save(QString filename)
 
 LSheet* LBookXlnt::CreateSheet(QString sheetName)
 {
+    for (LSheet* s : m_sheets)
+        if (s->m_name == sheetName) {
+            LMessage::lMessage.Error("Two excel sheets are identical, ignoring creating last sheet: '" + sheetName + "'");
+            return nullptr;
+        }
     LSheet* l = new LSheetXlnt(m_book.create_sheet());
     l->setName(sheetName);
 
@@ -57,14 +62,24 @@ LSheetXlnt::LSheetXlnt(xlnt::worksheet sheet)
     *m_sheet = sheet;
 }
 
-float LSheetXlnt::readNum(int i, int j)
+double LSheetXlnt::readNum(int i, int j)
 {
 //    qDebug() << m_sheet->cell(Util::c2x(i,j));
     if (m_sheet->cell(Util::c2x(i,j)).data_type() != xlnt::cell::type::number) {
         //qDebug() << "ERROR: Cell " << i << ", " << j << "does not contain number";
         return 0;
     }
-    return m_sheet->cell(Util::c2x(i,j)).value<float>();
+    return m_sheet->cell(Util::c2x(i,j)).value<double>();
+}
+
+long LSheetXlnt::readLong(int i, int j)
+{
+//    qDebug() << m_sheet->cell(Util::c2x(i,j));
+    if (m_sheet->cell(Util::c2x(i,j)).data_type() != xlnt::cell::type::number) {
+        //qDebug() << "ERROR: Cell " << i << ", " << j << "does not contain number";
+        return 0;
+    }
+    return m_sheet->cell(Util::c2x(i,j)).value<int>();
 }
 
 QString LSheetXlnt::readStr(int i, int j)

@@ -5,6 +5,44 @@
 #include <xlnt/xlnt.hpp>
 #include "source/unittest.h"
 #include <QStyleFactory>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include "source/util/updater.h"
+
+void setPalette(QApplication& a) {
+    a.setStyle(QStyleFactory::create("Fusion"));
+
+    QPalette darkPalette;
+    darkPalette.setColor(QPalette::Window, QColor(53,53,53));
+    darkPalette.setColor(QPalette::WindowText, Qt::white);
+    darkPalette.setColor(QPalette::Base, QColor(25,25,25));
+    darkPalette.setColor(QPalette::AlternateBase, QColor(53,53,53));
+    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
+    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
+    darkPalette.setColor(QPalette::Text, Qt::white);
+    darkPalette.setColor(QPalette::Button, QColor(53,53,53));
+    darkPalette.setColor(QPalette::ButtonText, Qt::white);
+    darkPalette.setColor(QPalette::BrightText, Qt::red);
+    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
+
+    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+
+    a.setPalette(darkPalette);
+
+    a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+
+
+}
+
+void CheckVersion() {
+
+    Updater u;
+    u.Initialize();
+
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -15,32 +53,12 @@ int main(int argc, char *argv[])
 //    UnitTest::TestMemory();
 //    exit(1);
 
+    CheckVersion();
+
 
     if (argc == 1)  {
         QApplication a(argc, argv);
-
-        a.setStyle(QStyleFactory::create("Fusion"));
-
-        QPalette darkPalette;
-        darkPalette.setColor(QPalette::Window, QColor(53,53,53));
-        darkPalette.setColor(QPalette::WindowText, Qt::white);
-        darkPalette.setColor(QPalette::Base, QColor(25,25,25));
-        darkPalette.setColor(QPalette::AlternateBase, QColor(53,53,53));
-        darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
-        darkPalette.setColor(QPalette::ToolTipText, Qt::white);
-        darkPalette.setColor(QPalette::Text, Qt::white);
-        darkPalette.setColor(QPalette::Button, QColor(53,53,53));
-        darkPalette.setColor(QPalette::ButtonText, Qt::white);
-        darkPalette.setColor(QPalette::BrightText, Qt::red);
-        darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
-
-        darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-        darkPalette.setColor(QPalette::HighlightedText, Qt::black);
-
-        a.setPalette(darkPalette);
-
-        a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
-
+        setPalette(a);
         MainWindow window;
         window.show();
         return a.exec();

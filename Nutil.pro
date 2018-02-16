@@ -5,6 +5,7 @@ CONFIG += c++11 console
 CONFIG += app_bundle
 QT += widgets
 QT += core gui
+QT += network
 TEMPLATE      = app
 
 # The following define makes your compiler emit warnings if you use
@@ -49,7 +50,10 @@ SOURCES += main.cpp \
     source/ProcessManager/processmanagerpcounter.cpp \
     source/ProcessManager/processmanagerfactory.cpp \
     source/ProcessManager/processmanagertransform.cpp \
-    source/ProcessManager/processmanagerautocontrast.cpp
+    source/ProcessManager/processmanagerautocontrast.cpp \
+    source/util/filedownloader.cpp \
+    source/util/updater.cpp \
+    source/util/downloadmanager.cpp
 
 HEADERS += \
     source/util/random.h \
@@ -78,7 +82,10 @@ HEADERS += \
     source/ProcessManager/processmanagerpcounter.h \
     source/ProcessManager/processmanagerfactory.h \
     source/ProcessManager/processmanagertransform.h \
-    source/ProcessManager/processmanagerautocontrast.h
+    source/ProcessManager/processmanagerautocontrast.h \
+    source/util/filedownloader.h \
+    source/util/updater.h \
+    source/util/downloadmanager.h
 
 FORMS    += mainwindow.ui
 
@@ -92,14 +99,14 @@ FORMS    += mainwindow.ui
 unix|win32: LIBS += -L$$PWD/lib/ -llibtiff
 
 INCLUDEPATH += $$PWD/lib/libtiff
-INCLUDEPATH += C:\Users\leuat\Documents\GitHub\TestLibraries\xlnt-master\include
+INCLUDEPATH += $$PWD/lib
 DEPENDPATH += $$PWD/lib/libtiff
 
 LIBS += -L$$PWD/lib/ -lxlnt
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
-else:unix: LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
+#else:unix: LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
 
-INCLUDEPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
-DEPENDPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
+#INCLUDEPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
+#DEPENDPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp

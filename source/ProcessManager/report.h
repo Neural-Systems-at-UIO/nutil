@@ -29,7 +29,12 @@ public:
         m_color = c;
         for (QString s : ids) {
             bool ok;
-            long l = s.simplified().toDouble(&ok);
+            long l = (long)s.simplified().toLong(&ok);
+/*            if (l>100000)
+                qDebug() << "FOUND " << l;
+            if (!ok) {
+                qDebug() << "NOT OK: " <<s.simplified() << " " << l;
+            }*/
             m_IDs.push_back( l);
         }
     }

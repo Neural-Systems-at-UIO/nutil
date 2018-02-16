@@ -8,11 +8,11 @@
 
 #include "source/util/area.h"
 #include "source/util/atlaslabel.h"
-#include "libxl.h"
+#include "xlnt/xlnt.hpp"
 #include "source/util/counter.h"
 #include "source/util/flat2d.h"
 
-using namespace libxl;
+//using namespace libxl;
 
 class LImage
 {
@@ -29,6 +29,7 @@ private:
     QColor set = QColor(255,255,255,255);
 
     QImage* m_testImage;
+    int scale = 2;
 
 
 public:

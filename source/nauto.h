@@ -10,7 +10,7 @@
 #include "source/LBook/lbook.h"
 #include "source/LBook/lbookxlnt.h"
 
-using namespace libxl;
+//using namespace libxl;
 
 class Nauto
 {

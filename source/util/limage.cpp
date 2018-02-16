@@ -1,4 +1,6 @@
 #include "limage.h"
+#include <QPainter>
+#include <QPen>
 
 
 QImage& LImage::image()
@@ -126,6 +128,9 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
     QRgb off = QColor(255,255,255,255).rgba();
 
 
+    m_index = QImage(QSize(scale*m_image.width(), scale*m_image.height()),QImage::Format_RGB32);
+
+
     for (int i=0;i<m_index.width();i++)
         for (int j=0;j<m_index.height();j++)
             m_index.setPixel(i,j, off);
@@ -135,22 +140,28 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
         counter->Init(m_areas->count());
 
     for (Area& a: *m_areas) {
-        QRgb on = QColor(0,0,0,255).rgba();
+        QRgb on = QColor(200,0,0,255).rgba();
         if (a.atlasLabel != nullptr) {
 //            if (rand()%100>90)
   //              qDebug() << a.atlasLabel->color;
-            on = QColor(a.atlasLabel->color.x(), a.atlasLabel->color.y(), a.atlasLabel->color.z(),255).rgba();
+            //on = QColor(a.atlasLabel->color.x(), a.atlasLabel->color.y(), a.atlasLabel->color.z(),255).rgba();
         }
 
         if (counter)
             counter->Tick();
-        for (QPointF qp: a.m_points)
-            m_index.setPixel(qp.x(), qp.y(), on);
+        for (QPointF qp: a.m_points) {
+            for (int i=0;i<1;i++)
+            for (int j=0;j<1;j++)
+                m_index.setPixel(2*qp.x()+i, 2*qp.y()+j, on);
+        }
 
-
+       // if (a.atlasLabel!=nullptr)
+//            painter.drawText(a.m_center*scale,  QString::number(a.atlasLabel->index));
     }
 
+    // Rescale background image
     if (m_testImage!=nullptr) {
+
         for (int i=0;i<m_index.width();i++)
             for (int j=0;j<m_index.height();j++) {
                 QPoint p((float)i/(float)m_index.width()*(float)m_testImage->width(),(float)j/(float)m_index.height()*(float)m_testImage->height());
@@ -166,7 +177,11 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
                     c.setBlue(min((int)(c.blue()*0.7 + c2.blue()*0),255));
                     m_index.setPixel(i,j,c.rgba());
                 }
+
             }
+
+
+
         delete m_testImage;
     }
 
@@ -181,12 +196,25 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
                 if (a.atlasLabel !=nullptr )
                     if (a.atlasLabel->index == i)
                         for (QPointF& q: a.m_points)
-                          m_index.setPixel(q.x(), q.y(), c.rgba() );
+                            for (int i=0;i<scale;i++)
+                            for (int j=0;j<scale;j++)
+                              m_index.setPixel(scale*q.x()+i, scale*q.y()+j, c.rgba() );
 
 
         }
         idx++;
 
+    }
+
+    QPainter painter(&m_index);
+    QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
+    painter.setPen(penHText);
+    QFont fnt = QFont("Times", 8, QFont::Normal);
+    fnt.setStyleStrategy(QFont::NoAntialias);
+    painter.setFont(fnt);
+    for (Area& a: *m_areas) {
+        if (a.atlasLabel!=nullptr)
+            painter.drawText(a.m_center*scale,  QString::number(a.atlasLabel->index));
     }
 
     m_index.save(filename);

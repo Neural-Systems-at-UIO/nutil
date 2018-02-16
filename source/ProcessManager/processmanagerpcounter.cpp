@@ -76,7 +76,7 @@ void ProcessManagerPCounter::Execute()
     Util::globalTimer.restart();
     m_mainCounter = Counter(m_processes.length(),"",false);
 
-    qDebug()<<"Number reports found: " << reports.m_reports.count();
+//    qDebug()<<"Number reports found: " << reports.m_reports.count();
 
 
     QVector<QColor> cols;
@@ -166,7 +166,7 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
             bool done = false;
             int j=i+2;
             while (!done) {
-                double num = m_sheet->readNum(j,x);
+                long num = m_sheet->readNum(j,x);
                 QString s = QString::number(num);
                 if (s!="" && s!="0" && j<1024)
                     ids<<s;
@@ -187,4 +187,5 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
     }
 
 }
+
 

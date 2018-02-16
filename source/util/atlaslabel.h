@@ -54,7 +54,7 @@ public:
 
 class AtlasLabels {
 private:
-    QMap<int, AtlasLabel*> indexedID;
+    QMap<long, AtlasLabel*> indexedID;
 
 public:
     //QMap<QVector3D, AtlasLabel*> indexedColor;

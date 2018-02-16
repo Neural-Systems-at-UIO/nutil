@@ -33,6 +33,13 @@ public:
 
     void ClearProcesses();
     void ClearItems();
+
+    void Abort() {
+        ClearProcesses();
+        ClearItems();
+
+    }
+
 };
 
 
