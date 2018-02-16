@@ -5,7 +5,7 @@
 #include <QColor>
 #include <QStringList>
 //#include "libxl.h"
-#include "processmanager.h"
+#include "source/ProcessManager/processmanager.h"
 #include "source/util/lmessage.h"
 #include "source/LBook/lbook.h"
 #include "source/LBook/lbookxlnt.h"

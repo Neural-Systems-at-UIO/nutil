@@ -41,7 +41,7 @@ public:
 //    void GenerateAreaReport(QString outExcelFile,Counter *counter);
 
     void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, float scale, float areaScale);
-    void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas, QVector<QVector<long>>);
+    void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas, QVector<QVector<long>>, QVector<QColor> cols);
     //void RenderAreas(QImage& image, QColor color);
     LImage() {}
     LImage(QString f) {

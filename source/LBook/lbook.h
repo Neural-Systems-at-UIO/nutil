@@ -4,6 +4,7 @@
 #include <QString>
 #include <QVector>
 #include <QStringList>
+#include <QColor>
 
 
 class LSheet
@@ -13,6 +14,7 @@ public:
     LSheet();
     virtual float readNum(int i, int j) = 0;
     virtual QString readStr(int i, int j) = 0;
+    virtual QColor readCol(int i, int j) = 0;
     virtual void Set(int i,int j, float val) = 0;
     virtual void Set(int i,int j, QString val) = 0;
 

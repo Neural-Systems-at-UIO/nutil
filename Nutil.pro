@@ -33,8 +33,8 @@ SOURCES += main.cpp \
     node.cpp \
     source/ltiff.cpp \
     source/nauto.cpp \
-    source/nutilprocess.cpp \
-    processmanager.cpp \
+    source/ProcessManager/nutilprocess.cpp \
+    source/ProcessManager/processmanager.cpp \
     source/util/lmessage.cpp \
     source/util/limage.cpp \
     source/util/area.cpp \
@@ -44,8 +44,12 @@ SOURCES += main.cpp \
     source/LBook/lbookxlnt.cpp \
     source/unittest.cpp \
     source/util/shape.cpp \
-    source/report.cpp \
-    source/processitem.cpp
+    source/ProcessManager/report.cpp \
+    source/ProcessManager/processitem.cpp \
+    source/ProcessManager/processmanagerpcounter.cpp \
+    source/ProcessManager/processmanagerfactory.cpp \
+    source/ProcessManager/processmanagertransform.cpp \
+    source/ProcessManager/processmanagerautocontrast.cpp
 
 HEADERS += \
     source/util/random.h \
@@ -58,8 +62,8 @@ HEADERS += \
     source/ltiff.h \
     source/util/cinifile.h \
     source/nauto.h \
-    source/nutilprocess.h \
-    processmanager.h \
+    source/ProcessManager/nutilprocess.h \
+    source/ProcessManager/processmanager.h \
     source/util/lmessage.h \
     source/util/limage.h \
     source/util/area.h \
@@ -69,8 +73,12 @@ HEADERS += \
     source/LBook/lbookxlnt.h \
     source/unittest.h \
     source/util/shape.h \
-    source/report.h \
-    source/processitem.h
+    source/ProcessManager/report.h \
+    source/ProcessManager/processitem.h \
+    source/ProcessManager/processmanagerpcounter.h \
+    source/ProcessManager/processmanagerfactory.h \
+    source/ProcessManager/processmanagertransform.h \
+    source/ProcessManager/processmanagerautocontrast.h
 
 FORMS    += mainwindow.ui
 

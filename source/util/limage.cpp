@@ -121,7 +121,7 @@ void LImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, 
 
 }
 */
-void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList)
+void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols)
 {
     QRgb off = QColor(255,255,255,255).rgba();
 
@@ -172,10 +172,10 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
 
     // Then test reports
 
-    QColor cols[4] = { QColor(255,0,0), QColor(0,255,0), QColor(0,0,255), QColor(255,0,255) };
+    //QColor cols[4] = { QColor(255,0,0), QColor(0,255,0), QColor(0,0,255), QColor(255,0,255) };
     int idx=0;
     for (QVector<long>& lst : reportList) {
-        QColor c = cols[idx % 4];
+        QColor c = cols[idx];
         for (long i : lst) {
             for (Area& a: *m_areas)
                 if (a.atlasLabel !=nullptr )

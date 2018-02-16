@@ -3,6 +3,7 @@
 #include <iostream>
 #include <QDebug>
 #include "source/util/util.h"
+#include "source/ProcessManager/processmanagerfactory.h"
 
 using namespace std;
 

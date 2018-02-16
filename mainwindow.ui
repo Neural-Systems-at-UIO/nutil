@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>NeSys Utilities</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btnLoad">
@@ -89,7 +89,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Nutil 0.05</string>
+     <string>Nutil 0.06</string>
     </property>
    </widget>
    <widget class="QComboBox" name="cmbSheets">

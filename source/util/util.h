@@ -59,6 +59,13 @@ public:
     static string trim(string s);
     static QString path;
 
+    static QString fixFolder(QString folderName) {
+        if (folderName[folderName.count()-1]=='\\')
+                return folderName;
+        if (folderName[folderName.count()-1]=='/')
+                return folderName;
+        return folderName + "/";
+    }
 
     static std::string c2x(int x, int y) {
         std::string s;
