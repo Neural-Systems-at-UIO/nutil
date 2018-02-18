@@ -6,3 +6,8 @@ xcopy /s %dir%\iconengines nutil\
 xcopy /s %dir%\platforms nutil\
 xcopy /s %dir%\*.dll nutil\
 xcopy /e ..\source\* nutil
+xcopy Nutil.cmd nutil\
+xcopy 7z.exe nutil\
+move nutil\nutil.exe nutil\nutil_program.exe
+
+

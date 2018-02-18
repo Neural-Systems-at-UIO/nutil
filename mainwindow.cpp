@@ -3,6 +3,8 @@
 #include <QFileDialog>
 #include <QDebug>
 
+float MainWindow::Version = 0.08;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -14,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_updateThread, SIGNAL(MessageChanged(QString)), this, SLOT(OnMessageTextChanged(QString)));
     m_updateThread->Init(&m_nauto);
     m_updateThread->start();
+
+    ui->lblMain->setText("NeSys Utilities " + QString::number(Version));
 
 }
 

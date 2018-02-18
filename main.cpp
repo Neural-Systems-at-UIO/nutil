@@ -37,10 +37,14 @@ void setPalette(QApplication& a) {
 }
 
 void CheckVersion() {
-
     Updater u;
     u.Initialize();
-
+    if (!u.CheckVersionOK(MainWindow::Version)) {
+        qDebug() << "New version of Nutil (" + QString::number(u.m_newVersion) +") released, downloading...";
+        u.FetchNewVersion();
+        exit(1);
+    }
+    else qDebug() << "No new version. Continuing.";
 }
 
 

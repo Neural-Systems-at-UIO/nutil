@@ -15,7 +15,6 @@ class UpdateThread : public QThread
 {
 public:
     Nauto* m_nauto;
-    float m_version = 0.06;
 
     bool quit = false;
     void Init(Nauto* n) {
@@ -62,6 +61,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     Ui::MainWindow *ui;
+    static float Version;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 

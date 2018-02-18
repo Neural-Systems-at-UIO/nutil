@@ -73,7 +73,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="lblMain">
     <property name="geometry">
      <rect>
       <x>630</x>
