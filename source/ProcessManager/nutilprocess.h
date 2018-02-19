@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <omp.h>
 #include "source/util/counter.h"
-#include "source/ltiff.h"
+#include "source/ltiff/ltiff.h"
 #include "source/util/util.h"
 #include "source/util/counter.h"
 #include "source/util/limage.h"

@@ -3,7 +3,7 @@
 
 #include <QVector>
 #include <QString>
-#include "source/ltiff.h"
+#include "source/ltiff/ltiff.h"
 
 class NutilApplication
 {

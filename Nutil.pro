@@ -8,6 +8,9 @@ QT += core gui
 QT += network
 TEMPLATE      = app
 
+
+
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -26,17 +29,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 
 SOURCES += main.cpp \
-    source/util/util.cpp \
     source/util/buffer2d.cpp \
     main.cpp \
     nutilapplication.cpp \
     mainwindow.cpp \
     node.cpp \
-    source/ltiff.cpp \
     source/nauto.cpp \
     source/ProcessManager/nutilprocess.cpp \
     source/ProcessManager/processmanager.cpp \
-    source/util/lmessage.cpp \
     source/util/limage.cpp \
     source/util/area.cpp \
     source/util/atlaslabel.cpp \
@@ -51,24 +51,16 @@ SOURCES += main.cpp \
     source/ProcessManager/processmanagerfactory.cpp \
     source/ProcessManager/processmanagertransform.cpp \
     source/ProcessManager/processmanagerautocontrast.cpp \
-    source/util/filedownloader.cpp \
-    source/util/updater.cpp \
-    source/util/downloadmanager.cpp
 
 HEADERS += \
-    source/util/random.h \
-    source/util/util.h \
     nutilapplication.h \
     source/util/buffer2d.h \
-    source/util/counter.h \
     mainwindow.h \
     node.h \
-    source/ltiff.h \
     source/util/cinifile.h \
     source/nauto.h \
     source/ProcessManager/nutilprocess.h \
     source/ProcessManager/processmanager.h \
-    source/util/lmessage.h \
     source/util/limage.h \
     source/util/area.h \
     source/util/atlaslabel.h \
@@ -83,9 +75,6 @@ HEADERS += \
     source/ProcessManager/processmanagerfactory.h \
     source/ProcessManager/processmanagertransform.h \
     source/ProcessManager/processmanagerautocontrast.h \
-    source/util/filedownloader.h \
-    source/util/updater.h \
-    source/util/downloadmanager.h
 
 FORMS    += mainwindow.ui
 
@@ -103,6 +92,22 @@ INCLUDEPATH += $$PWD/lib
 DEPENDPATH += $$PWD/lib/libtiff
 
 LIBS += -L$$PWD/lib/ -lxlnt
+
+#LELIB INCLUDES
+
+ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../LeLib/release/ -llelib
+ else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../LeLib/debug/ -llelib
+ else:symbian: LIBS += -llelib
+ else:unix: LIBS += -L$$OUT_PWD/../LeLib/debug/ -llelib
+
+ INCLUDEPATH += $$PWD/../lelib/
+ DEPENDPATH += $$PWD/../lelib/
+
+ win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../LeLib/release/lelib.lib
+ else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lelib/debug/lelib.lib
+ else:unix:!symbian: PRE_TARGETDEPS += $$OUT_PWD/../projects/lelib/liblelib.a
+
+#LELIB INCLUDES ENDS
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/libxl-3.8.1.0/lib64/ -llibxl

@@ -1,5 +1,5 @@
 #include "unittest.h"
-#include "source/ltiff.h"
+#include "source/ltiff/ltiff.h"
 #include <QDebug>
 
 UnitTest::UnitTest()

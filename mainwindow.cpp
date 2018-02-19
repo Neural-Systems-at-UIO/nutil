@@ -3,7 +3,7 @@
 #include <QFileDialog>
 #include <QDebug>
 
-float MainWindow::Version = 0.08;
+float MainWindow::Version = 0.07;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
