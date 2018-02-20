@@ -1,20 +1,20 @@
-#include "limage.h"
+#include "LImage.h"
 #include <QPainter>
 #include <QPen>
 
 
-QImage& LImage::image()
+QImage& NLImage::image()
 {
     return m_image;
 }
 
-void LImage::Load(QString filename)
+void NLImage::Load(QString filename)
 {
     m_image = QImage(filename);
 
 }
 
-void LImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas,int pixelCutoff)
+void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas,int pixelCutoff)
 {
 
 
@@ -49,7 +49,7 @@ void LImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_area
 }
 
 
-void LImage::FillArea(Area &area, int i, int j, QColor& testColor)
+void NLImage::FillArea(Area &area, int i, int j, QColor& testColor)
 {
     // First test if this is unset
     if (QColor(m_index.pixel(i,j)) == unset) {
@@ -69,7 +69,7 @@ void LImage::FillArea(Area &area, int i, int j, QColor& testColor)
     }
 }
 
-void LImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale)
+void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale)
 {
 
     for (int i=0;i<refImage.width();i++)
@@ -85,7 +85,7 @@ void LImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, 
 
 }
 
-/*void LImage::GenerateAreaReport(QString outExcelFile,Counter *counter)
+/*void NLImage::GenerateAreaReport(QString outExcelFile,Counter *counter)
 {
 //    for (Area a : m_areas)
   //      qDebug() <<" Area size: " << a.m_pixelArea << " center pixel " << a.m_center;
@@ -123,7 +123,7 @@ void LImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, 
 
 }
 */
-void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols)
+void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols)
 {
     QRgb off = QColor(255,255,255,255).rgba();
 
@@ -221,7 +221,7 @@ void LImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_
 
 }
 
-void LImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale)
+void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale)
 {
 
     Flat2D refImage;

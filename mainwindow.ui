@@ -102,6 +102,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnTiffEdit">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>480</y>
+      <width>93</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TIFF Editor</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

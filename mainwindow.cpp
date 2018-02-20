@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QDebug>
+#include "source/dialogtiff.h"
 
 float MainWindow::Version = 0.07;
 
@@ -119,4 +120,11 @@ void MainWindow::OnMessageTextChanged(QString msg)
 void MainWindow::on_btnStop_clicked()
 {
     Abort();
+}
+
+void MainWindow::on_btnTiffEdit_clicked()
+{
+    DialogTiff* dTiff = new DialogTiff(this);
+    dTiff->exec();
+    delete dTiff;
 }

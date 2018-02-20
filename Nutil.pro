@@ -15,7 +15,7 @@ TEMPLATE      = app
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += QT_DEPRECATED_WARNINGS USE_LIBTIFF
 QMAKE_CXXFLAGS += -openmp
 QMAKE_CXXFLAGS += -O2
 
@@ -51,6 +51,8 @@ SOURCES += main.cpp \
     source/ProcessManager/processmanagerfactory.cpp \
     source/ProcessManager/processmanagertransform.cpp \
     source/ProcessManager/processmanagerautocontrast.cpp \
+    source/dialogtiff.cpp \
+    source/updatethread.cpp
 
 HEADERS += \
     nutilapplication.h \
@@ -75,8 +77,11 @@ HEADERS += \
     source/ProcessManager/processmanagerfactory.h \
     source/ProcessManager/processmanagertransform.h \
     source/ProcessManager/processmanagerautocontrast.h \
+    source/dialogtiff.h \
+    source/updatethread.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    source/dialogtiff.ui
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../tiff-4.0.9/libtiff/ -llibtiff
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../tiff-4.0.9/libtiff/ -llibtiffd

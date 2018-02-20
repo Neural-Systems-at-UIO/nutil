@@ -24,7 +24,7 @@ public:
 
     QVector<Area> m_areas;
 
-    LImage lImage;
+    NLImage lImage;
     bool InitializeCounter(QString inFile, bool autoClip, int thumbnailSize);
     bool TransformTiff(QString inFile, QString outFile, QString compression, float angle, float scale, QColor background, bool autoClip);
     bool AutoContrast(QString inFile, QString outFile, QString compression, QColor background);

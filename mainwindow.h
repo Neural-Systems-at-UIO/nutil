@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "source/nauto.h"
 #include "source/util/lmessage.h"
+#include "ui_mainwindow.h"
+#include "ui_dialogtiff.h"
 #include <QThread>
 
 namespace Ui {
@@ -13,6 +15,7 @@ namespace Ui {
 
 class UpdateThread : public QThread
 {
+    Q_OBJECT
 public:
     Nauto* m_nauto;
 
@@ -21,7 +24,6 @@ public:
         m_nauto = n;
     }
 
-    Q_OBJECT
     void run() override {
 
         while (!quit) {
@@ -61,6 +63,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     Ui::MainWindow *ui;
+
     static float Version;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -72,6 +75,8 @@ private slots:
 
 
     void on_btnStop_clicked();
+
+    void on_btnTiffEdit_clicked();
 
 private:
     Nauto m_nauto;

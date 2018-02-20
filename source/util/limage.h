@@ -1,5 +1,5 @@
-#ifndef LIMAGE_H
-#define LIMAGE_H
+#ifndef NLIMAGE_H
+#define NLIMAGE_H
 
 #include <QImage>
 #include <QString>
@@ -14,7 +14,7 @@
 
 //using namespace libxl;
 
-class LImage
+class NLImage
 {
 
 private:
@@ -44,8 +44,8 @@ public:
     void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, float scale, float areaScale);
     void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas, QVector<QVector<long>>, QVector<QColor> cols);
     //void RenderAreas(QImage& image, QColor color);
-    LImage() {}
-    LImage(QString f) {
+    NLImage() {}
+    NLImage(QString f) {
         Load(f);
     }
 
