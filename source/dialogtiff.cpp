@@ -10,12 +10,25 @@ DialogTiff::DialogTiff(QWidget *parent) :
     m_updateThread = new ImageUpdateThread(ui, &m_tif);
     connect(m_updateThread, SIGNAL(updateImageSignal()), this, SLOT(UpdateImage()));
 
-    //connect(this, SIGNAL(closeEvent()), m_updateThread, SLOT(OnQuit()));
-
     m_updateThread->start();
+    m_guiThread = new UpdateGUIThread();
+
+    connect(m_guiThread, SIGNAL(updateProgressSignal()), this, SLOT(UpdateProgress()));
+
+    m_guiThread->start();
 
 
 }
+
+void UpdateGUIThread::run()
+{
+    while (!m_quit) {
+        emit updateProgressSignal();
+        QThread::msleep(10);
+    }
+
+}
+
 
 DialogTiff::~DialogTiff()
 {
@@ -29,10 +42,17 @@ void DialogTiff::UpdateImage()
     m_tif.ApplyToLabel(ui->lblImage);
 }
 
+void DialogTiff::UpdateProgress()
+{
+   ui->prgProgress->setValue(Data::data.percent*100.0);
+}
+
 void DialogTiff::on_btnClose_clicked()
 {
     m_updateThread->m_quit = true;
     m_updateThread->quit();
+    m_guiThread->m_quit = true;
+    m_guiThread->quit();
     close();
 }
 
@@ -44,10 +64,11 @@ void DialogTiff::on_btnOpen_clicked()
         return;
 
 //    m_tif.Initialize(1024,768);
-//    m_tif.Initialize(320,200);
-    m_tif.Initialize(1024,768);
+    m_tif.Initialize(320,200);
+//    m_tif.Initialize(64,40);
     m_tif.LoadTiff(fileName);
 //    UpdateImage();
+    m_updateThread->m_zoom = 0.01;
     Data::data.Redraw();
 
 }
@@ -79,9 +100,9 @@ void DialogTiff::wheelEvent(QWheelEvent *event)
     float f = event->delta()/100.0f;
 
     if (QApplication::keyboardModifiers() & Qt::ControlModifier) {
-        m_updateThread->m_zoom -=f*0.05;
+        m_updateThread->m_zoom *=1 - f*0.05;
         m_updateThread->m_zoom = min(m_updateThread->m_zoom, 1.0f);
-        m_updateThread->m_zoom = max(m_updateThread->m_zoom, 0.1f);
+        m_updateThread->m_zoom = max(m_updateThread->m_zoom, 0.001f);
         float t = 0.0f;
         m_updateThread->m_zoomCenter = (m_updateThread->m_zoomCenter*t + (1-t)*m_updateThread->m_currentPos);//*(2-2*m_zoom);
         Data::data.redrawOutput = true;

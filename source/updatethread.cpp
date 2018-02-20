@@ -9,9 +9,11 @@ void ImageUpdateThread::UpdateDrawing()
 
 void ImageUpdateThread::UpdateMousePosition()
 {
+    if (m_tif->m_tifs.count()==0)
+        return;
     QPointF pos = QCursor::pos() - ui->lblImage->mapToGlobal(ui->lblImage->rect().topLeft());
-    pos.setX(pos.x()/(float)ui->lblImage->width()*m_tif->m_tif.m_width);
-    pos.setY(pos.y()/(float)ui->lblImage->height()*m_tif->m_tif.m_height);
+    pos.setX(pos.x()/(float)ui->lblImage->width()*m_tif->m_tifs[0]->m_width);
+    pos.setY(pos.y()/(float)ui->lblImage->height()*m_tif->m_tifs[0]->m_height);
     m_prevPos = m_currentPos;
     m_currentPos = QPoint(pos.x(), pos.y());
     //    qDebug() << QApplication()::mouseButtons();
@@ -65,8 +67,6 @@ void ImageUpdateThread::run()
         int newShift = 0;
         if (QApplication::keyboardModifiers() & Qt::ShiftModifier)
             newShift = 1;
-
-
 
 
         QThread::msleep(2);

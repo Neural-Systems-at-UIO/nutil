@@ -25,7 +25,7 @@ public:
     int m_currentButton = 0;
     float m_zoom = 1;
     bool m_isPanning = false;
-    QPoint m_zoomCenter = QPoint(00,00);
+    QPointF m_zoomCenter = QPoint(00,00);
     QPixmap m_pixMapImage;
 
     void run() override;
@@ -38,6 +38,8 @@ public:
 
 signals:
     void updateImageSignal();
+
+
 
 public slots:
     void OnQuit();

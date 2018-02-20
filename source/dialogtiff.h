@@ -13,6 +13,23 @@ class DialogTiff;
 }
 
 
+class UpdateGUIThread : public QThread {
+
+    Q_OBJECT
+
+public:
+
+    UpdateGUIThread() {
+    }
+
+    bool m_quit = false;
+    void run() override;
+
+signals:
+    void updateProgressSignal();
+
+
+};
 
 
 
@@ -26,6 +43,7 @@ public:
     LImageTiff m_tif;
 
     ImageUpdateThread* m_updateThread;
+    UpdateGUIThread* m_guiThread;
     void mousePressEvent(QMouseEvent *e) override;
     void mouseReleaseEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent *event) override;
@@ -34,7 +52,7 @@ public:
 private slots:
     void on_btnClose_clicked();
     void UpdateImage();
-
+    void UpdateProgress();
     void on_btnOpen_clicked();
 
 private:
