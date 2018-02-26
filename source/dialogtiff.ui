@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>899</width>
+    <width>898</width>
     <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Nutil Tiff Editor</string>
   </property>
   <widget class="QPushButton" name="btnClose">
    <property name="geometry">

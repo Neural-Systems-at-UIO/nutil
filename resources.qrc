@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>Resources/newt.png</file>
+    </qresource>
+</RCC>

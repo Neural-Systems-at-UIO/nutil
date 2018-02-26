@@ -11,21 +11,23 @@ void ImageUpdateThread::UpdateMousePosition()
 {
     if (m_tif->m_tifs.count()==0)
         return;
+
     QPointF pos = QCursor::pos() - ui->lblImage->mapToGlobal(ui->lblImage->rect().topLeft());
+    QPointF center = QPointF(m_tif->m_tifs[0]->m_width/2, m_tif->m_tifs[0]->m_height/2);
     pos.setX(pos.x()/(float)ui->lblImage->width()*m_tif->m_tifs[0]->m_width);
     pos.setY(pos.y()/(float)ui->lblImage->height()*m_tif->m_tifs[0]->m_height);
     m_prevPos = m_currentPos;
     m_currentPos = QPoint(pos.x(), pos.y());
-    //    qDebug() << QApplication()::mouseButtons();
+    m_currentPos = (m_currentPos-center)*m_zoom + center;
 }
 
 void ImageUpdateThread::UpdatePanning()
 {
 
     m_isPanning = false;
-    if (m_currentButton == 2 && (QApplication::keyboardModifiers() & Qt::ShiftModifier)) {
-        QPoint delta = (m_prevPos - m_currentPos);
-        m_zoomCenter+=(QPoint)delta*0.5;
+    if (m_currentButton == 1/* && (QApplication::keyboardModifiers() & Qt::ShiftModifier)*/) {
+        QPointF delta = (m_prevPos - m_currentPos);
+        m_zoomCenter+=(QPointF)delta*0.5;
 //        qDebug() << delta;
         m_isPanning = true;
         Data::data.redrawOutput = true;
@@ -39,6 +41,8 @@ void ImageUpdateThread::UpdatePanning()
 
 void ImageUpdateThread::UpdateImage()
 {
+    if (m_tif->m_tifs.count()==0)
+        return;
 
     m_tif->ToQImage(m_tif->m_colorList, m_tif->m_qImage, m_zoom, m_zoomCenter);
     m_pixMapImage.convertFromImage(*m_tif->m_qImage);

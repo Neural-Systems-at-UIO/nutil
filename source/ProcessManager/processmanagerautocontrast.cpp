@@ -2,7 +2,37 @@
 
 bool ProcessManagerAutoContrast::Build(LSheet *m_sheet)
 {
-    qDebug() << "BUILD!";
+    bool ok = false;
+    int y = 10;
+    int x = 2;
+
+    m_processItems.clear();
+    QDir directory(m_inputDir);
+    QStringList images = directory.entryList(QStringList() << "*.tif" << "*.tiff",QDir::Files);
+    for (QString filename: images) {
+        QStringList inFileSplit = filename.split("/");
+        QString inFile = (inFileSplit[inFileSplit.count()-1]);
+        QFile test(m_inputDir+inFile);
+        if(!test.exists()) {
+            LMessage::lMessage.Error("Could not find file '" + inFile + "' for processing. Please fix input data and try again.");
+            //m_status = Status::Idle;
+            return false;
+        }
+        QString outFile = inFile;
+        float scale = 1;//QString::fromWCharArray(m_sheet->readStr(y,x+3)).toFloat();
+
+        m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, 0, 1, outFile, m_outputDir));
+        y++;
+//        return true;
+    }
+    if (!Verify()) {
+        m_processItems.clear();
+        return false;
+    }
+
+
+//    m_pm.ExecuteTransform(m_compression, m_background, m_autoClip.toLower()=="yes", m_thumbnailSize, m_thumbType);
+
     return true;
 }
 

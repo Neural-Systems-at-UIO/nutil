@@ -92,6 +92,24 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
 
 bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compression, QColor background)
 {
+    LTiff tif;
+    int writeCompression;
+    if (!LoadAndVerifyTiff(tif, inFile, writeCompression, compression))
+        return false;
+
+    otif.New(outFile);
+    otif.CreateFromMeta(tif, writeCompression, 0, background);
+
+    //qDebug() << "Finding bounds..";
+    //tif.FindBounds(background);
+
+
+    qDebug() << "Autocontrasting to file " << outFile;;
+
+    m_infoText =  "Autocontrasting ";
+    otif.AutoContrast(tif,  &m_counter);
+    otif.Close();
+
     return true;
 }
 

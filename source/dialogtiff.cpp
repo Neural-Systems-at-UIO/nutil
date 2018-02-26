@@ -6,7 +6,7 @@ DialogTiff::DialogTiff(QWidget *parent) :
     ui(new Ui::DialogTiff)
 {
     ui->setupUi(this);
-
+    Data::data.abort = false;
     m_updateThread = new ImageUpdateThread(ui, &m_tif);
     connect(m_updateThread, SIGNAL(updateImageSignal()), this, SLOT(UpdateImage()));
 
@@ -49,6 +49,7 @@ void DialogTiff::UpdateProgress()
 
 void DialogTiff::on_btnClose_clicked()
 {
+    Data::data.abort = true;
     m_updateThread->m_quit = true;
     m_updateThread->quit();
     m_guiThread->m_quit = true;
@@ -68,7 +69,8 @@ void DialogTiff::on_btnOpen_clicked()
 //    m_tif.Initialize(64,40);
     m_tif.LoadTiff(fileName);
 //    UpdateImage();
-    m_updateThread->m_zoom = 0.01;
+    m_updateThread->m_zoom = 0.1;
+    m_updateThread->m_zoomCenter = QPointF(m_tif.m_tifs[0]->m_width/2, m_tif.m_tifs[0]->m_height/2);
     Data::data.Redraw();
 
 }
@@ -99,7 +101,8 @@ void DialogTiff::wheelEvent(QWheelEvent *event)
 {
     float f = event->delta()/100.0f;
 
-    if (QApplication::keyboardModifiers() & Qt::ControlModifier) {
+    //if (QApplication::keyboardModifiers() & Qt::ControlModifier)
+    {
         m_updateThread->m_zoom *=1 - f*0.05;
         m_updateThread->m_zoom = min(m_updateThread->m_zoom, 1.0f);
         m_updateThread->m_zoom = max(m_updateThread->m_zoom, 0.001f);

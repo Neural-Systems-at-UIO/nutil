@@ -120,3 +120,8 @@ LIBS += -L$$PWD/lib/ -lxlnt
 
 #INCLUDEPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
 #DEPENDPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
+
+DISTFILES +=
+
+RESOURCES += \
+    resources.qrc

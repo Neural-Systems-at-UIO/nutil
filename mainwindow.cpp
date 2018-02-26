@@ -4,7 +4,7 @@
 #include <QDebug>
 #include "source/dialogtiff.h"
 
-float MainWindow::Version = 0.07;
+float MainWindow::Version = 0.08;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_updateThread->start();
 
     ui->lblMain->setText("NeSys Utilities " + QString::number(Version));
+    ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
+ //   QPixmap pixmap = QPixmap ("://my_image.png");
 
 }
 

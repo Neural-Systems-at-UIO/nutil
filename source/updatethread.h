@@ -21,7 +21,7 @@ public:
             ui = _ui;
     }
 
-    QPoint m_currentPos, m_prevPos;
+    QPointF m_currentPos, m_prevPos;
     int m_currentButton = 0;
     float m_zoom = 1;
     bool m_isPanning = false;
