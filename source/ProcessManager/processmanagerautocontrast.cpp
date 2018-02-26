@@ -53,7 +53,7 @@ void ProcessManagerAutoContrast::Execute()
 #pragma omp parallel for
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
-        m_processes[i]->AutoContrast(pi->m_inFile, pi->m_outFile, m_compression, m_background);
+        m_processes[i]->AutoContrast(pi->m_inFile, pi->m_outFile, m_compression, m_background, m_std);
         m_mainCounter.Tick();
     }
     m_processFinished = true;
@@ -70,6 +70,7 @@ void ProcessManagerAutoContrast::ReadHeader(LSheet *m_sheet)
     float col_r = m_sheet->readNum(3,1);
     float col_g = m_sheet->readNum(3,2);
     float col_b = m_sheet->readNum(3,3);
+    m_std = m_sheet->readNum(6,1);
     m_background = QColor(col_r, col_g, col_b);
 
  //   LMessage::lMessage.Message("Input dir: " + m_inputDir);

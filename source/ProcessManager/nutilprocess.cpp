@@ -90,7 +90,7 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
 
 }
 
-bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compression, QColor background)
+bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compression, QColor background, float std)
 {
     LTiff tif;
     int writeCompression;
@@ -107,7 +107,7 @@ bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compres
     qDebug() << "Autocontrasting to file " << outFile;;
 
     m_infoText =  "Autocontrasting ";
-    otif.AutoContrast(tif,  &m_counter);
+    otif.AutoContrast(tif,  &m_counter, std);
     otif.Close();
 
     return true;

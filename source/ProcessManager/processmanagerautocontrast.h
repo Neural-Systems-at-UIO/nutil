@@ -7,6 +7,7 @@ class ProcessManagerAutoContrast : public ProcessManager {
 public:
     QString m_inputDir, m_outputDir;
     QString m_compression = "jpg";
+    float m_std;
 
     bool Build(LSheet* m_sheet) override;// {return true;}
     void Execute() override;
