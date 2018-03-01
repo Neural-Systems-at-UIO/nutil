@@ -10,7 +10,22 @@ QImage& NLImage::image()
 
 void NLImage::Load(QString filename)
 {
-    m_image = QImage(filename);
+
+    //filename = "c:\\data\\test.png";
+    if (!QFile::exists(filename)) {
+        LMessage::lMessage.Error("Could not find file: " +filename);
+    }
+
+    m_image = QImage();
+    if (!m_image.load(filename) || m_image.width()==0)
+    {
+        qDebug() << "Error opening file: " + filename;
+        LMessage::lMessage.Error("Error opening file: " + filename);
+    }
+    if (m_image.width()==0) {
+        qDebug() << "Error opening file (size 0): " + filename;
+        LMessage::lMessage.Error("Error opening file (size 0): " + filename);
+    }
 
 }
 
@@ -26,25 +41,22 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
         for (int j=0;j<m_index.height();j++)
             m_index.setPixel(i,j, unset.rgba());
 
-
     counter->Init(m_image.width()*m_image.height());
-
     for (int i=0;i<m_image.width();i++)
         for (int j=0;j<m_image.height();j++) {
             counter->Tick();
 
             if (QColor(m_index.pixel(i,j)) == unset) {
-
                 if (QColor(m_image.pixel(i,j)) == testColor) {
                     Area area;
                     FillArea(area, i,j, testColor);
                     area.CalculateStatistics();
+
                     if (area.m_pixelArea>=pixelCutoff)
                         m_areas->append(area);
                 }
             }
         }
-
     qSort(m_areas->begin(), m_areas->end());
 }
 

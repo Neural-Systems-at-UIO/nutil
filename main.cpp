@@ -54,9 +54,6 @@ int main(int argc, char *argv[])
 
 
 
-//    UnitTest::TestMemory();
-//    exit(1);
-
     CheckVersion();
 
 
