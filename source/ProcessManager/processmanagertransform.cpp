@@ -27,7 +27,9 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
 
         angle = angle/360*(2*M_PI);
 
-        float scale = 1;//QString::fromWCharArray(m_sheet->readStr(y,x+3)).toFloat();
+        float scale = m_sheet->readNum(y,x+3);
+        if (scale==0)
+            scale = 1;
         m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, angle, scale, outFile, m_outputDir));
         y++;
 //        return true;

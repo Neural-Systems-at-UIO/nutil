@@ -61,7 +61,7 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
     otif.m_boundsMax = QVector3D(tif.m_width, tif.m_height, 0);
 
     otif.New(outFile);
-    otif.CreateFromMeta(tif, writeCompression, angle, background);
+    otif.CreateFromMeta(tif, writeCompression, angle, background, true);
 
     //qDebug() << "Finding bounds..";
     //tif.FindBounds(background);
@@ -98,7 +98,7 @@ bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compres
         return false;
 
     otif.New(outFile);
-    otif.CreateFromMeta(tif, writeCompression, 0, background);
+    otif.CreateFromMeta(tif, writeCompression, 0, background, false);
 
     //qDebug() << "Finding bounds..";
     //tif.FindBounds(background);

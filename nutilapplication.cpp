@@ -99,7 +99,7 @@ bool NutilApplication::RotateTiff()
 
     LTiff otif;
     otif.New(outFile);
-    otif.CreateFromMeta(tif, writeCompression, angle, background);
+    otif.CreateFromMeta(tif, writeCompression, angle, background, true);
 
 
     qDebug() << "Transforming to file " << outFile << " with compression " << tif.m_compressionTypes[writeCompression];
