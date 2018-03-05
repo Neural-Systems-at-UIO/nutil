@@ -1,6 +1,7 @@
 #include "LImage.h"
 #include <QPainter>
 #include <QPen>
+#include "source/data.h"
 
 
 QImage& NLImage::image()
@@ -45,7 +46,8 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
     for (int i=0;i<m_image.width();i++)
         for (int j=0;j<m_image.height();j++) {
             counter->Tick();
-
+            if (Data::data.abort)
+                return;
             if (QColor(m_index.pixel(i,j)) == unset) {
                 if (QColor(m_image.pixel(i,j)) == testColor) {
                     Area area;
@@ -258,6 +260,8 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
     for (Area& a: *m_areas) {
         if (counter)
             counter->Tick();
+        if (Data::data.abort)
+            return;
         QPointF p = a.m_points[0];
         p.setX(p.x()/(float)m_image.width());
         p.setY(p.y()/(float)m_image.height());

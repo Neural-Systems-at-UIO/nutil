@@ -1,5 +1,6 @@
 #include "processmanagerpcounter.h"
 #include <QStringList>
+#include "source/data.h"
 
 
 bool ProcessManagerPCounter::Build(LSheet* m_sheet)
@@ -83,17 +84,28 @@ void ProcessManagerPCounter::Execute()
     for (int i=0;i<reports.m_reports.count();i++)
         cols.append(reports.m_reports[i].m_color);
 
+    Data::data.abort = false;
+
 #pragma omp parallel for
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
 
 
-//        qDebug() << "Executing on " <<m_inputDir+  pi->m_inFile +".png";
+//        qDebug() << "Executing on " << pi->m_inFile +".png";
         m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +".png", m_background, &m_processes[i]->m_areas, m_pixelCutoff);
         m_processes[i]->m_infoText = "Anchoring areas";
         // Find atlas file:
 
-        QString atlasFile = Util::findFileInDirectory(pi->m_inFile.split('_')[3] + "_Segmentation", m_atlasDir, "flat");
+       // qDebug() << "Executing on " << pi->m_inFile.split('_')[3] +".png";
+        QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat");
+
+
+        if (atlasFile=="") {
+            LMessage::lMessage.Error("Could not find any atlas flat file!");
+            Data::data.abort = true;
+        }
+        if (Data::data.abort)
+            break;
 
         m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale);
 /*        m_processes[i]->m_infoText = "Generating Excel report";

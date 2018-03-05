@@ -13,6 +13,7 @@ public:
     QString m_outFolder;
     QString m_outFileSingle;
 
+
     QString m_id;
 
     float m_angle;
