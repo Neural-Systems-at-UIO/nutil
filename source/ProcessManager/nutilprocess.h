@@ -31,6 +31,10 @@ public:
     bool GenerateThumbnail(QString inFile, QString outFile, int thumbnailSize);
     bool AutoAdjustImageLevels(QString inFile, QString outFile);
 
+
+    void ClearAreaPixels();
+    void ReleasePCounter();
+
     bool PCounter(QString inFile, QColor counter, QVector<Area>* areas, int pixelCutoff);
 
 //    m_processes[i]->PCounter(+ pi->m_inFile, m_inputDir, m_background, pi->m_outFile, m_AtlasDir, m_labelFile);

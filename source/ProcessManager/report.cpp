@@ -50,7 +50,8 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
         sheet->writeStr(0,8, "Object pixel");
         sheet->writeStr(0,9, "Object area");
         sheet->writeStr(0,10, "Object area unit");
-        sheet->writeStr(0,11, "Object area ratio");
+        sheet->writeStr(0,11, "Pixel area ratio");
+        sheet->writeStr(0,12, "Object area ratio");
 
         int i = 1;
         for (Report& r : m_reports) {
@@ -61,6 +62,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
             sheet->writeNum(i,8, r.m_totalPixelArea);
             sheet->writeNum(i,9, r.m_totalArea);
             sheet->writeNum(i,11, r.m_totalPixelArea/(float)r.m_regionPixelArea);
+            sheet->writeNum(i,12, r.m_totalArea/(float)r.m_regionArea);
 
 
 

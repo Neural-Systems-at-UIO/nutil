@@ -4,7 +4,7 @@
 #include <QDebug>
 #include "source/dialogtiff.h"
 
-float MainWindow::Version = 0.09;
+float MainWindow::Version = 0.10;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

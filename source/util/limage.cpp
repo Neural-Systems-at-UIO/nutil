@@ -30,6 +30,17 @@ void NLImage::Load(QString filename)
 
 }
 
+void NLImage::Release()
+{
+    m_image = QImage(1,1,QImage::Format_RGB32);
+    /*if (m_testImage!=nullptr)
+        delete m_testImage;
+
+    m_testImage = nullptr;
+*/
+    m_index = QImage(1,1,QImage::Format_RGB32);
+}
+
 void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas,int pixelCutoff)
 {
 
@@ -48,6 +59,8 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
             counter->Tick();
             if (Data::data.abort)
                 return;
+
+
             if (QColor(m_index.pixel(i,j)) == unset) {
                 if (QColor(m_image.pixel(i,j)) == testColor) {
                     Area area;
@@ -59,6 +72,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
                 }
             }
         }
+
     qSort(m_areas->begin(), m_areas->end());
 }
 
@@ -251,7 +265,9 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
     float scale = m_image.width()*m_image.height()/ (float)(refImage.m_width*refImage.m_height);
 
 
+//    CountAtlasArea(refImage, labels, scale, pixelAreaScale);
     CountAtlasArea(refImage, labels, scale, pixelAreaScale);
+//    qDebug() << pixelAreaScale;
 //    qDebug() << scale;
 
     if (counter!=nullptr)

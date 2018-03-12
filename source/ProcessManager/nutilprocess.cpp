@@ -162,6 +162,19 @@ bool NutilProcess::AutoAdjustImageLevels(QString inFile, QString outFile)
     return true;
 }
 
+void NutilProcess::ClearAreaPixels()
+{
+    for (Area& a: m_areas) {
+        a.m_points.clear();
+    }
+}
+
+void NutilProcess::ReleasePCounter()
+{
+    lImage.Release();
+    ClearAreaPixels();
+}
+
 bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector<Area>* areas, int pixelCutoff)
 {
     lImage.Load(inFile);

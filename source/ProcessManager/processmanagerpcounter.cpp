@@ -91,12 +91,9 @@ void ProcessManagerPCounter::Execute()
         ProcessItem* pi = m_processItems[i];
 
 
-//        qDebug() << "Executing on " << pi->m_inFile +".png";
         m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +".png", m_background, &m_processes[i]->m_areas, m_pixelCutoff);
         m_processes[i]->m_infoText = "Anchoring areas";
         // Find atlas file:
-
-       // qDebug() << "Executing on " << pi->m_inFile.split('_')[3] +".png";
         QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat");
 
 
@@ -108,13 +105,13 @@ void ProcessManagerPCounter::Execute()
             break;
 
         m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale);
-/*        m_processes[i]->m_infoText = "Generating Excel report";
-        m_processes[i]->lImage.GenerateAreaReport(pi->m_outFile,&m_processes[i]->m_counter, &m_processes[i]->m_areas);
-        m_processes[i]->m_infoText = "Saving test png file";
-*/
+
         m_processes[i]->lImage.SaveAreasImage(m_outputDir + pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
         m_mainCounter.Tick();
         m_processes[i]->m_counter.m_progress = 100;
+
+
+        m_processes[i]->ReleasePCounter();
     }
 
     reports.CreateBook(m_outputDir + "Report.xls");

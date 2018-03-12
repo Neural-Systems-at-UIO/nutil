@@ -28,14 +28,14 @@ private:
     QColor unset = QColor(0,0,0,255);
     QColor set = QColor(255,255,255,255);
 
-    QImage* m_testImage;
+    QImage* m_testImage = nullptr;
     int scale = 2;
 
 
 public:
 
     void Load(QString filename);
-
+    void Release();
     void FindAreas(QColor color, Counter* counter, QVector<Area>* areas, int pixelCutoff);
 
     void FillArea(Area& area, int i, int j, QColor& testColor);
