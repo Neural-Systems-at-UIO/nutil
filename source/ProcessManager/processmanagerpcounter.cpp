@@ -91,6 +91,7 @@ void ProcessManagerPCounter::Execute()
         ProcessItem* pi = m_processItems[i];
 
 
+        qDebug() << "Pcounter: " << pi->m_inFile;
         m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +".png", m_background, &m_processes[i]->m_areas, m_pixelCutoff);
         m_processes[i]->m_infoText = "Anchoring areas";
         // Find atlas file:
@@ -104,11 +105,16 @@ void ProcessManagerPCounter::Execute()
         if (Data::data.abort)
             break;
 
+        qDebug() << "Anchor: " << pi->m_inFile;
         m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale);
 
+        qDebug() << "Save: " << pi->m_inFile;
         m_processes[i]->lImage.SaveAreasImage(m_outputDir + pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
         m_mainCounter.Tick();
         m_processes[i]->m_counter.m_progress = 100;
+        qDebug() << "Release: " << pi->m_inFile;
+
+// 37 49 71
 
 
         m_processes[i]->ReleasePCounter();

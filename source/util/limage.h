@@ -29,7 +29,7 @@ private:
     QColor set = QColor(255,255,255,255);
 
     QImage* m_testImage = nullptr;
-    int scale = 2;
+    int scale = 1;
 
 
 public:

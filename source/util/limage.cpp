@@ -180,7 +180,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
         for (QPointF qp: a.m_points) {
             for (int i=0;i<1;i++)
             for (int j=0;j<1;j++)
-                m_index.setPixel(2*qp.x()+i, 2*qp.y()+j, on);
+                m_index.setPixel(scale*qp.x()+i, scale*qp.y()+j, on);
         }
 
        // if (a.atlasLabel!=nullptr)
