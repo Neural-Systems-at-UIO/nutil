@@ -107,6 +107,7 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale,
                 if (al!=nullptr) {
                     al->area+=scale;
                     al->areaScaled +=scale*areaScale;
+                   // qDebug() << QString::number(scale*areaScale);
                 }
             }
         }
@@ -263,6 +264,9 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
     // First, count all areas
 
     float scale = m_image.width()*m_image.height()/ (float)(refImage.m_width*refImage.m_height);
+
+
+//    pixelAreaScale = 1;
 
 
 //    CountAtlasArea(refImage, labels, scale, pixelAreaScale);

@@ -136,7 +136,8 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
             r.m_totalPixelArea+=a->m_pixelArea;
             r.m_totalArea +=a->m_area;
         }
-        for (long i: r.m_IDs) {
+        for (long i: r.m_IDs)
+        {
             AtlasLabel* al = atlasLabels->get(i);
             if (al!=nullptr) {
                 r.m_regionPixelArea += al->area;
@@ -144,6 +145,26 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
             }
         }
 
+/*        QVector<long> used;
+
+
+        for (long i: r.m_IDs)
+        {
+            bool ok = true;
+            for (int j=0;j<used.count();j++)
+                if (used[j]==i) ok=false;
+
+            if (!ok)
+                continue;
+            AtlasLabel* al = atlasLabels->get(i);
+            if (al!=nullptr) {
+                r.m_regionPixelArea += al->area;
+                r.m_regionArea += al->areaScaled;
+                used.append(i);
+            }
+        }
+
+*/
     }
 }
 

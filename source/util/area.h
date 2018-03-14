@@ -13,8 +13,8 @@ public:
     Area();
     QVector<QPointF> m_points;
     QPointF m_center;
-    float m_pixelArea=0;
-    float m_area=0;
+    double m_pixelArea=0;
+    double m_area=0;
     QVector3D color;
     AtlasLabel* atlasLabel = nullptr;
 
