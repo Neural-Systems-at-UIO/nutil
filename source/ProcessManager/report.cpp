@@ -73,6 +73,54 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
 }
 
+void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items)
+{
+    LBook* book = new LBookXlnt();
+    LSheet* sheet = book->CreateSheet("Entire region summary");
+    sheet->writeStr(0,0,"Region ID");
+    sheet->writeStr(0,1,"Region Name");
+    sheet->writeStr(0,2,"Pixel area");
+    sheet->writeStr(0,3,"Object area");
+    sheet->writeStr(0,4,"units");
+
+    for (AtlasLabel* al: atlasLabels->atlases) {
+        al->extra2 = QVector3D(0,0,0);
+
+    }
+    for (NutilProcess* process: processes) {
+        for (Area& a: process->m_areas) {
+            //if (a->atlasLabel->index==al->index)
+            {
+                a.atlasLabel->extra2.setX(a.atlasLabel->extra2.x() + a.m_pixelArea);
+                a.atlasLabel->extra2.setY(a.atlasLabel->extra2.y() + a.m_area);
+            }
+        }
+    }
+
+
+    QVector<AtlasLabel*> sorted;
+    for (AtlasLabel* al: atlasLabels->atlases)
+        sorted.append(al);
+
+    qSort(sorted.begin(), sorted.end(),
+          [](const AtlasLabel* a, const AtlasLabel* b) -> bool { return a->extra2.x() > b->extra2.x(); });
+
+    int y = 1;
+    for (AtlasLabel* al: sorted) {
+        // Header
+        if (al->extra2.length()!=0) {
+            sheet->writeNum(y,0,al->index);
+            sheet->writeStr(y,1,al->name);
+            sheet->writeNum(y,2,al->extra2.x());
+            sheet->writeNum(y,3,al->extra2.y());
+            sheet->writeStr(y,4,"");
+            y++;
+        }
+
+    }
+    book->Save(fileName);
+}
+
 void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items)
 {
     LBook* book = new LBookXlnt();
@@ -114,9 +162,10 @@ void Report::FindAreasOfInterest(QVector<NutilProcess *>& processes)
                         if (i>18230570)
                         //if (a.atlasLabel->index>1000)
                         qDebug() << "Check: " << i << " vs " << a.atlasLabel->index;*/
-                     if (a.atlasLabel->index == i)
-
+                     if (a.atlasLabel->index == i) {
                         m_areasOfInterest.append(&a);
+                     }
+
                 }
 
 

@@ -46,7 +46,7 @@ bool NutilProcess::InitializeCounter(QString inFile, bool autoClip, int thumbnai
     return true;
 }
 
-bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compression, float angle, float scale, QColor background, bool autoClip)
+bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compression, float angle, QPointF scale, QColor background, bool autoClip)
 {
 
 
@@ -61,7 +61,7 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
     otif.m_boundsMax = QVector3D(tif.m_width, tif.m_height, 0);
 
     otif.New(outFile);
-    otif.CreateFromMeta(tif, writeCompression, angle, background, true);
+    otif.CreateFromMeta(tif, writeCompression, angle, background, false);
 
     //qDebug() << "Finding bounds..";
     //tif.FindBounds(background);
@@ -97,8 +97,12 @@ bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compres
     if (!LoadAndVerifyTiff(tif, inFile, writeCompression, compression))
         return false;
 
+
+
     otif.New(outFile);
-    otif.CreateFromMeta(tif, writeCompression, 0, background, false);
+    otif.CreateFromMeta(tif, writeCompression, 0, background, true);
+
+    qDebug() << "Width: " << otif.m_width;
 
     //qDebug() << "Finding bounds..";
     //tif.FindBounds(background);
@@ -177,6 +181,7 @@ void NutilProcess::ReleasePCounter()
 
 bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector<Area>* areas, int pixelCutoff)
 {
+    qDebug() << inFile;
     lImage.Load(inFile);
 
     m_infoText = "Finding areas";

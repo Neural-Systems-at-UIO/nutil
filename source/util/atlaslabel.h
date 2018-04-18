@@ -21,6 +21,7 @@ public:
     long index;
     QVector3D color;
     QVector3D extra;
+    QVector3D extra2;
     bool toggle;
     float maxval;
 
@@ -28,6 +29,7 @@ public:
     float area = 0;
     float areaScaled = 0;
     float areaSum = 0;
+
 
     AtlasLabel (QStringList& s)
     {

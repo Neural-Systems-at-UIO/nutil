@@ -15,7 +15,17 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
         }
         inFile += ".tif";
 
-        QFile test(m_inputDir+inFile);
+        QString searchFile = Util::findFileInSubDirectories(inFile,m_inputDir,"");
+
+        qDebug() << "Found: " << searchFile;
+        if (searchFile=="") {
+            LMessage::lMessage.Error("Could not find any file '"+inFile+"' in subdirectories.");
+            return false;
+        }
+        inFile = searchFile;
+
+
+        QFile test(inFile);
         if(!test.exists()) {
             LMessage::lMessage.Error("Could not find file '" + inFile + "' for processing. Please fix input data and try again.");
             //m_status = Status::Idle;
@@ -27,10 +37,15 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
 
         angle = angle/360*(2*M_PI);
 
-        float scale = m_sheet->readNum(y,x+3);
-        if (scale==0)
-            scale = 1;
-        m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, angle, scale, outFile, m_outputDir));
+        float scaleX = m_sheet->readNum(y,x+3);
+        float scaleY = m_sheet->readNum(y,x+4);
+        if (scaleX==0)
+            scaleX = 1;
+        if (scaleY==0)
+            scaleY = 1;
+
+        QPointF scale(scaleX, scaleY);
+        m_processItems.append(new ProcessItem(inFile, m_outputDir+ outFile, angle, scale, outFile, m_outputDir));
         y++;
 //        return true;
     }

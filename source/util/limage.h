@@ -14,6 +14,9 @@
 
 //using namespace libxl;
 
+#include <QRgb>
+#include "source/util/nlimagetiff.h"
+
 class NLImage
 {
 
@@ -21,8 +24,16 @@ private:
     //unsigned char* m_data;
     //unsigned int m_width, m_height;
 
-    QImage m_image;
-    QImage m_index;
+/*    QImage m_image;
+    QImage m_index;*/
+
+    enum Type{TIFF, OTHER};
+
+    Type m_type = Type::OTHER;
+
+
+    NLIParent* m_image=nullptr;
+    NLIParent* m_index=nullptr;
 //    QVector<Area> m_areas;
 
     QColor unset = QColor(0,0,0,255);
@@ -34,7 +45,17 @@ private:
 
 public:
 
+    NLIParent* createImage(int w, int h) {
+//        if (m_type==TIFF)
+//            return new NLImageTiff();
+        if (m_type==OTHER)
+            return new NLIQImage(w,h);
+
+        return nullptr;
+    }
+
     void Load(QString filename);
+
     void Release();
     void FindAreas(QColor color, Counter* counter, QVector<Area>* areas, int pixelCutoff);
 
@@ -50,7 +71,7 @@ public:
     }
 
     void Anchor(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale);
-    QImage& image();
+    NLIParent* image();
 };
 
 #endif // LIMAGE_H

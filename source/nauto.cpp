@@ -76,6 +76,9 @@ void Nauto::Execute()
     else
         m_status = Status::Idle;
 
+    m_status = Status::Idle;
+
+
     // Execute stuff
     qDebug() << "FINISHED!" << endl;
     if (m_status != Status::Idle)

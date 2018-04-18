@@ -22,8 +22,18 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
     while (!done) {
         QString name = m_sheet->readStr(y,x);
         if (name!="") {
+            bool isTiff = false;
             QString inFileFull = Util::findFileInDirectory(name,m_inputDir,"png");
             if (inFileFull=="") {
+                inFileFull = Util::findFileInDirectory(name,m_inputDir,"tif");
+                if (inFileFull!="")
+                    isTiff = true;
+            }
+
+
+
+            if (inFileFull=="") {
+
                 LMessage::lMessage.Error("Error: Could not find file that contains: " + name);
                 m_processItems.clear();
                 return false;
@@ -38,9 +48,11 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
             QStringList l = inFileFull.split('/');
             QString inFile = l[l.length()-1];
             QString inFileSingle = inFile.split('.')[0];
-            ProcessItem* pi = new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx", 0, 0, inFileSingle, m_outputDir);
+            ProcessItem* pi = new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx",0, QPointF(1,1), inFileSingle, m_outputDir);
             pi->m_pixelAreaScale = m_areaScale*m_sheet->readNum(y,x+1);
             pi->m_id = name;
+            if (isTiff)
+                pi->m_filetype = "tif";
             m_processItems.append(pi);
         }
         else {
@@ -92,7 +104,7 @@ void ProcessManagerPCounter::Execute()
 
 
         qDebug() << "Pcounter: " << pi->m_inFile;
-        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +".png", m_background, &m_processes[i]->m_areas, m_pixelCutoff);
+        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background, &m_processes[i]->m_areas, m_pixelCutoff);
         m_processes[i]->m_infoText = "Anchoring areas";
         // Find atlas file:
         QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat");
@@ -120,10 +132,10 @@ void ProcessManagerPCounter::Execute()
         m_processes[i]->ReleasePCounter();
     }
 
-    reports.CreateBook(m_outputDir + "Report.xls");
+    reports.CreateBook(m_outputDir + "Report.xlsx");
     reports.CreateSheets(m_processes, &m_labels);
-    reports.CreateSliceReports(m_outputDir + "Report_slices.xls", m_processes, m_processItems);
-
+    reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems);
+    reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems);
 
     m_processFinished = true;
 

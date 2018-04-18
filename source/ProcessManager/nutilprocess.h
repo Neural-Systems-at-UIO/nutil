@@ -26,7 +26,7 @@ public:
 
     NLImage lImage;
     bool InitializeCounter(QString inFile, bool autoClip, int thumbnailSize);
-    bool TransformTiff(QString inFile, QString outFile, QString compression, float angle, float scale, QColor background, bool autoClip);
+    bool TransformTiff(QString inFile, QString outFile, QString compression, float angle, QPointF scale, QColor background, bool autoClip);
     bool AutoContrast(QString inFile, QString outFile, QString compression, QColor background, float std);
     bool GenerateThumbnail(QString inFile, QString outFile, int thumbnailSize);
     bool AutoAdjustImageLevels(QString inFile, QString outFile);

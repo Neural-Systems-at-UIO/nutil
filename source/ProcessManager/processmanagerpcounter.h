@@ -19,6 +19,8 @@ public:
     Reports reports;
 
 
+
+
     bool Build(LSheet* m_sheet) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
     void ReadHeader(LSheet* m_sheet) override;

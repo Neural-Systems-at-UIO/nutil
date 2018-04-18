@@ -57,7 +57,8 @@ public:
     void CreateBook(QString filename );
     void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels);
     void CreateSummary(AtlasLabels* atlasLabels);
-    void CreateSliceReports(QString filename, QVector<NutilProcess*> processes, QVector<ProcessItem*> items);
+    void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items);
+    void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items);
 
 };
 

@@ -52,7 +52,11 @@ SOURCES += main.cpp \
     source/ProcessManager/processmanagertransform.cpp \
     source/ProcessManager/processmanagerautocontrast.cpp \
     source/dialogtiff.cpp \
-    source/updatethread.cpp
+    source/updatethread.cpp \
+    source/IO/nifti.cpp \
+    source/ProcessManager/areafinder3d.cpp \
+    source/IO/pointcloud3d.cpp \
+    source/util/nlimagetiff.cpp
 
 HEADERS += \
     nutilapplication.h \
@@ -78,7 +82,11 @@ HEADERS += \
     source/ProcessManager/processmanagertransform.h \
     source/ProcessManager/processmanagerautocontrast.h \
     source/dialogtiff.h \
-    source/updatethread.h
+    source/updatethread.h \
+    source/IO/nifti.h \
+    source/ProcessManager/areafinder3d.h \
+    source/IO/pointcloud3d.h \
+    source/util/nlimagetiff.h
 
 FORMS    += mainwindow.ui \
     source/dialogtiff.ui

@@ -4,7 +4,8 @@
 #include "source/data.h"
 
 
-QImage& NLImage::image()
+
+NLIParent* NLImage::image()
 {
     return m_image;
 }
@@ -17,52 +18,72 @@ void NLImage::Load(QString filename)
         LMessage::lMessage.Error("Could not find file: " +filename);
     }
 
-    m_image = QImage();
-    if (!m_image.load(filename) || m_image.width()==0)
+    if (filename.endsWith(".tif")) {
+        qDebug() << "NOT IMPLEMENTED NLIMAGETIFF";
+        m_type = TIFF;
+        exit(1);
+    }
+    else m_type = OTHER;
+
+    m_image = createImage(1,1);
+    m_index = createImage(1,1);
+
+//    m_image = QImage();
+    if (!m_image->Load(filename) || m_image->width()==0)
     {
         qDebug() << "Error opening file: " + filename;
         LMessage::lMessage.Error("Error opening file: " + filename);
     }
-    if (m_image.width()==0) {
+    if (m_image->width()==0) {
         qDebug() << "Error opening file (size 0): " + filename;
         LMessage::lMessage.Error("Error opening file (size 0): " + filename);
     }
 
 }
 
+
 void NLImage::Release()
 {
-    m_image = QImage(1,1,QImage::Format_RGB32);
+    //m_image = QImage(1,1,QImage::Format_RGB32);
     /*if (m_testImage!=nullptr)
         delete m_testImage;
 
     m_testImage = nullptr;
 */
-    m_index = QImage(1,1,QImage::Format_RGB32);
+   // m_index = QImage(1,1,QImage::Format_RGB32);
+
+    if (m_index)
+    m_index->Release();
+    if (m_image)
+    m_image->Release();
+
+
 }
 
 void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas,int pixelCutoff)
 {
 
+    if (m_index!=nullptr)
+        delete m_index;
 
-    m_index = QImage(QSize(m_image.width(), m_image.height()),QImage::Format_RGB32);
+    m_index = createImage(m_image->width(), m_image->height());
 
 
-    m_index.fill(unset);
-    for (int i=0;i<m_index.width();i++)
-        for (int j=0;j<m_index.height();j++)
-            m_index.setPixel(i,j, unset.rgba());
+    m_index->fill(unset);
+    for (int i=0;i<m_index->width();i++)
+        for (int j=0;j<m_index->height();j++)
+            m_index->setPixel(i,j, unset.rgba());
 
-    counter->Init(m_image.width()*m_image.height());
-    for (int i=0;i<m_image.width();i++)
-        for (int j=0;j<m_image.height();j++) {
+    counter->Init(m_image->width()*m_image->height());
+    for (int i=0;i<m_image->width();i++)
+        for (int j=0;j<m_image->height();j++) {
             counter->Tick();
             if (Data::data.abort)
                 return;
 
 
-            if (QColor(m_index.pixel(i,j)) == unset) {
-                if (QColor(m_image.pixel(i,j)) == testColor) {
+            if (QColor(m_index->getPixel(i,j)) == unset) {
+                if (QColor(m_image->getPixel(i,j)) == testColor) {
                     Area area;
                     FillArea(area, i,j, testColor);
                     area.CalculateStatistics();
@@ -80,16 +101,16 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
 void NLImage::FillArea(Area &area, int i, int j, QColor& testColor)
 {
     // First test if this is unset
-    if (QColor(m_index.pixel(i,j)) == unset) {
-        m_index.setPixel(i,j,set.rgba());
-        if (QColor(m_image.pixel(i,j)) == testColor) {
+    if (QColor(m_index->getPixel(i,j)) == unset) {
+        m_index->setPixel(i,j,set.rgba());
+        if (QColor(m_image->getPixel(i,j)) == testColor) {
             area.m_points.append(QPoint(i,j));
 //            qDebug() << "Appending: "<< i << " , " << j;
-            if (i+1<m_index.width())
+            if (i+1<m_index->width())
                 FillArea(area, i+1, j, testColor);
             if (i-1>=0)
                FillArea(area, i-1, j, testColor);
-            if (j+1<m_index.height())
+            if (j+1<m_index->height())
                 FillArea(area, i, j+1, testColor);
             if (j-1>=0)
                 FillArea(area, i, j-1, testColor);
@@ -156,13 +177,14 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 {
     QRgb off = QColor(255,255,255,255).rgba();
 
+    if (m_index!=nullptr)
+        delete m_index;
+    m_index = createImage(scale*m_image->width(), scale*m_image->height());//QImage(QSize(scale*m_image->width(), scale*m_image->height()),QImage::Format_RGB32);
 
-    m_index = QImage(QSize(scale*m_image.width(), scale*m_image.height()),QImage::Format_RGB32);
 
-
-    for (int i=0;i<m_index.width();i++)
-        for (int j=0;j<m_index.height();j++)
-            m_index.setPixel(i,j, off);
+    for (int i=0;i<m_index->width();i++)
+        for (int j=0;j<m_index->height();j++)
+            m_index->setPixel(i,j, off);
 
 
     if (counter!=nullptr)
@@ -181,7 +203,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
         for (QPointF qp: a.m_points) {
             for (int i=0;i<1;i++)
             for (int j=0;j<1;j++)
-                m_index.setPixel(scale*qp.x()+i, scale*qp.y()+j, on);
+                m_index->setPixel(scale*qp.x()+i, scale*qp.y()+j, on);
         }
 
        // if (a.atlasLabel!=nullptr)
@@ -191,20 +213,20 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
     // Rescale background image
     if (m_testImage!=nullptr) {
 
-        for (int i=0;i<m_index.width();i++)
-            for (int j=0;j<m_index.height();j++) {
-                QPoint p((float)i/(float)m_index.width()*(float)m_testImage->width(),(float)j/(float)m_index.height()*(float)m_testImage->height());
+        for (int i=0;i<m_index->width();i++)
+            for (int j=0;j<m_index->height();j++) {
+                QPoint p((float)i/(float)m_index->width()*(float)m_testImage->width(),(float)j/(float)m_index->height()*(float)m_testImage->height());
                 if (p.x()<0) p.setX(0);
                 if (p.y()<0) p.setY(0);
                 if (p.x()>m_testImage->width()-1) p.setX(m_testImage->width()-1);
                 if (p.y()>m_testImage->height()-1) p.setY(m_testImage->height()-1);
                 QColor c = QColor(m_testImage->pixel(p.x(), p.y()));
-                QColor c2 =QColor(m_index.pixel(i,j));
+                QColor c2 =QColor(m_index->getPixel(i,j));
                 if (c2.red()>=250 && c2.green()>=250 && c2.blue()>250 ) {
                     c.setRed(min((int)(c.red()*0.7 + c2.red()*0),255));
                     c.setGreen(min((int)(c.green()*0.7 + c2.green()*0),255));
                     c.setBlue(min((int)(c.blue()*0.7 + c2.blue()*0),255));
-                    m_index.setPixel(i,j,c.rgba());
+                    m_index->setPixel(i,j,c.rgba());
                 }
 
             }
@@ -227,7 +249,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
                         for (QPointF& q: a.m_points)
                             for (int i=0;i<scale;i++)
                             for (int j=0;j<scale;j++)
-                              m_index.setPixel(scale*q.x()+i, scale*q.y()+j, c.rgba() );
+                              m_index->setPixel(scale*q.x()+i, scale*q.y()+j, c.rgba() );
 
 
         }
@@ -235,18 +257,20 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
     }
 
-    QPainter painter(&m_index);
-    QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
-    painter.setPen(penHText);
-    QFont fnt = QFont("Times", 8, QFont::Normal);
-    fnt.setStyleStrategy(QFont::NoAntialias);
-    painter.setFont(fnt);
-    for (Area& a: *m_areas) {
-        if (a.atlasLabel!=nullptr)
-            painter.drawText(a.m_center*scale,  QString::number(a.atlasLabel->index));
+    NLIQImage* qi = dynamic_cast<NLIQImage*>(m_index);
+    if (qi!=nullptr) {
+        QPainter painter(&qi->m_image);
+        QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
+        painter.setPen(penHText);
+        QFont fnt = QFont("Times", 8, QFont::Normal);
+        fnt.setStyleStrategy(QFont::NoAntialias);
+        painter.setFont(fnt);
+        for (Area& a: *m_areas) {
+            if (a.atlasLabel!=nullptr)
+                painter.drawText(a.m_center*scale,  QString::number(a.atlasLabel->index));
+        }
     }
-
-    m_index.save(filename);
+    m_index->Save(filename);
 
 }
 
@@ -263,7 +287,7 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
 
     // First, count all areas
 
-    float scale = m_image.width()*m_image.height()/ (float)(refImage.m_width*refImage.m_height);
+    float scale = m_image->width()*m_image->height()/ (float)(refImage.m_width*refImage.m_height);
 
 
 //    pixelAreaScale = 1;
@@ -283,8 +307,8 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
         if (Data::data.abort)
             return;
         QPointF p = a.m_points[0];
-        p.setX(p.x()/(float)m_image.width());
-        p.setY(p.y()/(float)m_image.height());
+        p.setX(p.x()/(float)m_image->width());
+        p.setY(p.y()/(float)m_image->height());
 
 
 

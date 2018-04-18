@@ -10,7 +10,7 @@ public:
     static ProcessManager* CreateProcessManager(QString pm_type) {
         if (pm_type.toLower() == "rotation")
             return new ProcessManagerTransform();
-        if (pm_type.toLower() == "pcounter")
+        if (pm_type.toLower() == "objectcounter")
             return new ProcessManagerPCounter();
         if (pm_type.toLower() == "autocontrast")
             return new ProcessManagerAutoContrast();

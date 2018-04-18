@@ -21,7 +21,7 @@ bool ProcessManagerAutoContrast::Build(LSheet *m_sheet)
         QString outFile = inFile;
         float scale = 1;//QString::fromWCharArray(m_sheet->readStr(y,x+3)).toFloat();
 
-        m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, 0, 1, outFile, m_outputDir));
+        m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, 0, QPointF(1,1), outFile, m_outputDir));
         y++;
 //        return true;
     }

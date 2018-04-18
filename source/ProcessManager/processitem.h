@@ -3,7 +3,7 @@
 
 
 #include <QString>
-
+#include <QPointF>
 
 class ProcessItem {
 public:
@@ -13,11 +13,12 @@ public:
     QString m_outFolder;
     QString m_outFileSingle;
 
+    QString m_filetype = "png";
 
     QString m_id;
 
     float m_angle;
-    float m_scale;
+    QPointF m_scale;
 
     float m_pixelAreaScale;
 
@@ -25,7 +26,7 @@ public:
 
     }
 
-    ProcessItem(QString inFile, QString outFile, float angle, float scale, QString outFileSingle, QString outFolder) {
+    ProcessItem(QString inFile, QString outFile, float angle, QPointF scale, QString outFileSingle, QString outFolder) {
         m_inFile = inFile;
         m_outFile = outFile;
         m_angle = angle;
