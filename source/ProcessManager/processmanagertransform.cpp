@@ -1,4 +1,5 @@
 #include "processmanagertransform.h"
+#include "source/data.h"
 bool ProcessManagerTransform::Build(LSheet *m_sheet)
 {
     bool ok = false;
@@ -78,8 +79,13 @@ void ProcessManagerTransform::Execute()
 
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
+
         //m_processes[i]->InitializeCounter(pi->m_inFile, m_autoClip, m_thumbnailSize);
         m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_autoClip.toLower()=="yes");
+        if (Data::data.abort || Util::CancelSignal) {
+            qDebug() << "Breaking!";
+            break;
+        }
         if (m_thumbnailSize>0) {
             QString tfolder = pi->m_outFolder + "/thumbnails/";
             if (!QDir(tfolder).exists())

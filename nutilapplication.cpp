@@ -66,6 +66,8 @@ bool NutilApplication::RotateTiff()
 
 
     LTiff tif;
+
+
     if (!tif.Open(inFile)) {
         qDebug() << "Could not open tiff file! Please check the filename and try again.";
         exit(1);

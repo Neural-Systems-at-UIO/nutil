@@ -1,5 +1,6 @@
 #include "dialogtiff.h"
 #include <QMouseEvent>
+#include <QMessageBox>
 
 DialogTiff::DialogTiff(QWidget *parent) :
     QDialog(parent),
@@ -67,7 +68,12 @@ void DialogTiff::on_btnOpen_clicked()
 //    m_tif.Initialize(1024,768);
     m_tif.Initialize(320,200);
 //    m_tif.Initialize(64,40);
-    m_tif.LoadTiff(fileName);
+    if (!m_tif.LoadTiff(fileName)) {
+        QMessageBox msgBox;
+        msgBox.setText("TIFF file is corrputed!");
+        msgBox.exec();
+        return;
+    }
 //    UpdateImage();
     m_updateThread->m_zoom = 0.1;
     m_updateThread->m_zoomCenter = QPointF(m_tif.m_tifs[0]->m_width/2, m_tif.m_tifs[0]->m_height/2);

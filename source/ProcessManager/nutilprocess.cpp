@@ -1,5 +1,6 @@
 #include "nutilprocess.h"
 #include "source/util/lmessage.h"
+#include "source/data.h"
 
 NutilProcess::NutilProcess()
 {
@@ -17,7 +18,16 @@ bool NutilProcess::InitializeCounter(QString inFile, bool autoClip, int thumbnai
     int totalOperations = 0;
     LTiff tif;
     if (!tif.Open(inFile)) {
-        LMessage::lMessage.Error("Could not open tiff file + '"+inFile + "' ! Please check the filename and try again.");
+
+        QString s = "";
+        if (!QFile::exists(inFile))
+            s="(file does not exist)";
+        else
+            s="TIFF file is corrupted!";
+        LMessage::lMessage.Error("Could not open tiff file + '"+inFile + "' ! Please check the filename and try again. " + s);
+
+        Data::data.abort=true;
+        Util::CancelSignal=true;
         return false;
     }
 
@@ -137,6 +147,8 @@ bool NutilProcess::GenerateThumbnail(QString inFile, QString outFile, int thumbn
 
     for (int i=0;i<tx;i++) {
         for (int j=0;j<ty;j++) {
+            if (Data::data.abort ||Util::CancelSignal)
+                break;
             int x = (int)((float)i/(float)tx * tif.m_width);
             int y = (int)((float)j/(float)ty * tif.m_height);
             QColor c = tif.GetTiledRGB(x,y,omp_get_thread_num());
@@ -149,6 +161,7 @@ bool NutilProcess::GenerateThumbnail(QString inFile, QString outFile, int thumbn
             tif.bufferStack.UpdateBuffer();
             m_counter.Tick();
             //otif.m_progress = m_counter.percent;
+
 
         }
 
@@ -195,7 +208,15 @@ bool NutilProcess::LoadAndVerifyTiff(LTiff &tif, QString inFile, int &writeCompr
     qDebug() << "Loading tiled tiff file:" << inFile;
 
     if (!tif.Open(inFile)) {
-        LMessage::lMessage.Error("Could not open tiff file + '"+inFile + "' ! Please check the filename and try again.");
+        QString s = "";
+        if (!QFile::exists(inFile))
+            s="File does not exist! Please check the filename and try again. ";
+        else
+            s="TIFF file is corrupted!";
+        LMessage::lMessage.Error("Could not open tiff file + '"+inFile + "'! " + s);
+        Data::data.abort=true;
+        Util::CancelSignal=true;
+
         return false;
     }
     tif.PrintImageInfo();
