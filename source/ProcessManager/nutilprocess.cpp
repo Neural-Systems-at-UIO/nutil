@@ -92,9 +92,9 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
 
     if (autoClip && renameFile!="") {
         qDebug() << "Renaming from " << renameFile << " to "  << outFile;
-        QFile file (outFile);
-        file.remove();
-        QFile::rename(renameFile, outFile);
+        /*QFile file (outFile);
+        file.remove();*/
+        //QFile::rename(renameFile, outFile);
     }
     return true;
 
