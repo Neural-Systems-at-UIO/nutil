@@ -60,6 +60,10 @@ public:
     void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items);
     void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items);
 
+    void Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize);
+
+    void CreateNifti(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int size);
+
 };
 
 

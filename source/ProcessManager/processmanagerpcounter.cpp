@@ -3,6 +3,16 @@
 #include "source/data.h"
 
 
+void ProcessManagerPCounter::LoadXML()
+{
+
+
+    if (QFile::exists(m_anchorFile))
+        m_xmlAnchor.Load(m_anchorFile);
+
+
+}
+
 bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 {
     m_processItems.clear();
@@ -17,7 +27,9 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     }*/
     int x = 1;
-    int y = 12;
+    int y = 16;
+    LoadXML();
+
     bool done = false;
     while (!done) {
         QString name = m_sheet->readStr(y,x);
@@ -47,9 +59,12 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
             QStringList l = inFileFull.split('/');
             QString inFile = l[l.length()-1];
+
+
             QString inFileSingle = inFile.split('.')[0];
             ProcessItem* pi = new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx",0, QPointF(1,1), inFileSingle, m_outputDir);
             pi->m_pixelAreaScale = m_areaScale*m_sheet->readNum(y,x+1);
+            pi->m_xmlData =m_xmlAnchor.findData(name);
             pi->m_id = name;
             if (isTiff)
                 pi->m_filetype = "tif";
@@ -61,8 +76,6 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
         y++;
 
     }
-
-
     return true;
 
 }
@@ -104,7 +117,12 @@ void ProcessManagerPCounter::Execute()
 
 
         qDebug() << "Pcounter: " << pi->m_inFile;
+
+        QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
+
         m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background, &m_processes[i]->m_areas, m_pixelCutoff);
+        for (Area&a : m_processes[i]->m_areas)
+            a.m_mat = mat;
         m_processes[i]->m_infoText = "Anchoring areas";
         // Find atlas file:
         QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat");
@@ -136,6 +154,8 @@ void ProcessManagerPCounter::Execute()
     reports.CreateSheets(m_processes, &m_labels);
     reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems);
     reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems);
+    reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
+    reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
 
     m_processFinished = true;
 
@@ -160,6 +180,9 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet)
     m_labelFile = m_sheet->readStr(7,1);
     m_pixelCutoff = m_sheet->readNum(9,1);
     m_areaScale = m_sheet->readNum(10,1);
+    m_anchorFile = m_sheet->readStr(11,1);
+    m_niftiSize = m_sheet->readNum(12,1);
+    m_xyzScale = m_sheet->readNum(13,1);
 
     GenerateReports(m_sheet);
 

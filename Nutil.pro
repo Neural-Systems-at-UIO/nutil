@@ -3,6 +3,7 @@ QT += gui
 #CONFIG += static
 CONFIG += c++11 console
 CONFIG += app_bundle
+QT += xml
 QT += widgets
 QT += core gui
 QT += network
@@ -30,7 +31,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += main.cpp \
     source/util/buffer2d.cpp \
-    main.cpp \
     nutilapplication.cpp \
     mainwindow.cpp \
     node.cpp \
@@ -56,7 +56,8 @@ SOURCES += main.cpp \
     source/IO/nifti.cpp \
     source/ProcessManager/areafinder3d.cpp \
     source/IO/pointcloud3d.cpp \
-    source/util/nlimagetiff.cpp
+    source/util/nlimagetiff.cpp \
+    source/IO/xmlanchor.cpp
 
 HEADERS += \
     nutilapplication.h \
@@ -86,7 +87,8 @@ HEADERS += \
     source/IO/nifti.h \
     source/ProcessManager/areafinder3d.h \
     source/IO/pointcloud3d.h \
-    source/util/nlimagetiff.h
+    source/util/nlimagetiff.h \
+    source/IO/xmlanchor.h
 
 FORMS    += mainwindow.ui \
     source/dialogtiff.ui

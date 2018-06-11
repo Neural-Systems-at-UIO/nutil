@@ -189,7 +189,7 @@ void NutilProcess::ClearAreaPixels()
 void NutilProcess::ReleasePCounter()
 {
     lImage.Release();
-    ClearAreaPixels();
+//    ClearAreaPixels();
 }
 
 bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector<Area>* areas, int pixelCutoff)

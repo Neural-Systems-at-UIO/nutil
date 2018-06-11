@@ -4,6 +4,7 @@
 
 #include <QString>
 #include <QPointF>
+#include "source/IO/xmlanchor.h"
 
 class ProcessItem {
 public:
@@ -19,6 +20,8 @@ public:
 
     float m_angle;
     QPointF m_scale;
+
+    XMLData m_xmlData;
 
     float m_pixelAreaScale;
 

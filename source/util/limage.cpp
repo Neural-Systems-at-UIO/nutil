@@ -245,11 +245,12 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
         for (long i : lst) {
             for (Area& a: *m_areas)
                 if (a.atlasLabel !=nullptr )
-                    if (a.atlasLabel->index == i)
+                    if (a.atlasLabel->index == i) {
                         for (QPointF& q: a.m_points)
                             for (int i=0;i<scale;i++)
                             for (int j=0;j<scale;j++)
                               m_index->setPixel(scale*q.x()+i, scale*q.y()+j, c.rgba() );
+                    }
 
 
         }
@@ -292,7 +293,6 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
 
 //    pixelAreaScale = 1;
 
-
 //    CountAtlasArea(refImage, labels, scale, pixelAreaScale);
     CountAtlasArea(refImage, labels, scale, pixelAreaScale);
 //    qDebug() << pixelAreaScale;
@@ -310,7 +310,8 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
         p.setX(p.x()/(float)m_image->width());
         p.setY(p.y()/(float)m_image->height());
 
-
+        a.m_width = m_image->width();
+        a.m_height = m_image->height();
 
         long index = refImage.pixel(p.x()*refImage.width(),p.y()*refImage.height() );
         //if (index!=0)
@@ -323,6 +324,7 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
         }
 
         a.m_area = a.m_pixelArea*pixelAreaScale;
+        a.m_areaScale = pixelAreaScale*scale;
 
 //        else qDebug() << "Error in label file: could not find atlas color " << QColor(idxVal);
 

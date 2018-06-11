@@ -8,6 +8,10 @@
 #include <QWidget>
 #include <QGroupBox>
 
+
+
+
+
 class Parameter {
 public:
     QString name;

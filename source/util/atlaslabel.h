@@ -24,7 +24,7 @@ public:
     QVector3D extra2;
     bool toggle;
     float maxval;
-
+    int count;
 
     float area = 0;
     float areaScaled = 0;

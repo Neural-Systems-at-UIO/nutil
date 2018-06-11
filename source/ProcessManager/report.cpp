@@ -1,4 +1,7 @@
 #include "report.h"
+#include <QMatrix4x4>
+#include "source/IO/nifti.h"
+#include <QPointF>
 
 void Report::GenerateSheet(LBook* book)
 {
@@ -82,9 +85,11 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
     sheet->writeStr(0,2,"Pixel area");
     sheet->writeStr(0,3,"Object area");
     sheet->writeStr(0,4,"units");
+    sheet->writeStr(0,5,"No Objects");
 
     for (AtlasLabel* al: atlasLabels->atlases) {
         al->extra2 = QVector3D(0,0,0);
+        al->count = 0;
 
     }
     for (NutilProcess* process: processes) {
@@ -93,6 +98,7 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
             {
                 a.atlasLabel->extra2.setX(a.atlasLabel->extra2.x() + a.m_pixelArea);
                 a.atlasLabel->extra2.setY(a.atlasLabel->extra2.y() + a.m_area);
+                a.atlasLabel->count+=1;
             }
         }
     }
@@ -114,6 +120,7 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
             sheet->writeNum(y,2,al->extra2.x());
             sheet->writeNum(y,3,al->extra2.y());
             sheet->writeStr(y,4,"");
+            sheet->writeNum(y,5,al->count);
             y++;
         }
 
@@ -124,20 +131,46 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
 void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items)
 {
     LBook* book = new LBookXlnt();
+    LSheet* summary = book->GetSheet(0);
+
+    float sumPixel=0;
+    float sumArea = 0;
+    float totalSumPixel=0;
+    float totalSumArea = 0;
+
+    summary->writeStr(0,0,"Total pixel area");
+    summary->writeStr(0,1,"Total object area");
+    summary->writeStr(2,0,"Pixel area");
+    summary->writeStr(2,1,"Object area");
+    summary->writeStr(2,2,"units");
+    summary->writeStr(2,3,"Center X");
+    summary->writeStr(2,4,"Center Y");
+    summary->writeStr(2,5,"Region ID");
+    summary->writeStr(2,6,"Region Name");
+    int yy=3;
+
     for (int i=0;i<items.count();i++) {
         LSheet* sheet = book->CreateSheet(items[i]->m_id);
         // Header
-        sheet->writeStr(0,0,"Pixel area");
-        sheet->writeStr(0,1,"Object area");
-        sheet->writeStr(0,2,"units");
-        sheet->writeStr(0,3,"Center X");
-        sheet->writeStr(0,4,"Center Y");
-        sheet->writeStr(0,5,"Region ID");
-        sheet->writeStr(0,6,"Region Name");
-        int y = 1;
+        sheet->writeStr(0,0,"Total pixel area");
+        sheet->writeStr(0,1,"Total object area");
+        sheet->writeStr(2,0,"Pixel area");
+        sheet->writeStr(2,1,"Object area");
+        sheet->writeStr(2,2,"units");
+        sheet->writeStr(2,3,"Center X");
+        sheet->writeStr(2,4,"Center Y");
+        sheet->writeStr(2,5,"Region ID");
+        sheet->writeStr(2,6,"Region Name");
+        int y = 3;
         for (Area& a: processes[i]->m_areas) {
             sheet->writeNum(y,0,a.m_pixelArea);
             sheet->writeNum(y,1,a.m_area);
+
+            sumPixel+=a.m_pixelArea;
+            sumArea+=a.m_area;
+            totalSumPixel+=a.m_pixelArea;
+            totalSumArea+=a.m_area;
+
             sheet->writeNum(y,3,a.m_center.x());
             sheet->writeNum(y,4,a.m_center.y());
             if (a.atlasLabel!=nullptr) {
@@ -145,10 +178,135 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
                 sheet->writeStr(y,6,a.atlasLabel->name);
             }
             y++;
+
+            summary->writeNum(yy,0,a.m_pixelArea);
+            summary->writeNum(yy,1,a.m_area);
+            summary->writeNum(yy,3,a.m_center.x());
+            summary->writeNum(yy,4,a.m_center.y());
+            if (a.atlasLabel!=nullptr) {
+                summary->writeNum(yy,5,a.atlasLabel->index);
+                summary->writeStr(yy,6,a.atlasLabel->name);
+            }
+            yy++;
+
         }
 
+        sheet->writeNum(1,0,sumPixel);
+        sheet->writeNum(1,1,sumArea);
+        sumArea=0;
+        sumPixel=0;
+
+
     }
+    summary->writeNum(1,0,totalSumPixel);
+    summary->writeNum(1,1,totalSumArea);
     book->Save(filename);
+}
+
+void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize)
+{
+
+    QString o;
+    o += "SCALE 3\n";
+
+
+
+    for (int i=0;i<m_reports.count();i++) {
+        //qDebug() << mat;
+        //  items[i]->m_xmlData.matrix
+        QColor c = m_reports[i].m_color;
+        QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
+        o +="RGBA " + color +" \n";
+        qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
+        int count=0;
+        for (Area* a: m_reports[i].m_areasOfInterest) {
+/*            if (rand()%100>90)
+                qDebug() << color << " vs " << a->color;
+*/
+
+
+/*
+ *
+            QVector3D v(1,a->m_center.x()/a->m_width,a->m_center.y()/a->m_height);
+            v=v*a->m_mat;
+            o +=QString::number(v.x()) + ",";
+            o +=QString::number(v.y()) + ",";
+            o +=QString::number(v.z()) + "\n";
+*/
+
+
+            for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
+                QPointF& p =a->m_points[k];
+                QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
+                v=v*a->m_mat;
+                o +=QString::number(v.x()) + ",";
+                o +=QString::number(v.y()) + ",";
+                o +=QString::number(v.z()) + "\n";
+                if (count++>1000) {
+                    o +="RGBA " + color +" \n";
+                    count=0;
+
+                }
+            }
+
+
+        }
+    }
+
+    QFile file (filename);
+    file.open(QFile::Text | QFile::WriteOnly);
+    QTextStream outstream(&file);
+    outstream << o;
+    file.close();
+}
+
+void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, int size)
+{
+    Nifti n;
+    n.Create(QVector3D(size,size,size),Nifti::DataType::DT_RGB, 24);
+    n.rawData.fill(0);
+    qDebug() << "Creating nifti..";
+    qDebug() << n.size;
+    for (int i=0;i<m_reports.count();i++) {
+        QColor c = m_reports[i].m_color;
+        qDebug() << c.red() << ", " << c.green() << ", " << c.blue() << "  : " << m_reports[i].m_areasOfInterest.count();
+
+        for (Area* a: m_reports[i].m_areasOfInterest) {
+
+            //c.setRed(rand()%255);
+            //c.setBlue(rand()%255);
+            //qDebug() << a->m_points.count();
+            for (QPointF& p: a->m_points) {
+//                QPointF pp=a->m_center;
+                QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
+
+                v=v*a->m_mat;
+                v=v/1.2;
+
+
+
+
+/*                v = QVector3D(rand()%128, rand()%128, rand()%128);
+                v=v/4.0;
+*/
+                //if (rand()%100>98) qDebug() << v;
+
+                n.SetRGBPixel(v,c);
+                n.SetRGBPixel(v + QVector3D(1,0,0),c);
+                n.SetRGBPixel(v - QVector3D(1,0,0),c);
+                n.SetRGBPixel(v + QVector3D(0,1,0),c);
+                n.SetRGBPixel(v - QVector3D(0,1,0),c);
+                n.SetRGBPixel(v + QVector3D(0,0,1),c);
+                n.SetRGBPixel(v - QVector3D(0,0,1),c);
+            }
+        }
+    }
+
+
+
+
+    n.Save(filename);
+
 }
 
 void Report::FindAreasOfInterest(QVector<NutilProcess *>& processes)
@@ -184,6 +342,8 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
         for (Area* a: r.m_areasOfInterest) {
             r.m_totalPixelArea+=a->m_pixelArea;
             r.m_totalArea +=a->m_area;
+            a->color = r.m_color;
+//            if (rand()%100>98) qDebug() << r.m_color;
         }
         for (long i: r.m_IDs)
         {
