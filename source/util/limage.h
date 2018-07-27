@@ -59,7 +59,7 @@ public:
     void Release();
     void FindAreas(QColor color, Counter* counter, QVector<Area>* areas, int pixelCutoff);
 
-    void FillArea(Area& area, int i, int j, QColor& testColor);
+    void FillArea(Area& area, const int i, const int j, const QColor& testColor);
 //    void GenerateAreaReport(QString outExcelFile,Counter *counter);
 
     void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, float scale, float areaScale);

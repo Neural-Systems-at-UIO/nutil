@@ -75,6 +75,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
             m_index->setPixel(i,j, unset.rgba());
 
     counter->Init(m_image->width()*m_image->height());
+    qDebug() << "A";
     for (int i=0;i<m_image->width();i++)
         for (int j=0;j<m_image->height();j++) {
             counter->Tick();
@@ -90,32 +91,41 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
 
                     if (area.m_pixelArea>=pixelCutoff)
                         m_areas->append(area);
+
                 }
             }
         }
+    qDebug() << "B";
 
     qSort(m_areas->begin(), m_areas->end());
 }
 
 
-void NLImage::FillArea(Area &area, int i, int j, QColor& testColor)
+void NLImage::FillArea(Area &area, const int i, const int j, const QColor& testColor)
 {
+    if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
     // First test if this is unset
     if (QColor(m_index->getPixel(i,j)) == unset) {
         m_index->setPixel(i,j,set.rgba());
+        //qDebug() << i << ", " << j << " :" << m_index->width() << ", " << m_index->height() ;
         if (QColor(m_image->getPixel(i,j)) == testColor) {
             area.m_points.append(QPoint(i,j));
-//            qDebug() << "Appending: "<< i << " , " << j;
-            if (i+1<m_index->width())
+            /*if (area.m_points.count()>3000)
+            qDebug() << area.m_points.count() << " :" << i << ", " << j << " :" << m_index->width() << ", " << m_index->height();
+            if (area.m_points.count()>3000)
+                return;
+*/
+            if (i+1<m_index->width()-1)
                 FillArea(area, i+1, j, testColor);
             if (i-1>=0)
                FillArea(area, i-1, j, testColor);
-            if (j+1<m_index->height())
+            if (j+1<m_index->height()-1)
                 FillArea(area, i, j+1, testColor);
             if (j-1>=0)
                 FillArea(area, i, j-1, testColor);
         }
     }
+
 }
 
 void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale)

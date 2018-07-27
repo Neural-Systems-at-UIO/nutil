@@ -9,7 +9,10 @@ void ProcessManagerPCounter::LoadXML()
 
     if (QFile::exists(m_anchorFile))
         m_xmlAnchor.Load(m_anchorFile);
-
+    else {
+        LMessage::lMessage.Message("Could not find anchor file: " + m_anchorFile + ". Please specify in the input xml file!" );
+        Data::data.abort = true;
+    }
 
 }
 
@@ -28,6 +31,8 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
     }*/
     int x = 1;
     int y = 16;
+    Data::data.abort = false;
+
     LoadXML();
 
     bool done = false;
@@ -64,6 +69,7 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
             QString inFileSingle = inFile.split('.')[0];
             ProcessItem* pi = new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx",0, QPointF(1,1), inFileSingle, m_outputDir);
             pi->m_pixelAreaScale = m_areaScale*m_sheet->readNum(y,x+1);
+            //qDebug() << name;
             pi->m_xmlData =m_xmlAnchor.findData(name);
             pi->m_id = name;
             if (isTiff)
@@ -109,7 +115,6 @@ void ProcessManagerPCounter::Execute()
     for (int i=0;i<reports.m_reports.count();i++)
         cols.append(reports.m_reports[i].m_color);
 
-    Data::data.abort = false;
 
 #pragma omp parallel for
     for (int i=0;i<m_processes.length();i++) {
@@ -121,6 +126,7 @@ void ProcessManagerPCounter::Execute()
         QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
 
         m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background, &m_processes[i]->m_areas, m_pixelCutoff);
+        qDebug() << "PCounter done";
         for (Area&a : m_processes[i]->m_areas)
             a.m_mat = mat;
         m_processes[i]->m_infoText = "Anchoring areas";

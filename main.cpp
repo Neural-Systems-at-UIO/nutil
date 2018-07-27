@@ -10,6 +10,10 @@
 #include <QNetworkReply>
 #include "source/util/updater.h"
 
+#pragma comment(linker,"/STACK:2000000");
+#pragma comment(linker,"/HEAP:2000000");
+
+
 void setPalette(QApplication& a) {
     a.setStyle(QStyleFactory::create("Fusion"));
 
