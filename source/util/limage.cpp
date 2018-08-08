@@ -75,7 +75,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
             m_index->setPixel(i,j, unset.rgba());
 
     counter->Init(m_image->width()*m_image->height());
-    qDebug() << "A";
+//    qDebug() << "A";
     for (int i=0;i<m_image->width();i++)
         for (int j=0;j<m_image->height();j++) {
             counter->Tick();
@@ -95,7 +95,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
                 }
             }
         }
-    qDebug() << "B";
+  //  qDebug() << "B";
 
     qSort(m_areas->begin(), m_areas->end());
 }

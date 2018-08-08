@@ -26,68 +26,69 @@
 #include <string>
 
 #include <xlnt/xlnt_config.hpp>
+#include <xlnt/utils/optional.hpp>
+#include <xlnt/cell/cell_reference.hpp>
 
 namespace xlnt {
 
-/// <summary>
-/// A time is a specific time of the day specified in terms of an hour,
-/// minute, second, and microsecond (0-999999).
-/// It can also be initialized as a fraction of a day using time::from_number.
-/// </summary>
-struct XLNT_API time
+struct XLNT_API sheet_pr
 {
     /// <summary>
-    /// Return the current time according to the system time.
+    /// is horizontally synced to the anchor point
     /// </summary>
-    static time now();
+    optional<bool> sync_horizontal;
 
     /// <summary>
-    /// Return a time from a number representing a fraction of a day.
-    /// The integer part of number will be ignored.
-    /// 0.5 would return time(12, 0, 0, 0) or noon, halfway through the day.
+    /// is vertically synced to the anchor point
     /// </summary>
-    static time from_number(double number);
+    optional<bool> sync_vertical;
 
     /// <summary>
-    /// Constructs a time object from an optional hour, minute, second, and microsecond.
+    /// Anchor point for worksheet's window
     /// </summary>
-    explicit time(int hour_ = 0, int minute_ = 0, int second_ = 0, int microsecond_ = 0);
+    optional<cell_reference> sync_ref;
 
     /// <summary>
-    /// Constructs a time object from a string representing the time.
+    /// Lotus compatibility option
     /// </summary>
-    explicit time(const std::string &time_string);
+    optional<bool> transition_evaluation;
 
     /// <summary>
-    /// Returns a numeric representation of the time in the range 0-1 where the value
-    /// is equal to the fraction of the day elapsed.
+    /// Lotus compatibility option
     /// </summary>
-    double to_number() const;
+    optional<bool> transition_entry;
 
     /// <summary>
-    /// Returns true if this time is equivalent to comparand.
+    /// worksheet is published
     /// </summary>
-    bool operator==(const time &comparand) const;
+    optional<bool> published;
 
     /// <summary>
-    /// The hour
+    /// stable name of the sheet
     /// </summary>
-    int hour;
+    optional<std::string> code_name;
 
     /// <summary>
-    /// The minute
+    /// worksheet has one or more autofilters or advanced filters on
     /// </summary>
-    int minute;
+    optional<bool> filter_mode;
 
     /// <summary>
-    /// The second
+    /// whether the conditional formatting calculations shall be evaluated
     /// </summary>
-    int second;
-
-    /// <summary>
-    /// The microsecond
-    /// </summary>
-    int microsecond;
+    optional<bool> enable_format_condition_calculation;
 };
 
+inline bool operator==(const sheet_pr &lhs, const sheet_pr &rhs)
+{
+    return lhs.sync_horizontal == rhs.sync_horizontal
+        && lhs.sync_vertical == rhs.sync_vertical
+        && lhs.sync_ref == rhs.sync_ref
+        && lhs.transition_evaluation == rhs.transition_evaluation
+        && lhs.transition_entry == rhs.transition_entry
+        && lhs.published == rhs.published
+        && lhs.code_name == rhs.code_name
+        && lhs.filter_mode == rhs.filter_mode
+        && lhs.enable_format_condition_calculation == rhs.enable_format_condition_calculation;
+}
 } // namespace xlnt

@@ -217,7 +217,7 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
         QColor c = m_reports[i].m_color;
         QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
         o +="RGBA " + color +" \n";
-        qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
+        //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
         int count=0;
         for (Area* a: m_reports[i].m_areasOfInterest) {
 /*            if (rand()%100>90)
@@ -269,7 +269,7 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
     qDebug() << n.size;
     for (int i=0;i<m_reports.count();i++) {
         QColor c = m_reports[i].m_color;
-        qDebug() << c.red() << ", " << c.green() << ", " << c.blue() << "  : " << m_reports[i].m_areasOfInterest.count();
+        //qDebug() << c.red() << ", " << c.green() << ", " << c.blue() << "  : " << m_reports[i].m_areasOfInterest.count();
 
         for (Area* a: m_reports[i].m_areasOfInterest) {
 
@@ -400,9 +400,9 @@ void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasL
     qDebug() << "Generating sheets ";
 
     for (Report& r: m_reports) {
-        qDebug() << r.m_filename;
+        //qDebug() << r.m_filename;
         r.GenerateSheet(m_book);
-        qDebug() << "Done";
+        //qDebug() << "Done";
     }
     qDebug() << "Saving to " << m_filename;
     m_book->Save(m_filename);

@@ -1,5 +1,4 @@
 // Copyright (c) 2014-2018 Thomas Fussell
-// Copyright (c) 2010-2015 openpyxl
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,14 +24,44 @@
 #pragma once
 
 #include <xlnt/xlnt_config.hpp>
+#include <xlnt/utils/optional.hpp>
 
 namespace xlnt {
 
-/// <summary>
-/// A reference to an external workbook for use in formulae.
-/// </summary>
-class XLNT_API external_book
+struct XLNT_API print_options
 {
+    /// <summary>
+    /// if both grid_lines_set and this are true, grid lines are printed
+    /// </summary>
+    optional<bool> print_grid_lines;
+
+    /// <summary>
+    /// if both print grid lines and this are true, grid lines are printed
+    /// </summary>
+    optional<bool> grid_lines_set;
+
+    /// <summary>
+    /// print row and column headings
+    /// </summary>
+    optional<bool> print_headings;
+
+    /// <summary>
+    /// center on page horizontally
+    /// </summary>
+    optional<bool> horizontal_centered;
+
+    /// <summary>
+    /// center on page vertically
+    /// </summary>
+    optional<bool> vertical_centered;
 };
 
+inline bool operator==(const print_options& lhs, const print_options &rhs)
+{
+    return lhs.grid_lines_set == rhs.grid_lines_set
+        && lhs.horizontal_centered == rhs.horizontal_centered
+        && lhs.print_grid_lines == rhs.print_grid_lines
+        && lhs.print_headings == rhs.print_headings
+        && lhs.vertical_centered == rhs.vertical_centered;
+}
 } // namespace xlnt

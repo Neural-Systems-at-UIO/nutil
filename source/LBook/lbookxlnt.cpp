@@ -29,6 +29,9 @@ LSheet* LBookXlnt::CreateSheet(QString sheetName)
             return nullptr;
         }
     LSheet* l = new LSheetXlnt(m_book.create_sheet());
+//    sheetName = sheetName.replace(" ", "_");
+    if (sheetName.count()>24) sheetName = sheetName.left(24);
+   // qDebug() << sheetName;
     l->setName(sheetName);
 
     m_sheets.append(l);
