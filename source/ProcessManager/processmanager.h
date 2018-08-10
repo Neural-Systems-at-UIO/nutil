@@ -24,6 +24,8 @@ public:
     Counter m_mainCounter;
     QColor m_background = QColor(255,255,255,255);
 
+    int m_numProcessors = -1;
+
     virtual bool Build(LSheet* m_sheet) = 0;
     virtual void Execute() = 0;
     virtual void ReadHeader(LSheet* m_sheet) { }

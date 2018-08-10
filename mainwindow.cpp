@@ -4,7 +4,7 @@
 #include <QDebug>
 #include "source/dialogtiff.h"
 
-float MainWindow::Version = 0.14;
+float MainWindow::Version = 0.15;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
  //   QPixmap pixmap = QPixmap ("://my_image.png");
 
+
+    ui->leProcessors->setText(QString::number(omp_get_max_threads()));
 }
 
 MainWindow::~MainWindow()
@@ -47,11 +49,23 @@ void MainWindow::on_btnStart_clicked()
         return;
     }
 
+
+    m_nauto.m_numThreads = ui->leProcessors->text().toInt();
     m_nauto.m_sheetIndex = ui->cmbSheets->currentIndex();;
     //m_nauto.Execute(); // Non-threaded
     m_workerThread = new WorkerThread();
     m_workerThread->Init(&m_nauto);
     m_workerThread->start();
+}
+
+void MainWindow::on_leProcessors_returnPressed()
+{
+    bool ok=true;
+    int i=ui->leProcessors->text().toInt(&ok,10);
+    if (!ok || i<1 || i>omp_get_max_threads()) {
+        ui->leProcessors->setText(QString::number(omp_get_max_threads()));
+        m_nauto.m_numThreads=omp_get_max_threads();
+    }
 }
 
 
@@ -129,4 +143,9 @@ void MainWindow::on_btnTiffEdit_clicked()
     DialogTiff* dTiff = new DialogTiff(this);
     dTiff->exec();
     delete dTiff;
+}
+
+void MainWindow::on_leProcessors_editingFinished()
+{
+    on_leProcessors_returnPressed();
 }

@@ -64,8 +64,10 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
             sheet->writeNum(i,6, r.m_areasOfInterest.count());
             sheet->writeNum(i,8, r.m_totalPixelArea);
             sheet->writeNum(i,9, r.m_totalArea);
-            sheet->writeNum(i,11, r.m_totalPixelArea/(float)r.m_regionPixelArea);
-            sheet->writeNum(i,12, r.m_totalArea/(float)r.m_regionArea);
+            if (r.m_regionPixelArea!=0)
+                sheet->writeNum(i,11, r.m_totalPixelArea/(float)r.m_regionPixelArea);
+            if (r.m_regionArea!=0)
+                sheet->writeNum(i,12, r.m_totalArea/(float)r.m_regionArea);
 
 
 

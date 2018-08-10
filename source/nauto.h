@@ -34,6 +34,8 @@ public:
 
     Counter m_mainCounter;
 
+    int m_numThreads=1;
+
     Status m_status = Status::Idle;
     QString m_type;
     QString m_batchName;

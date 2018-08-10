@@ -64,6 +64,8 @@ void Nauto::Execute()
 
     m_pm = ProcessManagerFactory::CreateProcessManager(m_type);
 
+    m_pm->m_numProcessors = m_numThreads;
+
     if (m_pm == nullptr) {
         LMessage::lMessage.Error("Unknown command: " + m_type);
         m_status = Status::Idle;

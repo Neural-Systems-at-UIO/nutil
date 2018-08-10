@@ -75,7 +75,9 @@ void ProcessManagerTransform::Execute()
     Util::globalTimer.restart();
     m_mainCounter = Counter(m_processes.length(),"",false);
 
-#pragma omp parallel for
+    int n=3;
+
+#pragma omp parallel for num_threads(m_numProcessors)
 
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];

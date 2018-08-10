@@ -74,9 +74,13 @@ private slots:
     void on_btnStart_clicked();
 
 
+    void on_leProcessors_returnPressed();
+
     void on_btnStop_clicked();
 
     void on_btnTiffEdit_clicked();
+
+    void on_leProcessors_editingFinished();
 
 private:
     Nauto m_nauto;
