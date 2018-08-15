@@ -16,6 +16,7 @@ public:
     QString m_anchorFile;
 
     int m_pixelCutoff;
+    int m_pixelCutoffMax;
     float m_areaScale = 1;
 
     float m_niftiSize;

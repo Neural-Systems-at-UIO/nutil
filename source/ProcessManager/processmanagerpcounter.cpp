@@ -125,7 +125,7 @@ void ProcessManagerPCounter::Execute()
 
         QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
 
-        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background, &m_processes[i]->m_areas, m_pixelCutoff);
+        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax);
         qDebug() << "PCounter done";
         for (Area&a : m_processes[i]->m_areas)
             a.m_mat = mat;
@@ -185,6 +185,7 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet)
     m_atlasDir = m_sheet->readStr(6,1);
     m_labelFile = m_sheet->readStr(7,1);
     m_pixelCutoff = m_sheet->readNum(9,1);
+    m_pixelCutoffMax = m_sheet->readNum(9,2);
     m_areaScale = m_sheet->readNum(10,1);
     m_anchorFile = m_sheet->readStr(11,1);
     m_niftiSize = m_sheet->readNum(12,1);

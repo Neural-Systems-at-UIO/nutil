@@ -60,7 +60,7 @@ void NLImage::Release()
 
 }
 
-void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas,int pixelCutoff)
+void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas,int pixelCutoff, int pMax)
 {
 
     if (m_index!=nullptr)
@@ -86,11 +86,16 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
             if (QColor(m_index->getPixel(i,j)) == unset) {
                 if (QColor(m_image->getPixel(i,j)) == testColor) {
                     Area area;
-                    FillArea(area, i,j, testColor);
+//                    qDebug() << "FillArea start";
+
+                    FillArea(area, i,j, testColor, pMax);
+  //                  qDebug() << "FillArea stop";
                     area.CalculateStatistics();
 
-                    if (area.m_pixelArea>=pixelCutoff)
+                    if (area.m_pixelArea>=pixelCutoff) {
                         m_areas->append(area);
+                        qDebug() << "Area found" << m_areas->size() << " ," << area.m_pixelArea;
+                    }
 
                 }
             }
@@ -101,9 +106,10 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
 }
 
 
-void NLImage::FillArea(Area &area, const int i, const int j, const QColor& testColor)
+void NLImage::FillArea(Area &area, const int i, const int j, const QColor& testColor, int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
+    if (area.m_points.size()>pMax) return;
     // First test if this is unset
     if (QColor(m_index->getPixel(i,j)) == unset) {
         m_index->setPixel(i,j,set.rgba());
@@ -116,13 +122,13 @@ void NLImage::FillArea(Area &area, const int i, const int j, const QColor& testC
                 return;
 */
             if (i+1<m_index->width()-1)
-                FillArea(area, i+1, j, testColor);
+                FillArea(area, i+1, j, testColor, pMax);
             if (i-1>=0)
-               FillArea(area, i-1, j, testColor);
+               FillArea(area, i-1, j, testColor, pMax);
             if (j+1<m_index->height()-1)
-                FillArea(area, i, j+1, testColor);
+                FillArea(area, i, j+1, testColor, pMax);
             if (j-1>=0)
-                FillArea(area, i, j-1, testColor);
+                FillArea(area, i, j-1, testColor, pMax);
         }
     }
 
