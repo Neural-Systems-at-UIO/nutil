@@ -23,6 +23,7 @@ void LBookXlnt::Save(QString filename)
 
 LSheet* LBookXlnt::CreateSheet(QString sheetName)
 {
+    QString org = sheetName;
     for (LSheet* s : m_sheets)
         if (s->m_name == sheetName) {
             LMessage::lMessage.Error("Two excel sheets are identical, ignoring creating last sheet: '" + sheetName + "'");
@@ -30,8 +31,15 @@ LSheet* LBookXlnt::CreateSheet(QString sheetName)
         }
     LSheet* l = new LSheetXlnt(m_book.create_sheet());
 //    sheetName = sheetName.replace(" ", "_");
-    if (sheetName.count()>24) sheetName = sheetName.left(24);
+    if (sheetName.count()>22) sheetName = sheetName.left(24);
    // qDebug() << sheetName;
+    for (LSheet* s : m_sheets)
+        if (s->m_name == sheetName) {
+            sheetName = QString::number(m_book.sheet_count()+1) + sheetName;
+            LMessage::lMessage.Message("Two excel sheets are identical, ignoring '"+org+"' and creating based on count: "+sheetName);
+            break;
+        }
+
     l->setName(sheetName);
 
     m_sheets.append(l);

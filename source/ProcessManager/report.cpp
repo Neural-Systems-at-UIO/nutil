@@ -132,6 +132,7 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
 
 void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items)
 {
+    qDebug() << "Generating sliced reports";
     LBook* book = new LBookXlnt();
     LSheet* summary = book->GetSheet(0);
 
@@ -152,6 +153,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     int yy=3;
 
     for (int i=0;i<items.count();i++) {
+        qDebug() << "  Generating sliced report : " << items[i]->m_id;
         LSheet* sheet = book->CreateSheet(items[i]->m_id);
         // Header
         sheet->writeStr(0,0,"Total pixel area");
@@ -164,6 +166,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         sheet->writeStr(2,5,"Region ID");
         sheet->writeStr(2,6,"Region Name");
         int y = 3;
+        qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
             sheet->writeNum(y,0,a.m_pixelArea);
             sheet->writeNum(y,1,a.m_area);
@@ -202,6 +205,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     }
     summary->writeNum(1,0,totalSumPixel);
     summary->writeNum(1,1,totalSumArea);
+    qDebug() << "Saving sliced reports";
     book->Save(filename);
 }
 
@@ -411,6 +415,7 @@ void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasL
 
     qDebug() << "Releasing " << m_filename;
     m_book->Release();
+    qDebug() << "Done releasing " << m_filename;
 
 }
 

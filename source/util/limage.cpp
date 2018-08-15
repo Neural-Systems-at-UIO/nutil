@@ -94,7 +94,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
 
                     if (area.m_pixelArea>=pixelCutoff) {
                         m_areas->append(area);
-                        qDebug() << "Area found" << m_areas->size() << " ," << area.m_pixelArea;
+//                        qDebug() << "Area found" << m_areas->size() << " ," << area.m_pixelArea;
                     }
 
                 }

@@ -192,6 +192,10 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet)
     m_niftiSize = m_sheet->readNum(12,1);
     m_xyzScale = m_sheet->readNum(13,1);
 
+    if (m_pixelCutoffMax<m_pixelCutoff) {
+
+    }
+
     GenerateReports(m_sheet);
 
 }
