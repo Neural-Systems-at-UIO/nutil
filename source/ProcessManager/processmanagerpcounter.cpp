@@ -116,7 +116,7 @@ void ProcessManagerPCounter::Execute()
         cols.append(reports.m_reports[i].m_color);
 
 
-#pragma omp parallel for
+#pragma omp parallel for num_threads(m_numProcessors)
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
 
