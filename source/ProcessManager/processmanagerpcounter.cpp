@@ -160,9 +160,10 @@ void ProcessManagerPCounter::Execute()
     reports.CreateSheets(m_processes, &m_labels);
     reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems);
     reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems);
-    reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
-    reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
-
+    if (m_niftiSize!=0) {
+        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
+        reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
+    }
     m_processFinished = true;
 
 
