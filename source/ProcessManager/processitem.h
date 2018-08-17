@@ -17,11 +17,13 @@ public:
     QString m_filetype = "png";
 
     QString m_id;
+    QString m_reportName;
 
     float m_angle;
     QPointF m_scale;
 
     XMLData m_xmlData;
+    bool m_onlyThumbs=false;
 
     float m_pixelAreaScale;
 

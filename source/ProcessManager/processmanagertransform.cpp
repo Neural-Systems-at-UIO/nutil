@@ -82,11 +82,17 @@ void ProcessManagerTransform::Execute()
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
 
+
+
         //m_processes[i]->InitializeCounter(pi->m_inFile, m_autoClip, m_thumbnailSize);
+
+        if (!m_onlyThumbs) {
+
         m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_autoClip.toLower()=="yes");
         if (Data::data.abort || Util::CancelSignal) {
             qDebug() << "Breaking!";
             break;
+        }
         }
         if (m_thumbnailSize>0) {
             QString tfolder = pi->m_outFolder + "/thumbnails/";
@@ -94,9 +100,12 @@ void ProcessManagerTransform::Execute()
                QDir().mkdir(tfolder);
 
             QString thumbOut = tfolder + pi->m_outFileSingle.split('.')[0] + "_thumbnail." + m_thumbType;
+            if (!m_onlyThumbs)
+                m_processes[i]->GenerateThumbnail(pi->m_outFile, thumbOut,m_thumbnailSize);
+            else
+                m_processes[i]->GenerateThumbnail(pi->m_inFile, thumbOut,m_thumbnailSize);
 
-            m_processes[i]->GenerateThumbnail(pi->m_outFile, thumbOut,m_thumbnailSize);
-        }
+            }
         m_mainCounter.Tick();
     }
     m_processFinished = true;
@@ -114,7 +123,14 @@ void ProcessManagerTransform::ReadHeader(LSheet* m_sheet)
     float col_g = m_sheet->readNum(3,2);
     float col_b = m_sheet->readNum(3,3);
     m_autoClip = m_sheet->readStr(7,1);
+    m_onlyThumbs = (m_sheet->readStr(8,1).toLower()=="yes");
+
+
     m_thumbnailSize = m_sheet->readNum(6,1);
+
+//    qDebug() << m_thumbnailSize;
+  //  exit(1);
+
     m_thumbType = m_sheet->readStr(6,2);
     m_background = QColor(col_r, col_g, col_b);
 

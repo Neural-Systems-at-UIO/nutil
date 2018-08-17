@@ -35,6 +35,14 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     LoadXML();
 
+    if (m_pixelCutoffMax<=m_pixelCutoff) {
+        LMessage::lMessage.Error("Error: max pixel cutoff cannot be lower than lower pixel cutoff! ");
+        m_processItems.clear();
+        return false;
+
+    }
+
+
     bool done = false;
     while (!done) {
         QString name = m_sheet->readStr(y,x);
@@ -71,17 +79,44 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
             pi->m_pixelAreaScale = m_areaScale*m_sheet->readNum(y,x+1);
             //qDebug() << name;
             pi->m_xmlData =m_xmlAnchor.findData(name);
-            pi->m_id = name;
+            pi->m_id = name;//m_sheet->readStr(y,x+2);
+            pi->m_reportName = m_sheet->readStr(y,x+2);
+            if (pi->m_reportName=="")  pi->m_reportName = QString::number(m_sheet->readNum(y,x+2));
+
             if (isTiff)
                 pi->m_filetype = "tif";
+
             m_processItems.append(pi);
         }
         else {
             done = true;
         }
         y++;
-
     }
+
+    // Verify IDs
+
+    for (int i=0; i<m_processItems.count();i++) {
+        if (m_processItems[i]->m_reportName.length()>24) {
+            LMessage::lMessage.Error("Error: ID needs to be less than 24 characters :" + m_processItems[i]->m_id);
+            return false;
+
+        }
+        if (m_processItems[i]->m_reportName=="") {
+            LMessage::lMessage.Error("Error: ID needs to be not zero on x,y:" + QString::number(x) + ", " + QString::number(y));
+            return false;
+
+        }
+        for (int j=i+1;j<m_processItems.count();j++) {
+            if (m_processItems[j]->m_reportName.toLower()==m_processItems[i]->m_reportName.toLower()) {
+                LMessage::lMessage.Error("Error: Reports have to have unique names for : " + m_processItems[i]->m_reportName);
+                return false;
+
+            }
+        }
+    }
+
+
     return true;
 
 }
@@ -121,12 +156,12 @@ void ProcessManagerPCounter::Execute()
         ProcessItem* pi = m_processItems[i];
 
 
-        qDebug() << "Pcounter: " << pi->m_inFile;
+//        qDebug() << "Pcounter: " << pi->m_inFile;
 
         QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
 
         m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax);
-        qDebug() << "PCounter done";
+        LMessage::lMessage.Log("  PCounter done for " +pi->m_inFile);
         for (Area&a : m_processes[i]->m_areas)
             a.m_mat = mat;
         m_processes[i]->m_infoText = "Anchoring areas";
@@ -141,14 +176,14 @@ void ProcessManagerPCounter::Execute()
         if (Data::data.abort)
             break;
 
-        qDebug() << "Anchor: " << pi->m_inFile;
+        LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
         m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale);
 
-        qDebug() << "Save: " << pi->m_inFile;
+        LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
         m_processes[i]->lImage.SaveAreasImage(m_outputDir + pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
         m_mainCounter.Tick();
         m_processes[i]->m_counter.m_progress = 100;
-        qDebug() << "Release: " << pi->m_inFile;
+        LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
 
 // 37 49 71
 

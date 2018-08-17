@@ -25,10 +25,10 @@ public:
     QVector<Area> m_areas;
 
     NLImage lImage;
-    bool InitializeCounter(QString inFile, bool autoClip, int thumbnailSize);
+    bool InitializeCounter(QString inFile, bool autoClip, float thumbnailSize);
     bool TransformTiff(QString inFile, QString outFile, QString compression, float angle, QPointF scale, QColor background, bool autoClip);
     bool AutoContrast(QString inFile, QString outFile, QString compression, QColor background, float std);
-    bool GenerateThumbnail(QString inFile, QString outFile, int thumbnailSize);
+    bool GenerateThumbnail(QString inFile, QString outFile, float thumbnailSize);
     bool AutoAdjustImageLevels(QString inFile, QString outFile);
 
 

@@ -132,7 +132,7 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
 
 void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items)
 {
-    qDebug() << "Generating sliced reports";
+    LMessage::lMessage.Log("Generating sliced reports");
     LBook* book = new LBookXlnt();
     LSheet* summary = book->GetSheet(0);
 
@@ -153,8 +153,8 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     int yy=3;
 
     for (int i=0;i<items.count();i++) {
-        qDebug() << "  Generating sliced report : " << items[i]->m_id;
-        LSheet* sheet = book->CreateSheet(items[i]->m_id);
+        //qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
+        LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
         // Header
         sheet->writeStr(0,0,"Total pixel area");
         sheet->writeStr(0,1,"Total object area");
@@ -166,7 +166,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         sheet->writeStr(2,5,"Region ID");
         sheet->writeStr(2,6,"Region Name");
         int y = 3;
-        qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
+        //qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
             sheet->writeNum(y,0,a.m_pixelArea);
             sheet->writeNum(y,1,a.m_area);
@@ -205,7 +205,6 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     }
     summary->writeNum(1,0,totalSumPixel);
     summary->writeNum(1,1,totalSumArea);
-    qDebug() << "Saving sliced reports";
     book->Save(filename);
 }
 
@@ -271,8 +270,7 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
     Nifti n;
     n.Create(QVector3D(size,size,size),Nifti::DataType::DT_RGB, 24);
     n.rawData.fill(0);
-    qDebug() << "Creating nifti..";
-    qDebug() << n.size;
+    LMessage::lMessage.Log("Creating nifti ..");
     for (int i=0;i<m_reports.count();i++) {
         QColor c = m_reports[i].m_color;
         //qDebug() << c.red() << ", " << c.green() << ", " << c.blue() << "  : " << m_reports[i].m_areasOfInterest.count();
@@ -396,26 +394,26 @@ void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasL
     if (!m_book)
         return;
 
-    qDebug() << "Finding areas of interest";
+    LMessage::lMessage.Log("Finding areas of interest");
+
     for (Report& r: m_reports)
             r.FindAreasOfInterest(processes);
 
-    qDebug() << "Creating summary ";
+    LMessage::lMessage.Log("Creating summary ");
     CreateSummary(atlasLabels);
 
-    qDebug() << "Generating sheets ";
+    LMessage::lMessage.Log("Generating sheets ");
 
     for (Report& r: m_reports) {
         //qDebug() << r.m_filename;
         r.GenerateSheet(m_book);
         //qDebug() << "Done";
     }
-    qDebug() << "Saving to " << m_filename;
+    LMessage::lMessage.Log("Saving report to " + m_filename);
     m_book->Save(m_filename);
 
-    qDebug() << "Releasing " << m_filename;
+    LMessage::lMessage.Log("Releasing " + m_filename);
     m_book->Release();
-    qDebug() << "Done releasing " << m_filename;
 
 }
 

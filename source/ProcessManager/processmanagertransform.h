@@ -11,8 +11,8 @@ public:
     QString m_compression = "jpg";
     QString m_thumbType;
     QString m_autoClip;
-
-    int m_thumbnailSize;
+    bool m_onlyThumbs = false;
+    float m_thumbnailSize;
 
     bool Build(LSheet* m_sheet) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);

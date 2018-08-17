@@ -12,7 +12,7 @@ float NutilProcess::getProgress()
     return m_counter.m_progress;
 }
 
-bool NutilProcess::InitializeCounter(QString inFile, bool autoClip, int thumbnailSize)
+bool NutilProcess::InitializeCounter(QString inFile, bool autoClip, float thumbnailSize)
 {
 
     int totalOperations = 0;
@@ -127,7 +127,7 @@ bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compres
     return true;
 }
 
-bool NutilProcess::GenerateThumbnail(QString inFile, QString outFile, int thumbnailSize)
+bool NutilProcess::GenerateThumbnail(QString inFile, QString outFile, float thumbnailSize)
 {
     LTiff tif;
     if (!tif.Open(inFile))

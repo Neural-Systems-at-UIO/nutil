@@ -4,7 +4,7 @@
 #include <QDebug>
 #include "source/dialogtiff.h"
 
-float MainWindow::Version = 0.15;
+float MainWindow::Version = 0.16;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -44,6 +44,7 @@ void MainWindow::on_btnLoad_clicked()
 
 void MainWindow::on_btnStart_clicked()
 {
+    LMessage::lMessage.Clear();
     if (!m_nauto.m_book) {
         LMessage::lMessage.Error("No file loaded!");
         return;
