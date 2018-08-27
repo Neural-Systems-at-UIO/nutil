@@ -75,7 +75,7 @@ void XMLAnchor::Load(QString file)
                     //qDebug() << d.m_o;
                     //qDebug() << d.m_v;
 
-                    qDebug() << "Adding slice:" << d.m_filename;
+                   // qDebug() << "Adding slice:" << d.m_filename;
 
                     m_data.append(d);
 

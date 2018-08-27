@@ -18,7 +18,8 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
 
         QString searchFile = Util::findFileInSubDirectories(inFile,m_inputDir,"");
 
-        qDebug() << "Found: " << searchFile;
+        LMessage::lMessage.Log("Transform found file: " + searchFile);
+//        qDebug() << "Found: " << searchFile;
         if (searchFile=="") {
             LMessage::lMessage.Error("Could not find any file '"+inFile+"' in subdirectories.");
             return false;
@@ -56,6 +57,7 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
     }
 
 
+
 //    m_pm.ExecuteTransform(m_compression, m_background, m_autoClip.toLower()=="yes", m_thumbnailSize, m_thumbType);
 
 }
@@ -67,6 +69,7 @@ void ProcessManagerTransform::Execute()
     for (int i=0;i<m_processItems.length();i++) {
         m_processes.append(new NutilProcess());
     }
+    SetParameters();
 
 
     if (m_processes.length()==0)
@@ -82,15 +85,13 @@ void ProcessManagerTransform::Execute()
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
 
-
-
         //m_processes[i]->InitializeCounter(pi->m_inFile, m_autoClip, m_thumbnailSize);
 
         if (!m_onlyThumbs) {
 
         m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_autoClip.toLower()=="yes");
         if (Data::data.abort || Util::CancelSignal) {
-            qDebug() << "Breaking!";
+            LMessage::lMessage.Log("User aborting!");
             break;
         }
         }

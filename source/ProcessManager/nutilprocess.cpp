@@ -100,7 +100,7 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
 
 }
 
-bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compression, QColor background, float std)
+bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compression, QColor background, QString path)
 {
     LTiff tif;
     int writeCompression;
@@ -112,16 +112,18 @@ bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compres
     otif.New(outFile);
     otif.CreateFromMeta(tif, writeCompression, 0, background, true);
 
-    qDebug() << "Width: " << otif.m_width;
+  //  qDebug() << "Width: " << otif.m_width;
 
     //qDebug() << "Finding bounds..";
     //tif.FindBounds(background);
 
 
-    qDebug() << "Autocontrasting to file " << outFile;;
+//    qDebug() << "Autocontrasting to file " << outFile;;
 
     m_infoText =  "Autocontrasting ";
-    otif.AutoContrast(tif,  &m_counter, std);
+//    qDebug() << m_parameters->getFloat("lowerT");
+  //  qDebug() << "YUAE";
+    otif.AutoContrast(tif,  &m_counter, m_parameters->getFloat("lowerT"),m_parameters->getFloat("middleT"), m_parameters->getFloat("forceStartZero"),path);
     otif.Close();
 
     return true;
@@ -136,9 +138,18 @@ bool NutilProcess::GenerateThumbnail(QString inFile, QString outFile, float thum
     tif.SetupBuffers();
     float aspectRatio = 1.0/(float)(tif.m_width/(float)tif.m_height);
 
-    int tx = thumbnailSize;
+    int tx,ty;
+    if (thumbnailSize<1) {
+        tx = tif.m_width*thumbnailSize;
+        ty = (int)(tif.m_width*thumbnailSize*aspectRatio);
+        qDebug() << tx << "," << ty;
+//        exit(1);
 
-    int ty = (int)(thumbnailSize*aspectRatio);
+    }else {
+        tx = thumbnailSize;
+        ty = (int)(thumbnailSize*aspectRatio);
+    }
+
     m_infoText = "Creating thumbnail";
     unsigned char* pixels = new unsigned char[tx*ty*4];
 

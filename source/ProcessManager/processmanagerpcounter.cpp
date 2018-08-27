@@ -136,6 +136,7 @@ void ProcessManagerPCounter::Execute()
     for (int i=0;i<m_processItems.length();i++) {
         m_processes.append(new NutilProcess());
     }
+    SetParameters();
 
     if (m_processes.length()==0)
         return;

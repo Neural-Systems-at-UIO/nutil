@@ -8,14 +8,14 @@
 #include "source/util/atlaslabel.h"
 #include "source/ProcessManager/report.h"
 #include "source/ProcessManager/processitem.h"
-
+#include "source/util/lparameter.h"
 
 
 class ProcessManager
 {
 public:
     ProcessManager();
-
+    LParameter m_parameters;
     bool m_processFinished;
 
     QVector<ProcessItem*> m_processItems;
@@ -35,6 +35,8 @@ public:
 
     void ClearProcesses();
     void ClearItems();
+    void SetParameters();
+
 
     void Abort() {
         ClearProcesses();

@@ -88,6 +88,8 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
     sheet->writeStr(0,3,"Object area");
     sheet->writeStr(0,4,"units");
     sheet->writeStr(0,5,"No Objects");
+    sheet->writeStr(0,6,"Region pixel area");
+    sheet->writeStr(0,7,"Region area");
 
     for (AtlasLabel* al: atlasLabels->atlases) {
         al->extra2 = QVector3D(0,0,0);
@@ -123,6 +125,9 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
             sheet->writeNum(y,3,al->extra2.y());
             sheet->writeStr(y,4,"");
             sheet->writeNum(y,5,al->count);
+            sheet->writeNum(y,6,al->areaScaled);
+            sheet->writeNum(y,7,al->area);
+
             y++;
         }
 

@@ -16,6 +16,13 @@ void ProcessManager::ClearProcesses()
     m_processes.clear();
 }
 
+void ProcessManager::SetParameters()
+{
+    for (NutilProcess* np:m_processes) {
+        np->m_parameters = &m_parameters;
+    }
+}
+
 
 
 

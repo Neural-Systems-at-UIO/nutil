@@ -54,7 +54,9 @@ void Nauto::Execute()
         LMessage::lMessage.Error(m_book->errorMessage());
     }
 */
+    LMessage::lMessage.Log("******** Reading global header");
     ReadHeader();
+    LMessage::lMessage.Log("******** Type of Nutil operation: " + m_type );
 
     m_status = Status::Working;
     Util::CancelSignal = false;
@@ -72,17 +74,21 @@ void Nauto::Execute()
         return;
     }
 
+    LMessage::lMessage.Log("******** Reading local header");
     m_pm->ReadHeader(m_sheet);
-    if (m_pm->Build(m_sheet))
+    LMessage::lMessage.Log("******** Building");
+    if (m_pm->Build(m_sheet)) {
+        LMessage::lMessage.Log("******** Executing");
         m_pm->Execute();
+
+    }
     else
         m_status = Status::Idle;
 
     m_status = Status::Idle;
 
-
+    LMessage::lMessage.EndOK();
     // Execute stuff
-    qDebug() << "FINISHED!" << endl;
     if (m_status != Status::Idle)
         m_status = Status::Finished;
 }
