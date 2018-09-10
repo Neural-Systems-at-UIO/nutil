@@ -26,6 +26,7 @@ public:
     bool m_onlyThumbs=false;
 
     float m_pixelAreaScale;
+    float m_atlasAreaScaled;
 
     ProcessItem() {
 

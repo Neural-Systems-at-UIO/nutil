@@ -118,6 +118,8 @@ QColor LSheetXlnt::readCol(int i, int j)
 
 void LSheetXlnt::Set(int i, int j, float val)
 {
+    if (val!=val)
+        val=0;
     m_sheet->cell(Util::c2x(i,j)).value(val);
 }
 

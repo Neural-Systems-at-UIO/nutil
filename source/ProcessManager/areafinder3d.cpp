@@ -99,7 +99,7 @@ void AreaFinder3D::Execute()
 
     reports.CreateBook(m_outputDir + "Report.xls");
     reports.CreateSheets(m_processes, &m_labels);
-    reports.CreateSliceReports(m_outputDir + "Report_slices.xls", m_processes, m_processItems);
+    reports.CreateSliceReports(m_outputDir + "Report_slices.xls", m_processes, m_processItems, &m_labels);
 
 
     m_processFinished = true;

@@ -125,8 +125,8 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
             sheet->writeNum(y,3,al->extra2.y());
             sheet->writeStr(y,4,"");
             sheet->writeNum(y,5,al->count);
-            sheet->writeNum(y,6,al->areaScaled);
-            sheet->writeNum(y,7,al->area);
+            sheet->writeNum(y,7,al->areaScaled);
+            sheet->writeNum(y,6,al->area);
 
             y++;
         }
@@ -135,7 +135,7 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
     book->Save(fileName);
 }
 
-void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items)
+void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels)
 {
     LMessage::lMessage.Log("Generating sliced reports");
     LBook* book = new LBookXlnt();
@@ -146,32 +146,38 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     float totalSumPixel=0;
     float totalSumArea = 0;
 
-    summary->writeStr(0,0,"Total pixel area");
-    summary->writeStr(0,1,"Total object area");
+    summary->writeStr(0,0,"Total pixel area sum");
+    summary->writeStr(0,1,"Total object area sum");
+    summary->writeStr(0,2,"Total atlas area sum");
+
     summary->writeStr(2,0,"Pixel area");
     summary->writeStr(2,1,"Object area");
     summary->writeStr(2,2,"units");
     summary->writeStr(2,3,"Center X");
     summary->writeStr(2,4,"Center Y");
     summary->writeStr(2,5,"Region ID");
+//    summary->writeStr(2,6,"Region Area");
     summary->writeStr(2,6,"Region Name");
     int yy=3;
-
+    float sumTotalAtlasArea=0;
     for (int i=0;i<items.count();i++) {
         //qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
         LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
         // Header
         sheet->writeStr(0,0,"Total pixel area");
         sheet->writeStr(0,1,"Total object area");
+        sheet->writeStr(0,2,"Total atlas area");
         sheet->writeStr(2,0,"Pixel area");
         sheet->writeStr(2,1,"Object area");
         sheet->writeStr(2,2,"units");
         sheet->writeStr(2,3,"Center X");
         sheet->writeStr(2,4,"Center Y");
         sheet->writeStr(2,5,"Region ID");
+  //      sheet->writeStr(2,6,"Region Area");
         sheet->writeStr(2,6,"Region Name");
+        sheet->writeStr(2,7,"Cutoff reached");
         int y = 3;
-        //qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
+   //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
             sheet->writeNum(y,0,a.m_pixelArea);
             sheet->writeNum(y,1,a.m_area);
@@ -183,34 +189,54 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
 
             sheet->writeNum(y,3,a.m_center.x());
             sheet->writeNum(y,4,a.m_center.y());
+            if (a.m_areaHasReachedCutoff)
+                sheet->writeNum(y,8,1);
+
             if (a.atlasLabel!=nullptr) {
                 sheet->writeNum(y,5,a.atlasLabel->index);
+                //sheet->writeNum(y,6,a.atlasLabel->area);
                 sheet->writeStr(y,6,a.atlasLabel->name);
             }
             y++;
+
 
             summary->writeNum(yy,0,a.m_pixelArea);
             summary->writeNum(yy,1,a.m_area);
             summary->writeNum(yy,3,a.m_center.x());
             summary->writeNum(yy,4,a.m_center.y());
+
             if (a.atlasLabel!=nullptr) {
                 summary->writeNum(yy,5,a.atlasLabel->index);
+              //  if (a.atlasLabel->area!=a.atlasLabel->area)
+              //  qDebug() << a.atlasLabel->area;
+//                summary->writeNum(yy,6,a.atlasLabel->area);
                 summary->writeStr(yy,6,a.atlasLabel->name);
             }
+
             yy++;
+
 
         }
 
         sheet->writeNum(1,0,sumPixel);
         sheet->writeNum(1,1,sumArea);
+        sheet->writeNum(1,2,items[i]->m_atlasAreaScaled);
         sumArea=0;
         sumPixel=0;
-
+        sumTotalAtlasArea+=items[i]->m_atlasAreaScaled;
 
     }
+//qDebug() << "SUM";
     summary->writeNum(1,0,totalSumPixel);
     summary->writeNum(1,1,totalSumArea);
+/*    float all=0;
+    for (AtlasLabel* al: labels->atlases) {
+        all+=al->area;
+    }*/
+    summary->writeNum(1,2,sumTotalAtlasArea);
+   // qDebug() << "SAVING";
     book->Save(filename);
+    //qDebug() << "SAVED";
 }
 
 void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize)

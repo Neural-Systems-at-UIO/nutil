@@ -179,7 +179,7 @@ void ProcessManagerPCounter::Execute()
 
         LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
         m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale);
-
+        m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
         LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
         m_processes[i]->lImage.SaveAreasImage(m_outputDir + pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
         m_mainCounter.Tick();
@@ -194,7 +194,7 @@ void ProcessManagerPCounter::Execute()
 
     reports.CreateBook(m_outputDir + "Report.xlsx");
     reports.CreateSheets(m_processes, &m_labels);
-    reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems);
+    reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels);
     reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems);
     if (m_niftiSize!=0) {
         reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);

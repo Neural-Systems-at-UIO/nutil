@@ -21,6 +21,7 @@ public:
     double m_width,m_height;
     QColor color;
     AtlasLabel* atlasLabel = nullptr;
+    bool m_areaHasReachedCutoff = false;
 
     void CalculateStatistics();
 

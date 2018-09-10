@@ -32,6 +32,7 @@ private:
     Type m_type = Type::OTHER;
 
 
+
     NLIParent* m_image=nullptr;
     NLIParent* m_index=nullptr;
 //    QVector<Area> m_areas;
@@ -44,6 +45,8 @@ private:
 
 
 public:
+
+    int m_totalPixelArea;
 
     NLIParent* createImage(int w, int h) {
 //        if (m_type==TIFF)

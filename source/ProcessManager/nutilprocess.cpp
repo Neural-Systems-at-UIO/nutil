@@ -124,7 +124,23 @@ bool NutilProcess::AutoContrast(QString inFile, QString outFile, QString compres
 //    qDebug() << m_parameters->getFloat("lowerT");
   //  qDebug() << "YUAE";
     otif.AutoContrast(tif,  &m_counter, m_parameters->getFloat("lowerT"),m_parameters->getFloat("middleT"), m_parameters->getFloat("forceStartZero"),path);
+
+
+    // Create new histogram
+
+    LGraph hist, gauss;
+    QColor min_c, max_c;
+    otif.AllocateBuffers();
+    otif.SetupBuffers();
+    otif.GetMinMax(50000,min_c, max_c, hist);
+    hist.Normalize();
+
+    QString f = otif.m_filename.split("\\").last().split(".")[0];
+//    qDebug() << "File: " << f;
+    hist.SaveText(path+"/histogram_after"+f+".plt");
+
     otif.Close();
+
 
     return true;
 }

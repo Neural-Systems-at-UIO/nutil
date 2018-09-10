@@ -109,7 +109,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
 void NLImage::FillArea(Area &area, const int i, const int j, const QColor& testColor, int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
-    if (area.m_points.size()>pMax) return;
+    if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
     // First test if this is unset
     if (QColor(m_index->getPixel(i,j)) == unset) {
         m_index->setPixel(i,j,set.rgba());
@@ -136,10 +136,11 @@ void NLImage::FillArea(Area &area, const int i, const int j, const QColor& testC
 
 void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale)
 {
-
+    m_totalPixelArea = 0;
     for (int i=0;i<refImage.width();i++)
         for (int j=0;j<refImage.height();j++) {
             if (refImage.pixel(i,j)!=0) {
+                m_totalPixelArea++;
                 AtlasLabel* al =labels.get(refImage.pixel(i,j));
                 if (al!=nullptr) {
                     al->area+=scale;
@@ -311,6 +312,7 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
 
 //    CountAtlasArea(refImage, labels, scale, pixelAreaScale);
     CountAtlasArea(refImage, labels, scale, pixelAreaScale);
+    m_totalPixelArea*=scale*pixelAreaScale;
 //    qDebug() << pixelAreaScale;
 //    qDebug() << scale;
 
