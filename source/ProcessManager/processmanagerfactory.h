@@ -8,7 +8,7 @@
 class ProcessManagerFactory {
 public:
     static ProcessManager* CreateProcessManager(QString pm_type) {
-        if (pm_type.toLower() == "rotation")
+        if (pm_type.toLower() == "transform")
             return new ProcessManagerTransform();
         if (pm_type.toLower() == "objectcounter")
             return new ProcessManagerPCounter();

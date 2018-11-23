@@ -107,9 +107,9 @@ void AreaFinder3D::Execute()
 
 }
 
-void AreaFinder3D::ReadHeader(LSheet *m_sheet)
+void AreaFinder3D::ReadHeader(LSheet *m_sheet, LBook* book)
 {
-    ProcessManager::ReadHeader(m_sheet);
+    ProcessManager::ReadHeader(m_sheet, book);
     m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));
     m_outputDir = Util::fixFolder(m_sheet->readStr(5,1));
 

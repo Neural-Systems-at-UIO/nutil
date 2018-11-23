@@ -59,6 +59,7 @@ public:
     void CreateSummary(AtlasLabels* atlasLabels);
     void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items);
     void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels);
+    void CreateSliceReportsSummary(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels);
 
     void Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize);
 

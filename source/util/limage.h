@@ -65,7 +65,7 @@ public:
     void FillArea(Area& area, const int i, const int j, const QColor& testColor, int pMax);
 //    void GenerateAreaReport(QString outExcelFile,Counter *counter);
 
-    void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, float scale, float areaScale);
+    void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, float scale, float areaScale, int slice);
     void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas, QVector<QVector<long>>, QVector<QColor> cols);
     //void RenderAreas(QImage& image, QColor color);
     NLImage() {}
@@ -73,7 +73,7 @@ public:
         Load(f);
     }
 
-    void Anchor(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale);
+    void Anchor(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale, int slice);
     NLIParent* image();
 };
 

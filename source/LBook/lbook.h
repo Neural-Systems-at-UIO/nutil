@@ -45,6 +45,7 @@ public:
     virtual void Save(QString filename) = 0;
     virtual LSheet* CreateSheet(QString sheetName) = 0;
     virtual LSheet* GetSheet(int idx) = 0;
+    virtual LSheet* GetSheet(QString sheetName) = 0;
 
     LSheet* getSheetIndex(int idx);
     void Release();

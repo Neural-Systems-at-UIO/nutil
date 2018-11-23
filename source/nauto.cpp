@@ -4,6 +4,7 @@
 #include <QDebug>
 #include "source/util/util.h"
 #include "source/ProcessManager/processmanagerfactory.h"
+#include "source/data.h"
 
 using namespace std;
 
@@ -65,17 +66,21 @@ void Nauto::Execute()
         delete m_pm;
 
     m_pm = ProcessManagerFactory::CreateProcessManager(m_type);
-
-    m_pm->m_numProcessors = m_numThreads;
-
-    if (m_pm == nullptr) {
-        LMessage::lMessage.Error("Unknown command: " + m_type);
+    if (m_pm==nullptr) {
+        LMessage::lMessage.Error("Unknown operation type specified in sheet: "+m_type);
         m_status = Status::Idle;
         return;
     }
 
+    m_pm->m_numProcessors = m_numThreads;
+
     LMessage::lMessage.Log("******** Reading local header");
-    m_pm->ReadHeader(m_sheet);
+    m_pm->ReadHeader(m_sheet, m_book);
+    if (Data::data.abort) {
+        m_status = Status::Idle;
+        return;
+    }
+
     LMessage::lMessage.Log("******** Building");
     if (m_pm->Build(m_sheet)) {
         LMessage::lMessage.Log("******** Executing");

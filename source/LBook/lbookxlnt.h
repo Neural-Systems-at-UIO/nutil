@@ -21,6 +21,7 @@ public:
     void Save(QString filename) override;
     LSheet* CreateSheet(QString sheetName) override;
     LSheet* GetSheet(int idx) override;
+    LSheet* GetSheet(QString name) override;
     QStringList sheet_titles() override;
 
 

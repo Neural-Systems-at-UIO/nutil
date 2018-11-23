@@ -30,7 +30,7 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     }*/
     int x = 1;
-    int y = 16;
+    int y = 17;
     Data::data.abort = false;
 
     LoadXML();
@@ -151,6 +151,8 @@ void ProcessManagerPCounter::Execute()
     for (int i=0;i<reports.m_reports.count();i++)
         cols.append(reports.m_reports[i].m_color);
 
+    Data::data.m_currentPath = m_outputDir;
+
 
 #pragma omp parallel for num_threads(m_numProcessors)
     for (int i=0;i<m_processes.length();i++) {
@@ -178,23 +180,24 @@ void ProcessManagerPCounter::Execute()
             break;
 
         LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
-        m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale);
+        m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i);
         m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
         LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
         m_processes[i]->lImage.SaveAreasImage(m_outputDir + pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
         m_mainCounter.Tick();
         m_processes[i]->m_counter.m_progress = 100;
         LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
+//        LMessage::lMessage.Message("<a href=\"file://"+m_outputDir+"\">"+m_outputDir+"</a>");
 
 // 37 49 71
 
 
         m_processes[i]->ReleasePCounter();
     }
-
     reports.CreateBook(m_outputDir + "Report.xlsx");
     reports.CreateSheets(m_processes, &m_labels);
     reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels);
+    reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels);
     reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems);
     if (m_niftiSize!=0) {
         reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
@@ -209,9 +212,9 @@ void ProcessManagerPCounter::Execute()
 
 
 
-void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet)
+void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
 {
-    ProcessManager::ReadHeader(m_sheet);
+    ProcessManager::ReadHeader(m_sheet, book);
     m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));
     m_outputDir = Util::fixFolder(m_sheet->readStr(5,1));
     float col_r = m_sheet->readNum(3,1);
@@ -227,31 +230,41 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet)
     m_anchorFile = m_sheet->readStr(11,1);
     m_niftiSize = m_sheet->readNum(12,1);
     m_xyzScale = m_sheet->readNum(13,1);
+    m_reportSheetName = m_sheet->readStr(14,1);
 
     if (m_pixelCutoffMax<m_pixelCutoff) {
 
     }
+    LSheet* reportSheet = book->GetSheet(m_reportSheetName);
+    if (reportSheet == nullptr) {
+        LMessage::lMessage.Error("Error: could not find any report sheet named '" + m_reportSheetName + "' in the excel file");
+        Data::data.abort = true;
+    }
+    else
+        GenerateReports(reportSheet);
 
-    GenerateReports(m_sheet);
 
 }
 
 void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
 {
     bool found = false;
-    int i = 4;
+    int i = 0;
+/*    qDebug() << "Generating reports..";
     // Find hierarchy analysis list
     while ((i<1000) && (found==false)) {
         i++;
-        QString t = m_sheet->readStr(i,1);
+        QString t = m_sheet->readStr(i,0);
         if (t.simplified().toLower() == "hierarchy analysis list") {
             found = true;
             break;
         }
     }
-    i++;
+    i++;*/
+    i=0;
     bool hasNext = true;
     int x = 1;
+
     // As long as a next one exist (x-axis reports)
     while (hasNext) {
 
@@ -262,7 +275,7 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
 
             QStringList ids;// = QString::fromWCharArray(m_sheet->readStr(i,3)).split(',');
             bool done = false;
-            int j=i+2;
+            int j=i+3;
             while (!done) {
                 long num = m_sheet->readNum(j,x);
                 QString s = QString::number(num);
@@ -273,10 +286,12 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
                 j++;
             }
 //            qDebug() << excelName;
-//            qDebug() << ids;
+  //          qDebug() << ids;
 
 
             reports.m_reports.push_back(Report(excelName, ids,reportColor));
+            LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");
+
             //qDebug() << excelName << " , " << ids;
 
         }

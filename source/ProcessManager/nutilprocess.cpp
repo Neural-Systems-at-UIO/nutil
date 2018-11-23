@@ -86,15 +86,16 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
     QString renameFile = "";
     if (autoClip) {
         m_infoText =  "Clipping whitespace" ;
+
         renameFile = otif.ClipToCurrentBorders(writeCompression, background,&m_counter);
     }
     otif.Close();
 
     if (autoClip && renameFile!="") {
         qDebug() << "Renaming from " << renameFile << " to "  << outFile;
-        /*QFile file (outFile);
-        file.remove();*/
-        //QFile::rename(renameFile, outFile);
+        QFile file (outFile);
+        file.remove();
+        QFile::rename(renameFile, outFile);
     }
     return true;
 

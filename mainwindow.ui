@@ -173,6 +173,32 @@
      <string># threads</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnOpenFolder">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>480</y>
+      <width>93</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open folder</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblElapsedTime">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>675</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Elapsed time:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

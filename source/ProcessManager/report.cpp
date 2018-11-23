@@ -239,6 +239,167 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     //qDebug() << "SAVED";
 }
 
+void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, AtlasLabels *labels)
+{
+    LMessage::lMessage.Log("Generating sliced reports summary");
+    LBook* book = new LBookXlnt();
+    LSheet* summary = book->GetSheet(0);
+
+    float sumPixel=0;
+    float sumArea = 0;
+    float totalSumPixel=0;
+    float totalSumArea = 0;
+
+    for (int i=0;i<items.count();i++) {
+        //qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
+
+        LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
+
+        sheet->writeStr(0,0, "Region name");
+        sheet->writeStr(0,1, "reg_idx_full");
+        sheet->writeStr(0,2, "reg_idx");
+        sheet->writeStr(0,3, "Region pixel area");
+        sheet->writeStr(0,4, "Region area");
+        sheet->writeStr(0,5, "Area unit");
+        sheet->writeStr(0,6, "Object count");
+        sheet->writeStr(0,7, "Object region count ratio");
+        sheet->writeStr(0,8, "Object pixel");
+        sheet->writeStr(0,9, "Object area");
+        sheet->writeStr(0,10, "Object area unit");
+        sheet->writeStr(0,11, "Pixel area ratio");
+        sheet->writeStr(0,12, "Object area ratio");
+        int j=1;
+        for (Report& r : m_reports) {
+
+            float regionPixelArea=0;
+            float regionArea=0;
+            float totalPixelArea=0;//items[i]->m_pixelAreaScale;
+//            float totalArea=0;
+            float totalArea=0;//items[i]->m_atlasAreaScaled;
+            int cnt=0;
+
+//            QVector<AtlasLabel*> lbls;
+
+            for (Area& a: processes[i]->m_areas) {
+     //           totalPixelArea+=a.m_pixelArea;
+       //         totalArea+=a.m_mrea;
+                regionPixelArea+=a.m_pixelArea;
+                regionArea+=a.m_area;
+
+
+
+                if (a.atlasLabel!=nullptr) {
+
+
+                    if (r.m_IDs.contains(a.atlasLabel->index)) {
+                        cnt++;
+                        regionPixelArea+=a.m_pixelArea;
+                        regionArea+=a.m_area;
+                    }
+                }
+
+            }
+  //          qDebug() << "WTF";
+            // Now total area
+            for (AtlasLabel* al : labels->atlases) {
+                for (long ID: r.m_IDs)
+                    if (ID==al->index) {
+
+                    totalPixelArea +=al->sliceArea[i];
+                    totalArea +=al->sliceAreaScaled[i];
+                    }
+            }
+            qDebug() << "TOTAL AREA: " <<" WITH : " << totalArea;
+
+
+
+            sheet->writeStr(j,0, r.m_filename);
+            sheet->writeNum(j,3, regionPixelArea);
+            sheet->writeNum(j,4, regionArea);
+            sheet->writeNum(j,6, cnt);
+            sheet->writeNum(j,8, totalPixelArea);
+            sheet->writeNum(j,9, totalArea);
+            if (regionPixelArea!=0)
+                sheet->writeNum(j,11, totalPixelArea/(float)regionPixelArea);
+            if (r.m_regionArea!=0)
+                sheet->writeNum(j,12, totalArea/(float)regionArea);
+
+
+
+            j++;
+        }
+
+    }
+
+
+        // Header
+/*        sheet->writeStr(0,0,"Total pixel area");
+        sheet->writeStr(0,1,"Total object area");
+        sheet->writeStr(0,2,"Total atlas area");
+        sheet->writeStr(2,0,"Pixel area");
+        sheet->writeStr(2,1,"Object area");
+        sheet->writeStr(2,2,"units");
+        sheet->writeStr(2,3,"Center X");
+        sheet->writeStr(2,4,"Center Y");
+        sheet->writeStr(2,5,"Region ID");
+  //      sheet->writeStr(2,6,"Region Area");
+        sheet->writeStr(2,6,"Region Name");
+        sheet->writeStr(2,7,"Cutoff reached");
+        int y = 3;
+   //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
+        for (Area& a: processes[i]->m_areas) {
+            sheet->writeNum(y,0,a.m_pixelArea);
+            sheet->writeNum(y,1,a.m_area);
+
+            sumPixel+=a.m_pixelArea;
+            sumArea+=a.m_area;
+            totalSumPixel+=a.m_pixelArea;
+            totalSumArea+=a.m_area;
+
+            sheet->writeNum(y,3,a.m_center.x());
+            sheet->writeNum(y,4,a.m_center.y());
+            if (a.m_areaHasReachedCutoff)
+                sheet->writeNum(y,8,1);
+
+            if (a.atlasLabel!=nullptr) {
+                sheet->writeNum(y,5,a.atlasLabel->index);
+                //sheet->writeNum(y,6,a.atlasLabel->area);
+                sheet->writeStr(y,6,a.atlasLabel->name);
+            }
+            y++;
+
+
+            summary->writeNum(yy,0,a.m_pixelArea);
+            summary->writeNum(yy,1,a.m_area);
+            summary->writeNum(yy,3,a.m_center.x());
+            summary->writeNum(yy,4,a.m_center.y());
+
+            if (a.atlasLabel!=nullptr) {
+                summary->writeNum(yy,5,a.atlasLabel->index);
+              //  if (a.atlasLabel->area!=a.atlasLabel->area)
+              //  qDebug() << a.atlasLabel->area;
+//                summary->writeNum(yy,6,a.atlasLabel->area);
+                summary->writeStr(yy,6,a.atlasLabel->name);
+            }
+
+            yy++;
+
+
+        }
+
+        sheet->writeNum(1,0,sumPixel);
+        sheet->writeNum(1,1,sumArea);
+        sheet->writeNum(1,2,items[i]->m_atlasAreaScaled);
+        sumArea=0;
+        sumPixel=0;
+        sumTotalAtlasArea+=items[i]->m_atlasAreaScaled;
+
+        */
+
+    book->Save(filename);
+
+}
+
 void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize)
 {
 
@@ -251,6 +412,7 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
         //qDebug() << mat;
         //  items[i]->m_xmlData.matrix
         QColor c = m_reports[i].m_color;
+        //c=m_reports[i].
         QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
         o +="RGBA " + color +" \n";
         //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();

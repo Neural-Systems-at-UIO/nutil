@@ -57,6 +57,16 @@ LSheet* LBookXlnt::GetSheet(int idx)
     return l;
 }
 
+LSheet *LBookXlnt::GetSheet(QString name)
+{
+    if (!m_book.contains(name.toStdString()))
+        return nullptr;
+    qDebug() << "OK!";
+    LSheetXlnt* lx = new LSheetXlnt(m_book.sheet_by_title(name.toStdString()));
+    m_sheets.append(lx);
+    return lx;
+}
+
 QStringList LBookXlnt::sheet_titles()
 {
     QStringList l;

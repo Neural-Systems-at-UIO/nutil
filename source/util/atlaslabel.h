@@ -26,6 +26,10 @@ public:
     float maxval;
     int count;
 
+    QMap<int, float> sliceArea;
+    QMap<int, float> sliceAreaScaled;
+
+
     float area = 0;
     float areaScaled = 0;
     float areaSum = 0;

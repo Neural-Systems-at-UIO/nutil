@@ -3,8 +3,9 @@
 #include <QFileDialog>
 #include <QDebug>
 #include "source/dialogtiff.h"
+#include <QDesktopServices>
 
-float MainWindow::Version = 0.18;
+float MainWindow::Version = 0.21;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -49,7 +50,8 @@ void MainWindow::on_btnStart_clicked()
         LMessage::lMessage.Error("No file loaded!");
         return;
     }
-
+    m_timer = QElapsedTimer();
+     m_timer.start();
 
     m_nauto.m_numThreads = ui->leProcessors->text().toInt();
     m_nauto.m_sheetIndex = ui->cmbSheets->currentIndex();;
@@ -123,9 +125,17 @@ void MainWindow::closeEvent(QCloseEvent * event)
 {
     AppQuit();
 }
+
+void MainWindow::UpdateInfoTimer()
+{
+    m_elapsedTimer=m_timer.elapsed();
+    if (!m_nauto.m_status == Nauto::Idle)
+        ui->lblElapsedTime->setText("Elapsed time: " + Util::MilisecondToString(m_elapsedTimer));
+}
 void MainWindow::OnInfoTextChanged(QString info)
 {
     ui->txtInfo->setText(info);
+    UpdateInfoTimer();
 }
 
 void MainWindow::OnMessageTextChanged(QString msg)
@@ -149,4 +159,15 @@ void MainWindow::on_btnTiffEdit_clicked()
 void MainWindow::on_leProcessors_editingFinished()
 {
     on_leProcessors_returnPressed();
+}
+
+void MainWindow::on_btnOpenFolder_clicked()
+{
+    QString s = Data::data.m_currentPath;
+    s=s.replace("/","\\");
+    s=s.replace("\\\\","\\");
+//    qDebug() <<s;
+    if (s!="")
+//        QProcess::startDetached("explorer " + Data::data.m_currentPath);
+        QDesktopServices::openUrl( QUrl::fromLocalFile(s) );
 }

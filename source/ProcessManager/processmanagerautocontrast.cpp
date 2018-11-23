@@ -60,9 +60,9 @@ void ProcessManagerAutoContrast::Execute()
 
 }
 
-void ProcessManagerAutoContrast::ReadHeader(LSheet *m_sheet)
+void ProcessManagerAutoContrast::ReadHeader(LSheet *m_sheet, LBook* book)
 {
-    ProcessManager::ReadHeader(m_sheet);
+    ProcessManager::ReadHeader(m_sheet, book);
 
     m_compression = m_sheet->readStr(2,1);
     m_inputDir = m_sheet->readStr(4,1);

@@ -113,9 +113,9 @@ void ProcessManagerTransform::Execute()
 
 }
 
-void ProcessManagerTransform::ReadHeader(LSheet* m_sheet)
+void ProcessManagerTransform::ReadHeader(LSheet* m_sheet, LBook* book)
 {
-    ProcessManager::ReadHeader(m_sheet);
+    ProcessManager::ReadHeader(m_sheet, book);
 
     m_compression = m_sheet->readStr(2,1);
     m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));

@@ -7,6 +7,7 @@
 #include "ui_mainwindow.h"
 #include "ui_dialogtiff.h"
 #include <QThread>
+#include <QElapsedTimer>
 
 namespace Ui {
     class MainWindow;
@@ -65,6 +66,7 @@ public:
     Ui::MainWindow *ui;
 
     static float Version;
+    long m_elapsedTimer = -1;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -82,16 +84,20 @@ private slots:
 
     void on_leProcessors_editingFinished();
 
+    void on_btnOpenFolder_clicked();
+
 private:
     Nauto m_nauto;
     UpdateThread* m_updateThread;
     WorkerThread* m_workerThread = nullptr;
 
+    QElapsedTimer m_timer;
+
     void AppQuit();
     void Abort();
     void FillSheetCombo();
     void closeEvent(QCloseEvent * event) override;
-
+    void UpdateInfoTimer();
 public slots:
     void OnInfoTextChanged(QString);
     void OnMessageTextChanged(QString);
