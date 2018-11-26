@@ -283,8 +283,8 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
             for (Area& a: processes[i]->m_areas) {
      //           totalPixelArea+=a.m_pixelArea;
        //         totalArea+=a.m_mrea;
-                regionPixelArea+=a.m_pixelArea;
-                regionArea+=a.m_area;
+//                regionPixelArea+=a.m_pixelArea;
+  //              regionArea+=a.m_area;
 
 
 
@@ -293,8 +293,8 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
 
                     if (r.m_IDs.contains(a.atlasLabel->index)) {
                         cnt++;
-                        regionPixelArea+=a.m_pixelArea;
-                        regionArea+=a.m_area;
+                        totalPixelArea+=a.m_pixelArea;
+                        totalArea+=a.m_area;
                     }
                 }
 
@@ -305,11 +305,11 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
                 for (long ID: r.m_IDs)
                     if (ID==al->index) {
 
-                    totalPixelArea +=al->sliceArea[i];
-                    totalArea +=al->sliceAreaScaled[i];
+                    regionPixelArea +=al->sliceArea[i];
+                    regionArea +=al->sliceAreaScaled[i];
                     }
             }
-            qDebug() << "TOTAL AREA: " <<" WITH : " << totalArea;
+//            qDebug() << "TOTAL AREA: " <<" WITH : " << totalArea;
 
 
 
@@ -467,7 +467,7 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
     for (int i=0;i<m_reports.count();i++) {
         QColor c = m_reports[i].m_color;
         //qDebug() << c.red() << ", " << c.green() << ", " << c.blue() << "  : " << m_reports[i].m_areasOfInterest.count();
-
+  //      c= QColor(Qt::white);
         for (Area* a: m_reports[i].m_areasOfInterest) {
 
             //c.setRed(rand()%255);
@@ -475,13 +475,19 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
             //qDebug() << a->m_points.count();
             for (QPointF& p: a->m_points) {
 //                QPointF pp=a->m_center;
+
                 QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
+//                QVector3D v(1,p.x(),p.y());
 
                 v=v*a->m_mat;
-                v=v/1.2;
+//                v=v/1;
 
+                v.setX(v.x()/512*n.size.x() + 10);
+                v.setY(v.y()/512*n.size.y()+24);
+                v.setZ(v.z()/512*n.size.z()+10);
 
-
+//                               if (rand()%100==0)
+  //                                 qDebug() << v;
 
 /*                v = QVector3D(rand()%128, rand()%128, rand()%128);
                 v=v/4.0;
@@ -503,7 +509,7 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
 
 
     n.Save(filename);
-
+    qDebug() << "done.";
 }
 
 void Report::FindAreasOfInterest(QVector<NutilProcess *>& processes)

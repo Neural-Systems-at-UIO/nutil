@@ -171,15 +171,35 @@ void Nifti::Save(QString filename)
     QFile file(filename);
     file.open(QFile::WriteOnly);
 
+    header.sizeof_hdr=348;
+    header.magic[0]='n';
+    header.magic[1]='+';
+    header.magic[2]='1';
+    header.magic[3]='\0';
 
+    header.qoffset_x=1;
+    header.qoffset_y=1;
+    header.qoffset_z=1;
+
+
+
+
+
+
+
+    header.pixdim[0]=3;
+    header.pixdim[1]=0.039;
+    header.pixdim[2]=0.039;
+    header.pixdim[3]=0.039;
+//    header.vox_offset
 
     file.write(reinterpret_cast<char*>(&header),sizeof(NiftiHeader));
-    qDebug() << "Regular : " << header.regular;
+    //qDebug() << "Regular : " << header.regular;
     //qDebug() << "Header size: " << sizeof(NiftiHeader);
     file.write(rawData);
-    qDebug() << " : " << header.regular;
+  //  qDebug() << " : " << header.regular;
 
-    qDebug() << "Dim info:" << QString::number(((uchar*)(&header))[39]);
+//    qDebug() << "Dim info:" << QString::number(((uchar*)(&header))[39]);
 
     file.close();
 }

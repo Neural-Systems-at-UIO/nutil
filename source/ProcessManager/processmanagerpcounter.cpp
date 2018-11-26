@@ -154,6 +154,8 @@ void ProcessManagerPCounter::Execute()
     Data::data.m_currentPath = m_outputDir;
 
 
+
+
 #pragma omp parallel for num_threads(m_numProcessors)
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
@@ -200,6 +202,7 @@ void ProcessManagerPCounter::Execute()
     reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels);
     reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems);
     if (m_niftiSize!=0) {
+        qDebug() << "Nifti: " << m_niftiSize;
         reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
         reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
     }
