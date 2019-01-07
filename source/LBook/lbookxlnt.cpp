@@ -29,8 +29,12 @@ LSheet* LBookXlnt::CreateSheet(QString sheetName)
             LMessage::lMessage.Error("Two excel sheets are identical, ignoring creating last sheet: '" + sheetName + "'");
             return nullptr;
         }
-    LSheet* l = new LSheetXlnt(m_book.create_sheet());
-//    sheetName = sheetName.replace(" ", "_");
+//    m_book.create_sheet();
+    LSheet* l = new LSheetXlnt(m_book.copy_sheet(m_book.sheet_by_index(0)));
+    xlnt::worksheet* sheet =  ((LSheetXlnt*)l)->m_sheet;
+    sheet->rows().clear_cells();
+        // Create sheet CRASHES
+//    LSheet* l = new LSheetXlnt(m_book.create_sheet());
     if (sheetName.count()>22) sheetName = sheetName.left(24);
    // qDebug() << sheetName;
     for (LSheet* s : m_sheets)

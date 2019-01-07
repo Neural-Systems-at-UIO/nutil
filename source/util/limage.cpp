@@ -70,7 +70,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
 
 
     bool isBfs = Data::data.m_settings->getString("fill_method")=="bfs";
-    qDebug() << "Method is bfs:" << isBfs;
+//    qDebug() << "Method is bfs:" << isBfs;
     m_index->fill(unset);
     for (int i=0;i<m_index->width();i++)
         for (int j=0;j<m_index->height();j++)

@@ -6,6 +6,7 @@
 void Report::GenerateSheet(LBook* book)
 {
     LSheet* sheet = book->CreateSheet(m_filename);
+
     if(sheet)
     {
         sheet->writeStr(0,0, "Pixel count");
