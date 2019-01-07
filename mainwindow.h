@@ -6,8 +6,10 @@
 #include "source/util/lmessage.h"
 #include "ui_mainwindow.h"
 #include "ui_dialogtiff.h"
+#include "source/util/cinifile.h"
 #include <QThread>
 #include <QElapsedTimer>
+#include "dialogsettings.h"
 
 namespace Ui {
     class MainWindow;
@@ -24,6 +26,10 @@ public:
     void Init(Nauto* n) {
         m_nauto = n;
     }
+
+
+
+
 
     void run() override {
 
@@ -69,6 +75,10 @@ public:
     long m_elapsedTimer = -1;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    CIniFile m_settings;
+
+
+
 
 private slots:
     void on_btnLoad_clicked();
@@ -86,6 +96,10 @@ private slots:
 
     void on_btnOpenFolder_clicked();
 
+    void on_actionSettings_triggered();
+
+
+
 private:
     Nauto m_nauto;
     UpdateThread* m_updateThread;
@@ -98,6 +112,9 @@ private:
     void FillSheetCombo();
     void closeEvent(QCloseEvent * event) override;
     void UpdateInfoTimer();
+    void DefaultSettings();
+
+
 public slots:
     void OnInfoTextChanged(QString);
     void OnMessageTextChanged(QString);

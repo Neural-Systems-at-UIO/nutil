@@ -6,100 +6,328 @@
 #include <QString>
 #include <QDebug>
 
+
+#ifndef CINIFILE_H
+#define CINIFILE_H
+
+#include <QString>
+#include <QDebug>
+#include <QFile>
+#include <QTextStream>
+#include <QVector>
+#include <QVector3D>
+#include <QColor>
+
 class CItem {
 public:
-    string name, strval;
+    QString name, strval;
+    QStringList lst;
     double dval;
+    QVector3D vec;
 };
 
 class CIniFile  {
 public:
-    string filename;
+    QString filename;
 
-    vector<CItem> items;
+    QVector<CItem> items;
 
-    void load(string fname) {
-        CUtil::verify_file(fname);
+    CIniFile() {}
 
-        fstream f(fname.c_str(), ios::in);
-        if (!f)
-            throw string("Could not load file "+filename);
-
-        char s[2000];
-        string er = "";
-        while(!f.eof()) {
-            f.getline(s,2000);
-            vector<string> tok;
-            CUtil::Tokenize(s, tok,"=");
-            if (tok.size()==2) {
-                CItem it;
-                it.dval = -1;
-                it.name = CUtil::trim(tok[0]);
-                it.strval = CUtil::trim(tok[1]);
-                try {
-                    it.dval  = strtod(tok.at(1).c_str(),0);
-                } catch(...) {
-                }
-                items.push_back(it);
-            }
-        }
-        f.close();
+    void Save() {
+        Save(filename);
     }
 
-    string getstring(string name) {
-        for (unsigned int i=0;i<items.size();i++) {
-            if (items[i].name==CUtil::trim(name))
+    bool contains(QString name) {
+        for (int i=0;i<items.size();i++)
+            if (items[i].name==name.toLower().trimmed())
+                return true;
+
+       return false;
+
+    }
+
+    QString getString(QString name) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed())
                 return items[i].strval;
         }
-        throw string("Could not find any parameter '" + name +"'");
+        return "";
     }
 
-    unsigned char getchar(string name) {
-        for (unsigned int i=0;i<items.size();i++) {
-            if (items[i].name==CUtil::trim(name))
-                return items[i].strval[0];
+
+    QVector3D getVec(QString name) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed())
+                return items[i].vec;
         }
-        throw string("Could not find any parameter '" + name +"'");
+        return QVector3D(0,0,0);
+    }
+    QColor getColor(QString name) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed()) {
+                QColor c;
+                c.setRed(items[i].vec.x());
+                c.setGreen(items[i].vec.y());
+                c.setBlue(items[i].vec.z());
+                return c;
+            }
+        }
+        return QColor(0,0,0);
+    }
+
+    QStringList getStringList(QString name) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed())
+                return items[i].lst;
+        }
+        return QStringList();
+    }
+
+    void setString(QString name, QString val) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed()) {
+                items[i].strval = val;
+                return;
+            }
+
+        }
+        CItem i;
+        i.name = name;
+        i.strval  = val;
+        items.append(i);
+
+    }
+
+    void setFloat(QString name, float val) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed()) {
+                items[i].dval = val;
+                items[i].strval = "";
+                return;
+            }
+
+        }
+        CItem i;
+        i.name = name;
+        i.dval  = val;
+        i.strval = "";
+        items.append(i);
+
     }
 
 
-    bool getbool(string name) {
-        for (unsigned int i=0;i<items.size();i++) {
-            if (items[i].name==CUtil::trim(name)) {
+    void setVec(QString name, QVector3D val) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed()) {
+                items[i].vec = val;
+                return;
+            }
+
+        }
+        CItem i;
+        i.name = name;
+        i.vec  = val;
+        items.append(i);
+
+    }
+
+    void addStringList(QString name, QString val, bool isUnique) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed()) {
+                if (isUnique)
+                    AddUniqueString(&items[i], val);
+                else
+                    items[i].lst<<val;
+                return;
+            }
+
+        }
+        CItem i;
+        i.name = name;
+//        if (isUnique)
+  //          AddUniqueString(&items[i], val);
+
+        i.lst<<val;
+        items.append(i);
+
+    }
+
+    void setStringList(QString name, QStringList val) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed()) {
+                items[i].lst = val;
+                return;
+            }
+
+        }
+        CItem i;
+        i.name = name;
+//        if (isUnique)
+  //          AddUniqueString(&items[i], val);
+
+        i.lst = val;
+        items.append(i);
+
+    }
+
+
+
+    void removeFromList(QString name, QString val) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed()) {
+                items[i].lst.removeAll(val);
+                return;
+            }
+
+        }
+
+    }
+
+    void AddUniqueString(CItem* it,QString str) {
+        it->lst.removeAll(str);
+        it->lst.insert(0, str);
+    }
+
+    bool getBool(QString name) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed()) {
                 if (items[i].strval=="true")
                     return true;
                 return false;
             }
         }
-        throw string("Could not find any parameter '" + name +"'");
+        qDebug() << "CIniFile: Could not find parameter " + name;
     }
 
-    int getint(string name) {
-        for (unsigned int i=0;i<items.size();i++) {
-            if (items[i].name==CUtil::trim(name))
+    int getInt(QString name) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed())
                 return (int)items[i].dval;
         }
-        throw string("Could not find any parameter '" + name +"'");
+        qDebug() << "CIniFile: Could not find parameter " + name;
     }
 
-    double getdouble(string name) {
-        for (unsigned int i=0;i<items.size();i++) {
-            if (items[i].name==CUtil::trim(name))
+    double getdouble(QString name) {
+        for (int i=0;i<items.size();i++) {
+            if (items[i].name==name.toLower().trimmed())
                 return items[i].dval;
         }
-        throw string("Could not find any parameter '" + name +"'");
+        qDebug() << "CIniFile: Could not find parameter " + name;
     }
 
-    bool find(QString key, QString value) {
-        QString actualValue = QString::fromStdString(getstring(key.toLower().toStdString()));
+/*    bool find(QString key, QString value) {
+        QQString actualValue = QQString::fromStdQString(getQString(key.toLower().toStdQString()));
         return value.toLower().compare(actualValue) == 0;
     }
-
     bool find(QString key, int value) {
-        return getint(key.toStdString()) == value;
+        return getint(key.toStdQString()) == value;
+    }
+    bool find(QString key, bool value) {
+        return getbool(key.toStdQString()) == value;
+    }*/
+
+
+
+
+
+void Load(QString fname) {
+
+    filename = fname;
+    if (!QFile::exists(fname)) {
+        qDebug() << "Could not find file " << fname;
+        return;
+    }
+//    qDebug() << fname << "exists";
+
+    QFile file(fname);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream f(&file);
+
+    while(!f.atEnd()) {
+
+        QString line = f.readLine();
+
+
+
+        QStringList tok = line.split("=");
+        if (tok.size()==2) {
+            CItem it;
+            it.dval = -1;
+            it.name = tok[0].toLower().trimmed();
+            it.strval = tok[1].trimmed();
+            bool ok;
+            it.dval  = tok[1].toFloat(&ok);
+            if (ok) {
+                it.strval="";
+            }
+            else it.dval = 0;
+
+            if (tok[1].split(":").count()==3) {
+                QStringList v = tok[1].split(":");
+                it.vec.setX( v[0].toFloat());
+                it.vec.setY( v[1].toFloat());
+                it.vec.setZ( v[2].toFloat());
+            }
+
+
+            if (tok[1].split(",").count()!=1) {
+                it.strval = "";
+                it.dval = -1;
+                it.lst = tok[1].split(",");
+                it.lst.removeFirst();
+                for (QString& s : it.lst) {
+                    s = s.trimmed();
+                 //   qDebug() << s;
+                }
+            }
+            items.push_back(it);
+        }
+    }
+    file.close();
+}
+
+void Save(QString fname)
+{
+    if (QFile::exists(fname)) {
+        QFile::remove(fname);
     }
 
-    bool find(QString key, bool value) {
-        return getbool(key.toStdString()) == value;
+    QFile file(fname);
+    file.open(QIODevice::WriteOnly| QIODevice::Text);
+    QTextStream f(&file);
+    for (CItem i: items) {
+        //  qDebug() << i.name << " " << QString::number(i.dval) << ", " << i.strval << "\n";
+        f << i.name << " = ";
+        if (i.strval!="")
+           f << i.strval << "\n";
+        else
+          if (i.lst.count()!=0) {
+              f<<",";
+              for (int j=0;j<i.lst.count();j++) {
+                  f<<i.lst[j];
+                 // qDebug() << " << " << i.lst[j];
+                  if (j!=i.lst.count()-1)
+                      f<<", ";
+              }
+            f<<"\n";
+          }
+          else
+              if (i.vec.length()!=0) {
+                  f<<QString::number(i.vec.x()) << ":";
+                  f<<QString::number(i.vec.y()) << ":";
+                  f<<QString::number(i.vec.z()) << "\n";
+              }
+
+              else {
+            f << QString::number(i.dval) << "\n";
+          //  qDebug() << QString::number(i.dval) << "\n";
+              }
+
     }
+    file.close();
+
+}
+
 };
+#endif // CINIFILE_H

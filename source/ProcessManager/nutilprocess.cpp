@@ -222,7 +222,7 @@ void NutilProcess::ReleasePCounter()
 
 bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector<Area>* areas, int pixelCutoff, int pMax)
 {
-    qDebug() << inFile;
+//    qDebug() << inFile;
     lImage.Load(inFile);
 
     m_infoText = "Finding areas";

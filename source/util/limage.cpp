@@ -69,6 +69,8 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
     m_index = createImage(m_image->width(), m_image->height());
 
 
+    bool isBfs = Data::data.m_settings->getString("fill_method")=="bfs";
+    qDebug() << "Method is bfs:" << isBfs;
     m_index->fill(unset);
     for (int i=0;i<m_index->width();i++)
         for (int j=0;j<m_index->height();j++)
@@ -86,10 +88,10 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
             if (QColor(m_index->getPixel(i,j)) == unset) {
                 if (QColor(m_image->getPixel(i,j)) == testColor) {
                     Area area;
-//                    qDebug() << "FillArea start";
-
-                    FillArea(area, i,j, testColor, pMax);
-  //                  qDebug() << "FillArea stop";
+                    if (isBfs)
+                        FillAreaBFS(area, i,j, testColor, pMax);
+                    else
+                        FillAreaDFS(area, i,j, testColor, pMax);
                     area.CalculateStatistics();
 
                     if (area.m_pixelArea>=pixelCutoff) {
@@ -106,7 +108,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
 }
 
 
-void NLImage::FillArea(Area &area, const int i, const int j, const QColor& testColor, int pMax)
+void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& testColor, int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
     if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
@@ -122,16 +124,56 @@ void NLImage::FillArea(Area &area, const int i, const int j, const QColor& testC
                 return;
 */
             if (i+1<m_index->width()-1)
-                FillArea(area, i+1, j, testColor, pMax);
+                FillAreaDFS(area, i+1, j, testColor, pMax);
             if (i-1>=0)
-               FillArea(area, i-1, j, testColor, pMax);
+               FillAreaDFS(area, i-1, j, testColor, pMax);
             if (j+1<m_index->height()-1)
-                FillArea(area, i, j+1, testColor, pMax);
+                FillAreaDFS(area, i, j+1, testColor, pMax);
             if (j-1>=0)
-                FillArea(area, i, j-1, testColor, pMax);
+                FillAreaDFS(area, i, j-1, testColor, pMax);
         }
     }
 
+}
+
+void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &testColor, int pMax)
+{
+    if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
+    if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
+    // First test if this is unset
+
+
+    QVector<QPoint> queue;
+    queue.append(QPoint(i,j));
+
+    while (queue.count()!=0) {
+        QPoint q = queue.last();
+        queue.removeLast();
+        if (QColor(m_index->getPixel(q.x(),q.y())) == unset) {
+            m_index->setPixel(q.x(),q.y(),set.rgba());
+            //qDebug() << i << ", " << j << " :" << m_index->width() << ", " << m_index->height() ;
+            if (QColor(m_image->getPixel(q.x(),q.y())) == testColor) {
+                area.m_points.append(q);
+                /*if (area.m_points.count()>3000)
+                qDebug() << area.m_points.count() << " :" << i << ", " << j << " :" << m_index->width() << ", " << m_index->height();
+                if (area.m_points.count()>3000)
+                    return;
+    */
+                if (q.x()+1<m_index->width()-1)
+                    queue.append(QPoint(q.x()+1,q.y()));
+                if (q.x()-1>=0)
+                   queue.append(QPoint(q.x()-1,q.y()));
+                if (q.y()+1<m_index->height()-1)
+                   queue.append(QPoint(q.x(),q.y()+1));
+                if (q.y()-1>=0)
+                    queue.append(QPoint(q.x(),q.y()-1));
+            }
+        }
+//        qDebug() << "cnt:"  << queue.count();
+
+    }
+
+//    qDebug() << area.m_points.count();
 }
 
 void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale, int slice)

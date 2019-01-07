@@ -1,5 +1,5 @@
 #QT -= gui
-QT += gui
+QT += gui  websockets
 #CONFIG += static
 CONFIG += c++11 console
 CONFIG += app_bundle
@@ -57,7 +57,8 @@ SOURCES += main.cpp \
     source/ProcessManager/areafinder3d.cpp \
     source/IO/pointcloud3d.cpp \
     source/util/nlimagetiff.cpp \
-    source/IO/xmlanchor.cpp
+    source/IO/xmlanchor.cpp \
+    dialogsettings.cpp
 
 HEADERS += \
     nutilapplication.h \
@@ -88,10 +89,13 @@ HEADERS += \
     source/ProcessManager/areafinder3d.h \
     source/IO/pointcloud3d.h \
     source/util/nlimagetiff.h \
-    source/IO/xmlanchor.h
+    source/IO/xmlanchor.h \
+    dialogsettings.h \
+    source/util/cinifile.h
 
 FORMS    += mainwindow.ui \
-    source/dialogtiff.ui
+    source/dialogtiff.ui \
+    dialogsettings.ui
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../tiff-4.0.9/libtiff/ -llibtiff
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../tiff-4.0.9/libtiff/ -llibtiffd

@@ -9,6 +9,7 @@
 #include <QVector3D>
 #include <QColor>
 
+
 struct NiftiHeader
 {
 public:

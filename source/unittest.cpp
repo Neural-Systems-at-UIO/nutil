@@ -7,6 +7,26 @@ UnitTest::UnitTest()
 
 }
 
+/*
+tab1 : incbin("tab1.dat","$2000");
+p1 : pointer;
+y,x,k : byte;
+..
+
+begin
+
+    p1:=tab1; // la p1 peke til tabellen
+    moveto(0,0,$04); // Flytt screenmemroy til $0400
+    for y:=0 to 24 do begin // alle y-linjer
+        for x:=0 to 40 do begin
+            screenmemory[i]:=p1[x]/16 + 64; // anta at data er mellom [0-16] + 64 (ha noen tøffe chars her!)
+        end;
+        inczp(p1,40); //flytt p1 1 row ned
+        inczp(screenmemory, 40); //flytt screenmemory 1 row ned
+
+    end;
+
+*/
 
 void UnitTest::TestMemory()
 {

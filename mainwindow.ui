@@ -213,6 +213,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionSettings"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuJadda">
@@ -233,6 +234,11 @@
   <action name="actionAbout_Nutil">
    <property name="text">
     <string>About Nutil</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>

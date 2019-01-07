@@ -18,11 +18,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_updateThread, SIGNAL(MessageChanged(QString)), this, SLOT(OnMessageTextChanged(QString)));
     m_updateThread->Init(&m_nauto);
     m_updateThread->start();
-
+    Data::data.m_settings = &m_settings;
     ui->lblMain->setText("NeSys Utilities " + QString::number(Version));
     ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
  //   QPixmap pixmap = QPixmap ("://my_image.png");
 
+
+    m_settings.filename = "nutil.ini";
+    if (QFile::exists(m_settings.filename))
+        m_settings.Load(m_settings.filename);
+
+    DefaultSettings();
 
     ui->leProcessors->setText(QString::number(omp_get_max_threads()));
 }
@@ -132,6 +138,12 @@ void MainWindow::UpdateInfoTimer()
     if (!m_nauto.m_status == Nauto::Idle)
         ui->lblElapsedTime->setText("Elapsed time: " + Util::MilisecondToString(m_elapsedTimer));
 }
+
+void MainWindow::DefaultSettings()
+{
+    if (!m_settings.contains("fill_method"))
+        m_settings.setString("fill_method","bfs");
+}
 void MainWindow::OnInfoTextChanged(QString info)
 {
     ui->txtInfo->setText(info);
@@ -170,4 +182,10 @@ void MainWindow::on_btnOpenFolder_clicked()
     if (s!="")
 //        QProcess::startDetached("explorer " + Data::data.m_currentPath);
         QDesktopServices::openUrl( QUrl::fromLocalFile(s) );
+}
+
+void MainWindow::on_actionSettings_triggered()
+{
+    DialogSettings* ds = new DialogSettings(nullptr, &m_settings);
+    ds->exec();
 }
