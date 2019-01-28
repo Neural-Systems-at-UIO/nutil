@@ -18,6 +18,7 @@ public:
     QColor m_color = QColor(255,0,0);
     QVector<long> m_IDs;
     QVector<Area*> m_areasOfInterest;
+    QString m_unit;
     float m_totalPixelArea = 0;
     float m_totalArea = 0;
     float m_regionPixelArea = 0;
@@ -57,8 +58,8 @@ public:
     void CreateBook(QString filename );
     void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels);
     void CreateSummary(AtlasLabels* atlasLabels);
-    void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items);
-    void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels);
+    void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items, QString units);
+    void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString units);
     void CreateSliceReportsSummary(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels);
 
     void Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize);

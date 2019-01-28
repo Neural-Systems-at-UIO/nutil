@@ -11,8 +11,14 @@ class Flat2D
 {
 public:
 
-    unsigned int *m_data = nullptr;
+    unsigned int *m_data_i = nullptr;
+    unsigned short *m_data_s = nullptr;
+    unsigned char *m_data_b = nullptr;
+
     unsigned int m_width, m_height;
+    unsigned char m_bpp;
+
+    bool m_newFormat = false;
 
     bool Load(QString filename);
 

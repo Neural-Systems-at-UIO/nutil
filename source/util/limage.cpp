@@ -382,7 +382,11 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
         long index = refImage.pixel(p.x()*refImage.width(),p.y()*refImage.height() );
         //if (index!=0)
         {
-            AtlasLabel* al = labels.get(index);
+            AtlasLabel* al;
+            if (!refImage.m_newFormat)
+                al = labels.get(index);
+            else
+                al = labels.atlases[index];
 
             if (al!=nullptr) {
                 a.atlasLabel = al;

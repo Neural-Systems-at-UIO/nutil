@@ -15,6 +15,7 @@ public:
     QString m_labelFile;
     QString m_anchorFile;
     QString m_reportSheetName;
+    QString m_units = "mm";
 
     int m_pixelCutoff;
     int m_pixelCutoffMax;

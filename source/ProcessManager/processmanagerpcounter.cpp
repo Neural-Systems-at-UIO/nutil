@@ -198,9 +198,9 @@ void ProcessManagerPCounter::Execute()
     }
     reports.CreateBook(m_outputDir + "Report.xlsx");
     reports.CreateSheets(m_processes, &m_labels);
-    reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels);
+    reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units);
     reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels);
-    reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems);
+    reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units);
     if (m_niftiSize!=0) {
         qDebug() << "Nifti: " << m_niftiSize;
         reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
@@ -234,6 +234,8 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     m_niftiSize = m_sheet->readNum(12,1);
     m_xyzScale = m_sheet->readNum(13,1);
     m_reportSheetName = m_sheet->readStr(14,1);
+    m_units = m_sheet->readStr(10,2);
+
 
     if (m_pixelCutoffMax<m_pixelCutoff) {
 
@@ -288,11 +290,10 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
                     done = true;
                 j++;
             }
-//            qDebug() << excelName;
-  //          qDebug() << ids;
 
 
             reports.m_reports.push_back(Report(excelName, ids,reportColor));
+
             LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");
 
             //qDebug() << excelName << " , " << ids;
@@ -302,6 +303,8 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
         x++;
     }
 
+    for (Report& r: reports.m_reports)
+        r.m_unit = m_units;
 }
 
 

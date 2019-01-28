@@ -62,6 +62,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
             sheet->writeStr(i,0, r.m_filename);
             sheet->writeNum(i,3, r.m_regionPixelArea);
             sheet->writeNum(i,4, r.m_regionArea);
+            sheet->writeStr(i,5, r.m_unit);
             sheet->writeNum(i,6, r.m_areasOfInterest.count());
             sheet->writeNum(i,8, r.m_totalPixelArea);
             sheet->writeNum(i,9, r.m_totalArea);
@@ -79,13 +80,13 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
 }
 
-void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items)
+void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units)
 {
     LBook* book = new LBookXlnt();
     LSheet* sheet = book->CreateSheet("Entire region summary");
     sheet->writeStr(0,0,"Region ID");
     sheet->writeStr(0,1,"Region Name");
-    sheet->writeStr(0,2,"Pixel area");
+    sheet->writeStr(0,2,"Object pixels");
     sheet->writeStr(0,3,"Object area");
     sheet->writeStr(0,4,"units");
     sheet->writeStr(0,5,"No Objects");
@@ -124,7 +125,7 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
             sheet->writeStr(y,1,al->name);
             sheet->writeNum(y,2,al->extra2.x());
             sheet->writeNum(y,3,al->extra2.y());
-            sheet->writeStr(y,4,"");
+            sheet->writeStr(y,4,units);
             sheet->writeNum(y,5,al->count);
             sheet->writeNum(y,7,al->areaScaled);
             sheet->writeNum(y,6,al->area);
@@ -136,7 +137,7 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
     book->Save(fileName);
 }
 
-void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels)
+void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels, QString units)
 {
     LMessage::lMessage.Log("Generating sliced reports");
     LBook* book = new LBookXlnt();
@@ -151,7 +152,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     summary->writeStr(0,1,"Total object area sum");
     summary->writeStr(0,2,"Total atlas area sum");
 
-    summary->writeStr(2,0,"Pixel area");
+    summary->writeStr(2,0,"Object pixels");
     summary->writeStr(2,1,"Object area");
     summary->writeStr(2,2,"units");
     summary->writeStr(2,3,"Center X");
@@ -168,7 +169,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         sheet->writeStr(0,0,"Total pixel area");
         sheet->writeStr(0,1,"Total object area");
         sheet->writeStr(0,2,"Total atlas area");
-        sheet->writeStr(2,0,"Pixel area");
+        sheet->writeStr(2,0,"Object pixels");
         sheet->writeStr(2,1,"Object area");
         sheet->writeStr(2,2,"units");
         sheet->writeStr(2,3,"Center X");
@@ -182,6 +183,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         for (Area& a: processes[i]->m_areas) {
             sheet->writeNum(y,0,a.m_pixelArea);
             sheet->writeNum(y,1,a.m_area);
+            sheet->writeStr(y,2,units);
 
             sumPixel+=a.m_pixelArea;
             sumArea+=a.m_area;
@@ -203,6 +205,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
 
             summary->writeNum(yy,0,a.m_pixelArea);
             summary->writeNum(yy,1,a.m_area);
+            summary->writeStr(yy,2,units);
             summary->writeNum(yy,3,a.m_center.x());
             summary->writeNum(yy,4,a.m_center.y());
 
@@ -317,6 +320,7 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
             sheet->writeStr(j,0, r.m_filename);
             sheet->writeNum(j,3, regionPixelArea);
             sheet->writeNum(j,4, regionArea);
+            sheet->writeStr(j,5, r.m_unit);
             sheet->writeNum(j,6, cnt);
             sheet->writeNum(j,8, totalPixelArea);
             sheet->writeNum(j,9, totalArea);
@@ -337,7 +341,7 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
 /*        sheet->writeStr(0,0,"Total pixel area");
         sheet->writeStr(0,1,"Total object area");
         sheet->writeStr(0,2,"Total atlas area");
-        sheet->writeStr(2,0,"Pixel area");
+        sheet->writeStr(2,0,"Object pixels");
         sheet->writeStr(2,1,"Object area");
         sheet->writeStr(2,2,"units");
         sheet->writeStr(2,3,"Center X");
