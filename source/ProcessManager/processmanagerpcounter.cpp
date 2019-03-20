@@ -58,7 +58,6 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
 
             if (inFileFull=="") {
-
                 LMessage::lMessage.Error("Error: Could not find file that contains: " + name);
                 m_processItems.clear();
                 return false;
@@ -165,7 +164,7 @@ void ProcessManagerPCounter::Execute()
 
         QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
 
-        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax);
+        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background,m_colorThreshold, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax);
         LMessage::lMessage.Log("  PCounter done for " +pi->m_inFile);
         for (Area&a : m_processes[i]->m_areas)
             a.m_mat = mat;
@@ -182,7 +181,12 @@ void ProcessManagerPCounter::Execute()
             break;
 
         LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
-        m_processes[i]->lImage.Anchor(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i);
+
+        if (m_areaSplitting!=1)
+            m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i);
+        else
+           m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i);
+
         m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
         LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
         m_processes[i]->lImage.SaveAreasImage(m_outputDir + pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
@@ -201,11 +205,20 @@ void ProcessManagerPCounter::Execute()
     reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units);
     reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels);
     reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units);
-    if (m_niftiSize!=0) {
-        qDebug() << "Nifti: " << m_niftiSize;
-        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
+//        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
+//    m_processes[i].m_infoText = "Creating 3D point cloud";
+
+
+    if (m_output3DPoints)
+        reports.Create3DSummaryJson(m_outputDir + "3D_combined.json", m_processes, m_processItems, m_xyzScale);
+
+
+  //  m_infoText = "Creating 3D point cloud";
+    Data::data.m_globalMessage = "Creating NIFTI";
+
+    if (m_outputNifti)
         reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
-    }
+
     m_processFinished = true;
 
 
@@ -225,16 +238,21 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     float col_b = m_sheet->readNum(3,3);
 
     m_background = QColor(col_r, col_g, col_b);
+    m_colorThreshold = QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
     m_atlasDir = m_sheet->readStr(6,1);
     m_labelFile = m_sheet->readStr(7,1);
     m_pixelCutoff = m_sheet->readNum(9,1);
     m_pixelCutoffMax = m_sheet->readNum(9,2);
     m_areaScale = m_sheet->readNum(10,1);
+    m_areaSplitting = m_sheet->readStr(8,1).toLower()=="yes"?1:0;
     m_anchorFile = m_sheet->readStr(11,1);
     m_niftiSize = m_sheet->readNum(12,1);
     m_xyzScale = m_sheet->readNum(13,1);
     m_reportSheetName = m_sheet->readStr(14,1);
     m_units = m_sheet->readStr(10,2);
+
+    m_output3DPoints = m_sheet->readStr(13,2).toLower()=="yes";
+    m_outputNifti = m_sheet->readStr(12,2).toLower()=="yes";
 
 
     if (m_pixelCutoffMax<m_pixelCutoff) {

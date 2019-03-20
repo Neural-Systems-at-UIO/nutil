@@ -70,7 +70,7 @@ public:
 
     }
 
-    AtlasLabel* get(long index);
+    AtlasLabel* get(long index, bool newFormat);
 
     AtlasLabels(QString filename) {
         Load(filename);

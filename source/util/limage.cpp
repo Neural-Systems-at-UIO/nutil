@@ -60,7 +60,7 @@ void NLImage::Release()
 
 }
 
-void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_areas,int pixelCutoff, int pMax)
+void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter, QVector<Area>* m_areas,int pixelCutoff, int pMax)
 {
 
     if (m_index!=nullptr)
@@ -84,14 +84,25 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
             if (Data::data.abort)
                 return;
 
+            // Check if unset
+
+
 
             if (QColor(m_index->getPixel(i,j)) == unset) {
-                if (QColor(m_image->getPixel(i,j)) == testColor) {
+                QColor pix = QColor(m_image->getPixel(i,j));
+  //              if (pix.red()!=0)
+//                    qDebug() << pix.red();
+
+                bool found = Util::QVector3DIsClose( pix, testColor, colorWidth );
+
+//                if (pix == testColor) {
+                if (found) {
                     Area area;
                     if (isBfs)
-                        FillAreaBFS(area, i,j, testColor, pMax);
+                        FillAreaBFS(area, i,j, testColor, colorWidth, pMax);
                     else
-                        FillAreaDFS(area, i,j, testColor, pMax);
+                        FillAreaDFS(area, i,j, testColor, colorWidth, pMax);
+
                     area.CalculateStatistics();
 
                     if (area.m_pixelArea>=pixelCutoff) {
@@ -108,7 +119,7 @@ void NLImage::FindAreas(QColor testColor, Counter* counter, QVector<Area>* m_are
 }
 
 
-void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& testColor, int pMax)
+void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& testColor, const QVector3D& spread,int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
     if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
@@ -116,7 +127,8 @@ void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& te
     if (QColor(m_index->getPixel(i,j)) == unset) {
         m_index->setPixel(i,j,set.rgba());
         //qDebug() << i << ", " << j << " :" << m_index->width() << ", " << m_index->height() ;
-        if (QColor(m_image->getPixel(i,j)) == testColor) {
+//        if (QColor(m_image->getPixel(i,j)) == testColor) {
+           if (Util::QVector3DIsClose(QColor(m_image->getPixel(i,j)),testColor, spread)) {
             area.m_points.append(QPoint(i,j));
             /*if (area.m_points.count()>3000)
             qDebug() << area.m_points.count() << " :" << i << ", " << j << " :" << m_index->width() << ", " << m_index->height();
@@ -124,19 +136,19 @@ void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& te
                 return;
 */
             if (i+1<m_index->width()-1)
-                FillAreaDFS(area, i+1, j, testColor, pMax);
+                FillAreaDFS(area, i+1, j, testColor, spread, pMax);
             if (i-1>=0)
-               FillAreaDFS(area, i-1, j, testColor, pMax);
+               FillAreaDFS(area, i-1, j, testColor,spread, pMax);
             if (j+1<m_index->height()-1)
-                FillAreaDFS(area, i, j+1, testColor, pMax);
+                FillAreaDFS(area, i, j+1, testColor, spread,pMax);
             if (j-1>=0)
-                FillAreaDFS(area, i, j-1, testColor, pMax);
+                FillAreaDFS(area, i, j-1, testColor, spread,pMax);
         }
     }
 
 }
 
-void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &testColor, int pMax)
+void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &testColor, const QVector3D& spread,int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
     if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
@@ -152,7 +164,9 @@ void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &te
         if (QColor(m_index->getPixel(q.x(),q.y())) == unset) {
             m_index->setPixel(q.x(),q.y(),set.rgba());
             //qDebug() << i << ", " << j << " :" << m_index->width() << ", " << m_index->height() ;
-            if (QColor(m_image->getPixel(q.x(),q.y())) == testColor) {
+//            if (QColor(m_image->getPixel(q.x(),q.y())) == testColor) {
+            if (Util::QVector3DIsClose(QColor(m_image->getPixel(q.x(),q.y())),testColor, spread)) {
+
                 area.m_points.append(q);
                 /*if (area.m_points.count()>3000)
                 qDebug() << area.m_points.count() << " :" << i << ", " << j << " :" << m_index->width() << ", " << m_index->height();
@@ -179,12 +193,15 @@ void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &te
 void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale, int slice)
 {
     m_totalPixelArea = 0;
-
     for (int i=0;i<refImage.width();i++)
         for (int j=0;j<refImage.height();j++) {
-            if (refImage.pixel(i,j)!=0) {
+            if (refImage.pixel(i,j)!=0)
+                {
                 m_totalPixelArea++;
-                AtlasLabel* al =labels.get(refImage.pixel(i,j));
+
+                AtlasLabel* al = labels.get(refImage.pixel(i,j), refImage.m_newFormat);
+
+              //  AtlasLabel* al =labels.get(refImage.pixel(i,j));
                 if (al!=nullptr) {
                     al->area+=scale;
                     al->areaScaled +=scale*areaScale;
@@ -197,6 +214,7 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale,
                 }
             }
         }
+
 
 }
 
@@ -340,7 +358,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
 }
 
-void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice)
+void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice)
 {
 
     Flat2D refImage;
@@ -382,11 +400,7 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
         long index = refImage.pixel(p.x()*refImage.width(),p.y()*refImage.height() );
         //if (index!=0)
         {
-            AtlasLabel* al;
-            if (!refImage.m_newFormat)
-                al = labels.get(index);
-            else
-                al = labels.atlases[index];
+            AtlasLabel* al = labels.get(index, refImage.m_newFormat);
 
             if (al!=nullptr) {
                 a.atlasLabel = al;
@@ -403,4 +417,97 @@ void NLImage::Anchor(QString filenameStripped, QString atlasFile, QString labelF
 }
 
 
+void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice)
+{
+
+    Flat2D refImage;
+    refImage.Load(atlasFile);
+
+    m_testImage = refImage.toImage(labels);
+//    testImage->save(labelFile);
+ //   delete testImage;
+
+
+    // First, count all areas
+
+    float scale = m_image->width()*m_image->height()/ (float)(refImage.m_width*refImage.m_height);
+
+
+//    pixelAreaScale = 1;
+
+//    CountAtlasArea(refImage, labels, scale, pixelAreaScale);
+    CountAtlasArea(refImage, labels, scale, pixelAreaScale,slice);
+    m_totalPixelArea*=scale*pixelAreaScale;
+//    qDebug() << pixelAreaScale;
+//    qDebug() << scale;
+
+    if (counter!=nullptr)
+        counter->Init(m_areas->count());
+
+
+    QVector<Area> newAreas;
+
+    for (Area& a: *m_areas) {
+        if (counter)
+            counter->Tick();
+        if (Data::data.abort)
+            return;
+
+        QVector<Area> splitAreas;
+//        QMap<AtlasLabel*, Area> splitAreas;
+
+
+        for (QPointF& p: a.m_points) {
+
+
+//        QPointF p = a.m_points[0];
+            QPointF orgP = p;
+            p.setX(p.x()/(float)m_image->width());
+            p.setY(p.y()/(float)m_image->height());
+
+            a.m_width = m_image->width();
+            a.m_height = m_image->height();
+
+            long index = refImage.pixel(p.x()*refImage.width(),p.y()*refImage.height() );
+            //if (index!=0)
+                AtlasLabel* al = labels.get(index, refImage.m_newFormat);
+
+                if (al!=nullptr) {
+                    //a.atlasLabel = al;
+                    Area* currentArea = nullptr;
+                    for (Area& ar : splitAreas) {
+                        if (ar.atlasLabel == al)
+                            currentArea = &ar;
+                    }
+                    if (currentArea == nullptr) {
+                        splitAreas.append(Area());
+                        currentArea = &splitAreas.last();
+                        currentArea->atlasLabel = al;
+                        currentArea->m_width = m_image->width();
+                        currentArea->m_height = m_image->height();
+
+                    }
+                    currentArea->m_points.append(orgP);
+
+                }
+
+
+
+        }
+//        qDebug() << "*********** SPLIT AREAS: " << splitAreas.count();
+        for (Area& a: splitAreas) {
+            a.CalculateStatistics();
+            a.m_area += a.m_pixelArea*pixelAreaScale;
+            a.m_areaScale = pixelAreaScale*scale;
+        }
+
+        newAreas.append(splitAreas);
+
+//        else qDebug() << "Error in label file: could not find atlas color " << QColor(idxVal);
+
+    }
+    m_areas->clear();
+    m_areas->append(newAreas);
+
+}
 

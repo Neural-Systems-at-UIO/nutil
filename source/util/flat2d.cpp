@@ -112,11 +112,8 @@ QImage *Flat2D::toImage(AtlasLabels &labels)
     for (unsigned int i=0;i<m_width;i++)
         for (unsigned int j=0;j<m_height;j++) {
             long idx = pixel(i,j);
-            AtlasLabel* al;
-            if (!m_newFormat)
-                al = labels.get(idx);
+            AtlasLabel* al = labels.get(idx, m_newFormat);
 
-            else al = labels.atlases[idx];
             if (al!=nullptr)
                 img->setPixel(i,j, QColor(al->color.x(), al->color.y(),al->color.z()).rgba());
         }

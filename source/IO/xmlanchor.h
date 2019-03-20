@@ -21,9 +21,9 @@ public:
 
     float* toMatrix() {
         return new float[16] {
-                m_o.x(),m_o.y(),m_o.z(),0,
                 m_u.x(),m_u.y(),m_u.z(),0,
                 m_v.x(),m_v.y(),m_v.z(),0,
+                m_o.x(),m_o.y(),m_o.z(),0,
                 0,0,0,1
     };
     }

@@ -26,6 +26,8 @@ public:
 
     int m_numProcessors = -1;
 
+ //   QString m_globalMessage = "";
+
     virtual bool Build(LSheet* m_sheet) = 0;
     virtual void Execute() = 0;
     virtual void ReadHeader(LSheet* m_sheet, LBook* book) { }

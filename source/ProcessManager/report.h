@@ -3,12 +3,13 @@
 #include <QString>
 #include <QVector>
 #include <QColor>
+#include "source/data.h"
 #include "source/ProcessManager/nutilprocess.h"
 //#include "libxl.h"
 #include "source/util/lmessage.h"
 #include "source/util/atlaslabel.h"
 #include "source/LBook/lbookxlnt.h".h"
-
+#include "source/util/counter.h"
 #include "source/ProcessManager/processitem.h"
 
 
@@ -63,6 +64,7 @@ public:
     void CreateSliceReportsSummary(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels);
 
     void Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize);
+    void Create3DSummaryJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize);
 
     void CreateNifti(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int size);
 

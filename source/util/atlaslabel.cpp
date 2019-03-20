@@ -5,10 +5,13 @@ AtlasLabel::AtlasLabel()
 
 }
 
-AtlasLabel *AtlasLabels::get(long index)
+AtlasLabel *AtlasLabels::get(long index, bool format)
 {
     //if (index==182305705)
     //    qDebug()<< "CONTAINS: " <<indexedID.contains(index);
+    if (format==true)
+        return atlases[index];
+
 
     if (indexedID.contains(index))
         return indexedID[index];

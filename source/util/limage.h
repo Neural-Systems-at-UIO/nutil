@@ -60,10 +60,10 @@ public:
     void Load(QString filename);
 
     void Release();
-    void FindAreas(QColor color, Counter* counter, QVector<Area>* areas, int pixelCutoff, int pMax);
+    void FindAreas(QColor color, QVector3D colorWidth,Counter* counter, QVector<Area>* areas, int pixelCutoff, int pMax);
 
-    void FillAreaDFS(Area& area, const int i, const int j, const QColor& testColor, int pMax);
-    void FillAreaBFS(Area& area, const int i, const int j, const QColor& testColor, int pMax);
+    void FillAreaDFS(Area& area, const int i, const int j, const QColor& testColor, const QVector3D& spread,int pMax);
+    void FillAreaBFS(Area& area, const int i, const int j, const QColor& testColor, const QVector3D& spread,int pMax);
 //    void GenerateAreaReport(QString outExcelFile,Counter *counter);
 
     void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, float scale, float areaScale, int slice);
@@ -74,7 +74,8 @@ public:
         Load(f);
     }
 
-    void Anchor(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale, int slice);
+    void AnchorSingle(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale, int slice);
+    void AnchorSplitting(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale, int slice);
     NLIParent* image();
 };
 

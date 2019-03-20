@@ -139,7 +139,6 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
 
 void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels, QString units)
 {
-    LMessage::lMessage.Log("Generating sliced reports");
     LBook* book = new LBookXlnt();
     LSheet* summary = book->GetSheet(0);
 
@@ -147,6 +146,8 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     float sumArea = 0;
     float totalSumPixel=0;
     float totalSumArea = 0;
+
+
 
     summary->writeStr(0,0,"Total pixel area sum");
     summary->writeStr(0,1,"Total object area sum");
@@ -162,7 +163,14 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     summary->writeStr(2,6,"Region Name");
     int yy=3;
     float sumTotalAtlasArea=0;
+    LMessage::lMessage.Log("Generating sliced reports");
+    int k=0;
+    for (int i=0;i<items.count();i++)
+        k+=processes[i]->m_areas.count();
+    Counter cnt(k,"");
     for (int i=0;i<items.count();i++) {
+
+
         //qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
         LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
         // Header
@@ -181,6 +189,8 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         int y = 3;
    //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
+            cnt.Tick();
+            Data::data.m_globalMessage = "Creating sliced reports: " + cnt.getPercentFormatted();
             sheet->writeNum(y,0,a.m_pixelArea);
             sheet->writeNum(y,1,a.m_area);
             sheet->writeStr(y,2,units);
@@ -238,8 +248,12 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         all+=al->area;
     }*/
     summary->writeNum(1,2,sumTotalAtlasArea);
+    Data::data.m_globalMessage = "Saving sliced reports... (this might take some time)";
+
    // qDebug() << "SAVING";
     book->Save(filename);
+    Data::data.m_globalMessage = "Done saving.";
+
     //qDebug() << "SAVED";
 }
 
@@ -253,9 +267,11 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
     float sumArea = 0;
     float totalSumPixel=0;
     float totalSumArea = 0;
-
+    Counter cnt(items.count()*m_reports.count(),"");
     for (int i=0;i<items.count();i++) {
         //qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
+
+
 
         LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
 
@@ -275,6 +291,8 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
         int j=1;
         for (Report& r : m_reports) {
 
+            cnt.Tick();
+            Data::data.m_globalMessage = "Creating sliced reports summary: " + cnt.getPercentFormatted();
             float regionPixelArea=0;
             float regionArea=0;
             float totalPixelArea=0;//items[i]->m_pixelAreaScale;
@@ -414,33 +432,18 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
 
 
     for (int i=0;i<m_reports.count();i++) {
-        //qDebug() << mat;
-        //  items[i]->m_xmlData.matrix
         QColor c = m_reports[i].m_color;
-        //c=m_reports[i].
         QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
         o +="RGBA " + color +" \n";
         //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
         int count=0;
         for (Area* a: m_reports[i].m_areasOfInterest) {
-/*            if (rand()%100>90)
-                qDebug() << color << " vs " << a->color;
-*/
-
-
-/*
- *
-            QVector3D v(1,a->m_center.x()/a->m_width,a->m_center.y()/a->m_height);
-            v=v*a->m_mat;
-            o +=QString::number(v.x()) + ",";
-            o +=QString::number(v.y()) + ",";
-            o +=QString::number(v.z()) + "\n";
-*/
 
 
             for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
                 QPointF& p =a->m_points[k];
-                QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
+                //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
+                QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;
                 o +=QString::number(v.x()) + ",";
                 o +=QString::number(v.y()) + ",";
@@ -463,17 +466,87 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
     file.close();
 }
 
+
+void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize)
+{
+
+    QString o;
+
+    o+="[\n";
+    int cnt=0;
+    int k=0;
+
+    for (int i=0;i<m_reports.count();i++)
+        k+=m_reports[i].m_areasOfInterest.count();
+
+    Counter cntr(k,"");
+
+    for (int i=0;i<m_reports.count();i++) {
+        QColor c = m_reports[i].m_color;
+        QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
+        //o +="RGBA " + color +" \n";
+        //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
+        int count = m_reports[i].m_areasOfInterest.count();
+        if (cnt!=0) o+=",\n";
+        o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(count)+",";
+        o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename+ "\",";
+        o+="\"triplets\":[";
+        int cnt2=0;
+        cnt++;
+        for (Area* a: m_reports[i].m_areasOfInterest) {
+            cntr.Tick();
+            Data::data.m_globalMessage = "Creating 3D point clouds : " + cntr.getPercentFormatted();
+
+//            if (cnt!=0) o+=",";
+
+            for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
+                QPointF& p =a->m_points[k];
+                //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
+                QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
+                v=v*a->m_mat;
+
+                if (cnt2!=0) o+=",\n";
+//                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
+                o+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
+
+
+                cnt2++;
+             }
+
+
+        }
+        o+="]}";
+
+    }
+
+    o+="\n]\n";
+    QFile file (filename);
+    file.open(QFile::Text | QFile::WriteOnly);
+    QTextStream outstream(&file);
+    outstream << o;
+    file.close();
+}
+
 void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, int size)
 {
     Nifti n;
     n.Create(QVector3D(size,size,size),Nifti::DataType::DT_RGB, 24);
     n.rawData.fill(0);
     LMessage::lMessage.Log("Creating nifti ..");
+
+    int k=0;
+    for (int i=0;i<m_reports.count();i++)
+        k+=m_reports[i].m_areasOfInterest.count();
+
+
+    Counter cnt(k,"");
     for (int i=0;i<m_reports.count();i++) {
         QColor c = m_reports[i].m_color;
         //qDebug() << c.red() << ", " << c.green() << ", " << c.blue() << "  : " << m_reports[i].m_areasOfInterest.count();
   //      c= QColor(Qt::white);
         for (Area* a: m_reports[i].m_areasOfInterest) {
+            cnt.Tick();
+            Data::data.m_globalMessage="Generating nifti file : " + cnt.getPercentFormatted();
 
             //c.setRed(rand()%255);
             //c.setBlue(rand()%255);
@@ -481,15 +554,13 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
             for (QPointF& p: a->m_points) {
 //                QPointF pp=a->m_center;
 
-                QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
-//                QVector3D v(1,p.x(),p.y());
-
+                QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;
 //                v=v/1;
 
-                v.setX(v.x()/512*n.size.x() + 10);
-                v.setY(v.y()/512*n.size.y()+24);
-                v.setZ(v.z()/512*n.size.z()+10);
+                v.setX(v.x()/512*n.size.x() );
+                v.setY(v.y()/512*n.size.y());
+                v.setZ(v.z()/512*n.size.z());
 
 //                               if (rand()%100==0)
   //                                 qDebug() << v;
@@ -555,7 +626,7 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
         }
         for (long i: r.m_IDs)
         {
-            AtlasLabel* al = atlasLabels->get(i);
+            AtlasLabel* al = atlasLabels->get(i,false);
             if (al!=nullptr) {
                 r.m_regionPixelArea += al->area;
                 r.m_regionArea += al->areaScaled;
@@ -599,14 +670,17 @@ void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasL
         return;
 
     LMessage::lMessage.Log("Finding areas of interest");
+    Data::data.m_globalMessage = "Creating sheets 1/3";
 
     for (Report& r: m_reports)
             r.FindAreasOfInterest(processes);
+    Data::data.m_globalMessage = "Creating sheets 2/3";
 
     LMessage::lMessage.Log("Creating summary ");
     CreateSummary(atlasLabels);
 
     LMessage::lMessage.Log("Generating sheets ");
+    Data::data.m_globalMessage = "Creating sheets 3/3";
 
     for (Report& r: m_reports) {
         //qDebug() << r.m_filename;

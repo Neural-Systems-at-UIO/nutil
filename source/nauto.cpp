@@ -159,7 +159,7 @@ void Nauto::BuildInfo()
     total/=m_pm->m_processes.length();
     int totalTime = (m_elapsedTime )/(total/100.0);
 
-
+    t+=Data::data.m_globalMessage + "<br><br>";
     t+="Total: [ <b><font size=\"+1\">"+ QString::number(total,'f', 1)+ "% </font></b>] <br>";
     t+="Elapsed: "+ Util::MilisecondToString(m_elapsedTime) +" / <b> <br>";// + Util::MilisecondToString(totalTime) + "</b> <br>";
 

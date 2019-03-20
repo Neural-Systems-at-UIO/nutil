@@ -101,11 +101,15 @@ void ProcessManagerTransform::Execute()
                QDir().mkdir(tfolder);
 
             QString thumbOut = tfolder + pi->m_outFileSingle.split('.')[0] + "_thumbnail." + m_thumbType;
+
+            if (m_thumbnailSize!=0) {
+
             if (!m_onlyThumbs)
                 m_processes[i]->GenerateThumbnail(pi->m_outFile, thumbOut,m_thumbnailSize);
             else
                 m_processes[i]->GenerateThumbnail(pi->m_inFile, thumbOut,m_thumbnailSize);
 
+            }
             }
         m_mainCounter.Tick();
     }

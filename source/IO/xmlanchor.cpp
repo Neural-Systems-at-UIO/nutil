@@ -10,9 +10,11 @@ XMLAnchor::XMLAnchor()
 
 XMLData XMLAnchor::findData(QString name)
 {
-    for (XMLData& d : m_data)
+    for (XMLData& d : m_data) {
+ //       qDebug() << d.m_filename;
         if (d.m_filename.contains(name))
             return d;
+    }
 
     qDebug() << "Could not find xmldata for:" << name;
 

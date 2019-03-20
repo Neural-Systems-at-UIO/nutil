@@ -24,6 +24,15 @@ public:
     float m_niftiSize;
     float m_xyzScale;
 
+
+    bool m_outputNifti = false;
+    bool m_output3DPoints = false;
+
+
+    QVector3D m_colorThreshold  = QVector3D(255,255,255);
+
+    float m_areaSplitting = 0;
+
     Reports reports;
 
     XMLAnchor m_xmlAnchor;
