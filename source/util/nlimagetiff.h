@@ -39,7 +39,14 @@ public:
     bool Load(QString filename) override {
         if (!QFile::exists(filename))
             return false;
+        m_image = QImage();
         m_image.load(filename);
+        if (m_image.format()!=QImage::Format_RGB32) {
+            //qDebug() << "Converting";
+            m_image = m_image.convertToFormat(QImage::Format_RGB32);
+  //          m_image = img;
+        }
+
         return true;
 
     }
@@ -58,6 +65,7 @@ public:
 
     void setPixel(int x, int y, QRgb col) override {
         m_image.setPixel(x,y, col);
+
     }
 
     void Release() override {

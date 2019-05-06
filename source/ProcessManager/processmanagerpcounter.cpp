@@ -19,6 +19,7 @@ void ProcessManagerPCounter::LoadXML()
 bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 {
     m_processItems.clear();
+    Data::data.m_globalMessage="";
     /*QDirIterator it(m_inputDir, QStringList() << "*.png", QDir::Files);
     while (it.hasNext()) {
         QString inFileFull = it.next();
@@ -30,7 +31,7 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     }*/
     int x = 1;
-    int y = 17;
+    int y = 19;
     Data::data.abort = false;
 
     LoadXML();
@@ -154,7 +155,6 @@ void ProcessManagerPCounter::Execute()
 
 
 
-
 #pragma omp parallel for num_threads(m_numProcessors)
     for (int i=0;i<m_processes.length();i++) {
         ProcessItem* pi = m_processItems[i];
@@ -164,8 +164,19 @@ void ProcessManagerPCounter::Execute()
 
         QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
 
-        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background,m_colorThreshold, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax);
-        LMessage::lMessage.Log("  PCounter done for " +pi->m_inFile);
+        QString maskFile = "";
+        if (m_useCustomMask) {
+  //          qDebug() << "Search for mask file" << pi->m_id;
+            maskFile = Util::findFileInDirectory(QStringList() << "mask" << pi->m_id,m_inputDir,"png");
+            if (maskFile=="")
+                LMessage::lMessage.Error("  Could not find mask file for " +pi->m_inFile);
+
+
+        }
+
+        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background,m_colorThreshold, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax, maskFile, m_customMaskInclusionColors);
+
+        LMessage::lMessage.Log("  Quantifier done for " +pi->m_inFile);
         for (Area&a : m_processes[i]->m_areas)
             a.m_mat = mat;
         m_processes[i]->m_infoText = "Anchoring areas";
@@ -253,6 +264,11 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
 
     m_output3DPoints = m_sheet->readStr(13,2).toLower()=="yes";
     m_outputNifti = m_sheet->readStr(12,2).toLower()=="yes";
+
+    m_useCustomMask = m_sheet->readStr(15,1).toLower()=="yes";
+    if (m_useCustomMask) {
+        m_customMaskInclusionColors = Util::vecFromString(m_sheet->readStr(16,1));
+    }
 
 
     if (m_pixelCutoffMax<m_pixelCutoff) {

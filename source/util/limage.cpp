@@ -12,6 +12,11 @@ NLIParent* NLImage::image()
 
 void NLImage::Load(QString filename)
 {
+//    QImage test(filename);
+//    qDebug() << filename << test.format();
+//    test.setPixel(0,0,QColor(1,0,0).rgb());
+  //  test.setPixelColor(0,0,QColor(1,0,0));
+    //exit(1);
 
     //filename = "c:\\data\\test.png";
     if (!QFile::exists(filename)) {
@@ -28,7 +33,8 @@ void NLImage::Load(QString filename)
     m_image = createImage(1,1);
     m_index = createImage(1,1);
 
-//    m_image = QImage();
+
+
     if (!m_image->Load(filename) || m_image->width()==0)
     {
         qDebug() << "Error opening file: " + filename;
@@ -38,6 +44,32 @@ void NLImage::Load(QString filename)
         qDebug() << "Error opening file (size 0): " + filename;
         LMessage::lMessage.Error("Error opening file (size 0): " + filename);
     }
+
+
+}
+
+void NLImage::ApplyMask(QString maskFile, QVector3D useColor, QColor background)
+{
+    QImage mask;
+    mask.load(maskFile);
+    QColor testColor(1,1,1);
+    if (background==testColor)
+        testColor = QColor(0,0,0);
+    for (int j=0;j<m_image->height();j++)
+        for (int i=0;i<m_image->width();i++) {
+            //QVector3D imgCol = Util::fromColor(QColor(m_image->getPixel(i,j)));
+            float x = (i/(float)m_image->width())*(float)mask.width();
+            float y = (j/(float)m_image->height())*(float)mask.height();
+            QVector3D maskCol = Util::fromColor(QColor(mask.pixel(x,y)));
+            //qDebug() << maskCol << useColor;
+
+            if (!Util::QVector3DIsClose(maskCol,useColor,QVector3D(1,1,1)*2))
+            {
+                m_image->setPixel(i,j,testColor.rgba());
+//                qDebug() << i<< j;
+            }
+        }
+
 
 }
 

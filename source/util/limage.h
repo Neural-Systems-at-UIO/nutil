@@ -59,6 +59,8 @@ public:
 
     void Load(QString filename);
 
+    void ApplyMask(QString maskFile, QVector3D useColor, QColor background);
+
     void Release();
     void FindAreas(QColor color, QVector3D colorWidth,Counter* counter, QVector<Area>* areas, int pixelCutoff, int pMax);
 

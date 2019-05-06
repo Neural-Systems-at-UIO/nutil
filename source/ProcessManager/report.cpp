@@ -164,16 +164,15 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     int yy=3;
     float sumTotalAtlasArea=0;
     LMessage::lMessage.Log("Generating sliced reports");
-    int k=0;
-    for (int i=0;i<items.count();i++)
-        k+=processes[i]->m_areas.count();
-    Counter cnt(k,"");
+    Counter cnt(items.count(),"");
     for (int i=0;i<items.count();i++) {
 
 
         //qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
         LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
         // Header
+        cnt.Tick();
+        Data::data.m_globalMessage = "Creating sliced reports: " + cnt.getPercentFormatted();
         sheet->writeStr(0,0,"Total pixel area");
         sheet->writeStr(0,1,"Total object area");
         sheet->writeStr(0,2,"Total atlas area");
@@ -189,8 +188,6 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         int y = 3;
    //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
-            cnt.Tick();
-            Data::data.m_globalMessage = "Creating sliced reports: " + cnt.getPercentFormatted();
             sheet->writeNum(y,0,a.m_pixelArea);
             sheet->writeNum(y,1,a.m_area);
             sheet->writeStr(y,2,units);
@@ -476,30 +473,38 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
     int cnt=0;
     int k=0;
 
-    for (int i=0;i<m_reports.count();i++)
-        k+=m_reports[i].m_areasOfInterest.count();
+//    for (int i=0;i<m_reports.count();i++)
+  //      k+=m_reports[i].m_areasOfInterest.count();
 
-    Counter cntr(k,"");
-
+    Counter cntr(m_reports.count(),"");
+    int tcount = 0;
     for (int i=0;i<m_reports.count();i++) {
+
+        cntr.Tick();
+        Data::data.m_globalMessage = "Creating 3D point clouds : " + cntr.getPercentFormatted();
         QColor c = m_reports[i].m_color;
         QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
         //o +="RGBA " + color +" \n";
         //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
-        int count = m_reports[i].m_areasOfInterest.count();
+
+        int count = 0;//m_reports[i].m_areasOfInterest.count();
+        for (int j=0;j<m_reports[i].m_areasOfInterest.count();j++)
+            count+=m_reports[i].m_areasOfInterest[j]->m_points.count();
         if (cnt!=0) o+=",\n";
         o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(count)+",";
         o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename+ "\",";
         o+="\"triplets\":[";
         int cnt2=0;
         cnt++;
+
         for (Area* a: m_reports[i].m_areasOfInterest) {
-            cntr.Tick();
-            Data::data.m_globalMessage = "Creating 3D point clouds : " + cntr.getPercentFormatted();
+
 
 //            if (cnt!=0) o+=",";
 
-            for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
+            for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
+//                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
+                tcount++;
                 QPointF& p =a->m_points[k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
@@ -525,6 +530,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
     QTextStream outstream(&file);
     outstream << o;
     file.close();
+    LMessage::lMessage.Message("****** Count of pixels " + QString::number(tcount));
 }
 
 void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, int size)
@@ -535,18 +541,16 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
     LMessage::lMessage.Log("Creating nifti ..");
 
     int k=0;
-    for (int i=0;i<m_reports.count();i++)
-        k+=m_reports[i].m_areasOfInterest.count();
 
 
-    Counter cnt(k,"");
+    Counter cnt(m_reports.count(),"");
     for (int i=0;i<m_reports.count();i++) {
         QColor c = m_reports[i].m_color;
         //qDebug() << c.red() << ", " << c.green() << ", " << c.blue() << "  : " << m_reports[i].m_areasOfInterest.count();
   //      c= QColor(Qt::white);
+        cnt.Tick();
+        Data::data.m_globalMessage="Generating nifti file : " + cnt.getPercentFormatted();
         for (Area* a: m_reports[i].m_areasOfInterest) {
-            cnt.Tick();
-            Data::data.m_globalMessage="Generating nifti file : " + cnt.getPercentFormatted();
 
             //c.setRed(rand()%255);
             //c.setBlue(rand()%255);

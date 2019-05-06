@@ -4,7 +4,7 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
 {
     bool ok = false;
     int y = 10;
-    int x = 2;
+    int x = 0;
 
     m_processItems.clear();
 
@@ -17,6 +17,7 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
         inFile += ".tif";
 
         QString searchFile = Util::findFileInSubDirectories(inFile,m_inputDir,"");
+
 
         LMessage::lMessage.Log("Transform found file: " + searchFile);
 //        qDebug() << "Found: " << searchFile;
@@ -89,7 +90,7 @@ void ProcessManagerTransform::Execute()
 
         if (!m_onlyThumbs) {
 
-        m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_autoClip.toLower()=="yes");
+        m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_colorSpread, m_autoClip.toLower()=="yes");
         if (Data::data.abort || Util::CancelSignal) {
             LMessage::lMessage.Log("User aborting!");
             break;
@@ -127,6 +128,8 @@ void ProcessManagerTransform::ReadHeader(LSheet* m_sheet, LBook* book)
     float col_r = m_sheet->readNum(3,1);
     float col_g = m_sheet->readNum(3,2);
     float col_b = m_sheet->readNum(3,3);
+    m_colorSpread = m_sheet->readNum(3,4);
+    if (m_colorSpread==0) m_colorSpread=1;
     m_autoClip = m_sheet->readStr(7,1);
     m_onlyThumbs = (m_sheet->readStr(8,1).toLower()=="yes");
 

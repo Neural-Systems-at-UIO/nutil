@@ -56,7 +56,7 @@ bool NutilProcess::InitializeCounter(QString inFile, bool autoClip, float thumbn
     return true;
 }
 
-bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compression, float angle, QPointF scale, QColor background, bool autoClip)
+bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compression, float angle, QPointF scale, QColor background, int colorScale, bool autoClip)
 {
 
 
@@ -66,6 +66,9 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
     int writeCompression;
     if (!LoadAndVerifyTiff(tif, inFile, writeCompression, compression))
         return false;
+
+    tif.PrintImageInfo();
+//    exit(1);
 
     otif.m_boundsMin = QVector3D(0,0,0);
     otif.m_boundsMax = QVector3D(tif.m_width, tif.m_height, 0);
@@ -80,7 +83,7 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
     qDebug() << "Transforming to file " << outFile << " with compression " << tif.m_compressionTypes[writeCompression];
 
     m_infoText =  "rotating " + QString::number(angle/(2*M_PI)*360,'f',2) + " degrees" ;
-    otif.Transform(tif, angle, scale, 0,0, background, &m_counter);
+    otif.Transform(tif, angle, scale, 0,0, background, colorScale, &m_counter);
 
     tif.Close();
     QString renameFile = "";
@@ -152,6 +155,9 @@ bool NutilProcess::GenerateThumbnail(QString inFile, QString outFile, float thum
     if (!tif.Open(inFile))
         return false;
 
+/*    tif.PrintImageInfo();
+    exit(1);
+*/
     tif.SetupBuffers();
     float aspectRatio = 1.0/(float)(tif.m_width/(float)tif.m_height);
 
@@ -220,10 +226,13 @@ void NutilProcess::ReleasePCounter()
 //    ClearAreaPixels();
 }
 
-bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector3D colorWidth, QVector<Area>* areas, int pixelCutoff, int pMax)
+bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector3D colorWidth, QVector<Area>* areas, int pixelCutoff, int pMax, QString maskFile, QVector3D maskColor)
 {
 //    qDebug() << inFile;
     lImage.Load(inFile);
+
+    if (maskFile!="")
+        lImage.ApplyMask(maskFile,maskColor, testColor);
 
     m_infoText = "Finding areas";
     lImage.FindAreas(testColor, colorWidth, &m_counter, areas, pixelCutoff, pMax);
@@ -247,7 +256,6 @@ bool NutilProcess::LoadAndVerifyTiff(LTiff &tif, QString inFile, int &writeCompr
 
         return false;
     }
-    tif.PrintImageInfo();
     if (!TIFFIsTiled(tif.m_tif)) {
         LMessage::lMessage.Error("Error: this tiff file is not tiled. Please use the other transformation method for non-tiled tiffs.");
         return false;

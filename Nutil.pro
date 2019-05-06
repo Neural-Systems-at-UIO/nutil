@@ -58,7 +58,8 @@ SOURCES += main.cpp \
     source/IO/pointcloud3d.cpp \
     source/util/nlimagetiff.cpp \
     source/IO/xmlanchor.cpp \
-    dialogsettings.cpp
+    dialogsettings.cpp \
+    source/ProcessManager/processmanagertiffcreator.cpp
 
 HEADERS += \
     nutilapplication.h \
@@ -91,7 +92,8 @@ HEADERS += \
     source/util/nlimagetiff.h \
     source/IO/xmlanchor.h \
     dialogsettings.h \
-    source/util/cinifile.h
+    source/util/cinifile.h \
+    source/ProcessManager/processmanagertiffcreator.h
 
 FORMS    += mainwindow.ui \
     source/dialogtiff.ui \

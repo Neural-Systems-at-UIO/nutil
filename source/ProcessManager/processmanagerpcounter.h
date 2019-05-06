@@ -30,6 +30,9 @@ public:
 
 
     QVector3D m_colorThreshold  = QVector3D(255,255,255);
+    QVector3D m_customMaskInclusionColors  = QVector3D(255,255,255);
+
+    bool m_useCustomMask = false;
 
     float m_areaSplitting = 0;
 

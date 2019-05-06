@@ -3,7 +3,8 @@
 
 #include "source/ProcessManager/processmanagerpcounter.h"
 #include "source/ProcessManager/processmanagertransform.h"
-#include "source/ProcessManager/processmanagerautocontrast.h".h"
+#include "source/ProcessManager/processmanagerautocontrast.h"
+#include "source/ProcessManager/processmanagertiffcreator.h"
 
 class ProcessManagerFactory {
 public:
@@ -14,6 +15,8 @@ public:
             return new ProcessManagerPCounter();
         if (pm_type.toLower() == "autocontrast")
             return new ProcessManagerAutoContrast();
+        if (pm_type.toLower() == "tiffcreator")
+            return new ProcessManagerTiffCreator();
 
         return nullptr;
     }

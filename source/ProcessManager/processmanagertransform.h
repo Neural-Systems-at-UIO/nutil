@@ -11,6 +11,7 @@ public:
     QString m_compression = "jpg";
     QString m_thumbType;
     QString m_autoClip;
+    int m_colorSpread = 1;
     bool m_onlyThumbs = false;
     float m_thumbnailSize;
 
