@@ -36,6 +36,12 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
         }
 
         QString outFile = m_sheet->readStr(y,x+1) + ".tif";
+        if (outFile==".tif") {
+
+            LMessage::lMessage.Error("Output file not specified for : '"+inFile+"'.");
+            return false;
+        }
+
         float angle = m_sheet->readNum(y,x+2);
 
         angle = angle/360*(2*M_PI);
@@ -101,7 +107,9 @@ void ProcessManagerTransform::Execute()
             if (!QDir(tfolder).exists())
                QDir().mkdir(tfolder);
 
+
             QString thumbOut = tfolder + pi->m_outFileSingle.split('.')[0] + "_thumbnail." + m_thumbType;
+            qDebug() <<"*** : "<< pi->m_outFileSingle;
 
             if (m_thumbnailSize!=0) {
 

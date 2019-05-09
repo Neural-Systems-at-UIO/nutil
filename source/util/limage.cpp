@@ -478,7 +478,6 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
 
 
     QVector<Area> newAreas;
-
     for (Area& a: *m_areas) {
         if (counter)
             counter->Tick();
@@ -517,6 +516,7 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
                         currentArea->atlasLabel = al;
                         currentArea->m_width = m_image->width();
                         currentArea->m_height = m_image->height();
+                        currentArea->m_mat = a.m_mat;
 
                     }
                     currentArea->m_points.append(orgP);

@@ -164,6 +164,7 @@ void ProcessManagerPCounter::Execute()
 
         QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
 
+
         QString maskFile = "";
         if (m_useCustomMask) {
   //          qDebug() << "Search for mask file" << pi->m_id;
@@ -179,6 +180,7 @@ void ProcessManagerPCounter::Execute()
         LMessage::lMessage.Log("  Quantifier done for " +pi->m_inFile);
         for (Area&a : m_processes[i]->m_areas)
             a.m_mat = mat;
+
         m_processes[i]->m_infoText = "Anchoring areas";
         // Find atlas file:
         QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat");

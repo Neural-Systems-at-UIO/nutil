@@ -22,7 +22,6 @@ bool ProcessManagerTiffCreator::Build(LSheet *m_sheet)
             return false;
         }
         QString outFile = inFile.split(".").first()+".tif";
-
         m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, 0, QPointF(1,1), outFile, m_outputDir));
 //        return true;
     }

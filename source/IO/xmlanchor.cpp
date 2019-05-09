@@ -62,6 +62,7 @@ void XMLAnchor::Load(QString file)
                     //continue;
                 }
                 if(xml.name() == "slice") {
+
                     XMLData d;
                     QXmlStreamAttributes attributes = xml.attributes();
                     d.m_filename = attributes.value("filename").toString();
@@ -74,13 +75,12 @@ void XMLAnchor::Load(QString file)
                     d.m_u = QVector3D(anLst[3].split("=")[1].toFloat(), anLst[4].split("=")[1].toFloat(),anLst[5].split("=")[1].toFloat());
                     d.m_v = QVector3D(anLst[6].split("=")[1].toFloat(), anLst[7].split("=")[1].toFloat(),anLst[8].split("=")[1].toFloat());
 
-                    //qDebug() << d.m_o;
-                    //qDebug() << d.m_v;
+//                    qDebug() << d.m_o;
+//                    qDebug() << d.m_v;
 
                    // qDebug() << "Adding slice:" << d.m_filename;
 
                     m_data.append(d);
-
                         /* Let's check that person has id attribute. */
                 }
                 /* If it's named person, we'll dig the information from there.*/
