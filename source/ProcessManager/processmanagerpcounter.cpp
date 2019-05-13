@@ -31,7 +31,7 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     }*/
     int x = 1;
-    int y = 19;
+    int y = 20;
     Data::data.abort = false;
 
     LoadXML();
@@ -213,14 +213,20 @@ void ProcessManagerPCounter::Execute()
 
         m_processes[i]->ReleasePCounter();
     }
-    reports.CreateBook(m_outputDir + "Report.xlsx");
-    reports.CreateSheets(m_processes, &m_labels);
-    reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units);
-    reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels);
-    reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units);
+
+    if (m_reportType!="none") {
+
+        reports.CreateBook(m_outputDir + "Report.xlsx");
+        reports.CreateSheets(m_processes, &m_labels);
+
+        if (m_reportType=="all") {
+            reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units);
+            reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels);
+            reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units);
+        }
 //        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
 //    m_processes[i].m_infoText = "Creating 3D point cloud";
-
+    }
 
     if (m_output3DPoints)
         reports.Create3DSummaryJson(m_outputDir + "3D_combined.json", m_processes, m_processItems, m_xyzScale);
@@ -246,11 +252,14 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     ProcessManager::ReadHeader(m_sheet, book);
     m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));
     m_outputDir = Util::fixFolder(m_sheet->readStr(5,1));
-    float col_r = m_sheet->readNum(3,1);
-    float col_g = m_sheet->readNum(3,2);
-    float col_b = m_sheet->readNum(3,3);
+//    float col_r = m_sheet->readNum(3,1);
+  //  float col_g = m_sheet->readNum(3,2);
+    //float col_b = m_sheet->readNum(3,3);
 
-    m_background = QColor(col_r, col_g, col_b);
+//    m_background = QColor(col_r, col_g, col_b);
+    QVector3D bg = Util::vecFromString(m_sheet->readStr(3,1));
+    m_background = QColor(bg.x(), bg.y(), bg.z());
+
     m_colorThreshold = QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
     m_atlasDir = m_sheet->readStr(6,1);
     m_labelFile = m_sheet->readStr(7,1);
@@ -272,6 +281,7 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
         m_customMaskInclusionColors = Util::vecFromString(m_sheet->readStr(16,1));
     }
 
+    m_reportType = m_sheet->readStr(17,1).toLower();
 
     if (m_pixelCutoffMax<m_pixelCutoff) {
 

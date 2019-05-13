@@ -34,6 +34,8 @@ public:
 
     bool m_useCustomMask = false;
 
+    QString m_reportType ="all";
+
     float m_areaSplitting = 0;
 
     Reports reports;
