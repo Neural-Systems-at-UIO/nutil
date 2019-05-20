@@ -1,5 +1,5 @@
 rmdir /s /q nutil
-set dir=C:\Users\leuat\Documents\GitHub\build-Nutil-Desktop_Qt_5_9_2_MSVC2017_64bit-Release\release
+set dir=C:\Users\leuat\OneDrive\Documents\GitHub\build-Nutil-Desktop_Qt_5_12_0_MSVC2017_64bit-Release\release
 mkdir nutil
 xcopy /s %dir%\*.exe nutil\
 xcopy /s %dir%\iconengines nutil\
