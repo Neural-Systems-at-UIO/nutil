@@ -42,6 +42,10 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
         return false;
 
     }
+    if (m_areaScale==0) {
+        LMessage::lMessage.Error("Global pixel scale is not set (or is set to zero). Please specify a valid global pixel scale (such as 1).");
+        return false;
+    }
 
 
     bool done = false;
@@ -77,6 +81,13 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
             QString inFileSingle = inFile.split('.')[0];
             ProcessItem* pi = new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx",0, QPointF(1,1), inFileSingle, m_outputDir);
             pi->m_pixelAreaScale = m_areaScale*m_sheet->readNum(y,x+1);
+
+            if (pi->m_pixelAreaScale==0) {
+                LMessage::lMessage.Error("Pixel area scale is not set (or is set to zero) for image file '" + name +"'. Please specify a valid pixel area scale (such as 1).");
+                return false;
+            }
+
+
             //qDebug() << name;
             pi->m_xmlData =m_xmlAnchor.findData(name);
             pi->m_id = name;//m_sheet->readStr(y,x+2);
@@ -116,6 +127,11 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
         }
     }
 
+
+    if (m_processItems.count()==0) {
+        LMessage::lMessage.Error("Error: You need to specify at least one input file. See the included excel template for instructions. ");
+
+    }
 
     return true;
 
@@ -228,8 +244,16 @@ void ProcessManagerPCounter::Execute()
 //    m_processes[i].m_infoText = "Creating 3D point cloud";
     }
 
-    if (m_output3DPoints)
+    if (m_output3DPoints=="yes") {
         reports.Create3DSummaryJson(m_outputDir + "3D_combined.json", m_processes, m_processItems, m_xyzScale);
+        reports.Create3DSliceJson(m_outputDir + "3D_slice_", m_processes, m_processItems, m_xyzScale);
+    }
+    if (m_output3DPoints=="summary") {
+        reports.Create3DSummaryJson(m_outputDir + "3D_combined.json", m_processes, m_processItems, m_xyzScale);
+    }
+    if (m_output3DPoints=="slices") {
+        reports.Create3DSliceJson(m_outputDir + "3D_slice_", m_processes, m_processItems, m_xyzScale);
+    }
 
 
   //  m_infoText = "Creating 3D point cloud";

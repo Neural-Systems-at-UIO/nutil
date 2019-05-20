@@ -307,6 +307,7 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
 
 
 
+
                 if (a.atlasLabel!=nullptr) {
 
 
@@ -434,7 +435,8 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
         o +="RGBA " + color +" \n";
         //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
         int count=0;
-        for (Area* a: m_reports[i].m_areasOfInterest) {
+        for (Area* a: m_reports[i].m_areasOfInterest)
+            {
 
 
             for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
@@ -455,7 +457,6 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
 
         }
     }
-
     QFile file (filename);
     file.open(QFile::Text | QFile::WriteOnly);
     QTextStream outstream(&file);
@@ -475,6 +476,9 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
 
 //    for (int i=0;i<m_reports.count();i++)
   //      k+=m_reports[i].m_areasOfInterest.count();
+
+    for (Report& r: m_reports)
+            r.FindAreasOfInterest(processes);
 
     Counter cntr(m_reports.count(),"");
     int tcount = 0;
@@ -496,6 +500,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
         o+="\"triplets\":[";
         int cnt2=0;
         cnt++;
+
 
         for (Area* a: m_reports[i].m_areasOfInterest) {
 
@@ -541,6 +546,8 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
     LMessage::lMessage.Log("Creating nifti ..");
 
     int k=0;
+
+
 
 
     Counter cnt(m_reports.count(),"");
@@ -591,6 +598,107 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
     n.Save(filename);
     qDebug() << "done.";
 }
+
+
+void Reports::Create3DSliceJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize)
+{
+
+
+//    for (int i=0;i<m_reports.count();i++)
+  //      k+=m_reports[i].m_areasOfInterest.count();
+    for (Report& r: m_reports)
+            r.FindAreasOfInterest(processes);
+
+
+    int tcount = 0;
+
+    Counter cntr(m_reports.count()*items.count(),"");
+    for (int itm=0;itm<items.count();itm++) {
+
+
+        QString o;
+
+        o+="[\n";
+        int cnt=0;
+        int k=0;
+
+
+    for (int i=0;i<m_reports.count();i++) {
+
+        cntr.Tick();
+        Data::data.m_globalMessage = "Creating 3D point clouds (slices) : " + cntr.getPercentFormatted();
+        QColor c = m_reports[i].m_color;
+        QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
+        //o +="RGBA " + color +" \n";
+        //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
+
+        int count = 0;//m_reports[i].m_areasOfInterest.count();
+        for (int j=0;j<m_reports[i].m_areasOfInterest.count();j++)
+            count+=m_reports[i].m_areasOfInterest[j]->m_points.count();
+        if (cnt!=0) o+=",\n";
+        int cnt2=0;
+        cnt++;
+
+
+        QString data = "";
+        for (Area* a: m_reports[i].m_areasOfInterest)
+        {
+
+            bool ok = false;
+            for (int ka = 0;ka<processes[itm]->m_areas.count();ka++) {
+                if (a==&processes[itm]->m_areas[ka])
+                    ok = true;
+            }
+            if (!ok)
+                continue;
+
+
+//            qDebug() << "FOUND";
+/*            if (processes[itm]->m_areas.contains(*a)) {
+                qDebug() << "FOUND " << i;
+            }
+*/
+
+//            if (cnt!=0) o+=",";
+
+            for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
+//                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
+                tcount++;
+                QPointF& p =a->m_points[k];
+                //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
+                QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
+                v=v*a->m_mat;
+
+                if (cnt2!=0) data+=",\n";
+//                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
+                data+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
+
+
+                cnt2++;
+             }
+
+
+        }
+        o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(cnt2)+",";
+        o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename+"\",";
+        o+="\"triplets\":[";
+
+        o+=data;
+
+        o+="]}";
+
+    }
+    o+="\n]\n";
+    QFile file (filename+items[itm]->m_id+".json");
+    file.open(QFile::Text | QFile::WriteOnly);
+    QTextStream outstream(&file);
+    outstream << o;
+    file.close();
+
+    }
+    LMessage::lMessage.Message("****** Count of pixels " + QString::number(tcount));
+}
+
 
 void Report::FindAreasOfInterest(QVector<NutilProcess *>& processes)
 {

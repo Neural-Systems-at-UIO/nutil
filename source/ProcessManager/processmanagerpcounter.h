@@ -26,7 +26,7 @@ public:
 
 
     bool m_outputNifti = false;
-    bool m_output3DPoints = false;
+    QString m_output3DPoints = "no";
 
 
     QVector3D m_colorThreshold  = QVector3D(255,255,255);

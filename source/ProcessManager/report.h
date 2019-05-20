@@ -65,6 +65,7 @@ public:
 
     void Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize);
     void Create3DSummaryJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize);
+    void Create3DSliceJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize);
 
     void CreateNifti(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int size);
 
