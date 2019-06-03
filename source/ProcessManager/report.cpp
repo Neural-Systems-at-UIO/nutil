@@ -34,6 +34,9 @@ void Report::GenerateSheet(LBook* book)
         }
 
     }
+
+
+
 }
 
 void Reports::CreateSummary(AtlasLabels* atlasLabels)
@@ -421,7 +424,7 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
 
 }
 
-void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize)
+void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize)
 {
 
     QString o;
@@ -465,14 +468,13 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
 }
 
 
-void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize)
+void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize)
 {
 
     QString o;
 
     o+="[\n";
     int cnt=0;
-    int k=0;
 
 //    for (int i=0;i<m_reports.count();i++)
   //      k+=m_reports[i].m_areasOfInterest.count();
@@ -495,22 +497,21 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
         for (int j=0;j<m_reports[i].m_areasOfInterest.count();j++)
             count+=m_reports[i].m_areasOfInterest[j]->m_points.count();
         if (cnt!=0) o+=",\n";
-        o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(count)+",";
+        o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(count/xyzSize)+",";
         o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename+ "\",";
         o+="\"triplets\":[";
         int cnt2=0;
         cnt++;
-
 
         for (Area* a: m_reports[i].m_areasOfInterest) {
 
 
 //            if (cnt!=0) o+=",";
 
-            for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
+            for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
-                QPointF& p =a->m_points[k];
+                QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;
@@ -600,7 +601,7 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
 }
 
 
-void Reports::Create3DSliceJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, int xyzSize)
+void Reports::Create3DSliceJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize)
 {
 
 
@@ -661,7 +662,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<NutilProcess*> proces
 
 //            if (cnt!=0) o+=",";
 
-            for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
+            for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
                 QPointF& p =a->m_points[k];

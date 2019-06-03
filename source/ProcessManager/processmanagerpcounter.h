@@ -22,7 +22,7 @@ public:
     float m_areaScale = 1;
 
     float m_niftiSize;
-    float m_xyzScale;
+    float m_xyzScale = 1.0;
 
 
     bool m_outputNifti = false;

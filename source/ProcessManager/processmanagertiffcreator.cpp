@@ -71,4 +71,7 @@ void ProcessManagerTiffCreator::ReadHeader(LSheet *m_sheet, LBook *book)
     m_inputDir = m_sheet->readStr(3,1);
     m_outputDir = m_sheet->readStr(4,1);
     m_tileSize = m_sheet->readNum(5,1);
+
+
+
 }

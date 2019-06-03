@@ -297,7 +297,7 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     m_reportSheetName = m_sheet->readStr(14,1);
     m_units = m_sheet->readStr(10,2);
 
-    m_output3DPoints = m_sheet->readStr(13,2).toLower()=="yes";
+    m_output3DPoints = m_sheet->readStr(13,2).toLower();
     m_outputNifti = m_sheet->readStr(12,2).toLower()=="yes";
 
     m_useCustomMask = m_sheet->readStr(15,1).toLower()=="yes";

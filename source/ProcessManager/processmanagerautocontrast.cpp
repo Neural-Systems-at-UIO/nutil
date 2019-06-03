@@ -6,6 +6,7 @@ bool ProcessManagerAutoContrast::Build(LSheet *m_sheet)
     int y = 10;
     int x = 2;
 
+
     m_processItems.clear();
     QDir directory(m_inputDir);
     QStringList images = directory.entryList(QStringList() << "*.tif" << "*.tiff",QDir::Files);
