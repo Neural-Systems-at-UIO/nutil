@@ -107,6 +107,7 @@ private:
 
     QElapsedTimer m_timer;
 
+
     void AppQuit();
     void Abort();
     void FillSheetCombo();

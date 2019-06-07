@@ -59,7 +59,8 @@ SOURCES += main.cpp \
     source/util/nlimagetiff.cpp \
     source/IO/xmlanchor.cpp \
     dialogsettings.cpp \
-    source/ProcessManager/processmanagertiffcreator.cpp
+    source/ProcessManager/processmanagertiffcreator.cpp \
+    source/LBook/lbookcsv.cpp
 
 HEADERS += \
     nutilapplication.h \
@@ -93,7 +94,8 @@ HEADERS += \
     source/IO/xmlanchor.h \
     dialogsettings.h \
     source/util/cinifile.h \
-    source/ProcessManager/processmanagertiffcreator.h
+    source/ProcessManager/processmanagertiffcreator.h \
+    source/LBook/lbookcsv.h
 
 FORMS    += mainwindow.ui \
     source/dialogtiff.ui \

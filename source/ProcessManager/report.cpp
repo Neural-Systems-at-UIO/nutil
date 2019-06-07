@@ -497,7 +497,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
         for (int j=0;j<m_reports[i].m_areasOfInterest.count();j++)
             count+=m_reports[i].m_areasOfInterest[j]->m_points.count();
         if (cnt!=0) o+=",\n";
-        o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(count/xyzSize)+",";
+        o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number((int)(count/xyzSize))+",";
         o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename+ "\",";
         o+="\"triplets\":[";
         int cnt2=0;

@@ -57,6 +57,8 @@ int main(int argc, char *argv[])
 
 
 
+//    qDebug() << QString::number(123456780.0);
+
 
     CheckVersion();
 

@@ -71,7 +71,7 @@ void Nauto::Execute()
         m_status = Status::Idle;
         return;
     }
-
+    m_pm->m_excelInputFilename = m_filename;
     m_pm->m_numProcessors = m_numThreads;
 
     LMessage::lMessage.Log("******** Reading local header");
@@ -85,7 +85,6 @@ void Nauto::Execute()
     if (m_pm->Build(m_sheet)) {
         LMessage::lMessage.Log("******** Executing");
         m_pm->Execute();
-
     }
     else
         m_status = Status::Idle;

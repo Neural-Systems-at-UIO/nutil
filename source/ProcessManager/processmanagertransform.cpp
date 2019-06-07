@@ -14,19 +14,26 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
             ok = true;
             break;
         }
-        inFile += ".tif";
-
+//        inFile += ".tif";
+        qDebug() << "Searching for : " << inFile << " in " << m_inputDir;
         QString searchFile = Util::findFileInSubDirectories(inFile,m_inputDir,"");
 
+/*        if (searchFile=="") {
+   //         inFile+="f";
+
+            searchFile = Util::findFileInSubDirectories(inFile,m_inputDir,"");
+        }
+*/
 
         LMessage::lMessage.Log("Transform found file: " + searchFile);
 //        qDebug() << "Found: " << searchFile;
-        if (searchFile=="") {
+        if (searchFile=="" || !searchFile.contains(".tif")) {
             LMessage::lMessage.Error("Could not find any file '"+inFile+"' in subdirectories.");
             return false;
         }
         inFile = searchFile;
 
+        qDebug() << inFile;
 
         QFile test(inFile);
         if(!test.exists()) {
@@ -78,6 +85,8 @@ void ProcessManagerTransform::Execute()
     }
     SetParameters();
 
+
+    QFile::copy(m_excelInputFilename, m_outputDir + "/" + m_excelInputFilename.split("/").last());
 
     if (m_processes.length()==0)
         return;

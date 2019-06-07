@@ -21,6 +21,8 @@ public:
     QVector<ProcessItem*> m_processItems;
     QVector<NutilProcess*> m_processes;
 
+
+    QString m_excelInputFilename="";
     Counter m_mainCounter;
     QColor m_background = QColor(255,255,255,255);
 

@@ -5,6 +5,7 @@
 #include "source/dialogtiff.h"
 #include <QDesktopServices>
 
+
 float MainWindow::Version = 0.3204;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -65,10 +66,13 @@ void MainWindow::on_btnStart_clicked()
 
     m_nauto.m_numThreads = ui->leProcessors->text().toInt();
     m_nauto.m_sheetIndex = ui->cmbSheets->currentIndex();;
+
     //m_nauto.Execute(); // Non-threaded
     m_workerThread = new WorkerThread();
     m_workerThread->Init(&m_nauto);
     m_workerThread->start();
+
+
 }
 
 void MainWindow::on_leProcessors_returnPressed()

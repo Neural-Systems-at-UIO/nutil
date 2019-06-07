@@ -145,6 +145,7 @@ void ProcessManagerPCounter::Execute()
         LMessage::lMessage.Error("Incorrect label file. Please check parameters in excel sheet.");
         return;
     }
+    QFile::copy(m_excelInputFilename, m_outputDir + "/" + m_excelInputFilename.split("/").last());
 
 
     m_processFinished = false;
