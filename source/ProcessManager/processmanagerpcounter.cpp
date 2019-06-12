@@ -207,8 +207,8 @@ void ProcessManagerPCounter::Execute()
             LMessage::lMessage.Error("Could not find any atlas flat file!");
             Data::data.abort = true;
         }
-        if (Data::data.abort)
-            break;
+//        if (Data::data.abort)
+  //          break;
 
         LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
 

@@ -247,12 +247,12 @@ QVector3D Nifti::getBounds()
 
 void Nifti::AddColor(long idx, QColor c)
 {
-    int r = std::min(rawData [3 * idx + 0]+c.red(), 255);
-    int g = std::min(rawData [3 * idx + 1]+c.green(), 255);
-    int b = std::min(rawData [3 * idx + 2]+c.blue(), 255);
-    rawData [3 * idx + 0] = r;
-    rawData [3 * idx + 1] = g;
-    rawData [3 * idx + 2] = b;
+    int r = std::min(rawData [(int)(3 * idx + 0)]+c.red(), 255);
+    int g = std::min(rawData [(int)(3 * idx + 1)]+c.green(), 255);
+    int b = std::min(rawData [(int)(3 * idx + 2)]+c.blue(), 255);
+    rawData [int(3 * idx + 0)] = r;
+    rawData [int(3 * idx + 1)] = g;
+    rawData [int(3 * idx + 2)] = b;
 
 }
 

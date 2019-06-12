@@ -17,7 +17,10 @@ DEFINES += IS_BETA
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS USE_LIBTIFF
-QMAKE_CXXFLAGS += -openmp
+
+win32-msvc*{
+    QMAKE_CXXFLAGS += -openmp
+}
 QMAKE_CXXFLAGS += -O2
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -108,27 +111,57 @@ FORMS    += mainwindow.ui \
 #INCLUDEPATH += $$PWD/../tiff-4.0.9/libtiff
 #DEPENDPATH += $$PWD/../tiff-4.0.9/libtiff
 
-unix|win32: LIBS += -L$$PWD/lib/ -llibtiff
 
-INCLUDEPATH += $$PWD/lib/libtiff
-INCLUDEPATH += $$PWD/lib
-DEPENDPATH += $$PWD/lib/libtiff
+win32-msvc*{
 
-LIBS += -L$$PWD/lib/ -lxlnt
+    unix|win32: LIBS += -L$$PWD/lib/ -llibtiff
+
+    INCLUDEPATH += $$PWD/lib/libtiff
+    INCLUDEPATH += $$PWD/lib
+    DEPENDPATH += $$PWD/lib/libtiff
+
+    LIBS += -L$$PWD/lib/ -lxlnt
+}
+
+
+linux*{
+
+    LIBS += -ltiff
+
+    INCLUDEPATH += $$PWD/lib/libtiff
+    INCLUDEPATH += $$PWD/lib
+    DEPENDPATH += $$PWD/lib/libtiff
+
+    LIBS += -lxlnt
+}
 
 #LELIB INCLUDES
 
- win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../LeLib/release/ -llelib
+ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lelib/Release/ -llelib
  else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../LeLib/debug/ -llelib
  else:symbian: LIBS += -llelib
- else:unix: LIBS += -L$$OUT_PWD/../LeLib/debug/ -llelib
+ #else:unix: LIBS += -L$$OUT_PWD/../LeLib/Release/ -lLeLib
 
- INCLUDEPATH += $$PWD/../lelib/
- DEPENDPATH += $$PWD/../lelib/
+ INCLUDEPATH += $$PWD/../LeLib/
+ DEPENDPATH += $$PWD/../LeLib/
 
  win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../LeLib/release/lelib.lib
  else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lelib/debug/lelib.lib
- else:unix:!symbian: PRE_TARGETDEPS += $$OUT_PWD/../projects/lelib/liblelib.a
+
+
+linux*{
+    QMAKE_CXXFLAGS += -fopenmp
+    QMAKE_CXXFLAGS +=  -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wno-comment -Wno-parentheses -Wno-delete-non-virtual-dtor -Wno-missing-noreturn
+    LIBS += -fopenmp
+    QMAKE_CXXFLAGS +=  -Ofast
+#    LIBS += -L$$PWD/libs/lua/ -llua -ldl
+    LIBS += -L$$OUT_PWD/../../LeLib/Release/ -lLeLib
+#    LIBS += -ldl
+
+
+}
+
+# else:unix:!symbian: PRE_TARGETDEPS += $$OUT_PWD/../LeLib/Release/libLeLib.a
 
 #LELIB INCLUDES ENDS
 

@@ -2,7 +2,7 @@
 #define NLIMAGETIFF_H
 
 #include <QImage>
-#include <QRGB>
+//#include <QRGB>
 #include "source/ltiff/ltiff.h"
 #include <QFile>
 

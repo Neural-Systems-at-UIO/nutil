@@ -108,7 +108,7 @@ void ProcessManagerTransform::Execute()
         m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_colorSpread, m_autoClip.toLower()=="yes");
         if (Data::data.abort || Util::CancelSignal) {
             LMessage::lMessage.Log("User aborting!");
-            break;
+            //break;
         }
         }
         if (m_thumbnailSize>0) {
