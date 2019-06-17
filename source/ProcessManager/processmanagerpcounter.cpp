@@ -245,7 +245,7 @@ void ProcessManagerPCounter::Execute()
 //    m_processes[i].m_infoText = "Creating 3D point cloud";
     }
 
-    if (m_output3DPoints=="yes") {
+    if (m_output3DPoints=="all") {
         reports.Create3DSummaryJson(m_outputDir + "3D_combined.json", m_processes, m_processItems, m_xyzScale);
         reports.Create3DSliceJson(m_outputDir + "3D_slice_", m_processes, m_processItems, m_xyzScale);
     }
@@ -307,13 +307,14 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     }
 
     m_reportType = m_sheet->readStr(17,1).toLower();
-    if (!(m_reportType.toLower()=="xlsx" || m_reportType.toLower()=="csv")) {
+
+    m_outputFileType = m_sheet->readStr(18,1).toLower();
+    if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
         LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv). Are you sure you are using the correct template version?");
         Data::data.abort = true;
         return;
     }
 
-    m_outputFileType = m_sheet->readStr(18,1).toLower();
     if (m_pixelCutoffMax<m_pixelCutoff) {
 
     }
