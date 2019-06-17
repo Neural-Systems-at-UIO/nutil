@@ -307,6 +307,12 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     }
 
     m_reportType = m_sheet->readStr(17,1).toLower();
+    if (!(m_reportType.toLower()=="xlsx" || m_reportType.toLower()=="csv")) {
+        LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv). Are you sure you are using the correct template version?");
+        Data::data.abort = true;
+        return;
+    }
+
     m_outputFileType = m_sheet->readStr(18,1).toLower();
     if (m_pixelCutoffMax<m_pixelCutoff) {
 
@@ -315,6 +321,7 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     if (reportSheet == nullptr) {
         LMessage::lMessage.Error("Error: could not find any report sheet named '" + m_reportSheetName + "' in the excel file");
         Data::data.abort = true;
+        return;
     }
     else
         GenerateReports(reportSheet);
