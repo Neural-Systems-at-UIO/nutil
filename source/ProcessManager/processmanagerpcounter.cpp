@@ -31,7 +31,7 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     }*/
     int x = 1;
-    int y = 20;
+    int y = 21;
     Data::data.abort = false;
 
     LoadXML();
@@ -233,13 +233,13 @@ void ProcessManagerPCounter::Execute()
 
     if (m_reportType!="none") {
 
-        reports.CreateBook(m_outputDir + "Report.xlsx");
+        reports.CreateBook(m_outputDir + "Report.xlsx", m_outputFileType);
         reports.CreateSheets(m_processes, &m_labels);
 
         if (m_reportType=="all") {
-            reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units);
-            reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels);
-            reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units);
+            reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
+            reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
+            reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
         }
 //        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
 //    m_processes[i].m_infoText = "Creating 3D point cloud";
@@ -307,7 +307,7 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     }
 
     m_reportType = m_sheet->readStr(17,1).toLower();
-
+    m_outputFileType = m_sheet->readStr(18,1).toLower();
     if (m_pixelCutoffMax<m_pixelCutoff) {
 
     }

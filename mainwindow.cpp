@@ -6,7 +6,7 @@
 #include <QDesktopServices>
 
 
-float MainWindow::Version = 0.3204;
+float MainWindow::Version = 0.3205;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_updateThread->start();
     Data::data.m_settings = &m_settings;
 #ifdef IS_BETA
-    ui->lblMain->setText("NeSys Utilities BETA " + QString::number(Version) +"\nFor internal use only.");
+    ui->lblMain->setText("NeSys Utilities BETA " + QString::number(Version) +"\nFor internal use only. \nUse template version "+ QString::number(Version));
 #else
     ui->lblMain->setText("NeSys Utilities " + QString::number(Version));
 #endif
@@ -161,6 +161,12 @@ void MainWindow::OnInfoTextChanged(QString info)
 void MainWindow::OnMessageTextChanged(QString msg)
 {
     ui->txtError->setText(msg);
+    ui->txtError->verticalScrollBar()->setValue(ui->txtError->verticalScrollBar()->maximum());
+    if (msg.toLower().contains("error")) {
+        QMessageBox msgBox;
+        msgBox.setText("NUtil encountered an error. Please read the error messages carefully!");
+        msgBox.exec();
+    }
 }
 
 

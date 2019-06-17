@@ -83,9 +83,9 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
 }
 
-void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units)
+void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units, QString bookType)
 {
-    LBook* book = new LBookXlnt();
+    LBook* book = LBookFactory::Create(bookType);
     LSheet* sheet = book->CreateSheet("Entire region summary");
     sheet->writeStr(0,0,"Region ID");
     sheet->writeStr(0,1,"Region Name");
@@ -140,9 +140,9 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
     book->Save(fileName);
 }
 
-void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels, QString units)
+void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels, QString units, QString bType)
 {
-    LBook* book = new LBookXlnt();
+    LBook* book = LBookFactory::Create(bType);
     LSheet* summary = book->GetSheet(0);
 
     float sumPixel=0;
@@ -257,10 +257,10 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     //qDebug() << "SAVED";
 }
 
-void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, AtlasLabels *labels)
+void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, AtlasLabels *labels, QString bType)
 {
     LMessage::lMessage.Log("Generating sliced reports summary");
-    LBook* book = new LBookXlnt();
+    LBook* book = LBookFactory::Create(bType);
     LSheet* summary = book->GetSheet(0);
 
     float sumPixel=0;
@@ -769,11 +769,13 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
     }
 }
 
-void Reports::CreateBook(QString filename)
+void Reports::CreateBook(QString filename, QString type)
 {
-    m_book = new LBookXlnt();
+     m_book = LBookFactory::Create(type);
+
     //m_book = xlCreateXMLBook();// for xlsx
     m_filename = filename;
+
 
 }
 

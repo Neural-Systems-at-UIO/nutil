@@ -27,6 +27,8 @@ public:
 
     bool m_outputNifti = false;
     QString m_output3DPoints = "no";
+    QString m_outputFileType = "xlsx";
+
 
 
     QVector3D m_colorThreshold  = QVector3D(255,255,255);

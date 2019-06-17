@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QScrollBar>
 #include "source/nauto.h"
 #include "source/util/lmessage.h"
 #include "ui_mainwindow.h"
@@ -10,7 +11,7 @@
 #include <QThread>
 #include <QElapsedTimer>
 #include "dialogsettings.h"
-
+#include <QMessageBox>
 namespace Ui {
     class MainWindow;
 }
@@ -38,7 +39,8 @@ public:
 
             m_nauto->BuildInfo();
             emit TextChanged(m_nauto->m_mainInfo);
-            emit MessageChanged(LMessage::lMessage.Build());
+            if (LMessage::lMessage.changed())
+               emit MessageChanged(LMessage::lMessage.Build());
         }
 
     }

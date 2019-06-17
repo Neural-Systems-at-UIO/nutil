@@ -97,9 +97,9 @@ void AreaFinder3D::Execute()
         m_processes[i]->ReleasePCounter();*/
     }
 
-    reports.CreateBook(m_outputDir + "Report.xls");
+    reports.CreateBook(m_outputDir + "Report.xls", "xlsx");
     reports.CreateSheets(m_processes, &m_labels);
-    reports.CreateSliceReports(m_outputDir + "Report_slices.xls", m_processes, m_processItems, &m_labels, "mm");
+//    reports.CreateSliceReports(m_outputDir + "Report_slices.xls", m_processes, m_processItems, &m_labels, "mm",bType);
 
 
     m_processFinished = true;

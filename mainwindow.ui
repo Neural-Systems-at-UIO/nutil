@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>20</y>
+      <y>30</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -76,10 +76,10 @@
    <widget class="QLabel" name="lblMain">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>20</y>
-      <width>441</width>
-      <height>51</height>
+      <x>330</x>
+      <y>0</y>
+      <width>581</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
@@ -118,16 +118,16 @@
    <widget class="QLabel" name="lblMain_2">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>-10</y>
-      <width>441</width>
-      <height>51</height>
+      <x>130</x>
+      <y>0</y>
+      <width>191</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Courier</family>
-      <pointsize>60</pointsize>
+      <pointsize>40</pointsize>
      </font>
     </property>
     <property name="text">
@@ -206,7 +206,7 @@
      <x>0</x>
      <y>0</y>
      <width>962</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTest">

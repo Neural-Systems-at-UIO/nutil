@@ -11,6 +11,7 @@
 #include "source/LBook/lbookxlnt.h".h"
 #include "source/util/counter.h"
 #include "source/ProcessManager/processitem.h"
+#include "source/LBook/lbookfactory.h"
 
 
 class Report {
@@ -56,12 +57,12 @@ public:
     QVector<QVector<long>> getList();
 
     void Calculate(AtlasLabels* atlasLabels);
-    void CreateBook(QString filename );
+    void CreateBook(QString filename, QString type);
     void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels);
     void CreateSummary(AtlasLabels* atlasLabels);
-    void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items, QString units);
-    void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString units);
-    void CreateSliceReportsSummary(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels);
+    void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items, QString units, QString bookType);
+    void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString units, QString bType);
+    void CreateSliceReportsSummary(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString bType);
 
     void Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize);
     void Create3DSummaryJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize);

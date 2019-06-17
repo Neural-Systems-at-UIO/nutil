@@ -63,7 +63,8 @@ SOURCES += main.cpp \
     source/IO/xmlanchor.cpp \
     dialogsettings.cpp \
     source/ProcessManager/processmanagertiffcreator.cpp \
-    source/LBook/lbookcsv.cpp
+    source/LBook/lbookcsv.cpp \
+    source/LBook/lbookfactory.cpp
 
 HEADERS += \
     nutilapplication.h \
@@ -98,7 +99,8 @@ HEADERS += \
     dialogsettings.h \
     source/util/cinifile.h \
     source/ProcessManager/processmanagertiffcreator.h \
-    source/LBook/lbookcsv.h
+    source/LBook/lbookcsv.h \
+    source/LBook/lbookfactory.h
 
 FORMS    += mainwindow.ui \
     source/dialogtiff.ui \
