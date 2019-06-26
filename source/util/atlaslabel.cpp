@@ -9,9 +9,14 @@ AtlasLabel *AtlasLabels::get(long index, bool format)
 {
     //if (index==182305705)
     //    qDebug()<< "CONTAINS: " <<indexedID.contains(index);
-    if (format==true)
-        return atlases[index];
+    if (format==true) {
+        if (index<atlases.count())
+            return atlases[index];
+        else {
+            qDebug() << "Trying to access atlas index : "<< index << " which is above " <<atlases.count();
 
+        }
+    }
 
     if (indexedID.contains(index))
         return indexedID[index];

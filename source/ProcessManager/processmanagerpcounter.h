@@ -17,6 +17,11 @@ public:
     QString m_reportSheetName;
     QString m_units = "mm";
 
+
+    QString m_reportDirectory = "Reports";
+    QString m_imageDirectory = "Images";
+    QString m_coordinateDirectory = "Coordinates";
+
     int m_pixelCutoff;
     int m_pixelCutoffMax;
     float m_areaScale = 1;

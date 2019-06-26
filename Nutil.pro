@@ -122,7 +122,11 @@ win32-msvc*{
     INCLUDEPATH += $$PWD/lib
     DEPENDPATH += $$PWD/lib/libtiff
 
-    LIBS += -L$$PWD/lib/ -lxlnt
+#    LIBS += -L$$PWD/lib/ -lxlnt
+
+    win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/ -lxlnt
+    else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/Debug/ -lxlntd
+
 }
 
 

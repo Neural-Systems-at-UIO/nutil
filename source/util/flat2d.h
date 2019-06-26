@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <QImage>
-
+#include <QByteArray>
 #include "source/util/atlaslabel.h"
 
 
@@ -13,7 +13,8 @@ public:
 
     unsigned int *m_data_i = nullptr;
     unsigned short *m_data_s = nullptr;
-    unsigned char *m_data_b = nullptr;
+//    unsigned char *m_data_b = nullptr;
+    QByteArray m_data_b;
 
     unsigned int m_width, m_height;
     unsigned char m_bpp;

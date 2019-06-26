@@ -27,8 +27,11 @@ unsigned int Flat2D::pixel(int i, int j)
         return m_data_i[i+ j*m_width];
     if (m_bpp==2)
         return m_data_s[i+ j*m_width];
-    if (m_bpp==1)
-        return m_data_b[i+ j*m_width];
+
+    if (m_bpp==1) {
+        return m_data_b[i+j*m_width];
+    }
+    return 0;
 }
 
 bool Flat2D::Load(QString filename)
@@ -53,6 +56,7 @@ bool Flat2D::Load(QString filename)
         file.read((char*)&m_height,4);
         m_width = qFromBigEndian<int>((char*)&m_width);
         m_height = qFromBigEndian<int>((char*)&m_height);
+//        qDebug() << "BPP IS : "<< m_bpp << QString::number(m_width) << QString::number(m_height);
 //        qDebug() << "Width height: " << m_width << m_height << m_bpp;
   //      exit(1);
         m_newFormat = true;
@@ -72,8 +76,7 @@ bool Flat2D::Load(QString filename)
         for (int i=0;i<m_width*m_height;i++) m_data_s[i] = qFromBigEndian<unsigned short>((char*)&m_data_s[i]);
     }
     if (m_bpp==1) {
-        m_data_b = new unsigned char[m_width*m_height];
-        file.read((char*)m_data_b, m_width*m_height);
+        m_data_b = file.read(m_width*m_height);
     }
     file.close();
     return true;
@@ -94,8 +97,8 @@ void Flat2D::Release()
     if (m_data_s!=nullptr)
         delete[] m_data_s;
 
-    if (m_data_b!=nullptr)
-        delete[] m_data_b;
+//    if (m_data_b!=nullptr)
+  //      delete[] m_data_b;
 
     if (m_data_i!=nullptr)
         delete[] m_data_i;
@@ -108,15 +111,13 @@ void Flat2D::Release()
 QImage *Flat2D::toImage(AtlasLabels &labels)
 {
     QImage* img = new QImage(m_width, m_height, QImage::Format_ARGB32);
-
     for (unsigned int i=0;i<m_width;i++)
         for (unsigned int j=0;j<m_height;j++) {
-            long idx = pixel(i,j);
-            AtlasLabel* al = labels.get(idx, m_newFormat);
-
-            if (al!=nullptr)
+           unsigned int idx = pixel(i,j);
+           AtlasLabel* al = labels.get(idx, m_newFormat);//
+           if (al!=nullptr)
                 img->setPixel(i,j, QColor(al->color.x(), al->color.y(),al->color.z()).rgba());
-        }
 
+        }
     return img;
 }

@@ -3,6 +3,7 @@
 
 
 #include "lbook.h"
+#include "source/util/util.h"
 #include "source/util/lmessage.h"
 #include <QDebug>
 

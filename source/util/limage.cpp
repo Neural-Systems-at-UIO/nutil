@@ -222,16 +222,35 @@ void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &te
 //    qDebug() << area.m_points.count();
 }
 
-void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale, int slice)
+void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale, float areaScale, int slice, QString maskFile, QVector3D maskColor)
 {
     m_totalPixelArea = 0;
+    bool useMask = false;
+    QImage maskImage;
+    if (QFile::exists(maskFile)) {
+        maskImage.load(maskFile);
+        useMask=true;
+    }
+
     for (int i=0;i<refImage.width();i++)
         for (int j=0;j<refImage.height();j++) {
-            if (refImage.pixel(i,j)!=0)
+            bool canTest=true;
+            if (useMask) {
+                int ix = (i/(float)refImage.width())*(float)maskImage.width();
+                int iy = (j/(float)refImage.height())*(float)maskImage.height();
+                QVector3D c = Util::fromColor(maskImage.pixelColor(ix,iy));
+                if (!Util::QVector3DIsClose(c,maskColor,QVector3D(1,1,1))) {
+                    canTest=false;
+                }
+
+            }
+
+
+            if (canTest && refImage.pixel(i,j)!=0)
                 {
                 m_totalPixelArea++;
 
-                AtlasLabel* al = labels.get(refImage.pixel(i,j), refImage.m_newFormat);
+                AtlasLabel* al = nullptr;//labels.get(refImage.pixel(i,j), refImage.m_newFormat);
 
               //  AtlasLabel* al =labels.get(refImage.pixel(i,j));
                 if (al!=nullptr) {
@@ -390,26 +409,23 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
 }
 
-void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice)
+void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice, QString maskFile, QVector3D maskColor)
 {
 
     Flat2D refImage;
     refImage.Load(atlasFile);
 
     m_testImage = refImage.toImage(labels);
-//    testImage->save(labelFile);
- //   delete testImage;
-
-
-    // First, count all areas
 
     float scale = m_image->width()*m_image->height()/ (float)(refImage.m_width*refImage.m_height);
+
+
 
 
 //    pixelAreaScale = 1;
 
 //    CountAtlasArea(refImage, labels, scale, pixelAreaScale);
-    CountAtlasArea(refImage, labels, scale, pixelAreaScale,slice);
+    CountAtlasArea(refImage, labels, scale, pixelAreaScale,slice, maskFile, maskColor);
     m_totalPixelArea*=scale*pixelAreaScale;
 //    qDebug() << pixelAreaScale;
 //    qDebug() << scale;
@@ -449,7 +465,7 @@ void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString 
 }
 
 
-void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice)
+void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice, QString maskFile, QVector3D maskColor)
 {
 
     Flat2D refImage;
@@ -468,7 +484,7 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
 //    pixelAreaScale = 1;
 
 //    CountAtlasArea(refImage, labels, scale, pixelAreaScale);
-    CountAtlasArea(refImage, labels, scale, pixelAreaScale,slice);
+    CountAtlasArea(refImage, labels, scale, pixelAreaScale,slice, maskFile, maskColor);
     m_totalPixelArea*=scale*pixelAreaScale;
 //    qDebug() << pixelAreaScale;
 //    qDebug() << scale;

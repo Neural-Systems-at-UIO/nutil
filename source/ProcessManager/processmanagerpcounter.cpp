@@ -133,6 +133,11 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     }
 
+    Util::CreateDirectory(m_outputDir+QDir::separator()+m_reportDirectory);
+    Util::CreateDirectory(m_outputDir+QDir::separator()+m_coordinateDirectory);
+    Util::CreateDirectory(m_outputDir+QDir::separator()+m_imageDirectory);
+
+
     return true;
 
 }
@@ -211,15 +216,14 @@ void ProcessManagerPCounter::Execute()
   //          break;
 
         LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
-
         if (m_areaSplitting!=1)
-            m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i);
+            m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
         else
-           m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i);
+           m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
 
         m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
         LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
-        m_processes[i]->lImage.SaveAreasImage(m_outputDir + pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
+        m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
         m_mainCounter.Tick();
         m_processes[i]->m_counter.m_progress = 100;
         LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
@@ -233,27 +237,27 @@ void ProcessManagerPCounter::Execute()
 
     if (m_reportType!="none") {
 
-        reports.CreateBook(m_outputDir + "Report.xlsx", m_outputFileType);
+        reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "Report.xlsx", m_outputFileType);
         reports.CreateSheets(m_processes, &m_labels);
 
         if (m_reportType=="all") {
-            reports.CreateSliceReports(m_outputDir + "Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
-            reports.CreateSliceReportsSummary(m_outputDir + "Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
-            reports.CreateCombinedList(m_outputDir + "Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+            reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
+            reports.CreateSliceReportsSummary(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
+            reports.CreateCombinedList(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
         }
 //        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
 //    m_processes[i].m_infoText = "Creating 3D point cloud";
     }
 
     if (m_output3DPoints=="all") {
-        reports.Create3DSummaryJson(m_outputDir + "3D_combined.json", m_processes, m_processItems, m_xyzScale);
-        reports.Create3DSliceJson(m_outputDir + "3D_slice_", m_processes, m_processItems, m_xyzScale);
+        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
+        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
     }
     if (m_output3DPoints=="summary") {
-        reports.Create3DSummaryJson(m_outputDir + "3D_combined.json", m_processes, m_processItems, m_xyzScale);
+        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
     }
     if (m_output3DPoints=="slices") {
-        reports.Create3DSliceJson(m_outputDir + "3D_slice_", m_processes, m_processItems, m_xyzScale);
+        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
     }
 
 

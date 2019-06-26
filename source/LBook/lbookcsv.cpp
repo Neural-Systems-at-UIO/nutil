@@ -27,7 +27,9 @@ void LSheetCSV::Save(QString basename)
 //    qDebug() << "LBookCSV::save";
     QString separator="_";
     if (m_name=="") separator="";
-    QString fn = basename.split(".").first() + separator + m_name + ".csv";
+    QString fn = Util::RemoveFinalFiletype(basename) + separator + m_name + ".csv";
+ //   qDebug() << "Report output filename :" << fn;
+
     QFile file(fn);
     if (QFile::exists(fn))
         QFile::remove(fn);
