@@ -79,6 +79,12 @@ QStringList LBookXlnt::sheet_titles()
     return l;
 }
 
+void LBookXlnt::RemoveSheet(int index)
+{
+//    m_book.remove_sheet()
+  //  m_book.remove_sheet(m_book.sheet_by_id(index));
+}
+
 
 
 LSheetXlnt::LSheetXlnt(xlnt::worksheet sheet)

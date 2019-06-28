@@ -43,7 +43,7 @@ public:
     }
 
     void FindAreasOfInterest(QVector<NutilProcess*>& processes);
-    void GenerateSheet(LBook* b);
+    void GenerateSheet(LBook* b, QString units);
 
 };
 
@@ -58,7 +58,7 @@ public:
 
     void Calculate(AtlasLabels* atlasLabels);
     void CreateBook(QString filename, QString type);
-    void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels);
+    void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels, QString unit);
     void CreateSummary(AtlasLabels* atlasLabels);
     void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items, QString units, QString bookType);
     void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString units, QString bType);

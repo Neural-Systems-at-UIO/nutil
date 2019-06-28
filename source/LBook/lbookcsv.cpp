@@ -92,6 +92,11 @@ void LSheetCSV::Set(int i, int j, QString val)
     set(i,j,val);
 }
 
+void LBookCSV::RemoveSheet(int index)
+{
+    m_sheets.remove(index);
+}
+
 void LBookCSV::Load(QString filename)
 {
 

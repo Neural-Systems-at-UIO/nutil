@@ -24,6 +24,7 @@ public:
     LSheet* GetSheet(QString name) override;
     QStringList sheet_titles() override;
 
+    void RemoveSheet(int index);
 
 
 };

@@ -23,6 +23,8 @@ public:
         Release();
     }
 
+    void RemoveSheet(int index) override ;
+
     QVector<LSheetCSV*> m_sheets;
     QStringList m_titles;
     void Load(QString filename) override;

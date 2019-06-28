@@ -41,6 +41,8 @@ public:
 
     virtual QStringList sheet_titles() = 0;
 
+
+    virtual void RemoveSheet(int index) = 0;
     virtual void Load(QString filename) = 0;
     virtual void Save(QString filename) = 0;
     virtual LSheet* CreateSheet(QString sheetName) = 0;

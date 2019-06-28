@@ -6,7 +6,7 @@
 #include <QDesktopServices>
 
 
-float MainWindow::Version = 0.3205;
+float MainWindow::Version = 0.3206;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

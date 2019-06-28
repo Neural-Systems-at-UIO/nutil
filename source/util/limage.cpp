@@ -231,7 +231,6 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale,
         maskImage.load(maskFile);
         useMask=true;
     }
-
     for (int i=0;i<refImage.width();i++)
         for (int j=0;j<refImage.height();j++) {
             bool canTest=true;
@@ -245,12 +244,13 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale,
 
             }
 
-
             if (canTest && refImage.pixel(i,j)!=0)
+
+//            if (refImage.pixel(i,j)!=0)
                 {
                 m_totalPixelArea++;
 
-                AtlasLabel* al = nullptr;//labels.get(refImage.pixel(i,j), refImage.m_newFormat);
+                AtlasLabel* al =labels.get(refImage.pixel(i,j), refImage.m_newFormat);
 
               //  AtlasLabel* al =labels.get(refImage.pixel(i,j));
                 if (al!=nullptr) {

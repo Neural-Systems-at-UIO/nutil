@@ -1,5 +1,5 @@
 rmdir /s /q nutil
-set dir=C:\Users\leuat\OneDrive\Documents\GitHub\build-Nutil-Desktop_Qt_5_12_0_MSVC2017_64bit-Release\release
+set dir=C:\Users\nicolaag\Documents\GitHub\build-Nutil-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\release
 mkdir nutil
 mkdir nutil\program
 xcopy /s %dir%\*.exe nutil\program

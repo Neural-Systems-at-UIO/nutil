@@ -236,14 +236,16 @@ void ProcessManagerPCounter::Execute()
     }
 
     if (m_reportType!="none") {
-
-        reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "Report.xlsx", m_outputFileType);
-        reports.CreateSheets(m_processes, &m_labels);
+        // Custom region
+        reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "ReportCustomRegionsWholeBrain.xlsx", m_outputFileType);
+        reports.CreateSheets(m_processes, &m_labels, m_units);
 
         if (m_reportType=="all") {
-            reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Report_slices.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
-            reports.CreateSliceReportsSummary(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Report_slices_summary.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
-            reports.CreateCombinedList(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Report_combined.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+            if (m_areaSplitting==0.0)
+                reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"ReportObjects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
+
+            reports.CreateSliceReportsSummary(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"ReportCustomRegionsSections.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
+            reports.CreateCombinedList(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"ReportRefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
         }
 //        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
 //    m_processes[i].m_infoText = "Creating 3D point cloud";
