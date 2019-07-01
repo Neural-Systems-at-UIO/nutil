@@ -49,15 +49,15 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
     if (sheet) {
 
         sheet->writeStr(0,0, "Region name");
-        sheet->writeStr(0,1, "Region pixel area");
+        sheet->writeStr(0,1, "Region pixels");
         sheet->writeStr(0,2, "Region area");
         sheet->writeStr(0,3, "Area unit");
         sheet->writeStr(0,4, "Object count");
         sheet->writeStr(0,5, "Object pixel");
         sheet->writeStr(0,6, "Object area");
-        sheet->writeStr(0,7, "Object area unit");
-        sheet->writeStr(0,8, "Pixel area ratio");
-        sheet->writeStr(0,9, "Object area ratio");
+        sheet->writeStr(0,7, "Area unit");
+        sheet->writeStr(0,8, "Obj/Reg pixel ratio");
+        sheet->writeStr(0,9, "Obj/Reg area ratio");
 
         int i = 1;
         for (Report& r : m_reports) {
@@ -806,7 +806,7 @@ void Reports::CreateBook(QString filename, QString type)
 
 }
 
-void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels, QString units)
+void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels, QString units, bool hasAreaSplitting)
 {
     if (!m_book)
         return;
@@ -824,6 +824,7 @@ void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasL
     LMessage::lMessage.Log("Generating sheets ");
     Data::data.m_globalMessage = "Creating sheets 3/3";
 
+    if (!hasAreaSplitting)
     for (Report& r: m_reports) {
         //qDebug() << r.m_filename;
         r.GenerateSheet(m_book, units);

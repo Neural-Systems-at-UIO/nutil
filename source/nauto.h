@@ -28,7 +28,7 @@ public:
 
 
     QString m_filename;
-    int m_sheetIndex;
+    QString m_sheetIndex;
     int m_elapsedTime;
     ProcessManager* m_pm = nullptr;
 

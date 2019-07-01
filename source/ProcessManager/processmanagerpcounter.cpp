@@ -237,15 +237,15 @@ void ProcessManagerPCounter::Execute()
 
     if (m_reportType!="none") {
         // Custom region
-        reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "ReportCustomRegionsWholeBrain.xlsx", m_outputFileType);
-        reports.CreateSheets(m_processes, &m_labels, m_units);
+        reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "CustomRegionsSummary.xlsx", m_outputFileType);
+        reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
 
         if (m_reportType=="all") {
             if (m_areaSplitting==0.0)
-                reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"ReportObjects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
+                reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
 
-            reports.CreateSliceReportsSummary(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"ReportCustomRegionsSections.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
-            reports.CreateCombinedList(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"ReportRefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+            reports.CreateSliceReportsSummary(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"CustomRegionsSections.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
+            reports.CreateCombinedList(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
         }
 //        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
 //    m_processes[i].m_infoText = "Creating 3D point cloud";
@@ -281,6 +281,7 @@ void ProcessManagerPCounter::Execute()
 void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
 {
     ProcessManager::ReadHeader(m_sheet, book);
+
     m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));
     m_outputDir = Util::fixFolder(m_sheet->readStr(5,1));
 //    float col_r = m_sheet->readNum(3,1);
@@ -291,7 +292,7 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     QVector3D bg = Util::vecFromString(m_sheet->readStr(3,1));
     m_background = QColor(bg.x(), bg.y(), bg.z());
 
-    m_colorThreshold = QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
+    m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
     m_atlasDir = m_sheet->readStr(6,1);
     m_labelFile = m_sheet->readStr(7,1);
     m_pixelCutoff = m_sheet->readNum(9,1);

@@ -6,7 +6,7 @@
 #include <QDesktopServices>
 
 
-float MainWindow::Version = 0.3206;
+float MainWindow::Version = 0.3207;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -65,7 +65,7 @@ void MainWindow::on_btnStart_clicked()
      m_timer.start();
 
     m_nauto.m_numThreads = ui->leProcessors->text().toInt();
-    m_nauto.m_sheetIndex = ui->cmbSheets->currentIndex();;
+    m_nauto.m_sheetIndex = ui->cmbSheets->currentText();
 
     //m_nauto.Execute(); // Non-threaded
     m_workerThread = new WorkerThread();
@@ -131,6 +131,8 @@ void MainWindow::Abort()
 
 void MainWindow::FillSheetCombo()
 {
+    if (m_nauto.m_book==nullptr)
+        return;
     ui->cmbSheets->clear();
     ui->cmbSheets->addItems(m_nauto.getSheetList());
 }

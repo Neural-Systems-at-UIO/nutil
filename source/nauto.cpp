@@ -5,7 +5,7 @@
 #include "source/util/util.h"
 #include "source/ProcessManager/processmanagerfactory.h"
 #include "source/data.h"
-
+#include "mainwindow.h"
 using namespace std;
 
 Nauto::Nauto(QString filename, int sheetIndex)
@@ -35,6 +35,23 @@ void Nauto::Load(QString filename)
         return;
     }
    m_book->Load(filename);
+
+   LSheet* sheet = m_book->GetSheet("Nutil_info");
+   if (sheet==nullptr) {
+       LMessage::lMessage.Error("Excel sheet does not contain a 'Nutil_info' sheet. Are you sure this is is a nutil template file?");
+       delete m_book;
+       m_book = nullptr;
+       return;
+
+   }
+   if (sheet->readStr(14,4).toFloat()!=MainWindow::Version ) {
+       LMessage::lMessage.Error("The excel template ("+QString::number(sheet->readStr(14,4).toFloat()) + ") version is not compatible with the current version of Nutil ("+QString::number(MainWindow::Version)+")");
+       delete m_book;
+       m_book = nullptr;
+       return;
+
+   }
+
 }
 
 void Nauto::Execute()
