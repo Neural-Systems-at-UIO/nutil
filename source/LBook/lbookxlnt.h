@@ -40,7 +40,7 @@ public:
     double readNum(int i, int j) override;
     long readLong(int i, int j) override;
     QString readStr(int i, int j) override;
-    QColor readCol(int i, int j) override;
+//    QColor readCol(int i, int j) override;
 
     void Set(int i,int j, float val) override;
     void Set(int i,int j, QString val) override;

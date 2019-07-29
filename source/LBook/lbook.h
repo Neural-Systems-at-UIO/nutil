@@ -5,6 +5,8 @@
 #include <QVector>
 #include <QStringList>
 #include <QColor>
+#include "source/util/util.h"
+#include <QVector3D>
 
 
 class LSheet
@@ -12,10 +14,11 @@ class LSheet
 public:
     QString m_name;
     LSheet();
+
     virtual double readNum(int i, int j) = 0;
     virtual long readLong(int i, int j) = 0;
     virtual QString readStr(int i, int j) = 0;
-    virtual QColor readCol(int i, int j) = 0;
+//    virtual QColor readCol(int i, int j) = 0;
     virtual void Set(int i,int j, float val) = 0;
     virtual void Set(int i,int j, QString val) = 0;
 
@@ -28,6 +31,8 @@ public:
     virtual void setName(QString name) {
         m_name = name;
     }
+
+    QColor readCol(int i, int j);
 
 
 };
