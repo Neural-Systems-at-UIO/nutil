@@ -135,10 +135,10 @@ linux*{
     LIBS += -ltiff
 
     INCLUDEPATH += $$PWD/lib/libtiff
-    INCLUDEPATH += $$PWD/lib
+    INCLUDEPATH += $$PWD/lib/
     DEPENDPATH += $$PWD/lib/libtiff
 
-    LIBS += -lxlnt
+    LIBS += -L$$PWD/lib/ -lxlnt
 }
 
 #LELIB INCLUDES
@@ -148,10 +148,10 @@ linux*{
  else:symbian: LIBS += -llelib
  #else:unix: LIBS += -L$$OUT_PWD/../LeLib/Release/ -lLeLib
 
- INCLUDEPATH += $$PWD/../LeLib/
- DEPENDPATH += $$PWD/../LeLib/
+ INCLUDEPATH += $$PWD/../lelib/
+ DEPENDPATH += $$PWD/../lelib/
 
- win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../LeLib/release/lelib.lib
+ win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lelib/release/lelib.lib
  else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lelib/debug/lelib.lib
 
 
@@ -161,7 +161,7 @@ linux*{
     LIBS += -fopenmp
     QMAKE_CXXFLAGS +=  -Ofast
 #    LIBS += -L$$PWD/libs/lua/ -llua -ldl
-    LIBS += -L$$OUT_PWD/../../LeLib/Release/ -lLeLib
+    LIBS += -L$$OUT_PWD/../../lelib/Release/ -lLeLib
 #    LIBS += -ldl
 
 
