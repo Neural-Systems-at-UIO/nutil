@@ -142,10 +142,12 @@ void ProcessManagerTransform::ReadHeader(LSheet* m_sheet, LBook* book)
     m_compression = m_sheet->readStr(2,1);
     m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));
     m_outputDir = Util::fixFolder(m_sheet->readStr(5,1));
-    float col_r = m_sheet->readNum(3,1);
-    float col_g = m_sheet->readNum(3,2);
-    float col_b = m_sheet->readNum(3,3);
-    m_colorSpread = m_sheet->readNum(3,4);
+//    float col_r = m_sheet->readNum(3,1);
+  //  float col_g = m_sheet->readNum(3,2);
+    //float col_b = m_sheet->readNum(3,3);
+    QVector3D color = Util::vecFromString(m_sheet->readStr(3,1));
+
+    m_colorSpread = m_sheet->readNum(3,2);
     if (m_colorSpread==0) m_colorSpread=1;
     m_autoClip = m_sheet->readStr(7,1);
     m_onlyThumbs = (m_sheet->readStr(8,1).toLower()=="yes");
@@ -157,7 +159,7 @@ void ProcessManagerTransform::ReadHeader(LSheet* m_sheet, LBook* book)
   //  exit(1);
 
     m_thumbType = m_sheet->readStr(6,2);
-    m_background = QColor(col_r, col_g, col_b);
+    m_background = QColor(color.x(), color.y(), color.z());
 
     LMessage::lMessage.Message("Input dir: " + m_inputDir);
 }

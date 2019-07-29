@@ -63,24 +63,6 @@ QString LSheetCSV::readStr(int i, int j)
     return get(i,j);
 }
 
-QColor LSheetCSV::readCol(int i, int j)
-{
-    QString val = get(i,j);
-    QStringList valSplit = val.split(':');
-    QString ij = QString::number(i) + ", " + QString::number(j);
-    if (valSplit[0].toLower()!="col" || valSplit.count()!=2) {
-        LMessage::lMessage.Error("Value at " +ij+ " not a color" );
-        return QColor(0,0,0);
-    }
-    QStringList colList = valSplit[1].split(',');
-
-    if (colList.length()!=3) {
-        LMessage::lMessage.Error("Value at " +ij + " has incorrect color format 'col:r,g,b'");
-        return QColor(0,0,0);
-    }
-    return QColor(colList[0].toInt(),colList[1].toInt(),colList[2].toInt());
-
-}
 
 void LSheetCSV::Set(int i, int j, float val)
 {
