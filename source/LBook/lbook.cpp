@@ -31,8 +31,9 @@ LSheet::LSheet()
 
 QColor LSheet::readCol(int i, int j)
 {
-//    QString val = readStr(i,j);
-    /*    QStringList valSplit = val.split(':');
+    QString val = readStr(i,j);
+    if (val.toLower().startsWith("col")) {
+        QStringList valSplit = val.split(':');
         QString ij = QString::number(i) + ", " + QString::number(j);
         if (valSplit[0].toLower()!="col" || valSplit.count()!=2) {
             LMessage::lMessage.Error("Value at " +ij+ " not a color" );
@@ -45,8 +46,8 @@ QColor LSheet::readCol(int i, int j)
             return QColor(0,0,0);
         }
         return QColor(colList[0].toInt(),colList[1].toInt(),colList[2].toInt());
+    }
 
-    */
     QVector3D col = Util::vecFromString(readStr(i,j));
     return QColor(col.x(), col.y(), col.z());
 

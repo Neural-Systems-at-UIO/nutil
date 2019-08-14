@@ -7,7 +7,7 @@
 #include <QColor>
 #include "source/util/util.h"
 #include <QVector3D>
-
+#include "source/util/lmessage.h"
 
 class LSheet
 {

@@ -93,6 +93,7 @@ void Nauto::Execute()
 
     LMessage::lMessage.Log("******** Reading local header");
     m_pm->ReadHeader(m_sheet, m_book);
+
     if (Data::data.abort) {
         m_status = Status::Idle;
         return;

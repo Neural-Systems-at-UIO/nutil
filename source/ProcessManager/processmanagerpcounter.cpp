@@ -152,7 +152,6 @@ void ProcessManagerPCounter::Execute()
     }
     QFile::copy(m_excelInputFilename, m_outputDir + "/" + m_excelInputFilename.split("/").last());
 
-
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {
@@ -325,6 +324,8 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     if (m_pixelCutoffMax<m_pixelCutoff) {
 
     }
+//    qDebug() << "HERE";
+
     LSheet* reportSheet = book->GetSheet(m_reportSheetName);
     if (reportSheet == nullptr) {
         LMessage::lMessage.Error("Error: could not find any report sheet named '" + m_reportSheetName + "' in the excel file");
@@ -355,14 +356,14 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
     i=0;
     bool hasNext = true;
     int x = 1;
-
+    qDebug() << "Reading from report sheet";
     // As long as a next one exist (x-axis reports)
     while (hasNext) {
-
         QString excelName = m_sheet->readStr(i,x);
 //        qDebug() << excelName << i << " " << x;
         if (excelName.simplified()!="") {
             QColor reportColor = m_sheet->readCol(i+1,x);
+            qDebug() << "..";
 
             QStringList ids;// = QString::fromWCharArray(m_sheet->readStr(i,3)).split(',');
             bool done = false;
