@@ -1,11 +1,23 @@
 #include "processmanagerpcounter.h"
 #include <QStringList>
 #include "source/data.h"
+#include <QImageReader>
 
+
+float ProcessManagerPCounter::CalculateRamNeededInGB()
+{
+    if (m_processItems.count()==0)
+        return 0;
+
+    ProcessItem* pi = m_processItems[0];
+    float singleFile = Util::getImageFileSizeInGB(m_inputDir+  pi->m_inFile +"."+pi->m_filetype);
+//    qDebug() << "Singlefile: " << singleFile;
+    return singleFile*m_numProcessors*2; // 3 files open at the same time... around
+
+}
 
 void ProcessManagerPCounter::LoadXML()
 {
-
 
     if (QFile::exists(m_anchorFile))
         m_xmlAnchor.Load(m_anchorFile);
@@ -31,8 +43,9 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     }*/
     int x = 1;
-    int y = 21;
+    int y = 22;
     Data::data.abort = false;
+
 
     LoadXML();
 
@@ -53,9 +66,9 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
         QString name = m_sheet->readStr(y,x);
         if (name!="") {
             bool isTiff = false;
-            QString inFileFull = Util::findFileInDirectory(name,m_inputDir,"png");
+            QString inFileFull = Util::findFileInDirectory(name,m_inputDir,"png","mask");
             if (inFileFull=="") {
-                inFileFull = Util::findFileInDirectory(name,m_inputDir,"tif");
+                inFileFull = Util::findFileInDirectory(name,m_inputDir,"tif","mask");
                 if (inFileFull!="")
                     isTiff = true;
             }
@@ -67,7 +80,7 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
                 m_processItems.clear();
                 return false;
             }
-            QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat");
+            QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat","");
             if (inFlatFull=="") {
                 LMessage::lMessage.Error("Error: Could not find FLAT files that contains: " + name + ". Did you remember to run the java binary file converter?");
                 m_processItems.clear();
@@ -189,14 +202,27 @@ void ProcessManagerPCounter::Execute()
         QString maskFile = "";
         if (m_useCustomMask) {
   //          qDebug() << "Search for mask file" << pi->m_id;
-            maskFile = Util::findFileInDirectory(QStringList() << "mask" << pi->m_id,m_inputDir,"png");
-            if (maskFile=="")
+            maskFile = Util::findFileInDirectory(QStringList() << "mask" << pi->m_id,m_inputDir,"png","");
+            if (maskFile==""){
                 LMessage::lMessage.Error("  Could not find mask file for " +pi->m_inFile);
+                Data::data.abort = true;
+            }
+
+
+//            QImageReader reader(maskFile);
+            if (!Util::VerifyImageFileSize(maskFile,2048)){
+                LMessage::lMessage.Error("  Mask file '" +pi->m_inFile+"' has too large dimensions! Make sure that the file size is less than 2048x2048");
+
+                Data::data.abort = true;
+
+            }
 
 
         }
 
-        m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background,m_colorThreshold, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax, maskFile, m_customMaskInclusionColors);
+
+        if (!Data::data.abort)
+            m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background,m_colorThreshold, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax, maskFile, m_customMaskInclusionColors);
 
         LMessage::lMessage.Log("  Quantifier done for " +pi->m_inFile);
         for (Area&a : m_processes[i]->m_areas)
@@ -204,69 +230,80 @@ void ProcessManagerPCounter::Execute()
 
         m_processes[i]->m_infoText = "Anchoring areas";
         // Find atlas file:
-        QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat");
+        QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat","");
 
 
         if (atlasFile=="") {
             LMessage::lMessage.Error("Could not find any atlas flat file!");
             Data::data.abort = true;
         }
-//        if (Data::data.abort)
-  //          break;
+        //        if (Data::data.abort)
+        //          break;
+
 
         LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
-        if (m_areaSplitting!=1)
-            m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
-        else
-           m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
+        if (!Data::data.abort)
+        {
+            if (m_areaSplitting!=1)
+                m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
+            else
+                m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
+
+        }
 
         m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
         LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
-        m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
+                if (!Data::data.abort)
+                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
         m_mainCounter.Tick();
         m_processes[i]->m_counter.m_progress = 100;
         LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
-//        LMessage::lMessage.Message("<a href=\"file://"+m_outputDir+"\">"+m_outputDir+"</a>");
+        //        LMessage::lMessage.Message("<a href=\"file://"+m_outputDir+"\">"+m_outputDir+"</a>");
 
-// 37 49 71
+        // 37 49 71
 
 
         m_processes[i]->ReleasePCounter();
     }
 
-    if (m_reportType!="none") {
-        // Custom region
-        reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "CustomRegionsSummary.xlsx", m_outputFileType);
-        reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
+    if (!Data::data.abort)
+    {
+        if (m_reportType!="none") {
+            // Custom region
+            reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "CustomRegionsSummary.xlsx", m_outputFileType);
+            reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
 
-        if (m_reportType=="all") {
-            if (m_areaSplitting==0.0)
-                reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
+            if (m_reportType=="all") {
+                if (m_areaSplitting==0.0)
+                    reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
 
-            reports.CreateSliceReportsSummary(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"CustomRegionsSections.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
-            reports.CreateCombinedList(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+                reports.CreateSliceReportsSummary(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"CustomRegionsSections.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
+                reports.CreateCombinedList(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+            }
+            //        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
+            //    m_processes[i].m_infoText = "Creating 3D point cloud";
         }
-//        reports.Create3DSummary(m_outputDir + "3D_combined.txt", m_processes, m_processItems, m_xyzScale);
-//    m_processes[i].m_infoText = "Creating 3D point cloud";
-    }
 
-    if (m_output3DPoints=="all") {
-        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
-        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
-    }
-    if (m_output3DPoints=="summary") {
-        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
-    }
-    if (m_output3DPoints=="slices") {
-        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
-    }
+        if (m_output3DPoints=="all") {
+            reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
+            reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
+        }
+        if (m_output3DPoints=="summary") {
+            reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
+        }
+        if (m_output3DPoints=="slices") {
+            reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
+        }
 
 
-  //  m_infoText = "Creating 3D point cloud";
-    Data::data.m_globalMessage = "Creating NIFTI";
+        //  m_infoText = "Creating 3D point cloud";
+        Data::data.m_globalMessage = "Creating NIFTI";
 
-    if (m_outputNifti)
-        reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
+        if (m_outputNifti)
+            reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
+
+
+    }
 
     m_processFinished = true;
 
@@ -320,6 +357,9 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
         Data::data.abort = true;
         return;
     }
+
+    m_dataType = m_sheet->readStr(19,1).toLower();
+
 
     if (m_pixelCutoffMax<m_pixelCutoff) {
 

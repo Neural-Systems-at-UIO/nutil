@@ -52,6 +52,8 @@ void NLImage::ApplyMask(QString maskFile, QVector3D useColor, QColor background)
 {
     QImage mask;
     mask.load(maskFile);
+
+
     QColor testColor(1,1,1);
     if (background==testColor)
         testColor = QColor(0,0,0);
@@ -60,13 +62,15 @@ void NLImage::ApplyMask(QString maskFile, QVector3D useColor, QColor background)
             //QVector3D imgCol = Util::fromColor(QColor(m_image->getPixel(i,j)));
             float x = (i/(float)m_image->width())*(float)mask.width();
             float y = (j/(float)m_image->height())*(float)mask.height();
-            QVector3D maskCol = Util::fromColor(QColor(mask.pixel(x,y)));
-            //qDebug() << maskCol << useColor;
+            if (x<mask.width() && y<mask.height()) {
+                QVector3D maskCol = Util::fromColor(QColor(mask.pixel(x,y)));
+                //qDebug() << maskCol << useColor;
 
-            if (!Util::QVector3DIsClose(maskCol,useColor,QVector3D(1,1,1)*2))
-            {
-                m_image->setPixel(i,j,testColor.rgba());
-//                qDebug() << i<< j;
+                if (!Util::QVector3DIsClose(maskCol,useColor,QVector3D(1,1,1)*2))
+                {
+                    m_image->setPixel(i,j,testColor.rgba());
+                    //                qDebug() << i<< j;
+                }
             }
         }
 

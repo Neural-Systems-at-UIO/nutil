@@ -33,6 +33,7 @@ public:
     virtual bool Build(LSheet* m_sheet) = 0;
     virtual void Execute() = 0;
     virtual void ReadHeader(LSheet* m_sheet, LBook* book) { }
+    virtual float CalculateRamNeededInGB()  { return 0;}
 
     virtual bool Verify() = 0;
 //    void ExecuteAutoContrast(QString compression, QColor background);

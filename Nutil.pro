@@ -10,7 +10,8 @@ QT += network
 TEMPLATE      = app
 
 
-DEFINES += IS_BETA
+DEFINES += IS_BETA IGNORE_DOWNLOAD
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings

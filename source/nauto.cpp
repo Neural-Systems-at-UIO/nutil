@@ -99,8 +99,20 @@ void Nauto::Execute()
         return;
     }
 
+
+
+
     LMessage::lMessage.Log("******** Building");
     if (m_pm->Build(m_sheet)) {
+
+        // Verify memory limits
+        float memRequired = m_pm->CalculateRamNeededInGB();
+        float totalMemory = Util::getAmountOfInstalledMemory();
+        float total = memRequired/totalMemory;
+        LMessage::lMessage.Message("Required memory: " + QString::number(memRequired)+" GB,  with "+QString::number(totalMemory)+ " GB installed ("+(QString::number((int)(total*100))) +" %) usage");
+
+
+
         LMessage::lMessage.Log("******** Executing");
         m_pm->Execute();
     }

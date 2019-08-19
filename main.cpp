@@ -59,9 +59,9 @@ int main(int argc, char *argv[])
 
 //    qDebug() << QString::number(123456780.0);
 
-
+#ifndef IGNORE_DOWNLOAD
     CheckVersion();
-
+#endif
 
     if (argc == 1)  {
         QApplication a(argc, argv);

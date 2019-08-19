@@ -230,7 +230,6 @@ bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector3D colorWid
 {
 //    qDebug() << inFile;
     lImage.Load(inFile);
-
     if (maskFile!="")
         lImage.ApplyMask(maskFile,maskColor, testColor);
 
