@@ -41,7 +41,7 @@ private:
     QColor set = QColor(255,255,255,255);
 
     QImage* m_testImage = nullptr;
-    int scale = 1;
+    float scale = 1.0;
 
 
 public:

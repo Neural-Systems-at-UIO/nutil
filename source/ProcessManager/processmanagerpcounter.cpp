@@ -12,7 +12,7 @@ float ProcessManagerPCounter::CalculateRamNeededInGB()
     ProcessItem* pi = m_processItems[0];
     float singleFile = Util::getImageFileSizeInGB(m_inputDir+  pi->m_inFile +"."+pi->m_filetype);
 //    qDebug() << "Singlefile: " << singleFile;
-    return singleFile*m_numProcessors*2; // 3 files open at the same time... around
+    return singleFile*m_numProcessors*2.5; // 3 files open at the same time... around
 
 }
 
@@ -27,6 +27,7 @@ void ProcessManagerPCounter::LoadXML()
     }
 
 }
+
 
 bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 {
@@ -47,7 +48,8 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
     Data::data.abort = false;
 
 
-    LoadXML();
+    if (m_dataType=="quicknii")
+        LoadXML();
 
     if (m_pixelCutoffMax<=m_pixelCutoff) {
         LMessage::lMessage.Error("Error: max pixel cutoff cannot be lower than lower pixel cutoff! ");
@@ -80,13 +82,15 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
                 m_processItems.clear();
                 return false;
             }
-            QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat","");
-            if (inFlatFull=="") {
-                LMessage::lMessage.Error("Error: Could not find FLAT files that contains: " + name + ". Did you remember to run the java binary file converter?");
-                m_processItems.clear();
-                return false;
-            }
+            if (m_dataType=="quicknii") {
 
+                QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat","");
+                if (inFlatFull=="") {
+                    LMessage::lMessage.Error("Error: Could not find FLAT files that contains: " + name + ". Did you remember to run the java binary file converter?");
+                    m_processItems.clear();
+                    return false;
+                }
+            }
             QStringList l = inFileFull.split('/');
             QString inFile = l[l.length()-1];
 
@@ -157,11 +161,12 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
 void ProcessManagerPCounter::Execute()
 {
-
-    m_labels.Load(m_labelFile);
-    if (m_labels.atlases.count()==0) {
-        LMessage::lMessage.Error("Incorrect label file. Please check parameters in excel sheet.");
-        return;
+    if (m_dataType=="quicknii") {
+        m_labels.Load(m_labelFile);
+        if (m_labels.atlases.count()==0) {
+            LMessage::lMessage.Error("Incorrect label file. Please check parameters in excel sheet.");
+            return;
+        }
     }
     QFile::copy(m_excelInputFilename, m_outputDir + "/" + m_excelInputFilename.split("/").last());
 
@@ -228,34 +233,37 @@ void ProcessManagerPCounter::Execute()
         for (Area&a : m_processes[i]->m_areas)
             a.m_mat = mat;
 
-        m_processes[i]->m_infoText = "Anchoring areas";
-        // Find atlas file:
-        QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat","");
+
+        if (m_dataType=="quicknii") {
+
+            m_processes[i]->m_infoText = "Anchoring areas";
+            // Find atlas file:
+            QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat","");
+
+            if (atlasFile=="") {
+                LMessage::lMessage.Error("Could not find any atlas flat file!");
+                Data::data.abort = true;
+            }
+            //        if (Data::data.abort)
+            //          break;
 
 
-        if (atlasFile=="") {
-            LMessage::lMessage.Error("Could not find any atlas flat file!");
-            Data::data.abort = true;
-        }
-        //        if (Data::data.abort)
-        //          break;
+            LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
+            if (!Data::data.abort)
+            {
+                if (m_areaSplitting!=1)
+                    m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
+                else
+                    m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
 
+            }
 
-        LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
-        if (!Data::data.abort)
-        {
-            if (m_areaSplitting!=1)
-                m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
-            else
-                m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
-
-        }
-
-        m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
-        LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
-                if (!Data::data.abort)
+            m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
+            LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
+            if (!Data::data.abort)
                 m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
-        m_mainCounter.Tick();
+            m_mainCounter.Tick();
+        }
         m_processes[i]->m_counter.m_progress = 100;
         LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
         //        LMessage::lMessage.Message("<a href=\"file://"+m_outputDir+"\">"+m_outputDir+"</a>");
@@ -304,9 +312,19 @@ void ProcessManagerPCounter::Execute()
 
 
     }
+//    QVector<ProcessItem*> m_processItems;
+  //  QVector<NutilProcess*> m_processes;
+    reports = Reports();
+
 
     m_processFinished = true;
+    for (int i=0;i<m_processItems.count();i++)
+        delete m_processItems.takeAt(i);
+    for (int i=0;i<m_processes.count();i++)
+        delete m_processes.takeAt(i);
 
+    m_processItems.clear();
+    m_processes.clear();
 
 
 }
@@ -328,14 +346,21 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     QVector3D bg = Util::vecFromString(m_sheet->readStr(3,1));
     m_background = QColor(bg.x(), bg.y(), bg.z());
 
+
+    m_dataType = m_sheet->readStr(19,1).toLower();
+
+
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
-    m_atlasDir = m_sheet->readStr(6,1);
+    if (m_dataType=="quicknii")
+       m_atlasDir = m_sheet->readStr(6,1);
+    if (m_dataType=="quicknii")
     m_labelFile = m_sheet->readStr(7,1);
     m_pixelCutoff = m_sheet->readNum(9,1);
     m_pixelCutoffMax = m_sheet->readNum(9,2);
     m_areaScale = m_sheet->readNum(10,1);
     m_areaSplitting = m_sheet->readStr(8,1).toLower()=="yes"?1:0;
-    m_anchorFile = m_sheet->readStr(11,1);
+    if (m_dataType=="quicknii")
+        m_anchorFile = m_sheet->readStr(11,1);
     m_niftiSize = m_sheet->readNum(12,1);
     m_xyzScale = m_sheet->readNum(13,1);
     m_reportSheetName = m_sheet->readStr(14,1);
@@ -358,7 +383,6 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
         return;
     }
 
-    m_dataType = m_sheet->readStr(19,1).toLower();
 
 
     if (m_pixelCutoffMax<m_pixelCutoff) {

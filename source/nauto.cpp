@@ -100,21 +100,25 @@ void Nauto::Execute()
     }
 
 
-
-
     LMessage::lMessage.Log("******** Building");
     if (m_pm->Build(m_sheet)) {
 
         // Verify memory limits
         float memRequired = m_pm->CalculateRamNeededInGB();
         float totalMemory = Util::getAmountOfInstalledMemory();
-        float total = memRequired/totalMemory;
-        LMessage::lMessage.Message("Required memory: " + QString::number(memRequired)+" GB,  with "+QString::number(totalMemory)+ " GB installed ("+(QString::number((int)(total*100))) +" %) usage");
+        float freeMemory = Util::getFreeRam();
+        float total = memRequired/freeMemory;
+        LMessage::lMessage.Message("Required memory: " + QString::number(memRequired)+" GB. Free memory : "+QString::number(freeMemory)+ " GB from a total of "+QString::number(totalMemory) +" GB installed ("+(QString::number((int)(total*100))) +" %) usage");
+        if (total>0.9 && total<=1.0)
+            LMessage::lMessage.Message("Warning! You are close to exceeding maximum memory usage. Consider lowering the number of threads.");
+        if (total>1) {
+            LMessage::lMessage.Error("You are exceeding the memory limitations of this system. Please lower the number of threads, or reduce size of input files.");
+        } else {
 
 
-
-        LMessage::lMessage.Log("******** Executing");
-        m_pm->Execute();
+            LMessage::lMessage.Log("******** Executing");
+            m_pm->Execute();
+        }
     }
     else
         m_status = Status::Idle;
