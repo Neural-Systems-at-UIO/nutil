@@ -205,3 +205,8 @@ void MainWindow::on_actionSettings_triggered()
     DialogSettings* ds = new DialogSettings(nullptr, &m_settings);
     ds->exec();
 }
+
+void MainWindow::on_bntSetInputDirectory_clicked()
+{
+//    QFileOpenDial
+}

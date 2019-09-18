@@ -150,9 +150,9 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
     }
 
-    Util::CreateDirectory(m_outputDir+QDir::separator()+m_reportDirectory);
-    Util::CreateDirectory(m_outputDir+QDir::separator()+m_coordinateDirectory);
-    Util::CreateDirectory(m_outputDir+QDir::separator()+m_imageDirectory);
+    Util::CreateDir(m_outputDir+QDir::separator()+m_reportDirectory);
+    Util::CreateDir(m_outputDir+QDir::separator()+m_coordinateDirectory);
+    Util::CreateDir(m_outputDir+QDir::separator()+m_imageDirectory);
 
 
     return true;
