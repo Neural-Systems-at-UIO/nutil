@@ -2,4 +2,7 @@
     <qresource prefix="/images">
         <file>Resources/newt.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>Resources/text/transform.txt</file>
+    </qresource>
 </RCC>

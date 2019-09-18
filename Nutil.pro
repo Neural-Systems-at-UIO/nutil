@@ -34,6 +34,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 
 SOURCES += main.cpp \
+    source/IO/nutiltemplate.cpp \
     source/util/buffer2d.cpp \
     nutilapplication.cpp \
     mainwindow.cpp \
@@ -69,6 +70,7 @@ SOURCES += main.cpp \
 
 HEADERS += \
     nutilapplication.h \
+    source/IO/nutiltemplate.h \
     source/util/buffer2d.h \
     mainwindow.h \
     node.h \
@@ -179,7 +181,8 @@ linux*{
 #INCLUDEPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
 #DEPENDPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
 
-DISTFILES +=
+DISTFILES += \
+    Resources/text/transform.txt
 
 RESOURCES += \
     resources.qrc

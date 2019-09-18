@@ -1,0 +1,11 @@
+type;  Type: ;  string; Transform
+name; Name: ; string; 
+output_compression; Output compression; list; jpeg,lzw,none; lzw
+input_dir; Input directory; directory; 
+output_dir; Output directory; directory;
+thumbnail_size; Thumbnail size: ; number; 1
+auto_crop; Auto cropping : ; list; yes,no; yes
+only_thumbnails; Only create thumbnails; list; yes, no; no
+files; List of data; textfield;  
+
+

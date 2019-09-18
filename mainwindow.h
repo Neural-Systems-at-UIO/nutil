@@ -12,6 +12,7 @@
 #include <QElapsedTimer>
 #include "dialogsettings.h"
 #include <QMessageBox>
+#include "source/IO/nutiltemplate.h"
 namespace Ui {
     class MainWindow;
 }
@@ -102,8 +103,14 @@ private slots:
 
 
 
+    void on_btnNew_clicked();
+
+
+    void on_btnSave_clicked();
+
 private:
     Nauto m_nauto;
+    NutilTemplate m_nt;
     UpdateThread* m_updateThread;
     WorkerThread* m_workerThread = nullptr;
 

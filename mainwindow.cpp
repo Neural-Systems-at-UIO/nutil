@@ -206,7 +206,17 @@ void MainWindow::on_actionSettings_triggered()
     ds->exec();
 }
 
-void MainWindow::on_bntSetInputDirectory_clicked()
+
+void MainWindow::on_btnNew_clicked()
 {
-//    QFileOpenDial
+//    m_nt.LoadTemplate(":/text/Resources/text/"+ui->cmbNew->currentText().toLower()+".txt");
+
+    m_nt.LoadTemplate(":/Resources/text/transform.txt");
+    m_nt.Populate(ui->gridTemplate);
+}
+
+
+void MainWindow::on_btnSave_clicked()
+{
+    m_nt.Save();
 }
