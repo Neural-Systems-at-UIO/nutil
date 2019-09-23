@@ -116,7 +116,8 @@ void NutilTemplate::Populate(QGridLayout *grid)
             });
         }
 
-
+        QPushButton* help = new QPushButton("?");
+        grid->addWidget(help,row,3);
         row++;
     }
 
@@ -141,10 +142,10 @@ void NutilTemplate::FillFromGUI()
     }*/
 }
 
-void NutilTemplate::Save()
+void NutilTemplate::Save(QString fname)
 {
     for (QString k: m_sortList) {
         NutilTemplateItem* nti = m_items[k];
-       qDebug() << nti->m_name << nti->m_value;
+//       qDebug() << nti->m_name << nti->m_value;
     }
 }

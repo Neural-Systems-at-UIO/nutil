@@ -65,7 +65,7 @@ void MainWindow::on_btnStart_clicked()
      m_timer.start();
 
     m_nauto.m_numThreads = ui->leProcessors->text().toInt();
-    m_nauto.m_sheetIndex = ui->cmbSheets->currentText();
+    //m_nauto.m_sheetIndex = ui->cmbSheets->currentText();
 
     //m_nauto.Execute(); // Non-threaded
     m_workerThread = new WorkerThread();
@@ -133,8 +133,8 @@ void MainWindow::FillSheetCombo()
 {
     if (m_nauto.m_book==nullptr)
         return;
-    ui->cmbSheets->clear();
-    ui->cmbSheets->addItems(m_nauto.getSheetList());
+    //ui->cmbSheets->clear();
+    //ui->cmbSheets->addItems(m_nauto.getSheetList());
 }
 
 void MainWindow::closeEvent(QCloseEvent * event)
@@ -213,10 +213,17 @@ void MainWindow::on_btnNew_clicked()
 
     m_nt.LoadTemplate(":/Resources/text/transform.txt");
     m_nt.Populate(ui->gridTemplate);
+    m_settings.setString("current_file", m_newFileName);
 }
 
 
 void MainWindow::on_btnSave_clicked()
 {
-    m_nt.Save();
+    QString fileName = m_settings.getString("current_file");
+    if (fileName==m_newFileName) {
+        fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                   "",
+                                   tr("Nutil (*.nut)"));
+    }
+    m_nt.Save(fileName);
 }

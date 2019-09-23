@@ -73,7 +73,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     Ui::MainWindow *ui;
-
+    const QString m_newFileName = "_new_file_";
     static float Version;
     long m_elapsedTimer = -1;
     explicit MainWindow(QWidget *parent = 0);

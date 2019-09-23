@@ -1,4 +1,4 @@
-#ifndef NUTILTEMPLATE_H
+#idef NUTILTEMPLATE_H
 #define NUTILTEMPLATE_H
 
 #include <QString>
@@ -59,7 +59,7 @@ public:
     void Populate(QGridLayout* grid);
     void clearGrid(QGridLayout* grid);
     void FillFromGUI();
-    void Save();
+    void Save(QString fname);
 };
 
 #endif // NUTILTEMPLATE_H
