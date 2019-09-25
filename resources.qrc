@@ -4,5 +4,6 @@
     </qresource>
     <qresource prefix="/">
         <file>Resources/text/transform.txt</file>
+        <file>Resources/text/help/name.rtf</file>
     </qresource>
 </RCC>

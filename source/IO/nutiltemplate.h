@@ -1,4 +1,4 @@
-#idef NUTILTEMPLATE_H
+#ifndef NUTILTEMPLATE_H
 #define NUTILTEMPLATE_H
 
 #include <QString>
@@ -7,18 +7,20 @@
 #include <QMap>
 #include <QVariant>
 #include <QGridLayout>
+#include "source/dialoghelp.h"
 
 class NutilTemplateItem : public QObject {
     Q_OBJECT
 public:
 
-    enum Type{ STRING, LIST, DIRECTORY, FILE, TEXTFIELD, NUMBER, NONE };
+    enum Type{ STRING, LIST, DIRECTORY, FILE, TEXTFIELD, NUMBER, NONE, COLOR };
     Q_ENUM(Type)
 
     QString m_name;
     QString m_text;
     QStringList m_items;
     QString m_value;
+    QColor m_color;
     Type m_type;
     QWidget* m_widget;
 
@@ -39,6 +41,7 @@ public:
         if (t=="file") return FILE;
         if (t=="textfield") return TEXTFIELD;
         if (t=="number") return NUMBER;
+        if (t=="color") return COLOR;
         if (t=="none") return NONE;
         return NONE;
     }

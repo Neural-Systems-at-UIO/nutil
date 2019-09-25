@@ -35,6 +35,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += main.cpp \
     source/IO/nutiltemplate.cpp \
+    source/dialoghelp.cpp \
     source/util/buffer2d.cpp \
     nutilapplication.cpp \
     mainwindow.cpp \
@@ -71,6 +72,7 @@ SOURCES += main.cpp \
 HEADERS += \
     nutilapplication.h \
     source/IO/nutiltemplate.h \
+    source/dialoghelp.h \
     source/util/buffer2d.h \
     mainwindow.h \
     node.h \
@@ -106,6 +108,7 @@ HEADERS += \
     source/LBook/lbookfactory.h
 
 FORMS    += mainwindow.ui \
+    source/dialoghelp.ui \
     source/dialogtiff.ui \
     dialogsettings.ui
 
