@@ -24,6 +24,14 @@ public:
     Type m_type;
     QWidget* m_widget;
 
+    static QString colorToString(QColor col) {
+        return QString::number(col.red())+","+QString::number(col.green())+","+ QString::number(col.blue()) +"," + QString::number(col.alpha());
+    }
+    static QColor StringToColor(QString col) {
+        QStringList l = col.trimmed().simplified().split(",");
+        return QColor(l[0].toFloat(),l[1].toFloat(),l[2].toFloat(),l[3].toFloat());
+    }
+
     NutilTemplateItem() {
 
     }
@@ -51,18 +59,20 @@ public:
 
 class NutilTemplate
 {
+    QGridLayout* m_grid = nullptr;
+
 public:
     NutilTemplate();
     QMap<QString,NutilTemplateItem*> m_items;
 
     QVector<QString> m_sortList;
-
     void LoadTemplate(QString file);
 
     void Populate(QGridLayout* grid);
     void clearGrid(QGridLayout* grid);
     void FillFromGUI();
     void Save(QString fname);
+    void Load(QString fname);
 };
 
 #endif // NUTILTEMPLATE_H

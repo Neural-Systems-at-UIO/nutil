@@ -108,6 +108,8 @@ private slots:
 
     void on_btnSave_clicked();
 
+    void on_btnLoad_2_clicked();
+
 private:
     Nauto m_nauto;
     NutilTemplate m_nt;

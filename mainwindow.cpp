@@ -227,3 +227,14 @@ void MainWindow::on_btnSave_clicked()
     }
     m_nt.Save(fileName);
 }
+
+void MainWindow::on_btnLoad_2_clicked()
+{
+   QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                   "",
+                                   tr("Nutil (*.nut)"));
+
+    m_nt.Load(fileName);
+    m_nt.Populate(ui->gridTemplate);
+
+}

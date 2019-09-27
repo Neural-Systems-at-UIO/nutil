@@ -55,6 +55,7 @@ void NutilTemplate::LoadTemplate(QString fileName)
                 a=nti->m_items[3].toFloat();
 
              nti->m_color = QColor(nti->m_items[0].toFloat(),nti->m_items[1].toFloat(),nti->m_items[2].toFloat(),a);
+             nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
 //             nti->m_value = nti->m_items[0].trimmed()+
         }
 
@@ -67,7 +68,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
 {
     int row = 0;
     clearGrid(grid);
-
+    m_grid = grid;
     for (QString name : m_sortList) {
         NutilTemplateItem* nti = m_items[name];
 
@@ -89,7 +90,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
             if (nti->m_type==NutilTemplateItem::DIRECTORY) {
 
-
+                le->setEnabled(false);
                 QPushButton* btn = new QPushButton("...");
                 grid->addWidget(btn,row,2);
 
@@ -109,13 +110,15 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
         if (nti->m_type==NutilTemplateItem::COLOR) {
             QPushButton* btn = new QPushButton("");
-            btn->setStyleSheet("background-color: #"+QString::number(nti->m_color.rgb(),16));
+            btn->setStyleSheet("background-color: #"+QString::number(NutilTemplateItem::StringToColor(nti->m_value).rgb(),16));
 
             grid->addWidget(btn,row,1);
 
             QObject::connect(btn, &QPushButton::clicked, [=]() {
                 nti->m_color = QColorDialog::getColor(nti->m_color, nullptr );
                 btn->setStyleSheet("background-color: #"+QString::number(nti->m_color.rgb(),16));
+                nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
+
 
             });
 
@@ -194,12 +197,38 @@ void NutilTemplate::Save(QString fname)
 
     QFile f(fname);
     f.open(QFile::WriteOnly | QFile::Text);
-    QTextStream s(&f);
+    QTextStream str(&f);
     for (QString k: m_sortList) {
         NutilTemplateItem* nti = m_items[k];
         QString s = nti->m_name + " = " + nti->m_value;;
-
+        str<< s << endl;
     }
 
     f.close();
+}
+
+void NutilTemplate::Load(QString fname)
+{
+    if (!QFile::exists(fname))
+        return;
+
+    QFile f(fname);
+    f.open(QFile::ReadOnly);
+    QString dataStr = f.readAll();
+    QStringList data = dataStr.split('\n');
+    QString type =  data[0].trimmed().simplified().split("=")[1].toLower().trimmed();
+    LoadTemplate(":/Resources/text/"+ type+ ".txt");
+
+    for (QString k: data) {
+        if (k.trimmed()=="")
+            continue;
+        QStringList d =  k.trimmed().simplified().split("=");
+        if (d.count()!=2)
+            continue;
+        qDebug() << d;
+        NutilTemplateItem* nti = m_items[d[0].trimmed()];
+        nti->m_value = d[1].trimmed();
+    }
+    f.close();
+
 }
