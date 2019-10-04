@@ -284,8 +284,9 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
     float totalSumPixel=0;
     float totalSumArea = 0;
     Counter cnt(items.count()*m_reports.count(),"");
+
     for (int i=0;i<items.count();i++) {
-        //qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
+        qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
 
 
 
@@ -314,8 +315,8 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
             int cnt=0;
 
 //            QVector<AtlasLabel*> lbls;
-
             for (Area& a: processes[i]->m_areas) {
+
      //           totalPixelArea+=a.m_pixelArea;
        //         totalArea+=a.m_mrea;
 //                regionPixelArea+=a.m_pixelArea;

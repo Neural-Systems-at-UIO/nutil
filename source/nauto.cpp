@@ -7,7 +7,7 @@
 #include "source/data.h"
 #include "mainwindow.h"
 using namespace std;
-
+/*
 Nauto::Nauto(QString filename, int sheetIndex)
 {
     m_sheetIndex = sheetIndex;
@@ -18,12 +18,17 @@ Nauto::Nauto(QString filename)
 {
     m_filename = filename;
 }
-
+*/
 Nauto::Nauto()
 {
 
 }
 
+Nauto::Nauto(NutilTemplate *temp)
+{
+     m_data  = temp;
+}
+/*
 void Nauto::Load(QString filename)
 {
     if (m_book)
@@ -53,7 +58,7 @@ void Nauto::Load(QString filename)
    }
 
 }
-
+*/
 void Nauto::Execute()
 {
     if (m_status!=Status::Idle) {
@@ -62,11 +67,12 @@ void Nauto::Execute()
     }
 
 
-    if (!m_book) {
+/*    if (!m_book) {
         LMessage::lMessage.Error("No excel document loaded.");
         return;
     }
     m_sheet = m_book->GetSheet(m_sheetIndex);
+    */
 /*    if(!m_sheet)
     {
         LMessage::lMessage.Error(m_book->errorMessage());
@@ -75,7 +81,6 @@ void Nauto::Execute()
     LMessage::lMessage.Log("******** Reading global header");
     ReadHeader();
     LMessage::lMessage.Log("******** Type of Nutil operation: " + m_type );
-
     m_status = Status::Working;
     Util::CancelSignal = false;
 
@@ -92,16 +97,15 @@ void Nauto::Execute()
     m_pm->m_numProcessors = m_numThreads;
 
     LMessage::lMessage.Log("******** Reading local header");
-    m_pm->ReadHeader(m_sheet, m_book);
+    m_pm->ReadHeader(m_data);
 
     if (Data::data.abort) {
         m_status = Status::Idle;
         return;
     }
 
-
     LMessage::lMessage.Log("******** Building");
-    if (m_pm->Build(m_sheet)) {
+    if (m_pm->Build(m_data)) {
 
         // Verify memory limits
         float memRequired = m_pm->CalculateRamNeededInGB();
@@ -114,6 +118,7 @@ void Nauto::Execute()
         if (total>1) {
             LMessage::lMessage.Error("You are exceeding the memory limitations of this system. Please lower the number of threads, or reduce size of input files.");
         } else {
+            qDebug() << "B";
 
 
             LMessage::lMessage.Log("******** Executing");
@@ -133,9 +138,11 @@ void Nauto::Execute()
 
 void Nauto::ReadHeader()
 {
-    xlnt::column_t t;
-    m_type = m_sheet->readStr(0,1);
-    m_batchName = m_sheet->readStr(1,1);
+ //   xlnt::column_t t;
+    if (m_data==nullptr)
+        return;
+    m_type = m_data->Get("type");
+    m_batchName = m_data->Get("name");
 
 }
 
@@ -217,17 +224,17 @@ void Nauto::Abort()
 
 void Nauto::Release()
 {
-    if (m_book)
+/*    if (m_book)
         delete m_book;
 
-    m_book = nullptr;
+    m_book = nullptr;*/
 }
-
+/*
 QStringList Nauto::getSheetList()
 {
     return m_book->sheet_titles();
 }
-
+*/
 Nauto::~Nauto()
 {
     Release();

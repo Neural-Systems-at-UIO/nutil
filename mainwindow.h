@@ -73,18 +73,18 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     Ui::MainWindow *ui;
-    const QString m_newFileName = "_new_file_";
     static float Version;
     long m_elapsedTimer = -1;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     CIniFile m_settings;
 
+    void UpdateRecentList();
 
 
 
 private slots:
-    void on_btnLoad_clicked();
+//    void on_btnLoad_clicked();
 
     void on_btnStart_clicked();
 
@@ -110,6 +110,10 @@ private slots:
 
     void on_btnLoad_2_clicked();
 
+    void on_lstRecent_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_btnSaveAs_clicked();
+
 private:
     Nauto m_nauto;
     NutilTemplate m_nt;
@@ -121,7 +125,7 @@ private:
 
     void AppQuit();
     void Abort();
-    void FillSheetCombo();
+//    void FillSheetCombo();
     void closeEvent(QCloseEvent * event) override;
     void UpdateInfoTimer();
     void DefaultSettings();

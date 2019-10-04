@@ -9,6 +9,8 @@
 #include "source/util/lmessage.h"
 #include "source/LBook/lbook.h"
 #include "source/LBook/lbookxlnt.h"
+#include "source/IO/nutiltemplate.h"
+
 
 //using namespace libxl;
 
@@ -23,8 +25,10 @@ public:
 /*      Book* m_book = nullptr;
 
     Sheet* m_sheet = nullptr;*/
-    LBook *m_book = nullptr;
-    LSheet* m_sheet = nullptr;
+//    LBook *m_book = nullptr;
+//    LSheet* m_sheet = nullptr;
+    NutilTemplate* m_data;
+
 
 
     QString m_filename;
@@ -44,13 +48,13 @@ public:
     QString m_mainInfo;
 
 
-    Nauto(QString filename, int shee);
-    Nauto(QString filename);
+/*    Nauto(QString filename, int shee);
+    Nauto(QString filename);*/
     Nauto();
+    Nauto(NutilTemplate* temp);
 
 
-
-    void Load(QString filename);
+//    void Load(QString filename);
     void Execute();
     void ExecuteTransformation();
 //    void ExecuteAutoContrast();
@@ -59,7 +63,7 @@ public:
     void BuildInfo();
     void Abort();
     void Release();
-    QStringList getSheetList();
+ //   QStringList getSheetList();
     ~Nauto();
 };
 

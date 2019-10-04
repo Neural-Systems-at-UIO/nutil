@@ -5,5 +5,7 @@
     <qresource prefix="/">
         <file>Resources/text/transform.txt</file>
         <file>Resources/text/help/name.rtf</file>
+        <file>Resources/text/quantifier.txt</file>
+        <file>Resources/text/help/label_file.rtf</file>
     </qresource>
 </RCC>

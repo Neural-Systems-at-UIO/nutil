@@ -29,20 +29,12 @@ void ProcessManagerPCounter::LoadXML()
 }
 
 
-bool ProcessManagerPCounter::Build(LSheet* m_sheet)
+bool ProcessManagerPCounter::Build(NutilTemplate* data)
 {
+
     m_processItems.clear();
     Data::data.m_globalMessage="";
-    /*QDirIterator it(m_inputDir, QStringList() << "*.png", QDir::Files);
-    while (it.hasNext()) {
-        QString inFileFull = it.next();
-        QStringList l = inFileFull.split('/');
-        QString inFile = l[l.length()-1];
-        QString inFileSingle = inFile.split('.')[0];
-        m_processItems.append(new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx", 0, 0, inFileSingle, m_outputDir));
-//        break;
 
-    }*/
     int x = 1;
     int y = 22;
     Data::data.abort = false;
@@ -61,11 +53,44 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
         LMessage::lMessage.Error("Global pixel scale is not set (or is set to zero). Please specify a valid global pixel scale (such as 1).");
         return false;
     }
+    QStringList files;
+    Util::findFilesInSubDirectories(&files,m_inputDir,"png");
+
+//    pattern_match ; Pattern type; list; nesys, files, user, all; nesys
 
 
-    bool done = false;
-    while (!done) {
-        QString name = m_sheet->readStr(y,x);
+   // pattern_match ; Pattern type; list; nesys, files, user, all; nesys
+    QString regexp = "_s[0-9][0-9][0-9]_";
+    if (m_patternType=="user")
+        regexp = m_files[0];
+
+    if (m_patternType=="files") {
+
+    }
+    if (m_patternType == "nesys") {
+
+        QRegularExpression re(regexp);
+        QStringList newFiles;
+        for (QString s: files) {
+            QRegularExpressionMatch match = re.match(s);
+            if (match.hasMatch()) {
+                newFiles.append(match.captured(0));
+            }
+//            if (regExp.mat)
+        }
+        m_files = newFiles;
+    }
+
+
+
+
+//    bool done = false;
+    //while (!done) {
+
+    for (auto name: m_files) {
+        name = name.trimmed();
+  //      QString name = m_sheet->readStr(y,x);
+//        QString name = "NOT IMPLEMENTED YET";
         if (name!="") {
             bool isTiff = false;
             QString inFileFull = Util::findFileInDirectory(name,m_inputDir,"png","mask");
@@ -97,7 +122,7 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
 
             QString inFileSingle = inFile.split('.')[0];
             ProcessItem* pi = new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx",0, QPointF(1,1), inFileSingle, m_outputDir);
-            pi->m_pixelAreaScale = m_areaScale*m_sheet->readNum(y,x+1);
+            pi->m_pixelAreaScale = m_areaScale;//*m_sheet->readNum(y,x+1);
 
             if (pi->m_pixelAreaScale==0) {
                 LMessage::lMessage.Error("Pixel area scale is not set (or is set to zero) for image file '" + name +"'. Please specify a valid pixel area scale (such as 1).");
@@ -108,16 +133,13 @@ bool ProcessManagerPCounter::Build(LSheet* m_sheet)
             //qDebug() << name;
             pi->m_xmlData =m_xmlAnchor.findData(name);
             pi->m_id = name;//m_sheet->readStr(y,x+2);
-            pi->m_reportName = m_sheet->readStr(y,x+2);
-            if (pi->m_reportName=="")  pi->m_reportName = QString::number(m_sheet->readNum(y,x+2));
+            pi->m_reportName = name.split(".").first() + "r"; //m_sheet->readStr(y,x+2);
+//            if (pi->m_reportName=="")  pi->m_reportName = QString::number(m_sheet->readNum(y,x+2));
 
             if (isTiff)
                 pi->m_filetype = "tif";
 
             m_processItems.append(pi);
-        }
-        else {
-            done = true;
         }
         y++;
     }
@@ -332,51 +354,73 @@ void ProcessManagerPCounter::Execute()
 
 
 
-void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
+void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 {
-    ProcessManager::ReadHeader(m_sheet, book);
+    /*
+    type;  Type: ;  string; Quantifier
+    name; Name: ; string;
+    input_dir; Input directory; directory;
+    output_dir; Output directory; directory;
+    atlas_dir; Atlas directory; directory;
+    label_file; Label file; file;
+    xml_anchor_file; XML anchor file; file;
+    object_splitting; Object splotting; list; yes, no; yes
+    object_min_size; Object minimum size; number; 8
+    object_max_size; Object maximum size; number; 10000
+    global_pixel_scale; Global scale; number; 1
+    custom_region_file; Custom region file; file;
+    use_custom_masks; Use custom masks; list; yes, no; no
+    custom_mask_color ; Custom mask color ; color ; 255,255,255,255
+    output_report; Output reports; list; all, summary,none; all
+    output_report_type; Output report type; list; xlsx, csv
+*/
 
-    m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));
-    m_outputDir = Util::fixFolder(m_sheet->readStr(5,1));
+    m_inputDir = data->Get("input_dir")+QDir::separator(); //Util::fixFolder(m_sheet->readStr(4,1));
+    m_outputDir = data->Get("output_dir")+QDir::separator();;
 //    float col_r = m_sheet->readNum(3,1);
   //  float col_g = m_sheet->readNum(3,2);
     //float col_b = m_sheet->readNum(3,3);
 
 //    m_background = QColor(col_r, col_g, col_b);
-    QVector3D bg = Util::vecFromString(m_sheet->readStr(3,1));
-    m_background = QColor(bg.x(), bg.y(), bg.z());
+    m_background =  NutilTemplateItem::StringToColor(data->Get("custom_mask_color"));
 
+    m_patternType = data->Get("pattern_match");
 
-    m_dataType = m_sheet->readStr(19,1).toLower();
+    m_dataType = "quicknii";//m_sheet->readStr(19,1).toLower();
 
 
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
     if (m_dataType=="quicknii")
-       m_atlasDir = m_sheet->readStr(6,1);
+       m_atlasDir = data->Get("atlas_dir");
     if (m_dataType=="quicknii")
-    m_labelFile = m_sheet->readStr(7,1);
-    m_pixelCutoff = m_sheet->readNum(9,1);
-    m_pixelCutoffMax = m_sheet->readNum(9,2);
-    m_areaScale = m_sheet->readNum(10,1);
-    m_areaSplitting = m_sheet->readStr(8,1).toLower()=="yes"?1:0;
+        m_labelFile = data->Get("label_file");
+
+
+    m_files = data->Get("files").trimmed().simplified().split(",");
+
+    m_pixelCutoff = data->Get("object_min_size").toFloat();
+    m_pixelCutoffMax = data->Get("object_max_size").toFloat();
+    m_areaScale = data->Get("global_pixel_scale").toFloat();
+    m_areaSplitting = data->Get("object_splitting").toLower()=="yes"?1:0;
     if (m_dataType=="quicknii")
-        m_anchorFile = m_sheet->readStr(11,1);
-    m_niftiSize = m_sheet->readNum(12,1);
-    m_xyzScale = m_sheet->readNum(13,1);
-    m_reportSheetName = m_sheet->readStr(14,1);
-    m_units = m_sheet->readStr(10,2);
+        m_anchorFile = data->Get("xml_anchor_file");
+    m_niftiSize = 0;//m_sheet->readNum(12,1);
+    //m_xyzScale = m_sheet->readNum(13,1);
+    m_reportSheetName = data->Get("custom_region_file");
+    //m_units = m_sheet->readStr(10,2);
 
-    m_output3DPoints = m_sheet->readStr(13,2).toLower();
-    m_outputNifti = m_sheet->readStr(12,2).toLower()=="yes";
+    m_output3DPoints = "none";//m_sheet->readStr(13,2).toLower();
+    m_outputNifti = false;//m_sheet->readStr(12,2).toLower()=="yes";
 
-    m_useCustomMask = m_sheet->readStr(15,1).toLower()=="yes";
+/*    m_useCustomMask = m_sheet->readStr(15,1).toLower()=="yes";
     if (m_useCustomMask) {
         m_customMaskInclusionColors = Util::vecFromString(m_sheet->readStr(16,1));
     }
+*/
+    m_reportType = data->Get("output_report");
 
-    m_reportType = m_sheet->readStr(17,1).toLower();
-
-    m_outputFileType = m_sheet->readStr(18,1).toLower();
+    m_outputFileType = data->Get("output_report_type");;
+    qDebug() << "Output type: " <<m_outputFileType;
     if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
         LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv). Are you sure you are using the correct template version?");
         Data::data.abort = true;
@@ -390,15 +434,17 @@ void ProcessManagerPCounter::ReadHeader(LSheet *m_sheet, LBook* book)
     }
 //    qDebug() << "HERE";
 
-    LSheet* reportSheet = book->GetSheet(m_reportSheetName);
+    LBook* sbook = new LBookXlnt();
+    sbook->Load(m_reportSheetName);
+    LSheet* reportSheet = sbook->GetSheet(0);
     if (reportSheet == nullptr) {
-        LMessage::lMessage.Error("Error: could not find any report sheet named '" + m_reportSheetName + "' in the excel file");
+        LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
         Data::data.abort = true;
         return;
     }
     else
         GenerateReports(reportSheet);
-
+//*/
 
 }
 

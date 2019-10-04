@@ -64,9 +64,11 @@ class NutilTemplate
 public:
     NutilTemplate();
     QMap<QString,NutilTemplateItem*> m_items;
-
+    QString m_openFile = "";
     QVector<QString> m_sortList;
     void LoadTemplate(QString file);
+
+    QString Get(QString val);
 
     void Populate(QGridLayout* grid);
     void clearGrid(QGridLayout* grid);

@@ -5,9 +5,8 @@ ProcessManagerTiffCreator::ProcessManagerTiffCreator()
 
 }
 
-bool ProcessManagerTiffCreator::Build(LSheet *m_sheet)
+bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
 {
-    bool ok = false;
 
     m_processItems.clear();
     QDir directory(m_inputDir);
@@ -64,14 +63,14 @@ void ProcessManagerTiffCreator::Execute()
 
 }
 
-void ProcessManagerTiffCreator::ReadHeader(LSheet *m_sheet, LBook *book)
+void ProcessManagerTiffCreator::ReadHeader(NutilTemplate* data)
 {
-    ProcessManager::ReadHeader(m_sheet, book);
-    m_compression = m_sheet->readStr(2,1);
+    ProcessManager::ReadHeader(data);
+/*    m_compression = m_sheet->readStr(2,1);
     m_inputDir = m_sheet->readStr(3,1);
     m_outputDir = m_sheet->readStr(4,1);
     m_tileSize = m_sheet->readNum(5,1);
-
+*/
 
 
 }

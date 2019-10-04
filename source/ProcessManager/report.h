@@ -8,7 +8,7 @@
 //#include "libxl.h"
 #include "source/util/lmessage.h"
 #include "source/util/atlaslabel.h"
-#include "source/LBook/lbookxlnt.h".h"
+#include "source/LBook/lbookxlnt.h"
 #include "source/util/counter.h"
 #include "source/ProcessManager/processitem.h"
 #include "source/LBook/lbookfactory.h"

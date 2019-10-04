@@ -1,14 +1,14 @@
 #include "areafinder3d.h"
 #include "source/data.h"
 
-bool AreaFinder3D::Build(LSheet *m_sheet)
+bool AreaFinder3D::Build(NutilTemplate* data)
 {
     m_processItems.clear();
     int x = 1;
     int y = 12;
     bool done = false;
     while (!done) {
-        QString name = m_sheet->readStr(y,x);
+        //QString name = m_sheet->readStr(y,x);
 /*        if (name!="") {
             QString inFileFull = Util::findFileInDirectory(name,m_inputDir,"png");
             if (inFileFull=="") {
@@ -107,9 +107,9 @@ void AreaFinder3D::Execute()
 
 }
 
-void AreaFinder3D::ReadHeader(LSheet *m_sheet, LBook* book)
+void AreaFinder3D::ReadHeader(NutilTemplate* data)
 {
-    ProcessManager::ReadHeader(m_sheet, book);
+/*    ProcessManager::ReadHeader(m_sheet, book);
     m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));
     m_outputDir = Util::fixFolder(m_sheet->readStr(5,1));
 
@@ -120,6 +120,7 @@ void AreaFinder3D::ReadHeader(LSheet *m_sheet, LBook* book)
 //    m_areaScale = m_sheet->readNum(10,1);
 
     GenerateReports(m_sheet);
+    */
 }
 
 void AreaFinder3D::GenerateReports(LSheet *m_sheet)

@@ -21,9 +21,9 @@ public:
 
     Reports reports;
 
-    bool Build(LSheet* m_sheet) override;
+    bool Build(NutilTemplate* data) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
-    void ReadHeader(LSheet* m_sheet, LBook* book) override;
+    void ReadHeader(NutilTemplate* data) override;
 
     void GenerateReports(LSheet* m_sheet);
     bool Verify() override { return true; }

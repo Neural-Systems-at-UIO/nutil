@@ -33,10 +33,14 @@ class LSheetXlnt : public LSheet
 {
 public:
 
-    xlnt::worksheet* m_sheet;
+    xlnt::worksheet* m_sheet = nullptr;
+    xlnt::worksheet m_sheetO;
 
     LSheetXlnt(xlnt::worksheet sheet);
-    LSheetXlnt() {}
+    LSheetXlnt(LBookXlnt* book) {
+        m_sheetO = book->m_book.create_sheet();
+        m_sheet = &m_sheetO;
+    }
     double readNum(int i, int j) override;
     long readLong(int i, int j) override;
     QString readStr(int i, int j) override;

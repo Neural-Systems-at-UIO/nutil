@@ -17,12 +17,17 @@ NutilTemplate::NutilTemplate()
 void NutilTemplate::LoadTemplate(QString fileName)
 {
     QFile file(fileName);
+    if (!QFile::exists(fileName)) {
+        qDebug() << "Could not load template: "<<fileName;
+        return;
+    }
     file.open(QFile::ReadOnly);
     QTextStream in(&file);
     m_items.clear();
     m_sortList.clear();
     while(!in.atEnd()) {
         QString line = in.readLine();
+//        qDebug() << line;
         if (line.trimmed()=="")
             continue;
         if (line.trimmed().startsWith("#"))
@@ -42,9 +47,13 @@ void NutilTemplate::LoadTemplate(QString fileName)
             nti->m_items = fields[3].trimmed().simplified().split(",");
             for (QString& s : nti->m_items)
                 s = s.trimmed();
+
             if (fields.size()>=5)
                 nti->m_value = fields[4].trimmed();
        //     qDebug() << nti->m_value;
+        }
+        if (nti->m_type==NutilTemplateItem::TEXTFIELD) {
+            nti->m_value = fields[3];
         }
         if (nti->m_type==NutilTemplateItem::COLOR) {
             nti->m_items = fields[3].trimmed().simplified().split(",");
@@ -62,6 +71,17 @@ void NutilTemplate::LoadTemplate(QString fileName)
         m_items[nti->m_name] = nti;
         m_sortList.append(nti->m_name);
     }
+}
+
+QString NutilTemplate::Get(QString val)
+{
+    if (m_items.contains(val)) {
+        QString v = m_items[val]->m_value;
+        v = v.replace("#NNN","\n");
+        return v;
+    }
+    qDebug() << "NutilTemplate::Get error : could not find item for value '"<<val<<"'";
+    return "";
 }
 
 void NutilTemplate::Populate(QGridLayout *grid)
@@ -97,14 +117,36 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
                 QObject::connect(btn, &QPushButton::clicked, [=]() {
                     QString dir = QFileDialog::getExistingDirectory(nullptr, "Open Directory",
-                                                            "",
+                                                            nti->m_value,
                                                             QFileDialog::ShowDirsOnly
                                                             | QFileDialog::DontResolveSymlinks);
-                    nti->m_value = dir;
-                    le->setText(dir);
+
+                    if (!(dir=="")) {
+                        nti->m_value = dir;
+                        le->setText(dir);
+                    }
                 });
 
             }
+
+            if (nti->m_type==NutilTemplateItem::FILE) {
+
+                le->setEnabled(false);
+                QPushButton* btn = new QPushButton("...");
+                grid->addWidget(btn,row,2);
+
+
+                QObject::connect(btn, &QPushButton::clicked, [=]() {
+                    QString f = QFileDialog::getOpenFileName(nullptr, "Open Directory",
+                                                            nti->m_value);
+                    if (!(f=="")) {
+                        nti->m_value = f;
+                        le->setText(f);
+                    }
+                });
+
+            }
+
 
         }
 
@@ -141,8 +183,11 @@ void NutilTemplate::Populate(QGridLayout *grid)
             QTextEdit* te = new QTextEdit();
             grid->addWidget(te,row,1);
             nti->m_widget = te;
+            te->setText(nti->m_value);
             QObject::connect(te, &QTextEdit::textChanged, [=]() {
                 nti->m_value = te->toPlainText();
+                nti->m_value.replace("\n", "#NNN");
+//                qDebug() << nti->m_value;
             });
         }
 
@@ -177,6 +222,7 @@ void NutilTemplate::clearGrid(QGridLayout *grid)
 {
     for (int i = 0; i < grid->count(); i++)
     {
+        grid->itemAt(i)->widget()->disconnect();
         grid->itemAt(i)->widget()->deleteLater();
     }
 }
@@ -195,6 +241,8 @@ void NutilTemplate::Save(QString fname)
     if (QFile::exists(fname))
         QFile::remove(fname);
 
+    m_openFile = fname;
+
     QFile f(fname);
     f.open(QFile::WriteOnly | QFile::Text);
     QTextStream str(&f);
@@ -212,6 +260,8 @@ void NutilTemplate::Load(QString fname)
     if (!QFile::exists(fname))
         return;
 
+
+    m_openFile = fname;
     QFile f(fname);
     f.open(QFile::ReadOnly);
     QString dataStr = f.readAll();
@@ -225,9 +275,11 @@ void NutilTemplate::Load(QString fname)
         QStringList d =  k.trimmed().simplified().split("=");
         if (d.count()!=2)
             continue;
-        qDebug() << d;
+//        qDebug() << d;
         NutilTemplateItem* nti = m_items[d[0].trimmed()];
         nti->m_value = d[1].trimmed();
+        nti->m_value = nti->m_value.replace("#NNN","\n");
+
     }
     f.close();
 

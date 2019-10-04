@@ -9,13 +9,14 @@
 #include "source/ProcessManager/report.h"
 #include "source/ProcessManager/processitem.h"
 #include "source/util/lparameter.h"
-
+#include "source/IO/nutiltemplate.h"
 
 class ProcessManager
 {
 public:
     ProcessManager();
     LParameter m_parameters;
+
     bool m_processFinished;
 
     QVector<ProcessItem*> m_processItems;
@@ -30,9 +31,9 @@ public:
 
  //   QString m_globalMessage = "";
 
-    virtual bool Build(LSheet* m_sheet) = 0;
+    virtual bool Build(NutilTemplate* data) = 0;
     virtual void Execute() = 0;
-    virtual void ReadHeader(LSheet* m_sheet, LBook* book) { }
+    virtual void ReadHeader(NutilTemplate* data) { }
     virtual float CalculateRamNeededInGB()  { return 0;}
 
     virtual bool Verify() = 0;

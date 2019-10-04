@@ -11,9 +11,9 @@ public:
 
     ProcessManagerTiffCreator();
 
-    bool Build(LSheet* m_sheet) override;
+    bool Build(NutilTemplate* data) override;
     void Execute() override;
-    void ReadHeader(LSheet* m_sheet, LBook* book) override;
+    void ReadHeader(NutilTemplate* data) override;
     bool Verify() override { return true; }
 
 };

@@ -212,8 +212,8 @@ bool NutilApplication::Batch()
     }
     QString inFile = m_argv[2];
     int sheetIndex =  m_argv[3].toInt();
-    Nauto n(inFile, sheetIndex);
-    n.Execute();
+//    Nauto n(inFile, sheetIndex);
+//    n.Execute();
 
     return true;
 }

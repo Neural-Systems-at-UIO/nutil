@@ -30,8 +30,10 @@ LSheet* LBookXlnt::CreateSheet(QString sheetName)
             return nullptr;
         }
 //    m_book.create_sheet();
-    LSheet* l = new LSheetXlnt(m_book.copy_sheet(m_book.sheet_by_index(0)));
+//    LSheet* l = new LSheetXlnt(m_book.copy_sheet(m_book.sheet_by_index(0)));
+    LSheet* l = new LSheetXlnt(this);
     xlnt::worksheet* sheet =  ((LSheetXlnt*)l)->m_sheet;
+
     sheet->rows().clear_cells();
         // Create sheet CRASHES
 //    LSheet* l = new LSheetXlnt(m_book.create_sheet());

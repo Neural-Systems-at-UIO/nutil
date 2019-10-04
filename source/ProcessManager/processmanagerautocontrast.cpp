@@ -1,8 +1,8 @@
 #include "processmanagerautocontrast.h"
 
-bool ProcessManagerAutoContrast::Build(LSheet *m_sheet)
+bool ProcessManagerAutoContrast::Build(NutilTemplate* data)
 {
-    bool ok = false;
+/*    bool ok = false;
     int y = 10;
     int x = 2;
 
@@ -32,7 +32,7 @@ bool ProcessManagerAutoContrast::Build(LSheet *m_sheet)
     }
 
 //    m_pm.ExecuteTransform(m_compression, m_background, m_autoClip.toLower()=="yes", m_thumbnailSize, m_thumbType);
-
+*/
     return true;
 }
 
@@ -61,11 +61,11 @@ void ProcessManagerAutoContrast::Execute()
 
 }
 
-void ProcessManagerAutoContrast::ReadHeader(LSheet *m_sheet, LBook* book)
+void ProcessManagerAutoContrast::ReadHeader(NutilTemplate* data)
 {
-    ProcessManager::ReadHeader(m_sheet, book);
+    ProcessManager::ReadHeader(data);
 
-    m_compression = m_sheet->readStr(2,1);
+/*    m_compression = m_sheet->readStr(2,1);
     m_inputDir = m_sheet->readStr(4,1);
     m_outputDir = m_sheet->readStr(5,1);
     float col_r = m_sheet->readNum(3,1);
@@ -81,5 +81,5 @@ void ProcessManagerAutoContrast::ReadHeader(LSheet *m_sheet, LBook* book)
     m_background = QColor(col_r, col_g, col_b);
 
  //   LMessage::lMessage.Message("Input dir: " + m_inputDir);
-
+*/
 }

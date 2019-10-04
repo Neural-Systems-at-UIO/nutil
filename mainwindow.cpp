@@ -36,6 +36,13 @@ MainWindow::MainWindow(QWidget *parent) :
     DefaultSettings();
 
     ui->leProcessors->setText(QString::number(omp_get_max_threads()));
+    QStringList l = m_settings.getStringList("recent_files");
+    if (l.count()!=0) {
+        m_nt.Load(l[0]);
+        m_nt.Populate(ui->gridTemplate);
+    }
+    UpdateRecentList();
+
 }
 
 MainWindow::~MainWindow()
@@ -43,7 +50,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_btnLoad_clicked()
+void MainWindow::UpdateRecentList()
+{
+
+    if (m_nt.m_openFile!="") {
+        QStringList lst = m_settings.getStringList("recent_files");
+        lst.removeAll(m_nt.m_openFile);
+        lst.insert(0,m_nt.m_openFile);
+        m_settings.setStringList("recent_files",lst);
+    }
+
+
+    QStringList lst = m_settings.getStringList("recent_files");
+    ui->lstRecent->clear();
+    for (QString s: lst) {
+        QString small = s;
+        small = small.replace("\\","/");
+        small = small.split("/").last();
+        QListWidgetItem* wi = new QListWidgetItem(small);
+        wi->setData(Qt::UserRole,s);
+        ui->lstRecent->addItem(wi);
+    }
+
+    m_settings.Save();
+}
+
+/*void MainWindow::on_btnLoad_clicked()
 {
 
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -53,11 +85,16 @@ void MainWindow::on_btnLoad_clicked()
     m_nauto.Load(fileName);
     FillSheetCombo();
 }
+*/
 
 void MainWindow::on_btnStart_clicked()
 {
     LMessage::lMessage.Clear();
-    if (!m_nauto.m_book) {
+/*    if (!m_nauto.m_book) {
+        LMessage::lMessage.Error("No file loaded!");
+        return;
+    }*/
+    if (m_nt.m_openFile == "") {
         LMessage::lMessage.Error("No file loaded!");
         return;
     }
@@ -68,10 +105,12 @@ void MainWindow::on_btnStart_clicked()
     //m_nauto.m_sheetIndex = ui->cmbSheets->currentText();
 
     //m_nauto.Execute(); // Non-threaded
+    m_nauto.m_data = &m_nt;
     m_workerThread = new WorkerThread();
     m_workerThread->Init(&m_nauto);
     m_workerThread->start();
 
+    ui->tabMain->setCurrentIndex(1);
 
 }
 
@@ -88,6 +127,9 @@ void MainWindow::on_leProcessors_returnPressed()
 
 void MainWindow::AppQuit()
 {
+    m_settings.Save();
+    if (m_nt.m_openFile!="")
+        m_nt.Save(m_nt.m_openFile);
     close();
     Abort();
     //Wait maximum 1 second
@@ -129,14 +171,14 @@ void MainWindow::Abort()
 
 }
 
-void MainWindow::FillSheetCombo()
+/*void MainWindow::FillSheetCombo()
 {
     if (m_nauto.m_book==nullptr)
         return;
     //ui->cmbSheets->clear();
     //ui->cmbSheets->addItems(m_nauto.getSheetList());
 }
-
+*/
 void MainWindow::closeEvent(QCloseEvent * event)
 {
     AppQuit();
@@ -145,7 +187,7 @@ void MainWindow::closeEvent(QCloseEvent * event)
 void MainWindow::UpdateInfoTimer()
 {
     m_elapsedTimer=m_timer.elapsed();
-    if (!m_nauto.m_status == Nauto::Idle)
+    if (!(m_nauto.m_status == Nauto::Idle))
         ui->lblElapsedTime->setText("Elapsed time: " + Util::MilisecondToString(m_elapsedTimer));
 }
 
@@ -209,23 +251,28 @@ void MainWindow::on_actionSettings_triggered()
 
 void MainWindow::on_btnNew_clicked()
 {
-//    m_nt.LoadTemplate(":/text/Resources/text/"+ui->cmbNew->currentText().toLower()+".txt");
-
-    m_nt.LoadTemplate(":/Resources/text/transform.txt");
+    m_nt.LoadTemplate(":/Resources/text/"+ui->cmbNew->currentText().toLower()+".txt");
+//    qDebug() <<m_nt.m_items.keys();
+//    m_nt.LoadTemplate(":/Resources/text/transform.txt");
     m_nt.Populate(ui->gridTemplate);
-    m_settings.setString("current_file", m_newFileName);
+//    m_settings.setString("current_file", "");
+    m_nt.m_openFile = "";
+    UpdateRecentList();
 }
 
 
 void MainWindow::on_btnSave_clicked()
 {
-    QString fileName = m_settings.getString("current_file");
-    if (fileName==m_newFileName) {
+    QString fileName = m_nt.m_openFile;
+    if (fileName=="") {
         fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
                                    "",
                                    tr("Nutil (*.nut)"));
     }
-    m_nt.Save(fileName);
+    if (fileName!="") {
+        m_nt.Save(fileName);
+        UpdateRecentList();
+    }
 }
 
 void MainWindow::on_btnLoad_2_clicked()
@@ -236,5 +283,34 @@ void MainWindow::on_btnLoad_2_clicked()
 
     m_nt.Load(fileName);
     m_nt.Populate(ui->gridTemplate);
+    UpdateRecentList();
+}
 
+void MainWindow::on_lstRecent_itemDoubleClicked(QListWidgetItem *item)
+{
+    //    QObject::connect(ui->lstRecent, &QListWidget::doubleClicked, [=]() {
+    if (ui->lstRecent->currentRow()==-1)
+        return;
+    QStringList lst = m_settings.getStringList("recent_files");
+    QString v = lst[ui->lstRecent->currentRow()];
+    if (v!=m_nt.m_openFile) {
+        m_nt.Load(v);
+        m_nt.Populate(ui->gridTemplate);
+        UpdateRecentList();
+    }
+
+    //  });
+
+}
+
+void MainWindow::on_btnSaveAs_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File As"),
+                                   "",
+                                   tr("Nutil (*.nut)"));
+    if (fileName!="") {
+        m_nt.Save(fileName);
+        UpdateRecentList();
+
+    }
 }

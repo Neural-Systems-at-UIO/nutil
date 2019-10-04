@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1130</width>
+    <width>1404</width>
     <height>849</height>
    </rect>
   </property>
@@ -14,149 +14,7 @@
    <string>NeSys Utilities</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0">
-    <item row="2" column="0" colspan="4">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Operation</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,8">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <layout class="QGridLayout" name="gridLayout_4">
-            <item row="1" column="0">
-             <widget class="QPushButton" name="btnLoad_2">
-              <property name="text">
-               <string>Load</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QComboBox" name="cmbNew">
-              <item>
-               <property name="text">
-                <string>Transform</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Quantifier</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="btnSave">
-              <property name="text">
-               <string>Save</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QPushButton" name="btnNew">
-              <property name="text">
-               <string>New</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QPushButton" name="pushButton">
-              <property name="text">
-               <string>Help</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QListWidget" name="listWidget"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QGridLayout" name="gridTemplate">
-          <item row="0" column="0">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Process output</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QTextBrowser" name="txtInfo"/>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="Output">
-       <attribute name="title">
-        <string>Output images</string>
-       </attribute>
-      </widget>
-     </widget>
-    </item>
-    <item row="4" column="3">
-     <widget class="QLabel" name="lblElapsedTime">
-      <property name="text">
-       <string>Elapsed time:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="lblNewt">
-      <property name="maximumSize">
-       <size>
-        <width>200</width>
-        <height>128</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="scaledContents">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QLabel" name="lblMain">
-      <property name="font">
-       <font>
-        <family>Courier</family>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Version</string>
-      </property>
-     </widget>
-    </item>
+   <layout class="QGridLayout" name="gridLayout" rowstretch="1,1,100,1,1,1">
     <item row="1" column="1">
      <widget class="QLabel" name="lblMain_2">
       <property name="font">
@@ -169,9 +27,6 @@
        <string>njuːt</string>
       </property>
      </widget>
-    </item>
-    <item row="4" column="0" colspan="3">
-     <widget class="QTextBrowser" name="txtError"/>
     </item>
     <item row="3" column="0" colspan="4">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -215,6 +70,169 @@
       </item>
      </layout>
     </item>
+    <item row="1" column="2">
+     <widget class="QLabel" name="lblMain">
+      <property name="font">
+       <font>
+        <family>Courier</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Version</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="4">
+     <widget class="QTabWidget" name="tabMain">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>600</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>100000</height>
+        </size>
+       </property>
+       <attribute name="title">
+        <string>Operation</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,8">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QPushButton" name="btnNew">
+              <property name="text">
+               <string>New</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="btnSave">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="btnLoad_2">
+              <property name="text">
+               <string>Load</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="cmbNew">
+              <item>
+               <property name="text">
+                <string>Transform</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Quantifier</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="btnSaveAs">
+              <property name="text">
+               <string>Save As</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QListWidget" name="lstRecent"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridTemplate">
+          <item row="0" column="0">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Process output</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3" rowstretch="2,1">
+        <item row="0" column="0">
+         <widget class="QTextBrowser" name="txtInfo"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTextBrowser" name="txtError"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Output">
+       <attribute name="title">
+        <string>Output images</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="lblNewt">
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>128</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="lblElapsedTime">
+      <property name="text">
+       <string>Elapsed time:</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -222,7 +240,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1130</width>
+     <width>1404</width>
      <height>28</height>
     </rect>
    </property>

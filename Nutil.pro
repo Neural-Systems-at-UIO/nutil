@@ -167,8 +167,15 @@ linux*{
     LIBS += -fopenmp
     QMAKE_CXXFLAGS +=  -Ofast
 #    LIBS += -L$$PWD/libs/lua/ -llua -ldl
-    LIBS += -L$$OUT_PWD/../../lelib/Release/ -lLeLib
-#    LIBS += -ldl
+
+    linux:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../lelib/Release/
+    linux:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../lelib/Debug/
+
+
+
+#    LIBS += -L$$OUT_PWD/../../lelib/Release/ -lLeLib
+#    LIBS += -L$$OUT_PWD/../../lelib/Debug/ -lLeLib
+    LIBS += -lLeLib
 
 
 }
@@ -185,6 +192,7 @@ linux*{
 #DEPENDPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
 
 DISTFILES += \
+    Resources/text/quantifier.txt \
     Resources/text/transform.txt
 
 RESOURCES += \

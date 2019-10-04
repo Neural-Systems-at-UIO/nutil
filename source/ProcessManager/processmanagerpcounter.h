@@ -3,7 +3,7 @@
 
 #include "source/ProcessManager/processmanager.h"
 #include "source/IO/xmlanchor.h"
-
+#include <QRegularExpression>
 class ProcessManagerPCounter : public ProcessManager {
 
 public:
@@ -16,6 +16,8 @@ public:
     QString m_anchorFile;
     QString m_reportSheetName;
     QString m_units = "mm";
+    QString m_patternType;
+    QStringList m_files;
 
 
     QString m_reportDirectory = "Reports";
@@ -52,9 +54,9 @@ public:
     XMLAnchor m_xmlAnchor;
 
     void LoadXML();
-    bool Build(LSheet* m_sheet) override;
+    bool Build(NutilTemplate* data) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
-    void ReadHeader(LSheet* m_sheet, LBook* book) override;
+    void ReadHeader(NutilTemplate* data) override;
 
     void GenerateReports(LSheet* m_sheet);
     bool Verify() override { return true; }

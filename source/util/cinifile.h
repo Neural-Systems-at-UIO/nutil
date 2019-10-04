@@ -76,12 +76,13 @@ public:
         return QColor(0,0,0);
     }
 
-    QStringList getStringList(QString name) {
+    QStringList nullList;
+    QStringList& getStringList(QString name) {
         for (int i=0;i<items.size();i++) {
             if (items[i].name==name.toLower().trimmed())
                 return items[i].lst;
         }
-        return QStringList();
+        return nullList;
     }
 
     void setString(QString name, QString val) {
@@ -297,7 +298,7 @@ void Save(QString fname)
     file.open(QIODevice::WriteOnly| QIODevice::Text);
     QTextStream f(&file);
     for (CItem i: items) {
-        //  qDebug() << i.name << " " << QString::number(i.dval) << ", " << i.strval << "\n";
+//          qDebug() << i.name << " " << QString::number(i.dval) << ", " << i.strval << "\n";
         f << i.name << " = ";
         if (i.strval!="")
            f << i.strval << "\n";

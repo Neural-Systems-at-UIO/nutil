@@ -4,9 +4,9 @@ output_compression; Output compression; list; jpeg,lzw,none; lzw
 input_dir; Input directory; directory; Default value
 output_dir; Output directory; directory;
 background_color ; Background color ; color ; 255,255,255,5
+color_spread; Color spread:; number, 5
 thumbnail_size; Thumbnail size: ; number; 1
 auto_crop; Auto cropping : ; list; yes,no; yes
 only_thumbnails; Only create thumbnails; list; yes, no; no
 files; List of data; textfield;  
-
 

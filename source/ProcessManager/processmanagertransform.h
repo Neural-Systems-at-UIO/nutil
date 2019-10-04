@@ -15,9 +15,9 @@ public:
     bool m_onlyThumbs = false;
     float m_thumbnailSize;
 
-    bool Build(LSheet* m_sheet) override;
+    bool Build(NutilTemplate* data) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
-    void ReadHeader(LSheet* m_sheet, LBook* book) override;
+    void ReadHeader(NutilTemplate* data) override;
     bool Verify() override;
 
 };

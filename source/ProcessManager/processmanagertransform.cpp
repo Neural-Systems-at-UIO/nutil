@@ -1,21 +1,28 @@
 #include "processmanagertransform.h"
 #include "source/data.h"
-bool ProcessManagerTransform::Build(LSheet *m_sheet)
+bool ProcessManagerTransform::Build(NutilTemplate* data)
 {
     bool ok = false;
     int y = 10;
     int x = 0;
 
     m_processItems.clear();
+    QString dt = data->m_items["files"]->m_value;
+    dt = dt.replace("#NNN","\n");
+    QStringList dataList =dt.split("\n");
+//    //while (!ok)
 
-    while (!ok) {
-        QString inFile = m_sheet->readStr(y,x);
+    for (QString f : dataList)
+    {
+//        qDebug() << f;
+        QStringList d = f.simplified().trimmed().split(" ");
+        QString inFile = d[0];
         if (inFile == "") {
             ok = true;
             break;
         }
 //        inFile += ".tif";
-        qDebug() << "Searching for : " << inFile << " in " << m_inputDir;
+  //      qDebug() << "Searching for : " << inFile << " in " << m_inputDir;
         QString searchFile = Util::findFileInSubDirectories(inFile,m_inputDir,"");
 
 /*        if (searchFile=="") {
@@ -33,7 +40,7 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
         }
         inFile = searchFile;
 
-        qDebug() << inFile;
+//        qDebug() << inFile;
 
         QFile test(inFile);
         if(!test.exists()) {
@@ -42,23 +49,25 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
             return false;
         }
 
-        QString outFile = m_sheet->readStr(y,x+1) + ".tif";
+        QString outFile = d[1].trimmed() + ".tif";
         if (outFile==".tif") {
 
             LMessage::lMessage.Error("Output file not specified for : '"+inFile+"'.");
             return false;
         }
 
-        float angle = m_sheet->readNum(y,x+2);
+        float angle = d[2].toFloat();
 
         angle = angle/360*(2*M_PI);
 
-        float scaleX = m_sheet->readNum(y,x+3);
-        float scaleY = m_sheet->readNum(y,x+4);
+        float scaleX = d[3].toFloat();//m_sheet->readNum(y,x+3);
+        float scaleY = d[4].toFloat();//m_sheet->readNum(y,x+4);
         if (scaleX==0)
             scaleX = 1;
         if (scaleY==0)
             scaleY = 1;
+
+//        qDebug() << "Scales : " << scaleX << scaleY;
 
         QPointF scale(scaleX, scaleY);
         m_processItems.append(new ProcessItem(inFile, m_outputDir+ outFile, angle, scale, outFile, m_outputDir));
@@ -71,7 +80,7 @@ bool ProcessManagerTransform::Build(LSheet *m_sheet)
     }
 
 
-
+    return true;
 //    m_pm.ExecuteTransform(m_compression, m_background, m_autoClip.toLower()=="yes", m_thumbnailSize, m_thumbType);
 
 }
@@ -94,7 +103,6 @@ void ProcessManagerTransform::Execute()
     Util::globalTimer.restart();
     m_mainCounter = Counter(m_processes.length(),"",false);
 
-    int n=3;
 
 #pragma omp parallel for num_threads(m_numProcessors)
 
@@ -105,11 +113,11 @@ void ProcessManagerTransform::Execute()
 
         if (!m_onlyThumbs) {
 
-        m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_colorSpread, m_autoClip.toLower()=="yes");
-        if (Data::data.abort || Util::CancelSignal) {
-            LMessage::lMessage.Log("User aborting!");
-            //break;
-        }
+            m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_colorSpread, m_autoClip.toLower()=="yes");
+            if (Data::data.abort || Util::CancelSignal) {
+                LMessage::lMessage.Log("User aborting!");
+                //break;
+            }
         }
         if (m_thumbnailSize>0) {
             QString tfolder = pi->m_outFolder + "/thumbnails/";
@@ -118,7 +126,7 @@ void ProcessManagerTransform::Execute()
 
 
             QString thumbOut = tfolder + pi->m_outFileSingle.split('.')[0] + "_thumbnail." + m_thumbType;
-            qDebug() <<"*** : "<< pi->m_outFileSingle;
+//            qDebug() <<"*** : "<< pi->m_outFileSingle;
 
             if (m_thumbnailSize!=0) {
 
@@ -135,31 +143,26 @@ void ProcessManagerTransform::Execute()
 
 }
 
-void ProcessManagerTransform::ReadHeader(LSheet* m_sheet, LBook* book)
+void ProcessManagerTransform::ReadHeader(NutilTemplate* data)
 {
-    ProcessManager::ReadHeader(m_sheet, book);
 
-    m_compression = m_sheet->readStr(2,1);
-    m_inputDir = Util::fixFolder(m_sheet->readStr(4,1));
-    m_outputDir = Util::fixFolder(m_sheet->readStr(5,1));
-//    float col_r = m_sheet->readNum(3,1);
-  //  float col_g = m_sheet->readNum(3,2);
-    //float col_b = m_sheet->readNum(3,3);
-    QVector3D color = Util::vecFromString(m_sheet->readStr(3,1));
+    m_compression = data->Get("output_compression");
+    m_inputDir = Util::fixFolder(data->Get("input_dir"));
+    m_outputDir = Util::fixFolder(data->Get("output_dir"));
+    m_background =  NutilTemplateItem::StringToColor(data->Get("background_color"));
 
-    m_colorSpread = m_sheet->readNum(3,2);
+    m_colorSpread = data->Get("color_spread").toFloat();
     if (m_colorSpread==0) m_colorSpread=1;
-    m_autoClip = m_sheet->readStr(7,1);
-    m_onlyThumbs = (m_sheet->readStr(8,1).toLower()=="yes");
+    m_autoClip = data->Get("auto_crop");
+    m_onlyThumbs = (data->Get("only_thumbnails").toLower()=="yes");
 
 
-    m_thumbnailSize = m_sheet->readNum(6,1);
+    m_thumbnailSize = data->Get("thumbnail_size").toFloat();
 
 //    qDebug() << m_thumbnailSize;
   //  exit(1);
 
-    m_thumbType = m_sheet->readStr(6,2);
-    m_background = QColor(color.x(), color.y(), color.z());
+    m_thumbType = "png";
 
     LMessage::lMessage.Message("Input dir: " + m_inputDir);
 }
