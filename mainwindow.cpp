@@ -314,3 +314,8 @@ void MainWindow::on_btnSaveAs_clicked()
 
     }
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    qApp->quit();
+}

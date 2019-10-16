@@ -194,7 +194,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
         QString helpfn = ":Resources/text/help/"+nti->m_name.toLower()+".rtf";
         if (QFile::exists(helpfn)) {
 
-            QPushButton* help = new QPushButton("?");
+            QPushButton* help = new QPushButton("Help");
             grid->addWidget(help,row,3);
 
 
@@ -277,8 +277,13 @@ void NutilTemplate::Load(QString fname)
             continue;
 //        qDebug() << d;
         NutilTemplateItem* nti = m_items[d[0].trimmed()];
-        nti->m_value = d[1].trimmed();
-        nti->m_value = nti->m_value.replace("#NNN","\n");
+        if (nti==nullptr) {
+            qDebug() << "Warning: could not find parameter " <<d[0].trimmed();
+        }
+        else {
+            nti->m_value = d[1].trimmed();
+            nti->m_value = nti->m_value.replace("#NNN","\n");
+        }
 
     }
     f.close();

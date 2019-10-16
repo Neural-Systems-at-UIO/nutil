@@ -8,5 +8,6 @@
         <file>Resources/text/quantifier.txt</file>
         <file>Resources/text/help/label_file.rtf</file>
         <file>Resources/text/tiffcreator.txt</file>
+        <file>Resources/text/help/custom_mask_color.rtf</file>
     </qresource>
 </RCC>

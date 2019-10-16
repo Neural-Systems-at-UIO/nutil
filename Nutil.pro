@@ -149,7 +149,7 @@ linux*{
 
 #LELIB INCLUDES
 
- win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lelib/Release/ -llelib
+ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../LeLib/release/ -llelib
  else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../LeLib/debug/ -llelib
  else:symbian: LIBS += -llelib
  #else:unix: LIBS += -L$$OUT_PWD/../LeLib/Release/ -lLeLib
