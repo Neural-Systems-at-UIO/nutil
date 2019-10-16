@@ -60,7 +60,8 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 
    // pattern_match ; Pattern type; list; nesys, files, user, all; nesys
-    QString regexp = "_s[0-9][0-9][0-9]_";
+    QString regexp = "_s[0-9][0-9][0-9]";
+
     if (m_patternType=="user")
         regexp = m_files[0];
 
@@ -226,6 +227,7 @@ void ProcessManagerPCounter::Execute()
         QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
 
 
+
         QString maskFile = "";
         if (m_useCustomMask) {
   //          qDebug() << "Search for mask file" << pi->m_id;
@@ -273,10 +275,11 @@ void ProcessManagerPCounter::Execute()
             LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
             if (!Data::data.abort)
             {
+                QVector3D col = QVector3D(m_customMaskInclusionColors.red(),m_customMaskInclusionColors.green(),m_customMaskInclusionColors.blue());
                 if (m_areaSplitting!=1)
-                    m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
+                    m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile, col);
                 else
-                    m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile,m_customMaskInclusionColors);
+                    m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile, col);
 
             }
 
@@ -382,7 +385,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     //float col_b = m_sheet->readNum(3,3);
 
 //    m_background = QColor(col_r, col_g, col_b);
-    m_background =  NutilTemplateItem::StringToColor(data->Get("custom_mask_color"));
+    m_background =  NutilTemplateItem::StringToColor(data->Get("extraction_color"));
 
     m_patternType = data->Get("pattern_match");
 
@@ -404,23 +407,22 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_areaSplitting = data->Get("object_splitting").toLower()=="yes"?1:0;
     if (m_dataType=="quicknii")
         m_anchorFile = data->Get("xml_anchor_file");
-    m_niftiSize = 0;//m_sheet->readNum(12,1);
+    m_niftiSize = data->Get("nifti_size").toInt();//m_sheet->readNum(12,1);
     //m_xyzScale = m_sheet->readNum(13,1);
     m_reportSheetName = data->Get("custom_region_file");
     //m_units = m_sheet->readStr(10,2);
 
-    m_output3DPoints = "none";//m_sheet->readStr(13,2).toLower();
-    m_outputNifti = false;//m_sheet->readStr(12,2).toLower()=="yes";
+    m_output3DPoints = data->Get("coordinate_extraction").toLower();
+    m_outputNifti = m_niftiSize!=0;
 
-/*    m_useCustomMask = m_sheet->readStr(15,1).toLower()=="yes";
-    if (m_useCustomMask) {
-        m_customMaskInclusionColors = Util::vecFromString(m_sheet->readStr(16,1));
-    }
-*/
+    m_useCustomMask = data->Get("use_custom_mask").toLower()=="yes";
+    if (m_useCustomMask)
+        m_customMaskInclusionColors = NutilTemplateItem::StringToColor(data->Get("custom_mask_color"));
+
     m_reportType = data->Get("output_report");
 
     m_outputFileType = data->Get("output_report_type");;
-    qDebug() << "Output type: " <<m_outputFileType;
+//    qDebug() << "Output type: " <<m_outputFileType;
     if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
         LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv). Are you sure you are using the correct template version?");
         Data::data.abort = true;

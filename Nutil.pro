@@ -193,7 +193,7 @@ linux*{
 
 DISTFILES += \
     Resources/text/quantifier.txt \
-    Resources/text/transform.txt
+    Resources/text/tiffcreator.txt
 
 RESOURCES += \
     resources.qrc

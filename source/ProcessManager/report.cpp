@@ -544,6 +544,8 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;
 
+
+
                 if (cnt2!=0) o+=",\n";
 //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
                 o+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());

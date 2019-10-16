@@ -8,11 +8,14 @@ xml_anchor_file; XML anchor file; file;
 object_splitting; Object splitting; list; yes, no; yes
 object_min_size; Object minimum size; number; 8
 object_max_size; Object maximum size; number; 10000
+extraction_color ; Extraction color ; color ; 255,0,0,255
 global_pixel_scale; Global scale; number; 1
 custom_region_file; Custom region file; file;
 use_custom_masks; Use custom masks; list; yes, no; no
 custom_mask_color ; Custom mask color ; color ; 255,255,255,255
 output_report; Output reports; list; all, summary,none; all
 output_report_type; Output report type; list; xlsx, csv; xlsx
+nifti_size; Nifti size ; list; 0; 64,128,256,512; 0
+coordinate_extraction; Coordinate extraction;list; All, None, Slices, Summary; All
 pattern_match ; Pattern type; list; nesys, files, user; nesys
 files; Files; textfield;

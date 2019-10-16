@@ -226,12 +226,12 @@ void NutilProcess::ReleasePCounter()
 //    ClearAreaPixels();
 }
 
-bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector3D colorWidth, QVector<Area>* areas, int pixelCutoff, int pMax, QString maskFile, QVector3D maskColor)
+bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector3D colorWidth, QVector<Area>* areas, int pixelCutoff, int pMax, QString maskFile, QColor maskColor)
 {
 //    qDebug() << inFile;
     lImage.Load(inFile);
     if (maskFile!="")
-        lImage.ApplyMask(maskFile,maskColor, testColor);
+        lImage.ApplyMask(maskFile,QVector3D(maskColor.red(), maskColor.green(), maskColor.blue()), testColor);
 
     m_infoText = "Finding areas";
     lImage.FindAreas(testColor, colorWidth, &m_counter, areas, pixelCutoff, pMax);

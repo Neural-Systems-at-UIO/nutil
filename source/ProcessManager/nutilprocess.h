@@ -35,7 +35,7 @@ public:
     void ClearAreaPixels();
     void ReleasePCounter();
 
-    bool PCounter(QString inFile, QColor counter,  QVector3D colorWidth, QVector<Area>* areas, int pixelCutoff, int pMax, QString maskFile, QVector3D maskColor);
+    bool PCounter(QString inFile, QColor counter,  QVector3D colorWidth, QVector<Area>* areas, int pixelCutoff, int pMax, QString maskFile, QColor maskColor);
 
 //    m_processes[i]->PCounter(+ pi->m_inFile, m_inputDir, m_background, pi->m_outFile, m_AtlasDir, m_labelFile);
 
