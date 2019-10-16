@@ -192,6 +192,7 @@ linux*{
 #DEPENDPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
 
 DISTFILES += \
+    Resources/text/help/input_dir.rtf \
     Resources/text/quantifier.txt \
     Resources/text/tiffcreator.txt
 

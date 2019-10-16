@@ -9,5 +9,6 @@
         <file>Resources/text/help/label_file.rtf</file>
         <file>Resources/text/tiffcreator.txt</file>
         <file>Resources/text/help/custom_mask_color.rtf</file>
+        <file>Resources/text/help/input_dir.rtf</file>
     </qresource>
 </RCC>
