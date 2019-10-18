@@ -11,5 +11,8 @@
         <file>Resources/text/help/custom_mask_color.rtf</file>
         <file>Resources/text/help/input_dir.rtf</file>
         <file>Resources/text/help/output_dir.rtf</file>
+        <file>Resources/text/help/atlas_dir.rtf</file>
+        <file>Resources/text/help/object_splitting.rtf</file>
+        <file>Resources/text/help/object_min_size.rtf</file>
     </qresource>
 </RCC>
