@@ -62,6 +62,7 @@ void MainWindow::UpdateRecentList()
 
 
     QStringList lst = m_settings.getStringList("recent_files");
+
     ui->lstRecent->clear();
     for (QString s: lst) {
         QString small = s;

@@ -12,7 +12,7 @@ extraction_color ; Extraction colour ; color ; 255,0,0,255
 global_pixel_scale; Global scale; number; 1
 custom_region_file; Custom region file; file;
 use_custom_masks; Use custom masks; list; yes, no; no
-custom_mask_color ; Custom mask color ; color ; 255,255,255,255
+custom_mask_color ; Custom mask colour ; color ; 255,255,255,255
 output_report; Output reports; list; all, summary,none; all
 output_report_type; Output report type; list; xlsx, csv; xlsx
 nifti_size; Nifti size ; list; 0; 64,128,256,512; 0
