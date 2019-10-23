@@ -22,6 +22,25 @@ NutilApplication::NutilApplication(int argc, char *argv[])
         m_argv.append(QString(argv[i]));
 }
 
+bool Execute(QString fileName) {
+    try {
+        Data::data.isConsole = true;
+        NutilTemplate nt;
+        nt.Load(fileName);
+        Nauto nauto;
+        nauto.m_data = &nt;
+        nauto.m_numThreads=omp_get_max_threads();
+        nauto.m_filename = fileName;
+        nauto.Execute();
+    }
+    catch (QString e) {
+        return false;
+    }
+
+    return true;
+}
+
+
 void NutilApplication::exec()
 {
     bool ok = false;
@@ -30,9 +49,12 @@ void NutilApplication::exec()
         PrintUsage();
         exit(1);
     }
-    QString cmd = m_argv[1];
+    QString file = m_argv[1];
 
-    if (cmd == "transform")
+
+    ok = Execute(file);
+
+/*    if (cmd == "transform")
         ok = Transform();
 
     if (cmd == "transform_tiff")
@@ -41,7 +63,7 @@ void NutilApplication::exec()
     if (cmd == "batch") {
         ok = Batch();
     }
-
+*/
     if (!ok) {
         PrintUsage();
     }
@@ -193,11 +215,11 @@ void NutilApplication::PrintUsage()
     qDebug() << QImageReader::supportedImageFormats() << endl;
 
     cout << "Usage: "<< endl;
-    cout << "  Nutil <command> <parameters>" << endl;
-    cout << "  Commands: "<< endl;
-    cout << "    batch [ excel file ] [ int sheet no ]" << endl;
-    cout << "    transform [img input] [img output] [angle in rad] [scale] [bg col r] [bg col g] [bg col b] [bg col a]"<<endl;
-    cout << "    transform_tiff [img input] [img output] [compression = none, jpeg, lzw] [angle in rad] [scale] [bg col b] [bg col g] [bg col r] [bg col a]" << endl;
+    cout << "  Nutil <file>" << endl;
+    cout << " " << endl;
+//    cout << "    batch [ excel file ] [ int sheet no ]" << endl;
+//    cout << "    transform [img input] [img output] [angle in rad] [scale] [bg col r] [bg col g] [bg col b] [bg col a]"<<endl;
+//    cout << "    transform_tiff [img input] [img output] [compression = none, jpeg, lzw] [angle in rad] [scale] [bg col b] [bg col g] [bg col r] [bg col a]" << endl;
     cout << " " << endl;
     cout << "If anything crashes or acts naughy, don't hesitate contacting leuat@irio.co.uk" << endl;
     cout << "" << endl;

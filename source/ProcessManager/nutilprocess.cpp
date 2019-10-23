@@ -228,7 +228,6 @@ void NutilProcess::ReleasePCounter()
 
 bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector3D colorWidth, QVector<Area>* areas, int pixelCutoff, int pMax, QString maskFile, QColor maskColor)
 {
-//    qDebug() << inFile;
     lImage.Load(inFile);
     if (maskFile!="")
         lImage.ApplyMask(maskFile,QVector3D(maskColor.red(), maskColor.green(), maskColor.blue()), testColor);
