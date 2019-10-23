@@ -111,7 +111,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
             if (nti->m_type==NutilTemplateItem::DIRECTORY) {
 
                 le->setEnabled(false);
-                QPushButton* btn = new QPushButton("...");
+                QPushButton* btn = new QPushButton("Select directory");
                 grid->addWidget(btn,row,2);
 
 
@@ -132,7 +132,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
             if (nti->m_type==NutilTemplateItem::FILE) {
 
                 le->setEnabled(false);
-                QPushButton* btn = new QPushButton("...");
+                QPushButton* btn = new QPushButton("Select file");
                 grid->addWidget(btn,row,2);
 
 
