@@ -1,4 +1,4 @@
-type;  Type: ;  string; Quantifier
+type; Type: ;  string; Quantifier
 name; Name: ; string; 
 input_dir; Input directory; directory;
 output_dir; Output directory; directory;

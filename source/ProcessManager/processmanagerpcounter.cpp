@@ -56,11 +56,13 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     QStringList files;
     Util::findFilesInSubDirectories(&files,m_inputDir,"png");
 
+
+
 //    pattern_match ; Pattern type; list; nesys, files, user, all; nesys
 
 
    // pattern_match ; Pattern type; list; nesys, files, user, all; nesys
-    QString regexp = "_s[0-9][0-9][0-9]";
+    QString regexp = "_s[0-9]*";
 
     if (m_patternType=="user")
         regexp = m_files[0];

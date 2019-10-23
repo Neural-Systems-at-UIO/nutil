@@ -84,19 +84,30 @@ QString NutilTemplate::Get(QString val)
     return "";
 }
 
+
+
+
 void NutilTemplate::Populate(QGridLayout *grid)
 {
     int row = 0;
     clearGrid(grid);
     m_grid = grid;
+
+    int textColumn = 0;
+    int helpColumn = 1;
+    int valueColumn = 2;
+    int buttonColumn = 3;
+
+
     for (QString name : m_sortList) {
         NutilTemplateItem* nti = m_items[name];
 
-        grid->addWidget(new QLabel(nti->m_text),row,0);
+        grid->addWidget(new QLabel(nti->m_text),row,textColumn);
+
 
         if (nti->m_type==NutilTemplateItem::STRING || nti->m_type==NutilTemplateItem::FILE || nti->m_type==NutilTemplateItem::DIRECTORY || nti->m_type==NutilTemplateItem::NUMBER) {
             QLineEdit* le = new QLineEdit();
-            grid->addWidget(le,row,1);
+            grid->addWidget(le,row,valueColumn);
             nti->m_widget = le;
             le->setText(nti->m_value);
             if (nti->m_name=="type")
@@ -112,7 +123,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
                 le->setEnabled(false);
                 QPushButton* btn = new QPushButton("Select directory");
-                grid->addWidget(btn,row,2);
+                grid->addWidget(btn,row,buttonColumn);
 
 
                 QObject::connect(btn, &QPushButton::clicked, [=]() {
@@ -133,7 +144,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
                 le->setEnabled(false);
                 QPushButton* btn = new QPushButton("Select file");
-                grid->addWidget(btn,row,2);
+                grid->addWidget(btn,row,buttonColumn);
 
 
                 QObject::connect(btn, &QPushButton::clicked, [=]() {
@@ -154,7 +165,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
             QPushButton* btn = new QPushButton("");
             btn->setStyleSheet("background-color: #"+QString::number(NutilTemplateItem::StringToColor(nti->m_value).rgb(),16));
 
-            grid->addWidget(btn,row,1);
+            grid->addWidget(btn,row,valueColumn);
 
             QObject::connect(btn, &QPushButton::clicked, [=]() {
                 nti->m_color = QColorDialog::getColor(nti->m_color, nullptr );
@@ -170,7 +181,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
         if (nti->m_type==NutilTemplateItem::LIST) {
             QComboBox* cmb = new QComboBox();
             cmb->addItems(nti->m_items);
-            grid->addWidget(cmb,row,1);
+            grid->addWidget(cmb,row,valueColumn);
             nti->m_widget = cmb;
             QString val = nti->m_value;
             QObject::connect(cmb, &QComboBox::currentTextChanged, [=]() {
@@ -181,7 +192,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
         }
         if (nti->m_type==NutilTemplateItem::TEXTFIELD) {
             QTextEdit* te = new QTextEdit();
-            grid->addWidget(te,row,1);
+            grid->addWidget(te,row,valueColumn);
             nti->m_widget = te;
             te->setText(nti->m_value);
             QObject::connect(te, &QTextEdit::textChanged, [=]() {
@@ -195,7 +206,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
         if (QFile::exists(helpfn)) {
 
             QPushButton* help = new QPushButton("Help");
-            grid->addWidget(help,row,3);
+            grid->addWidget(help,row,helpColumn);
 
 
             QObject::connect(help, &QPushButton::clicked, [=]() {
@@ -214,9 +225,10 @@ void NutilTemplate::Populate(QGridLayout *grid)
         row++;
     }
 
-    grid->setColumnStretch(0,2);
-    grid->setColumnStretch(1,5);
-    grid->setColumnStretch(2,1);
+    grid->setColumnStretch(textColumn,10);
+    grid->setColumnStretch(helpColumn,5);
+    grid->setColumnStretch(valueColumn,30);
+    grid->setColumnStretch(buttonColumn,10);
 }
 void NutilTemplate::clearGrid(QGridLayout *grid)
 {
