@@ -62,6 +62,7 @@ void MainWindow::UpdateRecentList()
 
 
     QStringList lst = m_settings.getStringList("recent_files");
+
     ui->lstRecent->clear();
     for (QString s: lst) {
         QString small = s;
@@ -281,9 +282,11 @@ void MainWindow::on_btnLoad_2_clicked()
                                    "",
                                    tr("Nutil (*.nut)"));
 
-    m_nt.Load(fileName);
-    m_nt.Populate(ui->gridTemplate);
-    UpdateRecentList();
+    if (fileName!="") {
+        m_nt.Load(fileName);
+        m_nt.Populate(ui->gridTemplate);
+        UpdateRecentList();
+    }
 }
 
 void MainWindow::on_lstRecent_itemDoubleClicked(QListWidgetItem *item)
