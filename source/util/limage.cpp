@@ -105,8 +105,9 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
     m_index = createImage(m_image->width(), m_image->height());
 
 
-    bool isBfs = Data::data.m_settings->getString("fill_method")=="bfs";
-//    qDebug() << "Method is bfs:" << isBfs;
+    bool isBfs = true;
+    if (Data::data.m_settings!=nullptr)
+        isBfs = Data::data.m_settings->getString("fill_method")=="bfs";
     m_index->fill(unset);
     for (int i=0;i<m_index->width();i++)
         for (int j=0;j<m_index->height();j++)
@@ -328,6 +329,8 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
     if (counter!=nullptr)
         counter->Init(m_areas->count());
 
+
+
     for (Area& a: *m_areas) {
         QRgb on = QColor(200,0,0,255).rgba();
         if (a.atlasLabel != nullptr) {
@@ -397,7 +400,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
     }
 
     NLIQImage* qi = dynamic_cast<NLIQImage*>(m_index);
-    if (qi!=nullptr) {
+    if (qi!=nullptr && !Data::data.isConsole) {
         QPainter painter(&qi->m_image);
         QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
         painter.setPen(penHText);

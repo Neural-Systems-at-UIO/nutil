@@ -294,8 +294,11 @@ void MainWindow::on_lstRecent_itemDoubleClicked(QListWidgetItem *item)
     //    QObject::connect(ui->lstRecent, &QListWidget::doubleClicked, [=]() {
     if (ui->lstRecent->currentRow()==-1)
         return;
+
     QStringList lst = m_settings.getStringList("recent_files");
+
     QString v = lst[ui->lstRecent->currentRow()];
+
     if (v!=m_nt.m_openFile) {
         m_nt.Load(v);
         m_nt.Populate(ui->gridTemplate);

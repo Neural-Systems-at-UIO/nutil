@@ -137,7 +137,8 @@ OBJECTS       = main.o \
 		moc_dialogtiff.o \
 		moc_updatethread.o \
 		moc_dialogsettings.o
-DIST          = ../Resources/text/quantifier.txt \
+DIST          = ../Resources/text/help/input_dir.rtf \
+		../Resources/text/quantifier.txt \
 		../Resources/text/tiffcreator.txt \
 		../../../../Qt/5.13.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.13.0/gcc_64/mkspecs/common/unix.conf \
@@ -798,9 +799,25 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/tiffcreator.txt \
 		../Resources/text/transform.txt \
 		../Resources/text/quantifier.txt \
+		../Resources/text/help/use_custom_masks.rtf \
+		../Resources/text/help/custom_region_file.rtf \
+		../Resources/text/help/output_dir.rtf \
+		../Resources/text/help/global_pixel_scale.rtf \
+		../Resources/text/help/extraction_color.rtf \
+		../Resources/text/help/pattern_match.rtf \
+		../Resources/text/help/object_max_size.rtf \
 		../Resources/text/help/name.rtf \
-		../Resources/text/help/label_file.rtf \
-		../Resources/text/help/custom_mask_color.rtf
+		../Resources/text/help/custom_mask_color.rtf \
+		../Resources/text/help/object_min_size.rtf \
+		../Resources/text/help/atlas_dir.rtf \
+		../Resources/text/help/output_report.rtf \
+		../Resources/text/help/output_report_type.rtf \
+		../Resources/text/help/xml_anchor_file.rtf \
+		../Resources/text/help/object_splitting.rtf \
+		../Resources/text/help/input_dir.rtf \
+		../Resources/text/help/coordinate_extraction.rtf \
+		../Resources/text/help/nifti_size.rtf \
+		../Resources/text/help/label_file.rtf
 	/home/leuat/Qt/5.13.0/gcc_64/bin/rcc -name resources ../resources.qrc -o qrc_resources.cpp
 
 compiler_qmlcache_make_all:

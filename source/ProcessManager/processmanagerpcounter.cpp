@@ -230,6 +230,7 @@ void ProcessManagerPCounter::Execute()
 
         QString maskFile = "";
         if (m_useCustomMask) {
+
   //          qDebug() << "Search for mask file" << pi->m_id;
             maskFile = Util::findFileInDirectory(QStringList() << "mask" << pi->m_id,m_inputDir,"png","");
             if (maskFile==""){
@@ -475,7 +476,6 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
 //        qDebug() << excelName << i << " " << x;
         if (excelName.simplified()!="") {
             QColor reportColor = m_sheet->readCol(i+1,x);
-            qDebug() << "..";
 
             QStringList ids;// = QString::fromWCharArray(m_sheet->readStr(i,3)).split(',');
             bool done = false;
@@ -493,7 +493,7 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
 
             reports.m_reports.push_back(Report(excelName, ids,reportColor));
 
-            LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");
+            //LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");
 
             //qDebug() << excelName << " , " << ids;
 

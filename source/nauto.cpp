@@ -118,9 +118,6 @@ void Nauto::Execute()
         if (total>1) {
             LMessage::lMessage.Error("You are exceeding the memory limitations of this system. Please lower the number of threads, or reduce size of input files.");
         } else {
-            qDebug() << "B";
-
-
             LMessage::lMessage.Log("******** Executing");
             m_pm->Execute();
         }
