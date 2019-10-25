@@ -24,7 +24,7 @@
        </font>
       </property>
       <property name="text">
-       <string>njuːt</string>
+       <string>Nutil</string>
       </property>
      </widget>
     </item>
@@ -32,6 +32,11 @@
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QPushButton" name="btnStart">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Start</string>
         </property>
@@ -39,6 +44,11 @@
       </item>
       <item>
        <widget class="QPushButton" name="btnStop">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Stop</string>
         </property>
@@ -49,6 +59,11 @@
       </item>
       <item>
        <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string># threads</string>
         </property>
@@ -91,6 +106,11 @@
         <height>600</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -115,69 +135,100 @@
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <layout class="QGridLayout" name="gridLayout_4">
+            <item row="4" column="1">
+             <widget class="QPushButton" name="pushButton">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Quit</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2" alignment="Qt::AlignVCenter">
+             <widget class="QComboBox" name="cmbNew">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <item>
+               <property name="text">
+                <string>TRANSFORM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>QUANTIFIER</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>TIFFCREATOR</string>
+               </property>
+              </item>
+             </widget>
+            </item>
             <item row="2" column="0">
+             <widget class="QPushButton" name="btnNew">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>New</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="btnSave">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
              <widget class="QPushButton" name="btnLoad_2">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Load</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QPushButton" name="pushButton">
-              <property name="text">
-               <string>Quit</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QPushButton" name="btnSave">
-              <property name="text">
-               <string>Save</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
              <widget class="QPushButton" name="btnSaveAs">
-              <property name="text">
-               <string>Save As</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QComboBox" name="cmbNew">
               <property name="font">
                <font>
-                <pointsize>12</pointsize>
+                <pointsize>10</pointsize>
                </font>
               </property>
-              <item>
-               <property name="text">
-                <string>Transform</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Quantifier</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>TiffCreator</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="btnNew">
               <property name="text">
-               <string>New</string>
+               <string>Save As</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <widget class="QListWidget" name="lstRecent"/>
+           <widget class="QListWidget" name="lstRecent">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -245,6 +296,11 @@
     </item>
     <item row="5" column="0">
      <widget class="QLabel" name="lblElapsedTime">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Elapsed time:</string>
       </property>

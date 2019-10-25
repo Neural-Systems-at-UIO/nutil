@@ -1,21 +1,21 @@
-type; Type: ;  string; Quantifier
-name; Name: ; string; 
-input_dir; Input directory; directory;
+type; Type ;  string; Quantifier
+name; Name of project ; string;
+input_dir; Segmentation directory; directory;
+atlas_dir; Atlas map directory; directory;
+label_file; Reference atlas; file;
+xml_anchor_file; Anchored XML file; file;
 output_dir; Output directory; directory;
-atlas_dir; Atlas directory; directory;
-label_file; Label file; file;
-xml_anchor_file; XML anchor file; file;
-object_splitting; Object splitting; list; yes, no; yes
-object_min_size; Object minimum size; number; 8
-object_max_size; Object maximum size; number; 10000
+object_splitting; Object Splitting; list; YES, NO; yes
+object_min_size; Minimum object size; number; 8
+object_max_size; Maximum object size; number; 10000
 extraction_color ; Extraction colour ; color ; 255,0,0,255
-global_pixel_scale; Global scale; number; 1
-custom_region_file; Custom region file; file;
-use_custom_masks; Use custom masks; list; yes, no; no
+global_pixel_scale; Pixel scale; number; 1
+use_custom_masks; Use custom masks?; list; YES, NO; no
 custom_mask_color ; Custom mask colour ; color ; 255,255,255,255
-output_report; Output reports; list; all, summary,none; all
-output_report_type; Output report type; list; xlsx, csv; xlsx
+output_report; Output reports; list; All, Summary, None; all
+custom_region_file; Customised reports; file;
+output_report_type; Output report type; list; CSV, XLSX; xlsx
 nifti_size; Nifti size ; list; 0,64,128,256,512; 0
 coordinate_extraction; Coordinate extraction;list; All, None, Slices, Summary; All
-pattern_match ; Pattern type; list; nesys, files, user; nesys
-files; Files; textfield;
+pattern_match ; Unique ID format; list; _sXXX, files, user; nesys
+files; Other ID format; textfield;
