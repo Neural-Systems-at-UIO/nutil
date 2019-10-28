@@ -25,5 +25,11 @@
         <file>Resources/text/help/nifti_size.rtf</file>
         <file>Resources/text/help/coordinate_extraction.rtf</file>
         <file>Resources/text/help/pattern_match.rtf</file>
+        <file>Resources/text/help/background_color.rtf</file>
+        <file>Resources/text/help/color_spread.rtf</file>
+        <file>Resources/text/help/thumbnail_size.rtf</file>
+        <file>Resources/text/help/output_compression.rtf</file>
+        <file>Resources/text/help/auto_crop.rtf</file>
+        <file>Resources/text/help/only_thumbnails.rtf</file>
     </qresource>
 </RCC>

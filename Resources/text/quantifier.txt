@@ -12,8 +12,8 @@ extraction_color ; Extraction colour ; color ; 255,0,0,255
 global_pixel_scale; Pixel scale; number; 1
 use_custom_masks; Use custom masks?; list; YES, NO; no
 custom_mask_color ; Custom mask colour ; color ; 255,255,255,255
-output_report; Output reports; list; All, Summary, None; all
 custom_region_file; Customised reports; file;
+output_report; Output reports; list; All, Summary, None; all
 output_report_type; Output report type; list; CSV, XLSX; xlsx
 nifti_size; Nifti size ; list; 0,64,128,256,512; 0
 coordinate_extraction; Coordinate extraction;list; All, None, Slices, Summary; All
