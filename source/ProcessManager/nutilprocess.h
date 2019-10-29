@@ -8,7 +8,7 @@
 #include "source/ltiff/ltiff.h"
 #include "source/util/util.h"
 #include "source/util/counter.h"
-#include "source/util/limage.h"
+#include "source/util/nlimage.h"
 #include "source/util/area.h"
 #include "source/util/lparameter.h"
 

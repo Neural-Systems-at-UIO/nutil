@@ -31,5 +31,7 @@
         <file>Resources/text/help/output_compression.rtf</file>
         <file>Resources/text/help/auto_crop.rtf</file>
         <file>Resources/text/help/only_thumbnails.rtf</file>
+        <file>Resources/labels/WHS_Atlas_Rat_Brain_v2.label</file>
+        <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label</file>
     </qresource>
 </RCC>

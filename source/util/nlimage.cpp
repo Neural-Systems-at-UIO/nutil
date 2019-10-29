@@ -1,4 +1,4 @@
-#include "limage.h"
+#include "nlimage.h"
 #include <QPainter>
 #include <QPen>
 #include "source/data.h"

@@ -57,15 +57,6 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     Util::findFilesInSubDirectories(&files,m_inputDir,"png");
 
 
-//    qDebug() <<"ALL files in directory: " << m_inputDir;
-//    qDebug() << m_files;
-
-//    pattern_match ; Pattern type; list; nesys, files, user, all; nesys
-
-
-   // pattern_match ; Pattern type; list; nesys, files, user, all; nesys
-
-
 
     QString regexp = "_s[0-9]*";
 
@@ -92,7 +83,6 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         m_files = newFiles;
     }
 
-    qDebug() << m_files;
 
 
 
@@ -409,8 +399,14 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
     if (m_dataType=="quicknii")
        m_atlasDir = data->Get("atlas_dir");
-    if (m_dataType=="quicknii")
-        m_labelFile = data->Get("label_file");
+    if (m_dataType=="quicknii") {
+       QString labelType = data->Get("label_file");
+//       qDebug() << "Labl type:" <<labelType;
+       if (labelType == "Allen Mouse Brain 2015")
+            m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
+       if (labelType=="WHS Atlas Rat v2")
+           m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
+    }
 
 
     m_files = data->Get("files").trimmed().simplified().split(",");

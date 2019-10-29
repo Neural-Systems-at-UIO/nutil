@@ -35,7 +35,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += main.cpp \
     source/IO/nutiltemplate.cpp \
+    source/data.cpp \
     source/dialoghelp.cpp \
+    source/limage/lcolorlist.cpp \
+    source/limage/limage.cpp \
+    source/limage/limageqimage.cpp \
+    source/limage/limagetiff.cpp \
+    source/ltiff/ltiff.cpp \
     source/util/buffer2d.cpp \
     nutilapplication.cpp \
     mainwindow.cpp \
@@ -43,13 +49,17 @@ SOURCES += main.cpp \
     source/nauto.cpp \
     source/ProcessManager/nutilprocess.cpp \
     source/ProcessManager/processmanager.cpp \
-    source/util/limage.cpp \
+    source/util/downloadmanager.cpp \
+    source/util/lgraph.cpp \
     source/util/area.cpp \
     source/util/atlaslabel.cpp \
     source/util/flat2d.cpp \
     source/LBook/lbook.cpp \
     source/LBook/lbookxlnt.cpp \
     source/unittest.cpp \
+    source/util/nlimage.cpp \
+    source/util/lmessage.cpp \
+    source/util/lparameter.cpp \
     source/util/shape.cpp \
     source/ProcessManager/report.cpp \
     source/ProcessManager/processitem.cpp \
@@ -67,12 +77,21 @@ SOURCES += main.cpp \
     dialogsettings.cpp \
     source/ProcessManager/processmanagertiffcreator.cpp \
     source/LBook/lbookcsv.cpp \
-    source/LBook/lbookfactory.cpp
+    source/LBook/lbookfactory.cpp \
+    source/util/spline.cpp \
+    source/util/updater.cpp \
+    source/util/util.cpp
 
 HEADERS += \
     nutilapplication.h \
     source/IO/nutiltemplate.h \
+    source/data.h \
     source/dialoghelp.h \
+    source/limage/lcolorlist.h \
+    source/limage/limage.h \
+    source/limage/limageqimage.h \
+    source/limage/limagetiff.h \
+    source/ltiff/ltiff.h \
     source/util/buffer2d.h \
     mainwindow.h \
     node.h \
@@ -80,13 +99,19 @@ HEADERS += \
     source/nauto.h \
     source/ProcessManager/nutilprocess.h \
     source/ProcessManager/processmanager.h \
-    source/util/limage.h \
+    source/util/counter.h \
+    source/util/downloadmanager.h \
+    source/util/lgraph.h \
     source/util/area.h \
     source/util/atlaslabel.h \
     source/util/flat2d.h \
     source/LBook/lbook.h \
     source/LBook/lbookxlnt.h \
     source/unittest.h \
+    source/util/nlimage.h \
+    source/util/lmessage.h \
+    source/util/lparameter.h \
+    source/util/random.h \
     source/util/shape.h \
     source/ProcessManager/report.h \
     source/ProcessManager/processitem.h \
@@ -105,7 +130,10 @@ HEADERS += \
     source/util/cinifile.h \
     source/ProcessManager/processmanagertiffcreator.h \
     source/LBook/lbookcsv.h \
-    source/LBook/lbookfactory.h
+    source/LBook/lbookfactory.h \
+    source/util/spline.h \
+    source/util/updater.h \
+    source/util/util.h
 
 FORMS    += mainwindow.ui \
     source/dialoghelp.ui \
@@ -149,16 +177,16 @@ linux*{
 
 #LELIB INCLUDES
 
- win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../LeLib/release/ -llelib
- else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../LeLib/debug/ -llelib
- else:symbian: LIBS += -llelib
+# win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../LeLib/release/ -llelib
+# else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../LeLib/debug/ -llelib
+# else:symbian: LIBS += -llelib
  #else:unix: LIBS += -L$$OUT_PWD/../LeLib/Release/ -lLeLib
 
- INCLUDEPATH += $$PWD/../lelib/
- DEPENDPATH += $$PWD/../lelib/
+# INCLUDEPATH += $$PWD/../lelib/
+# DEPENDPATH += $$PWD/../lelib/
 
- win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lelib/release/lelib.lib
- else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lelib/debug/lelib.lib
+# win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lelib/release/lelib.lib
+# else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lelib/debug/lelib.lib
 
 
 linux*{
@@ -168,14 +196,14 @@ linux*{
     QMAKE_CXXFLAGS +=  -Ofast
 #    LIBS += -L$$PWD/libs/lua/ -llua -ldl
 
-    linux:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../lelib/Release/
-    linux:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../lelib/Debug/
+#    linux:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../lelib/Release/
+ #   linux:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../lelib/Debug/
 
 
 
 #    LIBS += -L$$OUT_PWD/../../lelib/Release/ -lLeLib
 #    LIBS += -L$$OUT_PWD/../../lelib/Debug/ -lLeLib
-    LIBS += -lLeLib
+#    LIBS += -lLeLib
 
 
 }

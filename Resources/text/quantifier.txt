@@ -2,7 +2,7 @@ type; Type ;  string; Quantifier
 name; Name of project ; string;
 input_dir; Segmentation directory; directory;
 atlas_dir; Atlas map directory; directory;
-label_file; Reference atlas; file;
+label_file; Reference atlas; list; Allen Mouse Brain 2015, WHS Atlas Rat v2
 xml_anchor_file; Anchored XML file; file;
 output_dir; Output directory; directory;
 object_splitting; Object Splitting; list; YES, NO; yes
