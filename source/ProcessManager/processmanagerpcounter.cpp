@@ -406,6 +406,8 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
        if (labelType=="WHS Atlas Rat v2")
            m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
+       if (labelType=="WHS Atlas Rat v3")
+           m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v3.label";
     }
 
 

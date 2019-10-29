@@ -37,7 +37,12 @@ void NutilTemplate::LoadTemplate(QString fileName)
         NutilTemplateItem* nti = new NutilTemplateItem();
         nti->m_name = fields[0].toLower().trimmed();
         nti->m_text = fields[1];
-        nti->m_type = NutilTemplateItem::StringToType(fields[2].trimmed());
+        QString t = fields[2].trimmed();
+        if (t.contains(",")) {
+            nti->m_isHidden = t.split(",")[1].trimmed().toLower() == "hidden"?true:false;
+            t = t.split(",")[0].trimmed();
+        }
+        nti->m_type = NutilTemplateItem::StringToType(t);
 
         if (nti->m_type==NutilTemplateItem::STRING || nti->m_type == NutilTemplateItem::NUMBER) {
             if (fields.size()>=4)
@@ -100,9 +105,30 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
 
     for (QString name : m_sortList) {
+
         NutilTemplateItem* nti = m_items[name];
 
-        grid->addWidget(new QLabel(nti->m_text),row,textColumn);
+        if (nti->m_isHidden)
+            continue;
+
+        int fontSize = -1;
+        QString n = nti->m_text;
+        QStringList lstName = n.split(",");
+
+        if (lstName.count()!=1) {
+            n = lstName[0];
+            fontSize = lstName[1].toInt();
+        }
+
+        QLabel * lbl = new QLabel(n);
+
+        if (fontSize!=-1) {
+            QFont f;
+   //        f.setFamily("Courier new");
+            f.setPixelSize(fontSize);
+            lbl->setFont(f);
+        }
+        grid->addWidget(lbl,row,textColumn);
 
 
         if (nti->m_type==NutilTemplateItem::STRING || nti->m_type==NutilTemplateItem::FILE || nti->m_type==NutilTemplateItem::DIRECTORY || nti->m_type==NutilTemplateItem::NUMBER) {

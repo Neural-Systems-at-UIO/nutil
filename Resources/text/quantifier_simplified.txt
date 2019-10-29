@@ -1,4 +1,4 @@
-type; Type,20 ;  string; Quantifier
+type; Type,20 ;  string; Quantifier Simplified YEAH
 name; Name of project ; string;
 input_dir; Segmentation directory; directory;
 atlas_dir; Atlas map directory; directory;
@@ -6,12 +6,12 @@ label_file; Reference atlas; list; Allen Mouse Brain 2015, WHS Atlas Rat v2, WHS
 xml_anchor_file; Anchored XML file; file;
 output_dir; Output directory; directory;
 object_splitting; Object Splitting; list; YES, NO; yes
-object_min_size; Minimum object size; number; 8
-object_max_size; Maximum object size; number; 10000
+object_min_size; Minimum object size; number,hidden; 8
+object_max_size; Maximum object size; number,hidden; 10000
 extraction_color ; Extraction colour ; color ; 255,0,0,255
 global_pixel_scale; Pixel scale; number; 1
-use_custom_masks; Use custom masks?; list; YES, NO; no
-custom_mask_color ; Custom mask colour ; color ; 255,255,255,255
+use_custom_masks; Use custom masks?; list, hidden; YES, NO; no
+custom_mask_color ; Custom mask colour ; color, hidden ; 255,255,255,255
 custom_region_file; Customised reports; file;
 output_report; Output reports; list; All, Summary, None; all
 output_report_type; Output report type; list; CSV, XLSX; xlsx

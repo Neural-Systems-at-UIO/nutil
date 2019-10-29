@@ -13,6 +13,9 @@
 #include "dialogsettings.h"
 #include <QMessageBox>
 #include "source/IO/nutiltemplate.h"
+#include "source/dialognewfile.h"
+
+
 namespace Ui {
     class MainWindow;
 }
@@ -115,6 +118,8 @@ private slots:
     void on_btnSaveAs_clicked();
 
     void on_pushButton_clicked();
+
+    void on_btnClearList_clicked();
 
 private:
     Nauto m_nauto;

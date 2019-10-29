@@ -10,6 +10,11 @@
     <height>849</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>NeSys Utilities</string>
   </property>
@@ -135,7 +140,7 @@
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <layout class="QGridLayout" name="gridLayout_4">
-            <item row="4" column="1">
+            <item row="3" column="1">
              <widget class="QPushButton" name="pushButton">
               <property name="font">
                <font>
@@ -147,43 +152,19 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0" colspan="2" alignment="Qt::AlignVCenter">
-             <widget class="QComboBox" name="cmbNew">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <item>
-               <property name="text">
-                <string>TRANSFORM</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>QUANTIFIER</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>TIFFCREATOR</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QPushButton" name="btnNew">
+            <item row="2" column="1">
+             <widget class="QPushButton" name="btnSaveAs">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>New</string>
+               <string>Save As</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
+            <item row="2" column="0">
              <widget class="QPushButton" name="btnSave">
               <property name="font">
                <font>
@@ -195,7 +176,26 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="3" column="0">
+             <widget class="QPushButton" name="btnClearList">
+              <property name="text">
+               <string>Clear list</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="btnNew">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>New</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
              <widget class="QPushButton" name="btnLoad_2">
               <property name="font">
                <font>
@@ -204,18 +204,6 @@
               </property>
               <property name="text">
                <string>Load</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QPushButton" name="btnSaveAs">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Save As</string>
               </property>
              </widget>
             </item>
@@ -314,7 +302,7 @@
      <x>0</x>
      <y>0</y>
      <width>1404</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTest">

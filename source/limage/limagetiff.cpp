@@ -106,7 +106,7 @@ void LImageTiff::ToQImage(LColorList &lst, QImage *img, float zoom, QPointF cent
 
         }
         if (Data::data.abort) {
-            i=m_width;
+            //i=m_width;
          //   break;
         }
 

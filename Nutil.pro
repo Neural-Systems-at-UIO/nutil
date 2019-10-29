@@ -37,6 +37,7 @@ SOURCES += main.cpp \
     source/IO/nutiltemplate.cpp \
     source/data.cpp \
     source/dialoghelp.cpp \
+    source/dialognewfile.cpp \
     source/limage/lcolorlist.cpp \
     source/limage/limage.cpp \
     source/limage/limageqimage.cpp \
@@ -87,6 +88,7 @@ HEADERS += \
     source/IO/nutiltemplate.h \
     source/data.h \
     source/dialoghelp.h \
+    source/dialognewfile.h \
     source/limage/lcolorlist.h \
     source/limage/limage.h \
     source/limage/limageqimage.h \
@@ -137,6 +139,7 @@ HEADERS += \
 
 FORMS    += mainwindow.ui \
     source/dialoghelp.ui \
+    source/dialognewfile.ui \
     source/dialogtiff.ui \
     dialogsettings.ui
 
@@ -222,6 +225,7 @@ linux*{
 DISTFILES += \
     Resources/text/help/input_dir.rtf \
     Resources/text/quantifier.txt \
+    Resources/text/quantifier_simplified.txt \
     Resources/text/tiffcreator.txt
 
 RESOURCES += \

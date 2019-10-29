@@ -252,13 +252,20 @@ void MainWindow::on_actionSettings_triggered()
 
 void MainWindow::on_btnNew_clicked()
 {
-    m_nt.LoadTemplate(":/Resources/text/"+ui->cmbNew->currentText().toLower()+".txt");
-//    qDebug() <<m_nt.m_items.keys();
-//    m_nt.LoadTemplate(":/Resources/text/transform.txt");
+
+    DialogNewFile* newFile = new DialogNewFile();
+
+    newFile->exec();
+
+    if (!newFile->m_isOK)
+        return;
+
+    m_nt.LoadTemplate(":/Resources/text/"+newFile->m_type.toLower()+".txt");
     m_nt.Populate(ui->gridTemplate);
-//    m_settings.setString("current_file", "");
     m_nt.m_openFile = "";
     UpdateRecentList();
+    delete newFile;
+
 }
 
 
@@ -324,4 +331,10 @@ void MainWindow::on_btnSaveAs_clicked()
 void MainWindow::on_pushButton_clicked()
 {
     qApp->quit();
+}
+
+void MainWindow::on_btnClearList_clicked()
+{
+    m_settings.setStringList("recent_files",QStringList());
+    UpdateRecentList();
 }

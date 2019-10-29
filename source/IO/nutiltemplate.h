@@ -23,6 +23,7 @@ public:
     QColor m_color;
     Type m_type;
     QWidget* m_widget;
+    bool m_isHidden = false;
 
     static QString colorToString(QColor col) {
         return QString::number(col.red())+","+QString::number(col.green())+","+ QString::number(col.blue()) +"," + QString::number(col.alpha());
