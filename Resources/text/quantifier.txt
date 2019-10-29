@@ -1,4 +1,4 @@
-type; Type,20 ;  string; Quantifier
+type; Type ;  string; Quantifier
 name; Name of project ; string;
 input_dir; Segmentation directory; directory;
 atlas_dir; Atlas map directory; directory;

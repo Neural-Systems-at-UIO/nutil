@@ -52,12 +52,12 @@
    </item>
    <item>
     <property name="text">
-     <string>QUANTIFIER_SIMPLIFIED</string>
+     <string>Quantifier_simplified</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>TIFFCREATOR</string>
+     <string>TiffCreator</string>
     </property>
    </item>
   </widget>

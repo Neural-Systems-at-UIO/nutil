@@ -1,4 +1,4 @@
-type; Type,20 ;  string; Quantifier Simplified YEAH
+type; Type ;  string; Quantifier Simplified
 name; Name of project ; string;
 input_dir; Segmentation directory; directory;
 atlas_dir; Atlas map directory; directory;
@@ -12,7 +12,7 @@ extraction_color ; Extraction colour ; color ; 255,0,0,255
 global_pixel_scale; Pixel scale; number; 1
 use_custom_masks; Use custom masks?; list, hidden; YES, NO; no
 custom_mask_color ; Custom mask colour ; color, hidden ; 255,255,255,255
-custom_region_file; Customised reports; file;
+custom_region_file; Customised reports; file, hidden;
 output_report; Output reports; list; All, Summary, None; all
 output_report_type; Output report type; list; CSV, XLSX; xlsx
 nifti_size; Nifti size ; list; 0,64,128,256,512; 0

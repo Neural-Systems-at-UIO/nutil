@@ -178,6 +178,11 @@
             </item>
             <item row="3" column="0">
              <widget class="QPushButton" name="btnClearList">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Clear list</string>
               </property>
@@ -302,7 +307,7 @@
      <x>0</x>
      <y>0</y>
      <width>1404</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTest">
