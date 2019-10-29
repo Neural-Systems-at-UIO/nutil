@@ -17,5 +17,5 @@ output_report; Output reports; list; All, Summary, None; all
 output_report_type; Output report type; list; CSV, XLSX; xlsx
 nifti_size; Nifti size ; list; 0,64,128,256,512; 0
 coordinate_extraction; Coordinate extraction;list; All, None, Slices, Summary; All
-pattern_match ; Unique ID format; list; _sXXX, files, user; nesys
+pattern_match ; Unique ID format; list; sXXX..., files, user; nesys
 files; Other ID format; textfield;

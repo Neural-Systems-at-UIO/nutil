@@ -57,33 +57,42 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     Util::findFilesInSubDirectories(&files,m_inputDir,"png");
 
 
+//    qDebug() <<"ALL files in directory: " << m_inputDir;
+//    qDebug() << m_files;
 
 //    pattern_match ; Pattern type; list; nesys, files, user, all; nesys
 
 
    // pattern_match ; Pattern type; list; nesys, files, user, all; nesys
+
+
+
     QString regexp = "_s[0-9]*";
 
     if (m_patternType=="user")
         regexp = m_files[0];
 
-    if (m_patternType=="files") {
+/*    if (m_patternType=="files") {
 
-    }
-    if (m_patternType == "nesys") {
+    }*/
+
+    if (m_patternType == "sXXX...") {
 
         QRegularExpression re(regexp);
         QStringList newFiles;
         for (QString s: files) {
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
+
                 newFiles.append(match.captured(0));
+
             }
 //            if (regExp.mat)
         }
         m_files = newFiles;
     }
 
+    qDebug() << m_files;
 
 
 
@@ -381,8 +390,10 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     output_report_type; Output report type; list; xlsx, csv
 */
 
-    m_inputDir = data->Get("input_dir")+QDir::separator(); //Util::fixFolder(m_sheet->readStr(4,1));
-    m_outputDir = data->Get("output_dir")+QDir::separator();;
+
+
+    m_inputDir = data->Get("input_dir")+"/"; //Util::fixFolder(m_sheet->readStr(4,1));
+    m_outputDir = data->Get("output_dir")+"/";
 //    float col_r = m_sheet->readNum(3,1);
   //  float col_g = m_sheet->readNum(3,2);
     //float col_b = m_sheet->readNum(3,3);
@@ -417,6 +428,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_output3DPoints = data->Get("coordinate_extraction").toLower();
     m_outputNifti = m_niftiSize!=0;
+
 
     m_useCustomMask = data->Get("use_custom_mask").toLower()=="yes";
     if (m_useCustomMask)
