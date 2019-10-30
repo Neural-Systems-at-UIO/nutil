@@ -39,5 +39,10 @@
         <file>Resources/images/object_splitting.png</file>
         <file>Resources/text/help/quantifier_pixel_scale_unit.rtf</file>
         <file>Resources/text/help/atlas_dir.rtf</file>
+        <file>Resources/text/help/transform_output_dir.rtf</file>
+        <file>Resources/text/help/transform_background_color.rtf</file>
+        <file>Resources/text/help/transform_color_spread.rtf</file>
+        <file>Resources/text/help/transform_thumbnail_size.rtf</file>
+        <file>Resources/text/help/transform_files.rtf</file>
     </qresource>
 </RCC>
