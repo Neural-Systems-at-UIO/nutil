@@ -52,11 +52,6 @@
    </item>
    <item>
     <property name="text">
-     <string>Quantifier_simplified</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
      <string>TiffCreator</string>
     </property>
    </item>

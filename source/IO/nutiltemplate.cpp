@@ -35,9 +35,11 @@ void NutilTemplate::LoadTemplate(QString fileName)
 
         QStringList fields = line.split(";");
         NutilTemplateItem* nti = new NutilTemplateItem();
+//        qDebug() << fields;
         nti->m_name = fields[0].toLower().trimmed();
-        nti->m_text = fields[1];
-        QString t = fields[2].trimmed();
+        nti->m_level = fields[1].toInt();
+        nti->m_text = fields[2].trimmed();
+        QString t = fields[3].trimmed();
         if (t.contains(",")) {
             nti->m_isHidden = t.split(",")[1].trimmed().toLower() == "hidden"?true:false;
             t = t.split(",")[0].trimmed();
@@ -45,28 +47,29 @@ void NutilTemplate::LoadTemplate(QString fileName)
         nti->m_type = NutilTemplateItem::StringToType(t);
 
         if (nti->m_type==NutilTemplateItem::STRING || nti->m_type == NutilTemplateItem::NUMBER) {
-            if (fields.size()>=4)
-                nti->m_value = fields[3].trimmed();
+            if (fields.size()>=5)
+                nti->m_value = fields[4].trimmed();
         }
         if (nti->m_type==NutilTemplateItem::LIST) {
-            nti->m_items = fields[3].trimmed().simplified().split(",");
+            nti->m_items = fields[4].trimmed().simplified().split(",");
             for (QString& s : nti->m_items)
                 s = s.trimmed();
 
-            if (fields.size()>=5)
-                nti->m_value = fields[4].trimmed();
+            if (fields.size()>=6)
+                nti->m_value = fields[5].trimmed();
+
        //     qDebug() << nti->m_value;
         }
         if (nti->m_type==NutilTemplateItem::TEXTFIELD) {
-            nti->m_value = fields[3];
+            nti->m_value = fields[4];
         }
         if (nti->m_type==NutilTemplateItem::COLOR) {
-            nti->m_items = fields[3].trimmed().simplified().split(",");
+            nti->m_items = fields[4].trimmed().simplified().split(",");
             for (QString& s : nti->m_items)
                 s = s.trimmed();
             float a = 255;
-            if (nti->m_items.size()==4)
-                a=nti->m_items[3].toFloat();
+            if (nti->m_items.size()==6)
+                a=nti->m_items[5].toFloat();
 
              nti->m_color = QColor(nti->m_items[0].toFloat(),nti->m_items[1].toFloat(),nti->m_items[2].toFloat(),a);
              nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
@@ -94,7 +97,7 @@ QString NutilTemplate::Get(QString val)
 
 void NutilTemplate::Populate(QGridLayout *grid)
 {
-    int row = 0;
+    int row = 1;
     clearGrid(grid);
     m_grid = grid;
 
@@ -104,9 +107,24 @@ void NutilTemplate::Populate(QGridLayout *grid)
     int buttonColumn = 3;
 
 
+    grid->addWidget(new QLabel("View type:"),0,0);
+    QComboBox* cmb = new QComboBox();
+    cmb->addItem("Basic");
+    cmb->addItem("Advanced");
+    grid->addWidget(cmb, 0,1);
+    cmb->setCurrentIndex(m_currentLevel);
+    QObject::connect(cmb, &QComboBox::currentTextChanged, [=]() {
+        m_currentLevel = cmb->currentIndex();
+        Populate(grid);
+    });
+
+
+
     for (QString name : m_sortList) {
 
         NutilTemplateItem* nti = m_items[name];
+        if (nti->m_level>m_currentLevel)
+            continue;
 
         if (nti->m_isHidden)
             continue;
@@ -298,7 +316,7 @@ void NutilTemplate::Load(QString fname)
     if (!QFile::exists(fname))
         return;
 
-
+    m_currentLevel = 0;
     m_openFile = fname;
     QFile f(fname);
     f.open(QFile::ReadOnly);

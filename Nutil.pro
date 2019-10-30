@@ -225,7 +225,6 @@ linux*{
 DISTFILES += \
     Resources/text/help/input_dir.rtf \
     Resources/text/quantifier.txt \
-    Resources/text/quantifier_simplified.txt \
     Resources/text/tiffcreator.txt
 
 RESOURCES += \

@@ -1,21 +1,21 @@
-type; Type ;  string; Quantifier
-name; Name of project ; string;
-input_dir; Segmentation directory; directory;
-atlas_dir; Atlas map directory; directory;
-label_file; Reference atlas; list; Allen Mouse Brain 2015, WHS Atlas Rat v2, WHS Atlas Rat v3
-xml_anchor_file; Anchored XML file; file;
-output_dir; Output directory; directory;
-object_splitting; Object Splitting; list; YES, NO; yes
-object_min_size; Minimum object size; number; 8
-object_max_size; Maximum object size; number; 10000
-extraction_color ; Extraction colour ; color ; 255,0,0,255
-global_pixel_scale; Pixel scale; number; 1
-use_custom_masks; Use custom masks?; list; YES, NO; no
-custom_mask_color ; Custom mask colour ; color ; 255,255,255,255
-custom_region_file; Customised reports; file;
-output_report; Output reports; list; All, Summary, None; all
-output_report_type; Output report type; list; CSV, XLSX; xlsx
-nifti_size; Nifti size ; list; 0,64,128,256,512; 0
-coordinate_extraction; Coordinate extraction;list; All, None, Slices, Summary; All
-pattern_match ; Unique ID format; list; sXXX..., files, user; nesys
-files; Other ID format; textfield;
+type; 0 ; Type ;  string; Quantifier
+name; 0 ;Name of project ; string;
+input_dir; 0 ;Segmentation directory; directory;
+atlas_dir; 0 ;Atlas map directory; directory;
+label_file; 0 ; Reference atlas; list; Allen Mouse Brain 2015, WHS Atlas Rat v2, WHS Atlas Rat v3
+xml_anchor_file; 0 ; Anchored XML file; file;
+output_dir; 0 ; Output directory; directory;
+object_splitting; 1 ;Object Splitting; list; YES, NO; yes
+object_min_size; 1 ;Minimum object size; number; 8
+object_max_size; 1 ;Maximum object size; number; 10000
+extraction_color ; 0 ; Extraction colour ; color ; 255,0,0,255
+global_pixel_scale; 1 ;Pixel scale; number; 1
+use_custom_masks; 1 ;Use custom masks?; list; YES, NO; no
+custom_mask_color ;1 ; Custom mask colour ; color ; 255,255,255,255
+custom_region_file;1 ; Customised reports; file;
+output_report; 0 ;Output reports; list; All, Summary, None; all
+output_report_type; 1 ;Output report type; list; CSV, XLSX; xlsx
+nifti_size; 1 ;Nifti size ; list; 0,64,128,256,512; 0
+coordinate_extraction; 1 ;Coordinate extraction;list; All, None, Slices, Summary; All
+pattern_match ; 1 ;Unique ID format; list; sXXX, files, user; sXXX
+files; 1 ;Other ID format; textfield;

@@ -67,7 +67,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
     }*/
 
-    if (m_patternType == "sXXX...") {
+    if (m_patternType == "sXXX") {
 
         QRegularExpression re(regexp);
         QStringList newFiles;

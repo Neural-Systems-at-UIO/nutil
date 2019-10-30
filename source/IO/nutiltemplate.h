@@ -21,6 +21,7 @@ public:
     QStringList m_items;
     QString m_value;
     QColor m_color;
+    int m_level = 0;
     Type m_type;
     QWidget* m_widget;
     bool m_isHidden = false;
@@ -64,6 +65,7 @@ class NutilTemplate
 
 public:
     NutilTemplate();
+    int m_currentLevel = 0;
     QMap<QString,NutilTemplateItem*> m_items;
     QString m_openFile = "";
     QVector<QString> m_sortList;
