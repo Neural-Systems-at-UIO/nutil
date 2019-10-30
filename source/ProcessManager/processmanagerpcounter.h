@@ -4,6 +4,7 @@
 #include "source/ProcessManager/processmanager.h"
 #include "source/IO/xmlanchor.h"
 #include <QRegularExpression>
+
 class ProcessManagerPCounter : public ProcessManager {
 
 public:

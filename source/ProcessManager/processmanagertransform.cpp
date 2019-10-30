@@ -7,7 +7,7 @@ bool ProcessManagerTransform::Build(NutilTemplate* data)
     int x = 0;
 
     m_processItems.clear();
-    QString dt = data->m_items["files"]->m_value;
+    QString dt = data->m_items["transform_files"]->m_value;
     dt = dt.replace("#NNN","\n");
     QStringList dataList =dt.split("\n");
 //    //while (!ok)
@@ -147,17 +147,17 @@ void ProcessManagerTransform::ReadHeader(NutilTemplate* data)
 {
 
     m_compression = data->Get("output_compression");
-    m_inputDir = Util::fixFolder(data->Get("input_dir"));
-    m_outputDir = Util::fixFolder(data->Get("output_dir"));
-    m_background =  NutilTemplateItem::StringToColor(data->Get("background_color"));
+    m_inputDir = Util::fixFolder(data->Get("transform_input_dir"));
+    m_outputDir = Util::fixFolder(data->Get("transform_output_dir"));
+    m_background =  NutilTemplateItem::StringToColor(data->Get("transform_background_color"));
 
-    m_colorSpread = data->Get("color_spread").toFloat();
+    m_colorSpread = data->Get("transform_color_spread").toFloat();
     if (m_colorSpread==0) m_colorSpread=1;
     m_autoClip = data->Get("auto_crop");
     m_onlyThumbs = (data->Get("only_thumbnails").toLower()=="yes");
 
 
-    m_thumbnailSize = data->Get("thumbnail_size").toFloat();
+    m_thumbnailSize = data->Get("transform_thumbnail_size").toFloat();
 
 //    qDebug() << m_thumbnailSize;
   //  exit(1);

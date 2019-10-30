@@ -1,11 +1,11 @@
 type;  0;Type: ;  string; Transform
 name; 0;Name: ; string;
 output_compression; 0;Output compression; list; jpeg,lzw,none; lzw
-input_dir; 0;Input directory; directory; Default value
-output_dir; 0;Output directory; directory;
-background_color; 0;Background colour ; color ; 255,255,255,5
-color_spread; 0;Colour spread:; number, 5
-thumbnail_size; 0;Thumbnail size: ; number; 1
+transform_input_dir; 0;Input directory; directory; Default value
+transform_output_dir; 0;Output directory; directory;
+transform_background_color; 0;Background colour ; color ; 255,255,255,5
+transform_color_spread; 0;Colour spread:; number, 5
+transform_thumbnail_size; 0;Thumbnail size: ; number; 1
 auto_crop; 0;Auto cropping : ; list; yes,no; yes
 only_thumbnails; 0;Only create thumbnails; list; yes, no; no
-files; 0;List of data; textfield;
+transform_files; 0;List of data; textfield;

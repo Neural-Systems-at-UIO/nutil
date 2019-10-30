@@ -67,9 +67,9 @@ void ProcessManagerTiffCreator::ReadHeader(NutilTemplate* data)
 {
     ProcessManager::ReadHeader(data);
     m_compression = data->Get("output_compression");
-    m_inputDir = data->Get("input_dir")+"/";
-    m_outputDir = data->Get("output_dir")+"/";
-    m_tileSize = data->Get("size").toFloat();
+    m_inputDir = data->Get("tiffcreator_input_dir")+"/";
+    m_outputDir = data->Get("tiffcreator_output_dir")+"/";
+    m_tileSize = data->Get("tiffcreator_size").toFloat();
 
 /*    m_compression = m_sheet->readStr(2,1);
     m_inputDir = m_sheet->readStr(3,1);

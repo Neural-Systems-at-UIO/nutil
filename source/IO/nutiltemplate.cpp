@@ -108,11 +108,13 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
 
     grid->addWidget(new QLabel("View type:"),0,0);
+
     QComboBox* cmb = new QComboBox();
     cmb->addItem("Basic");
     cmb->addItem("Advanced");
     grid->addWidget(cmb, 0,1);
     cmb->setCurrentIndex(m_currentLevel);
+
     QObject::connect(cmb, &QComboBox::currentTextChanged, [=]() {
         m_currentLevel = cmb->currentIndex();
         Populate(grid);
@@ -123,6 +125,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
     for (QString name : m_sortList) {
 
         NutilTemplateItem* nti = m_items[name];
+
         if (nti->m_level>m_currentLevel)
             continue;
 
@@ -304,8 +307,8 @@ void NutilTemplate::Save(QString fname)
     QTextStream str(&f);
     for (QString k: m_sortList) {
         NutilTemplateItem* nti = m_items[k];
-        QString s = nti->m_name + " = " + nti->m_value;;
-        str<< s << endl;
+        QString s = nti->m_name + " = " + nti->m_value;
+        str << s << endl;
     }
 
     f.close();
@@ -345,3 +348,4 @@ void NutilTemplate::Load(QString fname)
     f.close();
 
 }
+

@@ -382,8 +382,8 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
 
-    m_inputDir = data->Get("input_dir")+"/"; //Util::fixFolder(m_sheet->readStr(4,1));
-    m_outputDir = data->Get("output_dir")+"/";
+    m_inputDir = data->Get("quantifier_input_dir")+"/"; //Util::fixFolder(m_sheet->readStr(4,1));
+    m_outputDir = data->Get("quantifier_output_dir")+"/";
 //    float col_r = m_sheet->readNum(3,1);
   //  float col_g = m_sheet->readNum(3,2);
     //float col_b = m_sheet->readNum(3,3);
@@ -398,7 +398,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
     if (m_dataType=="quicknii")
-       m_atlasDir = data->Get("atlas_dir");
+       m_atlasDir = data->Get("quantifier_atlas_dir");
     if (m_dataType=="quicknii") {
        QString labelType = data->Get("label_file");
 //       qDebug() << "Labl type:" <<labelType;
@@ -423,6 +423,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     //m_xyzScale = m_sheet->readNum(13,1);
     m_reportSheetName = data->Get("custom_region_file");
     //m_units = m_sheet->readStr(10,2);
+    m_units = data->Get("quantifier_pixel_scale_unit");
 
     m_output3DPoints = data->Get("coordinate_extraction").toLower();
     m_outputNifti = m_niftiSize!=0;

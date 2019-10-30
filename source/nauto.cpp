@@ -88,6 +88,7 @@ void Nauto::Execute()
         delete m_pm;
 
     m_pm = ProcessManagerFactory::CreateProcessManager(m_type);
+
     if (m_pm==nullptr) {
         LMessage::lMessage.Error("Unknown operation type specified in sheet: "+m_type);
         m_status = Status::Idle;

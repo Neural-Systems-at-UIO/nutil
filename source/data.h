@@ -4,6 +4,7 @@
 #include <QString>
 #include "source/util/cinifile.h"
 
+
 class Data
 {
 public:

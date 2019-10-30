@@ -9,9 +9,9 @@
         <file>Resources/text/help/label_file.rtf</file>
         <file>Resources/text/tiffcreator.txt</file>
         <file>Resources/text/help/custom_mask_color.rtf</file>
-        <file>Resources/text/help/input_dir.rtf</file>
-        <file>Resources/text/help/output_dir.rtf</file>
         <file>Resources/text/help/atlas_dir.rtf</file>
+        <file>Resources/text/help/quantifier_input_dir.rtf</file>
+        <file>Resources/text/help/quantifier_output_dir.rtf</file>
         <file>Resources/text/help/object_splitting.rtf</file>
         <file>Resources/text/help/object_min_size.rtf</file>
         <file>Resources/text/help/object_max_size.rtf</file>
@@ -34,5 +34,6 @@
         <file>Resources/labels/WHS_Atlas_Rat_Brain_v2.label</file>
         <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label</file>
         <file>Resources/labels/WHS_Atlas_Rat_Brain_v3.label</file>
+        <file>Resources/text/help/output_dir.rtf</file>
     </qresource>
 </RCC>
