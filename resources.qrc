@@ -44,5 +44,7 @@
         <file>Resources/text/help/transform_color_spread.rtf</file>
         <file>Resources/text/help/transform_thumbnail_size.rtf</file>
         <file>Resources/text/help/transform_files.rtf</file>
+        <file>Resources/text/help/type.rtf</file>
+        <file>Resources/images/quint.PNG</file>
     </qresource>
 </RCC>

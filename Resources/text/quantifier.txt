@@ -11,11 +11,11 @@ object_max_size; 1 ;Maximum object size; number; 100000
 extraction_color ; 0 ; Extraction colour ; color ; 255,0,0,255
 global_pixel_scale; 1 ;Pixel scale; number; 1
 quantifier_pixel_scale_unit; 1 ; Pixel scale unit; list; pixels, um2, mm2; pixels
-use_custom_masks; 1 ;Use custom masks?; list; YES, NO; no
+use_custom_masks; 1 ;Use custom masks?; list; Yes, No; no
 custom_mask_color ;1 ; Custom mask colour ; color ; 255,255,255,255
-custom_region_file;1 ; Customised reports; file;
 output_report; 0 ;Output reports; list; All, Summary, None; all
-output_report_type; 1 ;Output report type; list; CSV, XLSX; xlsx
+output_report_type; 1 ;Output report type; list; CSV, XLSX; CSV
+custom_region_file;1 ; Customised reports; file;
 nifti_size; 1 ;Nifti size ; list; 0,64,128,256,512; 0
 coordinate_extraction; 1 ;Coordinate extraction;list; All, None, Slices, Summary; All
 pattern_match ; 1 ;Unique ID format; list; sXXX, files, user; sXXX
