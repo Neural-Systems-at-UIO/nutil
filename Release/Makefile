@@ -869,39 +869,39 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/quantifier.txt \
 		../Resources/text/help/use_custom_masks.rtf \
 		../Resources/text/help/color_spread.rtf \
-		../Resources/text/help/quantifier_pixel_scale_unit.rtf \
 		../Resources/text/help/custom_region_file.rtf \
 		../Resources/text/help/output_compression.rtf \
-		../Resources/text/help/type.rtf \
 		../Resources/text/help/background_color.rtf \
 		../Resources/text/help/output_dir.rtf \
 		../Resources/text/help/global_pixel_scale.rtf \
 		../Resources/text/help/extraction_color.rtf \
 		../Resources/text/help/auto_crop.rtf \
-		../Resources/text/help/transform_thumbnail_size.rtf \
-		../Resources/text/help/quantifier_atlas_dir.rtf \
 		../Resources/text/help/pattern_match.rtf \
 		../Resources/text/help/object_max_size.rtf \
-		../Resources/text/help/transform_color_spread.rtf \
 		../Resources/text/help/name.rtf \
 		../Resources/text/help/custom_mask_color.rtf \
 		../Resources/text/help/thumbnail_size.rtf \
 		../Resources/text/help/object_min_size.rtf \
-		../Resources/text/help/quantifier_input_dir.rtf \
-		../Resources/text/help/transform_input_dir.rtf \
 		../Resources/text/help/atlas_dir.rtf \
-		../Resources/text/help/transform_background_color.rtf \
 		../Resources/text/help/output_report.rtf \
 		../Resources/text/help/output_report_type.rtf \
 		../Resources/text/help/xml_anchor_file.rtf \
 		../Resources/text/help/object_splitting.rtf \
-		../Resources/text/help/transform_files.rtf \
 		../Resources/text/help/only_thumbnails.rtf \
 		../Resources/text/help/coordinate_extraction.rtf \
-		../Resources/text/help/transform_output_dir.rtf \
-		../Resources/text/help/quantifier_output_dir.rtf \
 		../Resources/text/help/nifti_size.rtf \
-		../Resources/text/help/label_file.rtf
+		../Resources/text/help/label_file.rtf \
+		../Resources/text/help/quantifier/quantifier_pixel_scale_unit.rtf \
+		../Resources/text/help/quantifier/type.rtf \
+		../Resources/text/help/quantifier/quantifier_atlas_dir.rtf \
+		../Resources/text/help/quantifier/quantifier_output_dir.rtf \
+		../Resources/text/help/quantifier/quantifier_input_dir.rtf \
+		../Resources/text/help/transform/transform_files.rtf \
+		../Resources/text/help/transform/transform_background_color.rtf \
+		../Resources/text/help/transform/transform_output_dir.rtf \
+		../Resources/text/help/transform/transform_color_spread.rtf \
+		../Resources/text/help/transform/transform_input_dir.rtf \
+		../Resources/text/help/transform/transform_thumbnail_size.rtf
 	/home/leuat/Qt/5.13.0/gcc_64/bin/rcc -name resources ../resources.qrc -o qrc_resources.cpp
 
 compiler_qmlcache_make_all:
@@ -1034,6 +1034,7 @@ moc_nutiltemplate.cpp: ../source/IO/nutiltemplate.h \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
 	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/IO/nutiltemplate.h -o moc_nutiltemplate.cpp
@@ -1596,6 +1597,7 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
 		ui_mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QAction \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qaction.h \
@@ -1605,11 +1607,10 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qguiapplication.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QFrame \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QHBoxLayout \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLabel \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLineEdit \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qtextcursor.h \
@@ -1639,7 +1640,8 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QPushButton \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QScrollArea \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstatusbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QTabWidget \
@@ -2549,15 +2551,15 @@ main.o: ../main.cpp ../../../Qt/5.13.0/gcc_64/include/QtWidgets/QApplication \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
 		ui_mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QAction \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qaction.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QFrame \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QHBoxLayout \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLabel \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLineEdit \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qtextcursor.h \
@@ -2587,7 +2589,8 @@ main.o: ../main.cpp ../../../Qt/5.13.0/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QPushButton \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QScrollArea \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstatusbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QTabWidget \
@@ -2754,6 +2757,7 @@ nutiltemplate.o: ../source/IO/nutiltemplate.cpp ../source/IO/nutiltemplate.h \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QTextStream \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QDebug \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLabel \
@@ -4350,7 +4354,8 @@ nutilapplication.o: ../nutilapplication.cpp ../nutilapplication.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QGridLayout \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nutilapplication.o ../nutilapplication.cpp
 
 mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
@@ -4550,6 +4555,7 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
 		ui_mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QAction \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qaction.h \
@@ -4559,11 +4565,10 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qguiapplication.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QFrame \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QHBoxLayout \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLabel \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLineEdit \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qtextcursor.h \
@@ -4593,7 +4598,8 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QPushButton \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QScrollArea \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstatusbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QTabWidget \
@@ -4940,6 +4946,7 @@ nauto.o: ../source/nauto.cpp ../source/nauto.h \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
 		../source/ProcessManager/processmanagerfactory.h \
 		../source/ProcessManager/processmanagerpcounter.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QRegularExpression \
@@ -4964,11 +4971,10 @@ nauto.o: ../source/nauto.cpp ../source/nauto.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qguiapplication.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QFrame \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QHBoxLayout \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLabel \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLineEdit \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qtextcursor.h \
@@ -4997,7 +5003,8 @@ nauto.o: ../source/nauto.cpp ../source/nauto.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QPushButton \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QScrollArea \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstatusbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QTabWidget \
@@ -5373,7 +5380,8 @@ processmanager.o: ../source/ProcessManager/processmanager.cpp ../source/ProcessM
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QGridLayout \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanager.o ../source/ProcessManager/processmanager.cpp
 
 downloadmanager.o: ../source/util/downloadmanager.cpp ../source/util/downloadmanager.h \
@@ -7200,6 +7208,7 @@ processmanagerpcounter.o: ../source/ProcessManager/processmanagerpcounter.cpp ..
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QRegularExpression \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qregularexpression.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagerpcounter.o ../source/ProcessManager/processmanagerpcounter.cpp
@@ -7394,6 +7403,7 @@ processmanagerfactory.o: ../source/ProcessManager/processmanagerfactory.cpp ../s
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QRegularExpression \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qregularexpression.h \
 		../source/ProcessManager/processmanagertransform.h \
@@ -7589,7 +7599,8 @@ processmanagertransform.o: ../source/ProcessManager/processmanagertransform.cpp 
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QGridLayout \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagertransform.o ../source/ProcessManager/processmanagertransform.cpp
 
 processmanagerautocontrast.o: ../source/ProcessManager/processmanagerautocontrast.cpp ../source/ProcessManager/processmanagerautocontrast.h \
@@ -7780,7 +7791,8 @@ processmanagerautocontrast.o: ../source/ProcessManager/processmanagerautocontras
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QGridLayout \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagerautocontrast.o ../source/ProcessManager/processmanagerautocontrast.cpp
 
 dialogtiff.o: ../source/dialogtiff.cpp ../source/dialogtiff.h \
@@ -8462,7 +8474,8 @@ areafinder3d.o: ../source/ProcessManager/areafinder3d.cpp ../source/ProcessManag
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QGridLayout \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o areafinder3d.o ../source/ProcessManager/areafinder3d.cpp
 
 pointcloud3d.o: ../source/IO/pointcloud3d.cpp ../source/IO/pointcloud3d.h \
@@ -9097,7 +9110,8 @@ processmanagertiffcreator.o: ../source/ProcessManager/processmanagertiffcreator.
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QGridLayout \
 		../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagertiffcreator.o ../source/ProcessManager/processmanagertiffcreator.cpp
 
 lbookcsv.o: ../source/LBook/lbookcsv.cpp ../source/LBook/lbookcsv.h \

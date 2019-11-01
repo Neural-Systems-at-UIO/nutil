@@ -150,6 +150,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
             lbl->setFont(f);
         }
         grid->addWidget(lbl,row,textColumn);
+//        lbl->setMinimumSize(QSize(0,500));
 
 
         if (nti->m_type==NutilTemplateItem::STRING || nti->m_type==NutilTemplateItem::FILE || nti->m_type==NutilTemplateItem::DIRECTORY || nti->m_type==NutilTemplateItem::NUMBER) {
@@ -249,7 +250,10 @@ void NutilTemplate::Populate(QGridLayout *grid)
             });
         }
 
-        QString helpfn = ":Resources/text/help/"+nti->m_name.toLower()+".rtf";
+
+
+        QString type = m_items["type"]->m_value.trimmed().toLower();
+        QString helpfn = ":Resources/text/help/"+type + "/"+nti->m_name.toLower()+".rtf";
         if (QFile::exists(helpfn)) {
 
             QPushButton* help = new QPushButton("Help");
@@ -271,6 +275,8 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
         row++;
     }
+    QSpacerItem* sp =new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    grid->addItem(sp,row,0);
 
     grid->setColumnStretch(textColumn,10);
     grid->setColumnStretch(helpColumn,5);

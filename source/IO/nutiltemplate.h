@@ -8,7 +8,7 @@
 #include <QVariant>
 #include <QGridLayout>
 #include "source/dialoghelp.h"
-
+#include <QSpacerItem>
 class NutilTemplateItem : public QObject {
     Q_OBJECT
 public:

@@ -9,9 +9,6 @@
         <file>Resources/text/help/label_file.rtf</file>
         <file>Resources/text/tiffcreator.txt</file>
         <file>Resources/text/help/custom_mask_color.rtf</file>
-        <file>Resources/text/help/quantifier_atlas_dir.rtf</file>
-        <file>Resources/text/help/quantifier_input_dir.rtf</file>
-        <file>Resources/text/help/quantifier_output_dir.rtf</file>
         <file>Resources/text/help/object_splitting.rtf</file>
         <file>Resources/text/help/object_min_size.rtf</file>
         <file>Resources/text/help/object_max_size.rtf</file>
@@ -35,16 +32,19 @@
         <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label</file>
         <file>Resources/labels/WHS_Atlas_Rat_Brain_v3.label</file>
         <file>Resources/text/help/output_dir.rtf</file>
-        <file>Resources/text/help/transform_input_dir.rtf</file>
         <file>Resources/images/object_splitting.png</file>
-        <file>Resources/text/help/quantifier_pixel_scale_unit.rtf</file>
         <file>Resources/text/help/atlas_dir.rtf</file>
-        <file>Resources/text/help/transform_output_dir.rtf</file>
-        <file>Resources/text/help/transform_background_color.rtf</file>
-        <file>Resources/text/help/transform_color_spread.rtf</file>
-        <file>Resources/text/help/transform_thumbnail_size.rtf</file>
-        <file>Resources/text/help/transform_files.rtf</file>
-        <file>Resources/text/help/type.rtf</file>
         <file>Resources/images/quint.PNG</file>
+        <file>Resources/text/help/transform/transform_thumbnail_size.rtf</file>
+        <file>Resources/text/help/transform/transform_output_dir.rtf</file>
+        <file>Resources/text/help/transform/transform_input_dir.rtf</file>
+        <file>Resources/text/help/transform/transform_files.rtf</file>
+        <file>Resources/text/help/transform/transform_color_spread.rtf</file>
+        <file>Resources/text/help/transform/transform_background_color.rtf</file>
+        <file>Resources/text/help/quantifier/quantifier_pixel_scale_unit.rtf</file>
+        <file>Resources/text/help/quantifier/quantifier_atlas_dir.rtf</file>
+        <file>Resources/text/help/quantifier/quantifier_output_dir.rtf</file>
+        <file>Resources/text/help/quantifier/quantifier_input_dir.rtf</file>
+        <file>Resources/text/help/quantifier/type.rtf</file>
     </qresource>
 </RCC>
