@@ -862,32 +862,43 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label \
 		../Resources/labels/WHS_Atlas_Rat_Brain_v3.label \
 		../Resources/labels/WHS_Atlas_Rat_Brain_v2.label \
+		../Resources/images/quint.PNG \
+		../Resources/images/object_splitting.png \
 		../Resources/text/tiffcreator.txt \
 		../Resources/text/transform.txt \
 		../Resources/text/quantifier.txt \
 		../Resources/text/help/use_custom_masks.rtf \
 		../Resources/text/help/color_spread.rtf \
+		../Resources/text/help/quantifier_pixel_scale_unit.rtf \
 		../Resources/text/help/custom_region_file.rtf \
 		../Resources/text/help/output_compression.rtf \
+		../Resources/text/help/type.rtf \
 		../Resources/text/help/background_color.rtf \
 		../Resources/text/help/output_dir.rtf \
 		../Resources/text/help/global_pixel_scale.rtf \
 		../Resources/text/help/extraction_color.rtf \
 		../Resources/text/help/auto_crop.rtf \
+		../Resources/text/help/transform_thumbnail_size.rtf \
+		../Resources/text/help/quantifier_atlas_dir.rtf \
 		../Resources/text/help/pattern_match.rtf \
 		../Resources/text/help/object_max_size.rtf \
+		../Resources/text/help/transform_color_spread.rtf \
 		../Resources/text/help/name.rtf \
 		../Resources/text/help/custom_mask_color.rtf \
 		../Resources/text/help/thumbnail_size.rtf \
 		../Resources/text/help/object_min_size.rtf \
 		../Resources/text/help/quantifier_input_dir.rtf \
+		../Resources/text/help/transform_input_dir.rtf \
 		../Resources/text/help/atlas_dir.rtf \
+		../Resources/text/help/transform_background_color.rtf \
 		../Resources/text/help/output_report.rtf \
 		../Resources/text/help/output_report_type.rtf \
 		../Resources/text/help/xml_anchor_file.rtf \
 		../Resources/text/help/object_splitting.rtf \
+		../Resources/text/help/transform_files.rtf \
 		../Resources/text/help/only_thumbnails.rtf \
 		../Resources/text/help/coordinate_extraction.rtf \
+		../Resources/text/help/transform_output_dir.rtf \
 		../Resources/text/help/quantifier_output_dir.rtf \
 		../Resources/text/help/nifti_size.rtf \
 		../Resources/text/help/label_file.rtf

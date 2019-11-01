@@ -1,13 +1,29 @@
-<h2>Object Splitting</h2>
-
-Turn this feature <b>ON</b> to divide segmented objects that overlap atlas regions, with individual pixels assigned their precise anatomical location.
-This gives accurate load measurements but invalidates the object counts.
-<br>
-For accurate counts, turn this feature <b>OFF</b>. Segmented objects that overlap atlas regions are assigned to one of the regions at random.
-This gives accurate object counts but invalidates the load measurements.
+<h2>Object splitting</h2>
 
 <h3>Recommendation</h3>
-<p>Select <b>NO</b> for small objects (e.g. cells).<br>
-Select <b>YES</b> for segmentations with large objects that overlap atlas regions (e.g connectivity data).</p>
+<p>Select <u>NO</u> for small objects (e.g. cells).</p>
+<p>Select <u>YES</u> for large objects that overlap atlas regions (e.g connectivity data).<p>
 
-<p>See the user manual for more information.</p>
+<h3>Object splitting explained</h3>
+<br>
+<table width="100%">
+<tr>
+<td>
+Segmentated objects will in some cases overlap two or more atlas regions. <br>
+(for example, the red object shown here overlaps two atlas regions - shown in light and dark green).
+<p>
+Object splitting divides objects that overlap atlas regions, with individual pixels assigned their precise location.
+This gives accurate load measurements (load is the percentage of the region occupied by objects), but invalidates the object counts.</p>
+<p>
+For accurate object counts, turn this feature <u>OFF</u>. Objects that overlap atlas regions are in this case assigned to one of the regions at random.
+This gives accurate counts but less precise load measurements.</p>
+
+
+</td>
+<td>
+<img src="://Resources/images/object_splitting.png" width="140">
+</td>
+
+</table>
+
+
