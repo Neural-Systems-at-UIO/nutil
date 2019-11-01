@@ -102,6 +102,8 @@ void MainWindow::on_btnStart_clicked()
     m_timer = QElapsedTimer();
      m_timer.start();
 
+    on_btnSave_clicked();
+
     m_nauto.m_numThreads = ui->leProcessors->text().toInt();
     //m_nauto.m_sheetIndex = ui->cmbSheets->currentText();
 

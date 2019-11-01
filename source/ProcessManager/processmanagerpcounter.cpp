@@ -429,7 +429,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_outputNifti = m_niftiSize!=0;
 
 
-    m_useCustomMask = data->Get("use_custom_mask").toLower()=="yes";
+    m_useCustomMask = data->Get("use_custom_masks").toLower()=="yes";
     if (m_useCustomMask)
         m_customMaskInclusionColors = NutilTemplateItem::StringToColor(data->Get("custom_mask_color"));
 

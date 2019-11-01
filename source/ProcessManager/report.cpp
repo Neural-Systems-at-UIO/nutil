@@ -290,7 +290,7 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
 
 
 
-        LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
+        LSheet* sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
 
         sheet->writeStr(0,0, "Region name");
         sheet->writeStr(0,1, "Region pixel area");

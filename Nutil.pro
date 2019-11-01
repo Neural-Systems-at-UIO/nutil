@@ -172,7 +172,7 @@ linux*{
     LIBS += -ltiff
 
     INCLUDEPATH += $$PWD/lib/libtiff
-    INCLUDEPATH += $$PWD/lib/
+    #INCLUDEPATH += $$PWD/lib/
     DEPENDPATH += $$PWD/lib/libtiff
 
     LIBS += -L$$PWD/lib/ -lxlnt

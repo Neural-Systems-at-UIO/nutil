@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DIS_BETA -DIGNORE_DOWNLOAD -DQT_DEPRECATED_WARNINGS -DUSE_LIBTIFF -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -fopenmp -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wno-comment -Wno-parentheses -Wno-delete-non-virtual-dtor -Wno-missing-noreturn -Ofast -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../nutil -I. -I../lib/libtiff -I../lib -I../../../Qt/5.13.0/gcc_64/include -I../../../Qt/5.13.0/gcc_64/include/QtWidgets -I../../../Qt/5.13.0/gcc_64/include/QtGui -I../../../Qt/5.13.0/gcc_64/include/QtWebSockets -I../../../Qt/5.13.0/gcc_64/include/QtNetwork -I../../../Qt/5.13.0/gcc_64/include/QtXml -I../../../Qt/5.13.0/gcc_64/include/QtCore -I. -I/usr/include/libdrm -I. -I../../../Qt/5.13.0/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../../nutil -I. -I../lib/libtiff -I../../../Qt/5.13.0/gcc_64/include -I../../../Qt/5.13.0/gcc_64/include/QtWidgets -I../../../Qt/5.13.0/gcc_64/include/QtGui -I../../../Qt/5.13.0/gcc_64/include/QtWebSockets -I../../../Qt/5.13.0/gcc_64/include/QtNetwork -I../../../Qt/5.13.0/gcc_64/include/QtXml -I../../../Qt/5.13.0/gcc_64/include/QtCore -I. -I/usr/include/libdrm -I. -I../../../Qt/5.13.0/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/leuat/Qt/5.13.0/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -171,8 +171,7 @@ OBJECTS       = main.o \
 		moc_dialogtiff.o \
 		moc_updatethread.o \
 		moc_dialogsettings.o
-DIST          = ../Resources/text/help/input_dir.rtf \
-		../Resources/text/quantifier.txt \
+DIST          = ../Resources/text/quantifier.txt \
 		../Resources/text/tiffcreator.txt \
 		../../../../Qt/5.13.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.13.0/gcc_64/mkspecs/common/unix.conf \
@@ -870,8 +869,8 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/color_spread.rtf \
 		../Resources/text/help/custom_region_file.rtf \
 		../Resources/text/help/output_compression.rtf \
-		../Resources/text/help/output_dir.rtf \
 		../Resources/text/help/background_color.rtf \
+		../Resources/text/help/output_dir.rtf \
 		../Resources/text/help/global_pixel_scale.rtf \
 		../Resources/text/help/extraction_color.rtf \
 		../Resources/text/help/auto_crop.rtf \
@@ -881,14 +880,15 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/custom_mask_color.rtf \
 		../Resources/text/help/thumbnail_size.rtf \
 		../Resources/text/help/object_min_size.rtf \
+		../Resources/text/help/quantifier_input_dir.rtf \
 		../Resources/text/help/atlas_dir.rtf \
 		../Resources/text/help/output_report.rtf \
 		../Resources/text/help/output_report_type.rtf \
 		../Resources/text/help/xml_anchor_file.rtf \
 		../Resources/text/help/object_splitting.rtf \
-		../Resources/text/help/input_dir.rtf \
 		../Resources/text/help/only_thumbnails.rtf \
 		../Resources/text/help/coordinate_extraction.rtf \
+		../Resources/text/help/quantifier_output_dir.rtf \
 		../Resources/text/help/nifti_size.rtf \
 		../Resources/text/help/label_file.rtf
 	/home/leuat/Qt/5.13.0/gcc_64/bin/rcc -name resources ../resources.qrc -o qrc_resources.cpp
@@ -1025,7 +1025,7 @@ moc_nutiltemplate.cpp: ../source/IO/nutiltemplate.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/IO/nutiltemplate.h -o moc_nutiltemplate.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/IO/nutiltemplate.h -o moc_nutiltemplate.cpp
 
 moc_dialoghelp.cpp: ../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
@@ -1134,7 +1134,7 @@ moc_dialoghelp.cpp: ../source/dialoghelp.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qtouchdevice.h \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/dialoghelp.h -o moc_dialoghelp.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/dialoghelp.h -o moc_dialoghelp.cpp
 
 moc_dialognewfile.cpp: ../source/dialognewfile.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
@@ -1243,7 +1243,7 @@ moc_dialognewfile.cpp: ../source/dialognewfile.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qtouchdevice.h \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/dialognewfile.h -o moc_dialognewfile.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/dialognewfile.h -o moc_dialognewfile.cpp
 
 moc_lcolorlist.cpp: ../source/limage/lcolorlist.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/QColor \
@@ -1386,7 +1386,7 @@ moc_lcolorlist.cpp: ../source/limage/lcolorlist.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qvector3d.h \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/limage/lcolorlist.h -o moc_lcolorlist.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/limage/lcolorlist.h -o moc_lcolorlist.cpp
 
 moc_mainwindow.cpp: ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMainWindow \
@@ -1561,64 +1561,6 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -1704,7 +1646,7 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../source/dialognewfile.h \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../mainwindow.h -o moc_mainwindow.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../mainwindow.h -o moc_mainwindow.cpp
 
 moc_node.cpp: ../node.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QString \
@@ -1819,14 +1761,14 @@ moc_node.cpp: ../node.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qframe.h \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../node.h -o moc_node.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../node.h -o moc_node.cpp
 
 moc_downloadmanager.cpp: ../source/util/downloadmanager.h \
 		../../../Qt/5.13.0/gcc_64/include/QtNetwork \
 		../../../Qt/5.13.0/gcc_64/include/QtCore \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/util/downloadmanager.h -o moc_downloadmanager.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/util/downloadmanager.h -o moc_downloadmanager.cpp
 
 moc_dialogtiff.cpp: ../source/dialogtiff.h \
 		ui_dialogtiff.h \
@@ -2032,7 +1974,7 @@ moc_dialogtiff.cpp: ../source/dialogtiff.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QObject \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/dialogtiff.h -o moc_dialogtiff.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/dialogtiff.h -o moc_dialogtiff.cpp
 
 moc_updatethread.cpp: ../source/updatethread.h \
 		ui_dialogtiff.h \
@@ -2235,7 +2177,7 @@ moc_updatethread.cpp: ../source/updatethread.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QPointF \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/updatethread.h -o moc_updatethread.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/updatethread.h -o moc_updatethread.cpp
 
 moc_dialogsettings.cpp: ../dialogsettings.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
@@ -2353,7 +2295,7 @@ moc_dialogsettings.cpp: ../dialogsettings.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/QColor \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
-	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../dialogsettings.h -o moc_dialogsettings.cpp
+	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../dialogsettings.h -o moc_dialogsettings.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -2572,64 +2514,6 @@ main.o: ../main.cpp ../../../Qt/5.13.0/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -4432,64 +4316,6 @@ nutilapplication.o: ../nutilapplication.cpp ../nutilapplication.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -4689,64 +4515,6 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -5137,64 +4905,6 @@ nauto.o: ../source/nauto.cpp ../source/nauto.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -5457,64 +5167,6 @@ nutilprocess.o: ../source/ProcessManager/nutilprocess.cpp ../source/ProcessManag
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -5687,64 +5339,6 @@ processmanager.o: ../source/ProcessManager/processmanager.cpp ../source/ProcessM
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -6454,64 +6048,6 @@ lbookxlnt.o: ../source/LBook/lbookxlnt.cpp ../source/LBook/lbookxlnt.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringalgorithms.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringview.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringbuilder.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/LBook/lbook.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QVector \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qvector.h \
@@ -6886,64 +6422,6 @@ nlimage.o: ../source/util/nlimage.cpp ../source/util/nlimage.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/QColor \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/counter.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QElapsedTimer \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qelapsedtimer.h \
@@ -7421,64 +6899,6 @@ report.o: ../source/ProcessManager/report.cpp ../source/ProcessManager/report.h 
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -7745,64 +7165,6 @@ processmanagerpcounter.o: ../source/ProcessManager/processmanagerpcounter.cpp ..
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -7997,64 +7359,6 @@ processmanagerfactory.o: ../source/ProcessManager/processmanagerfactory.cpp ../s
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -8251,64 +7555,6 @@ processmanagertransform.o: ../source/ProcessManager/processmanagertransform.cpp 
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -8500,64 +7746,6 @@ processmanagerautocontrast.o: ../source/ProcessManager/processmanagerautocontras
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -9240,64 +8428,6 @@ areafinder3d.o: ../source/ProcessManager/areafinder3d.cpp ../source/ProcessManag
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -9933,64 +9063,6 @@ processmanagertiffcreator.o: ../source/ProcessManager/processmanagertiffcreator.
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp \
 		../source/util/flat2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
 		../source/util/nlimagetiff.h \
@@ -10310,65 +9382,7 @@ lbookfactory.o: ../source/LBook/lbookfactory.cpp ../source/LBook/lbookfactory.h 
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QMap \
-		../source/LBook/lbookxlnt.h \
-		../lib/xlnt/xlnt.hpp \
-		../lib/xlnt/xlnt_config.hpp \
-		../lib/xlnt/cell/cell.hpp \
-		../lib/xlnt/cell/cell_type.hpp \
-		../lib/xlnt/cell/index_types.hpp \
-		../lib/xlnt/cell/rich_text.hpp \
-		../lib/xlnt/cell/rich_text_run.hpp \
-		../lib/xlnt/styles/font.hpp \
-		../lib/xlnt/styles/color.hpp \
-		../lib/xlnt/utils/optional.hpp \
-		../lib/xlnt/utils/exceptions.hpp \
-		../lib/xlnt/cell/cell_reference.hpp \
-		../lib/xlnt/cell/comment.hpp \
-		../lib/xlnt/cell/hyperlink.hpp \
-		../lib/xlnt/packaging/manifest.hpp \
-		../lib/xlnt/packaging/relationship.hpp \
-		../lib/xlnt/packaging/uri.hpp \
-		../lib/xlnt/utils/path.hpp \
-		../lib/xlnt/styles/alignment.hpp \
-		../lib/xlnt/styles/border.hpp \
-		../lib/xlnt/styles/fill.hpp \
-		../lib/xlnt/styles/format.hpp \
-		../lib/xlnt/styles/number_format.hpp \
-		../lib/xlnt/styles/protection.hpp \
-		../lib/xlnt/styles/style.hpp \
-		../lib/xlnt/utils/calendar.hpp \
-		../lib/xlnt/utils/date.hpp \
-		../lib/xlnt/utils/datetime.hpp \
-		../lib/xlnt/utils/time.hpp \
-		../lib/xlnt/utils/timedelta.hpp \
-		../lib/xlnt/utils/variant.hpp \
-		../lib/xlnt/workbook/document_security.hpp \
-		../lib/xlnt/workbook/external_book.hpp \
-		../lib/xlnt/workbook/metadata_property.hpp \
-		../lib/xlnt/workbook/named_range.hpp \
-		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
-		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
-		../lib/xlnt/workbook/theme.hpp \
-		../lib/xlnt/workbook/workbook.hpp \
-		../lib/xlnt/workbook/worksheet_iterator.hpp \
-		../lib/xlnt/worksheet/cell_iterator.hpp \
-		../lib/xlnt/worksheet/range_reference.hpp \
-		../lib/xlnt/worksheet/worksheet.hpp \
-		../lib/xlnt/worksheet/page_margins.hpp \
-		../lib/xlnt/worksheet/page_setup.hpp \
-		../lib/xlnt/worksheet/sheet_view.hpp \
-		../lib/xlnt/worksheet/pane.hpp \
-		../lib/xlnt/worksheet/selection.hpp \
-		../lib/xlnt/worksheet/cell_vector.hpp \
-		../lib/xlnt/worksheet/major_order.hpp \
-		../lib/xlnt/worksheet/column_properties.hpp \
-		../lib/xlnt/worksheet/header_footer.hpp \
-		../lib/xlnt/utils/scoped_enum_hash.hpp \
-		../lib/xlnt/worksheet/range.hpp \
-		../lib/xlnt/styles/conditional_format.hpp \
-		../lib/xlnt/worksheet/range_iterator.hpp \
-		../lib/xlnt/worksheet/row_properties.hpp \
-		../lib/xlnt/worksheet/sheet_protection.hpp
+		../source/LBook/lbookxlnt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lbookfactory.o ../source/LBook/lbookfactory.cpp
 
 spline.o: ../source/util/spline.cpp ../source/util/spline.h

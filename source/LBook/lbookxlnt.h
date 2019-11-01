@@ -40,6 +40,7 @@ public:
     LSheetXlnt(LBookXlnt* book) {
         m_sheetO = book->m_book.create_sheet();
         m_sheet = &m_sheetO;
+        m_sheet->title(("t_"+QString::number(rand()%100)).toStdString());
     }
     double readNum(int i, int j) override;
     long readLong(int i, int j) override;
