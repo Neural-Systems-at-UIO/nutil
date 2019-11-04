@@ -1,7 +1,7 @@
-type;  0;Type: ;  string; TiffCreator
-name; 0;Name: ; string;
-output_compression; 0;Output compression; list; jpeg,lzw,none; lzw
-tiffcreator_input_dir; 0;Input directory; directory; Default value
-tiffcreator_output_dir; 0;Output directory; directory;
-tiffcreator_size; 0;Tile size; number; 128
+type;  0;;Type: ;  string; TiffCreator
+name; 0;;Name: ; string;
+output_compression; 0;;Output compression; list; jpeg,lzw,none; lzw
+tiffcreator_input_dir; 0;;Input directory; directory; Default value
+tiffcreator_output_dir; 0;;Output directory; directory;
+tiffcreator_size; 0;;Tile size; number; 128
 

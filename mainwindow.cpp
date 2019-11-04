@@ -38,8 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->leProcessors->setText(QString::number(omp_get_max_threads()));
     QStringList l = m_settings.getStringList("recent_files");
     if (l.count()!=0) {
-        m_nt.Load(l[0]);
-        m_nt.Populate(ui->gridTemplate);
+        Load(l[0]);
     }
     UpdateRecentList();
 
@@ -74,6 +73,16 @@ void MainWindow::UpdateRecentList()
     }
 
     m_settings.Save();
+}
+
+void MainWindow::Load(QString f)
+{
+    m_nt.Load(f);
+    m_nt.Populate(ui->gridTemplate);
+    QWidget* w = new QWidget(this);
+    w->setLayout(ui->gridTemplate);
+    ui->scrollArea->setWidget(w);
+
 }
 
 /*void MainWindow::on_btnLoad_clicked()
@@ -292,8 +301,7 @@ void MainWindow::on_btnLoad_2_clicked()
                                    tr("Nutil (*.nut)"));
 
     if (fileName!="") {
-        m_nt.Load(fileName);
-        m_nt.Populate(ui->gridTemplate);
+        Load(fileName);
         UpdateRecentList();
     }
 }
@@ -309,8 +317,7 @@ void MainWindow::on_lstRecent_itemDoubleClicked(QListWidgetItem *item)
     QString v = lst[ui->lstRecent->currentRow()];
 
     if (v!=m_nt.m_openFile) {
-        m_nt.Load(v);
-        m_nt.Populate(ui->gridTemplate);
+        Load(v);
         UpdateRecentList();
     }
 

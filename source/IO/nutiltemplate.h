@@ -16,6 +16,7 @@ public:
     enum Type{ STRING, LIST, DIRECTORY, FILE, TEXTFIELD, NUMBER, NONE, COLOR };
     Q_ENUM(Type)
 
+    QString m_depID = "", m_depVal="";
     QString m_name;
     QString m_text;
     QStringList m_items;

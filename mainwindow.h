@@ -84,7 +84,7 @@ public:
 
     void UpdateRecentList();
 
-
+    void Load(QString f);
 
 private slots:
 //    void on_btnLoad_clicked();
