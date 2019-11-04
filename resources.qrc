@@ -9,7 +9,6 @@
         <file>Resources/text/help/label_file.rtf</file>
         <file>Resources/text/tiffcreator.txt</file>
         <file>Resources/text/help/custom_mask_color.rtf</file>
-        <file>Resources/text/help/object_splitting.rtf</file>
         <file>Resources/text/help/object_min_size.rtf</file>
         <file>Resources/text/help/object_max_size.rtf</file>
         <file>Resources/text/help/xml_anchor_file.rtf</file>
@@ -46,5 +45,6 @@
         <file>Resources/text/help/quantifier/quantifier_output_dir.rtf</file>
         <file>Resources/text/help/quantifier/quantifier_input_dir.rtf</file>
         <file>Resources/text/help/quantifier/type.rtf</file>
+        <file>Resources/text/help/quantifier/object_splitting.rtf</file>
     </qresource>
 </RCC>
