@@ -397,13 +397,22 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
+
+
+    m_reportSheetName="";
+    if (data->Get("custom_region_type").toLower()=="custom")
+        m_reportSheetName = data->Get("custom_region_file");
+
     if (m_dataType=="quicknii")
        m_atlasDir = data->Get("quantifier_atlas_dir");
     if (m_dataType=="quicknii") {
        QString labelType = data->Get("label_file");
 //       qDebug() << "Labl type:" <<labelType;
-       if (labelType == "Allen Mouse Brain 2015")
+       if (labelType == "Allen Mouse Brain 2015") {
             m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
+            if (data->Get("custom_region_type").toLower()=="yes")
+               m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse.xlsx";
+       }
        if (labelType=="WHS Atlas Rat v2")
            m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
        if (labelType=="WHS Atlas Rat v3")
@@ -421,7 +430,6 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         m_anchorFile = data->Get("xml_anchor_file");
     m_niftiSize = data->Get("nifti_size").toInt();//m_sheet->readNum(12,1);
     //m_xyzScale = m_sheet->readNum(13,1);
-    m_reportSheetName = data->Get("custom_region_file");
     //m_units = m_sheet->readStr(10,2);
     m_units = data->Get("quantifier_pixel_scale_unit");
 
@@ -447,20 +455,31 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (m_pixelCutoffMax<m_pixelCutoff) {
 
     }
-//    qDebug() << "HERE";
 
-    LBook* sbook = new LBookXlnt();
-    sbook->Load(m_reportSheetName);
-    LSheet* reportSheet = sbook->GetSheet(0);
-    if (reportSheet == nullptr) {
-        LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
-        Data::data.abort = true;
-        return;
+
+    if (QFile::exists(m_reportSheetName)) {
+
+        if (!m_reportSheetName.toLower().endsWith(".xlsx")) {
+            LMessage::lMessage.Error("Error: custom region file must be xlsx");
+            Data::data.abort = true;
+            return;
+        }
+
+        LBook* sbook = new LBookXlnt();
+        QFile::copy(m_reportSheetName,"temp.xlsx");
+        sbook->Load("temp.xlsx");
+        QFile::remove("temp.xlsx");
+
+        LSheet* reportSheet = sbook->GetSheet(0);
+        if (reportSheet == nullptr) {
+            LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
+            Data::data.abort = true;
+            return;
+        }
+        else
+            GenerateReports(reportSheet);
+
     }
-    else
-        GenerateReports(reportSheet);
-//*/
-
 }
 
 void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)

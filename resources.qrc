@@ -44,5 +44,6 @@
         <file>Resources/text/help/transform/only_thumbnails.rtf</file>
         <file>Resources/text/help/transform/output_compression.rtf</file>
         <file>Resources/text/help/transform/thumbnail_size.rtf</file>
+        <file>Resources/CustomRegions/CustomRegionMouse.xlsx</file>
     </qresource>
 </RCC>

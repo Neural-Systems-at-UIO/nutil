@@ -15,7 +15,9 @@ use_custom_masks; 1; ;Use custom masks?; list; Yes, No; no
 custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,255,255,255
 output_report; 0 ;;Output reports; list; All, Summary, None; all
 output_report_type; 1; ;Output report type; list; CSV, XLSX; CSV
-custom_region_file;1; ; Customised reports; file;
+#custom_region_file;1; ; Customised reports; file;
+custom_region_type ; 1; ; Region reports; list; No,Yes, custom
+custom_region_file; 1; custom_region_type=custom ; Custom report file;  file;
 nifti_size; 1; ;Nifti size ; list; 0,64,128,256,512; 0
 coordinate_extraction; 1; ;Coordinate extraction;list; All, None, Slices, Summary; All
 pattern_match ; 1; ;Unique ID format; list; sXXX, files, user; sXXX

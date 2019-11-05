@@ -12,20 +12,12 @@ QString &LSheetCSV::get(int j, int i) {
 }
 
 void LSheetCSV::set(int j, int i, QString val) {
-  //  qDebug() << "LSheetCSV " << m_name<<QString::number(i)<<QString::number(j);
     if (j>=m_height) {
         m_height = j+1;
         m_data.resize(m_height*m_width);
-//        qDebug() << "Resizing to height " << QString::number(m_height);
 
     }
- //   const QLocale & cLocale = QLocale::c();
-//    QString ss = cLocale.toString(yourDoubleNumber, 'f');
-  //  ss.replace(cLocale.groupSeparator(), yourGroupChar);
-   // ss.replace(cLocale.decimalPoint(), yourDecimalPointChar);
-//    val.replace(cLocale.decimalPoint(), Data::data.comma);
     m_data[i+j*m_width] = val;
- //   qDebug() << "Done!";
 }
 
 void LSheetCSV::Save(QString basename)
