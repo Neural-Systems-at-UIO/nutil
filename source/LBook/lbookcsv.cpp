@@ -1,5 +1,6 @@
 #include "lbookcsv.h"
 #include <QTextStream>
+#include "source/data.h"
 
 QString &LSheetCSV::get(int j, int i) {
 //    qDebug() << "LBookCSV::get";
@@ -18,6 +19,11 @@ void LSheetCSV::set(int j, int i, QString val) {
 //        qDebug() << "Resizing to height " << QString::number(m_height);
 
     }
+ //   const QLocale & cLocale = QLocale::c();
+//    QString ss = cLocale.toString(yourDoubleNumber, 'f');
+  //  ss.replace(cLocale.groupSeparator(), yourGroupChar);
+   // ss.replace(cLocale.decimalPoint(), yourDecimalPointChar);
+//    val.replace(cLocale.decimalPoint(), Data::data.comma);
     m_data[i+j*m_width] = val;
  //   qDebug() << "Done!";
 }
@@ -66,7 +72,7 @@ QString LSheetCSV::readStr(int i, int j)
 
 void LSheetCSV::Set(int i, int j, float val)
 {
-    set(i,j,QString::number(val));
+    set(i,j,QString::number(val,'f'));
 }
 
 void LSheetCSV::Set(int i, int j, QString val)

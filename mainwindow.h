@@ -14,7 +14,7 @@
 #include <QMessageBox>
 #include "source/IO/nutiltemplate.h"
 #include "source/dialognewfile.h"
-
+#include "source/dialoggeneratedata.h"
 
 namespace Ui {
     class MainWindow;
@@ -120,6 +120,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_btnClearList_clicked();
+
+    void on_actionGenerate_validation_data_triggered();
 
 private:
     Nauto m_nauto;

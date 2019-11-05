@@ -53,7 +53,7 @@
         <property name="maximumSize">
          <size>
           <width>199</width>
-          <height>128</height>
+          <height>64</height>
          </size>
         </property>
         <property name="text">
@@ -201,8 +201,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1055</width>
-             <height>530</height>
+             <width>1060</width>
+             <height>535</height>
             </rect>
            </property>
            <widget class="QWidget" name="layoutWidget">
@@ -346,7 +346,7 @@
      <x>0</x>
      <y>0</y>
      <width>1404</width>
-     <height>31</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTest">
@@ -362,7 +362,14 @@
     </property>
     <addaction name="actionAbout_Nutil"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionGenerate_validation_data"/>
+   </widget>
    <addaction name="menuTest"/>
+   <addaction name="menuTools"/>
    <addaction name="menuJadda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -379,6 +386,11 @@
   <action name="actionSettings">
    <property name="text">
     <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionGenerate_validation_data">
+   <property name="text">
+    <string>Generate validation data</string>
    </property>
   </action>
  </widget>
