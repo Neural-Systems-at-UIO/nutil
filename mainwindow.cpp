@@ -347,3 +347,12 @@ void MainWindow::on_btnClearList_clicked()
     m_settings.setStringList("recent_files",QStringList());
     UpdateRecentList();
 }
+
+void MainWindow::on_actionGenerate_validation_data_triggered()
+{
+    DialogGenerateData* d = new DialogGenerateData();
+
+    d->exec();
+
+    delete d;
+}

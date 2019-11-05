@@ -27,6 +27,7 @@ public:
     static Data data;
     bool isConsole = false;
     void Redraw();
+    QString comma = ",";
 };
 
 #endif // DATA_H

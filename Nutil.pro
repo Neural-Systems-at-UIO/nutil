@@ -36,6 +36,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 SOURCES += main.cpp \
     source/IO/nutiltemplate.cpp \
     source/data.cpp \
+    source/dialoggeneratedata.cpp \
     source/dialoghelp.cpp \
     source/dialognewfile.cpp \
     source/limage/lcolorlist.cpp \
@@ -87,6 +88,7 @@ HEADERS += \
     nutilapplication.h \
     source/IO/nutiltemplate.h \
     source/data.h \
+    source/dialoggeneratedata.h \
     source/dialoghelp.h \
     source/dialognewfile.h \
     source/limage/lcolorlist.h \
@@ -138,6 +140,7 @@ HEADERS += \
     source/util/util.h
 
 FORMS    += mainwindow.ui \
+    source/dialoggeneratedata.ui \
     source/dialoghelp.ui \
     source/dialognewfile.ui \
     source/dialogtiff.ui \
@@ -172,7 +175,7 @@ linux*{
     LIBS += -ltiff
 
     INCLUDEPATH += $$PWD/lib/libtiff
-    #INCLUDEPATH += $$PWD/lib/
+    INCLUDEPATH += $$PWD/lib/
     DEPENDPATH += $$PWD/lib/libtiff
 
     LIBS += -L$$PWD/lib/ -lxlnt

@@ -435,8 +435,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_reportType = data->Get("output_report");
 
-    m_outputFileType = data->Get("output_report_type");;
-//    qDebug() << "Output type: " <<m_outputFileType;
+    m_outputFileType = data->Get("output_report_type").toLower();;
     if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
         LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv). Are you sure you are using the correct template version?");
         Data::data.abort = true;
