@@ -11,5 +11,6 @@ xcopy Nutil.cmd nutil\
 xcopy 7z.exe nutil\
 xcopy /e dll\* nutil\program
 move nutil\program\nutil.exe nutil\program\nutil_program.exe
+xcopy /s /y nutil\* Z:\HBP_Analytics\Nutil\Nutil_releases\NutilInternal\
 
 
