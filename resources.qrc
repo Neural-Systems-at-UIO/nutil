@@ -1,7 +1,5 @@
 <RCC>
-    <qresource prefix="/images">
-        <file>Resources/newt.png</file>
-    </qresource>
+    <qresource prefix="/images"/>
     <qresource prefix="/">
         <file>Resources/text/transform.txt</file>
         <file>Resources/text/quantifier.txt</file>
@@ -45,5 +43,9 @@
         <file>Resources/text/help/transform/output_compression.rtf</file>
         <file>Resources/text/help/transform/thumbnail_size.rtf</file>
         <file>Resources/CustomRegions/CustomRegionMouse.xlsx</file>
+        <file>Resources/images/Workflow_forGUI.jpg</file>
+        <file>Resources/images/Workflow_forGUI_v2.jpg</file>
+        <file>Resources/images/0218_79584253-Rainbow_2015.png</file>
+        <file>Resources/images/s218_segmentation.PNG</file>
     </qresource>
 </RCC>

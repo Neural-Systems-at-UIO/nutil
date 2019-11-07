@@ -86,6 +86,9 @@ public:
 
     void Load(QString f);
 
+    void setDarkPalette();
+
+
 private slots:
 //    void on_btnLoad_clicked();
 

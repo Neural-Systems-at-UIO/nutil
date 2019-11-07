@@ -14,9 +14,8 @@
 #pragma comment(linker,"/HEAP:18000000");
 
 
-void setPalette(QApplication& a) {
+void setDarkPalette(QApplication& a) {
     a.setStyle(QStyleFactory::create("Fusion"));
-
     QPalette darkPalette;
     darkPalette.setColor(QPalette::Window, QColor(53,53,53));
     darkPalette.setColor(QPalette::WindowText, Qt::white);
@@ -36,9 +35,37 @@ void setPalette(QApplication& a) {
     a.setPalette(darkPalette);
 
     a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
-
-
 }
+
+void setSharonPalette(QApplication& a) {
+    a.setStyle(QStyleFactory::create("Fusion"));
+    QPalette darkPalette;
+    float r = 1;
+    float g = 1;
+    float b = 1;
+
+    darkPalette.setColor(QPalette::Window, QColor(111*r,202*g,247*b));
+    darkPalette.setColor(QPalette::WindowText, Qt::black);
+    darkPalette.setColor(QPalette::Base, QColor(255*r,255*g,255*b));
+    darkPalette.setColor(QPalette::AlternateBase, QColor(111*r,202*g,247*b));
+    darkPalette.setColor(QPalette::ToolTipBase, Qt::black);
+    darkPalette.setColor(QPalette::ToolTipText, Qt::black);
+    darkPalette.setColor(QPalette::Text, Qt::black);
+    darkPalette.setColor(QPalette::Button, QColor(188*r,226*g,245*b));
+    darkPalette.setColor(QPalette::ButtonText, Qt::black);
+    darkPalette.setColor(QPalette::BrightText, Qt::red);
+    darkPalette.setColor(QPalette::Link, QColor(42*r, 130*g, 218*b));
+
+    darkPalette.setColor(QPalette::Highlight, QColor(42*r, 130*g, 218*b));
+    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+
+    a.setPalette(darkPalette);
+
+    a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+}
+
+
+
 
 void CheckVersion() {
     Updater u;
@@ -54,18 +81,15 @@ void CheckVersion() {
 
 int main(int argc, char *argv[])
 {
-
-
-
-//    qDebug() << QString::number(123456780.0);
-
 #ifndef IGNORE_DOWNLOAD
     CheckVersion();
 #endif
 
+
     if (argc == 1)  {
         QApplication a(argc, argv);
-        setPalette(a);
+        //setDarkPalette(a);
+        setSharonPalette(a);
         MainWindow window;
         window.show();
         return a.exec();
