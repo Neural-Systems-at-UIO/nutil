@@ -44,14 +44,14 @@ void setSharonPalette(QApplication& a) {
     float g = 1;
     float b = 1;
 
-    darkPalette.setColor(QPalette::Window, QColor(111*r,202*g,247*b));
+    darkPalette.setColor(QPalette::Window, QColor(220*r,220*g,220*b));
     darkPalette.setColor(QPalette::WindowText, Qt::black);
     darkPalette.setColor(QPalette::Base, QColor(255*r,255*g,255*b));
-    darkPalette.setColor(QPalette::AlternateBase, QColor(111*r,202*g,247*b));
+    darkPalette.setColor(QPalette::AlternateBase, QColor(220*r,220*g,220*b));
     darkPalette.setColor(QPalette::ToolTipBase, Qt::black);
     darkPalette.setColor(QPalette::ToolTipText, Qt::black);
     darkPalette.setColor(QPalette::Text, Qt::black);
-    darkPalette.setColor(QPalette::Button, QColor(188*r,226*g,245*b));
+    darkPalette.setColor(QPalette::Button, QColor(220*r,220*g,220*b));
     darkPalette.setColor(QPalette::ButtonText, Qt::black);
     darkPalette.setColor(QPalette::BrightText, Qt::red);
     darkPalette.setColor(QPalette::Link, QColor(42*r, 130*g, 218*b));
