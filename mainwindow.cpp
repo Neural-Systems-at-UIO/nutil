@@ -25,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
 #else
     ui->lblMain->setText("NeSys Utilities " + QString::number(Version));
 #endif
-    ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
+
+//    ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
  //   QPixmap pixmap = QPixmap ("://my_image.png");
 
 
@@ -48,6 +49,16 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+/*
+ *
+ *  MainWindow::UpdateRecentList
+ *  Parameters: none
+ *  This method will update the recent list of the main window
+ *
+ *
+ * */
 
 void MainWindow::UpdateRecentList()
 {
@@ -183,14 +194,7 @@ void MainWindow::Abort()
 
 }
 
-/*void MainWindow::FillSheetCombo()
-{
-    if (m_nauto.m_book==nullptr)
-        return;
-    //ui->cmbSheets->clear();
-    //ui->cmbSheets->addItems(m_nauto.getSheetList());
-}
-*/
+
 void MainWindow::closeEvent(QCloseEvent * event)
 {
     AppQuit();

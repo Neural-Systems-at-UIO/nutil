@@ -37,27 +37,24 @@ void setDarkPalette(QApplication& a) {
     a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
 }
 
-void setSharonPalette(QApplication& a) {
+void setSharonPalette(QApplication& a,float r, float g, float b) {
     a.setStyle(QStyleFactory::create("Fusion"));
     QPalette darkPalette;
-    float r = 1;
-    float g = 1;
-    float b = 1;
 
     darkPalette.setColor(QPalette::Window, QColor(220*r,220*g,220*b));
-    darkPalette.setColor(QPalette::WindowText, Qt::black);
-    darkPalette.setColor(QPalette::Base, QColor(255*r,255*g,255*b));
+//    darkPalette.setColor(QPalette::WindowText, Qt::black);
+//    darkPalette.setColor(QPalette::Base, QColor(255*r,255*g,255*b));
     darkPalette.setColor(QPalette::AlternateBase, QColor(220*r,220*g,220*b));
-    darkPalette.setColor(QPalette::ToolTipBase, Qt::black);
-    darkPalette.setColor(QPalette::ToolTipText, Qt::black);
-    darkPalette.setColor(QPalette::Text, Qt::black);
+  //  darkPalette.setColor(QPalette::ToolTipBase, Qt::black);
+  //  darkPalette.setColor(QPalette::ToolTipText, Qt::black);
+  //  darkPalette.setColor(QPalette::Text, Qt::black);
     darkPalette.setColor(QPalette::Button, QColor(220*r,220*g,220*b));
-    darkPalette.setColor(QPalette::ButtonText, Qt::black);
-    darkPalette.setColor(QPalette::BrightText, Qt::red);
-    darkPalette.setColor(QPalette::Link, QColor(42*r, 130*g, 218*b));
+  //  darkPalette.setColor(QPalette::ButtonText, Qt::black);
+  //  darkPalette.setColor(QPalette::BrightText, Qt::red);
+  //  darkPalette.setColor(QPalette::Link, QColor(42*r, 130*g, 218*b));
 
-    darkPalette.setColor(QPalette::Highlight, QColor(42*r, 130*g, 218*b));
-    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+    //darkPalette.setColor(QPalette::Highlight, QColor(42*r, 130*g, 218*b));
+   // darkPalette.setColor(QPalette::HighlightedText, Qt::black);
 
     a.setPalette(darkPalette);
 
@@ -79,6 +76,22 @@ void CheckVersion() {
 }
 
 
+void ApplyPalette(QString value, QApplication& a) {
+    if (value.toLower()=="dark")
+        setDarkPalette(a);
+    else
+    if (value.toLower()=="blue")
+        setSharonPalette(a,0.7,0.8,1.0);
+    else
+    if (value.toLower()=="purple")
+        setSharonPalette(a,1,0.7,0.9);
+
+
+
+}
+
+
+
 int main(int argc, char *argv[])
 {
 #ifndef IGNORE_DOWNLOAD
@@ -88,9 +101,8 @@ int main(int argc, char *argv[])
 
     if (argc == 1)  {
         QApplication a(argc, argv);
-        //setDarkPalette(a);
-        setSharonPalette(a);
         MainWindow window;
+        ApplyPalette(window.m_settings.getString("color_theme"),a);
         window.show();
         return a.exec();
     }

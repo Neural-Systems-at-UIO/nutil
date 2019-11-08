@@ -74,7 +74,6 @@ void DialogTiff::on_btnOpen_clicked()
         msgBox.exec();
         return;
     }
-    qDebug() << "OK";
 //    UpdateImage();
     m_updateThread->m_zoom = 0.1;
     m_updateThread->m_zoomCenter = QPointF(m_tif.m_tifs[0]->m_width/2, m_tif.m_tifs[0]->m_height/2);
