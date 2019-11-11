@@ -8,10 +8,10 @@ quantifier_output_dir; 0 ;; Output directory; directory;
 object_splitting; 1; ;Object Splitting; list; Yes, No; yes
 object_min_size; 1; ;Minimum object size; number; 1
 object_max_size; 1; ;Maximum object size; number; 100000
-extraction_color ; 0; ; Extraction colour ; color ; 255,0,0,255
+extraction_color ; 0; ; Object colour ; color ; 255,0,0,255
 global_pixel_scale; 1; ;Pixel scale; number; 1
 quantifier_pixel_scale_unit; 1; ; Pixel scale unit; list; pixels, um2, mm2; pixels
-use_custom_masks; 1; ;Use custom masks?; list; Yes, No; no
+use_custom_masks; 1; ;Custom masks (optional); list; Yes, No; no
 custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,255,255,255
 output_report; 0 ;;Output reports; list; All, Summary, None; all
 output_report_type; 1; ;Output report type; list; CSV, XLSX; CSV
