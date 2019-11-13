@@ -273,6 +273,36 @@ void LTiff::FromQIMage(QString filename, QImage &img, QString comp, int tileSize
 
 }
 
+QImage* LTiff::ToQImage()
+{
+    SetupBuffers();
+    AllocateBuffers();
+    QImage* img = new QImage(m_width, m_height,QImage::Format_RGB32);
+    for (int y = 0; y < m_height; y += m_tileHeight) {
+        for (int x = 0; x < m_width; x += m_tileWidth) {
+
+            //oTiff.ReadBuffer(x,y);
+
+            for (int i = 0;i<m_tileWidth;i++)
+                for (int j=0;j<m_tileHeight;j++) {
+                    float xx = (x+i);
+                    float yy = (y+j);
+                    if (xx<m_width && yy<m_height) {
+
+                        QColor c = GetTiledRGB(xx,yy,omp_get_thread_num());
+                        img->setPixelColor(xx,yy,c);
+                    }
+               }
+
+            bufferStack.UpdateBuffer();
+
+        }
+    }
+
+    Close();
+
+}
+
 void LTiff::WriteBuffer(int x, int y, int thread_num)
 {
     TIFFWriteTile(m_tif, m_writeBuf, x, y, 0,0);

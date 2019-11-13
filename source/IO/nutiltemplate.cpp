@@ -109,19 +109,8 @@ QString NutilTemplate::Get(QString val)
 
 
 
-
-void NutilTemplate::Populate(QGridLayout *grid)
+void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid)
 {
-    int row = 1;
-    clearGrid(grid);
-    m_grid = grid;
-
-    int textColumn = 0;
-    int helpColumn = 1;
-    int valueColumn = 2;
-    int buttonColumn = 3;
-
-
     grid->addWidget(new QLabel("View type:"),0,0);
 
     QComboBox* cmb = new QComboBox();
@@ -135,6 +124,23 @@ void NutilTemplate::Populate(QGridLayout *grid)
         Populate(grid);
     });
 
+}
+
+
+
+void NutilTemplate::Populate(QGridLayout *grid)
+{
+    int row = 1;
+    clearGrid(grid);
+    m_grid = grid;
+
+    int textColumn = 0;
+    int helpColumn = 1;
+    int valueColumn = 2;
+    int buttonColumn = 3;
+
+
+//    CreateBasicAdvancedOption(grid);
 
 
     for (QString name : m_sortList) {
@@ -381,4 +387,3 @@ void NutilTemplate::Load(QString fname)
     f.close();
 
 }
-

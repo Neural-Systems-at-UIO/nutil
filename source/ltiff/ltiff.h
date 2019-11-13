@@ -164,6 +164,7 @@ public:
     bool Open(QString filename);
     void New(QString filename);
     void FromQIMage(QString filename, QImage& img, QString comp, int tileSize, Counter& counter);
+    QImage* ToQImage();
     void WriteBuffer(int x, int y, int thread_num);
     void ReadBuffer(int x, int y, int thread_num);
     void ApplyParameters();

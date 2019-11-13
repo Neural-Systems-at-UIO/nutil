@@ -10,7 +10,7 @@ bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
 
     m_processItems.clear();
     QDir directory(m_inputDir);
-    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png",QDir::Files);
+    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png"<< "*.tif",QDir::Files);
     for (QString filename: images) {
         QStringList inFileSplit = filename.split("/");
         QString inFile = (inFileSplit[inFileSplit.count()-1]);
@@ -21,6 +21,7 @@ bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
             return false;
         }
         QString outFile = inFile.split(".").first()+".tif";
+
         m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, 0, QPointF(1,1), outFile, m_outputDir));
 //        return true;
     }
@@ -51,9 +52,18 @@ void ProcessManagerTiffCreator::Execute()
 #pragma omp parallel for
 
     for (int i=0;i<m_processes.length();i++) {
-
+        QImage img;
         ProcessItem* pi = m_processItems[i];
-        QImage img(pi->m_inFile);
+        if (pi->m_inFile.toLower().contains(".tif")) {
+            LTiff t;
+//            qDebug() << "HERE";
+            t.Open(pi->m_inFile);
+  //          exit(1);
+            img = *t.ToQImage();
+        }
+        else
+            img.load(pi->m_inFile);
+
         LTiff t;
         t.FromQIMage(pi->m_outFile,img,m_compression,m_tileSize, m_processes[i]->m_counter);
         //m_processes[i]->AutoContrast(pi->m_inFile, pi->m_outFile, m_compression, m_background, m_outputDir);

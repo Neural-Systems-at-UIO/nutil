@@ -54,6 +54,7 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../main.cpp \
 		../source/IO/nutiltemplate.cpp \
+		../source/ProcessManager/processmanagerresize.cpp \
 		../source/data.cpp \
 		../source/dialoggeneratedata.cpp \
 		../source/dialoghelp.cpp \
@@ -115,6 +116,7 @@ SOURCES       = ../main.cpp \
 		moc_dialogsettings.cpp
 OBJECTS       = main.o \
 		nutiltemplate.o \
+		processmanagerresize.o \
 		data.o \
 		dialoggeneratedata.o \
 		dialoghelp.o \
@@ -353,6 +355,7 @@ DIST          = ../Resources/text/quantifier.txt \
 		../../../../Qt/5.13.0/gcc_64/mkspecs/features/lex.prf \
 		../../Nutil.pro ../nutilapplication.h \
 		../source/IO/nutiltemplate.h \
+		../source/ProcessManager/processmanagerresize.h \
 		../source/data.h \
 		../source/dialoggeneratedata.h \
 		../source/dialoghelp.h \
@@ -405,6 +408,7 @@ DIST          = ../Resources/text/quantifier.txt \
 		../source/util/updater.h \
 		../source/util/util.h ../main.cpp \
 		../source/IO/nutiltemplate.cpp \
+		../source/ProcessManager/processmanagerresize.cpp \
 		../source/data.cpp \
 		../source/dialoggeneratedata.cpp \
 		../source/dialoghelp.cpp \
@@ -833,8 +837,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.13.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../nutilapplication.h ../source/IO/nutiltemplate.h ../source/data.h ../source/dialoggeneratedata.h ../source/dialoghelp.h ../source/dialognewfile.h ../source/limage/lcolorlist.h ../source/limage/limage.h ../source/limage/limageqimage.h ../source/limage/limagetiff.h ../source/ltiff/ltiff.h ../source/util/buffer2d.h ../mainwindow.h ../node.h ../source/util/cinifile.h ../source/nauto.h ../source/ProcessManager/nutilprocess.h ../source/ProcessManager/processmanager.h ../source/util/counter.h ../source/util/downloadmanager.h ../source/util/lgraph.h ../source/util/area.h ../source/util/atlaslabel.h ../source/util/flat2d.h ../source/LBook/lbook.h ../source/LBook/lbookxlnt.h ../source/unittest.h ../source/util/nlimage.h ../source/util/lmessage.h ../source/util/lparameter.h ../source/util/random.h ../source/util/shape.h ../source/ProcessManager/report.h ../source/ProcessManager/processitem.h ../source/ProcessManager/processmanagerpcounter.h ../source/ProcessManager/processmanagerfactory.h ../source/ProcessManager/processmanagertransform.h ../source/ProcessManager/processmanagerautocontrast.h ../source/dialogtiff.h ../source/updatethread.h ../source/IO/nifti.h ../source/ProcessManager/areafinder3d.h ../source/IO/pointcloud3d.h ../source/util/nlimagetiff.h ../source/IO/xmlanchor.h ../dialogsettings.h ../source/util/cinifile.h ../source/ProcessManager/processmanagertiffcreator.h ../source/LBook/lbookcsv.h ../source/LBook/lbookfactory.h ../source/util/spline.h ../source/util/updater.h ../source/util/util.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../source/IO/nutiltemplate.cpp ../source/data.cpp ../source/dialoggeneratedata.cpp ../source/dialoghelp.cpp ../source/dialognewfile.cpp ../source/limage/lcolorlist.cpp ../source/limage/limage.cpp ../source/limage/limageqimage.cpp ../source/limage/limagetiff.cpp ../source/ltiff/ltiff.cpp ../source/util/buffer2d.cpp ../nutilapplication.cpp ../mainwindow.cpp ../node.cpp ../source/nauto.cpp ../source/ProcessManager/nutilprocess.cpp ../source/ProcessManager/processmanager.cpp ../source/util/downloadmanager.cpp ../source/util/lgraph.cpp ../source/util/area.cpp ../source/util/atlaslabel.cpp ../source/util/flat2d.cpp ../source/LBook/lbook.cpp ../source/LBook/lbookxlnt.cpp ../source/unittest.cpp ../source/util/nlimage.cpp ../source/util/lmessage.cpp ../source/util/lparameter.cpp ../source/util/shape.cpp ../source/ProcessManager/report.cpp ../source/ProcessManager/processitem.cpp ../source/ProcessManager/processmanagerpcounter.cpp ../source/ProcessManager/processmanagerfactory.cpp ../source/ProcessManager/processmanagertransform.cpp ../source/ProcessManager/processmanagerautocontrast.cpp ../source/dialogtiff.cpp ../source/updatethread.cpp ../source/IO/nifti.cpp ../source/ProcessManager/areafinder3d.cpp ../source/IO/pointcloud3d.cpp ../source/util/nlimagetiff.cpp ../source/IO/xmlanchor.cpp ../dialogsettings.cpp ../source/ProcessManager/processmanagertiffcreator.cpp ../source/LBook/lbookcsv.cpp ../source/LBook/lbookfactory.cpp ../source/util/spline.cpp ../source/util/updater.cpp ../source/util/util.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../nutilapplication.h ../source/IO/nutiltemplate.h ../source/ProcessManager/processmanagerresize.h ../source/data.h ../source/dialoggeneratedata.h ../source/dialoghelp.h ../source/dialognewfile.h ../source/limage/lcolorlist.h ../source/limage/limage.h ../source/limage/limageqimage.h ../source/limage/limagetiff.h ../source/ltiff/ltiff.h ../source/util/buffer2d.h ../mainwindow.h ../node.h ../source/util/cinifile.h ../source/nauto.h ../source/ProcessManager/nutilprocess.h ../source/ProcessManager/processmanager.h ../source/util/counter.h ../source/util/downloadmanager.h ../source/util/lgraph.h ../source/util/area.h ../source/util/atlaslabel.h ../source/util/flat2d.h ../source/LBook/lbook.h ../source/LBook/lbookxlnt.h ../source/unittest.h ../source/util/nlimage.h ../source/util/lmessage.h ../source/util/lparameter.h ../source/util/random.h ../source/util/shape.h ../source/ProcessManager/report.h ../source/ProcessManager/processitem.h ../source/ProcessManager/processmanagerpcounter.h ../source/ProcessManager/processmanagerfactory.h ../source/ProcessManager/processmanagertransform.h ../source/ProcessManager/processmanagerautocontrast.h ../source/dialogtiff.h ../source/updatethread.h ../source/IO/nifti.h ../source/ProcessManager/areafinder3d.h ../source/IO/pointcloud3d.h ../source/util/nlimagetiff.h ../source/IO/xmlanchor.h ../dialogsettings.h ../source/util/cinifile.h ../source/ProcessManager/processmanagertiffcreator.h ../source/LBook/lbookcsv.h ../source/LBook/lbookfactory.h ../source/util/spline.h ../source/util/updater.h ../source/util/util.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../source/IO/nutiltemplate.cpp ../source/ProcessManager/processmanagerresize.cpp ../source/data.cpp ../source/dialoggeneratedata.cpp ../source/dialoghelp.cpp ../source/dialognewfile.cpp ../source/limage/lcolorlist.cpp ../source/limage/limage.cpp ../source/limage/limageqimage.cpp ../source/limage/limagetiff.cpp ../source/ltiff/ltiff.cpp ../source/util/buffer2d.cpp ../nutilapplication.cpp ../mainwindow.cpp ../node.cpp ../source/nauto.cpp ../source/ProcessManager/nutilprocess.cpp ../source/ProcessManager/processmanager.cpp ../source/util/downloadmanager.cpp ../source/util/lgraph.cpp ../source/util/area.cpp ../source/util/atlaslabel.cpp ../source/util/flat2d.cpp ../source/LBook/lbook.cpp ../source/LBook/lbookxlnt.cpp ../source/unittest.cpp ../source/util/nlimage.cpp ../source/util/lmessage.cpp ../source/util/lparameter.cpp ../source/util/shape.cpp ../source/ProcessManager/report.cpp ../source/ProcessManager/processitem.cpp ../source/ProcessManager/processmanagerpcounter.cpp ../source/ProcessManager/processmanagerfactory.cpp ../source/ProcessManager/processmanagertransform.cpp ../source/ProcessManager/processmanagerautocontrast.cpp ../source/dialogtiff.cpp ../source/updatethread.cpp ../source/IO/nifti.cpp ../source/ProcessManager/areafinder3d.cpp ../source/IO/pointcloud3d.cpp ../source/util/nlimagetiff.cpp ../source/IO/xmlanchor.cpp ../dialogsettings.cpp ../source/ProcessManager/processmanagertiffcreator.cpp ../source/LBook/lbookcsv.cpp ../source/LBook/lbookfactory.cpp ../source/util/spline.cpp ../source/util/updater.cpp ../source/util/util.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../mainwindow.ui ../source/dialoggeneratedata.ui ../source/dialoghelp.ui ../source/dialognewfile.ui ../source/dialogtiff.ui ../dialogsettings.ui $(DISTDIR)/
 
 
@@ -864,50 +868,76 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../resources.qrc \
 		../../../Qt/5.13.0/gcc_64/bin/rcc \
-		../Resources/newt.png \
 		../Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label \
 		../Resources/labels/WHS_Atlas_Rat_Brain_v3.label \
 		../Resources/labels/WHS_Atlas_Rat_Brain_v2.label \
 		../Resources/images/quint.PNG \
+		../Resources/images/s218_segmentation.PNG \
 		../Resources/images/object_splitting.png \
+		../Resources/images/Workflow_forGUI.jpg \
+		../Resources/images/0218_79584253-Rainbow_2015.png \
+		../Resources/images/Workflow_forGUI_v2.jpg \
+		../Resources/images/Extraction_colour.PNG \
+		../Resources/text/resize.txt \
+		../Resources/text/quantifier_basic.txt \
 		../Resources/text/tiffcreator.txt \
 		../Resources/text/transform.txt \
-		../Resources/text/quantifier.txt \
-		../Resources/text/help/use_custom_masks.rtf \
-		../Resources/text/help/color_spread.rtf \
-		../Resources/text/help/custom_region_file.rtf \
-		../Resources/text/help/output_compression.rtf \
-		../Resources/text/help/background_color.rtf \
-		../Resources/text/help/output_dir.rtf \
-		../Resources/text/help/global_pixel_scale.rtf \
-		../Resources/text/help/extraction_color.rtf \
-		../Resources/text/help/auto_crop.rtf \
-		../Resources/text/help/pattern_match.rtf \
-		../Resources/text/help/object_max_size.rtf \
-		../Resources/text/help/name.rtf \
-		../Resources/text/help/custom_mask_color.rtf \
-		../Resources/text/help/thumbnail_size.rtf \
-		../Resources/text/help/object_min_size.rtf \
-		../Resources/text/help/atlas_dir.rtf \
-		../Resources/text/help/output_report.rtf \
-		../Resources/text/help/output_report_type.rtf \
-		../Resources/text/help/xml_anchor_file.rtf \
-		../Resources/text/help/only_thumbnails.rtf \
-		../Resources/text/help/coordinate_extraction.rtf \
-		../Resources/text/help/nifti_size.rtf \
-		../Resources/text/help/label_file.rtf \
-		../Resources/text/help/quantifier/object_splitting.rtf \
-		../Resources/text/help/quantifier/quantifier_pixel_scale_unit.rtf \
-		../Resources/text/help/quantifier/type.rtf \
-		../Resources/text/help/quantifier/quantifier_atlas_dir.rtf \
-		../Resources/text/help/quantifier/quantifier_output_dir.rtf \
-		../Resources/text/help/quantifier/quantifier_input_dir.rtf \
+		../Resources/text/quantifier_advanced.txt \
+		../Resources/text/help/quantifier_advanced/use_custom_masks.rtf \
+		../Resources/text/help/quantifier_advanced/quantifier_pixel_scale_unit.rtf \
+		../Resources/text/help/quantifier_advanced/custom_region_file.rtf \
+		../Resources/text/help/quantifier_advanced/type.rtf \
+		../Resources/text/help/quantifier_advanced/global_pixel_scale.rtf \
+		../Resources/text/help/quantifier_advanced/extraction_color.rtf \
+		../Resources/text/help/quantifier_advanced/pattern_match.rtf \
+		../Resources/text/help/quantifier_advanced/quantifier_atlas_dir.rtf \
+		../Resources/text/help/quantifier_advanced/object_max_size.rtf \
+		../Resources/text/help/quantifier_advanced/name.rtf \
+		../Resources/text/help/quantifier_advanced/custom_mask_color.rtf \
+		../Resources/text/help/quantifier_advanced/object_min_size.rtf \
+		../Resources/text/help/quantifier_advanced/quantifier_input_dir.rtf \
+		../Resources/text/help/quantifier_advanced/output_report.rtf \
+		../Resources/text/help/quantifier_advanced/output_report_type.rtf \
+		../Resources/text/help/quantifier_advanced/xml_anchor_file.rtf \
+		../Resources/text/help/quantifier_advanced/object_splitting.rtf \
+		../Resources/text/help/quantifier_advanced/coordinate_extraction.rtf \
+		../Resources/text/help/quantifier_advanced/quantifier_output_dir.rtf \
+		../Resources/text/help/quantifier_advanced/nifti_size.rtf \
+		../Resources/text/help/quantifier_advanced/label_file.rtf \
+		../Resources/text/help/transform/thumbnail_size.rtf \
+		../Resources/text/help/transform/output_compression.rtf \
 		../Resources/text/help/transform/transform_files.rtf \
 		../Resources/text/help/transform/transform_background_color.rtf \
 		../Resources/text/help/transform/transform_output_dir.rtf \
 		../Resources/text/help/transform/transform_color_spread.rtf \
+		../Resources/text/help/transform/auto_crop.rtf \
+		../Resources/text/help/transform/only_thumbnails.rtf \
+		../Resources/text/help/transform/color_spread.rtf \
 		../Resources/text/help/transform/transform_input_dir.rtf \
-		../Resources/text/help/transform/transform_thumbnail_size.rtf
+		../Resources/text/help/transform/background_color.rtf \
+		../Resources/text/help/transform/transform_thumbnail_size.rtf \
+		../Resources/text/help/quantifier_basic/use_custom_masks.rtf \
+		../Resources/text/help/quantifier_basic/quantifier_pixel_scale_unit.rtf \
+		../Resources/text/help/quantifier_basic/custom_region_file.rtf \
+		../Resources/text/help/quantifier_basic/type.rtf \
+		../Resources/text/help/quantifier_basic/global_pixel_scale.rtf \
+		../Resources/text/help/quantifier_basic/extraction_color.rtf \
+		../Resources/text/help/quantifier_basic/pattern_match.rtf \
+		../Resources/text/help/quantifier_basic/quantifier_atlas_dir.rtf \
+		../Resources/text/help/quantifier_basic/object_max_size.rtf \
+		../Resources/text/help/quantifier_basic/name.rtf \
+		../Resources/text/help/quantifier_basic/custom_mask_color.rtf \
+		../Resources/text/help/quantifier_basic/object_min_size.rtf \
+		../Resources/text/help/quantifier_basic/quantifier_input_dir.rtf \
+		../Resources/text/help/quantifier_basic/output_report.rtf \
+		../Resources/text/help/quantifier_basic/output_report_type.rtf \
+		../Resources/text/help/quantifier_basic/xml_anchor_file.rtf \
+		../Resources/text/help/quantifier_basic/object_splitting.rtf \
+		../Resources/text/help/quantifier_basic/coordinate_extraction.rtf \
+		../Resources/text/help/quantifier_basic/quantifier_output_dir.rtf \
+		../Resources/text/help/quantifier_basic/nifti_size.rtf \
+		../Resources/text/help/quantifier_basic/label_file.rtf \
+		../Resources/CustomRegions/CustomRegionMouse.xlsx
 	/home/leuat/Qt/5.13.0/gcc_64/bin/rcc -name resources ../resources.qrc -o qrc_resources.cpp
 
 compiler_qmlcache_make_all:
@@ -3036,6 +3066,257 @@ nutiltemplate.o: ../source/IO/nutiltemplate.cpp ../source/IO/nutiltemplate.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcolordialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nutiltemplate.o ../source/IO/nutiltemplate.cpp
 
+processmanagerresize.o: ../source/ProcessManager/processmanagerresize.cpp ../source/ProcessManager/processmanagerresize.h \
+		../source/ProcessManager/processmanager.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QVector \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qvector.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qtcore-config.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qflags.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qstring.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qchar.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringliteral.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringview.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qpair.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qpoint.h \
+		../source/ProcessManager/nutilprocess.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QString \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QDebug \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qhash.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qlist.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qmap.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qset.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../source/util/counter.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QElapsedTimer \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qelapsedtimer.h \
+		../source/util/util.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QVector3D \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qvector3d.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qtgui-config.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QImage \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qimage.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qrgb.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qrect.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qsize.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qpixelformat.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qtransform.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qmatrix.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qregion.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qline.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qpainterpath.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QRgb \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QDirIterator \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qdiriterator.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qdir.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qfileinfo.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qfile.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qfiledevice.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QTextStream \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLayout \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlayout.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qwidget.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qpalette.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qpixmap.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qfont.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qfontinfo.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qcursor.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qkeysequence.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qevent.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qurl.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qurlquery.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qvector2d.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLayoutItem \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QWidget \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QImageReader \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qimagereader.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qeventloop.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qimageiohandler.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qplugin.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qpointer.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qjsonobject.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qjsonvalue.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		../source/ltiff/ltiff.h \
+		../lib/libtiff/tiff.h \
+		../lib/libtiff/tiffconf.h \
+		../lib/libtiff/tiffio.h \
+		../lib/libtiff/tiffvers.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QColor \
+		../source/util/lgraph.h \
+		../source/util/spline.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QPointF \
+		../source/util/nlimage.h \
+		../source/util/area.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QVector2D \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QMatrix4x4 \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qmatrix4x4.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qvector4d.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qquaternion.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qgenericmatrix.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QPoint \
+		../source/util/atlaslabel.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QStringList \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QMap \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QFile \
+		../source/util/lmessage.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QProcess \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qprocess.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QThread \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qthread.h \
+		../lib/xlnt/xlnt.hpp \
+		../lib/xlnt/xlnt_config.hpp \
+		../lib/xlnt/cell/cell.hpp \
+		../lib/xlnt/cell/cell_type.hpp \
+		../lib/xlnt/cell/index_types.hpp \
+		../lib/xlnt/cell/rich_text.hpp \
+		../lib/xlnt/cell/rich_text_run.hpp \
+		../lib/xlnt/styles/font.hpp \
+		../lib/xlnt/styles/color.hpp \
+		../lib/xlnt/utils/optional.hpp \
+		../lib/xlnt/utils/exceptions.hpp \
+		../lib/xlnt/cell/cell_reference.hpp \
+		../lib/xlnt/cell/comment.hpp \
+		../lib/xlnt/cell/hyperlink.hpp \
+		../lib/xlnt/packaging/manifest.hpp \
+		../lib/xlnt/packaging/relationship.hpp \
+		../lib/xlnt/packaging/uri.hpp \
+		../lib/xlnt/utils/path.hpp \
+		../lib/xlnt/styles/alignment.hpp \
+		../lib/xlnt/styles/border.hpp \
+		../lib/xlnt/styles/fill.hpp \
+		../lib/xlnt/styles/format.hpp \
+		../lib/xlnt/styles/number_format.hpp \
+		../lib/xlnt/styles/protection.hpp \
+		../lib/xlnt/styles/style.hpp \
+		../lib/xlnt/utils/calendar.hpp \
+		../lib/xlnt/utils/date.hpp \
+		../lib/xlnt/utils/datetime.hpp \
+		../lib/xlnt/utils/time.hpp \
+		../lib/xlnt/utils/timedelta.hpp \
+		../lib/xlnt/utils/variant.hpp \
+		../lib/xlnt/workbook/document_security.hpp \
+		../lib/xlnt/workbook/external_book.hpp \
+		../lib/xlnt/workbook/metadata_property.hpp \
+		../lib/xlnt/workbook/named_range.hpp \
+		../lib/xlnt/workbook/streaming_workbook_reader.hpp \
+		../lib/xlnt/workbook/streaming_workbook_writer.hpp \
+		../lib/xlnt/workbook/theme.hpp \
+		../lib/xlnt/workbook/workbook.hpp \
+		../lib/xlnt/workbook/worksheet_iterator.hpp \
+		../lib/xlnt/worksheet/cell_iterator.hpp \
+		../lib/xlnt/worksheet/range_reference.hpp \
+		../lib/xlnt/worksheet/worksheet.hpp \
+		../lib/xlnt/worksheet/page_margins.hpp \
+		../lib/xlnt/worksheet/page_setup.hpp \
+		../lib/xlnt/worksheet/sheet_view.hpp \
+		../lib/xlnt/worksheet/pane.hpp \
+		../lib/xlnt/worksheet/selection.hpp \
+		../lib/xlnt/worksheet/cell_vector.hpp \
+		../lib/xlnt/worksheet/major_order.hpp \
+		../lib/xlnt/worksheet/column_properties.hpp \
+		../lib/xlnt/worksheet/header_footer.hpp \
+		../lib/xlnt/utils/scoped_enum_hash.hpp \
+		../lib/xlnt/worksheet/range.hpp \
+		../lib/xlnt/styles/conditional_format.hpp \
+		../lib/xlnt/worksheet/range_iterator.hpp \
+		../lib/xlnt/worksheet/row_properties.hpp \
+		../lib/xlnt/worksheet/sheet_protection.hpp \
+		../source/util/flat2d.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QByteArray \
+		../source/util/nlimagetiff.h \
+		../source/util/lparameter.h \
+		../source/ProcessManager/report.h \
+		../source/data.h \
+		../source/util/cinifile.h \
+		../source/LBook/lbookxlnt.h \
+		../source/LBook/lbook.h \
+		../source/ProcessManager/processitem.h \
+		../source/IO/xmlanchor.h \
+		../../../Qt/5.13.0/gcc_64/include/QtXml/QXmlSimpleReader \
+		../../../Qt/5.13.0/gcc_64/include/QtXml/qxml.h \
+		../../../Qt/5.13.0/gcc_64/include/QtXml/qtxmlglobal.h \
+		../../../Qt/5.13.0/gcc_64/include/QtXml/qtxml-config.h \
+		../../../Qt/5.13.0/gcc_64/include/QtXml/QXmlAttributes \
+		../source/LBook/lbookfactory.h \
+		../source/LBook/lbookcsv.h \
+		../source/IO/nutiltemplate.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QVariant \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QGridLayout \
+		../source/dialoghelp.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QSpacerItem \
+		../source/ProcessManager/processmanagertiffcreator.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagerresize.o ../source/ProcessManager/processmanagerresize.cpp
+
 data.o: ../source/data.cpp ../source/data.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QString \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qstring.h \
@@ -3223,7 +3504,19 @@ dialoggeneratedata.o: ../source/dialoggeneratedata.cpp ../source/dialoggenerated
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_dialoggeneratedata.h
+		ui_dialoggeneratedata.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QVariant \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QApplication \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qapplication.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qeventloop.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qguiapplication.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qinputmethod.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QPushButton \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialoggeneratedata.o ../source/dialoggeneratedata.cpp
 
 dialoghelp.o: ../source/dialoghelp.cpp ../source/dialoghelp.h \
@@ -5474,6 +5767,7 @@ nauto.o: ../source/nauto.cpp ../source/nauto.h \
 		../source/ProcessManager/processmanagertransform.h \
 		../source/ProcessManager/processmanagerautocontrast.h \
 		../source/ProcessManager/processmanagertiffcreator.h \
+		../source/ProcessManager/processmanagerresize.h \
 		../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -8335,7 +8629,8 @@ processmanagerfactory.o: ../source/ProcessManager/processmanagerfactory.cpp ../s
 		../../../Qt/5.13.0/gcc_64/include/QtCore/qregularexpression.h \
 		../source/ProcessManager/processmanagertransform.h \
 		../source/ProcessManager/processmanagerautocontrast.h \
-		../source/ProcessManager/processmanagertiffcreator.h
+		../source/ProcessManager/processmanagertiffcreator.h \
+		../source/ProcessManager/processmanagerresize.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagerfactory.o ../source/ProcessManager/processmanagerfactory.cpp
 
 processmanagertransform.o: ../source/ProcessManager/processmanagertransform.cpp ../source/ProcessManager/processmanagertransform.h \

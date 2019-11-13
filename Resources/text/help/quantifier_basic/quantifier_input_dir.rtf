@@ -1,0 +1,28 @@
+<h2>Segmentation directory</h2>
+Select the directory containing the segmentations.
+<hr>
+<h3>Generating the segmentations</h3>
+<p>
+We recommend the <i>pixel classification workflow</i> in the ilastik software (www.ilastik.org) to generate the segmentations,
+but any image analysis software can be used as long as the segmentions comply with the following:</p>
+
+<h3>Requirements</h3>
+<br>
+<table width="100%">
+<tr>
+<td>
+<ul>
+<li>must be 24-bit colour images in PNG format.</li>
+<li>must have the same proportions, but not necessarily the same size as the atlas maps. <br>
+(use images with the same proportions for the QuickNII registration and ilastik segmentation)</li>
+<li>file names must include a unique ID that is also present in the file name of the corresponding atlas map.<br>
+(ideally in the format sXXX where XXX represents the section number; the section number should reflect the serial order and spacing of the sections)</li>
+<li>display all the objects of interest in one colour. <br>
+(This is because <i>Quantifier</i> is only able to extract one colour at a time).</li>
+</ul>
+</td>
+<td>
+<img src="://Resources/images/s218_segmentation.PNG" width="240">
+</td>
+
+</table>

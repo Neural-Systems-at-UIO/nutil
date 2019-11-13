@@ -35,6 +35,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += main.cpp \
     source/IO/nutiltemplate.cpp \
+    source/ProcessManager/processmanagerresize.cpp \
     source/data.cpp \
     source/dialoggeneratedata.cpp \
     source/dialoghelp.cpp \
@@ -87,6 +88,7 @@ SOURCES += main.cpp \
 HEADERS += \
     nutilapplication.h \
     source/IO/nutiltemplate.h \
+    source/ProcessManager/processmanagerresize.h \
     source/data.h \
     source/dialoggeneratedata.h \
     source/dialoghelp.h \

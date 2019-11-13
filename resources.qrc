@@ -2,7 +2,6 @@
     <qresource prefix="/images"/>
     <qresource prefix="/">
         <file>Resources/text/transform.txt</file>
-        <file>Resources/text/quantifier.txt</file>
         <file>Resources/text/tiffcreator.txt</file>
         <file>Resources/labels/WHS_Atlas_Rat_Brain_v2.label</file>
         <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label</file>
@@ -15,27 +14,6 @@
         <file>Resources/text/help/transform/transform_files.rtf</file>
         <file>Resources/text/help/transform/transform_color_spread.rtf</file>
         <file>Resources/text/help/transform/transform_background_color.rtf</file>
-        <file>Resources/text/help/quantifier/quantifier_pixel_scale_unit.rtf</file>
-        <file>Resources/text/help/quantifier/quantifier_atlas_dir.rtf</file>
-        <file>Resources/text/help/quantifier/quantifier_output_dir.rtf</file>
-        <file>Resources/text/help/quantifier/quantifier_input_dir.rtf</file>
-        <file>Resources/text/help/quantifier/type.rtf</file>
-        <file>Resources/text/help/quantifier/object_splitting.rtf</file>
-        <file>Resources/text/help/quantifier/coordinate_extraction.rtf</file>
-        <file>Resources/text/help/quantifier/custom_mask_color.rtf</file>
-        <file>Resources/text/help/quantifier/custom_region_file.rtf</file>
-        <file>Resources/text/help/quantifier/extraction_color.rtf</file>
-        <file>Resources/text/help/quantifier/global_pixel_scale.rtf</file>
-        <file>Resources/text/help/quantifier/label_file.rtf</file>
-        <file>Resources/text/help/quantifier/name.rtf</file>
-        <file>Resources/text/help/quantifier/nifti_size.rtf</file>
-        <file>Resources/text/help/quantifier/object_max_size.rtf</file>
-        <file>Resources/text/help/quantifier/object_min_size.rtf</file>
-        <file>Resources/text/help/quantifier/output_report.rtf</file>
-        <file>Resources/text/help/quantifier/output_report_type.rtf</file>
-        <file>Resources/text/help/quantifier/pattern_match.rtf</file>
-        <file>Resources/text/help/quantifier/use_custom_masks.rtf</file>
-        <file>Resources/text/help/quantifier/xml_anchor_file.rtf</file>
         <file>Resources/text/help/transform/auto_crop.rtf</file>
         <file>Resources/text/help/transform/background_color.rtf</file>
         <file>Resources/text/help/transform/color_spread.rtf</file>
@@ -48,5 +26,50 @@
         <file>Resources/images/0218_79584253-Rainbow_2015.png</file>
         <file>Resources/images/s218_segmentation.PNG</file>
         <file>Resources/images/Extraction_colour.PNG</file>
+        <file>Resources/text/resize.txt</file>
+        <file>Resources/text/quantifier_basic.txt</file>
+        <file>Resources/text/quantifier_advanced.txt</file>
+        <file>Resources/text/help/quantifier_basic/xml_anchor_file.rtf</file>
+        <file>Resources/text/help/quantifier_basic/use_custom_masks.rtf</file>
+        <file>Resources/text/help/quantifier_basic/quantifier_pixel_scale_unit.rtf</file>
+        <file>Resources/text/help/quantifier_basic/quantifier_output_dir.rtf</file>
+        <file>Resources/text/help/quantifier_basic/pattern_match.rtf</file>
+        <file>Resources/text/help/quantifier_basic/output_report_type.rtf</file>
+        <file>Resources/text/help/quantifier_basic/output_report.rtf</file>
+        <file>Resources/text/help/quantifier_basic/object_min_size.rtf</file>
+        <file>Resources/text/help/quantifier_basic/object_max_size.rtf</file>
+        <file>Resources/text/help/quantifier_basic/object_splitting.rtf</file>
+        <file>Resources/text/help/quantifier_basic/nifti_size.rtf</file>
+        <file>Resources/text/help/quantifier_basic/name.rtf</file>
+        <file>Resources/text/help/quantifier_basic/label_file.rtf</file>
+        <file>Resources/text/help/quantifier_basic/global_pixel_scale.rtf</file>
+        <file>Resources/text/help/quantifier_basic/custom_region_file.rtf</file>
+        <file>Resources/text/help/quantifier_basic/custom_mask_color.rtf</file>
+        <file>Resources/text/help/quantifier_basic/coordinate_extraction.rtf</file>
+        <file>Resources/text/help/quantifier_basic/extraction_color.rtf</file>
+        <file>Resources/text/help/quantifier_basic/type.rtf</file>
+        <file>Resources/text/help/quantifier_basic/quantifier_input_dir.rtf</file>
+        <file>Resources/text/help/quantifier_basic/quantifier_atlas_dir.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/xml_anchor_file.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/use_custom_masks.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/quantifier_pixel_scale_unit.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/quantifier_output_dir.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/pattern_match.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/output_report_type.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/output_report.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/object_min_size.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/object_max_size.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/object_splitting.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/nifti_size.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/name.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/label_file.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/global_pixel_scale.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/custom_region_file.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/custom_mask_color.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/coordinate_extraction.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/extraction_color.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/type.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/quantifier_input_dir.rtf</file>
+        <file>Resources/text/help/quantifier_advanced/quantifier_atlas_dir.rtf</file>
     </qresource>
 </RCC>

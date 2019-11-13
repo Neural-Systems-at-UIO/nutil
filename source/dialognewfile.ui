@@ -47,12 +47,22 @@
    </item>
    <item>
     <property name="text">
-     <string>Quantifier</string>
+     <string>Quantifier_basic</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Quantifier_advanced</string>
     </property>
    </item>
    <item>
     <property name="text">
      <string>TiffCreator</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Resize</string>
     </property>
    </item>
   </widget>

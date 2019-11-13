@@ -79,6 +79,10 @@ public:
     void FillFromGUI();
     void Save(QString fname);
     void Load(QString fname);
+
+private:
+    void CreateBasicAdvancedOption(QGridLayout* grid);
+
 };
 
 #endif // NUTILTEMPLATE_H
