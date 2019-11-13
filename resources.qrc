@@ -2,7 +2,7 @@
     <qresource prefix="/images"/>
     <qresource prefix="/">
         <file>Resources/text/transform.txt</file>
-        <file>Resources/text/quantifier.txt</file>
+        <file>Resources/text/quantifier_advanced.txt</file>
         <file>Resources/text/tiffcreator.txt</file>
         <file>Resources/labels/WHS_Atlas_Rat_Brain_v2.label</file>
         <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label</file>
@@ -48,5 +48,6 @@
         <file>Resources/images/0218_79584253-Rainbow_2015.png</file>
         <file>Resources/images/s218_segmentation.PNG</file>
         <file>Resources/images/Extraction_colour.PNG</file>
+        <file>Resources/text/quantifier_basic.txt</file>
     </qresource>
 </RCC>

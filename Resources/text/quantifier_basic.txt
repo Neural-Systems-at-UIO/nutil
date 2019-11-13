@@ -1,0 +1,24 @@
+type; 0 ;; Type ;  string; Quantifier
+name; 0 ;; Name of project ; string;
+quantifier_input_dir; 0 ;; Segmentation directory; directory;
+quantifier_atlas_dir; 0 ;; Atlas map directory; directory;
+label_file; 0 ; ;Reference atlas; list; Allen Mouse Brain 2015, WHS Atlas Rat v2, WHS Atlas Rat v3; Allen Mouse Brain 2015
+xml_anchor_file; 0 ;; Anchored XML file; file;
+quantifier_output_dir; 0 ;; Output directory; directory;
+object_splitting; 1; ;Object Splitting; list; Yes, No; yes
+object_min_size; 1; ;Minimum object size; number; 1
+object_max_size; 1; ;Maximum object size; number; 100000
+extraction_color ; 0; ; Object colour ; color ; 255,0,0,255
+global_pixel_scale; 1; ;Pixel scale; number; 1
+quantifier_pixel_scale_unit; 1; ; Pixel scale unit; list; pixels, um2, mm2; pixels
+use_custom_masks; 1; ;Custom masks (optional); list; Yes, No; no
+custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,255,255,255
+output_report; 0 ;;Output reports; list; All, Summary, None; all
+output_report_type; 1; ;Output report type; list; CSV, XLSX; CSV
+#custom_region_file;1; ; Customised reports; file;
+custom_region_type ; 1; ; Customised reports; list; No, Yes, custom; No
+custom_region_file; 1; custom_region_type=custom ; Custom report file;  file;
+nifti_size; 1; ;Nifti size ; list; 0,64,128,256,512; 0
+coordinate_extraction; 1; ;Coordinate extraction;list; All, None, Slices, Summary; All
+pattern_match ; 1; ;Unique ID format; list; sXXX, files, user; sXXX
+files; 1; ;Other ID format; textfield;
