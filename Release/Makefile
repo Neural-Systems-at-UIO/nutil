@@ -868,19 +868,8 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../resources.qrc \
 		../../../Qt/5.13.0/gcc_64/bin/rcc \
-		../Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label \
-		../Resources/labels/WHS_Atlas_Rat_Brain_v3.label \
-		../Resources/labels/WHS_Atlas_Rat_Brain_v2.label \
-		../Resources/images/quint.PNG \
-		../Resources/images/s218_segmentation.PNG \
-		../Resources/images/object_splitting.png \
-		../Resources/images/Workflow_forGUI.jpg \
-		../Resources/images/0218_79584253-Rainbow_2015.png \
-		../Resources/images/Workflow_forGUI_v2.jpg \
-		../Resources/images/Extraction_colour.PNG \
 		../Resources/text/resize.txt \
 		../Resources/text/quantifier_basic.txt \
-		../Resources/text/tiffcreator.txt \
 		../Resources/text/transform.txt \
 		../Resources/text/quantifier_advanced.txt \
 		../Resources/text/help/quantifier_advanced/use_custom_masks.rtf \
@@ -904,18 +893,6 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/quantifier_advanced/quantifier_output_dir.rtf \
 		../Resources/text/help/quantifier_advanced/nifti_size.rtf \
 		../Resources/text/help/quantifier_advanced/label_file.rtf \
-		../Resources/text/help/transform/thumbnail_size.rtf \
-		../Resources/text/help/transform/output_compression.rtf \
-		../Resources/text/help/transform/transform_files.rtf \
-		../Resources/text/help/transform/transform_background_color.rtf \
-		../Resources/text/help/transform/transform_output_dir.rtf \
-		../Resources/text/help/transform/transform_color_spread.rtf \
-		../Resources/text/help/transform/auto_crop.rtf \
-		../Resources/text/help/transform/only_thumbnails.rtf \
-		../Resources/text/help/transform/color_spread.rtf \
-		../Resources/text/help/transform/transform_input_dir.rtf \
-		../Resources/text/help/transform/background_color.rtf \
-		../Resources/text/help/transform/transform_thumbnail_size.rtf \
 		../Resources/text/help/quantifier_basic/use_custom_masks.rtf \
 		../Resources/text/help/quantifier_basic/quantifier_pixel_scale_unit.rtf \
 		../Resources/text/help/quantifier_basic/custom_region_file.rtf \
@@ -936,8 +913,7 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/quantifier_basic/coordinate_extraction.rtf \
 		../Resources/text/help/quantifier_basic/quantifier_output_dir.rtf \
 		../Resources/text/help/quantifier_basic/nifti_size.rtf \
-		../Resources/text/help/quantifier_basic/label_file.rtf \
-		../Resources/CustomRegions/CustomRegionMouse.xlsx
+		../Resources/text/help/quantifier_basic/label_file.rtf
 	/home/leuat/Qt/5.13.0/gcc_64/bin/rcc -name resources ../resources.qrc -o qrc_resources.cpp
 
 compiler_qmlcache_make_all:
