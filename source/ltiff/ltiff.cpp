@@ -273,6 +273,7 @@ void LTiff::FromQIMage(QString filename, QImage &img, QString comp, int tileSize
 
 }
 
+
 QImage* LTiff::ToQImage()
 {
     SetupBuffers();
@@ -300,6 +301,7 @@ QImage* LTiff::ToQImage()
     }
 
     Close();
+    return img;
 
 }
 
