@@ -364,8 +364,20 @@ void NutilTemplate::Load(QString fname)
     f.open(QFile::ReadOnly);
     QString dataStr = f.readAll();
     QStringList data = dataStr.split('\n');
-    QString type =  data[0].trimmed().simplified().split("=")[1].toLower().trimmed();
-    LoadTemplate(":/Resources/text/"+ type+ ".txt");
+    QStringList d = data[0].trimmed().simplified().split("=");
+
+    if (d.count()<=1)
+        return;
+
+    QString type =  d[1].toLower().trimmed();
+
+
+    QString temp =  ":/Resources/text/"+ type+ ".txt";
+
+    if (!QFile::exists(temp))
+        return;
+
+    LoadTemplate(temp);
 
     for (QString k: data) {
         if (k.trimmed()=="")

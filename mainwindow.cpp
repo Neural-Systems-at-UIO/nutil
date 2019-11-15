@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
  //   QPixmap pixmap = QPixmap ("://my_image.png");
 
 
+
     m_settings.filename = "nutil.ini";
     if (QFile::exists(m_settings.filename))
         m_settings.Load(m_settings.filename);
