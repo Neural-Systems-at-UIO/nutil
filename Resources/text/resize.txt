@@ -1,4 +1,4 @@
-type;  0;;Type: ;  string; Resizer
+type;  0;;Type: ;  string; Resize
 name; 0;;Name: ; string;
 resize_output_compression; 0;;Output compression; list; jpeg,lzw,none; lzw
 resize_input_dir; 0;;Input directory; directory; Default value

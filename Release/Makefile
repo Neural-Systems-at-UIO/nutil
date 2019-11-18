@@ -868,8 +868,20 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../resources.qrc \
 		../../../Qt/5.13.0/gcc_64/bin/rcc \
+		../Resources/newt.png \
+		../Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label \
+		../Resources/labels/WHS_Atlas_Rat_Brain_v3.label \
+		../Resources/labels/WHS_Atlas_Rat_Brain_v2.label \
+		../Resources/images/quint.PNG \
+		../Resources/images/s218_segmentation.PNG \
+		../Resources/images/object_splitting.png \
+		../Resources/images/Workflow_forGUI.jpg \
+		../Resources/images/0218_79584253-Rainbow_2015.png \
+		../Resources/images/Extraction_colour.PNG \
+		../Resources/images/Workflow_forGUI_v2.jpg \
 		../Resources/text/resize.txt \
 		../Resources/text/quantifier_basic.txt \
+		../Resources/text/tiffcreator.txt \
 		../Resources/text/transform.txt \
 		../Resources/text/quantifier_advanced.txt \
 		../Resources/text/help/quantifier_advanced/use_custom_masks.rtf \

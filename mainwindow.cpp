@@ -134,7 +134,7 @@ void MainWindow::on_btnStart_clicked()
     m_workerThread->Init(&m_nauto);
     m_workerThread->start();
 
-    ui->tabMain->setCurrentIndex(1);
+    ui->tabMain->setCurrentIndex(2);
 
 }
 
