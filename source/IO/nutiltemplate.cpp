@@ -307,21 +307,43 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
         row++;
     }
-    QSpacerItem* sp =new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    grid->addItem(sp,row,0);
 
     grid->setColumnStretch(textColumn,10);
     grid->setColumnStretch(helpColumn,5);
     grid->setColumnStretch(valueColumn,30);
     grid->setColumnStretch(buttonColumn,10);
 
-}
+
+    QSpacerItem* sp =new QSpacerItem(20, 400, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    grid->addItem(sp,row+1,0);
+
+
+}/*
+
 void NutilTemplate::clearGrid(QGridLayout *grid)
 {
     for (int i = 0; i < grid->count(); i++)
     {
         grid->itemAt(i)->widget()->disconnect();
         grid->itemAt(i)->widget()->deleteLater();
+
+    }
+
+}
+*/
+
+void NutilTemplate::clearGrid(QLayout* layout)
+{
+    while (QLayoutItem* item = layout->takeAt(0))
+    {
+//        if (deleteWidgets)
+        {
+            if (QWidget* widget = item->widget())
+                widget->deleteLater();
+        }
+        if (QLayout* childLayout = item->layout())
+            clearGrid(childLayout);
+        delete item;
     }
 }
 

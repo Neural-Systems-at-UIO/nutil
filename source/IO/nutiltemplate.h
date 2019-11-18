@@ -75,7 +75,7 @@ public:
     QString Get(QString val);
 
     void Populate(QGridLayout* grid);
-    void clearGrid(QGridLayout* grid);
+    void clearGrid(QLayout* grid);
     void FillFromGUI();
     void Save(QString fname);
     void Load(QString fname);
