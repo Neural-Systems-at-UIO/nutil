@@ -880,10 +880,10 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/images/Extraction_colour.PNG \
 		../Resources/images/Workflow_forGUI_v2.jpg \
 		../Resources/text/resize.txt \
-		../Resources/text/quantifier_basic.txt \
 		../Resources/text/tiffcreator.txt \
 		../Resources/text/transform.txt \
 		../Resources/text/quantifier_advanced.txt \
+		../Resources/text/quantifier.txt \
 		../Resources/text/help/quantifier_advanced/use_custom_masks.rtf \
 		../Resources/text/help/quantifier_advanced/quantifier_pixel_scale_unit.rtf \
 		../Resources/text/help/quantifier_advanced/custom_region_file.rtf \
@@ -905,27 +905,27 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/quantifier_advanced/quantifier_output_dir.rtf \
 		../Resources/text/help/quantifier_advanced/nifti_size.rtf \
 		../Resources/text/help/quantifier_advanced/label_file.rtf \
-		../Resources/text/help/quantifier_basic/use_custom_masks.rtf \
-		../Resources/text/help/quantifier_basic/quantifier_pixel_scale_unit.rtf \
-		../Resources/text/help/quantifier_basic/custom_region_file.rtf \
-		../Resources/text/help/quantifier_basic/type.rtf \
-		../Resources/text/help/quantifier_basic/global_pixel_scale.rtf \
-		../Resources/text/help/quantifier_basic/extraction_color.rtf \
-		../Resources/text/help/quantifier_basic/pattern_match.rtf \
-		../Resources/text/help/quantifier_basic/quantifier_atlas_dir.rtf \
-		../Resources/text/help/quantifier_basic/object_max_size.rtf \
-		../Resources/text/help/quantifier_basic/name.rtf \
-		../Resources/text/help/quantifier_basic/custom_mask_color.rtf \
-		../Resources/text/help/quantifier_basic/object_min_size.rtf \
-		../Resources/text/help/quantifier_basic/quantifier_input_dir.rtf \
-		../Resources/text/help/quantifier_basic/output_report.rtf \
-		../Resources/text/help/quantifier_basic/output_report_type.rtf \
-		../Resources/text/help/quantifier_basic/xml_anchor_file.rtf \
-		../Resources/text/help/quantifier_basic/object_splitting.rtf \
-		../Resources/text/help/quantifier_basic/coordinate_extraction.rtf \
-		../Resources/text/help/quantifier_basic/quantifier_output_dir.rtf \
-		../Resources/text/help/quantifier_basic/nifti_size.rtf \
-		../Resources/text/help/quantifier_basic/label_file.rtf
+		../Resources/text/help/quantifier/use_custom_masks.rtf \
+		../Resources/text/help/quantifier/quantifier_pixel_scale_unit.rtf \
+		../Resources/text/help/quantifier/custom_region_file.rtf \
+		../Resources/text/help/quantifier/type.rtf \
+		../Resources/text/help/quantifier/global_pixel_scale.rtf \
+		../Resources/text/help/quantifier/extraction_color.rtf \
+		../Resources/text/help/quantifier/pattern_match.rtf \
+		../Resources/text/help/quantifier/quantifier_atlas_dir.rtf \
+		../Resources/text/help/quantifier/object_max_size.rtf \
+		../Resources/text/help/quantifier/name.rtf \
+		../Resources/text/help/quantifier/custom_mask_color.rtf \
+		../Resources/text/help/quantifier/object_min_size.rtf \
+		../Resources/text/help/quantifier/quantifier_input_dir.rtf \
+		../Resources/text/help/quantifier/output_report.rtf \
+		../Resources/text/help/quantifier/output_report_type.rtf \
+		../Resources/text/help/quantifier/xml_anchor_file.rtf \
+		../Resources/text/help/quantifier/object_splitting.rtf \
+		../Resources/text/help/quantifier/coordinate_extraction.rtf \
+		../Resources/text/help/quantifier/quantifier_output_dir.rtf \
+		../Resources/text/help/quantifier/nifti_size.rtf \
+		../Resources/text/help/quantifier/label_file.rtf
 	/home/leuat/Qt/5.13.0/gcc_64/bin/rcc -name resources ../resources.qrc -o qrc_resources.cpp
 
 compiler_qmlcache_make_all:

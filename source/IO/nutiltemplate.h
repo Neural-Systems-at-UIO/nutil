@@ -9,6 +9,7 @@
 #include <QGridLayout>
 #include "source/dialoghelp.h"
 #include <QSpacerItem>
+
 class NutilTemplateItem : public QObject {
     Q_OBJECT
 public:
@@ -81,7 +82,7 @@ public:
     void Load(QString fname);
 
 private:
-    void CreateBasicAdvancedOption(QGridLayout* grid);
+    void CreateBasicAdvancedOption(QGridLayout* grid, int& row);
 
 };
 

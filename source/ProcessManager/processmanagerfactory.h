@@ -12,10 +12,10 @@ public:
     static ProcessManager* CreateProcessManager(QString pm_type) {
         if (pm_type.toLower() == "transform")
             return new ProcessManagerTransform();
-        if (pm_type.toLower() == "quantifier_basic")
+        if (pm_type.toLower() == "quantifier")
             return new ProcessManagerPCounter();
-        if (pm_type.toLower() == "quantifier_advanced")
-            return new ProcessManagerPCounter();
+//        if (pm_type.toLower() == "quantifier_advanced")
+  //          return new ProcessManagerPCounter();
         if (pm_type.toLower() == "autocontrast")
             return new ProcessManagerAutoContrast();
         if (pm_type.toLower() == "tiffcreator")

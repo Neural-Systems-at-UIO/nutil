@@ -47,12 +47,7 @@
    </item>
    <item>
     <property name="text">
-     <string>Quantifier_basic</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Quantifier_advanced</string>
+     <string>Quantifier</string>
     </property>
    </item>
    <item>

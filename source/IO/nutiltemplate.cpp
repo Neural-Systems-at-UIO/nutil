@@ -109,20 +109,45 @@ QString NutilTemplate::Get(QString val)
 
 
 
-void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid)
+void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid, int& row)
 {
-    grid->addWidget(new QLabel("View type:"),0,0);
+//    grid->addWidget(new QLabel("View type:"),0,0);
 
-    QComboBox* cmb = new QComboBox();
+/*    QComboBox* cmb = new QComboBox();
     cmb->addItem("Basic");
     cmb->addItem("Advanced");
-    grid->addWidget(cmb, 0,1);
+    grid->addWidget(cmb, row,0);
     cmb->setCurrentIndex(m_currentLevel);
 
     QObject::connect(cmb, &QComboBox::currentTextChanged, [=]() {
         m_currentLevel = cmb->currentIndex();
         Populate(grid);
     });
+*/
+    QString text ="Show advanced settings >>";
+    if (m_currentLevel==1)
+        text = "Show basic settings <<";
+    QPushButton* cmb = new QPushButton(text);
+
+
+    for (int j=0;j<2;j++)
+    for (int i=0;i<4;i++) {
+         QWidget *horizontalLineWidget = new QWidget;
+        horizontalLineWidget->setFixedHeight(2);
+        horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        horizontalLineWidget->setStyleSheet(QString("background-color: #101010;"));
+
+        grid->addWidget(horizontalLineWidget, row+j*2,i);
+    }
+
+    grid->addWidget(cmb, row+1,2);
+//    grid->addWidget(horizontalLineWidget, row+2,2);
+
+    QObject::connect(cmb, &QPushButton::clicked, [=]() {
+        m_currentLevel = (m_currentLevel+1)&1;
+        Populate(grid);
+    });
+    row+=3;
 
 }
 
@@ -140,9 +165,8 @@ void NutilTemplate::Populate(QGridLayout *grid)
     int buttonColumn = 3;
 
 
-//    CreateBasicAdvancedOption(grid);
 
-
+    bool isDrawn = false;
     for (QString name : m_sortList) {
 
         NutilTemplateItem* nti = m_items[name];
@@ -157,6 +181,12 @@ void NutilTemplate::Populate(QGridLayout *grid)
  //           qDebug() << nti->m_depID;
             if (m_items[nti->m_depID]->m_value != nti->m_depVal)
                 continue;
+        }
+
+
+        if (nti->m_level==1 && !isDrawn) {
+            isDrawn=true;
+            CreateBasicAdvancedOption(grid,row);
         }
 
 
@@ -312,6 +342,11 @@ void NutilTemplate::Populate(QGridLayout *grid)
     grid->setColumnStretch(helpColumn,5);
     grid->setColumnStretch(valueColumn,30);
     grid->setColumnStretch(buttonColumn,10);
+
+
+    if (!isDrawn)
+        CreateBasicAdvancedOption(grid,row);
+
 
 
     QSpacerItem* sp =new QSpacerItem(20, 400, QSizePolicy::Minimum, QSizePolicy::Expanding);
