@@ -126,16 +126,16 @@ void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid, int& row)
 */
     QString text ="Show advanced settings >>";
     if (m_currentLevel==1)
-        text = "Show basic settings <<";
+        text = "Hide advanced settings <<";
     QPushButton* cmb = new QPushButton(text);
 
 
     for (int j=0;j<2;j++)
     for (int i=0;i<4;i++) {
          QWidget *horizontalLineWidget = new QWidget;
-        horizontalLineWidget->setFixedHeight(2);
-        horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        horizontalLineWidget->setStyleSheet(QString("background-color: #101010;"));
+        horizontalLineWidget->setFixedHeight(5);
+//        horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  //      horizontalLineWidget->setStyleSheet(QString("background-color: #101010;"));
 
         grid->addWidget(horizontalLineWidget, row+j*2,i);
     }
@@ -165,11 +165,15 @@ void NutilTemplate::Populate(QGridLayout *grid)
     int buttonColumn = 3;
 
 
-
+    bool hasAdvancedSettings = false;
     bool isDrawn = false;
     for (QString name : m_sortList) {
 
         NutilTemplateItem* nti = m_items[name];
+
+
+        if (nti->m_level==1)
+            hasAdvancedSettings = true;
 
         if (nti->m_level>m_currentLevel)
             continue;
@@ -188,6 +192,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
             isDrawn=true;
             CreateBasicAdvancedOption(grid,row);
         }
+
 
 
         int fontSize = -1;
@@ -344,7 +349,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
     grid->setColumnStretch(buttonColumn,10);
 
 
-    if (!isDrawn)
+    if (!isDrawn && hasAdvancedSettings)
         CreateBasicAdvancedOption(grid,row);
 
 
