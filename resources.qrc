@@ -59,5 +59,6 @@
         <file>Resources/text/help/quantifier/quantifier_atlas_dir.rtf</file>
         <file>Resources/text/help/quantifier/object_splitting.rtf</file>
         <file>Resources/text/help/quantifier/quantifier_input_dir.rtf</file>
+        <file>Resources/text/help/quantifier/custom_region_type.rtf</file>
     </qresource>
 </RCC>
