@@ -60,5 +60,18 @@
         <file>Resources/text/help/quantifier/object_splitting.rtf</file>
         <file>Resources/text/help/quantifier/quantifier_input_dir.rtf</file>
         <file>Resources/text/help/quantifier/custom_region_type.rtf</file>
+        <file>Resources/text/help/transform/auto_crop.rtf</file>
+        <file>Resources/text/help/transform/background_color.rtf</file>
+        <file>Resources/text/help/transform/color_spread.rtf</file>
+        <file>Resources/text/help/transform/only_thumbnails.rtf</file>
+        <file>Resources/text/help/transform/output_compression.rtf</file>
+        <file>Resources/text/help/transform/thumbnail_size.rtf</file>
+        <file>Resources/text/help/transform/transform_background_color.rtf</file>
+        <file>Resources/text/help/transform/transform_color_spread.rtf</file>
+        <file>Resources/text/help/transform/transform_files.rtf</file>
+        <file>Resources/text/help/transform/transform_input_dir.rtf</file>
+        <file>Resources/text/help/transform/transform_output_dir.rtf</file>
+        <file>Resources/text/help/transform/transform_thumbnail_size.rtf</file>
+        <file>Resources/text/help/transform/name.rtf</file>
     </qresource>
 </RCC>
