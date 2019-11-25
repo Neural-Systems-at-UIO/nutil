@@ -420,7 +420,8 @@ void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString 
 {
 
     Flat2D refImage;
-    refImage.Load(atlasFile);
+    if (Data::data.m_isQuickNII)
+        refImage.Load(atlasFile);
 
     m_testImage = refImage.toImage(labels);
 
@@ -476,7 +477,8 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
 {
 
     Flat2D refImage;
-    refImage.Load(atlasFile);
+    if (Data::data.m_isQuickNII)
+        refImage.Load(atlasFile);
 
     m_testImage = refImage.toImage(labels);
 //    testImage->save(labelFile);

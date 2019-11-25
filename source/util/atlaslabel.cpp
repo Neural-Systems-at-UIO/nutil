@@ -48,6 +48,16 @@ void AtlasLabels::Load(QString filename)
     BuildDictionary();
 }
 
+void AtlasLabels::LoadFake()
+{
+    QString data =  "1   255   255   255        1  1  0    \"All\"";
+    QStringList fields = data.simplified().split(' ');
+    AtlasLabel* al = new AtlasLabel(fields);
+    atlases.append(al);
+    BuildDictionary();
+
+}
+
 void AtlasLabels::BuildDictionary()
 {
     indexedID.clear();

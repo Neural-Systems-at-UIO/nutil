@@ -74,8 +74,9 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         for (QString s: files) {
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
-
-                newFiles.append(match.captured(0));
+//                qDebug() << "MATCH << "<<match.captured(0);
+                if (!s.toLower().contains("mask"))
+                    newFiles.append(match.captured(0));
 
             }
 //            if (regExp.mat)
@@ -102,7 +103,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
                     isTiff = true;
             }
 
-
+            qDebug() << "FOUND file : " << inFileFull;
 
             if (inFileFull=="") {
                 LMessage::lMessage.Error("Error: Could not find file that contains: " + name);
@@ -118,6 +119,10 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
                     return false;
                 }
             }
+//            if (m_dataType=="none") {
+  //              inFlatFull =  Util::RemoveFinalFiletype(inFileFull)+".flatfake";
+
+    //        }
             QStringList l = inFileFull.split('/');
             QString inFile = l[l.length()-1];
 
@@ -191,6 +196,13 @@ void ProcessManagerPCounter::Execute()
             LMessage::lMessage.Error("Incorrect label file. Please check parameters in excel sheet.");
             return;
         }
+        Data::data.m_isQuickNII = true;
+
+    }
+    if (m_dataType == "none") {
+        m_labels.Clear();
+        m_labels.LoadFake();
+        Data::data.m_isQuickNII = false;
     }
     QFile::copy(m_excelInputFilename, m_outputDir + "/" + m_excelInputFilename.split("/").last());
 
@@ -232,7 +244,6 @@ void ProcessManagerPCounter::Execute()
         QString maskFile = "";
         if (m_useCustomMask) {
 
-  //          qDebug() << "Search for mask file" << pi->m_id;
             maskFile = Util::findFileInDirectory(QStringList() << "mask" << pi->m_id,m_inputDir,"png","");
             if (maskFile==""){
                 LMessage::lMessage.Error("  Could not find mask file for " +pi->m_inFile);
@@ -240,8 +251,7 @@ void ProcessManagerPCounter::Execute()
             }
 
 
-//            QImageReader reader(maskFile);
-            if (!Util::VerifyImageFileSize(maskFile,2048)){
+            if (!Util::VerifyImageFileSize(maskFile,8192*2)){
                 LMessage::lMessage.Error("  Mask file '" +pi->m_inFile+"' has too large dimensions! Make sure that the file size is less than 2048x2048");
 
                 Data::data.abort = true;
@@ -260,13 +270,14 @@ void ProcessManagerPCounter::Execute()
             a.m_mat = mat;
 
 
-        if (m_dataType=="quicknii") {
+        //if (m_dataType=="quicknii")
+        {
 
             m_processes[i]->m_infoText = "Anchoring areas";
             // Find atlas file:
             QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat","");
 
-            if (atlasFile=="") {
+            if (atlasFile=="" && m_dataType == "quicknii") {
                 LMessage::lMessage.Error("Could not find any atlas flat file!");
                 Data::data.abort = true;
             }
@@ -303,6 +314,9 @@ void ProcessManagerPCounter::Execute()
 
     if (!Data::data.abort)
     {
+
+
+
         if (m_reportType!="none") {
             // Custom region
             reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "CustomRegionsSummary.xlsx", m_outputFileType);
@@ -393,7 +407,8 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_patternType = data->Get("pattern_match");
 
-    m_dataType = "quicknii";//m_sheet->readStr(19,1).toLower();
+//    m_dataType = "quicknii";//m_sheet->readStr(19,1).toLower();
+    m_dataType = data->Get("analysis_type").toLower();
 
 
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
@@ -457,6 +472,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     }
 
 
+    if (m_dataType == "quicknii")
     if (QFile::exists(m_reportSheetName)) {
 
         if (!m_reportSheetName.toLower().endsWith(".xlsx")) {
@@ -480,6 +496,23 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             GenerateReports(reportSheet);
 
     }
+    if (m_dataType=="none") {
+        reports.m_reports.push_back(Report("Report", QStringList() << "1", m_background));
+        for (Report& r: reports.m_reports)
+            r.m_unit = m_units;
+
+
+    }
+}
+
+void ProcessManagerPCounter::SetupFakeReports()
+{
+
+}
+
+void ProcessManagerPCounter::CleanupFakeReports()
+{
+
 }
 
 void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)

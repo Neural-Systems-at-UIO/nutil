@@ -1,12 +1,13 @@
 type; 0 ;; Type ;  string; Quantifier
 name; 0 ;; Name of project ; string;
 quantifier_input_dir; 0 ;; Segmentation directory; directory;
-quantifier_atlas_dir; 0 ;; Atlas map directory; directory;
-label_file; 0 ; ;Reference atlas; list; Allen Mouse Brain 2015, WHS Atlas Rat v2, WHS Atlas Rat v3; Allen Mouse Brain 2015
-xml_anchor_file; 0 ;; Anchored XML file; file;
+quantifier_atlas_dir; 0 ; analysis_type=QuickNII ; Atlas map directory; directory;
+label_file; 0 ; analysis_type=QuickNII ;Reference atlas; list; Allen Mouse Brain 2015, WHS Atlas Rat v2, WHS Atlas Rat v3; Allen Mouse Brain 2015
+xml_anchor_file; 0 ; analysis_type=QuickNII; Anchored XML file; file;
 quantifier_output_dir; 0 ;; Output directory; directory;
 output_report; 0 ;;Output reports; list; All, Summary, None; All
 extraction_color ; 0; ; Object colour ; color ; 255,0,0,255
+analysis_type ; 1; ; Analysis type ;list; QuickNII, none; QuickNII
 object_splitting; 1; ;Object Splitting; list; Yes, No; Yes
 object_min_size; 1; ;Minimum object size; number; 1
 object_max_size; 1; ;Maximum object size; number; 100000

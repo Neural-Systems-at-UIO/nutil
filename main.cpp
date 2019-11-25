@@ -9,6 +9,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include "source/util/updater.h"
+#include "source/Validator/nutilvalidator.h"
 
 #pragma comment(linker,"/STACK:18000000");
 #pragma comment(linker,"/HEAP:18000000");
@@ -91,13 +92,19 @@ void ApplyPalette(QString value, QApplication& a) {
 }
 
 
+void CreateValidator() {
+    NutilValidator v;
+    v.CreateSegmentedImage("test",1280,1024,9,QColor(0,0,255,255));
+}
+
+
 
 int main(int argc, char *argv[])
 {
 #ifndef IGNORE_DOWNLOAD
     CheckVersion();
 #endif
-
+    CreateValidator();
 
     if (argc == 1)  {
         QApplication a(argc, argv);

@@ -23,6 +23,7 @@ public:
 
     bool Load(QString filename);
 
+//    void CreateFake(QString filename, int w, int h,short val);
 
     Flat2D();
     ~Flat2D();
@@ -30,6 +31,8 @@ public:
     void Release();
 
     QImage* toImage(AtlasLabels& labels);
+
+
 
     unsigned int width() const;
     unsigned int height() const;

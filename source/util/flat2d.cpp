@@ -82,8 +82,16 @@ bool Flat2D::Load(QString filename)
     return true;
 }
 
+
 Flat2D::Flat2D()
 {
+    m_width = 64;
+    m_height = 64;
+    m_data_s = new unsigned short[m_width*m_height];
+    for (int i=0;i<m_height*m_width;i++)
+        m_data_s[i]=1;
+
+    m_bpp =2;
 
 }
 

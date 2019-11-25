@@ -14,6 +14,7 @@ public:
     bool redrawInput=false;
     bool forceRedraw = false;
     bool redrawFileList = false;
+    bool m_isQuickNII = true;
     QString m_globalMessage = "";
     bool abort = false;
     bool requestSaveAs = false;

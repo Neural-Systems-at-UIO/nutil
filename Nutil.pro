@@ -36,6 +36,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 SOURCES += main.cpp \
     source/IO/nutiltemplate.cpp \
     source/ProcessManager/processmanagerresize.cpp \
+    source/Validator/nutilvalidator.cpp \
     source/data.cpp \
     source/dialoggeneratedata.cpp \
     source/dialoghelp.cpp \
@@ -83,12 +84,14 @@ SOURCES += main.cpp \
     source/LBook/lbookfactory.cpp \
     source/util/spline.cpp \
     source/util/updater.cpp \
-    source/util/util.cpp
+    source/util/util.cpp \
+    source/util/SimplexNoise.cpp
 
 HEADERS += \
     nutilapplication.h \
     source/IO/nutiltemplate.h \
     source/ProcessManager/processmanagerresize.h \
+    source/Validator/nutilvalidator.h \
     source/data.h \
     source/dialoggeneratedata.h \
     source/dialoghelp.h \
@@ -139,7 +142,8 @@ HEADERS += \
     source/LBook/lbookfactory.h \
     source/util/spline.h \
     source/util/updater.h \
-    source/util/util.h
+    source/util/util.h \
+    source/util/SimplexNoise.h
 
 FORMS    += mainwindow.ui \
     source/dialoggeneratedata.ui \

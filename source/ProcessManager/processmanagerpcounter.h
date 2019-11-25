@@ -58,6 +58,8 @@ public:
     bool Build(NutilTemplate* data) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
     void ReadHeader(NutilTemplate* data) override;
+    void SetupFakeReports();
+    void CleanupFakeReports();
 
     void GenerateReports(LSheet* m_sheet);
     bool Verify() override { return true; }

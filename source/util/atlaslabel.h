@@ -76,6 +76,7 @@ public:
         Load(filename);
     }
     void Load(QString filename);
+    void LoadFake();
     void BuildDictionary();
     QVector<AtlasLabel*> getFromColor(QVector3D col);
 
