@@ -420,6 +420,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     if (m_dataType=="quicknii")
        m_atlasDir = data->Get("quantifier_atlas_dir");
+
     if (m_dataType=="quicknii") {
        QString labelType = data->Get("label_file");
 //       qDebug() << "Labl type:" <<labelType;
@@ -472,7 +473,9 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     }
 
 
+
     if (m_dataType == "quicknii")
+
     if (QFile::exists(m_reportSheetName)) {
 
         if (!m_reportSheetName.toLower().endsWith(".xlsx")) {

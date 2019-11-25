@@ -73,5 +73,6 @@
         <file>Resources/text/help/transform/transform_output_dir.rtf</file>
         <file>Resources/text/help/transform/transform_thumbnail_size.rtf</file>
         <file>Resources/text/help/transform/name.rtf</file>
+        <file>Resources/CustomRegions/CustomRegionMouse.xlsx</file>
     </qresource>
 </RCC>
