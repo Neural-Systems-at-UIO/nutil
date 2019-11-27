@@ -116,14 +116,17 @@ void MainWindow::on_btnStart_clicked()
         LMessage::lMessage.Error("No file loaded!");
         return;
     }*/
-    if (m_nt.m_openFile == "") {
+/*    if (m_nt.m_openFile == "") {
         LMessage::lMessage.Error("No file loaded!");
         return;
-    }
+    }*/
+    on_btnSave_clicked();
+
+    if (m_nt.m_openFile == "")
+        return;
     m_timer = QElapsedTimer();
      m_timer.start();
 
-    on_btnSave_clicked();
 
     m_nauto.m_numThreads = ui->leProcessors->text().toInt();
     //m_nauto.m_sheetIndex = ui->cmbSheets->currentText();
@@ -360,4 +363,19 @@ void MainWindow::on_actionGenerate_validation_data_triggered()
     d->exec();
 
     delete d;
+}
+
+void MainWindow::on_btnClearData_clicked()
+{
+
+
+    QString fileName = ":/Resources/text/"+ m_nt.Get("type").toLower()  +".txt";
+    if (!QFile::exists(fileName))
+        return;
+
+    m_nt.LoadTemplate(fileName);
+    m_nt.Populate(ui->gridTemplate);
+    m_nt.m_openFile = "";
+    UpdateRecentList();
+
 }

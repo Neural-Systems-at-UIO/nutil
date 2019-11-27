@@ -126,6 +126,8 @@ private slots:
 
     void on_actionGenerate_validation_data_triggered();
 
+    void on_btnClearData_clicked();
+
 private:
     Nauto m_nauto;
     NutilTemplate m_nt;

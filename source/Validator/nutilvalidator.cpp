@@ -5,11 +5,14 @@ NutilValidator::NutilValidator()
 
 }
 
+
 void NutilValidator::CreateSegmentedImage(QString fname, int w, int h, int blobs, QColor col)
 {
     QImage img(w,h,QImage::Format_RGB32);
     img.fill(QColor(255,255,255,255));
     QVector<int> data;
+
+
 
     int N = sqrt(blobs);
     int dx = w/N;
@@ -43,13 +46,50 @@ void NutilValidator::CreateSegmentedImage(QString fname, int w, int h, int blobs
     if (QFile::exists(fn))
         QFile::remove(fn);
 
+
     QFile file( fn );
-    if ( file.open(QIODevice::ReadWrite) )
+    if ( file.open(QIODevice::ReadWrite | QFile::Text) )
     {
         QTextStream stream( &file );
         for (int i=0;i<data.size();i++)
-            stream << "blob " << QString::number(i) << " " <<  QString::number(data[i]) <<endl;
+            stream << "blob\t" << QString::number(i) << "\t" <<  QString::number(data[i]) <<"\n";
     }
     file.close();
+
+}
+
+void NutilValidator::CreateSlicedMask(QString fname, int w, int h, float a, QColor background, QColor foreground)
+{
+    QImage img(w,h,QImage::Format_RGB32);
+
+    img.fill(background);
+
+    int cx  = a*w;
+
+    for (int y=0;y<h;y++)
+        for (int x=0;x<cx;x++)
+            img.setPixelColor(x,y,foreground);
+
+
+
+/*    SimplexNoise sn;
+    for (int y=0;y<h;y++)
+        for (int x=0;x<h;x++) {
+            float scale = 0.01;
+//            if (sn.noise(x*scale,y*scale)>0.5)
+  //              img.setPixelColor(x,y,foreground);
+            float c = (sn.noise(x*scale,y*scale)+1)/2.0;
+
+            c = c + 0.2*(sn.noise(x*scale*5.0,y*scale*5.0)+1)/2.0;
+
+            if (c>1) c=1;
+            if (c<0) c=0;
+            img.setPixelColor(x,y,QColor(c*255,c*255,c*255,255));
+        }
+
+*/
+
+
+    img.save(fname);
 
 }

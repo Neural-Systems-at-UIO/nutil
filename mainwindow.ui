@@ -136,7 +136,21 @@ p, li { white-space: pre-wrap; }
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <layout class="QGridLayout" name="gridLayout_4">
-            <item row="3" column="1">
+            <item row="2" column="1">
+             <widget class="QPushButton" name="btnSaveAs">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Save As</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
              <widget class="QPushButton" name="pushButton">
               <property name="font">
                <font>
@@ -150,8 +164,8 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QPushButton" name="btnSaveAs">
+            <item row="1" column="1">
+             <widget class="QPushButton" name="btnLoad_2">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -160,7 +174,7 @@ p, li { white-space: pre-wrap; }
                </font>
               </property>
               <property name="text">
-               <string>Save As</string>
+               <string>Load</string>
               </property>
              </widget>
             </item>
@@ -178,20 +192,6 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
-             <widget class="QPushButton" name="btnClearList">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Clear list</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QPushButton" name="btnNew">
               <property name="font">
@@ -206,8 +206,21 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="btnLoad_2">
+            <item row="3" column="0">
+             <widget class="QPushButton" name="btnClearData">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Clear data</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="btnClearList">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -216,7 +229,7 @@ p, li { white-space: pre-wrap; }
                </font>
               </property>
               <property name="text">
-               <string>Load</string>
+               <string>Clear list</string>
               </property>
              </widget>
             </item>

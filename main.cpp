@@ -94,7 +94,8 @@ void ApplyPalette(QString value, QApplication& a) {
 
 void CreateValidator() {
     NutilValidator v;
-    v.CreateSegmentedImage("test",1280,1024,9,QColor(0,0,255,255));
+    v.CreateSegmentedImage("test",1280,1024, 16, QColor(0,0,255,255));
+    v.CreateSlicedMask("test_mask.png",1280,1024, 0.5, Qt::white, Qt::black);
 }
 
 
