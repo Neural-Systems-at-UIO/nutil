@@ -323,7 +323,7 @@ void ProcessManagerPCounter::Execute()
             reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
 
             if (m_reportType=="all") {
-                if (m_areaSplitting==0.0)
+                if (m_areaSplitting == 0.0)
                     reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
 
                 reports.CreateSliceReportsSummary(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"CustomRegionsSections.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
@@ -457,7 +457,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (m_useCustomMask)
         m_customMaskInclusionColors = NutilTemplateItem::StringToColor(data->Get("custom_mask_color"));
 
-    m_reportType = data->Get("output_report");
+    m_reportType = data->Get("output_report").toLower();
 
     m_outputFileType = data->Get("output_report_type").toLower();;
     if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {

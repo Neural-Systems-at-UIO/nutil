@@ -75,5 +75,6 @@
         <file>Resources/text/help/transform/name.rtf</file>
         <file>Resources/CustomRegions/CustomRegionMouse.xlsx</file>
         <file>Resources/text/help/quantifier/analysis_type.rtf</file>
+        <file>Resources/text/help/transform/type.rtf</file>
     </qresource>
 </RCC>
