@@ -50,13 +50,13 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
     }
     if (m_areaScale==0) {
-        LMessage::lMessage.Error("Global pixel scale is not set (or is set to zero). Please specify a valid global pixel scale (such as 1).");
+        LMessage::lMessage.Error("Pixel scale is not set (or is set to zero). Please specify a valid pixel scale (such as 1).");
         return false;
     }
     QStringList files;
     Util::findFilesInSubDirectories(&files,m_inputDir,"png");
 
-
+// Unique ID format
 
     QString regexp = "_s[0-9]*";
 
@@ -114,7 +114,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
                 QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat","");
                 if (inFlatFull=="") {
-                    LMessage::lMessage.Error("Error: Could not find FLAT files that contains: " + name + ". Did you remember to run the java binary file converter?");
+                    LMessage::lMessage.Error("Error: Could not find FLAT files that contains: " + name + ".");
                     m_processItems.clear();
                     return false;
                 }
@@ -132,7 +132,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
             pi->m_pixelAreaScale = m_areaScale;//*m_sheet->readNum(y,x+1);
 
             if (pi->m_pixelAreaScale==0) {
-                LMessage::lMessage.Error("Pixel area scale is not set (or is set to zero) for image file '" + name +"'. Please specify a valid pixel area scale (such as 1).");
+                LMessage::lMessage.Error("Pixel scale is not set (or is set to zero) for image file '" + name +"'. Please specify a valid pixel area scale (such as 1).");
                 return false;
             }
 
@@ -175,7 +175,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 
     if (m_processItems.count()==0) {
-        LMessage::lMessage.Error("Error: You need to specify at least one input file. See the included excel template for instructions. ");
+        LMessage::lMessage.Error("Error: You need to specify at least one input file. Press the help button for instructions. ");
 
     }
 
@@ -278,7 +278,7 @@ void ProcessManagerPCounter::Execute()
             QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat","");
 
             if (atlasFile=="" && m_dataType == "quicknii") {
-                LMessage::lMessage.Error("Could not find any atlas flat file!");
+                LMessage::lMessage.Error("Could not find any atlas flat files!");
                 Data::data.abort = true;
             }
             //        if (Data::data.abort)
@@ -413,15 +413,17 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
 
+//if select mouse reference atlas, automatically use the CustomRegionMouse resource file
+// this is not yet implemented for rat
 
-    m_reportSheetName="";
+    m_reportSheetName = "";
     if (data->Get("custom_region_type").toLower()=="custom")
         m_reportSheetName = data->Get("custom_region_file");
 
-    if (m_dataType=="quicknii")
+    if (m_dataType == "quicknii")
        m_atlasDir = data->Get("quantifier_atlas_dir");
 
-    if (m_dataType=="quicknii") {
+    if (m_dataType == "quicknii") {
        QString labelType = data->Get("label_file");
 //       qDebug() << "Labl type:" <<labelType;
        if (labelType == "Allen Mouse Brain 2015") {
@@ -429,9 +431,9 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             if (data->Get("custom_region_type").toLower()=="yes")
                m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse.xlsx";
        }
-       if (labelType=="WHS Atlas Rat v2")
+       if (labelType == "WHS Atlas Rat v2")
            m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
-       if (labelType=="WHS Atlas Rat v3")
+       if (labelType == "WHS Atlas Rat v3")
            m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v3.label";
     }
 
@@ -461,7 +463,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_outputFileType = data->Get("output_report_type").toLower();;
     if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
-        LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv). Are you sure you are using the correct template version?");
+        LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv).");
         Data::data.abort = true;
         return;
     }
