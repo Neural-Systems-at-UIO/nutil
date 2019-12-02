@@ -6,7 +6,7 @@ quantifier_atlas_dir; 0 ; analysis_type=QuickNII ; Atlas map directory; director
 label_file; 0 ; analysis_type=QuickNII ;Reference atlas; list; Allen Mouse Brain 2015, WHS Atlas Rat v2, WHS Atlas Rat v3; Allen Mouse Brain 2015
 xml_anchor_file; 0 ; analysis_type=QuickNII; Anchored XML file; file;
 quantifier_output_dir; 0 ;; Output directory; directory;
-output_report; 0 ;;Output reports; list; All, Summary, None; All
+output_report; 0 ;;Output reports; list; All, None; All
 extraction_color ; 0; ; Object colour ; color ; 255,0,0,255
 object_splitting; 1; ;Object Splitting; list; Yes, No; Yes
 object_min_size; 1; ;Minimum object size; number; 1
@@ -18,7 +18,7 @@ custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,25
 output_report_type; 1; ;Output report type; list; CSV, XLSX; CSV
 #custom_region_file;1; ; Customised reports; file;
 custom_region_type; 1; ; Customised reports; list; No, Yes, Custom; No
-custom_region_file; 1; custom_region_type=custom ; Custom report file;  file;
+custom_region_file; 1; custom_region_type=Custom ; Custom report file;  file;
 nifti_size; 1; ;Nifti size ; list; 0,64,128,256,512; 0
 coordinate_extraction; 1; ;Coordinate extraction;list; All, None, Slices, Summary; All
 pattern_match ; 1; ;Unique ID format; list; sXXX, files, user; sXXX

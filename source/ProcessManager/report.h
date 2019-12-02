@@ -60,9 +60,9 @@ public:
     void CreateBook(QString filename, QString type);
     void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels, QString unit, bool hasAreaSplitting);
     void CreateSummary(AtlasLabels* atlasLabels);
-    void CreateCombinedList( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items, QString units, QString bookType);
+    void CreateRefAtlasRegions( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items, QString units, QString bookType);
     void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString units, QString bType);
-    void CreateSliceReportsSummary(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString bType);
+    void CreateCustomRegions(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString bType);
 
     void Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize);
     void Create3DSummaryJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize);

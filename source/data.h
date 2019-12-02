@@ -27,6 +27,7 @@ public:
     bool currentIsColor = false;
     static Data data;
     bool isConsole = false;
+    bool m_hasAreaSplitting = true;
     void Redraw();
     QString comma = ",";
 };

@@ -37,6 +37,7 @@ public:
     QString m_output3DPoints = "no";
     QString m_outputFileType = "xlsx";
 
+
     QString m_dataType="quicknii";
 
     QVector3D m_colorThreshold  = QVector3D(255,255,255);
@@ -45,6 +46,7 @@ public:
     bool m_useCustomMask = false;
 
     QString m_reportType ="all";
+    QString m_customRegionType;
 
     float m_areaSplitting = 0;
 

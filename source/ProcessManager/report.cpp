@@ -83,11 +83,14 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
 }
 
-void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units, QString bookType)
+void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units, QString bookType)
 {
     LBook* book = LBookFactory::Create(bookType);
-    LSheet* sheet = book->CreateSheet("Entire region summary");
-    book->RemoveSheet(0);
+    LSheet* sheet = book->CreateSheet("All");
+
+    if (dynamic_cast<LBookXlnt*>(book))
+        book->RemoveSheet(1);
+
     sheet->writeStr(0,0,"Region ID");
     sheet->writeStr(0,1,"Region Name");
     sheet->writeStr(0,6,"Object pixels");
@@ -97,8 +100,8 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
     sheet->writeStr(0,3,"Region area");
     sheet->writeStr(0,7,"Object area");
     sheet->writeStr(0,8,"Area unit");
-    sheet->writeStr(0,9,"Obj/Reg pixel ratio");
-    sheet->writeStr(0,10,"Obj/Reg area ratio");
+    sheet->writeStr(0,9,"Load");
+
 
     for (AtlasLabel* al: atlasLabels->atlases) {
         al->extra2 = QVector3D(0,0,0);
@@ -121,8 +124,8 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
     for (AtlasLabel* al: atlasLabels->atlases)
         sorted.append(al);
 
-    qSort(sorted.begin(), sorted.end(),
-          [](const AtlasLabel* a, const AtlasLabel* b) -> bool { return a->extra2.y() > b->extra2.y(); });
+//    qSort(sorted.begin(), sorted.end(),
+  //        [](const AtlasLabel* a, const AtlasLabel* b) -> bool { return a->extra2.y() > b->extra2.y(); });
 
     int y = 1;
     for (AtlasLabel* al: sorted) {
@@ -136,14 +139,18 @@ void Reports::CreateCombinedList(QString fileName, AtlasLabels *atlasLabels, QVe
             sheet->writeNum(y,2,al->area);
             sheet->writeNum(y,3,al->areaScaled);
             sheet->writeStr(y,4,units);
-            sheet->writeNum(y,5,al->count);
+            if (Data::data.m_hasAreaSplitting)
+                sheet->writeStr(y,5,"N/A");
+            else
+                sheet->writeNum(y,5,al->count);
+
             sheet->writeNum(y,6,al->extra2.x());
             sheet->writeNum(y,7,al->extra2.y());
             sheet->writeStr(y,8,units);
             if (al->area!=0)
                 sheet->writeNum(y,9,al->extra2.x()/al->area);
-            if (al->areaScaled!=0)
-                sheet->writeNum(y,10,al->extra2.y()/al->areaScaled);
+ //           if (al->areaScaled!=0)
+   //             sheet->writeNum(y,10,al->extra2.y()/al->areaScaled);
 
             y++;
         }
@@ -163,22 +170,15 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     float totalSumArea = 0;
 
 
-
-/*    summary->writeStr(0,0,"Total pixel area sum");
-    summary->writeStr(0,1,"Total object area sum");
-    summary->writeStr(0,2,"Total atlas area sum");
-*/
     summary->writeStr(0,0,"Object pixels");
     summary->writeStr(0,1,"Object area");
     summary->writeStr(0,2,"units");
     summary->writeStr(0,3,"Center X");
     summary->writeStr(0,4,"Center Y");
     summary->writeStr(0,5,"Region ID");
-//    summary->writeStr(2,6,"Region Area");
     summary->writeStr(0,6,"Region Name");
     int yy=1;
     float sumTotalAtlasArea=0;
-    LMessage::lMessage.Log("Generating sliced reports");
     Counter cnt(items.count(),"");
 
 
@@ -273,7 +273,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     //qDebug() << "SAVED";
 }
 
-void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, AtlasLabels *labels, QString bType)
+void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, AtlasLabels *labels, QString bType)
 {
     LMessage::lMessage.Log("Generating sliced reports summary");
     LBook* book = LBookFactory::Create(bType);
@@ -367,7 +367,10 @@ void Reports::CreateSliceReportsSummary(QString filename, QVector<NutilProcess *
             sheet->writeNum(j,1, regionPixelArea);
             sheet->writeNum(j,2, regionArea);
             sheet->writeStr(j,3, r.m_unit);
-            sheet->writeNum(j,4, cnt);
+            if (Data::data.m_hasAreaSplitting)
+                sheet->writeStr(j,4, "N/A");
+            else
+                sheet->writeNum(j,4, cnt);
             sheet->writeNum(j,5, totalPixelArea);
             sheet->writeNum(j,6, totalArea);
             sheet->writeStr(j,7, r.m_unit);
