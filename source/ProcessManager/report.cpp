@@ -201,6 +201,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
   //      sheet->writeStr(2,6,"Region Area");
         sheet->writeStr(0,6,"Region Name");
         sheet->writeStr(0,7,"Cutoff reached");
+  // max object size cut off: objects greater in size were divided into max size or smaller. This feature should be removed.
         int y = 1;
    //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
@@ -261,7 +262,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         all+=al->area;
     }*/
 //    summary->writeNum(1,2,sumTotalAtlasArea);
-    Data::data.m_globalMessage = "Saving sliced reports... (this might take some time)";
+    Data::data.m_globalMessage = "Saving individual section reports... (this might take some time)";
 
    // qDebug() << "SAVING";
     book->Save(filename);
@@ -272,7 +273,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
 
 void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, AtlasLabels *labels, QString bType)
 {
-    LMessage::lMessage.Log("Generating sliced reports summary");
+    LMessage::lMessage.Log("Generating summary report");
     LBook* book = LBookFactory::Create(bType);
     LSheet* summary = book->GetSheet(0);
 
@@ -297,13 +298,13 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
         sheet->writeStr(0,5, "Object pixel");
         sheet->writeStr(0,6, "Object area");
         sheet->writeStr(0,7, "Object area unit");
-        sheet->writeStr(0,8, "Obj/Reg pixel ratio");
-        sheet->writeStr(0,9, "Obj/Reg area ratio");
+        sheet->writeStr(0,8, "Load");
+//        sheet->writeStr(0,9, "Load");
         int j=1;
         for (Report& r : m_reports) {
 
             cnt.Tick();
-            Data::data.m_globalMessage = "Creating sliced reports summary: " + cnt.getPercentFormatted();
+            Data::data.m_globalMessage = "Creating summary reports: " + cnt.getPercentFormatted();
             float regionPixelArea=0;
             float regionArea=0;
             float totalPixelArea=0;//items[i]->m_pixelAreaScale;
@@ -333,7 +334,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
                 }
 
             }
-  //          qDebug() << "WTF";
+  //          qDebug() << "xxx";
             // Now total area
             for (AtlasLabel* al : labels->atlases) {
                 for (long ID: r.m_IDs)
@@ -355,8 +356,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             sheet->writeStr(0,5, "Object pixel");
             sheet->writeStr(0,6, "Object area");
             sheet->writeStr(0,7, "Object area unit");
-            sheet->writeStr(0,8, "Obj/Reg pixel ratio");
-            sheet->writeStr(0,9, "Obj/Reg area ratio");
+            sheet->writeStr(0,8, "Load");
+//            sheet->writeStr(0,9, "Load");
 
 
 
@@ -373,8 +374,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             sheet->writeStr(j,7, r.m_unit);
             if (regionPixelArea!=0)
                 sheet->writeNum(j,8, totalPixelArea/(float)regionPixelArea);
-            if (r.m_regionArea!=0)
-                sheet->writeNum(j,9, totalArea/(float)regionArea);
+//            if (r.m_regionArea!=0)
+//                sheet->writeNum(j,9, totalArea/(float)regionArea);
 
 
 
