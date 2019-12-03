@@ -188,7 +188,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
         // Header
         cnt.Tick();
-        Data::data.m_globalMessage = "Creating sliced reports: " + cnt.getPercentFormatted();
+        Data::data.m_globalMessage = "Creating individual section reports: " + cnt.getPercentFormatted();
 /*        sheet->writeStr(0,0,"Total pixel area");
         sheet->writeStr(0,1,"Total object area");
         sheet->writeStr(0,2,"Total atlas area");*/
@@ -262,7 +262,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         all+=al->area;
     }*/
 //    summary->writeNum(1,2,sumTotalAtlasArea);
-    Data::data.m_globalMessage = "Saving individual section reports... (this might take some time)";
+    Data::data.m_globalMessage = "Saving section reports... (this might take some time)";
 
    // qDebug() << "SAVING";
     book->Save(filename);
@@ -284,7 +284,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
     Counter cnt(items.count()*m_reports.count(),"");
 
     for (int i=0;i<items.count();i++) {
-        qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
+        qDebug() << "  Generating section report : " << items[i]->m_reportName;
 
 
 
