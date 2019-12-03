@@ -324,11 +324,7 @@ void ProcessManagerPCounter::Execute()
             | |
             |_|
 
-     *
-     *
-     *
-     *
-     *
+
      * */
 
 

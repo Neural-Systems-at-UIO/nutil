@@ -30,8 +30,6 @@
         <file>Resources/images/object_splitting.png</file>
         <file>Resources/images/quint.PNG</file>
         <file>Resources/images/s218_segmentation.PNG</file>
-        <file>Resources/images/Workflow_forGUI.jpg</file>
-        <file>Resources/images/Workflow_forGUI_v2.jpg</file>
         <file>Resources/newt.png</file>
         <file>Resources/text/tiffcreator.txt</file>
         <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label</file>
@@ -76,5 +74,6 @@
         <file>Resources/CustomRegions/CustomRegionMouse.xlsx</file>
         <file>Resources/text/help/quantifier/analysis_type.rtf</file>
         <file>Resources/text/help/transform/type.rtf</file>
+        <file>Resources/Nutil_logo_black.png</file>
     </qresource>
 </RCC>

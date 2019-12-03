@@ -44,7 +44,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 {
     LSheet* sheet = m_book->GetSheet(0);//CreateSheet("Summary");
     Calculate(atlasLabels);
-    sheet->setName("Whole brain");
+    sheet->setName("All");
 
     if (sheet) {
 
@@ -56,8 +56,8 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
         sheet->writeStr(0,5, "Object pixel");
         sheet->writeStr(0,6, "Object area");
         sheet->writeStr(0,7, "Area unit");
-        sheet->writeStr(0,8, "Obj/Reg pixel ratio");
-        sheet->writeStr(0,9, "Obj/Reg area ratio");
+        sheet->writeStr(0,8, "Load");
+
 
         int i = 1;
         for (Report& r : m_reports) {
@@ -71,9 +71,6 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
             sheet->writeStr(i,7, r.m_unit);
             if (r.m_regionPixelArea!=0)
                 sheet->writeNum(i,8, r.m_totalPixelArea/(float)r.m_regionPixelArea);
-            if (r.m_regionArea!=0)
-                sheet->writeNum(i,9, r.m_totalArea/(float)r.m_regionArea);
-
 
 
             i++;
@@ -93,11 +90,11 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
     sheet->writeStr(0,0,"Region ID");
     sheet->writeStr(0,1,"Region Name");
-    sheet->writeStr(0,6,"Object pixels");
-    sheet->writeStr(0,4,"Area unit");
-    sheet->writeStr(0,5,"Object count");
     sheet->writeStr(0,2,"Region pixels");
     sheet->writeStr(0,3,"Region area");
+    sheet->writeStr(0,4,"Area unit");
+    sheet->writeStr(0,5,"Object count");
+    sheet->writeStr(0,6,"Object pixels");
     sheet->writeStr(0,7,"Object area");
     sheet->writeStr(0,8,"Area unit");
     sheet->writeStr(0,9,"Load");
@@ -182,7 +179,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     Counter cnt(items.count(),"");
 
 
-    summary->setName("Whole brain");
+    summary->setName("All");
 
     for (int i=0;i<items.count();i++) {
 
