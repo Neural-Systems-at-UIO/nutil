@@ -15,7 +15,7 @@ global_pixel_scale; 1; ;Pixel scale; number; 1
 quantifier_pixel_scale_unit; 1; ; Pixel scale unit; list; pixels, um2, mm2; pixels
 use_custom_masks; 1; ;Custom masks (optional); list; Yes, No; No
 custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,255,255,255
-output_report_type; 1; ;Output report type; list; CSV, XLSX; CSV
+output_report_type; 1; ;Output report type; list; CSV, XLSX, HTML; CSV
 #custom_region_file;1; ; Customised reports; file;
 custom_region_type; 1; ; Customised reports; list; No, Yes, Custom; No
 custom_region_file; 1; custom_region_type=Custom ; Custom report file;  file;

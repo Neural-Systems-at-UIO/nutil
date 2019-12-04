@@ -54,6 +54,7 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../main.cpp \
 		../source/IO/nutiltemplate.cpp \
+		../source/LBook/lbookhtml.cpp \
 		../source/ProcessManager/processmanagerresize.cpp \
 		../source/Validator/nutilvalidator.cpp \
 		../source/data.cpp \
@@ -118,6 +119,7 @@ SOURCES       = ../main.cpp \
 		moc_dialogsettings.cpp
 OBJECTS       = main.o \
 		nutiltemplate.o \
+		lbookhtml.o \
 		processmanagerresize.o \
 		nutilvalidator.o \
 		data.o \
@@ -359,6 +361,7 @@ DIST          = ../Resources/text/quantifier.txt \
 		../../../../Qt/5.13.0/gcc_64/mkspecs/features/lex.prf \
 		../../Nutil.pro ../nutilapplication.h \
 		../source/IO/nutiltemplate.h \
+		../source/LBook/lbookhtml.h \
 		../source/ProcessManager/processmanagerresize.h \
 		../source/Validator/nutilvalidator.h \
 		../source/data.h \
@@ -414,6 +417,7 @@ DIST          = ../Resources/text/quantifier.txt \
 		../source/util/util.h \
 		../source/util/SimplexNoise.h ../main.cpp \
 		../source/IO/nutiltemplate.cpp \
+		../source/LBook/lbookhtml.cpp \
 		../source/ProcessManager/processmanagerresize.cpp \
 		../source/Validator/nutilvalidator.cpp \
 		../source/data.cpp \
@@ -845,8 +849,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.13.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../nutilapplication.h ../source/IO/nutiltemplate.h ../source/ProcessManager/processmanagerresize.h ../source/Validator/nutilvalidator.h ../source/data.h ../source/dialoggeneratedata.h ../source/dialoghelp.h ../source/dialognewfile.h ../source/limage/lcolorlist.h ../source/limage/limage.h ../source/limage/limageqimage.h ../source/limage/limagetiff.h ../source/ltiff/ltiff.h ../source/util/buffer2d.h ../mainwindow.h ../node.h ../source/util/cinifile.h ../source/nauto.h ../source/ProcessManager/nutilprocess.h ../source/ProcessManager/processmanager.h ../source/util/counter.h ../source/util/downloadmanager.h ../source/util/lgraph.h ../source/util/area.h ../source/util/atlaslabel.h ../source/util/flat2d.h ../source/LBook/lbook.h ../source/LBook/lbookxlnt.h ../source/unittest.h ../source/util/nlimage.h ../source/util/lmessage.h ../source/util/lparameter.h ../source/util/random.h ../source/util/shape.h ../source/ProcessManager/report.h ../source/ProcessManager/processitem.h ../source/ProcessManager/processmanagerpcounter.h ../source/ProcessManager/processmanagerfactory.h ../source/ProcessManager/processmanagertransform.h ../source/ProcessManager/processmanagerautocontrast.h ../source/dialogtiff.h ../source/updatethread.h ../source/IO/nifti.h ../source/ProcessManager/areafinder3d.h ../source/IO/pointcloud3d.h ../source/util/nlimagetiff.h ../source/IO/xmlanchor.h ../dialogsettings.h ../source/util/cinifile.h ../source/ProcessManager/processmanagertiffcreator.h ../source/LBook/lbookcsv.h ../source/LBook/lbookfactory.h ../source/util/spline.h ../source/util/updater.h ../source/util/util.h ../source/util/SimplexNoise.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../source/IO/nutiltemplate.cpp ../source/ProcessManager/processmanagerresize.cpp ../source/Validator/nutilvalidator.cpp ../source/data.cpp ../source/dialoggeneratedata.cpp ../source/dialoghelp.cpp ../source/dialognewfile.cpp ../source/limage/lcolorlist.cpp ../source/limage/limage.cpp ../source/limage/limageqimage.cpp ../source/limage/limagetiff.cpp ../source/ltiff/ltiff.cpp ../source/util/buffer2d.cpp ../nutilapplication.cpp ../mainwindow.cpp ../node.cpp ../source/nauto.cpp ../source/ProcessManager/nutilprocess.cpp ../source/ProcessManager/processmanager.cpp ../source/util/downloadmanager.cpp ../source/util/lgraph.cpp ../source/util/area.cpp ../source/util/atlaslabel.cpp ../source/util/flat2d.cpp ../source/LBook/lbook.cpp ../source/LBook/lbookxlnt.cpp ../source/unittest.cpp ../source/util/nlimage.cpp ../source/util/lmessage.cpp ../source/util/lparameter.cpp ../source/util/shape.cpp ../source/ProcessManager/report.cpp ../source/ProcessManager/processitem.cpp ../source/ProcessManager/processmanagerpcounter.cpp ../source/ProcessManager/processmanagerfactory.cpp ../source/ProcessManager/processmanagertransform.cpp ../source/ProcessManager/processmanagerautocontrast.cpp ../source/dialogtiff.cpp ../source/updatethread.cpp ../source/IO/nifti.cpp ../source/ProcessManager/areafinder3d.cpp ../source/IO/pointcloud3d.cpp ../source/util/nlimagetiff.cpp ../source/IO/xmlanchor.cpp ../dialogsettings.cpp ../source/ProcessManager/processmanagertiffcreator.cpp ../source/LBook/lbookcsv.cpp ../source/LBook/lbookfactory.cpp ../source/util/spline.cpp ../source/util/updater.cpp ../source/util/util.cpp ../source/util/SimplexNoise.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../nutilapplication.h ../source/IO/nutiltemplate.h ../source/LBook/lbookhtml.h ../source/ProcessManager/processmanagerresize.h ../source/Validator/nutilvalidator.h ../source/data.h ../source/dialoggeneratedata.h ../source/dialoghelp.h ../source/dialognewfile.h ../source/limage/lcolorlist.h ../source/limage/limage.h ../source/limage/limageqimage.h ../source/limage/limagetiff.h ../source/ltiff/ltiff.h ../source/util/buffer2d.h ../mainwindow.h ../node.h ../source/util/cinifile.h ../source/nauto.h ../source/ProcessManager/nutilprocess.h ../source/ProcessManager/processmanager.h ../source/util/counter.h ../source/util/downloadmanager.h ../source/util/lgraph.h ../source/util/area.h ../source/util/atlaslabel.h ../source/util/flat2d.h ../source/LBook/lbook.h ../source/LBook/lbookxlnt.h ../source/unittest.h ../source/util/nlimage.h ../source/util/lmessage.h ../source/util/lparameter.h ../source/util/random.h ../source/util/shape.h ../source/ProcessManager/report.h ../source/ProcessManager/processitem.h ../source/ProcessManager/processmanagerpcounter.h ../source/ProcessManager/processmanagerfactory.h ../source/ProcessManager/processmanagertransform.h ../source/ProcessManager/processmanagerautocontrast.h ../source/dialogtiff.h ../source/updatethread.h ../source/IO/nifti.h ../source/ProcessManager/areafinder3d.h ../source/IO/pointcloud3d.h ../source/util/nlimagetiff.h ../source/IO/xmlanchor.h ../dialogsettings.h ../source/util/cinifile.h ../source/ProcessManager/processmanagertiffcreator.h ../source/LBook/lbookcsv.h ../source/LBook/lbookfactory.h ../source/util/spline.h ../source/util/updater.h ../source/util/util.h ../source/util/SimplexNoise.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../source/IO/nutiltemplate.cpp ../source/LBook/lbookhtml.cpp ../source/ProcessManager/processmanagerresize.cpp ../source/Validator/nutilvalidator.cpp ../source/data.cpp ../source/dialoggeneratedata.cpp ../source/dialoghelp.cpp ../source/dialognewfile.cpp ../source/limage/lcolorlist.cpp ../source/limage/limage.cpp ../source/limage/limageqimage.cpp ../source/limage/limagetiff.cpp ../source/ltiff/ltiff.cpp ../source/util/buffer2d.cpp ../nutilapplication.cpp ../mainwindow.cpp ../node.cpp ../source/nauto.cpp ../source/ProcessManager/nutilprocess.cpp ../source/ProcessManager/processmanager.cpp ../source/util/downloadmanager.cpp ../source/util/lgraph.cpp ../source/util/area.cpp ../source/util/atlaslabel.cpp ../source/util/flat2d.cpp ../source/LBook/lbook.cpp ../source/LBook/lbookxlnt.cpp ../source/unittest.cpp ../source/util/nlimage.cpp ../source/util/lmessage.cpp ../source/util/lparameter.cpp ../source/util/shape.cpp ../source/ProcessManager/report.cpp ../source/ProcessManager/processitem.cpp ../source/ProcessManager/processmanagerpcounter.cpp ../source/ProcessManager/processmanagerfactory.cpp ../source/ProcessManager/processmanagertransform.cpp ../source/ProcessManager/processmanagerautocontrast.cpp ../source/dialogtiff.cpp ../source/updatethread.cpp ../source/IO/nifti.cpp ../source/ProcessManager/areafinder3d.cpp ../source/IO/pointcloud3d.cpp ../source/util/nlimagetiff.cpp ../source/IO/xmlanchor.cpp ../dialogsettings.cpp ../source/ProcessManager/processmanagertiffcreator.cpp ../source/LBook/lbookcsv.cpp ../source/LBook/lbookfactory.cpp ../source/util/spline.cpp ../source/util/updater.cpp ../source/util/util.cpp ../source/util/SimplexNoise.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../mainwindow.ui ../source/dialoggeneratedata.ui ../source/dialoghelp.ui ../source/dialognewfile.ui ../source/dialogtiff.ui ../dialogsettings.ui $(DISTDIR)/
 
 
@@ -876,6 +880,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../resources.qrc \
 		../../../Qt/5.13.0/gcc_64/bin/rcc \
+		../Resources/Nutil_logo_black.png \
 		../Resources/newt.png \
 		../Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label \
 		../Resources/labels/WHS_Atlas_Rat_Brain_v3.label \
@@ -883,10 +888,8 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/images/quint.PNG \
 		../Resources/images/s218_segmentation.PNG \
 		../Resources/images/object_splitting.png \
-		../Resources/images/Workflow_forGUI.jpg \
 		../Resources/images/0218_79584253-Rainbow_2015.png \
 		../Resources/images/Extraction_colour.PNG \
-		../Resources/images/Workflow_forGUI_v2.jpg \
 		../Resources/text/resize.txt \
 		../Resources/text/tiffcreator.txt \
 		../Resources/text/transform.txt \
@@ -922,6 +925,7 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/transform/transform_output_dir.rtf \
 		../Resources/text/help/transform/only_thumbnails.rtf \
 		../Resources/text/help/transform/color_spread.rtf \
+		../Resources/text/help/transform/type.rtf \
 		../Resources/text/help/transform/transform_input_dir.rtf \
 		../Resources/text/help/transform/background_color.rtf \
 		../Resources/text/help/transform/name.rtf \
@@ -946,6 +950,7 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/quantifier/object_splitting.rtf \
 		../Resources/text/help/quantifier/coordinate_extraction.rtf \
 		../Resources/text/help/quantifier/quantifier_output_dir.rtf \
+		../Resources/text/help/quantifier/analysis_type.rtf \
 		../Resources/text/help/quantifier/nifti_size.rtf \
 		../Resources/text/help/quantifier/label_file.rtf \
 		../Resources/CustomRegions/CustomRegionMouse.xlsx
@@ -3078,6 +3083,9 @@ nutiltemplate.o: ../source/IO/nutiltemplate.cpp ../source/IO/nutiltemplate.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QColorDialog \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcolordialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nutiltemplate.o ../source/IO/nutiltemplate.cpp
+
+lbookhtml.o: ../source/LBook/lbookhtml.cpp ../source/LBook/lbookhtml.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lbookhtml.o ../source/LBook/lbookhtml.cpp
 
 processmanagerresize.o: ../source/ProcessManager/processmanagerresize.cpp ../source/ProcessManager/processmanagerresize.h \
 		../source/ProcessManager/processmanager.h \

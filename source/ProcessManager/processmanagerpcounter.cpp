@@ -63,11 +63,11 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     if (m_patternType=="user")
         regexp = m_files[0];
 
-    /*    if (m_patternType=="files") {
 
-    }*/
 
-    if (m_patternType == "sXXX") {
+
+
+    if (m_patternType == "sXXX" || m_patternType=="user") {
 
         QRegularExpression re(regexp);
         QStringList newFiles;
@@ -103,7 +103,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
                     isTiff = true;
             }
 
-            qDebug() << "FOUND file : " << inFileFull;
+//            qDebug() << "FOUND file : " << inFileFull;
 
             if (inFileFull=="") {
                 LMessage::lMessage.Error("Error: Could not find file that contains: " + name);
@@ -136,11 +136,10 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
                 return false;
             }
 
-
             //qDebug() << name;
             pi->m_xmlData =m_xmlAnchor.findData(name);
             pi->m_id = name;//m_sheet->readStr(y,x+2);
-            pi->m_reportName = name.split(".").first() + "r"; //m_sheet->readStr(y,x+2);
+            pi->m_reportName = name.split(".").first(); //m_sheet->readStr(y,x+2);
             //            if (pi->m_reportName=="")  pi->m_reportName = QString::number(m_sheet->readNum(y,x+2));
 
             if (isTiff)
@@ -478,12 +477,12 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_reportType = data->Get("output_report").toLower();
 
     m_outputFileType = data->Get("output_report_type").toLower();;
-    if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
+/*    if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
         LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv).");
         Data::data.abort = true;
         return;
     }
-
+*/
 
 
     if (m_pixelCutoffMax<m_pixelCutoff) {

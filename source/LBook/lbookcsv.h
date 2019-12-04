@@ -50,7 +50,9 @@ public:
     void set(int i, int j, QString val);
     QString none="";
 
+
     void Save(QString basename);
+    void SaveAsHTML(QString basename);
     QString m_name;
 //    LSheetXlnt(xlnt::worksheet sheet);
     LSheetCSV() {}

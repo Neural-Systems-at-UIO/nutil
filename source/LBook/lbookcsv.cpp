@@ -28,9 +28,10 @@ void LSheetCSV::Save(QString basename)
     QString fn = Util::RemoveFinalFiletype(basename) + separator + m_name + ".csv";
  //   qDebug() << "Report output filename :" << fn;
 
-    QFile file(fn);
     if (QFile::exists(fn))
         QFile::remove(fn);
+
+    QFile file(fn);
     file.open(QIODevice::ReadWrite);
     QTextStream stream(&file);
     for (int j=0;j<m_height;j++) {
@@ -43,6 +44,39 @@ void LSheetCSV::Save(QString basename)
     }
 
 
+    file.close();
+}
+
+
+void LSheetCSV::SaveAsHTML(QString basename)
+{
+//    qDebug() << "LBookCSV::save";
+    QString separator="_";
+    if (m_name=="") separator="";
+    QString fn = Util::RemoveFinalFiletype(basename) + separator + m_name + ".html";
+ //   qDebug() << "Report output filename :" << fn;
+
+    if (QFile::exists(fn))
+        QFile::remove(fn);
+
+    QFile file(fn);
+    file.open(QIODevice::ReadWrite);
+    QTextStream stream(&file);
+    stream << "<html>\n";
+    stream << "<table>\n";
+
+
+    for (int j=0;j<m_height;j++) {
+        QString str = "<tr>";
+        for (int i=0;i<m_width;i++) {
+            str=str+"<td>"+get(j,i) + "</td>";
+        }
+        str = str + "</tr>";
+        stream << str << "\n";
+
+    }
+
+    stream << "</table>\n";
     file.close();
 }
 
@@ -88,6 +122,10 @@ void LBookCSV::Save(QString filename)
         dynamic_cast<LSheetCSV*>(l)->Save(filename);
 
 }
+
+
+
+
 
 LSheet *LBookCSV::CreateSheet(QString sheetName)
 {
