@@ -3,6 +3,6 @@ name; 0;;Name: ; string;
 resize_output_compression; 0;;Output compression; list; jpeg,lzw,none; lzw
 resize_input_dir; 0;;Input directory; directory; Default value
 resize_output_dir; 0;;Output directory; directory;
-resize_size; 0;;Resize facotr; number; 25
+resize_size; 0;;Resize factor; number; 25
 resize_type;0;;Resize type; List; Percent, Fixed width; Percent
 
