@@ -281,18 +281,17 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
     float sumArea = 0;
     float totalSumPixel=0;
     float totalSumArea = 0;
+
     Counter cnt(items.count()*m_reports.count(),"");
 
 
-
-
     for (int i=0;i<items.count();i++) {
-        qDebug() << "  Generating section report : " << items[i]->m_reportName;
+//        qDebug() << "  Generating section report : " << items[i]->m_reportName;
 
 
 
         LSheet* sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
-
+//        LSheet* sheet = book->CreateSheet("sheet"+QString::number(i));
         sheet->writeStr(0,0, "Region name");
         sheet->writeStr(0,1, "Region pixel area");
         sheet->writeStr(0,2, "Region area");
@@ -351,7 +350,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
 
 
 
-            sheet->writeStr(0,0, "Region name");
+ /*           sheet->writeStr(0,0, "Region name");
             sheet->writeStr(0,1, "Region pixel area");
             sheet->writeStr(0,2, "Region area");
             sheet->writeStr(0,3, "Area unit");
@@ -360,8 +359,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             sheet->writeStr(0,6, "Object area");
             sheet->writeStr(0,7, "Object area unit");
             sheet->writeStr(0,8, "Load");
-            sheet->writeStr(0,9, "Load");
-
+*/
+    //        sheet->writeStr(0,9, "Load");
 
 
             sheet->writeStr(j,0, r.m_filename);
@@ -375,11 +374,22 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             sheet->writeNum(j,5, totalPixelArea);
             sheet->writeNum(j,6, totalArea);
             sheet->writeStr(j,7, r.m_unit);
-            if (regionPixelArea!=0.0f)
-                sheet->writeNum(j,8, totalPixelArea/(float)regionPixelArea);
-            if (r.m_regionArea!=0.0f)
-                sheet->writeNum(j,9, totalArea/(float)regionArea);
 
+
+            if (regionPixelArea>=1)
+                sheet->writeNum(j,8, totalPixelArea/(float)regionPixelArea);
+            else
+                sheet->writeNum(j,8, 0);
+
+
+//            if (regionArea>=1)
+  //              sheet->writeNum(j,9, totalArea/(float)regionArea);
+
+            /*if (regionPixelArea>=1)
+                sheet->writeNum(j,8, totalPixelArea);
+            if (r.m_regionArea>=1)
+                sheet->writeNum(j,9, totalArea);
+*/
 
 
             j++;

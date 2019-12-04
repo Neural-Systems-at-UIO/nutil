@@ -10,7 +10,7 @@ bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
 
     m_processItems.clear();
     QDir directory(m_inputDir);
-    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png"<< "*.tif",QDir::Files);
+    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png",QDir::Files);
     for (QString filename: images) {
         QStringList inFileSplit = filename.split("/");
         QString inFile = (inFileSplit[inFileSplit.count()-1]);
