@@ -75,5 +75,18 @@
         <file>Resources/text/help/quantifier/analysis_type.rtf</file>
         <file>Resources/text/help/transform/type.rtf</file>
         <file>Resources/Nutil_logo_black.png</file>
+        <file>Resources/text/help/resize/name.rtf</file>
+        <file>Resources/text/help/resize/resize_input_dir.rtf</file>
+        <file>Resources/text/help/resize/resize_output_compression.rtf</file>
+        <file>Resources/text/help/resize/resize_output_dir.rtf</file>
+        <file>Resources/text/help/resize/resize_size.rtf</file>
+        <file>Resources/text/help/resize/resize_type.rtf</file>
+        <file>Resources/text/help/resize/type.rtf</file>
+        <file>Resources/text/help/tiffcreator/type.rtf</file>
+        <file>Resources/text/help/tiffcreator/name.rtf</file>
+        <file>Resources/text/help/tiffcreator/output_compression.rtf</file>
+        <file>Resources/text/help/tiffcreator/tiffcreator_input_dir.rtf</file>
+        <file>Resources/text/help/tiffcreator/tiffcreator_output_dir.rtf</file>
+        <file>Resources/text/help/tiffcreator/tiffcreator_size.rtf</file>
     </qresource>
 </RCC>
