@@ -253,9 +253,9 @@ void LTiff::FromQIMage(QString filename, QImage &img, QString comp, int tileSize
                     if (xx<m_width && yy<m_height) {
                         QColor color = img.pixel(xx,yy);
 
-                        ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 2] = color.red();
+                        ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 0] = color.red();
                         ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 1] = color.green();
-                        ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 0] = color.blue();
+                        ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 2] = color.blue();
 
                     }
                }
