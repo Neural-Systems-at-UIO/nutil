@@ -21,9 +21,8 @@
        <widget class="QLabel" name="lblMain_2">
         <property name="font">
          <font>
-          <pointsize>40</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <family>MS Shell Dlg 2</family>
+          <pointsize>32</pointsize>
          </font>
         </property>
         <property name="text">
