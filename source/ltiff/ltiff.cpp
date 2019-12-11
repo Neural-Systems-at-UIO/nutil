@@ -411,8 +411,8 @@ QString LTiff::ClipToCurrentBorders(short compression, QColor background, Counte
                     float xx = (x+i) + m_boundsMin.x();
                     float yy = (y+j)+ m_boundsMin.y();
                     QColor color = QColor(0,0,0,255);
-                    if (xx>=0 && xx<otif.m_width)
-                        if (yy>=0 && yy<otif.m_height)
+                    if (xx>=0 && xx<m_width)
+                        if (yy>=0 && yy<m_height)
                             color = GetTiledRGB(xx,yy,omp_get_thread_num());
 
                     ((unsigned char *)otif.m_writeBuf)[3*(i + j*otif.m_tileWidth) + 2] = color.red();
@@ -642,6 +642,7 @@ void LTiff::Transform(LTiff &oTiff, float angle, QPointF scale, int tx, int ty, 
     m_boundsMin = QVector3D(m_width, m_height,0 );
     float t = 2 + colorSpread;
     float scaleDebug = 1;
+   // qDebug() << "BACKGROUND : " << background;
     for (int y = 0; y < m_height; y += m_tileHeight) {
         for (int x = 0; x < m_width; x += m_tileWidth) {
 
@@ -661,32 +662,23 @@ void LTiff::Transform(LTiff &oTiff, float angle, QPointF scale, int tx, int ty, 
                     QColor color = background;
                     if (xr>=0 && xr<oTiff.m_width && yr>=0 && yr<oTiff.m_height) {
                         color =  oTiff.GetTiledRGB(xr,yr,omp_get_thread_num());
-                    };// else qDebug() << "OUTSIDE";
-
-
-                    //if (rand()%100==0)
-                    {
-                       /* float v = abs(color.red()-background.red())+ abs(color.green()-background.green()) + abs(color.blue()-background.blue());
-                        if (v>0 && xx+centerx<5)
-                            qDebug() << v << " at " << QString::number(xx + centerx) << ", " << QString::number(yy+centery);
-                            */
                     }
 
-                    if (abs(color.red()-background.red())<t && abs(color.green()-background.green())<t && abs(color.blue()-background.blue())<t) {
+
+                    if (     (  abs(color.red()-background.red())<t
+                            && abs(color.green()-background.green())<t
+                            && abs(color.blue()-background.blue())<t
+                               )) {
 
                     }
                     else {
-                           //dy =  yy + centery
                         float dx = x+i;//(xx + centerx)*scale.x();
                         float dy = y+j;//(xx + centerx)*scale.x();
-
-/*                        if (scale.x()<0) {
-                            m_width-(xx + centerx);
-                        }*/
                         m_boundsMax.setX(max(m_boundsMax.x(), dx));
                         m_boundsMin.setX(min(m_boundsMin.x(), dx));
                         m_boundsMax.setY(max(m_boundsMax.y(), dy));
                         m_boundsMin.setY(min(m_boundsMin.y(), dy));
+//                        qDebug() << "NEW BOUNDS: " << m_boundsMin << m_boundsMax;
                     }
 
                     ((unsigned char *)m_writeBuf)[3*(i + j*m_tileWidth) + 2] = color.red();
@@ -710,7 +702,8 @@ void LTiff::Transform(LTiff &oTiff, float angle, QPointF scale, int tx, int ty, 
         }
 
     }
-
+//    qDebug() << "NEW BOUNDS: ";
+ //   qDebug() << m_boundsMin << m_boundsMax;
     //    cout << "\nDone!" << endl;
 }
 

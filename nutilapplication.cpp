@@ -51,19 +51,8 @@ void NutilApplication::exec()
     }
     QString file = m_argv[1];
 
-
     ok = Execute(file);
 
-/*    if (cmd == "transform")
-        ok = Transform();
-
-    if (cmd == "transform_tiff")
-        ok = RotateTiff();
-
-    if (cmd == "batch") {
-        ok = Batch();
-    }
-*/
     if (!ok) {
         PrintUsage();
     }
