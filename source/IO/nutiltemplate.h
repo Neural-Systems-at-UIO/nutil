@@ -9,14 +9,18 @@
 #include <QGridLayout>
 #include "source/dialoghelp.h"
 #include <QSpacerItem>
+#include <QTableWidget>
+#include <QLayout>
 
 class NutilTemplateItem : public QObject {
     Q_OBJECT
 public:
 
-    enum Type{ STRING, LIST, DIRECTORY, FILE, TEXTFIELD, NUMBER, NONE, COLOR };
+    enum Type{ STRING, LIST, DIRECTORY, FILE, TEXTFIELD, NUMBER, NONE, COLOR, MATRIXFIELD };
     Q_ENUM(Type)
 
+    int m_matrixFieldWidth =1;
+    QStringList m_matrixField;
     QString m_depID = "", m_depVal="";
     QString m_name;
     QString m_text;
@@ -55,6 +59,7 @@ public:
         if (t=="number") return NUMBER;
         if (t=="color") return COLOR;
         if (t=="none") return NONE;
+        if (t=="matrixfield") return MATRIXFIELD;
         return NONE;
     }
 

@@ -8,29 +8,34 @@ bool ProcessManagerTransform::Build(NutilTemplate* data)
 
     m_processItems.clear();
     QString dt = data->m_items["transform_files"]->m_value;
-    dt = dt.replace("#NNN","\n");
-    QStringList dataList =dt.split("\n");
+//    dt = dt.replace("#NNN","\n");
+    QStringList dataList =dt.split(",");
 //    //while (!ok)
 
-    for (QString f : dataList)
+    QStringList full;
+
+    int width = data->m_items["transform_files"]->m_matrixFieldWidth;
+    for (int i=0;i<dataList.count()/width;i++) {
+        QString cur = "";
+        for (int j=0;j<width;j++) {
+            cur += dataList[i*width+j].trimmed() + ",";
+        }
+        cur.remove(cur.length()-1,1);
+        full.append(cur);
+    }
+
+
+    for (QString f : full)
     {
 //        qDebug() << f;
-        QStringList d = f.simplified().trimmed().split(" ");
+        QStringList d = f.simplified().trimmed().split(",");
         QString inFile = d[0];
         if (inFile == "") {
             ok = true;
             break;
         }
-//        inFile += ".tif";
-  //      qDebug() << "Searching for : " << inFile << " in " << m_inputDir;
         QString searchFile = Util::findFileInSubDirectories(inFile,m_inputDir,"");
 
-/*        if (searchFile=="") {
-   //         inFile+="f";
-
-            searchFile = Util::findFileInSubDirectories(inFile,m_inputDir,"");
-        }
-*/
 
         LMessage::lMessage.Log("Transform found file: " + searchFile);
 //        qDebug() << "Found: " << searchFile;
@@ -102,7 +107,6 @@ void ProcessManagerTransform::Execute()
 
     Util::globalTimer.restart();
     m_mainCounter = Counter(m_processes.length(),"",false);
-
 
 #pragma omp parallel for num_threads(m_numProcessors)
 

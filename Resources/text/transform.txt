@@ -8,4 +8,5 @@ transform_color_spread; 0;;Colour spread; number, 5
 auto_crop; 0;;Auto cropping ; list; Yes, No; yes
 only_thumbnails; 0;;Only create thumbnails; list; Yes, No; No
 transform_thumbnail_size; 0;;Thumbnail size: ; number; 1000
-transform_files; 0;;List of data; textfield;
+#transform_files; 0;;List of data; textfield;
+transform_files; 0;;List of data; matrixfield,5;

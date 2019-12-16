@@ -659,7 +659,7 @@ void LTiff::Transform(LTiff &oTiff, float angle, QPointF scale, int tx, int ty, 
 
                     float xr = xx*cos(angle)-yy*sin(angle) + ocenterx + tx;
                     float yr = yy*cos(angle)+xx*sin(angle) + ocentery + ty;
-                    QColor color = background;
+                    QColor color = QColor(background.blue(), background.green(), background.red());
                     if (xr>=0 && xr<oTiff.m_width && yr>=0 && yr<oTiff.m_height) {
                         color =  oTiff.GetTiledRGB(xr,yr,omp_get_thread_num());
                     }

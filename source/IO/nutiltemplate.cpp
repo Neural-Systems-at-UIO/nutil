@@ -54,7 +54,11 @@ void NutilTemplate::LoadTemplate(QString fileName)
         }
         nti->m_level = fields[fldLevel].toInt();
         nti->m_text = fields[fldText].trimmed();
-        QString t = fields[fldType].trimmed();
+        QStringList typeData = fields[fldType].trimmed().split(",");
+        QString t = typeData[0];
+        if (typeData.count()>1)
+            nti->m_matrixFieldWidth = typeData[1].toInt();
+
         if (t.contains(",")) {
             nti->m_isHidden = t.split(",")[1].trimmed().toLower() == "hidden"?true:false;
             t = t.split(",")[0].trimmed();
@@ -315,6 +319,119 @@ void NutilTemplate::Populate(QGridLayout *grid)
                 nti->m_value.replace("\n", "#NNN");
 //                qDebug() << nti->m_value;
             });
+        }
+
+
+        if (nti->m_type==NutilTemplateItem::MATRIXFIELD) {
+                QVBoxLayout* vl = new QVBoxLayout();
+                QHBoxLayout* hl = new QHBoxLayout();
+                QTableWidget* tw = new QTableWidget();
+                tw->setMinimumHeight(200);
+                vl->addWidget(tw);
+                vl->addItem(hl);
+                grid->addItem(vl,row,valueColumn);
+                nti->m_widget = tw;
+                tw->setColumnCount(nti->m_matrixFieldWidth);
+
+
+                QPushButton* plus = new QPushButton("+");
+                QPushButton* minus = new QPushButton("-");
+                QPushButton* fill = new QPushButton("Fill files");
+
+                QObject::connect(plus, &QPushButton::pressed, [=]() {
+                    int y = tw->rowCount();
+                    tw->insertRow(y);
+                    tw->setItem(y, 0, new QTableWidgetItem("in_file.tif"));
+                    tw->setItem(y, 1, new QTableWidgetItem("out_file"));
+                    tw->setItem(y, 2, new QTableWidgetItem("0"));
+                    tw->setItem(y, 3, new QTableWidgetItem("1"));
+                    tw->setItem(y, 4, new QTableWidgetItem("1"));
+                }
+                );
+
+
+                QObject::connect(minus, &QPushButton::pressed, [=]() {
+                    tw->removeRow(tw->currentRow());
+                }
+                );
+
+
+
+
+                tw->setHorizontalHeaderLabels(QStringList() << "Input file" << "Output file" << "Rotationa angle" << "X scale" << "Y scale");
+                int l0 = 200;
+                int l1 = 60;
+                tw->setColumnWidth(0,l0);
+                tw->setColumnWidth(1,l0*0.8);
+                tw->setColumnWidth(2,l1);
+                tw->setColumnWidth(3,l1);
+                tw->setColumnWidth(4,l1);
+
+                QObject::connect(fill, &QPushButton::pressed, [=]() {
+                    tw->setRowCount(0);
+                    int y = 0;
+                    QDir directory(Get("transform_input_dir"));
+                    QStringList images = directory.entryList(QStringList() << "*.tif" << "*.tiff" << "*.TIF" << "*.TIFF",QDir::Files);
+                    for (QString fn :  images) {
+                        tw->insertRow(y);
+                        tw->setItem(y, 0, new QTableWidgetItem(fn));
+                        tw->setItem(y, 1, new QTableWidgetItem(fn.split(".").first()));
+                        tw->setItem(y, 2, new QTableWidgetItem("0"));
+                        tw->setItem(y, 3, new QTableWidgetItem("1"));
+                        tw->setItem(y, 4, new QTableWidgetItem("1"));
+
+
+                        y++;
+                    }
+                });
+
+
+
+                QObject::connect(tw, &QTableWidget::itemChanged, [=]() {
+                    QString data = "";
+                    for (int i=0;i<tw->rowCount();i++)
+                        for (int j=0;j<tw->columnCount();j++) {
+//                            qDebug() << tw->item(i,j)->text();
+                            QString txt = "";
+                            if (tw->item(i,j)!=nullptr)
+                                txt = tw->item(i,j)->text();
+                            data += txt + ",";
+                        }
+
+                    data.remove(data.length()-1,1);
+//                    qDebug() << data;
+                    nti->m_value = data;
+                });
+
+                hl->addWidget(plus);
+                hl->addWidget(minus);
+                hl->addWidget(fill);
+
+                QStringList data = nti->m_value.split(",");
+                int dataWidth = nti->m_matrixFieldWidth;
+                int cnt = data.count()/dataWidth;
+                int y = 0;
+                for (int i=0;i<cnt;i++) {
+                    tw->insertRow(y);
+                    int c = i*dataWidth;
+                    for (int j=0;j<dataWidth;j++)
+                        tw->setItem(y, j, new QTableWidgetItem(data[c+j].trimmed()));
+                    y++;
+                }
+
+
+
+
+
+/*            QTextEdit* te = new QTextEdit();
+            grid->addWidget(te,row,valueColumn);
+            nti->m_widget = te;
+            te->setText(nti->m_value);
+            QObject::connect(te, &QTextEdit::textChanged, [=]() {
+                nti->m_value = te->toPlainText();
+                nti->m_value.replace("\n", "#NNN");
+//                qDebug() << nti->m_value;
+            });*/
         }
 
 

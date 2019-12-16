@@ -129,8 +129,6 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
         // Header
         //if (al->extra2.length()!=0)
         {
-
-
             sheet->writeNum(y,0,al->index);
             sheet->writeStr(y,1,al->name);
             sheet->writeNum(y,2,al->area);
