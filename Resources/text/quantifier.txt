@@ -8,10 +8,10 @@ xml_anchor_file; 0 ; analysis_type=QuickNII; Anchored XML file; file;
 quantifier_output_dir; 0 ;; Output directory; directory;
 output_report; 0 ;;Output reports; list; All, None; All
 extraction_color ; 0; ; Object colour ; color ; 255,0,0,255
-object_splitting; 1; ;Object Splitting; list; Yes, No; Yes
+object_splitting; 0; ;Object Splitting; list; Yes, No; Yes
 object_min_size; 1; ;Minimum object size; number; 1
 object_max_size; 1; ;Maximum object size; number; 100000
-global_pixel_scale; 1; ;Pixel scale; number; 1
+global_pixel_scale; 1; ;Pixel scale (area per pixel); number; 1
 quantifier_pixel_scale_unit; 1; ; Pixel scale unit; list; pixels, um2, mm2; pixels
 use_custom_masks; 1; ;Custom masks (optional); list; Yes, No; No
 custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,255,255,255
@@ -21,5 +21,5 @@ custom_region_type; 1; ; Customised reports; list; No, Yes, Custom; No
 custom_region_file; 1; custom_region_type=Custom ; Custom report file;  file;
 nifti_size; 1; ;Nifti size ; list; 0,64,128,256,512; 0
 coordinate_extraction; 1; ;Coordinate extraction;list; All, None, Slices, Summary; All
-pattern_match ; 1; ;Unique ID format; list; sXXX, files, user; sXXX
+pattern_match ; 1; ;Unique ID format; list; _sXXX, user, files; _sXXX
 files; 1; ;Other ID format; textfield;
