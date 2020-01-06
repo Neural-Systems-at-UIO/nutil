@@ -11,6 +11,8 @@
 #include <QSpacerItem>
 #include <QTableWidget>
 #include <QLayout>
+#include <QComboBox>
+#include <QEvent>
 
 class NutilTemplateItem : public QObject {
     Q_OBJECT
@@ -71,12 +73,14 @@ class NutilTemplate
     QGridLayout* m_grid = nullptr;
 
 public:
+    QObject* m_eventFilter = nullptr;
     NutilTemplate();
     int m_currentLevel = 0;
     QMap<QString,NutilTemplateItem*> m_items;
     QString m_openFile = "";
     QVector<QString> m_sortList;
     void LoadTemplate(QString file);
+    QVector<QComboBox*> m_cmbBoxes;
 
     QString Get(QString val);
 
@@ -85,6 +89,8 @@ public:
     void FillFromGUI();
     void Save(QString fname);
     void Load(QString fname);
+
+
 
 private:
     void CreateBasicAdvancedOption(QGridLayout* grid, int& row);

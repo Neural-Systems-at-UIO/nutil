@@ -171,6 +171,8 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
     bool hasAdvancedSettings = false;
     bool isDrawn = false;
+    m_cmbBoxes.clear();
+
     for (QString name : m_sortList) {
 
         NutilTemplateItem* nti = m_items[name];
@@ -283,9 +285,14 @@ void NutilTemplate::Populate(QGridLayout *grid)
             grid->addWidget(btn,row,valueColumn);
 
             QObject::connect(btn, &QPushButton::clicked, [=]() {
-                nti->m_color = QColorDialog::getColor(nti->m_color, nullptr );
-                btn->setStyleSheet("background-color: #"+QString::number(nti->m_color.rgb(),16));
-                nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
+                //nti->m_color = QColorDialog::getColor(nti->m_color, nullptr );
+                QColor c = QColorDialog::getColor(nti->m_color, nullptr );
+                if (c.isValid())
+                {
+                    nti->m_color = c;
+                    btn->setStyleSheet("background-color: #"+QString::number(nti->m_color.rgb(),16));
+                    nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
+                }
 
 
             });
@@ -295,6 +302,10 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
         if (nti->m_type==NutilTemplateItem::LIST) {
             QComboBox* cmb = new QComboBox();
+            m_cmbBoxes.append(cmb);
+            cmb->setFocusPolicy( Qt::StrongFocus );
+            cmb->installEventFilter(m_eventFilter);
+
             cmb->addItems(nti->m_items);
             grid->addWidget(cmb,row,valueColumn);
             nti->m_widget = cmb;

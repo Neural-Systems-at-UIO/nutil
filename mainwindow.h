@@ -144,10 +144,13 @@ private:
     void UpdateInfoTimer();
     void DefaultSettings();
 
+    bool eventFilter(QObject* obj, QEvent *event) override;
+
 
 public slots:
     void OnInfoTextChanged(QString);
     void OnMessageTextChanged(QString);
+
 };
 
 

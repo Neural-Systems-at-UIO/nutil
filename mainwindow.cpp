@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
  //   QPixmap pixmap = QPixmap ("://my_image.png");
 
 
-
+    m_nt.m_eventFilter = this;
     m_settings.filename = "nutil.ini";
     if (QFile::exists(m_settings.filename))
         m_settings.Load(m_settings.filename);
@@ -91,6 +91,7 @@ void MainWindow::Load(QString f)
 {
     m_nt.Load(f);
     m_nt.Populate(ui->gridTemplate);
+
     QWidget* w = new QWidget(this);
     w->setLayout(ui->gridTemplate);
     ui->scrollArea->setWidget(w);
@@ -216,6 +217,18 @@ void MainWindow::DefaultSettings()
     if (!m_settings.contains("fill_method"))
         m_settings.setString("fill_method","bfs");
 }
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::Wheel)
+    {
+        event->ignore();
+        return true;
+
+    }
+    return false;
+}
+
 void MainWindow::OnInfoTextChanged(QString info)
 {
     ui->txtInfo->setText(info);
@@ -281,6 +294,7 @@ void MainWindow::on_btnNew_clicked()
 
     m_nt.LoadTemplate(":/Resources/text/"+newFile->m_type.toLower()+".txt");
     m_nt.Populate(ui->gridTemplate);
+
     m_nt.m_openFile = "";
     UpdateRecentList();
     delete newFile;
