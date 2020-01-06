@@ -445,6 +445,11 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             if (data->Get("custom_region_type").toLower()=="yes")
                 m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse.xlsx";
         }
+        if (labelType == "Allen Mouse Brain 2017") {
+            m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
+            if (data->Get("custom_region_type").toLower()=="yes")
+                m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse.xlsx";
+        }
         if (labelType == "WHS Atlas Rat v2")
             m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
         if (labelType == "WHS Atlas Rat v3")

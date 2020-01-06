@@ -1,5 +1,6 @@
 #include "atlaslabel.h"
 #include <QDebug>
+
 AtlasLabel::AtlasLabel()
 {
 
@@ -13,8 +14,10 @@ AtlasLabel *AtlasLabels::get(long index, bool format)
         if (index<atlases.count())
             return atlases[index];
         else {
-            qDebug() << "Trying to access atlas index : "<< index << " which is above " <<atlases.count();
-
+//            qDebug() << "Trying to access atlas index : "<< index << " which is above " <<atlases.count();
+            LMessage::lMessage.Error("Trying to access atlas index : "+ QString::number(index) +
+                                     " which is above " +QString::number(atlases.count()) +
+                                     ".<br>Please make sure that you are using the correct atlas label file (i.e. the same version as was used with QuickNII).");
         }
     }
 
@@ -37,7 +40,7 @@ void AtlasLabels::Load(QString filename)
     while(!in.atEnd()) {
         QString line = in.readLine();
 
-        if (line[0]!='#') {
+        if (!line.startsWith("#")) {
             QStringList fields = line.simplified().split(' ');
             AtlasLabel* al = new AtlasLabel(fields);
             atlases.append(al);

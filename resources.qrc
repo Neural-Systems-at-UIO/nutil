@@ -87,5 +87,6 @@
         <file>Resources/text/help/tiffcreator/tiffcreator_input_dir.rtf</file>
         <file>Resources/text/help/tiffcreator/tiffcreator_output_dir.rtf</file>
         <file>Resources/text/help/tiffcreator/tiffcreator_size.rtf</file>
+        <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label</file>
     </qresource>
 </RCC>
