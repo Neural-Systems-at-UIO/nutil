@@ -345,10 +345,13 @@ void NutilTemplate::Populate(QGridLayout *grid)
                 tw->setMinimumHeight(200);
                 vl->addWidget(tw);
                 vl->addItem(hl);
-                grid->addItem(vl,row,valueColumn);
+  /*              vl->addWidget(new QPushButton("WTF"));
+                grid->update();*/
+//                grid->addWidget(vl,row,valueColumn);
+                //grid->addWidget(new QPushButton("WTF"),row,valueColumn);
                 nti->m_widget = tw;
                 tw->setColumnCount(nti->m_matrixFieldWidth);
-
+                grid->addItem(vl,row,valueColumn);
 
                 QPushButton* plus = new QPushButton("+");
                 QPushButton* minus = new QPushButton("-");
