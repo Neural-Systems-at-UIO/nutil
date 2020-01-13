@@ -3,28 +3,6 @@
     <qresource prefix="/">
         <file>Resources/text/transform.txt</file>
         <file>Resources/text/resize.txt</file>
-        <file>Resources/text/quantifier_advanced.txt</file>
-        <file>Resources/text/help/quantifier_advanced/xml_anchor_file.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/use_custom_masks.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/quantifier_pixel_scale_unit.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/quantifier_output_dir.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/pattern_match.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/output_report_type.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/output_report.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/object_min_size.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/object_max_size.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/object_splitting.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/nifti_size.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/name.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/label_file.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/global_pixel_scale.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/custom_region_file.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/custom_mask_color.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/coordinate_extraction.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/extraction_color.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/type.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/quantifier_input_dir.rtf</file>
-        <file>Resources/text/help/quantifier_advanced/quantifier_atlas_dir.rtf</file>
         <file>Resources/images/0218_79584253-Rainbow_2015.png</file>
         <file>Resources/images/Extraction_colour.PNG</file>
         <file>Resources/images/object_splitting.png</file>
