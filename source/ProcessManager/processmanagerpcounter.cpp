@@ -472,7 +472,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (m_dataType=="quicknii")
         m_anchorFile = data->Get("xml_anchor_file");
     m_niftiSize = data->Get("nifti_size").toInt();//m_sheet->readNum(12,1);
-    //m_xyzScale = m_sheet->readNum(13,1);
+    m_xyzScale = data->Get("pixel_density").toInt();
     //m_units = m_sheet->readStr(10,2);
     m_units = data->Get("quantifier_pixel_scale_unit");
 
@@ -563,7 +563,6 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
     i=0;
     bool hasNext = true;
     int x = 1;
-    qDebug() << "Reading from report sheet";
     // As long as a next one exist (x-axis reports)
     while (hasNext) {
         QString excelName = m_sheet->readStr(i,x);

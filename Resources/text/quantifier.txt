@@ -20,6 +20,7 @@ output_report_type; 1; ;Output report type; list; CSV, HTML; CSV
 custom_region_type; 1; ; Customised reports; list; No, Yes, Custom; No
 custom_region_file; 1; custom_region_type=Custom ; Custom report file;  file;
 nifti_size; 1; ;Nifti size ; list; 0,64,128,256,512; 0
+pixel_density; 1; ;Pixel density ; number; 1
 coordinate_extraction; 1; ;Coordinate extraction;list; All, None, Slices, Summary; All
 pattern_match ; 1; ;Unique ID format; list; _sXXX, user, files; _sXXX
 files; 1; ;Other ID format; textfield;
