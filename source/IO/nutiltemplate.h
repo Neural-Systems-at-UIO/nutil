@@ -14,6 +14,7 @@
 #include <QComboBox>
 #include <QEvent>
 #include <QMessageBox>
+#include <QPixmap>
 
 class NutilTemplateItem : public QObject {
     Q_OBJECT

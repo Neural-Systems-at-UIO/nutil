@@ -890,6 +890,7 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/images/s218_segmentation.PNG \
 		../Resources/images/object_splitting.png \
 		../Resources/images/0218_79584253-Rainbow_2015.png \
+		../Resources/images/disk.png \
 		../Resources/images/Extraction_colour.PNG \
 		../Resources/text/resize.txt \
 		../Resources/text/tiffcreator.txt \
@@ -1121,6 +1122,12 @@ moc_nutiltemplate.cpp: ../source/IO/nutiltemplate.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLayout \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		moc_predefs.h \
 		../../../Qt/5.13.0/gcc_64/bin/moc
 	/home/leuat/Qt/5.13.0/gcc_64/bin/moc $(DEFINES) --include /home/leuat/code/nutil/Release/moc_predefs.h -I/home/leuat/Qt/5.13.0/gcc_64/mkspecs/linux-g++ -I/home/leuat/code/nutil -I/home/leuat/code/nutil/lib/libtiff -I/home/leuat/code/nutil/lib -I/home/leuat/Qt/5.13.0/gcc_64/include -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWidgets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtGui -I/home/leuat/Qt/5.13.0/gcc_64/include/QtWebSockets -I/home/leuat/Qt/5.13.0/gcc_64/include/QtNetwork -I/home/leuat/Qt/5.13.0/gcc_64/include/QtXml -I/home/leuat/Qt/5.13.0/gcc_64/include/QtCore -I. -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include' -I'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt' -I'C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt' ../source/IO/nutiltemplate.h -o moc_nutiltemplate.cpp
@@ -1869,6 +1876,12 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		ui_mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QAction \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qaction.h \
@@ -1911,8 +1924,6 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QProgressBar \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qprogressbar.h \
 		../dialogsettings.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
 		../source/dialognewfile.h \
 		../source/dialoggeneratedata.h \
 		moc_predefs.h \
@@ -2890,6 +2901,12 @@ main.o: ../main.cpp ../../../Qt/5.13.0/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		ui_mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QAction \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qaction.h \
@@ -2927,8 +2944,6 @@ main.o: ../main.cpp ../../../Qt/5.13.0/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QProgressBar \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qprogressbar.h \
 		../dialogsettings.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
 		../source/dialognewfile.h \
 		../source/dialoggeneratedata.h \
 		../source/unittest.h \
@@ -3106,6 +3121,12 @@ nutiltemplate.o: ../source/IO/nutiltemplate.cpp ../source/IO/nutiltemplate.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLayout \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QTextStream \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QDebug \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QLabel \
@@ -3119,8 +3140,6 @@ nutiltemplate.o: ../source/IO/nutiltemplate.cpp ../source/IO/nutiltemplate.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QPushButton \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QTextEdit \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtextedit.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qtextdocument.h \
@@ -3549,6 +3568,12 @@ processmanagerresize.o: ../source/ProcessManager/processmanagerresize.cpp ../sou
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		../source/ProcessManager/processmanagertiffcreator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagerresize.o ../source/ProcessManager/processmanagerresize.cpp
 
@@ -5401,7 +5426,13 @@ nutilapplication.o: ../nutilapplication.cpp ../nutilapplication.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nutilapplication.o ../nutilapplication.cpp
 
 mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
@@ -5678,6 +5709,12 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		ui_mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QAction \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qaction.h \
@@ -5720,8 +5757,6 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QProgressBar \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qprogressbar.h \
 		../dialogsettings.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
 		../source/dialognewfile.h \
 		../source/dialoggeneratedata.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QFileDialog \
@@ -5730,10 +5765,7 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../source/limage/limagetiff.h \
 		../source/limage/limageqimage.h \
 		../source/limage/lcolorlist.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/QIcon \
-		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		../source/limage/limage.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QGraphicsEffect \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qgraphicseffect.h \
@@ -6132,6 +6164,12 @@ nauto.o: ../source/nauto.cpp ../source/nauto.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		../source/ProcessManager/processmanagerfactory.h \
 		../source/ProcessManager/processmanagerpcounter.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QRegularExpression \
@@ -6186,8 +6224,6 @@ nauto.o: ../source/nauto.cpp ../source/nauto.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QProgressBar \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qprogressbar.h \
 		../dialogsettings.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
 		../source/dialognewfile.h \
 		../source/dialoggeneratedata.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nauto.o ../source/nauto.cpp
@@ -6688,7 +6724,13 @@ processmanager.o: ../source/ProcessManager/processmanager.cpp ../source/ProcessM
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanager.o ../source/ProcessManager/processmanager.cpp
 
 downloadmanager.o: ../source/util/downloadmanager.cpp ../source/util/downloadmanager.h \
@@ -8770,6 +8812,12 @@ processmanagerpcounter.o: ../source/ProcessManager/processmanagerpcounter.cpp ..
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QRegularExpression
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagerpcounter.o ../source/ProcessManager/processmanagerpcounter.cpp
 
@@ -9043,6 +9091,12 @@ processmanagerfactory.o: ../source/ProcessManager/processmanagerfactory.cpp ../s
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QRegularExpression \
 		../source/ProcessManager/processmanagertransform.h \
 		../source/ProcessManager/processmanagerautocontrast.h \
@@ -9318,7 +9372,13 @@ processmanagertransform.o: ../source/ProcessManager/processmanagertransform.cpp 
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagertransform.o ../source/ProcessManager/processmanagertransform.cpp
 
 processmanagerautocontrast.o: ../source/ProcessManager/processmanagerautocontrast.cpp ../source/ProcessManager/processmanagerautocontrast.h \
@@ -9589,7 +9649,13 @@ processmanagerautocontrast.o: ../source/ProcessManager/processmanagerautocontras
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagerautocontrast.o ../source/ProcessManager/processmanagerautocontrast.cpp
 
 dialogtiff.o: ../source/dialogtiff.cpp ../source/dialogtiff.h \
@@ -10351,7 +10417,13 @@ areafinder3d.o: ../source/ProcessManager/areafinder3d.cpp ../source/ProcessManag
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o areafinder3d.o ../source/ProcessManager/areafinder3d.cpp
 
 pointcloud3d.o: ../source/IO/pointcloud3d.cpp ../source/IO/pointcloud3d.h \
@@ -11066,7 +11138,13 @@ processmanagertiffcreator.o: ../source/ProcessManager/processmanagertiffcreator.
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QEvent \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/QMessageBox \
+		../../../Qt/5.13.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../Qt/5.13.0/gcc_64/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processmanagertiffcreator.o ../source/ProcessManager/processmanagertiffcreator.cpp
 
 lbookcsv.o: ../source/LBook/lbookcsv.cpp ../source/LBook/lbookcsv.h \

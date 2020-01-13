@@ -239,8 +239,13 @@ void NutilTemplate::Populate(QGridLayout *grid)
             if (nti->m_type==NutilTemplateItem::DIRECTORY) {
 
                 le->setEnabled(false);
-                QPushButton* btn = new QPushButton("Select directory");
-                grid->addWidget(btn,row,buttonColumn);
+                QPixmap m = QPixmap::fromImage(QImage(":Resources/images/disk"));
+
+                QPushButton* btn = new QPushButton(m,"");
+                btn->setIconSize(QSize(24,24));
+                QFont font = btn->font();
+   //             font.setPointSize(16);
+                btn->setFont(font);                grid->addWidget(btn,row,buttonColumn);
 
 
                 QObject::connect(btn, &QPushButton::clicked, [=]() {
@@ -390,9 +395,9 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
 
 
-                tw->setHorizontalHeaderLabels(QStringList() << "Input file" << "Output file" << "Rotationa angle" << "X scale" << "Y scale");
+                tw->setHorizontalHeaderLabels(QStringList() << "Input file" << "Output file" << "Rotation" << "X scale" << "Y scale");
                 int l0 = 200;
-                int l1 = 60;
+                int l1 = 120;
                 tw->setColumnWidth(0,l0);
                 tw->setColumnWidth(1,l0*0.8);
                 tw->setColumnWidth(2,l1);
@@ -494,9 +499,9 @@ void NutilTemplate::Populate(QGridLayout *grid)
     }
 
     grid->setColumnStretch(textColumn,10);
-    grid->setColumnStretch(helpColumn,5);
+    grid->setColumnStretch(helpColumn,4);
     grid->setColumnStretch(valueColumn,30);
-    grid->setColumnStretch(buttonColumn,10);
+    grid->setColumnStretch(buttonColumn,2);
 
 
     if (!isDrawn && hasAdvancedSettings)
