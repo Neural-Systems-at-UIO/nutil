@@ -121,7 +121,7 @@ void MainWindow::on_btnStart_clicked()
         LMessage::lMessage.Error("No file loaded!");
         return;
     }*/
-    on_btnSave_clicked();
+    //on_btnSave_clicked();
 
     if (m_nt.m_openFile == "")
         return;

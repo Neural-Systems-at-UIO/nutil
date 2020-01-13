@@ -928,6 +928,7 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/quantifier/xml_anchor_file.rtf \
 		../Resources/text/help/quantifier/object_splitting.rtf \
 		../Resources/text/help/quantifier/coordinate_extraction.rtf \
+		../Resources/text/help/quantifier/pixel_density.rtf \
 		../Resources/text/help/quantifier/quantifier_output_dir.rtf \
 		../Resources/text/help/quantifier/analysis_type.rtf \
 		../Resources/text/help/quantifier/nifti_size.rtf \

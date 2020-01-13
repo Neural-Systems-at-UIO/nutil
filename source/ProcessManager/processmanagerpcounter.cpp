@@ -360,7 +360,6 @@ void ProcessManagerPCounter::Execute()
             reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
         }
 
-
         //  m_infoText = "Creating 3D point cloud";
         Data::data.m_globalMessage = "Creating NIFTI";
 
