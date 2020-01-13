@@ -895,29 +895,7 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/resize.txt \
 		../Resources/text/tiffcreator.txt \
 		../Resources/text/transform.txt \
-		../Resources/text/quantifier_advanced.txt \
 		../Resources/text/quantifier.txt \
-		../Resources/text/help/quantifier_advanced/use_custom_masks.rtf \
-		../Resources/text/help/quantifier_advanced/quantifier_pixel_scale_unit.rtf \
-		../Resources/text/help/quantifier_advanced/custom_region_file.rtf \
-		../Resources/text/help/quantifier_advanced/type.rtf \
-		../Resources/text/help/quantifier_advanced/global_pixel_scale.rtf \
-		../Resources/text/help/quantifier_advanced/extraction_color.rtf \
-		../Resources/text/help/quantifier_advanced/pattern_match.rtf \
-		../Resources/text/help/quantifier_advanced/quantifier_atlas_dir.rtf \
-		../Resources/text/help/quantifier_advanced/object_max_size.rtf \
-		../Resources/text/help/quantifier_advanced/name.rtf \
-		../Resources/text/help/quantifier_advanced/custom_mask_color.rtf \
-		../Resources/text/help/quantifier_advanced/object_min_size.rtf \
-		../Resources/text/help/quantifier_advanced/quantifier_input_dir.rtf \
-		../Resources/text/help/quantifier_advanced/output_report.rtf \
-		../Resources/text/help/quantifier_advanced/output_report_type.rtf \
-		../Resources/text/help/quantifier_advanced/xml_anchor_file.rtf \
-		../Resources/text/help/quantifier_advanced/object_splitting.rtf \
-		../Resources/text/help/quantifier_advanced/coordinate_extraction.rtf \
-		../Resources/text/help/quantifier_advanced/quantifier_output_dir.rtf \
-		../Resources/text/help/quantifier_advanced/nifti_size.rtf \
-		../Resources/text/help/quantifier_advanced/label_file.rtf \
 		../Resources/text/help/transform/output_compression.rtf \
 		../Resources/text/help/transform/transform_files.rtf \
 		../Resources/text/help/transform/transform_background_color.rtf \

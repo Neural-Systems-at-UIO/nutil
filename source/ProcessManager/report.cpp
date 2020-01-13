@@ -165,13 +165,13 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     float totalSumArea = 0;
 
 
-    summary->writeStr(0,0,"Object pixels");
-    summary->writeStr(0,1,"Object area");
-    summary->writeStr(0,2,"units");
-    summary->writeStr(0,3,"Center X");
-    summary->writeStr(0,4,"Center Y");
-    summary->writeStr(0,5,"Region ID");
-    summary->writeStr(0,6,"Region Name");
+    summary->writeStr(0,1,"Object pixels");
+    summary->writeStr(0,2,"Object area");
+    summary->writeStr(0,3,"units");
+    summary->writeStr(0,4,"Center X");
+    summary->writeStr(0,5,"Center Y");
+    summary->writeStr(0,6,"Region ID");
+    summary->writeStr(0,7,"Region Name");
     int yy=1;
     float sumTotalAtlasArea=0;
     Counter cnt(items.count(),"");
@@ -225,18 +225,19 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
             y++;
 
 
-            summary->writeNum(yy,0,a.m_pixelArea);
-            summary->writeNum(yy,1,a.m_area);
-            summary->writeStr(yy,2,units);
-            summary->writeNum(yy,3,a.m_center.x());
-            summary->writeNum(yy,4,a.m_center.y());
+            summary->writeStr(yy,0,items[i]->m_reportName);
+            summary->writeNum(yy,1,a.m_pixelArea);
+            summary->writeNum(yy,2,a.m_area);
+            summary->writeStr(yy,3,units);
+            summary->writeNum(yy,4,a.m_center.x());
+            summary->writeNum(yy,5,a.m_center.y());
 
             if (a.atlasLabel!=nullptr) {
-                summary->writeNum(yy,5,a.atlasLabel->index);
+                summary->writeNum(yy,6,a.atlasLabel->index);
               //  if (a.atlasLabel->area!=a.atlasLabel->area)
               //  qDebug() << a.atlasLabel->area;
 //                summary->writeNum(yy,6,a.atlasLabel->area);
-                summary->writeStr(yy,6,a.atlasLabel->name);
+                summary->writeStr(yy,7,a.atlasLabel->name);
             }
 
             yy++;
