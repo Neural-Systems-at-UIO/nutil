@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 #ifndef IGNORE_DOWNLOAD
     CheckVersion();
 #endif
-    CreateValidator();
+   // CreateValidator();
 
     if (argc == 1)  {
         QApplication a(argc, argv);
