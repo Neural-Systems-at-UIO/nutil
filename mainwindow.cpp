@@ -293,7 +293,14 @@ void MainWindow::on_btnNew_clicked()
         return;
 
     m_nt.LoadTemplate(":/Resources/text/"+newFile->m_type.toLower()+".txt");
+
+
+
     m_nt.Populate(ui->gridTemplate);
+
+    QWidget* w = new QWidget(this);
+    w->setLayout(ui->gridTemplate);
+    ui->scrollArea->setWidget(w);
 
     m_nt.m_openFile = "";
     UpdateRecentList();

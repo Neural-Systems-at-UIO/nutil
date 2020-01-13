@@ -10,3 +10,4 @@ only_thumbnails; 0;;Only create thumbnails; list; Yes, No; No
 transform_thumbnail_size; 0;;Thumbnail size: ; number; 1000
 #transform_files; 0;;List of data; textfield;
 transform_files; 0;;List of data; matrixfield,5;
+

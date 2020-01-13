@@ -78,9 +78,8 @@ void Nauto::Execute()
         LMessage::lMessage.Error(m_book->errorMessage());
     }
 */
-    LMessage::lMessage.Log("******** Reading global header");
     ReadHeader();
-    LMessage::lMessage.Log("******** Type of Nutil operation: " + m_type );
+    LMessage::lMessage.Log("Type of operation: " + m_type );
     m_status = Status::Working;
     Util::CancelSignal = false;
 
@@ -97,7 +96,6 @@ void Nauto::Execute()
     m_pm->m_excelInputFilename = m_filename;
     m_pm->m_numProcessors = m_numThreads;
 
-    LMessage::lMessage.Log("******** Reading local header");
     m_pm->ReadHeader(m_data);
 
     if (Data::data.abort) {
@@ -105,7 +103,6 @@ void Nauto::Execute()
         return;
     }
 
-    LMessage::lMessage.Log("******** Building");
     if (m_pm->Build(m_data)) {
 
         // Verify memory limits
@@ -119,7 +116,7 @@ void Nauto::Execute()
         if (total>1) {
             LMessage::lMessage.Error("You are exceeding the memory limitations of this system. Please lower the number of threads, or reduce size of input files.");
         } else {
-            LMessage::lMessage.Log("******** Executing");
+            LMessage::lMessage.Log("Executing...");
             m_pm->Execute();
         }
     }

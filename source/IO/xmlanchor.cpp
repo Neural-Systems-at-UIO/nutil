@@ -40,7 +40,7 @@ void XMLAnchor::Load(QString file)
             n.append(qa[i]);
     }
 
-    qDebug() << "Loading xml file:" << file;
+//    qDebug() << "Loading xml file:" << file;
     QXmlStreamReader xml(n);
     QList< QMap<QString,QString> > files;
         /* We'll parse the XML until we reach end of it.*/

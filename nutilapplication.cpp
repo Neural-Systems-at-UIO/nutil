@@ -22,16 +22,20 @@ NutilApplication::NutilApplication(int argc, char *argv[])
         m_argv.append(QString(argv[i]));
 }
 
-bool Execute(QString fileName) {
+bool Execute(QString fileName, int numThreads) {
     try {
         Data::data.isConsole = true;
         NutilTemplate nt;
         nt.Load(fileName);
         Nauto nauto;
         nauto.m_data = &nt;
-        nauto.m_numThreads=omp_get_max_threads();
+        nauto.m_numThreads = numThreads;
         nauto.m_filename = fileName;
+        QElapsedTimer t;
+        t.start();
         nauto.Execute();
+     //   qDebug() << "Operation complete in "<<Util::;
+
     }
     catch (QString e) {
         return false;
@@ -51,7 +55,11 @@ void NutilApplication::exec()
     }
     QString file = m_argv[1];
 
-    ok = Execute(file);
+    int numThreads = omp_get_max_threads();
+    if (m_argv.count()>2)
+        numThreads = m_argv[2].toInt();
+
+    ok = Execute(file, numThreads);
 
     if (!ok) {
         PrintUsage();
