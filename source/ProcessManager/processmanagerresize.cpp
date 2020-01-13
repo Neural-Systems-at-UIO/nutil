@@ -7,6 +7,9 @@ ProcessManagerResize::ProcessManagerResize()
 
 void ProcessManagerResize::Execute()
 {
+    if (!QDir(m_outputDir).exists())
+        QDir().mkdir(m_outputDir);
+
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {
@@ -55,7 +58,7 @@ void ProcessManagerResize::Execute()
 void ProcessManagerResize::ReadHeader(NutilTemplate* data)
 {
     ProcessManager::ReadHeader(data);
-    m_compression = data->Get("output_compression");
+    m_compression = data->Get("resize_output_compression");
     m_inputDir = data->Get("resize_input_dir")+"/";
     m_outputDir = data->Get("resize_output_dir")+"/";
     m_tileSize = data->Get("resize_size").toFloat();

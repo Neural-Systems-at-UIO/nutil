@@ -85,6 +85,10 @@ bool ProcessManagerTransform::Build(NutilTemplate* data)
     }
 
 
+    if (!QDir(m_outputDir).exists())
+        QDir().mkdir(m_outputDir);
+
+
     return true;
 //    m_pm.ExecuteTransform(m_compression, m_background, m_autoClip.toLower()=="yes", m_thumbnailSize, m_thumbType);
 

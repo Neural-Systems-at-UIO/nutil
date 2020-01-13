@@ -183,6 +183,11 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     Util::CreateDir(m_outputDir+QDir::separator()+m_imageDirectory);
 
 
+    if (!QDir(m_outputDir).exists())
+        QDir().mkdir(m_outputDir);
+
+
+
     return true;
 
 }

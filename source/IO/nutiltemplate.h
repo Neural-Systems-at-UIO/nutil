@@ -13,6 +13,7 @@
 #include <QLayout>
 #include <QComboBox>
 #include <QEvent>
+#include <QMessageBox>
 
 class NutilTemplateItem : public QObject {
     Q_OBJECT

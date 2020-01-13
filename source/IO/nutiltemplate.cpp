@@ -348,6 +348,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
                 QPushButton* plus = new QPushButton("+");
                 QPushButton* minus = new QPushButton("-");
                 QPushButton* fill = new QPushButton("Fill files");
+                QPushButton* duplicate = new QPushButton("Duplicate");
 
                 QObject::connect(plus, &QPushButton::pressed, [=]() {
                     int y = tw->rowCount();
@@ -359,6 +360,26 @@ void NutilTemplate::Populate(QGridLayout *grid)
                     tw->setItem(y, 4, new QTableWidgetItem("1"));
                 }
                 );
+
+
+                QObject::connect(duplicate, &QPushButton::pressed, [=]() {
+                    QMessageBox msgBox;
+                    msgBox.setText("Are you sure you want to duplicate the data in this cell to all other cells in the same column?");
+                    msgBox.setInformativeText("Duplicate columns?");
+                    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+                    msgBox.setDefaultButton(QMessageBox::Cancel);
+                    int ret = msgBox.exec();
+                    int currentCol = tw->currentColumn();
+                    QString currentVal = tw->currentItem()->text();
+                    if (ret==QMessageBox::Ok) {
+                        for (int i=0;i<tw->rowCount();i++) {
+                            tw->item(i,currentCol)->setText(currentVal);
+                        }
+                    }
+
+                }
+                );
+
 
 
                 QObject::connect(minus, &QPushButton::pressed, [=]() {
@@ -416,6 +437,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
                 hl->addWidget(plus);
                 hl->addWidget(minus);
+                hl->addWidget(duplicate);
                 hl->addWidget(fill);
 
                 QStringList data = nti->m_value.split(",");
