@@ -312,7 +312,7 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale,
 
 }
 */
-void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols)
+void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols, QString maskFile)
 {
     QRgb off = QColor(255,255,255,255).rgba();
 

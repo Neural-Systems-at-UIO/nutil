@@ -60,21 +60,18 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
     QString regexp = "_s[0-9]*";
 
-    if (m_patternType=="user")
-        regexp = m_files[0];
-
-
+//    if (m_patternType=="user")
+  //      regexp = m_files[0];
 
 
 
     if (m_patternType == "_sXXX" || m_patternType=="user") {
-
         QRegularExpression re(regexp);
         QStringList newFiles;
         for (QString s: files) {
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
-                //                qDebug() << "MATCH << "<<match.captured(0);
+//                                qDebug() << "MATCH << "<<match.captured(0);
                 if (!s.toLower().contains("mask"))
                     newFiles.append(match.captured(0));
 
@@ -103,7 +100,6 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
                     isTiff = true;
             }
 
-//            qDebug() << "FOUND file : " << inFileFull;
 
             if (inFileFull=="") {
                 LMessage::lMessage.Error("Error: Could not find file that contains: " + name);
@@ -303,7 +299,7 @@ void ProcessManagerPCounter::Execute()
             m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
             LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
             if (!Data::data.abort)
-                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols);
+                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile);
             m_mainCounter.Tick();
         }
         m_processes[i]->m_counter.m_progress = 100;
