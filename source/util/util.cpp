@@ -115,6 +115,8 @@ QColor Util::colorScale2(QColor &col, int x0, int x1)
 QString Util::RemoveFinalFiletype(QString input)
 {
     QStringList ls = input.split(".");
+    if (ls.count()==1)
+        return input;
     QString res = "";
     for (int i=0;i<ls.count()-1;i++)
         res+=ls[i]+".";

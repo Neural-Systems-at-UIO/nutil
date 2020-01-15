@@ -338,6 +338,7 @@ void ProcessManagerPCounter::Execute()
 
         if (m_reportType!="none") {
 
+            reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
             if (m_customRegionType=="custom" || m_customRegionType=="yes") {
                 reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "CustomRegions.xlsx", m_outputFileType);
                 reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
@@ -345,7 +346,7 @@ void ProcessManagerPCounter::Execute()
             if (m_areaSplitting == 0.0)
                 reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
 
-            reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"CustomRegionsSlices.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
+            reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
             reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
         }
 

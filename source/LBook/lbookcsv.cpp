@@ -118,6 +118,20 @@ void LBookCSV::Load(QString filename)
 
 void LBookCSV::Save(QString filename)
 {
+
+    filename = QDir::fromNativeSeparators(filename);
+
+    QString dir = Util::RemoveFinalFiletype(filename);
+
+    QString base = dir.split("/").last();
+    if (!QDir().exists(dir))
+        QDir().mkdir(dir);
+
+    filename = dir + "/" + base + ".xslx";
+
+
+    qDebug() << "Writing report : " << filename;
+
     for (auto l: m_sheets)
         dynamic_cast<LSheetCSV*>(l)->Save(filename);
 
