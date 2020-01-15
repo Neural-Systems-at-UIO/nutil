@@ -83,10 +83,14 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units, QString bookType)
 {
     LBook* book = LBookFactory::Create(bookType);
-    LSheet* sheet = book->CreateSheet("All");
+//    LSheet* sheet = book->CreateSheet("All");
+    LSheet* sheet = book->GetSheet(0);
 
-    if (dynamic_cast<LBookXlnt*>(book))
-        book->RemoveSheet(1);
+//    if (dynamic_cast<LBookXlnt*>(book))
+  //      book->RemoveSheet(1);
+
+
+
 
     sheet->writeStr(0,0,"Region ID");
     sheet->writeStr(0,1,"Region Name");
@@ -142,8 +146,12 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
             sheet->writeNum(y,6,al->extra2.x());
             sheet->writeNum(y,7,al->extra2.y());
             sheet->writeStr(y,8,units);
-            if (al->area!=0)
+            sheet->writeNum(y,9,0);
+            //sheet->writeNum(y,,10);
+
+            if (al->area!=0.0 && !isnan(al->extra2.x()/al->area))
                 sheet->writeNum(y,9,al->extra2.x()/al->area);
+
  //           if (al->areaScaled!=0)
    //             sheet->writeNum(y,10,al->extra2.y()/al->areaScaled);
 
@@ -152,6 +160,66 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
     }
     book->Save(fileName);
+}
+
+void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLabels, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, QString units, QString bookType)
+{
+    LBook* book = LBookFactory::Create(bookType);
+    /*   QVector<AtlasLabel*> sorted;
+    for (AtlasLabel* al: atlasLabels->atlases)
+        sorted.append(al);
+*/
+    //    qSort(sorted.begin(), sorted.end(),
+    //        [](const AtlasLabel* a, const AtlasLabel* b) -> bool { return a->extra2.y() > b->extra2.y(); });
+
+
+
+
+
+
+    for (int i=0;i<processes.length();i++) {
+        LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
+        int y = 1;
+
+
+        sheet->writeStr(0,0,"Region ID");
+        sheet->writeStr(0,1,"Region Name");
+        sheet->writeStr(0,2,"Region pixels");
+        sheet->writeStr(0,3,"Region area");
+        sheet->writeStr(0,4,"Area unit");
+        sheet->writeStr(0,5,"Object count");
+        sheet->writeStr(0,6,"Object pixels");
+        sheet->writeStr(0,7,"Object area");
+        sheet->writeStr(0,8,"Area unit");
+        sheet->writeStr(0,9,"Load");
+
+        //        slice->
+        for (AtlasLabel* al : atlasLabels->atlases) {
+            {
+                sheet->writeNum(y,0,al->index);
+                sheet->writeStr(y,1,al->name);
+                sheet->writeNum(y,2,al->sliceArea[i]);
+                //            sheet->writeNum(y,3,al->areaScaled);
+                sheet->writeStr(y,4,units);
+                if (Data::data.m_hasAreaSplitting)
+                    sheet->writeStr(y,5,"N/A");
+                else
+                    sheet->writeNum(y,5,al->count);
+
+                /*            sheet->writeNum(y,6,al->extra2.x());
+            sheet->writeNum(y,7,al->extra2.y());
+            sheet->writeStr(y,8,units);
+            if (al->area!=0)
+                sheet->writeNum(y,9,al->extra2.x()/al->area);
+                */
+                y++;
+            }
+
+        }
+
+    }
+    book->Save(filename);
+
 }
 
 void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels, QString units, QString bType)
@@ -462,6 +530,9 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
         */
 
     book->Save(filename);
+    if (QFile::exists(filename+".csv"))
+        QFile::remove(filename+".csv");
+//    filename.csv
 
 }
 

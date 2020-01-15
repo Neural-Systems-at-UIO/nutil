@@ -61,6 +61,7 @@ public:
     void CreateSheets( QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels, QString unit, bool hasAreaSplitting);
     void CreateSummary(AtlasLabels* atlasLabels);
     void CreateRefAtlasRegions( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items, QString units, QString bookType);
+    void CreateRefAtlasRegionsSlices( QString filename, AtlasLabels* atlasLabels,QVector<NutilProcess*> processes,QVector<ProcessItem*> items, QString units, QString bookType);
     void CreateSliceReports(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString units, QString bType);
     void CreateCustomRegions(QString filename,  QVector<NutilProcess*> processes, QVector<ProcessItem*> items,AtlasLabels* labels, QString bType);
 
