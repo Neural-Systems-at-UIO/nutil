@@ -321,7 +321,13 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
     m_index = createImage(scale*m_image->width(), scale*m_image->height());//QImage(QSize(scale*m_image->width(), scale*m_image->height()),QImage::Format_RGB32);
 
 
-    QImage mask(maskFile);
+    QImage mask;
+
+    bool useMask = false;
+    if (QFile::exists(maskFile)) {
+        useMask = true;
+        mask = QImage(maskFile);
+    }
 
     for (int i=0;i<m_index->width();i++)
         for (int j=0;j<m_index->height();j++)
@@ -402,6 +408,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
     }
 
     // Add masked area
+    if (useMask)
     for (int y=0;y<m_index->height();y++) {
         for (int x=0;x<m_index->width();x++) {
             QPoint p((float)x/(float)m_index->width()*(float)mask.width(),
