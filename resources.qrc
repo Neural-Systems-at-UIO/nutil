@@ -68,5 +68,7 @@
         <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label</file>
         <file>Resources/images/disk.png</file>
         <file>Resources/text/help/quantifier/pixel_density.rtf</file>
+        <file>Resources/images/btn-b-mirror-vert.png</file>
+        <file>Resources/images/btn-a-mirror-horiz.png</file>
     </qresource>
 </RCC>

@@ -151,7 +151,6 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
             if (al->area!=0.0 && !isnan(al->extra2.x()/al->area))
                 sheet->writeNum(y,9,al->extra2.x()/al->area);
-
  //           if (al->areaScaled!=0)
    //             sheet->writeNum(y,10,al->extra2.y()/al->areaScaled);
 
@@ -181,6 +180,21 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
         LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
         int y = 1;
 
+        for (AtlasLabel* al: atlasLabels->atlases) {
+            al->extra2 = QVector3D(0,0,0);
+            al->count = 0;
+        }
+        for (Area& a: processes[i]->m_areas) {
+            {
+                a.atlasLabel->extra2.setX(a.atlasLabel->extra2.x() + a.m_pixelArea);
+                a.atlasLabel->extra2.setY(a.atlasLabel->extra2.y() + a.m_area);
+                a.atlasLabel->count+=1;
+            }
+        }
+
+
+
+
 
         sheet->writeStr(0,0,"Region ID");
         sheet->writeStr(0,1,"Region Name");
@@ -206,12 +220,15 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 else
                     sheet->writeNum(y,5,al->count);
 
-                /*            sheet->writeNum(y,6,al->extra2.x());
-            sheet->writeNum(y,7,al->extra2.y());
-            sheet->writeStr(y,8,units);
-            if (al->area!=0)
-                sheet->writeNum(y,9,al->extra2.x()/al->area);
-                */
+
+
+
+                sheet->writeNum(y,6,al->extra2.x());
+                sheet->writeNum(y,7,al->extra2.y());
+                sheet->writeStr(y,8,units);
+                sheet->writeNum(y,9,0);
+                 if (al->area!=0)
+                    sheet->writeNum(y,9,al->extra2.x()/al->area);
                 y++;
             }
 
@@ -240,6 +257,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     summary->writeStr(0,5,"Center Y");
     summary->writeStr(0,6,"Region ID");
     summary->writeStr(0,7,"Region Name");
+//    summary->writeStr(0,8,"Slice");
     int yy=1;
     float sumTotalAtlasArea=0;
     Counter cnt(items.count(),"");
@@ -299,6 +317,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
             summary->writeStr(yy,3,units);
             summary->writeNum(yy,4,a.m_center.x());
             summary->writeNum(yy,5,a.m_center.y());
+//            summary->writeStr(yy,8,items[i]->m_id);
 
             if (a.atlasLabel!=nullptr) {
                 summary->writeNum(yy,6,a.atlasLabel->index);
@@ -313,25 +332,13 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
 
         }
 
-/*        sheet->writeNum(1,0,sumPixel);
-        sheet->writeNum(1,1,sumArea);
-        sheet->writeNum(1,2,items[i]->m_atlasAreaScaled);*/
         sumArea=0;
         sumPixel=0;
         sumTotalAtlasArea+=items[i]->m_atlasAreaScaled;
 
     }
-//qDebug() << "SUM";
-//    summary->writeNum(1,0,totalSumPixel);
-//    summary->writeNum(1,1,totalSumArea);
-/*    float all=0;
-    for (AtlasLabel* al: labels->atlases) {
-        all+=al->area;
-    }*/
-//    summary->writeNum(1,2,sumTotalAtlasArea);
     Data::data.m_globalMessage = "Saving section reports... (this might take some time)";
 
-   // qDebug() << "SAVING";
     book->Save(filename);
     Data::data.m_globalMessage = "Done saving.";
 

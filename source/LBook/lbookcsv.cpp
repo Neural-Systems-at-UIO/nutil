@@ -5,8 +5,18 @@
 QString &LSheetCSV::get(int j, int i) {
 //    qDebug() << "LBookCSV::get";
     int idx = i+j*m_width;
-    if (idx<m_data.count())
+
+
+    if (idx<m_data.count()) {
+        bool isOk = false;
+        double someVal = m_data[idx].toFloat(&isOk);
+        if (isOk) {
+            if ((someVal-floor(someVal)) ==0.0)
+                m_data[idx] = QString::number((int)someVal,10);
+
+        }
         return m_data[idx];
+    }
     return none;
 
 }
