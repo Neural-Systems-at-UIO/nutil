@@ -60,8 +60,8 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
     QString regexp = "_s[0-9]*";
 
-//    if (m_patternType=="user")
-  //      regexp = m_files[0];
+    if (m_patternType=="user")
+        regexp = m_files[0];
 
 
 
@@ -69,9 +69,10 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         QRegularExpression re(regexp);
         QStringList newFiles;
         for (QString s: files) {
+//            qDebug() << "Testing file " << s ;
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
-//                                qDebug() << "MATCH << "<<match.captured(0);
+  //                              qDebug() << "MATCH << "<<match.captured(0);
                 if (!s.toLower().contains("mask"))
                     newFiles.append(match.captured(0));
 
@@ -299,7 +300,7 @@ void ProcessManagerPCounter::Execute()
             m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
             LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
             if (!Data::data.abort)
-                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile);
+                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors);
             m_mainCounter.Tick();
         }
         m_processes[i]->m_counter.m_progress = 100;
@@ -335,7 +336,7 @@ void ProcessManagerPCounter::Execute()
         if (m_reportType!="none") {
 
             reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
-            if (m_customRegionType=="custom" || m_customRegionType=="yes") {
+            if (m_customRegionType=="custom" || m_customRegionType=="default") {
                 reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "CustomRegions.xlsx", m_outputFileType);
                 reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
             }
@@ -443,12 +444,12 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         //       qDebug() << "Labl type:" <<labelType;
         if (labelType == "Allen Mouse Brain 2015") {
             m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
-            if (data->Get("custom_region_type").toLower()=="yes")
+            if (data->Get("custom_region_type").toLower()=="default")
                 m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse.xlsx";
         }
         if (labelType == "Allen Mouse Brain 2017") {
             m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
-            if (data->Get("custom_region_type").toLower()=="yes")
+            if (data->Get("custom_region_type").toLower()=="default")
                 m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse.xlsx";
         }
         if (labelType == "WHS Atlas Rat v2")

@@ -312,7 +312,7 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, float scale,
 
 }
 */
-void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols, QString maskFile)
+void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols, QString maskFile, QColor customMaskInclusionColors)
 {
     QRgb off = QColor(255,255,255,255).rgba();
 
@@ -320,6 +320,8 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
         delete m_index;
     m_index = createImage(scale*m_image->width(), scale*m_image->height());//QImage(QSize(scale*m_image->width(), scale*m_image->height()),QImage::Format_RGB32);
 
+
+    QImage mask(maskFile);
 
     for (int i=0;i<m_index->width();i++)
         for (int j=0;j<m_index->height();j++)
@@ -398,6 +400,30 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
         idx++;
 
     }
+
+    // Add masked area
+    for (int y=0;y<m_index->height();y++) {
+        for (int x=0;x<m_index->width();x++) {
+            QPoint p((float)x/(float)m_index->width()*(float)mask.width(),
+                     (float)y/(float)m_index->height()*(float)mask.height());
+            QColor c = m_index->getPixel(x,y);
+
+            QColor mcol = mask.pixelColor(p.x(),p.y());
+            QVector3D p1 = Util::fromColor(mcol);
+            QVector3D p2 = Util::fromColor(customMaskInclusionColors);
+            if (!Util::QVector3DIsClose(p1,p2,QVector3D(1,1,1))) {
+                if ((x&1 && ((y+x)&1))==0)
+                    c = Qt::black;
+            }
+
+
+
+            m_index->setPixel(x,y,c.rgb());
+
+        }
+    }
+
+
 
     NLIQImage* qi = dynamic_cast<NLIQImage*>(m_index);
     if (qi!=nullptr && !Data::data.isConsole) {
