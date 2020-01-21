@@ -193,9 +193,6 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
         }
 
 
-
-
-
         sheet->writeStr(0,0,"Region ID");
         sheet->writeStr(0,1,"Region Name");
         sheet->writeStr(0,2,"Region pixels");
@@ -257,7 +254,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     summary->writeStr(0,5,"Center Y");
     summary->writeStr(0,6,"Region ID");
     summary->writeStr(0,7,"Region Name");
-//    summary->writeStr(0,8,"Slice");
+    //summary->writeStr(0,8,"Slice");
     int yy=1;
     float sumTotalAtlasArea=0;
     Counter cnt(items.count(),"");

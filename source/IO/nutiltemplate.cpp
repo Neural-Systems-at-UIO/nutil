@@ -398,7 +398,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
 
 
-                tw->setHorizontalHeaderLabels(QStringList() << "Input file" << "Output file" << "Rotation" << "X scale" << "");
+                tw->setHorizontalHeaderLabels(QStringList() << "Input file" << "Output file" << "Rotation" << "X scale" << "Y scale");
                 QPixmap pmA(":Resources/images/btn-b-mirror-vert.png");
                 QPixmap pmB(":Resources/images/btn-a-mirror-horiz.png");
                 QTableWidgetItem* itmA = new QTableWidgetItem();
