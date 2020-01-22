@@ -37,7 +37,7 @@ void NutilTemplate::LoadTemplate(QString fileName)
 
     while(!in.atEnd()) {
         QString line = in.readLine();
-//        qDebug() << line;
+        //        qDebug() << line;
         if (line.trimmed()=="")
             continue;
         if (line.trimmed().startsWith("#"))
@@ -45,7 +45,7 @@ void NutilTemplate::LoadTemplate(QString fileName)
 
         QStringList fields = line.split(";");
         NutilTemplateItem* nti = new NutilTemplateItem();
-//        qDebug() << fields;
+        //        qDebug() << fields;
         nti->m_name = fields[fldID].toLower().trimmed();
         QStringList depList = fields[fldDep].split("=");
         if (depList.count()==2) {
@@ -77,7 +77,7 @@ void NutilTemplate::LoadTemplate(QString fileName)
             if (fields.size()>=fldDefault+2)
                 nti->m_value = fields[fldDefault+1].trimmed();
 
-       //     qDebug() << nti->m_value;
+            //     qDebug() << nti->m_value;
         }
         if (nti->m_type==NutilTemplateItem::TEXTFIELD) {
             nti->m_value = fields[fldDefault];
@@ -90,9 +90,9 @@ void NutilTemplate::LoadTemplate(QString fileName)
             if (nti->m_items.size()==fldDefault+2)
                 a=nti->m_items[fldDefault+1].toFloat();
 
-             nti->m_color = QColor(nti->m_items[0].toFloat(),nti->m_items[1].toFloat(),nti->m_items[2].toFloat(),a);
-             nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
-//             nti->m_value = nti->m_items[0].trimmed()+
+            nti->m_color = QColor(nti->m_items[0].toFloat(),nti->m_items[1].toFloat(),nti->m_items[2].toFloat(),a);
+            nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
+            //             nti->m_value = nti->m_items[0].trimmed()+
         }
 
         m_items[nti->m_name] = nti;
@@ -115,9 +115,9 @@ QString NutilTemplate::Get(QString val)
 
 void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid, int& row)
 {
-//    grid->addWidget(new QLabel("View type:"),0,0);
+    //    grid->addWidget(new QLabel("View type:"),0,0);
 
-/*    QComboBox* cmb = new QComboBox();
+    /*    QComboBox* cmb = new QComboBox();
     cmb->addItem("Basic");
     cmb->addItem("Advanced");
     grid->addWidget(cmb, row,0);
@@ -135,17 +135,17 @@ void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid, int& row)
 
 
     for (int j=0;j<2;j++)
-    for (int i=0;i<4;i++) {
-         QWidget *horizontalLineWidget = new QWidget;
-        horizontalLineWidget->setFixedHeight(5);
-//        horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-  //      horizontalLineWidget->setStyleSheet(QString("background-color: #101010;"));
+        for (int i=0;i<4;i++) {
+            QWidget *horizontalLineWidget = new QWidget;
+            horizontalLineWidget->setFixedHeight(5);
+            //        horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+            //      horizontalLineWidget->setStyleSheet(QString("background-color: #101010;"));
 
-        grid->addWidget(horizontalLineWidget, row+j*2,i);
-    }
+            grid->addWidget(horizontalLineWidget, row+j*2,i);
+        }
 
     grid->addWidget(cmb, row+1,2);
-//    grid->addWidget(horizontalLineWidget, row+2,2);
+    //    grid->addWidget(horizontalLineWidget, row+2,2);
 
     QObject::connect(cmb, &QPushButton::clicked, [=]() {
         m_currentLevel = (m_currentLevel+1)&1;
@@ -188,7 +188,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
             continue;
 
         if (nti->m_depID!="") {
- //           qDebug() << nti->m_depID;
+            //           qDebug() << nti->m_depID;
             if (m_items[nti->m_depID]->m_value != nti->m_depVal)
                 continue;
         }
@@ -214,12 +214,12 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
         if (fontSize!=-1) {
             QFont f;
-   //        f.setFamily("Courier new");
+            //        f.setFamily("Courier new");
             f.setPixelSize(fontSize);
             lbl->setFont(f);
         }
         grid->addWidget(lbl,row,textColumn);
-//        lbl->setMinimumSize(QSize(0,500));
+        //        lbl->setMinimumSize(QSize(0,500));
 
 
         if (nti->m_type==NutilTemplateItem::STRING || nti->m_type==NutilTemplateItem::FILE || nti->m_type==NutilTemplateItem::DIRECTORY || nti->m_type==NutilTemplateItem::NUMBER) {
@@ -244,15 +244,15 @@ void NutilTemplate::Populate(QGridLayout *grid)
                 QPushButton* btn = new QPushButton(m,"");
                 btn->setIconSize(QSize(24,24));
                 QFont font = btn->font();
-   //             font.setPointSize(16);
+                //             font.setPointSize(16);
                 btn->setFont(font);                grid->addWidget(btn,row,buttonColumn);
 
 
                 QObject::connect(btn, &QPushButton::clicked, [=]() {
                     QString dir = QFileDialog::getExistingDirectory(nullptr, "Open Directory",
-                                                            nti->m_value,
-                                                            QFileDialog::ShowDirsOnly
-                                                            | QFileDialog::DontResolveSymlinks);
+                                                                    nti->m_value,
+                                                                    QFileDialog::ShowDirsOnly
+                                                                    | QFileDialog::DontResolveSymlinks);
 
                     if (!(dir=="")) {
                         nti->m_value = dir;
@@ -271,7 +271,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
                 QObject::connect(btn, &QPushButton::clicked, [=]() {
                     QString f = QFileDialog::getOpenFileName(nullptr, "Open Directory",
-                                                            nti->m_value);
+                                                             nti->m_value);
                     if (!(f=="")) {
                         nti->m_value = f;
                         le->setText(f);
@@ -333,146 +333,151 @@ void NutilTemplate::Populate(QGridLayout *grid)
             QObject::connect(te, &QTextEdit::textChanged, [=]() {
                 nti->m_value = te->toPlainText();
                 nti->m_value.replace("\n", "#NNN");
-//                qDebug() << nti->m_value;
+                //                qDebug() << nti->m_value;
             });
         }
 
 
         if (nti->m_type==NutilTemplateItem::MATRIXFIELD) {
-                QVBoxLayout* vl = new QVBoxLayout();
-                QHBoxLayout* hl = new QHBoxLayout();
-                QTableWidget* tw = new QTableWidget();
-                tw->setMinimumHeight(200);
-                vl->addWidget(tw);
-                vl->addItem(hl);
-  /*              vl->addWidget(new QPushButton("WTF"));
+            QVBoxLayout* vl = new QVBoxLayout();
+            QHBoxLayout* hl = new QHBoxLayout();
+            QTableWidget* tw = new QTableWidget();
+
+            tw->setMinimumHeight(200);
+            vl->addWidget(tw);
+            vl->addItem(hl);
+            /*              vl->addWidget(new QPushButton("WTF"));
                 grid->update();*/
-//                grid->addWidget(vl,row,valueColumn);
-                //grid->addWidget(new QPushButton("WTF"),row,valueColumn);
-                nti->m_widget = tw;
-                tw->setColumnCount(nti->m_matrixFieldWidth);
-                grid->addItem(vl,row,valueColumn);
+            //                grid->addWidget(vl,row,valueColumn);
+            //grid->addWidget(new QPushButton("WTF"),row,valueColumn);
+            nti->m_widget = tw;
+            tw->setColumnCount(nti->m_matrixFieldWidth);
+            grid->addItem(vl,row,valueColumn);
 
-                QPushButton* plus = new QPushButton("+");
-                QPushButton* minus = new QPushButton("-");
-                QPushButton* fill = new QPushButton("Fill files");
-                QPushButton* duplicate = new QPushButton("Duplicate");
+            QPushButton* plus = new QPushButton("+");
+            QPushButton* minus = new QPushButton("-");
+            QPushButton* fill = new QPushButton("Fill files");
+            QPushButton* duplicate = new QPushButton("Duplicate");
 
-                QObject::connect(plus, &QPushButton::pressed, [=]() {
-                    int y = tw->rowCount();
+            QObject::connect(plus, &QPushButton::pressed, [=]() {
+                int y = tw->rowCount();
+                tw->insertRow(y);
+                tw->setItem(y, 0, new QTableWidgetItem("in_file.tif"));
+                tw->setItem(y, 1, new QTableWidgetItem("out_file"));
+                tw->setItem(y, 2, new QTableWidgetItem("0"));
+                tw->setItem(y, 3, new QTableWidgetItem("1"));
+                tw->setItem(y, 4, new QTableWidgetItem("1"));
+            }
+            );
+
+
+            QObject::connect(duplicate, &QPushButton::pressed, [=]() {
+                QMessageBox msgBox;
+                msgBox.setText("Are you sure you want to duplicate the data in this cell to all other cells in the same column?");
+                msgBox.setInformativeText("Duplicate columns?");
+                msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+                msgBox.setDefaultButton(QMessageBox::Cancel);
+                int ret = msgBox.exec();
+                int currentCol = tw->currentColumn();
+                QString currentVal = tw->currentItem()->text();
+                if (ret==QMessageBox::Ok) {
+                    for (int i=0;i<tw->rowCount();i++) {
+                        tw->item(i,currentCol)->setText(currentVal);
+                    }
+                }
+
+            }
+            );
+
+
+
+            QObject::connect(minus, &QPushButton::pressed, [=]() {
+                tw->removeRow(tw->currentRow());
+            }
+            );
+
+
+
+
+            tw->setHorizontalHeaderLabels(QStringList() << "Input file" << "Output file" << "Rotation" << "X scale" << "Y scale");
+            QPixmap pmA(":Resources/images/btn-b-mirror-vert.png");
+            QPixmap pmB(":Resources/images/btn-a-mirror-horiz.png");
+            QTableWidgetItem* itmA = new QTableWidgetItem();
+            itmA->setIcon(pmA);
+            itmA->setText("Y scale");
+
+
+            QTableWidgetItem* itmB = new QTableWidgetItem();
+            itmB->setIcon(pmB);
+            itmB->setText("X scale");
+            tw->setHorizontalHeaderItem(4, itmA);
+            tw->setHorizontalHeaderItem(3, itmB);
+            int l0 = 200;
+            int l1 = 120;
+            tw->setColumnWidth(0,l0);
+            tw->setColumnWidth(1,l0*0.8);
+            tw->setColumnWidth(2,l1);
+            tw->setColumnWidth(3,l1);
+            tw->setColumnWidth(4,l1);
+
+            QObject::connect(fill, &QPushButton::pressed, [=]() {
+                tw->setRowCount(0);
+                int y = 0;
+                QDir directory(Get("transform_input_dir"));
+                QStringList images = directory.entryList(QStringList() << "*.tif" << "*.tiff" << "*.TIF" << "*.TIFF",QDir::Files);
+                for (QString fn :  images) {
                     tw->insertRow(y);
-                    tw->setItem(y, 0, new QTableWidgetItem("in_file.tif"));
-                    tw->setItem(y, 1, new QTableWidgetItem("out_file"));
+                    tw->setItem(y, 0, new QTableWidgetItem(fn));
+                    tw->setItem(y, 1, new QTableWidgetItem(fn.split(".").first()));
                     tw->setItem(y, 2, new QTableWidgetItem("0"));
                     tw->setItem(y, 3, new QTableWidgetItem("1"));
                     tw->setItem(y, 4, new QTableWidgetItem("1"));
-                }
-                );
 
 
-                QObject::connect(duplicate, &QPushButton::pressed, [=]() {
-                    QMessageBox msgBox;
-                    msgBox.setText("Are you sure you want to duplicate the data in this cell to all other cells in the same column?");
-                    msgBox.setInformativeText("Duplicate columns?");
-                    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-                    msgBox.setDefaultButton(QMessageBox::Cancel);
-                    int ret = msgBox.exec();
-                    int currentCol = tw->currentColumn();
-                    QString currentVal = tw->currentItem()->text();
-                    if (ret==QMessageBox::Ok) {
-                        for (int i=0;i<tw->rowCount();i++) {
-                            tw->item(i,currentCol)->setText(currentVal);
-                        }
-                    }
-
-                }
-                );
-
-
-
-                QObject::connect(minus, &QPushButton::pressed, [=]() {
-                    tw->removeRow(tw->currentRow());
-                }
-                );
-
-
-
-
-                tw->setHorizontalHeaderLabels(QStringList() << "Input file" << "Output file" << "Rotation" << "X scale" << "Y scale");
-                QPixmap pmA(":Resources/images/btn-b-mirror-vert.png");
-                QPixmap pmB(":Resources/images/btn-a-mirror-horiz.png");
-                QTableWidgetItem* itmA = new QTableWidgetItem();
-                itmA->setIcon(pmA);
-                QTableWidgetItem* itmB = new QTableWidgetItem();
-                itmB->setIcon(pmB);
-                tw->setHorizontalHeaderItem(4, itmA);
-                tw->setHorizontalHeaderItem(3, itmB);
-                int l0 = 200;
-                int l1 = 120;
-                tw->setColumnWidth(0,l0);
-                tw->setColumnWidth(1,l0*0.8);
-                tw->setColumnWidth(2,l1);
-                tw->setColumnWidth(3,l1);
-                tw->setColumnWidth(4,l1);
-
-                QObject::connect(fill, &QPushButton::pressed, [=]() {
-                    tw->setRowCount(0);
-                    int y = 0;
-                    QDir directory(Get("transform_input_dir"));
-                    QStringList images = directory.entryList(QStringList() << "*.tif" << "*.tiff" << "*.TIF" << "*.TIFF",QDir::Files);
-                    for (QString fn :  images) {
-                        tw->insertRow(y);
-                        tw->setItem(y, 0, new QTableWidgetItem(fn));
-                        tw->setItem(y, 1, new QTableWidgetItem(fn.split(".").first()));
-                        tw->setItem(y, 2, new QTableWidgetItem("0"));
-                        tw->setItem(y, 3, new QTableWidgetItem("1"));
-                        tw->setItem(y, 4, new QTableWidgetItem("1"));
-
-
-                        y++;
-                    }
-                });
-
-
-
-                QObject::connect(tw, &QTableWidget::itemChanged, [=]() {
-                    QString data = "";
-                    for (int i=0;i<tw->rowCount();i++)
-                        for (int j=0;j<tw->columnCount();j++) {
-//                            qDebug() << tw->item(i,j)->text();
-                            QString txt = "";
-                            if (tw->item(i,j)!=nullptr)
-                                txt = tw->item(i,j)->text();
-                            data += txt + ",";
-                        }
-
-                    data.remove(data.length()-1,1);
-//                    qDebug() << data;
-                    nti->m_value = data;
-                });
-
-                hl->addWidget(plus);
-                hl->addWidget(minus);
-                hl->addWidget(duplicate);
-                hl->addWidget(fill);
-
-                QStringList data = nti->m_value.split(",");
-                int dataWidth = nti->m_matrixFieldWidth;
-                int cnt = data.count()/dataWidth;
-                int y = 0;
-                for (int i=0;i<cnt;i++) {
-                    tw->insertRow(y);
-                    int c = i*dataWidth;
-                    for (int j=0;j<dataWidth;j++)
-                        tw->setItem(y, j, new QTableWidgetItem(data[c+j].trimmed()));
                     y++;
                 }
+            });
+
+
+
+            QObject::connect(tw, &QTableWidget::itemChanged, [=]() {
+                QString data = "";
+                for (int i=0;i<tw->rowCount();i++)
+                    for (int j=0;j<tw->columnCount();j++) {
+                        //                            qDebug() << tw->item(i,j)->text();
+                        QString txt = "";
+                        if (tw->item(i,j)!=nullptr)
+                            txt = tw->item(i,j)->text();
+                        data += txt + ",";
+                    }
+
+                data.remove(data.length()-1,1);
+                //                    qDebug() << data;
+                nti->m_value = data;
+            });
+
+            hl->addWidget(plus);
+            hl->addWidget(minus);
+            hl->addWidget(duplicate);
+            hl->addWidget(fill);
+
+            QStringList data = nti->m_value.split(",");
+            int dataWidth = nti->m_matrixFieldWidth;
+            int cnt = data.count()/dataWidth;
+            int y = 0;
+            for (int i=0;i<cnt;i++) {
+                tw->insertRow(y);
+                int c = i*dataWidth;
+                for (int j=0;j<dataWidth;j++)
+                    tw->setItem(y, j, new QTableWidgetItem(data[c+j].trimmed()));
+                y++;
+            }
 
 
 
 
 
-/*            QTextEdit* te = new QTextEdit();
+            /*            QTextEdit* te = new QTextEdit();
             grid->addWidget(te,row,valueColumn);
             nti->m_widget = te;
             te->setText(nti->m_value);
@@ -542,7 +547,7 @@ void NutilTemplate::clearGrid(QLayout* layout)
 {
     while (QLayoutItem* item = layout->takeAt(0))
     {
-//        if (deleteWidgets)
+        //        if (deleteWidgets)
         {
             if (QWidget* widget = item->widget())
                 widget->deleteLater();
@@ -555,7 +560,7 @@ void NutilTemplate::clearGrid(QLayout* layout)
 
 void NutilTemplate::FillFromGUI()
 {
-/*    for (QString k: m_sortList) {
+    /*    for (QString k: m_sortList) {
         NutilTemplateItem* nti = m_items[k];
         if (nti->m_type==NutilTemplateItem::STRING || nti->m_type==NutilTemplateItem::FILE || nti->m_type==NutilTemplateItem::DIRECTORY) {
 
@@ -613,7 +618,7 @@ void NutilTemplate::Load(QString fname)
         QStringList d =  k.trimmed().simplified().split("=");
         if (d.count()!=2)
             continue;
-//        qDebug() << d;
+        //        qDebug() << d;
         NutilTemplateItem* nti = m_items[d[0].trimmed()];
         if (nti==nullptr) {
             qDebug() << "Warning: could not find parameter " <<d[0].trimmed();

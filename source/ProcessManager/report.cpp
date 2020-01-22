@@ -246,7 +246,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     float totalSumPixel=0;
     float totalSumArea = 0;
 
-
+    summary->writeStr(0,0,"Section ID");
     summary->writeStr(0,1,"Object pixels");
     summary->writeStr(0,2,"Object area");
     summary->writeStr(0,3,"units");
@@ -281,7 +281,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         sheet->writeStr(0,5,"Region ID");
   //      sheet->writeStr(2,6,"Region Area");
         sheet->writeStr(0,6,"Region Name");
-        sheet->writeStr(0,7,"Cutoff reached");
+   //     sheet->writeStr(0,7,"Cutoff reached");
   // max object size cut off: objects greater in size were divided into max size or smaller. This feature should be removed.
         int y = 1;
    //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
@@ -297,8 +297,8 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
 
             sheet->writeNum(y,3,a.m_center.x());
             sheet->writeNum(y,4,a.m_center.y());
-            if (a.m_areaHasReachedCutoff)
-                sheet->writeNum(y,8,1);
+            //if (a.m_areaHasReachedCutoff)
+            //    sheet->writeNum(y,8,1);
 
             if (a.atlasLabel!=nullptr) {
                 sheet->writeNum(y,5,a.atlasLabel->index);

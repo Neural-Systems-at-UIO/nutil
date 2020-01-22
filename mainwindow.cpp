@@ -113,15 +113,10 @@ void MainWindow::Load(QString f)
 void MainWindow::on_btnStart_clicked()
 {
     LMessage::lMessage.Clear();
-/*    if (!m_nauto.m_book) {
-        LMessage::lMessage.Error("No file loaded!");
-        return;
-    }*/
-/*    if (m_nt.m_openFile == "") {
-        LMessage::lMessage.Error("No file loaded!");
-        return;
-    }*/
-    //on_btnSave_clicked();
+
+
+    if (m_nt.m_openFile=="")
+        on_btnSave_clicked();
 
     if (m_nt.m_openFile == "")
         return;
@@ -130,9 +125,6 @@ void MainWindow::on_btnStart_clicked()
 
 
     m_nauto.m_numThreads = ui->leProcessors->text().toInt();
-    //m_nauto.m_sheetIndex = ui->cmbSheets->currentText();
-
-    //m_nauto.Execute(); // Non-threaded
     m_nauto.m_data = &m_nt;
     m_workerThread = new WorkerThread();
     m_workerThread->Init(&m_nauto);
@@ -314,7 +306,7 @@ void MainWindow::on_btnSave_clicked()
     QString fileName = m_nt.m_openFile;
     if (fileName=="") {
         fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                                   "",
+                                   m_nt.Get("name"),
                                    tr("Nutil (*.nut)"));
     }
     if (fileName!="") {

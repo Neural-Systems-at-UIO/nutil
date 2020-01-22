@@ -19,6 +19,7 @@ public:
     QString m_units = "mm";
     QString m_patternType;
     QStringList m_files;
+    QString m_prefix ="";
 
 
     QString m_reportDirectory = "Reports";

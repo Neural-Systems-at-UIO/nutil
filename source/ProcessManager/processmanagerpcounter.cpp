@@ -335,16 +335,16 @@ void ProcessManagerPCounter::Execute()
 
         if (m_reportType!="none") {
 
-            reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
+            reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
             if (m_customRegionType=="custom" || m_customRegionType=="default") {
-                reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ "CustomRegions.xlsx", m_outputFileType);
+                reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ m_prefix+"CustomRegions.xlsx", m_outputFileType);
                 reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
             }
             if (m_areaSplitting == 0.0)
-                reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
+                reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
 
-            reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
-            reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+            reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+            reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
         }
 
         if (m_output3DPoints=="all") {
@@ -476,6 +476,10 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_output3DPoints = data->Get("coordinate_extraction").toLower();
     m_outputNifti = m_niftiSize!=0;
     m_customRegionType =  data->Get("custom_region_type").toLower();
+
+    m_prefix = data->Get("name");
+    if (m_prefix!="")
+        m_prefix = m_prefix+"_";
 
     m_useCustomMask = data->Get("use_custom_masks").toLower()=="yes";
     if (m_useCustomMask)
