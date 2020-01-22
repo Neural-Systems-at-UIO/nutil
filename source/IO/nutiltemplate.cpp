@@ -264,8 +264,12 @@ void NutilTemplate::Populate(QGridLayout *grid)
 
             if (nti->m_type==NutilTemplateItem::FILE) {
 
+                QPixmap m = QPixmap::fromImage(QImage(":Resources/images/disk"));
+
+                QPushButton* btn = new QPushButton(m,"");
+                btn->setIconSize(QSize(24,24));
+
                 le->setEnabled(false);
-                QPushButton* btn = new QPushButton("Select file");
                 grid->addWidget(btn,row,buttonColumn);
 
 

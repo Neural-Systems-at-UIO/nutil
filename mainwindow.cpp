@@ -6,7 +6,12 @@
 #include <QDesktopServices>
 
 
-float MainWindow::Version = 0.3301;
+
+
+
+
+
+float MainWindow::Version = 0.4;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_updateThread->start();
     Data::data.m_settings = &m_settings;
 #ifdef IS_BETA
-    ui->lblMain->setText("NeSys Utilities BETA " + QString::number(Version) +"\nFor internal use only. \nUse template version "+ QString::number(Version));
+    ui->lblMain->setText("NeSys Utilities BETA " + QString::number(Version) +"\nFor internal use only.");
 #else
     ui->lblMain->setText("NeSys Utilities " + QString::number(Version));
 #endif
