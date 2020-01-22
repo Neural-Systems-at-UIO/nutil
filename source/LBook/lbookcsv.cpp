@@ -8,6 +8,7 @@ QString &LSheetCSV::get(int j, int i) {
 
 
     if (idx<m_data.count()) {
+//        return m_data[idx];
         bool isOk = false;
         double someVal = m_data[idx].toFloat(&isOk);
         if (isOk) {

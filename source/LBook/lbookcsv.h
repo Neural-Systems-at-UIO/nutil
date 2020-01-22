@@ -48,7 +48,7 @@ public:
 
     QString& get(int i, int j);
     void set(int i, int j, QString val);
-    QString none="";
+    QString none="0";
 
 
     void Save(QString basename);

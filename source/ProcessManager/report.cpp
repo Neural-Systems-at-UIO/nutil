@@ -146,7 +146,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
             sheet->writeNum(y,6,al->extra2.x());
             sheet->writeNum(y,7,al->extra2.y());
             sheet->writeStr(y,8,units);
-            sheet->writeNum(y,9,0);
+            sheet->writeStr(y,9,"0");
             //sheet->writeNum(y,,10);
 
             if (al->area!=0.0 && !isnan(al->extra2.x()/al->area))
