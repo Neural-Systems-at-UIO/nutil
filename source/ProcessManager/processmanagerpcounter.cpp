@@ -483,7 +483,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_reportType = data->Get("output_report").toLower();
 
-    m_outputFileType = data->Get("output_report_type").toLower();;
+    m_outputFileType = data->Get("output_report_type").toLower();
 /*    if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
         LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv).");
         Data::data.abort = true;
