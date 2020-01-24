@@ -333,6 +333,10 @@ void ProcessManagerPCounter::Execute()
     {
 
 
+        QString RefAtlasname = "RefAtlasRegions.xlsx";
+        if (m_dataType != "quicknii") {
+            RefAtlasname = "Regions.xlsx";
+        }
         if (m_reportType!="none") {
 
             reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
@@ -343,8 +347,8 @@ void ProcessManagerPCounter::Execute()
             if (m_areaSplitting == 0.0)
                 reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
 
-            reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
-            reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"RefAtlasRegions.xlsx", &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+            reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+            reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
         }
 
         if (m_output3DPoints=="all") {
@@ -494,6 +498,12 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         return;
     }
 */
+
+
+    if (m_dataType != "quicknii") {
+        m_output3DPoints = false;
+        m_outputNifti = false;
+    }
 
 
     if (m_pixelCutoffMax<m_pixelCutoff) {
