@@ -1,14 +1,14 @@
 type; 0 ;; Type ;  string; Quantifier
 name; 0 ;; Name of project ; string;
-analysis_type ; 0; ; Analysis type ;list; QuickNII, none; QuickNII
+analysis_type ; 0; ; Analysis type ;list; QUINT; QUINT
 quantifier_input_dir; 0 ;; Segmentation directory; directory;
-quantifier_atlas_dir; 0 ; analysis_type=QuickNII ; Brain atlas map directory; directory;
-label_file; 0 ; analysis_type=QuickNII ;Reference atlas; list; Allen Mouse Brain 2015,Allen Mouse Brain 2017, WHS Atlas Rat v2, WHS Atlas Rat v3; Allen Mouse Brain 2015
-xml_anchor_file; 0 ; analysis_type=QuickNII; Anchored XML file; file;
+quantifier_atlas_dir; 0 ; analysis_type=QUINT ; Brain atlas map directory; directory;
+label_file; 0 ; analysis_type=QUINT ;Reference atlas; list; Allen Mouse Brain 2015,Allen Mouse Brain 2017, WHS Atlas Rat v2, WHS Atlas Rat v3; Allen Mouse Brain 2015
+xml_anchor_file; 0 ; analysis_type=QUINT; Anchored XML file; file;
 quantifier_output_dir; 0 ;; Output directory; directory;
 output_report; 0 ;;Output reports; list; All, None; All
 extraction_color ; 0; ; Object colour ; color ; 255,0,0,255
-object_splitting; 0; analysis_type=QuickNII;Object Splitting; list; Yes, No; Yes
+object_splitting; 0; analysis_type=QUINT;Object Splitting; list; Yes, No; Yes
 object_min_size; 1; ;Minimum object size; number; 1
 object_max_size; 1; ;Maximum object size; number; 100000
 global_pixel_scale; 1; ;Pixel scale (area per pixel); number; 1
@@ -17,10 +17,11 @@ use_custom_masks; 1; ;Custom masks (optional); list; Yes, No; No
 custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,255,255,255
 output_report_type; 1; ;Output report type; list; CSV, HTML; CSV
 #custom_region_file;1; ; Customised reports; file;
-custom_region_type; 1; analysis_type=QuickNII; Customised reports (optional); list; No, Default, Custom; No
+custom_region_type; 1; analysis_type=QUINT; Customised reports (optional); list; No, Default, Custom; No
 custom_region_file; 1; custom_region_type=Custom,analysis_type=QuickNII ; Custom report file;  file;
-coordinate_extraction; 1; analysis_type=QuickNII;Coordinate extraction;list; All, None, Slices, Summary; All
-pixel_density; 1; analysis_type=QuickNII;Point cloud density ; number; 1
-nifti_size; 1; analysis_type=QuickNII;Nifti size ; list; 0,64,128,256,512; 0
+coordinate_extraction; 1; analysis_type=QUINT;Coordinate extraction;list; All, None, Slices, Summary; All
+pixel_density; 1; analysis_type=QUINT;Point cloud density ; number; 1
+nifti_size; 1; analysis_type=QUINT;Nifti size ; list; 0,64,128,256,512; 0
 pattern_match ; 1; ;Unique ID format; list; _sXXX, user, files; _sXXX
 files; 1; ;Other ID format; textfield;
+

@@ -189,6 +189,9 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
     bool isDrawn = false;
     m_cmbBoxes.clear();
 
+
+
+
     for (QString name : m_sortList) {
 
         NutilTemplateItem* nti = m_items[name];
@@ -197,7 +200,7 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
         if (nti->m_level==1)
             hasAdvancedSettings = true;
 
-        if (nti->m_level>m_currentLevel)
+        if (nti->m_level > m_currentLevel)
             continue;
 
         if (nti->m_isHidden)
@@ -206,7 +209,6 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
         bool breakHere = false;
 
         for (int i=0;i<nti->m_depID.count();i++) {
-            //           qDebug() << nti->m_depID;
             if (m_items[nti->m_depID[i]]->m_value != nti->m_depVal[i])
                 breakHere = true;
         }

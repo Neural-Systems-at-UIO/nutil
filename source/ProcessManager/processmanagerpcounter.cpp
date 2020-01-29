@@ -40,7 +40,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     Data::data.abort = false;
 
 
-    if (m_dataType=="quicknii")
+    if (m_dataType=="quint")
         LoadXML();
 
     if (m_pixelCutoffMax<=m_pixelCutoff) {
@@ -110,7 +110,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
                 m_processItems.clear();
                 return false;
             }
-            if (m_dataType=="quicknii") {
+            if (m_dataType=="quint") {
 
                 QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat","");
                 if (inFlatFull=="") {
@@ -194,7 +194,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 void ProcessManagerPCounter::Execute()
 {
-    if (m_dataType=="quicknii") {
+    if (m_dataType=="quint") {
         m_labels.Load(m_labelFile);
         if (m_labels.atlases.count()==0) {
             LMessage::lMessage.Error("Incorrect label file. Please check parameters in excel sheet.");
@@ -281,7 +281,7 @@ void ProcessManagerPCounter::Execute()
             // Find atlas file:
             QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat","");
 
-            if (atlasFile=="" && m_dataType == "quicknii") {
+            if (atlasFile=="" && m_dataType == "quint") {
                 LMessage::lMessage.Error("Could not find any atlas flat files!");
                 Data::data.abort = true;
             }
@@ -337,7 +337,7 @@ void ProcessManagerPCounter::Execute()
 
 
         QString RefAtlasname = "RefAtlasRegions.xlsx";
-        if (m_dataType != "quicknii") {
+        if (m_dataType != "quint") {
             RefAtlasname = "Regions.xlsx";
         }
         if (m_reportType!="none") {
@@ -429,7 +429,8 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     //    m_dataType = "quicknii";//m_sheet->readStr(19,1).toLower();
     m_dataType = data->Get("analysis_type").toLower();
-
+    if (m_dataType=="quicknii")
+        m_dataType ="quint";
 
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
 
@@ -440,29 +441,37 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (data->Get("custom_region_type").toLower()=="custom")
         m_reportSheetName = data->Get("custom_region_file");
 
-    if (m_dataType == "quicknii")
+    if (m_dataType == "quint")
         m_atlasDir = data->Get("quantifier_atlas_dir");
 
 
 
 
-    if (m_dataType == "quicknii") {
+    if (m_dataType == "quint") {
         QString labelType = data->Get("label_file");
         //       qDebug() << "Labl type:" <<labelType;
         if (labelType == "Allen Mouse Brain 2015") {
             m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
             if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse.xlsx";
+                m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
         }
         if (labelType == "Allen Mouse Brain 2017") {
             m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
             if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse.xlsx";
+                m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
         }
-        if (labelType == "WHS Atlas Rat v2")
+        if (labelType == "WHS Atlas Rat v2") {
             m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
-        if (labelType == "WHS Atlas Rat v3")
+            if (data->Get("custom_region_type").toLower()=="default")
+                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v2.xlsx";
+
+        }
+        if (labelType == "WHS Atlas Rat v3") {
             m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v3.label";
+            if (data->Get("custom_region_type").toLower()=="default")
+                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v3.xlsx";
+
+        }
     }
 
 
@@ -473,7 +482,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_areaScale = data->Get("global_pixel_scale").toFloat();
     m_areaSplitting = data->Get("object_splitting").toLower()=="yes"?1:0;
     Data::data.m_hasAreaSplitting = m_areaSplitting;
-    if (m_dataType=="quicknii")
+    if (m_dataType=="quint")
         m_anchorFile = data->Get("xml_anchor_file");
     m_niftiSize = data->Get("nifti_size").toInt();//m_sheet->readNum(12,1);
     m_xyzScale = data->Get("pixel_density").toInt();
@@ -503,7 +512,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 */
 
 
-    if (m_dataType != "quicknii") {
+    if (m_dataType != "quint") {
         m_output3DPoints = "no";
         m_outputNifti = false;
     }
@@ -515,7 +524,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
 
-    if (m_dataType == "quicknii")
+    if (m_dataType == "quint")
 
         if (QFile::exists(m_reportSheetName)) {
 
@@ -526,7 +535,11 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             }
 
             LBook* sbook = new LBookXlnt();
+            if (QFile::exists("temp.xlsx"))
+               QFile::remove("temp.xlsx");
             QFile::copy(m_reportSheetName,"temp.xlsx");
+            QFile f("temp.xlsx");
+            f.setPermissions(QFile::ReadOther | QFile::WriteOther);
             sbook->Load("temp.xlsx");
             QFile::remove("temp.xlsx");
 
@@ -561,26 +574,14 @@ void ProcessManagerPCounter::CleanupFakeReports()
 
 void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
 {
-    bool found = false;
     int i = 0;
-    /*    qDebug() << "Generating reports..";
-    // Find hierarchy analysis list
-    while ((i<1000) && (found==false)) {
-        i++;
-        QString t = m_sheet->readStr(i,0);
-        if (t.simplified().toLower() == "hierarchy analysis list") {
-            found = true;
-            break;
-        }
-    }
-    i++;*/
-    i=0;
     bool hasNext = true;
     int x = 1;
     // As long as a next one exist (x-axis reports)
     while (hasNext) {
         QString excelName = m_sheet->readStr(i,x);
-        //        qDebug() << excelName << i << " " << x;
+//               qDebug() << excelName << i << " " << x;
+//               qDebug() << m_sheet->readStr(i+1,x);
         if (excelName.simplified()!="") {
             QColor reportColor = m_sheet->readCol(i+1,x);
 
@@ -600,7 +601,7 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
 
             reports.m_reports.push_back(Report(excelName, ids,reportColor));
 
-            //LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");
+            LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");
 
             //qDebug() << excelName << " , " << ids;
 
@@ -611,6 +612,8 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
 
     for (Report& r: reports.m_reports)
         r.m_unit = m_units;
+
+
 }
 
 
