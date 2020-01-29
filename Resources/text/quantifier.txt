@@ -2,7 +2,7 @@ type; 0 ;; Type ;  string; Quantifier
 name; 0 ;; Name of project ; string;
 analysis_type ; 0; ; Analysis type ;list; QuickNII, none; QuickNII
 quantifier_input_dir; 0 ;; Segmentation directory; directory;
-quantifier_atlas_dir; 0 ; analysis_type=QuickNII ; Atlas map directory; directory;
+quantifier_atlas_dir; 0 ; analysis_type=QuickNII ; Brain atlas map directory; directory;
 label_file; 0 ; analysis_type=QuickNII ;Reference atlas; list; Allen Mouse Brain 2015,Allen Mouse Brain 2017, WHS Atlas Rat v2, WHS Atlas Rat v3; Allen Mouse Brain 2015
 xml_anchor_file; 0 ; analysis_type=QuickNII; Anchored XML file; file;
 quantifier_output_dir; 0 ;; Output directory; directory;
@@ -17,7 +17,7 @@ use_custom_masks; 1; ;Custom masks (optional); list; Yes, No; No
 custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,255,255,255
 output_report_type; 1; ;Output report type; list; CSV, HTML; CSV
 #custom_region_file;1; ; Customised reports; file;
-custom_region_type; 1; analysis_type=QuickNII; Customised reports; list; No, Default, Custom; No
+custom_region_type; 1; analysis_type=QuickNII; Customised reports (optional); list; No, Default, Custom; No
 custom_region_file; 1; custom_region_type=Custom,analysis_type=QuickNII ; Custom report file;  file;
 coordinate_extraction; 1; analysis_type=QuickNII;Coordinate extraction;list; All, None, Slices, Summary; All
 pixel_density; 1; analysis_type=QuickNII;Point cloud density ; number; 1

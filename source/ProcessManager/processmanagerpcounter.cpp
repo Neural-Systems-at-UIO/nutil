@@ -49,7 +49,10 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         return false;
 
     }
-    if (m_areaScale==0) {
+
+
+
+    if (m_areaScale==(float)0) {
         LMessage::lMessage.Error("Pixel scale is not set (or is set to zero). Please specify a valid pixel scale (such as 1).");
         return false;
     }
@@ -501,7 +504,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
     if (m_dataType != "quicknii") {
-        m_output3DPoints = false;
+        m_output3DPoints = "no";
         m_outputNifti = false;
     }
 
