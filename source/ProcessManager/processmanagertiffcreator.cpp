@@ -3,6 +3,7 @@
 ProcessManagerTiffCreator::ProcessManagerTiffCreator()
 {
 
+
 }
 
 bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
