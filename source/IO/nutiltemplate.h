@@ -15,6 +15,7 @@
 #include <QEvent>
 #include <QMessageBox>
 #include <QPixmap>
+#include "ui_mainwindow.h"
 
 class NutilTemplateItem : public QObject {
     Q_OBJECT
@@ -25,7 +26,7 @@ public:
 
     int m_matrixFieldWidth =1;
     QStringList m_matrixField;
-    QString m_depID = "", m_depVal="";
+    QStringList m_depID, m_depVal;
     QString m_name;
     QString m_text;
     QStringList m_items;
@@ -73,6 +74,7 @@ public:
 class NutilTemplate
 {
     QGridLayout* m_grid = nullptr;
+    Ui::MainWindow *m_ui;
 
 public:
     QObject* m_eventFilter = nullptr;
@@ -86,8 +88,11 @@ public:
 
     QString Get(QString val);
 
-    void Populate(QGridLayout* grid);
+//    void Populate(QGridLayout* grid);
+    void Populate(Ui::MainWindow* ui);
     void clearGrid(QLayout* grid);
+    void clearLayout2(QLayout *layout);
+
     void FillFromGUI();
     void Save(QString fname);
     void Load(QString fname);

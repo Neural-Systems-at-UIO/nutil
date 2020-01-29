@@ -47,10 +47,17 @@ void NutilTemplate::LoadTemplate(QString fileName)
         NutilTemplateItem* nti = new NutilTemplateItem();
         //        qDebug() << fields;
         nti->m_name = fields[fldID].toLower().trimmed();
-        QStringList depList = fields[fldDep].split("=");
-        if (depList.count()==2) {
-            nti->m_depID  =depList[0].trimmed();
-            nti->m_depVal  =depList[1].trimmed();
+        QStringList depList = fields[fldDep].split(",");
+
+        for (QString s : depList) {
+
+            QStringList ls = s.split("=");
+            if (ls.count()==2) {
+                nti->m_depID.append(ls[0].trimmed());
+                nti->m_depVal.append(ls[1].trimmed());
+
+            }
+
         }
         nti->m_level = fields[fldLevel].toInt();
         nti->m_text = fields[fldText].trimmed();
@@ -149,7 +156,7 @@ void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid, int& row)
 
     QObject::connect(cmb, &QPushButton::clicked, [=]() {
         m_currentLevel = (m_currentLevel+1)&1;
-        Populate(grid);
+        Populate(m_ui);
     });
     row+=3;
 
@@ -157,11 +164,20 @@ void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid, int& row)
 
 
 
-void NutilTemplate::Populate(QGridLayout *grid)
+void NutilTemplate::Populate(Ui::MainWindow* ui)
 {
     int row = 1;
-    clearGrid(grid);
-    m_grid = grid;
+
+  //  m_grid = grid;
+    m_ui = ui;
+//    clearGrid(m_grid);
+    clearGrid(ui->gridTemplate);
+//    clearLayout2(ui->gridTemplate);
+//    clearGrid(ui->gridTemplate);
+//    m_ui->gridTemplate->deleteLater();
+//    delete m_ui->gridTemplate;
+  //  m_ui->gridTemplate = new QGridLayout(ui->scrollArea);
+    m_grid = m_ui->gridTemplate;
 
     int textColumn = 0;
     int helpColumn = 1;
@@ -187,16 +203,20 @@ void NutilTemplate::Populate(QGridLayout *grid)
         if (nti->m_isHidden)
             continue;
 
-        if (nti->m_depID!="") {
+        bool breakHere = false;
+
+        for (int i=0;i<nti->m_depID.count();i++) {
             //           qDebug() << nti->m_depID;
-            if (m_items[nti->m_depID]->m_value != nti->m_depVal)
-                continue;
+            if (m_items[nti->m_depID[i]]->m_value != nti->m_depVal[i])
+                breakHere = true;
         }
+        if (breakHere)
+            continue;
 
 
         if (nti->m_level==1 && !isDrawn) {
             isDrawn=true;
-            CreateBasicAdvancedOption(grid,row);
+            CreateBasicAdvancedOption(m_grid,row);
         }
 
 
@@ -211,6 +231,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
         }
 
         QLabel * lbl = new QLabel(n);
+//        QLabel * lbl = new QLabel(n + ""+QString::number(rand()%100));
 
         if (fontSize!=-1) {
             QFont f;
@@ -218,13 +239,13 @@ void NutilTemplate::Populate(QGridLayout *grid)
             f.setPixelSize(fontSize);
             lbl->setFont(f);
         }
-        grid->addWidget(lbl,row,textColumn);
+        m_grid->addWidget(lbl,row,textColumn);
         //        lbl->setMinimumSize(QSize(0,500));
 
 
         if (nti->m_type==NutilTemplateItem::STRING || nti->m_type==NutilTemplateItem::FILE || nti->m_type==NutilTemplateItem::DIRECTORY || nti->m_type==NutilTemplateItem::NUMBER) {
             QLineEdit* le = new QLineEdit();
-            grid->addWidget(le,row,valueColumn);
+            m_grid->addWidget(le,row,valueColumn);
             nti->m_widget = le;
             le->setText(nti->m_value);
             if (nti->m_name=="type")
@@ -245,7 +266,8 @@ void NutilTemplate::Populate(QGridLayout *grid)
                 btn->setIconSize(QSize(24,24));
                 QFont font = btn->font();
                 //             font.setPointSize(16);
-                btn->setFont(font);                grid->addWidget(btn,row,buttonColumn);
+                btn->setFont(font);
+                m_grid->addWidget(btn,row,buttonColumn);
 
 
                 QObject::connect(btn, &QPushButton::clicked, [=]() {
@@ -270,7 +292,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
                 btn->setIconSize(QSize(24,24));
 
                 le->setEnabled(false);
-                grid->addWidget(btn,row,buttonColumn);
+                m_grid->addWidget(btn,row,buttonColumn);
 
 
                 QObject::connect(btn, &QPushButton::clicked, [=]() {
@@ -291,7 +313,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
             QPushButton* btn = new QPushButton("");
             btn->setStyleSheet("background-color: #"+QString::number(NutilTemplateItem::StringToColor(nti->m_value).rgb(),16));
 
-            grid->addWidget(btn,row,valueColumn);
+            m_grid->addWidget(btn,row,valueColumn);
 
             QObject::connect(btn, &QPushButton::clicked, [=]() {
                 //nti->m_color = QColorDialog::getColor(nti->m_color, nullptr );
@@ -316,13 +338,13 @@ void NutilTemplate::Populate(QGridLayout *grid)
             cmb->installEventFilter(m_eventFilter);
 
             cmb->addItems(nti->m_items);
-            grid->addWidget(cmb,row,valueColumn);
+            m_grid->addWidget(cmb,row,valueColumn);
             nti->m_widget = cmb;
             QString val = nti->m_value;
             QObject::connect(cmb, &QComboBox::currentTextChanged, [=]() {
                 if (nti->m_value!=cmb->currentText()) {
                     nti->m_value = cmb->currentText();
-                    Populate(grid);
+                    Populate(m_ui);
                 }
 
             });
@@ -331,7 +353,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
         }
         if (nti->m_type==NutilTemplateItem::TEXTFIELD) {
             QTextEdit* te = new QTextEdit();
-            grid->addWidget(te,row,valueColumn);
+            m_grid->addWidget(te,row,valueColumn);
             nti->m_widget = te;
             te->setText(nti->m_value);
             QObject::connect(te, &QTextEdit::textChanged, [=]() {
@@ -350,13 +372,16 @@ void NutilTemplate::Populate(QGridLayout *grid)
             tw->setMinimumHeight(200);
             vl->addWidget(tw);
             vl->addItem(hl);
+//            vl->addWidget(new QPushButton("TEST"));
             /*              vl->addWidget(new QPushButton("WTF"));
                 grid->update();*/
             //                grid->addWidget(vl,row,valueColumn);
             //grid->addWidget(new QPushButton("WTF"),row,valueColumn);
             nti->m_widget = tw;
             tw->setColumnCount(nti->m_matrixFieldWidth);
-            grid->addItem(vl,row,valueColumn);
+//            qDebug() << row << valueColumn;
+            m_grid->addItem(vl,row,valueColumn);
+//            qDebug() << m_grid->itemAt(row,valueColumn);
 
             QPushButton* plus = new QPushButton("+");
             QPushButton* minus = new QPushButton("-");
@@ -423,7 +448,6 @@ void NutilTemplate::Populate(QGridLayout *grid)
             tw->setColumnWidth(2,l1);
             tw->setColumnWidth(3,l1);
             tw->setColumnWidth(4,l1);
-
             QObject::connect(fill, &QPushButton::pressed, [=]() {
                 tw->setRowCount(0);
                 int y = 0;
@@ -499,7 +523,7 @@ void NutilTemplate::Populate(QGridLayout *grid)
         if (QFile::exists(helpfn)) {
 
             QPushButton* help = new QPushButton("Help");
-            grid->addWidget(help,row,helpColumn);
+            m_grid->addWidget(help,row,helpColumn);
 
 
             QObject::connect(help, &QPushButton::clicked, [=]() {
@@ -518,19 +542,19 @@ void NutilTemplate::Populate(QGridLayout *grid)
         row++;
     }
 
-    grid->setColumnStretch(textColumn,10);
-    grid->setColumnStretch(helpColumn,4);
-    grid->setColumnStretch(valueColumn,30);
-    grid->setColumnStretch(buttonColumn,2);
+    m_grid->setColumnStretch(textColumn,10);
+    m_grid->setColumnStretch(helpColumn,4);
+    m_grid->setColumnStretch(valueColumn,30);
+    m_grid->setColumnStretch(buttonColumn,2);
 
 
     if (!isDrawn && hasAdvancedSettings)
-        CreateBasicAdvancedOption(grid,row);
+        CreateBasicAdvancedOption(m_grid,row);
 
 
 
     QSpacerItem* sp =new QSpacerItem(20, 400, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    grid->addItem(sp,row+1,0);
+    m_grid->addItem(sp,row+1,0);
 
 
 }/*
@@ -560,8 +584,32 @@ void NutilTemplate::clearGrid(QLayout* layout)
             clearGrid(childLayout);
         delete item;
     }
+
+
+
 }
 
+void NutilTemplate::clearLayout2(QLayout *layout) {
+    if (layout==nullptr)
+        return;
+    QLayoutItem *item = nullptr;
+    while(layout->count() > 0){
+        item = layout->takeAt(0);
+        layout->removeItem(item);
+        delete item;
+        qDebug()<< layout->count();
+/*        if (item->layout()) {
+            clearLayout2(item->layout());
+            delete item->layout();
+        }
+        else
+        if (item->widget()) {
+           delete item->widget();
+        }
+        else
+        delete item;*/
+    }
+}
 void NutilTemplate::FillFromGUI()
 {
     /*    for (QString k: m_sortList) {

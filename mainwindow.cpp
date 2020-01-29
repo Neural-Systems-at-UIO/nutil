@@ -95,7 +95,7 @@ void MainWindow::UpdateRecentList()
 void MainWindow::Load(QString f)
 {
     m_nt.Load(f);
-    m_nt.Populate(ui->gridTemplate);
+    m_nt.Populate(ui);
 
     QWidget* w = new QWidget(this);
     w->setLayout(ui->gridTemplate);
@@ -293,7 +293,7 @@ void MainWindow::on_btnNew_clicked()
 
 
 
-    m_nt.Populate(ui->gridTemplate);
+    m_nt.Populate(ui);
 
     QWidget* w = new QWidget(this);
     w->setLayout(ui->gridTemplate);
@@ -354,7 +354,7 @@ void MainWindow::on_lstRecent_itemDoubleClicked(QListWidgetItem *item)
 void MainWindow::on_btnSaveAs_clicked()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File As"),
-                                   "",
+                                   m_nt.Get("name"),
                                    tr("Nutil (*.nut)"));
     if (fileName!="") {
         m_nt.Save(fileName);
@@ -392,7 +392,7 @@ void MainWindow::on_btnClearData_clicked()
         return;
 
     m_nt.LoadTemplate(fileName);
-    m_nt.Populate(ui->gridTemplate);
+    m_nt.Populate(ui);
     m_nt.m_openFile = "";
     UpdateRecentList();
 

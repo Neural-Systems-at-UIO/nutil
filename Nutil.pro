@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS USE_LIBTIFF
 win32-msvc*{
     QMAKE_CXXFLAGS += -openmp
 }
+
 QMAKE_CXXFLAGS += -O2
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

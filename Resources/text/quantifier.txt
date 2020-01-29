@@ -18,7 +18,7 @@ custom_mask_color ;1; use_custom_masks=Yes ; Custom mask colour ; color ; 255,25
 output_report_type; 1; ;Output report type; list; CSV, HTML; CSV
 #custom_region_file;1; ; Customised reports; file;
 custom_region_type; 1; analysis_type=QuickNII; Customised reports; list; No, Default, Custom; No
-custom_region_file; 1; custom_region_type=Custom ; Custom report file;  file;
+custom_region_file; 1; custom_region_type=Custom,analysis_type=QuickNII ; Custom report file;  file;
 coordinate_extraction; 1; analysis_type=QuickNII;Coordinate extraction;list; All, None, Slices, Summary; All
 pixel_density; 1; analysis_type=QuickNII;Point cloud density ; number; 1
 nifti_size; 1; analysis_type=QuickNII;Nifti size ; list; 0,64,128,256,512; 0
