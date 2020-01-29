@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_updateThread = new UpdateThread();
     connect(m_updateThread, SIGNAL(TextChanged(QString)), this, SLOT(OnInfoTextChanged(QString)));
     connect(m_updateThread, SIGNAL(MessageChanged(QString)), this, SLOT(OnMessageTextChanged(QString)));
+    connect(&m_nt, SIGNAL(emitUpdate()), this, SLOT(on_EmitUpdate()));
+    connect(&m_nt, SIGNAL(emitRePopulate()), this, SLOT(on_RePopulate()));
     m_updateThread->Init(&m_nauto);
     m_updateThread->start();
     Data::data.m_settings = &m_settings;
@@ -97,10 +99,7 @@ void MainWindow::Load(QString f)
     m_nt.Load(f);
     m_nt.Populate(ui);
 
-    QWidget* w = new QWidget(this);
-    w->setLayout(ui->gridTemplate);
-    ui->scrollArea->setWidget(w);
-
+//    on_EmitUpdate();
 }
 
 /*void MainWindow::on_btnLoad_clicked()
@@ -136,6 +135,20 @@ void MainWindow::on_btnStart_clicked()
     m_workerThread->start();
 
     ui->tabMain->setCurrentIndex(2);
+
+}
+
+void MainWindow::on_EmitUpdate()
+{
+    QWidget* w = new QWidget(this);
+    w->setLayout(ui->gridTemplate);
+    ui->scrollArea->setWidget(w);
+
+}
+
+void MainWindow::on_RePopulate()
+{
+    m_nt.Populate(ui);
 
 }
 
@@ -295,10 +308,10 @@ void MainWindow::on_btnNew_clicked()
 
     m_nt.Populate(ui);
 
-    QWidget* w = new QWidget(this);
+/*    QWidget* w = new QWidget(this);
     w->setLayout(ui->gridTemplate);
     ui->scrollArea->setWidget(w);
-
+*/
     m_nt.m_openFile = "";
     UpdateRecentList();
     delete newFile;

@@ -164,7 +164,7 @@ void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid, int& row)
 
 
 
-void NutilTemplate::Populate(Ui::MainWindow* ui)
+void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
 {
     int row = 1;
 
@@ -176,7 +176,7 @@ void NutilTemplate::Populate(Ui::MainWindow* ui)
 //    clearGrid(ui->gridTemplate);
 //    m_ui->gridTemplate->deleteLater();
 //    delete m_ui->gridTemplate;
-  //  m_ui->gridTemplate = new QGridLayout(ui->scrollArea);
+  //  m_ui->gridTemplate = new QGridLayout(uia);
     m_grid = m_ui->gridTemplate;
 
     int textColumn = 0;
@@ -344,7 +344,9 @@ void NutilTemplate::Populate(Ui::MainWindow* ui)
             QObject::connect(cmb, &QComboBox::currentTextChanged, [=]() {
                 if (nti->m_value!=cmb->currentText()) {
                     nti->m_value = cmb->currentText();
-                    Populate(m_ui);
+                    //Populate(m_ui,true);
+//                    QObject::disconnect(cmb);
+                    emit emitRePopulate();
                 }
 
             });
@@ -556,6 +558,9 @@ void NutilTemplate::Populate(Ui::MainWindow* ui)
     QSpacerItem* sp =new QSpacerItem(20, 400, QSizePolicy::Minimum, QSizePolicy::Expanding);
     m_grid->addItem(sp,row+1,0);
 
+    if (sendSignal)
+        emit emitUpdate();
+
 
 }/*
 
@@ -577,8 +582,10 @@ void NutilTemplate::clearGrid(QLayout* layout)
     {
         //        if (deleteWidgets)
         {
-            if (QWidget* widget = item->widget())
+            if (QWidget* widget = item->widget()) {
+                widget->disconnect();
                 widget->deleteLater();
+            }
         }
         if (QLayout* childLayout = item->layout())
             clearGrid(childLayout);

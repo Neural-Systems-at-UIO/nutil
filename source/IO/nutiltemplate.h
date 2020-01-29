@@ -71,8 +71,11 @@ public:
 };
 
 
-class NutilTemplate
+class NutilTemplate : public QObject
 {
+    Q_OBJECT
+
+
     QGridLayout* m_grid = nullptr;
     Ui::MainWindow *m_ui;
 
@@ -89,7 +92,7 @@ public:
     QString Get(QString val);
 
 //    void Populate(QGridLayout* grid);
-    void Populate(Ui::MainWindow* ui);
+    void Populate(Ui::MainWindow* ui, bool sendSignal = true);
     void clearGrid(QLayout* grid);
     void clearLayout2(QLayout *layout);
 
@@ -97,7 +100,9 @@ public:
     void Save(QString fname);
     void Load(QString fname);
 
-
+signals:
+    void emitUpdate();
+    void emitRePopulate();
 
 private:
     void CreateBasicAdvancedOption(QGridLayout* grid, int& row);

@@ -94,6 +94,8 @@ private slots:
 
     void on_btnStart_clicked();
 
+    void on_EmitUpdate();
+    void on_RePopulate();
 
     void on_leProcessors_returnPressed();
 
