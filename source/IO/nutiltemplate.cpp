@@ -348,6 +348,7 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
                     nti->m_value = cmb->currentText();
                     //Populate(m_ui,true);
 //                    QObject::disconnect(cmb);
+                    cmb->disconnect();
                     emit emitRePopulate();
                 }
 

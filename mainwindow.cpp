@@ -4,7 +4,7 @@
 #include <QDebug>
 #include "source/dialogtiff.h"
 #include <QDesktopServices>
-
+#include <QTimer>
 
 
 
@@ -99,8 +99,9 @@ void MainWindow::Load(QString f)
     m_nt.Load(f);
     m_nt.Populate(ui);
 
-//    on_EmitUpdate();
+    //    on_EmitUpdate();
 }
+
 
 /*void MainWindow::on_btnLoad_clicked()
 {
@@ -138,12 +139,19 @@ void MainWindow::on_btnStart_clicked()
 
 }
 
-void MainWindow::on_EmitUpdate()
+void MainWindow::PrivateUpdate()
 {
     QWidget* w = new QWidget(this);
     w->setLayout(ui->gridTemplate);
     ui->scrollArea->setWidget(w);
 
+}
+
+void MainWindow::on_EmitUpdate()
+{
+     QTimer::singleShot(25, [=]() {
+            PrivateUpdate();
+     } );
 }
 
 void MainWindow::on_RePopulate()

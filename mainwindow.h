@@ -77,6 +77,7 @@ class MainWindow : public QMainWindow
 public:
     Ui::MainWindow *ui;
     static float Version;
+    bool m_isInit = false;
     long m_elapsedTimer = -1;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -87,6 +88,10 @@ public:
     void Load(QString f);
 
     void setDarkPalette();
+
+
+private:
+    void PrivateUpdate();
 
 
 private slots:
