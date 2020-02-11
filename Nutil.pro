@@ -10,10 +10,10 @@ QT += network
 TEMPLATE      = app
 
 
-DEFINES += IS_BETA IGNORE_DOWNLOAD
+#DEFINES += IS_BETA IGNORE_DOWNLOAD
+DEFINES += IGNORE_DOWNLOAD
 
 
-#DEFINES += SHARONCODE
 
 
 # The following define makes your compiler emit warnings if you use
