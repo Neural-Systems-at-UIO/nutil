@@ -395,5 +395,6 @@ bool Util::QVector3DIsClose(QColor a, QColor b, QVector3D spread)
 QVector3D Util::vecFromString(QString s)
 {
     QStringList sl = s.split(";");
+
     return QVector3D(sl[0].toFloat(), sl[1].toFloat(),sl[2].toFloat());
 }

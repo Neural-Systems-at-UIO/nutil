@@ -14,9 +14,9 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DIS_BETA -DIGNORE_DOWNLOAD -DQT_DEPRECATED_WARNINGS -DUSE_LIBTIFF -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_CORE_LIB
+DEFINES       = -DIGNORE_DOWNLOAD -DQT_DEPRECATED_WARNINGS -DUSE_LIBTIFF -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -O2 -fopenmp -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wno-comment -Wno-parentheses -Wno-delete-non-virtual-dtor -Wno-missing-noreturn -Ofast -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -fopenmp -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wno-comment -Wno-parentheses -Wno-delete-non-virtual-dtor -Wno-missing-noreturn -Ofast -O2 -Os -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../../nutil -I. -I../lib/libtiff -I../lib -I../../../Qt/5.13.0/gcc_64/include -I../../../Qt/5.13.0/gcc_64/include/QtWidgets -I../../../Qt/5.13.0/gcc_64/include/QtGui -I../../../Qt/5.13.0/gcc_64/include/QtWebSockets -I../../../Qt/5.13.0/gcc_64/include/QtNetwork -I../../../Qt/5.13.0/gcc_64/include/QtXml -I../../../Qt/5.13.0/gcc_64/include/QtCore -I. -I/usr/include/libdrm -I. -I../../../Qt/5.13.0/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/leuat/Qt/5.13.0/gcc_64/bin/qmake
 DEL_FILE      = rm -f
@@ -948,7 +948,10 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/resize/name.rtf \
 		../Resources/text/help/resize/resize_size.rtf \
 		../Resources/text/help/resize/resize_output_dir.rtf \
-		../Resources/CustomRegions/CustomRegionMouse.xlsx
+		../Resources/CustomRegions/CustomRegionMouse_2017.xlsx \
+		../Resources/CustomRegions/CustomRegionRat_v3.xlsx \
+		../Resources/CustomRegions/CustomRegionRat_v2.xlsx \
+		../Resources/CustomRegions/CustomRegionMouse_2015.xlsx
 	/home/leuat/Qt/5.13.0/gcc_64/bin/rcc -name resources ../resources.qrc -o qrc_resources.cpp
 
 compiler_qmlcache_make_all:
@@ -960,7 +963,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: ../../../Qt/5.13.0/gcc_64/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -fopenmp -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wno-comment -Wno-parentheses -Wno-delete-non-virtual-dtor -Wno-missing-noreturn -Ofast -O2 -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.13.0/gcc_64/mkspecs/features/data/dummy.cpp
+	g++ -pipe -fopenmp -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -Wno-comment -Wno-parentheses -Wno-delete-non-virtual-dtor -Wno-missing-noreturn -Ofast -O2 -Os -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.13.0/gcc_64/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_nutiltemplate.cpp moc_dialoggeneratedata.cpp moc_dialoghelp.cpp moc_dialognewfile.cpp moc_lcolorlist.cpp moc_mainwindow.cpp moc_node.cpp moc_downloadmanager.cpp moc_dialogtiff.cpp moc_updatethread.cpp moc_dialogsettings.cpp
 compiler_moc_header_clean:
@@ -5908,7 +5911,10 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../Qt/5.13.0/gcc_64/include/QtCore/QObject \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/QDesktopServices \
 		../../../Qt/5.13.0/gcc_64/include/QtGui/qdesktopservices.h \
-		../../../Qt/5.13.0/gcc_64/include/QtCore/qstandardpaths.h
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qstandardpaths.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/QTimer \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt/5.13.0/gcc_64/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../mainwindow.cpp
 
 node.o: ../node.cpp ../node.h \

@@ -47,8 +47,14 @@ QColor LSheet::readCol(int i, int j)
         }
         return QColor(colList[0].toInt(),colList[1].toInt(),colList[2].toInt());
     }
+    QStringList sl = readStr(i,j).split(";");
 
-    QVector3D col = Util::vecFromString(readStr(i,j));
+    QVector3D col = QVector3D(0,0,0);
+    if (sl.count()==3)
+        col = QVector3D(sl[0].toFloat(), sl[1].toFloat(),sl[2].toFloat());
+    else
+        LMessage::lMessage.Error("Error when reading colour data in sheet '" + m_name +"' : " + readStr(i,j) + " (" +QString::number(readNum(i,j)) +")" + " is not correct colour format. ");
+//    QVector3D col = Util::vecFromString();
     return QColor(col.x(), col.y(), col.z());
 
 }
