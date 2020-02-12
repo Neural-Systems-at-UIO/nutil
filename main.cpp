@@ -99,6 +99,29 @@ void CreateValidator() {
 }
 
 
+void SharonImageTest(int px, int py, int width, int height) {
+
+    QImage img(1024,768, QImage::Format_ARGB32);
+    img.fill(Qt::red);
+
+
+    for (int y=0;y<height;y++) {
+        for (int x=0;x<width;x++) {
+
+            float ourBlue = (x/(float)width)*255;
+
+            QColor col = QColor(0,0,0,255);
+            col.setBlue(ourBlue);
+            img.setPixelColor(x+px, y+py, col);
+        }
+    }
+
+
+
+    img.save("sharonTest.png");
+}
+
+
 
 int main(int argc, char *argv[])
 {
@@ -106,7 +129,11 @@ int main(int argc, char *argv[])
     CheckVersion();
 #endif
 
-//   CreateValidator();
+
+//
+//    SharonImageTest(x, y, 300 , 200);
+
+    //CreateValidator();
 
     if (argc == 1)  {
         QApplication a(argc, argv);
