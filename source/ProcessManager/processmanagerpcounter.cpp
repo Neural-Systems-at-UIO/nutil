@@ -40,7 +40,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     Data::data.abort = false;
 
 
-    if (m_dataType=="quint")
+    if (m_dataType==QUINT)
         LoadXML();
 
     if (m_pixelCutoffMax<=m_pixelCutoff) {
@@ -110,7 +110,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
                 m_processItems.clear();
                 return false;
             }
-            if (m_dataType=="quint") {
+            if (m_dataType==QUINT) {
 
                 QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat","");
                 if (inFlatFull=="") {
@@ -194,7 +194,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 void ProcessManagerPCounter::Execute()
 {
-    if (m_dataType=="quint") {
+    if (m_dataType==QUINT) {
         m_labels.Load(m_labelFile);
         if (m_labels.atlases.count()==0) {
             LMessage::lMessage.Error("Incorrect label file. Please check parameters in excel sheet.");
@@ -203,7 +203,7 @@ void ProcessManagerPCounter::Execute()
         Data::data.m_isQuickNII = true;
 
     }
-    if (m_dataType == "none") {
+    if (m_dataType == NONE) {
         m_labels.Clear();
         m_labels.LoadFake();
         Data::data.m_isQuickNII = false;
@@ -281,7 +281,7 @@ void ProcessManagerPCounter::Execute()
             // Find atlas file:
             QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat","");
 
-            if (atlasFile=="" && m_dataType == "quint") {
+            if (atlasFile=="" && m_dataType == QUINT) {
                 LMessage::lMessage.Error("Could not find any atlas flat files!");
                 Data::data.abort = true;
             }
@@ -337,7 +337,7 @@ void ProcessManagerPCounter::Execute()
 
 
         QString RefAtlasname = "RefAtlasRegions.xlsx";
-        if (m_dataType != "quint") {
+        if (m_dataType != QUINT) {
             RefAtlasname = "Regions.xlsx";
         }
         if (m_reportType!="none") {
@@ -428,9 +428,12 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_patternType = data->Get("pattern_match");
 
     //    m_dataType = "quicknii";//m_sheet->readStr(19,1).toLower();
-    m_dataType = data->Get("analysis_type").toLower();
-    if (m_dataType=="quicknii")
-        m_dataType ="quint";
+    QString analysisType = data->Get("analysis_type").toLower();
+    m_dataType = NONE;
+    if (analysisType=="quicknii")
+        m_dataType =QUINT;
+    if (analysisType=="quint")
+        m_dataType =QUINT;
 
     m_colorThreshold = QVector3D(2,2,2);//QVector3D(m_sheet->readNum(3,4),m_sheet->readNum(3,5),m_sheet->readNum(3,6));
 
@@ -441,13 +444,13 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (data->Get("custom_region_type").toLower()=="custom")
         m_reportSheetName = data->Get("custom_region_file");
 
-    if (m_dataType == "quint")
+    if (m_dataType == QUINT)
         m_atlasDir = data->Get("quantifier_atlas_dir");
 
 
 
 
-    if (m_dataType == "quint") {
+    if (m_dataType == QUINT) {
         QString labelType = data->Get("label_file");
         //       qDebug() << "Labl type:" <<labelType;
         if (labelType == "Allen Mouse Brain 2015") {
@@ -482,7 +485,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_areaScale = data->Get("global_pixel_scale").toFloat();
     m_areaSplitting = data->Get("object_splitting").toLower()=="yes"?1:0;
     Data::data.m_hasAreaSplitting = m_areaSplitting;
-    if (m_dataType=="quint")
+    if (m_dataType==QUINT)
         m_anchorFile = data->Get("xml_anchor_file");
     m_niftiSize = data->Get("nifti_size").toInt();//m_sheet->readNum(12,1);
     m_xyzScale = data->Get("pixel_density").toInt();
@@ -512,7 +515,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 */
 
 
-    if (m_dataType != "quint") {
+    if (m_dataType != QUINT) {
         m_output3DPoints = "no";
         m_outputNifti = false;
     }
@@ -524,7 +527,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
 
-    if (m_dataType == "quint")
+    if (m_dataType == QUINT)
 
         if (QFile::exists(m_reportSheetName)) {
 
@@ -555,7 +558,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
                 GenerateReports(reportSheet);
 
         }
-    if (m_dataType=="none") {
+    if (m_dataType==NONE) {
         reports.m_reports.push_back(Report("Report", QStringList() << "1", m_background));
         for (Report& r: reports.m_reports)
             r.m_unit = m_units;

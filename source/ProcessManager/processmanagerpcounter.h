@@ -39,7 +39,10 @@ public:
     QString m_outputFileType = "xlsx";
 
 
-    QString m_dataType="quint";
+    enum DataType {QUINT, NONE };
+
+//    QString m_dataType="quint";
+    DataType m_dataType=QUINT;
 
     QVector3D m_colorThreshold  = QVector3D(255,255,255);
     QColor m_customMaskInclusionColors  = QColor(255,255,255,255);
