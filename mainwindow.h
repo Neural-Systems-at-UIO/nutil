@@ -135,6 +135,8 @@ private slots:
 
     void on_btnClearData_clicked();
 
+    void on_actionNutil_Duplicator_triggered();
+
 private:
     Nauto m_nauto;
     NutilTemplate m_nt;

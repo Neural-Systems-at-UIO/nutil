@@ -418,3 +418,8 @@ void MainWindow::on_btnClearData_clicked()
     UpdateRecentList();
 
 }
+
+void MainWindow::on_actionNutil_Duplicator_triggered()
+{
+
+}

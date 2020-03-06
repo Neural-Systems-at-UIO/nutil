@@ -65,7 +65,7 @@ void LSheetCSV::SaveAsHTML(QString basename)
     QString separator="_";
     if (m_name=="") separator="";
     QString fn = Util::RemoveFinalFiletype(basename) + separator + m_name + ".html";
- //   qDebug() << "Report output filename :" << fn;
+//    qDebug() << "Report output filename :" << fn;
 
     if (QFile::exists(fn))
         QFile::remove(fn);
@@ -141,7 +141,6 @@ void LBookCSV::Save(QString filename)
     filename = dir + "/" + base + ".xslx";
 
 
-    qDebug() << "Writing report : " << filename;
 
     for (auto l: m_sheets)
         dynamic_cast<LSheetCSV*>(l)->Save(filename);

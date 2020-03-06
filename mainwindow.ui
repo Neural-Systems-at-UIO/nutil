@@ -475,6 +475,7 @@ p, li { white-space: pre-wrap; }
      <string>Tools</string>
     </property>
     <addaction name="actionGenerate_validation_data"/>
+    <addaction name="actionNutil_Duplicator"/>
    </widget>
    <addaction name="menuTest"/>
    <addaction name="menuTools"/>
@@ -499,6 +500,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionGenerate_validation_data">
    <property name="text">
     <string>Generate validation data</string>
+   </property>
+  </action>
+  <action name="actionNutil_Duplicator">
+   <property name="text">
+    <string>Nutil Duplicator</string>
    </property>
   </action>
  </widget>
