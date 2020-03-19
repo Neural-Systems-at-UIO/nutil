@@ -265,7 +265,7 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
                 QPixmap m = QPixmap::fromImage(QImage(":Resources/images/disk"));
 
 //                QPushButton* btn = new QPushButton(m,"");
-                QPushButton* btn = new QPushButton("...");
+                QPushButton* btn = new QPushButton("Browse...");
                 btn->setIconSize(QSize(24,24));
                 QFont font = btn->font();
                 //             font.setPointSize(16);
@@ -292,7 +292,7 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
                 QPixmap m = QPixmap::fromImage(QImage(":Resources/images/disk"));
 
 //                QPushButton* btn = new QPushButton(m,"");
-                QPushButton* btn = new QPushButton("...");
+                QPushButton* btn = new QPushButton("Browse...");
                 btn->setIconSize(QSize(24,24));
 
                 le->setEnabled(false);
