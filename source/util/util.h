@@ -94,12 +94,7 @@ public:
 
     static float getAmountOfInstalledMemory();
 
-    static std::string c2x(int x, int y) {
-        std::string s;
-        s = char('A' + y);
-        s += std::to_string(x+1);
-        return s;
-    }
+    static std::string c2x(int x, int y);
 
 
     static bool VerifyImageFileSize(QString file, int avgDimension);

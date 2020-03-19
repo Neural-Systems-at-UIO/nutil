@@ -588,9 +588,10 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
     int x = 1;
     // As long as a next one exist (x-axis reports)
     while (hasNext) {
+//        qDebug() << "Starting..:";
         QString excelName = m_sheet->readStr(i,x);
-//               qDebug() << excelName << i << " " << x;
-//               qDebug() << m_sheet->readStr(i+1,x);
+  //             qDebug() << excelName << i << " " << x;
+    //           qDebug() << m_sheet->readStr(i+1,x);
         if (excelName.simplified()!="") {
             QColor reportColor = m_sheet->readCol(i+1,x);
 
@@ -622,7 +623,7 @@ void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
     for (Report& r: reports.m_reports)
         r.m_unit = m_units;
 
-
+//    qDebug() << "DONE reading excel sheet";
 }
 
 

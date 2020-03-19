@@ -201,6 +201,17 @@ float Util::getAmountOfInstalledMemory()
 #endif
 }
 
+string Util::c2x(int x, int y) {
+    std::string s ="";
+    int k=y/26;
+    if (k!=0) s = s+char('A' + k);
+
+    s = s+char('A' + (y%26));
+    s += std::to_string(x+1);
+//    qDebug() <<QString::fromStdString(s) <<k << x << y;
+    return s;
+}
+
 
 bool Util::VerifyImageFileSize(QString file, int avgDimension)
 {
