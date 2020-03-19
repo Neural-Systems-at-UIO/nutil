@@ -40,16 +40,18 @@ public:
 
 
     enum DataType {QUINT, NONE };
+    DataType m_dataType=QUINT;
+    enum ReportType {REPORTTYPE_ALL, REPORTTYPE_NONE };
+    ReportType m_reportType = REPORTTYPE_ALL;
 
 //    QString m_dataType="quint";
-    DataType m_dataType=QUINT;
 
     QVector3D m_colorThreshold  = QVector3D(255,255,255);
     QColor m_customMaskInclusionColors  = QColor(255,255,255,255);
 
     bool m_useCustomMask = false;
 
-    QString m_reportType ="all";
+//    QString m_reportType ="all";
     QString m_customRegionType;
 
     float m_areaSplitting = 0;

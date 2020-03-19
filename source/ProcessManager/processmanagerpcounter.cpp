@@ -340,7 +340,7 @@ void ProcessManagerPCounter::Execute()
         if (m_dataType != QUINT) {
             RefAtlasname = "Regions.xlsx";
         }
-        if (m_reportType!="none") {
+        if (m_reportType!=REPORTTYPE_NONE) {
 
             reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
             if (m_customRegionType=="custom" || m_customRegionType=="default") {
@@ -504,7 +504,11 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (m_useCustomMask)
         m_customMaskInclusionColors = NutilTemplateItem::StringToColor(data->Get("custom_mask_color"));
 
-    m_reportType = data->Get("output_report").toLower();
+    if (data->Get("output_report").toLower()=="all")
+        m_reportType = REPORTTYPE_ALL;
+    if (data->Get("output_report").toLower()=="none")
+        m_reportType = REPORTTYPE_NONE;
+
 
     m_outputFileType = data->Get("output_report_type").toLower();
 /*    if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {

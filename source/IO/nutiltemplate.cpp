@@ -264,7 +264,8 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
                 le->setEnabled(false);
                 QPixmap m = QPixmap::fromImage(QImage(":Resources/images/disk"));
 
-                QPushButton* btn = new QPushButton(m,"");
+//                QPushButton* btn = new QPushButton(m,"");
+                QPushButton* btn = new QPushButton("...");
                 btn->setIconSize(QSize(24,24));
                 QFont font = btn->font();
                 //             font.setPointSize(16);
@@ -290,7 +291,8 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
 
                 QPixmap m = QPixmap::fromImage(QImage(":Resources/images/disk"));
 
-                QPushButton* btn = new QPushButton(m,"");
+//                QPushButton* btn = new QPushButton(m,"");
+                QPushButton* btn = new QPushButton("...");
                 btn->setIconSize(QSize(24,24));
 
                 le->setEnabled(false);
@@ -693,4 +695,48 @@ void NutilTemplate::Load(QString fname)
     }
     f.close();
 
+}
+
+void NutilTemplate::Duplicator(QString directory) {
+//    QDirIterator it(directory, QDirIterator::Subdirectories);
+    QDirIterator it(directory, QDir::Dirs | QDir::NoDotAndDotDot);
+    QString typ = m_items["type"]->m_value.toLower();
+    QString base ="";
+    QString end = "";
+    if (typ=="quantifier") {
+        base = m_items["quantifier_input_dir"]->m_value;
+        base = base.replace("/",QDir::separator());
+        base = base.replace("\\",QDir::separator());
+        QStringList baseList = base.split(QDir::separator());
+        base = "";
+        for (int i=0;i<baseList.count()-1;i++)
+            base = base + QDir::separator() + baseList[i];
+//        end = QDir::separator() + baseList.last();
+
+    }
+    base = base.replace(QString(QDir::separator())+QString(QDir::separator()),QDir::separator());
+  //  qDebug() << "Duplicator type : " << typ;
+//    QString idir = m_items["inp"]
+  //  qDebug() << "INPUT DIR" <<
+//    qDebug() << "BASE " << base;
+    while (it.hasNext()) {
+        QString fn = it.next();
+        QString ln = fn.split(QDir::separator()).last();
+        if (QDir().exists(fn)) {
+            NutilTemplate nt;
+            for (QString& k : m_items.keys()) {
+                nt.m_items[k] = new NutilTemplateItem(m_items[k]);
+            }
+//            nt.m_items = m_items;
+            nt.m_sortList = m_sortList;
+            nt.m_items["quantifier_input_dir"]->m_value = nt.m_items["quantifier_input_dir"]->m_value.replace(base,fn);
+            nt.m_items["quantifier_output_dir"]->m_value = nt.m_items["quantifier_output_dir"]->m_value.replace(base,fn);
+            nt.m_items["quantifier_atlas_dir"]->m_value = nt.m_items["quantifier_atlas_dir"]->m_value.replace(base,fn);
+            nt.m_items["xml_anchor_file"]->m_value = nt.m_items["xml_anchor_file"]->m_value.replace(base,fn);
+//            qDebug() << "BASE / fn "<<base<<fn;
+  //          qDebug() << "NEW quantifier input dir : " << nt.m_items["quantifier_input_dir"]->m_value;
+            nt.Save(directory+QDir::separator()+ln+".nut");
+        }
+
+    }
 }

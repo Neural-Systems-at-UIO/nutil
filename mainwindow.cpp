@@ -407,6 +407,14 @@ void MainWindow::on_actionGenerate_validation_data_triggered()
 void MainWindow::on_btnClearData_clicked()
 {
 
+    QMessageBox msgBox;
+    msgBox.setText("Are you sure that you want to clear all data?");
+    msgBox.setInformativeText("This action cannot be undone.");
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Cancel);
+    if (msgBox.exec()==QMessageBox::Cancel)
+        return;
+
 
     QString fileName = ":/Resources/text/"+ m_nt.Get("type").toLower()  +".txt";
     if (!QFile::exists(fileName))
@@ -421,5 +429,5 @@ void MainWindow::on_btnClearData_clicked()
 
 void MainWindow::on_actionNutil_Duplicator_triggered()
 {
-
+    m_nt.Duplicator("/home/leuat/code/nutildata/input/duptest");
 }

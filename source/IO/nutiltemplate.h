@@ -15,6 +15,8 @@
 #include <QEvent>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QDirIterator>
+#include "source/util/util.h"
 #include "ui_mainwindow.h"
 
 class NutilTemplateItem : public QObject {
@@ -43,6 +45,22 @@ public:
     static QColor StringToColor(QString col) {
         QStringList l = col.trimmed().simplified().split(",");
         return QColor(l[0].toFloat(),l[1].toFloat(),l[2].toFloat(),l[3].toFloat());
+    }
+
+    NutilTemplateItem(NutilTemplateItem* nti) {
+        m_matrixFieldWidth = nti->m_matrixFieldWidth;
+        m_matrixField = nti->m_matrixField;
+        m_depID = nti->m_depID;
+        m_depVal = nti->m_depVal;
+        m_name = nti->m_name;
+        m_text = nti->m_text;
+        m_items = nti->m_items;
+        m_value = nti->m_value;
+        m_color = nti->m_color;
+        m_level =nti->m_level;
+        m_type = nti->m_type;
+
+
     }
 
     NutilTemplateItem() {
@@ -99,6 +117,10 @@ public:
     void FillFromGUI();
     void Save(QString fname);
     void Load(QString fname);
+
+
+    void Duplicator(QString directory);
+
 
 signals:
     void emitUpdate();

@@ -10,6 +10,7 @@
 #include "source/ProcessManager/processitem.h"
 #include "source/util/lparameter.h"
 #include "source/IO/nutiltemplate.h"
+#include <QDirIterator>
 
 class ProcessManager
 {
@@ -35,6 +36,10 @@ public:
     virtual void Execute() = 0;
     virtual void ReadHeader(NutilTemplate* data) { }
     virtual float CalculateRamNeededInGB()  { return 0;}
+
+
+
+
 
     virtual bool Verify() = 0;
 //    void ExecuteAutoContrast(QString compression, QColor background);
