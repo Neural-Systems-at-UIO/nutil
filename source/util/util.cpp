@@ -204,11 +204,12 @@ float Util::getAmountOfInstalledMemory()
 string Util::c2x(int x, int y) {
     std::string s ="";
     int k=y/26;
-    if (k!=0) s = s+char('A' + k);
+    if (k!=0) s = s+char('A' + k-1);
 
     s = s+char('A' + (y%26));
     s += std::to_string(x+1);
-//    qDebug() <<QString::fromStdString(s) <<k << x << y;
+ //   if (x<4)
+   //     qDebug() <<QString::fromStdString(s) <<k << x << y;
     return s;
 }
 

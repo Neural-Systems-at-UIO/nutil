@@ -393,6 +393,7 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
             QPushButton* plus = new QPushButton("+");
             QPushButton* minus = new QPushButton("-");
             QPushButton* fill = new QPushButton("Fill files");
+            QPushButton* fillFromExcel = new QPushButton("From excel");
             QPushButton* duplicate = new QPushButton("Duplicate");
 
             QObject::connect(plus, &QPushButton::pressed, [=]() {
@@ -474,6 +475,26 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
             });
 
 
+            QObject::connect(fillFromExcel, &QPushButton::pressed, [=]() {
+                tw->setRowCount(0);
+                //FillFromExcel(ty);
+                /*int y = 0;
+                QDir directory(Get("transform_input_dir"));
+                QStringList images = directory.entryList(QStringList() << "*.tif" << "*.tiff" << "*.TIF" << "*.TIFF",QDir::Files);
+                for (QString fn :  images) {
+                    tw->insertRow(y);
+                    tw->setItem(y, 0, new QTableWidgetItem(fn));
+                    tw->setItem(y, 1, new QTableWidgetItem(fn.split(".").first()));
+                    tw->setItem(y, 2, new QTableWidgetItem("0"));
+                    tw->setItem(y, 3, new QTableWidgetItem("1"));
+                    tw->setItem(y, 4, new QTableWidgetItem("1"));
+
+
+                    y++;
+                }
+                */
+            });
+
 
             QObject::connect(tw, &QTableWidget::itemChanged, [=]() {
                 QString data = "";
@@ -495,6 +516,7 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
             hl->addWidget(minus);
             hl->addWidget(duplicate);
             hl->addWidget(fill);
+            hl->addWidget(fillFromExcel);
 
             QStringList data = nti->m_value.split(",");
             int dataWidth = nti->m_matrixFieldWidth;
