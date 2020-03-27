@@ -15,7 +15,8 @@ XMLData XMLAnchor::findData(QString name)
             return d;
     }
 
-    qDebug() << "Could not find xmldata for:" << name;
+//    qDebug() << "Could not find xmldata for:" << name;
+    LMessage::lMessage.Message("<font color=\"yellow\">Warning: Could not find xmldata in .xml file for slice '" + name +"', so 3D data will be incorrect. Please make sure that there exists a corresponding field in the xml file!</font>");
 
     return XMLData();
 

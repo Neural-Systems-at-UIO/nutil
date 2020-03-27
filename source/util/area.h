@@ -16,6 +16,7 @@ public:
     QPointF m_center;
     double m_pixelArea=0;
     QMatrix4x4 m_mat;
+    bool m_matrixInitialized = false;
     double m_area=0;
     double m_areaScale = 0;
     double m_width,m_height;

@@ -597,6 +597,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
 
     for (Report& r: m_reports)
             r.FindAreasOfInterest(processes);
+    bool matrixError = false;
 
     Counter cntr(m_reports.count(),"");
     int tcount = 0;
@@ -618,7 +619,6 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
         o+="\"triplets\":[";
         int cnt2=0;
         cnt++;
-
         for (Area* a: m_reports[i].m_areasOfInterest) {
 
 
@@ -630,6 +630,10 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
                 QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
+                if (!a->m_matrixInitialized) {
+//                    qDebug() << "ERROR : Area Matrix not initialized! ";
+                    matrixError = true;
+                }
                 v=v*a->m_mat;
 
 
@@ -655,6 +659,8 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
     outstream << o;
     file.close();
     LMessage::lMessage.Message("****** Count of pixels " + QString::number(tcount));
+    if (matrixError)
+        LMessage::lMessage.Message("WARNING: Some of the area matrices were not initialized. Please make sure that you are using a correct anchor xml file!");
 }
 
 void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, int size)
