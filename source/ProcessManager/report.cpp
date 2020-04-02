@@ -20,16 +20,16 @@ void Report::GenerateSheet(LBook* book, QString units)
 
         for (int i=0;i<m_areasOfInterest.count();i++) {
   //          qDebug() << i << " / " << m_areasOfInterest.count();
-            sheet->writeNum(1+i,0, m_areasOfInterest[i]->m_pixelArea);
-            sheet->writeNum(1+i,1, m_areasOfInterest[i]->m_area);
+            sheet->Set(1+i,0, m_areasOfInterest[i]->m_pixelArea);
+            sheet->Set(1+i,1, m_areasOfInterest[i]->m_area);
             sheet->writeStr(1+i,2, units);
-            sheet->writeNum(1+i,3, m_areasOfInterest[i]->m_center.x());
-            sheet->writeNum(1+i,4, m_areasOfInterest[i]->m_center.y());
+            sheet->Set(1+i,3, m_areasOfInterest[i]->m_center.x());
+            sheet->Set(1+i,4, m_areasOfInterest[i]->m_center.y());
             if (!m_areasOfInterest[i]->atlasLabel) {
                 LMessage::lMessage.Message("WARNING: Could not find atlasLabel coupling for area: " + QString::number(i) + " in sheet " + m_filename);
             }
             else {
-                sheet->writeNum(1+i,5, m_areasOfInterest[i]->atlasLabel->index);
+                sheet->Set(1+i,5, m_areasOfInterest[i]->atlasLabel->index);
                 sheet->writeStr(1+i,6, m_areasOfInterest[i]->atlasLabel->name);
             }
         }
@@ -62,15 +62,15 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
         int i = 1;
         for (Report& r : m_reports) {
             sheet->writeStr(i,0, r.m_filename);
-            sheet->writeNum(i,1, r.m_regionPixelArea);
-            sheet->writeNum(i,2, r.m_regionArea);
+            sheet->Set(i,1, r.m_regionPixelArea);
+            sheet->Set(i,2, r.m_regionArea);
             sheet->writeStr(i,3, r.m_unit);
-            sheet->writeNum(i,4, r.m_areasOfInterest.count());
-            sheet->writeNum(i,5, r.m_totalPixelArea);
-            sheet->writeNum(i,6, r.m_totalArea);
+            sheet->Set(i,4, r.m_areasOfInterest.count());
+            sheet->Set(i,5, r.m_totalPixelArea);
+            sheet->Set(i,6, r.m_totalArea);
             sheet->writeStr(i,7, r.m_unit);
             if (r.m_regionPixelArea!=0)
-                sheet->writeNum(i,8, r.m_totalPixelArea/(float)r.m_regionPixelArea);
+                sheet->Set(i,8, r.m_totalPixelArea/(float)r.m_regionPixelArea);
 
 
             i++;
@@ -133,26 +133,26 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
         // Header
         //if (al->extra2.length()!=0)
         {
-            sheet->writeNum(y,0,al->index);
+            sheet->Set(y,0,al->index);
             sheet->writeStr(y,1,al->name);
-            sheet->writeNum(y,2,al->area);
-            sheet->writeNum(y,3,al->areaScaled);
+            sheet->Set(y,2,al->area);
+            sheet->Set(y,3,al->areaScaled);
             sheet->writeStr(y,4,units);
             if (Data::data.m_hasAreaSplitting)
                 sheet->writeStr(y,5,"N/A");
             else
-                sheet->writeNum(y,5,al->count);
+                sheet->Set(y,5,al->count);
 
-            sheet->writeNum(y,6,al->extra2.x());
-            sheet->writeNum(y,7,al->extra2.y());
+            sheet->Set(y,6,al->extra2.x());
+            sheet->Set(y,7,al->extra2.y());
             sheet->writeStr(y,8,units);
             sheet->writeStr(y,9,"0");
-            //sheet->writeNum(y,,10);
+            //sheet->Set(y,,10);
 
             if (al->area!=0.0 && !isnan(al->extra2.x()/al->area))
-                sheet->writeNum(y,9,al->extra2.x()/al->area);
+                sheet->Set(y,9,al->extra2.x()/al->area);
  //           if (al->areaScaled!=0)
-   //             sheet->writeNum(y,10,al->extra2.y()/al->areaScaled);
+   //             sheet->Set(y,10,al->extra2.y()/al->areaScaled);
 
             y++;
         }
@@ -207,25 +207,25 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
         //        slice->
         for (AtlasLabel* al : atlasLabels->atlases) {
             {
-                sheet->writeNum(y,0,al->index);
+                sheet->Set(y,0,al->index);
                 sheet->writeStr(y,1,al->name);
-                sheet->writeNum(y,2,al->sliceArea[i]);
-                //            sheet->writeNum(y,3,al->areaScaled);
+                sheet->Set(y,2,al->sliceArea[i]);
+                //            sheet->Set(y,3,al->areaScaled);
                 sheet->writeStr(y,4,units);
                 if (Data::data.m_hasAreaSplitting)
                     sheet->writeStr(y,5,"N/A");
                 else
-                    sheet->writeNum(y,5,al->count);
+                    sheet->Set(y,5,al->count);
 
 
 
 
-                sheet->writeNum(y,6,al->extra2.x());
-                sheet->writeNum(y,7,al->extra2.y());
+                sheet->Set(y,6,al->extra2.x());
+                sheet->Set(y,7,al->extra2.y());
                 sheet->writeStr(y,8,units);
-                sheet->writeNum(y,9,0);
+                sheet->Set(y,9,0);
                  if (al->area!=0)
-                    sheet->writeNum(y,9,al->extra2.x()/al->area);
+                    sheet->Set(y,9,al->extra2.x()/al->area);
                 y++;
             }
 
@@ -286,8 +286,8 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         int y = 1;
    //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
-            sheet->writeNum(y,0,a.m_pixelArea);
-            sheet->writeNum(y,1,a.m_area);
+            sheet->Set(y,0,a.m_pixelArea);
+            sheet->Set(y,1,a.m_area);
             sheet->writeStr(y,2,units);
 
             sumPixel+=a.m_pixelArea;
@@ -295,32 +295,32 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
             totalSumPixel+=a.m_pixelArea;
             totalSumArea+=a.m_area;
 
-            sheet->writeNum(y,3,a.m_center.x());
-            sheet->writeNum(y,4,a.m_center.y());
+            sheet->Set(y,3,a.m_center.x());
+            sheet->Set(y,4,a.m_center.y());
             //if (a.m_areaHasReachedCutoff)
-            //    sheet->writeNum(y,8,1);
+            //    sheet->Set(y,8,1);
 
             if (a.atlasLabel!=nullptr) {
-                sheet->writeNum(y,5,a.atlasLabel->index);
-                //sheet->writeNum(y,6,a.atlasLabel->area);
+                sheet->Set(y,5,a.atlasLabel->index);
+                //sheet->Set(y,6,a.atlasLabel->area);
                 sheet->writeStr(y,6,a.atlasLabel->name);
             }
             y++;
 
 
             summary->writeStr(yy,0,items[i]->m_reportName);
-            summary->writeNum(yy,1,a.m_pixelArea);
-            summary->writeNum(yy,2,a.m_area);
+            summary->Set(yy,1,a.m_pixelArea);
+            summary->Set(yy,2,a.m_area);
             summary->writeStr(yy,3,units);
-            summary->writeNum(yy,4,a.m_center.x());
-            summary->writeNum(yy,5,a.m_center.y());
+            summary->Set(yy,4,a.m_center.x());
+            summary->Set(yy,5,a.m_center.y());
 //            summary->writeStr(yy,8,items[i]->m_id);
 
             if (a.atlasLabel!=nullptr) {
-                summary->writeNum(yy,6,a.atlasLabel->index);
+                summary->Set(yy,6,a.atlasLabel->index);
               //  if (a.atlasLabel->area!=a.atlasLabel->area)
               //  qDebug() << a.atlasLabel->area;
-//                summary->writeNum(yy,6,a.atlasLabel->area);
+//                summary->Set(yy,6,a.atlasLabel->area);
                 summary->writeStr(yy,7,a.atlasLabel->name);
             }
 
@@ -435,31 +435,31 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
 
 
             sheet->writeStr(j,0, r.m_filename);
-            sheet->writeNum(j,1, regionPixelArea);
-            sheet->writeNum(j,2, regionArea);
+            sheet->Set(j,1, regionPixelArea);
+            sheet->Set(j,2, regionArea);
             sheet->writeStr(j,3, r.m_unit);
             if (Data::data.m_hasAreaSplitting)
                 sheet->writeStr(j,4, "N/A");
             else
-                sheet->writeNum(j,4, cnt);
-            sheet->writeNum(j,5, totalPixelArea);
-            sheet->writeNum(j,6, totalArea);
+                sheet->Set(j,4, cnt);
+            sheet->Set(j,5, totalPixelArea);
+            sheet->Set(j,6, totalArea);
             sheet->writeStr(j,7, r.m_unit);
 
 
             if (regionPixelArea>=1)
-                sheet->writeNum(j,8, totalPixelArea/(float)regionPixelArea);
+                sheet->Set(j,8, totalPixelArea/(float)regionPixelArea);
             else
-                sheet->writeNum(j,8, 0);
+                sheet->Set(j,8, 0);
 
 
 //            if (regionArea>=1)
-  //              sheet->writeNum(j,9, totalArea/(float)regionArea);
+  //              sheet->Set(j,9, totalArea/(float)regionArea);
 
             /*if (regionPixelArea>=1)
-                sheet->writeNum(j,8, totalPixelArea);
+                sheet->Set(j,8, totalPixelArea);
             if (r.m_regionArea>=1)
-                sheet->writeNum(j,9, totalArea);
+                sheet->Set(j,9, totalArea);
 */
 
 
@@ -485,37 +485,37 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
         int y = 3;
    //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
-            sheet->writeNum(y,0,a.m_pixelArea);
-            sheet->writeNum(y,1,a.m_area);
+            sheet->Set(y,0,a.m_pixelArea);
+            sheet->Set(y,1,a.m_area);
 
             sumPixel+=a.m_pixelArea;
             sumArea+=a.m_area;
             totalSumPixel+=a.m_pixelArea;
             totalSumArea+=a.m_area;
 
-            sheet->writeNum(y,3,a.m_center.x());
-            sheet->writeNum(y,4,a.m_center.y());
+            sheet->Set(y,3,a.m_center.x());
+            sheet->Set(y,4,a.m_center.y());
             if (a.m_areaHasReachedCutoff)
-                sheet->writeNum(y,8,1);
+                sheet->Set(y,8,1);
 
             if (a.atlasLabel!=nullptr) {
-                sheet->writeNum(y,5,a.atlasLabel->index);
-                //sheet->writeNum(y,6,a.atlasLabel->area);
+                sheet->Set(y,5,a.atlasLabel->index);
+                //sheet->Set(y,6,a.atlasLabel->area);
                 sheet->writeStr(y,6,a.atlasLabel->name);
             }
             y++;
 
 
-            summary->writeNum(yy,0,a.m_pixelArea);
-            summary->writeNum(yy,1,a.m_area);
-            summary->writeNum(yy,3,a.m_center.x());
-            summary->writeNum(yy,4,a.m_center.y());
+            summary->Set(yy,0,a.m_pixelArea);
+            summary->Set(yy,1,a.m_area);
+            summary->Set(yy,3,a.m_center.x());
+            summary->Set(yy,4,a.m_center.y());
 
             if (a.atlasLabel!=nullptr) {
-                summary->writeNum(yy,5,a.atlasLabel->index);
+                summary->Set(yy,5,a.atlasLabel->index);
               //  if (a.atlasLabel->area!=a.atlasLabel->area)
               //  qDebug() << a.atlasLabel->area;
-//                summary->writeNum(yy,6,a.atlasLabel->area);
+//                summary->Set(yy,6,a.atlasLabel->area);
                 summary->writeStr(yy,6,a.atlasLabel->name);
             }
 
@@ -524,9 +524,9 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
 
         }
 
-        sheet->writeNum(1,0,sumPixel);
-        sheet->writeNum(1,1,sumArea);
-        sheet->writeNum(1,2,items[i]->m_atlasAreaScaled);
+        sheet->Set(1,0,sumPixel);
+        sheet->Set(1,1,sumArea);
+        sheet->Set(1,2,items[i]->m_atlasAreaScaled);
         sumArea=0;
         sumPixel=0;
         sumTotalAtlasArea+=items[i]->m_atlasAreaScaled;

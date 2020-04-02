@@ -19,8 +19,10 @@ public:
     virtual long readLong(int i, int j) = 0;
     virtual QString readStr(int i, int j) = 0;
 
-    virtual void Set(int i,int j, float val) = 0;
+    virtual void Set(int i,int j, double val) = 0;
     virtual void Set(int i,int j, QString val) = 0;
+    virtual void Set(int i,int j, long val) = 0;
+    virtual void Set(int i,int j, int val) = 0;
 
     void writeStr(int i, int j, QString val) {
         Set(i,j,val);

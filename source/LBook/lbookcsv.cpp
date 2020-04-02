@@ -10,7 +10,7 @@ QString &LSheetCSV::get(int j, int i) {
     if (idx<m_data.count()) {
 //        return m_data[idx];
         bool isOk = false;
-        double someVal = m_data[idx].toFloat(&isOk);
+        double someVal = m_data[idx].toDouble(&isOk);
         if (isOk) {
             if ((someVal-floor(someVal)) ==0.0)
                 m_data[idx] = QString::number((int)someVal,10);
@@ -107,9 +107,23 @@ QString LSheetCSV::readStr(int i, int j)
 }
 
 
-void LSheetCSV::Set(int i, int j, float val)
+void LSheetCSV::Set(int i, int j, double val)
 {
-    set(i,j,QString::number(val,'f'));
+    set(i,j,QString::number(val,'d'));
+}
+
+void LSheetCSV::Set(int i, int j, long val)
+{
+    set(i,j,QString::number(val));
+/*    if (val==526157192) {
+        set(i,j,get(i,j) + " BLOOP ");
+        qDebug() << "LONG : " << val << QString::number(val) << get(i,j);
+    }*/
+}
+
+void LSheetCSV::Set(int i, int j, int val)
+{
+    set(i,j,QString::number(val));
 }
 
 void LSheetCSV::Set(int i, int j, QString val)

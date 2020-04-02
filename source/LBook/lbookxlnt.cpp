@@ -121,11 +121,27 @@ QString LSheetXlnt::readStr(int i, int j)
 }
 
 
-void LSheetXlnt::Set(int i, int j, float val)
+void LSheetXlnt::Set(int i, int j, double val)
 {
     if (val!=val)
         val=0;
     m_sheet->cell(Util::c2x(i,j)).value(val);
+}
+
+void LSheetXlnt::Set(int i, int j, int val)
+{
+    if (val!=val)
+        val=0;
+    m_sheet->cell(Util::c2x(i,j)).value(val);
+
+}
+
+void LSheetXlnt::Set(int i, int j, long val)
+{
+    if (val!=val)
+        val=0;
+    m_sheet->cell(Util::c2x(i,j)).value((double)val);
+
 }
 
 void LSheetXlnt::Set(int i, int j, QString val)

@@ -440,9 +440,11 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
         QFont fnt = QFont("Times", 8, QFont::Normal);
         fnt.setStyleStrategy(QFont::NoAntialias);
         painter.setFont(fnt);
+  //      long l = 312782592;
         for (Area& a: *m_areas) {
             if (a.atlasLabel!=nullptr)
                 painter.drawText(a.m_center*scale,  QString::number(a.atlasLabel->index));
+//            painter.drawText(a.m_center*scale,  QString::number(l));
         }
     }
     m_index->Save(filename);
