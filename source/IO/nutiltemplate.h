@@ -18,6 +18,8 @@
 #include <QDirIterator>
 #include "source/util/util.h"
 #include "ui_mainwindow.h"
+#include "source/LBook/lbookxlnt.h"
+#include <QSharedPointer>
 
 class NutilTemplateItem : public QObject {
     Q_OBJECT
@@ -117,7 +119,7 @@ public:
     void FillFromGUI();
     void Save(QString fname);
     void Load(QString fname);
-
+    void FillFromExcel(QTableWidget* tw);
 
     void Duplicator(QString directory);
 

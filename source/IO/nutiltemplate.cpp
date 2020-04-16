@@ -393,8 +393,9 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
             QPushButton* plus = new QPushButton("+");
             QPushButton* minus = new QPushButton("-");
             QPushButton* fill = new QPushButton("Fill files");
-            QPushButton* fillFromExcel = new QPushButton("From excel");
+            QPushButton* fillFromExcel = new QPushButton("From Excel");
             QPushButton* duplicate = new QPushButton("Duplicate");
+            QPushButton* clear = new QPushButton("Clear");
 
             QObject::connect(plus, &QPushButton::pressed, [=]() {
                 int y = tw->rowCount();
@@ -474,25 +475,21 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
                 }
             });
 
+            QObject::connect(clear, &QPushButton::pressed, [=]() {
+                QMessageBox msgBox;
+                msgBox.setText("Are you sure you want to delete all data from the file list?");
+                msgBox.setInformativeText("Clear list?");
+                msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+                msgBox.setDefaultButton(QMessageBox::Cancel);
+                int ret = msgBox.exec();
+                if (ret==QMessageBox::Ok) {
+                    tw->setRowCount(0);
+                }
+
+            });
 
             QObject::connect(fillFromExcel, &QPushButton::pressed, [=]() {
-                tw->setRowCount(0);
-                //FillFromExcel(ty);
-                /*int y = 0;
-                QDir directory(Get("transform_input_dir"));
-                QStringList images = directory.entryList(QStringList() << "*.tif" << "*.tiff" << "*.TIF" << "*.TIFF",QDir::Files);
-                for (QString fn :  images) {
-                    tw->insertRow(y);
-                    tw->setItem(y, 0, new QTableWidgetItem(fn));
-                    tw->setItem(y, 1, new QTableWidgetItem(fn.split(".").first()));
-                    tw->setItem(y, 2, new QTableWidgetItem("0"));
-                    tw->setItem(y, 3, new QTableWidgetItem("1"));
-                    tw->setItem(y, 4, new QTableWidgetItem("1"));
-
-
-                    y++;
-                }
-                */
+                FillFromExcel(tw);
             });
 
 
@@ -517,6 +514,7 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
             hl->addWidget(duplicate);
             hl->addWidget(fill);
             hl->addWidget(fillFromExcel);
+            hl->addWidget(clear);
 
             QStringList data = nti->m_value.split(",");
             int dataWidth = nti->m_matrixFieldWidth;
@@ -716,6 +714,39 @@ void NutilTemplate::Load(QString fname)
 
     }
     f.close();
+
+}
+
+void NutilTemplate::FillFromExcel(QTableWidget *tw)
+{
+    QString fileName = QFileDialog::getOpenFileName(nullptr,
+        tr("XLSX File"), "", tr("Excel files (*.xlsx)"));
+    if (fileName=="")
+        return;
+    if (!QFile::exists(fileName))
+        return;
+    QSharedPointer<LBook> book = QSharedPointer<LBookXlnt>(new LBookXlnt);
+    book->Load(fileName);
+    LSheet* l = book->GetSheet(0);
+    int row = 2;
+    int col = 0;
+
+    if (l==nullptr) {
+        qDebug() << "NutilTemplate::FillFromExcel book returned 0, should not happen "<<book->m_sheets.count();
+        return;
+    }
+
+    while (l->readStr(row,col)!="") {
+        int y = tw->rowCount();
+        tw->insertRow(y);
+        tw->setItem(y, 0, new QTableWidgetItem(l->readStr(row,col)));
+        tw->setItem(y, 1, new QTableWidgetItem(l->readStr(row,col+1)));
+        tw->setItem(y, 2, new QTableWidgetItem(QString::number(l->readNum(row,col+2))));
+        tw->setItem(y, 3, new QTableWidgetItem(QString::number(l->readNum(row,col+3))));
+        tw->setItem(y, 4, new QTableWidgetItem(QString::number(l->readNum(row,col+4))));
+        row++;
+    }
+
 
 }
 
