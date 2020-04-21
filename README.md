@@ -1,11 +1,13 @@
 # Nutil
 Nutil aims to both simplify and streamline the mechanism of pre-and-post processing 2D brain image data from mouse and rat. Nutil is developed as a stand-alone application that runs on all operating systems requiring little-to-no experience to execute. The user specifies the path to the input and output directories and the parameters for the pre-and post processing operations in the Nutil GUI. Pre-processing operations include conversion of images from JPEG/PNG format to tiled TIFF format, 2D transformations of extremely large tiled TIFF files (rotation, flipping and scaling), in addition to renaming, copying and downsizing. Post-processing is based on analysis of segmented images in the context of brain regions defined by a reference atlas, such as the Allen Mouse Brain reference atlas or the Waxholm Space Atlas of the Sprague Dawley rat brain. All functions operate in batch mode, and operate in parallel on multiple CPUs.
 # Getting started
+
+The Nutil software is available for download from https://www.nitrc.org/projects/nutil/
+
 Nutil is written in C++ using standard Qt libraries, and is optimised for parallel operations on multiple CPUs. Nutil does not require any installation, and does not currently utilise any GPU extensions. The external libraries that are used in Nutil are: 
 - Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/)
 - LibXLNT for Excel file I/O (https://github.com/tfussell/xlnt/)
 
-The Nutil software is available for download from https://www.nitrc.org/projects/nutil/
 # Prerequisites
 In order to compile from scratch, the following software components are also required:
 - The “lelib” library: https://github.com/leuat/lelib/).
