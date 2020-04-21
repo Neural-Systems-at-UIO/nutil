@@ -22,7 +22,7 @@ Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Jan G Bjaalie.
 # Licence
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 
-# Cite
+# References
 Nutil is a key component of the QUINT workflow for quantification and spatial analysis of labelled features in histological rodent brain section images: 
 
 Yates SC, Groeneboom NE, Coello C, et al. & Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075
