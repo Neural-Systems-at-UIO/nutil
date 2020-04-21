@@ -16,12 +16,16 @@ In order to compile from scratch, the following software components are also req
 
 Nutil can be compiled to work on Mac/Linux with little effort.
 Nutil contains an auto updater that checks the servers for a new version on each run. If a new 173 version is found, it is downloaded and extracted automatically.
-# Installing
 
 # Authors
 Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Jan G Bjaalie. 
 # Licence
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+
+# Cite
+Nutil is a key component of the QUINT workflow for quantification and spatial analysis of labelled features in histological rodent brain section images: 
+
+Yates SC, Groeneboom NE, Coello C, et al. & Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075
 
 # Acknowledgements
 Nutil was development with support from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 720270 (Human Brain Project SGA1) and Specific Grant Agreement No. 785907 (Human Brain Project SGA2).
