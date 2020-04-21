@@ -4,6 +4,8 @@ Nutil aims to both simplify and streamline the mechanism of pre-and-post process
 Nutil is written in C++ using standard Qt libraries, and is optimised for parallel operations on multiple CPUs. Nutil does not require any installation, and does not currently utilise any GPU extensions. The external libraries that are used in Nutil are: 
 - Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/)
 - LibXLNT for Excel file I/O (https://github.com/tfussell/xlnt/)
+
+The Nutil software is available for download from https://www.nitrc.org/projects/nutil/
 # Prerequisites
 In order to compile from scratch, the following software components are also required:
 - The “lelib” library: https://github.com/leuat/lelib/).
@@ -13,6 +15,7 @@ In order to compile from scratch, the following software components are also req
 Nutil can be compiled to work on Mac/Linux with little effort.
 Nutil contains an auto updater that checks the servers for a new version on each run. If a new 173 version is found, it is downloaded and extracted automatically.
 # Installing
+
 # Authors
 Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Jan G Bjaalie. 
 # Licence
