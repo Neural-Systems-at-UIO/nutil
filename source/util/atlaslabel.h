@@ -30,9 +30,9 @@ public:
     QMap<int, float> sliceAreaScaled;
 
 
-    float area = 0;
-    float areaScaled = 0;
-    float areaSum = 0;
+    double area = 0;
+    double areaScaled = 0;
+    double areaSum = 0;
 
 
     AtlasLabel (QStringList& s)

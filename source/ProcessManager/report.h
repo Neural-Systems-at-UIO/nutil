@@ -21,10 +21,10 @@ public:
     QVector<long> m_IDs;
     QVector<Area*> m_areasOfInterest;
     QString m_unit;
-    float m_totalPixelArea = 0;
-    float m_totalArea = 0;
-    float m_regionPixelArea = 0;
-    float m_regionArea = 0;
+    double m_totalPixelArea = 0;
+    double m_totalArea = 0;
+    double m_regionPixelArea = 0;
+    double m_regionArea = 0;
 
     Report() {}
     Report(QString filename, QStringList& ids, QColor c) {

@@ -147,6 +147,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
             sheet->Set(y,7,al->extra2.y());
             sheet->writeStr(y,8,units);
             sheet->writeStr(y,9,"0");
+
             //sheet->Set(y,,10);
 
             if (al->area!=0.0 && !isnan(al->extra2.x()/al->area))
@@ -241,10 +242,10 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     LBook* book = LBookFactory::Create(bType);
     LSheet* summary = book->GetSheet(0);
 
-    float sumPixel=0;
-    float sumArea = 0;
-    float totalSumPixel=0;
-    float totalSumArea = 0;
+    double sumPixel=0;
+    double sumArea = 0;
+    double totalSumPixel=0;
+    double totalSumArea = 0;
 
     summary->writeStr(0,0,"Section ID");
     summary->writeStr(0,1,"Object pixels");
@@ -346,12 +347,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
 {
     LMessage::lMessage.Log("Generating summary report");
     LBook* book = LBookFactory::Create(bType);
-    LSheet* summary = book->GetSheet(0);
+//    LSheet* summary = book->GetSheet(0);
 
-    float sumPixel=0;
-    float sumArea = 0;
-    float totalSumPixel=0;
-    float totalSumArea = 0;
 
     Counter cnt(items.count()*m_reports.count(),"");
 
