@@ -40,6 +40,8 @@ void Report::GenerateSheet(LBook* book, QString units)
 
 }
 
+
+
 void Reports::CreateSummary(AtlasLabels* atlasLabels)
 {
     LSheet* sheet = m_book->GetSheet(0);//CreateSheet("Summary");
@@ -67,7 +69,10 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
             sheet->Set(i,2, r.m_regionArea);
             sheet->writeStr(i,3, r.m_unit);
-            sheet->Set(i,4, r.m_areasOfInterest.count());
+            if (Data::data.m_hasAreaSplitting)
+                sheet->writeStr(i,4,"N/A");
+            else
+                sheet->Set(i,4, r.m_areasOfInterest.count());
             sheet->Set(i,5, r.m_totalPixelArea);
             sheet->Set(i,6, r.m_totalArea);
             sheet->writeStr(i,7, r.m_unit);
@@ -571,7 +576,6 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
 
                 }
             }
-
 
         }
     }
