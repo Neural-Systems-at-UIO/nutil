@@ -59,10 +59,12 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
         sheet->writeStr(0,8, "Load");
 
 
+
         int i = 1;
         for (Report& r : m_reports) {
             sheet->writeStr(i,0, r.m_filename);
             sheet->Set(i,1, r.m_regionPixelArea,0);
+
             sheet->Set(i,2, r.m_regionArea);
             sheet->writeStr(i,3, r.m_unit);
             sheet->Set(i,4, r.m_areasOfInterest.count());
@@ -211,7 +213,8 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 sheet->Set(y,0,al->index);
                 sheet->writeStr(y,1,al->name);
                 sheet->Set(y,2,al->sliceArea[i],0);
-                //            sheet->Set(y,3,al->areaScaled);
+                sheet->Set(y,3,al->sliceArea[i] * items[i]->m_pixelAreaScale );
+               // //            sheet->Set(y,3,al->areaScaled);
                 sheet->writeStr(y,4,units);
                 if (Data::data.m_hasAreaSplitting)
                     sheet->writeStr(y,5,"N/A");
