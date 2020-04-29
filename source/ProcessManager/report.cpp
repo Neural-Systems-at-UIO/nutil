@@ -212,6 +212,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 sheet->writeStr(y,1,al->name);
                 sheet->Set(y,2,al->sliceArea[i],0);
                 //            sheet->Set(y,3,al->areaScaled);
+                 //  The 0 here defines the number of decimal places for column 2
                 sheet->writeStr(y,4,units);
                 if (Data::data.m_hasAreaSplitting)
                     sheet->writeStr(y,5,"N/A");
