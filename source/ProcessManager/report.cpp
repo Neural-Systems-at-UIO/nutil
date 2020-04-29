@@ -365,8 +365,6 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
     for (int i=0;i<items.count();i++) {
 //        qDebug() << "  Generating section report : " << items[i]->m_reportName;
 
-
-
         LSheet* sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
 //        LSheet* sheet = book->CreateSheet("sheet"+QString::number(i));
         sheet->writeStr(0,0, "Region name");

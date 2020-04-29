@@ -42,6 +42,7 @@ void LSheetCSV::Save(QString basename)
     if (QFile::exists(fn))
         QFile::remove(fn);
 
+
     QFile file(fn);
     file.open(QIODevice::ReadWrite);
     QTextStream stream(&file);
@@ -56,6 +57,10 @@ void LSheetCSV::Save(QString basename)
 
 
     file.close();
+
+    if (QFile(fn).size()==0)
+        QFile::remove(fn);
+
 }
 
 
@@ -69,6 +74,10 @@ void LSheetCSV::SaveAsHTML(QString basename)
 
     if (QFile::exists(fn))
         QFile::remove(fn);
+
+    if (m_height==0 && m_width==0)
+        return;
+
 
     QFile file(fn);
     file.open(QIODevice::ReadWrite);
@@ -89,6 +98,10 @@ void LSheetCSV::SaveAsHTML(QString basename)
 
     stream << "</table>\n";
     file.close();
+
+    if (QFile(fn).size()==0)
+        QFile::remove(fn);
+
 }
 
 double LSheetCSV::readNum(int i, int j)
@@ -156,7 +169,6 @@ void LBookCSV::Save(QString filename)
         QDir().mkdir(dir);
 
     filename = dir + "/" + base + ".xslx";
-
 
 
     for (auto l: m_sheets)
