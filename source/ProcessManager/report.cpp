@@ -76,6 +76,8 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
             sheet->Set(i,5, r.m_totalPixelArea);
             sheet->Set(i,6, r.m_totalArea);
             sheet->writeStr(i,7, r.m_unit);
+            sheet->Set(i,8,0);
+
             if (r.m_regionPixelArea!=0)
                 sheet->Set(i,8, r.m_totalPixelArea/(float)r.m_regionPixelArea);
 
@@ -233,6 +235,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 sheet->Set(y,6,al->extra2.x(),0);
                 sheet->Set(y,7,al->extra2.y());
                 sheet->writeStr(y,8,units);
+
                 sheet->Set(y,9,0);
                  if (al->area!=0)
                     sheet->Set(y,9,al->extra2.x()/al->area);
@@ -451,6 +454,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             sheet->writeStr(j,7, r.m_unit);
 
 
+            sheet->Set(j,8,0);
             if (regionPixelArea>=1)
                 sheet->Set(j,8, totalPixelArea/(float)regionPixelArea);
             else
