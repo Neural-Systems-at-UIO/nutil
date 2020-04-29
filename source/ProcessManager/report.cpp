@@ -218,7 +218,9 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 sheet->Set(y,0,al->index);
                 sheet->writeStr(y,1,al->name);
                 sheet->Set(y,2,al->sliceArea[i],0);
+
                 sheet->Set(y,3,al->sliceArea[i] * items[i]->m_pixelAreaScale );
+
                 sheet->writeStr(y,4,units);
                 if (Data::data.m_hasAreaSplitting)
                     sheet->writeStr(y,5,"N/A");
