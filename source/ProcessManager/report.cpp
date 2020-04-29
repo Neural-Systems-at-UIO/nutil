@@ -223,7 +223,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
 
 
 
-                sheet->Set(y,6,al->extra2.x());
+                sheet->Set(y,6,al->extra2.x(),0);
                 sheet->Set(y,7,al->extra2.y());
                 sheet->writeStr(y,8,units);
                 sheet->Set(y,9,0);
@@ -289,7 +289,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
         int y = 1;
    //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
-            sheet->Set(y,0,a.m_pixelArea);
+            sheet->Set(y,0,a.m_pixelArea,0);
             sheet->Set(y,1,a.m_area);
             sheet->writeStr(y,2,units);
 
@@ -312,7 +312,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
 
 
             summary->writeStr(yy,0,items[i]->m_reportName);
-            summary->Set(yy,1,a.m_pixelArea);
+            summary->Set(yy,1,a.m_pixelArea,0);
             summary->Set(yy,2,a.m_area);
             summary->writeStr(yy,3,units);
             summary->Set(yy,4,a.m_center.x());
@@ -434,14 +434,14 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
 
 
             sheet->writeStr(j,0, r.m_filename);
-            sheet->Set(j,1, regionPixelArea);
+            sheet->Set(j,1, regionPixelArea,0);
             sheet->Set(j,2, regionArea);
             sheet->writeStr(j,3, r.m_unit);
             if (Data::data.m_hasAreaSplitting)
                 sheet->writeStr(j,4, "N/A");
             else
                 sheet->Set(j,4, cnt);
-            sheet->Set(j,5, totalPixelArea);
+            sheet->Set(j,5, totalPixelArea,0);
             sheet->Set(j,6, totalArea);
             sheet->writeStr(j,7, r.m_unit);
 
