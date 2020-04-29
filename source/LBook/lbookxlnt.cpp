@@ -121,7 +121,7 @@ QString LSheetXlnt::readStr(int i, int j)
 }
 
 
-void LSheetXlnt::Set(int i, int j, double val)
+void LSheetXlnt::Set(int i, int j, double val, int dec)
 {
     if (val!=val)
         val=0;

@@ -107,9 +107,12 @@ QString LSheetCSV::readStr(int i, int j)
 }
 
 
-void LSheetCSV::Set(int i, int j, double val)
+void LSheetCSV::Set(int i, int j, double val, int dec)
 {
-    set(i,j,QString::number(val,'d'));
+    if (dec==-1)
+        set(i,j,QString::number(val,'d'));
+    else
+        set(i,j,QString::number(val,'d',dec));
 }
 
 void LSheetCSV::Set(int i, int j, long val)

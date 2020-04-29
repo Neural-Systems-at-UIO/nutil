@@ -47,7 +47,7 @@ public:
     QString readStr(int i, int j) override;
 //    QColor readCol(int i, int j) override;
 
-    void Set(int i,int j, double val) override;
+    void Set(int i,int j, double val,int dec=-1) override;
     void Set(int i,int j, int val) override;
     void Set(int i,int j, long val) override;
     void Set(int i,int j, QString val) override;
