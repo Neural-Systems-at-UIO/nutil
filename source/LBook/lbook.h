@@ -18,8 +18,8 @@ public:
     virtual double readNum(int i, int j) = 0;
     virtual long readLong(int i, int j) = 0;
     virtual QString readStr(int i, int j) = 0;
-
     virtual void Set(int i,int j, double val, int dec=-1) = 0;
+        //added support for defining no. of decimal places
     virtual void Set(int i,int j, QString val) = 0;
     virtual void Set(int i,int j, long val) = 0;
     virtual void Set(int i,int j, int val) = 0;
