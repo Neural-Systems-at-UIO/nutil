@@ -448,7 +448,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             sheet->writeStr(0,8, "Load");
 */
 
-// Define column content (CustomRegion_slice reports)
+// Define column content (CustomRegion reports)
 
             sheet->writeStr(j,0, r.m_filename);
             sheet->Set(j,1, regionPixelArea,0);
