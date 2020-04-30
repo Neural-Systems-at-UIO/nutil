@@ -40,13 +40,15 @@ void Report::GenerateSheet(LBook* book, QString units)
 
 }
 
-
+// Create Report for all slices combined
 
 void Reports::CreateSummary(AtlasLabels* atlasLabels)
 {
     LSheet* sheet = m_book->GetSheet(0);//CreateSheet("Summary");
     Calculate(atlasLabels);
     sheet->setName("All");
+
+// Define column titles
 
     if (sheet) {
 
@@ -60,13 +62,12 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
         sheet->writeStr(0,7, "Area unit");
         sheet->writeStr(0,8, "Load");
 
-
+// Define column content
 
         int i = 1;
         for (Report& r : m_reports) {
             sheet->writeStr(i,0, r.m_filename);
             sheet->Set(i,1, r.m_regionPixelArea,0);
-
             sheet->Set(i,2, r.m_regionArea);
             sheet->writeStr(i,3, r.m_unit);
             if (Data::data.m_hasAreaSplitting)
@@ -89,6 +90,8 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
 }
 
+// Create Report for RefAtlasRegions all slices combined
+
 void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units, QString bookType)
 {
     LBook* book = LBookFactory::Create(bookType);
@@ -98,8 +101,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 //    if (dynamic_cast<LBookXlnt*>(book))
   //      book->RemoveSheet(1);
 
-
-
+// Define column titles (RefAtlasRegions_all)
 
     sheet->writeStr(0,0,"Region ID");
     sheet->writeStr(0,1,"Region Name");
@@ -137,6 +139,9 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 //    qSort(sorted.begin(), sorted.end(),
   //        [](const AtlasLabel* a, const AtlasLabel* b) -> bool { return a->extra2.y() > b->extra2.y(); });
 
+
+// Define column content (RefAtlasRegions_all)
+
     int y = 1;
     for (AtlasLabel* al: sorted) {
         // Header
@@ -171,6 +176,8 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
     book->Save(fileName);
 }
 
+// Create Reports for RefAtlasRegions_slices
+
 void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLabels, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, QString units, QString bookType)
 {
     LBook* book = LBookFactory::Create(bookType);
@@ -180,9 +187,6 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
 */
     //    qSort(sorted.begin(), sorted.end(),
     //        [](const AtlasLabel* a, const AtlasLabel* b) -> bool { return a->extra2.y() > b->extra2.y(); });
-
-
-
 
 
 
@@ -202,6 +206,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
             }
         }
 
+// Define column titles (RefAtlasRegions_slices)
 
         sheet->writeStr(0,0,"Region ID");
         sheet->writeStr(0,1,"Region Name");
@@ -214,28 +219,23 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
         sheet->writeStr(0,8,"Area unit");
         sheet->writeStr(0,9,"Load");
 
+// Define column content (RefAtlasRegions_slices)
+
         //        slice->
         for (AtlasLabel* al : atlasLabels->atlases) {
             {
                 sheet->Set(y,0,al->index);
                 sheet->writeStr(y,1,al->name);
                 sheet->Set(y,2,al->sliceArea[i],0);
-
                 sheet->Set(y,3,al->sliceArea[i] * items[i]->m_pixelAreaScale );
-
                 sheet->writeStr(y,4,units);
                 if (Data::data.m_hasAreaSplitting)
                     sheet->writeStr(y,5,"N/A");
                 else
                     sheet->Set(y,5,al->count);
-
-
-
-
                 sheet->Set(y,6,al->extra2.x(),0);
                 sheet->Set(y,7,al->extra2.y());
                 sheet->writeStr(y,8,units);
-
                 sheet->Set(y,9,0);
                  if (al->area!=0)
                     sheet->Set(y,9,al->extra2.x()/al->area);
