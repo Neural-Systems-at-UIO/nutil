@@ -3,6 +3,8 @@
 #include "source/IO/nifti.h"
 #include <QPointF>
 
+// Create Object report
+
 void Report::GenerateSheet(LBook* book, QString units)
 {
     LSheet* sheet = book->CreateSheet(m_filename);
@@ -11,7 +13,6 @@ void Report::GenerateSheet(LBook* book, QString units)
     {
         sheet->writeStr(0,0, "Pixel count");
         sheet->writeStr(0,1, "Area");
-
         sheet->writeStr(0, 2, "object_area_units");
         sheet->writeStr(0, 3, "Center X");
         sheet->writeStr(0, 4, "Center Y");
@@ -40,7 +41,7 @@ void Report::GenerateSheet(LBook* book, QString units)
 
 }
 
-// Create Report for all slices combined
+// Create Report for CustomRegions_all
 
 void Reports::CreateSummary(AtlasLabels* atlasLabels)
 {
@@ -48,7 +49,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
     Calculate(atlasLabels);
     sheet->setName("All");
 
-// Define column titles
+// Define column titles (CustomRegions_all)
 
     if (sheet) {
 
@@ -57,12 +58,12 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
         sheet->writeStr(0,2, "Region area");
         sheet->writeStr(0,3, "Area unit");
         sheet->writeStr(0,4, "Object count");
-        sheet->writeStr(0,5, "Object pixel");
+        sheet->writeStr(0,5, "Object pixels");
         sheet->writeStr(0,6, "Object area");
         sheet->writeStr(0,7, "Area unit");
         sheet->writeStr(0,8, "Load");
 
-// Define column content
+// Define column content (CustomRegions_all)
 
         int i = 1;
         for (Report& r : m_reports) {
@@ -90,7 +91,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
 }
 
-// Create Report for RefAtlasRegions all slices combined
+// Create Report for RefAtlasRegions_all slices combined
 
 void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units, QString bookType)
 {
@@ -221,12 +222,12 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
 
 // Define column content (RefAtlasRegions_slices)
 
-        //        slice->
         for (AtlasLabel* al : atlasLabels->atlases) {
             {
                 sheet->Set(y,0,al->index);
                 sheet->writeStr(y,1,al->name);
                 sheet->Set(y,2,al->sliceArea[i],0);
+                    // the 0 here here defines the number of decimal places for column 2
                 sheet->Set(y,3,al->sliceArea[i] * items[i]->m_pixelAreaScale );
                 sheet->writeStr(y,4,units);
                 if (Data::data.m_hasAreaSplitting)
@@ -249,6 +250,8 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
 
 }
 
+// Create object reports
+
 void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels, QString units, QString bType)
 {
     LBook* book = LBookFactory::Create(bType);
@@ -259,6 +262,8 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     double totalSumPixel=0;
     double totalSumArea = 0;
 
+// Define column titles (object_slice report)
+
     summary->writeStr(0,0,"Section ID");
     summary->writeStr(0,1,"Object pixels");
     summary->writeStr(0,2,"Object area");
@@ -268,10 +273,10 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     summary->writeStr(0,6,"Region ID");
     summary->writeStr(0,7,"Region Name");
     //summary->writeStr(0,8,"Slice");
+
     int yy=1;
     float sumTotalAtlasArea=0;
     Counter cnt(items.count(),"");
-
 
     summary->setName("All");
 
@@ -320,6 +325,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
             }
             y++;
 
+// Define column content
 
             summary->writeStr(yy,0,items[i]->m_reportName);
             summary->Set(yy,1,a.m_pixelArea,0);
@@ -355,31 +361,35 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
     //qDebug() << "SAVED";
 }
 
+// Create CustomRegions_slice reports
+
 void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, AtlasLabels *labels, QString bType)
 {
     LMessage::lMessage.Log("Generating summary report");
     LBook* book = LBookFactory::Create(bType);
 //    LSheet* summary = book->GetSheet(0);
 
-
     Counter cnt(items.count()*m_reports.count(),"");
-
 
     for (int i=0;i<items.count();i++) {
 //        qDebug() << "  Generating section report : " << items[i]->m_reportName;
 
         LSheet* sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
 //        LSheet* sheet = book->CreateSheet("sheet"+QString::number(i));
+
+
+// Define column titles (CustomRegion_slice reports)
+
         sheet->writeStr(0,0, "Region name");
-        sheet->writeStr(0,1, "Region pixel area");
+        sheet->writeStr(0,1, "Region pixels");
         sheet->writeStr(0,2, "Region area");
         sheet->writeStr(0,3, "Area unit");
         sheet->writeStr(0,4, "Object count");
-        sheet->writeStr(0,5, "Object pixel");
+        sheet->writeStr(0,5, "Object pixels");
         sheet->writeStr(0,6, "Object area");
-        sheet->writeStr(0,7, "Object area unit");
+        sheet->writeStr(0,7, "Area unit");
         sheet->writeStr(0,8, "Load");
-//        sheet->writeStr(0,9, "Load");
+
         int j=1;
         for (Report& r : m_reports) {
 
@@ -399,9 +409,6 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
        //         totalArea+=a.m_mrea;
 //                regionPixelArea+=a.m_pixelArea;
   //              regionArea+=a.m_area;
-
-
-
 
                 if (a.atlasLabel!=nullptr) {
 
@@ -426,8 +433,6 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             }
 //            qDebug() << "TOTAL AREA: " <<" WITH : " << totalArea;
 
-
-
  /*           sheet->writeStr(0,0, "Region name");
             sheet->writeStr(0,1, "Region pixel area");
             sheet->writeStr(0,2, "Region area");
@@ -438,8 +443,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             sheet->writeStr(0,7, "Object area unit");
             sheet->writeStr(0,8, "Load");
 */
-    //        sheet->writeStr(0,9, "Load");
 
+// Define column content (CustomRegion_slice reports)
 
             sheet->writeStr(j,0, r.m_filename);
             sheet->Set(j,1, regionPixelArea,0);
@@ -452,8 +457,6 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             sheet->Set(j,5, totalPixelArea,0);
             sheet->Set(j,6, totalArea);
             sheet->writeStr(j,7, r.m_unit);
-
-
             sheet->Set(j,8,0);
             if (regionPixelArea>=1)
                 sheet->Set(j,8, totalPixelArea/(float)regionPixelArea);
@@ -469,7 +472,6 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
             if (r.m_regionArea>=1)
                 sheet->Set(j,9, totalArea);
 */
-
 
             j++;
         }
@@ -541,6 +543,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
 
         */
 
+// Save files as .csv
+
     book->Save(filename);
     if (QFile::exists(filename+".csv"))
         QFile::remove(filename+".csv");
@@ -548,13 +552,13 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
 
 }
 
+// Create coordinate files in json format
+
 void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize)
 {
 
     QString o;
     o += "SCALE 3\n";
-
-
 
     for (int i=0;i<m_reports.count();i++) {
         QColor c = m_reports[i].m_color;
@@ -731,6 +735,7 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
     qDebug() << "done.";
 }
 
+// Create coordinate_slice json files
 
 void Reports::Create3DSliceJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize)
 {
