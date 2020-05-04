@@ -68,7 +68,7 @@ public:
     void FillAreaBFS(Area& area, const int i, const int j, const QColor& testColor, const QVector3D& spread,int pMax);
 //    void GenerateAreaReport(QString outExcelFile,Counter *counter);
 
-    void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, float scale, float areaScale, int slice, QString maskFile, QVector3D maskColor);
+    void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, double scale, double areaScale, int slice, QString maskFile, QVector3D maskColor);
     void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas, QVector<QVector<long>>, QVector<QColor> cols, QString maskFile,QColor m_customMaskInclusionColors);
     //void RenderAreas(QImage& image, QColor color);
     NLImage() {}
@@ -77,7 +77,7 @@ public:
     }
 
     void AnchorSingle(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale, int slice, QString maskFile, QVector3D maskColor);
-    void AnchorSplitting(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale, int slice, QString maskFile, QVector3D maskColor);
+    void AnchorSplitting(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, double pixelAreaScale, int slice, QString maskFile, QVector3D maskColor);
     NLIParent* image();
 };
 

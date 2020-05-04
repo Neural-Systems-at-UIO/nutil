@@ -151,7 +151,8 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
         {
             sheet->Set(y,0,al->index);
             sheet->writeStr(y,1,al->name);
-            sheet->Set(y,2,(int)al->area,0);
+            sheet->Set(y,2,al->area,0);
+
                 // the 0 here defines the number of decimal places displayed
             sheet->Set(y,3,al->areaScaled);
             sheet->writeStr(y,4,units);

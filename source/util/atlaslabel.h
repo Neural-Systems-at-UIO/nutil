@@ -22,17 +22,17 @@ public:
     QVector3D color;
     QVector3D extra;
     QVector3D extra2;
-    bool toggle;
-    float maxval;
-    int count;
+    bool toggle = false;
+    double maxval = 0;
+    int count = 0;
 
-    QMap<int, float> sliceArea;
-    QMap<int, float> sliceAreaScaled;
+    QMap<int, double> sliceArea;
+    QMap<int, double> sliceAreaScaled;
 
 
-    double area = 0;
-    double areaScaled = 0;
-    double areaSum = 0;
+    double area = 0.0;
+    double areaScaled = 0.0;
+    double areaSum = 0.0;
 
 
     AtlasLabel (QStringList& s)
@@ -53,7 +53,9 @@ public:
         name = name.replace("\"","");
         name = name.trimmed();
         toggle = true;
-
+        area = 0.0;
+        areaScaled = 0.0;
+        areaSum = 0.0;
     }
 };
 

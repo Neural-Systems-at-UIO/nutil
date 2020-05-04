@@ -304,13 +304,13 @@ void ProcessManagerPCounter::Execute()
             }
 
             m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
-            LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
+//            LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
             if (!Data::data.abort)
                 m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors);
             m_mainCounter.Tick();
         }
         m_processes[i]->m_counter.m_progress = 100;
-        LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
+//        LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
         //        LMessage::lMessage.Message("<a href=\"file://"+m_outputDir+"\">"+m_outputDir+"</a>");
 
         // 37 49 71
