@@ -32,7 +32,7 @@ public:
 
     float m_niftiSize;
     float m_xyzScale = 1.0;
-
+    bool m_outputRegionNumbers = true;
 
     bool m_outputNifti = false;
     QString m_output3DPoints = "no";

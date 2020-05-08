@@ -344,7 +344,7 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, double scale
 
 }
 */
-void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols, QString maskFile, QColor customMaskInclusionColors)
+void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols, QString maskFile, QColor customMaskInclusionColors, bool outputRegionID)
 {
     QRgb off = QColor(255,255,255,255).rgba();
 
@@ -465,7 +465,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
 
     NLIQImage* qi = dynamic_cast<NLIQImage*>(m_index);
-    if (qi!=nullptr && !Data::data.isConsole) {
+    if (qi!=nullptr && !Data::data.isConsole && outputRegionID) {
         QPainter painter(&qi->m_image);
         QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
         painter.setPen(penHText);

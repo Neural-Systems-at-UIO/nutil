@@ -306,7 +306,7 @@ void ProcessManagerPCounter::Execute()
             m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
 //            LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
             if (!Data::data.abort)
-                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors);
+                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors, m_outputRegionNumbers);
             m_mainCounter.Tick();
         }
         m_processes[i]->m_counter.m_progress = 100;
@@ -487,6 +487,10 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_pixelCutoffMax = data->Get("object_max_size").toFloat();
     m_areaScale = data->Get("global_pixel_scale").toFloat();
     m_areaSplitting = data->Get("object_splitting").toLower()=="yes"?1:0;
+
+    m_outputRegionNumbers = data->Get("output_region_id").toLower()=="no"?false:true;
+
+
     Data::data.m_hasAreaSplitting = m_areaSplitting;
     if (m_dataType==QUINT)
         m_anchorFile = data->Get("xml_anchor_file");

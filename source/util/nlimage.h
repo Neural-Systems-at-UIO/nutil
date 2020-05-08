@@ -69,7 +69,7 @@ public:
 //    void GenerateAreaReport(QString outExcelFile,Counter *counter);
 
     void CountAtlasArea(Flat2D& refImage, AtlasLabels& labels, double scale, double areaScale, int slice, QString maskFile, QVector3D maskColor);
-    void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas, QVector<QVector<long>>, QVector<QColor> cols, QString maskFile,QColor m_customMaskInclusionColors);
+    void SaveAreasImage(QString filename,Counter *counter, QVector<Area>* areas, QVector<QVector<long>>, QVector<QColor> cols, QString maskFile,QColor m_customMaskInclusionColors,bool outputRegionID);
     //void RenderAreas(QImage& image, QColor color);
     NLImage() {}
     NLImage(QString f) {
