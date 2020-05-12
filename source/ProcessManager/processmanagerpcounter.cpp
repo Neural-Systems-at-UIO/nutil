@@ -44,7 +44,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         LoadXML();
 
     if (m_pixelCutoffMax<=m_pixelCutoff) {
-        LMessage::lMessage.Error("Error: max pixel cutoff cannot be lower than lower pixel cutoff! ");
+        LMessage::lMessage.Error("Error: max pixel cutoff cannot be lower than lower pixel cutoff.");
         m_processItems.clear();
         return false;
 
@@ -61,15 +61,15 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
     // Unique ID format
 
-    QString regexp = "_s[0-9]*";
+    m_regexp = "_s[0-9]*";
 
     if (m_patternType=="user")
-        regexp = m_files[0];
+        m_regexp = m_files[0];
 
 
 
     if (m_patternType == "_sXXX" || m_patternType=="user") {
-        QRegularExpression re(regexp);
+        QRegularExpression re(m_regexp);
         QStringList newFiles;
         for (QString s: files) {
 //            qDebug() << "Testing file " << s ;
@@ -165,7 +165,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         }
         for (int j=i+1;j<m_processItems.count();j++) {
             if (m_processItems[j]->m_reportName.toLower()==m_processItems[i]->m_reportName.toLower()) {
-                LMessage::lMessage.Error("Error: Reports have to have unique names for : " + m_processItems[i]->m_reportName);
+                LMessage::lMessage.Error("Error: Report must have unique names for : " + m_processItems[i]->m_reportName);
                 return false;
 
             }
@@ -174,7 +174,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 
     if (m_processItems.count()==0) {
-        LMessage::lMessage.Error("Error: You need to specify at least one input file. Press the help button for instructions. ");
+        LMessage::lMessage.Error("Error: You need to specify at least one input file. Press the help button for instructions, Nutil is currently searching for files that contain the following regular expression format: '"+m_regexp + "'. Please make sure that this format matches the IDs in your input files.");
 
     }
 

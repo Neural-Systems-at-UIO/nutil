@@ -15,6 +15,7 @@ public:
     QString m_atlasDir;
     QString m_labelFile;
     QString m_anchorFile;
+    QString m_regexp;
     QString m_reportSheetName;
     QString m_units = "mm";
     QString m_patternType;
