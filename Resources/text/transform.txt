@@ -5,7 +5,7 @@ transform_input_dir; 0;;Input folder; directory; Default value
 transform_output_dir; 0;;Output folder; directory;
 auto_crop; 0;;Auto cropping ; list; Yes, No; yes
 transform_background_color; 0;;Image background colour ; color ; 255,255,255,5
-transform_color_spread; 0;;Background colour spread; number, 5
+transform_color_spread; 0;;Background colour range; number, 5
 transform_files; 0;;List of images; matrixfield,5;
 only_thumbnails; 1;;Only create thumbnails; list; Yes, No; No
 transform_thumbnail_size; 1;;Thumbnail size: ; number; 0.05
