@@ -73,5 +73,6 @@
         <file>Resources/CustomRegions/CustomRegionMouse_2017.xlsx</file>
         <file>Resources/CustomRegions/CustomRegionRat_v2.xlsx</file>
         <file>Resources/CustomRegions/CustomRegionRat_v3.xlsx</file>
+        <file>Resources/text/help/quantifier/output_region_id.rtf</file>
     </qresource>
 </RCC>
