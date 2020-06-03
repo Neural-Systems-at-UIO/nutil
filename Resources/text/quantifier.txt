@@ -23,5 +23,5 @@ coordinate_extraction; 1; analysis_type=QUINT;Coordinate extraction;list; All, N
 pixel_density; 1; analysis_type=QUINT;Point cloud density ; number; 1
 nifti_size; 1; analysis_type=QUINT;Nifti size ; list; 0,64,128,256,512; 0
 output_region_id; 1; ; Write region ID text to image files; list; Yes, No; Yes
-pattern_match ; 1; ;Unique ID format; list; _sXXX, user, files; _sXXX
-files; 1; ;Other ID format; textfield;
+pattern_match ; 1; ;Unique ID format; list; _sXXX, user; _sXXX
+files; 1; ;RegEx for user ID (optional); textfield;
