@@ -1,10 +1,15 @@
 <h2>Thumbnail size</h2>
-Resize factor or width of image in pixels.
+Specify either an x/y scaling factor or the desired width of the thumbnails in pixels.
 <hr>
-Resize factor: less than 1 (for example: 0.5)
 <br>
-Width of image: greater than 1 (for example: 1000)
+<b>Scaling factor:</b> a number less than 1 is interpreted as a scaling factor (for example: 0.5 is scaling by half on x and y axis)
+<br><br>
+<b>Width of image:</b> a number greater than 1 is interpreted as image width (for example: 1000 pixels)
 <br>
+<h3>Extra information:</h3>
+<br><br>
+- Thumbnails are generated from the transformed images.
 <br>
-NOTE: Thumbnails are generated based on the transformed images.
-
+- By scaling the length of the image along the X and Y axes by 0.5 respectively, the overall image area is reduced by 0.25 (1/4).
+<br>
+- By scaling the length of the image along the X and Y axes by 0.1 respectively, the overall image area is reduced by 0.01 (1/100).
