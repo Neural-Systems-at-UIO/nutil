@@ -125,6 +125,7 @@ void MainWindow::on_btnStart_clicked()
 
     if (m_nt.m_openFile == "")
         return;
+
     m_timer = QElapsedTimer();
      m_timer.start();
 
@@ -138,6 +139,9 @@ void MainWindow::on_btnStart_clicked()
     ui->tabMain->setCurrentIndex(2);
 
 }
+
+
+
 
 void MainWindow::PrivateUpdate()
 {

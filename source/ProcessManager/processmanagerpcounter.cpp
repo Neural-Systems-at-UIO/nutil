@@ -306,7 +306,7 @@ void ProcessManagerPCounter::Execute()
             m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
 //            LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
             if (!Data::data.abort)
-                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors, m_outputRegionNumbers);
+                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+m_prefix+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors, m_outputRegionNumbers);
             m_mainCounter.Tick();
         }
         m_processes[i]->m_counter.m_progress = 100;
@@ -358,14 +358,14 @@ void ProcessManagerPCounter::Execute()
         }
 
         if (m_output3DPoints=="all") {
-            reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
-            reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
+            reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
+            reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale);
         }
         if (m_output3DPoints=="summary") {
-            reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
+            reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
         }
         if (m_output3DPoints=="slices") {
-            reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+"3D_slice_", m_processes, m_processItems, m_xyzScale);
+            reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale);
         }
 
         //  m_infoText = "Creating 3D point cloud";

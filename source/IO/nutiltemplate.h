@@ -21,6 +21,8 @@
 #include "source/LBook/lbookxlnt.h"
 #include <QSharedPointer>
 
+
+
 class NutilTemplateItem : public QObject {
     Q_OBJECT
 public:
@@ -48,6 +50,7 @@ public:
         QStringList l = col.trimmed().simplified().split(",");
         return QColor(l[0].toFloat(),l[1].toFloat(),l[2].toFloat(),l[3].toFloat());
     }
+
 
     NutilTemplateItem(NutilTemplateItem* nti) {
         m_matrixFieldWidth = nti->m_matrixFieldWidth;
