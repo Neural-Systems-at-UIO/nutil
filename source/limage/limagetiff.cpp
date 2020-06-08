@@ -1,6 +1,10 @@
 #include "limagetiff.h"
 #include <QImage>
+#ifndef TARGET_OS_MAC
 #include <omp.h>
+#else
+#include "/usr/local/opt/libomp/include/omp.h"
+#endif
 
 LImageTiff::LImageTiff()
 {

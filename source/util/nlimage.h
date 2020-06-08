@@ -8,7 +8,15 @@
 
 #include "source/util/area.h"
 #include "source/util/atlaslabel.h"
+
+
+#ifndef TARGET_OS_MAC
 #include "xlnt/xlnt.hpp"
+#else
+#include "/usr/local/include/xlnt/xlnt.hpp"
+#endif
+
+
 #include "source/util/counter.h"
 #include "source/util/flat2d.h"
 

@@ -191,13 +191,13 @@ float Util::getAmountOfInstalledMemory()
     QString memory = p.readAllStandardOutput();
     return memory.toLong() / 1024.0/1024.0;
 #elif __APPLE__
-    Mac (sysctl)
+/*    Mac (sysctl)
 
     QProcess p;
     p.start("sysctl", QStringList() << "kern.version" << "hw.physmem");
     p.waitForFinished();
     QString system_info = p.readAllStandardOutput();
-    p.close();
+    p.close();*/
 #endif
 }
 

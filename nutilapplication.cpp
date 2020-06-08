@@ -7,7 +7,11 @@
 #include <QImageWriter>
 #include <QDebug>
 #include "source/util/util.h"
+#ifndef TARGET_OS_MAC
 #include <omp.h>
+#else
+#include "/usr/local/opt/libomp/include/omp.h"
+#endif
 #include "source/util/counter.h"
 #include "source/nauto.h"
 

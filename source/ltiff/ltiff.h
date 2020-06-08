@@ -6,8 +6,15 @@
 #include <QString>
 #include <QDebug>
 #include <QVector>
+
+#ifndef TARGET_OS_MAC
 #include <tiff.h>
 #include <tiffio.h>
+#else
+#include "/usr/local/opt/libtiff/include/tiff.h"
+#include "/usr/local/opt/libtiff/include/tiffio.h"
+#endif
+
 #include <QColor>
 #include "source/util/counter.h"
 #include <source/util/lgraph.h>

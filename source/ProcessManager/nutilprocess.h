@@ -3,7 +3,11 @@
 
 #include <QString>
 #include <QDebug>
+#ifndef TARGET_OS_MAC
 #include <omp.h>
+#else
+#include "/usr/local/opt/libomp/include/omp.h"
+#endif
 #include "source/util/counter.h"
 #include "source/ltiff/ltiff.h"
 #include "source/util/util.h"

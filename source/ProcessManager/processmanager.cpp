@@ -1,5 +1,4 @@
 #include "processmanager.h"
-#include <omp.h>
 
 ProcessManager::ProcessManager()
 {

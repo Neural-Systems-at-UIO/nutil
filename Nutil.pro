@@ -29,6 +29,21 @@ win32-msvc*{
     QMAKE_CXXFLAGS += -openmp
 }
 
+
+macx {
+    QMAKE_CXXFLAGS += -openmp
+    QMAKE_CXXFLAGS += -fast
+    INCLUDEPATH += /usr/local/include/
+    LIBS += -L/usr/local/lib/
+
+    LIBS += -ltiff
+
+    LIBS += -L$$PWD/lib/    -lxlnt
+    LIBS += -L/usr/local/opt/libomp/lib -lomp
+
+}
+
+
 QMAKE_CXXFLAGS_DEBUG -= -O2
 QMAKE_CXXFLAGS_RELEASE += -Os
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
