@@ -13,7 +13,7 @@ void ProcessManagerResize::Execute()
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {
-        m_processes.append(new NutilProcess());
+        m_processes.append(QSharedPointer<NutilProcess>(QSharedPointer<NutilProcess>(new NutilProcess())));
     }
     SetParameters();
 
@@ -28,7 +28,7 @@ void ProcessManagerResize::Execute()
 
     for (int i=0;i<m_processes.length();i++) {
         QImage img;
-        ProcessItem* pi = m_processItems[i];
+        QSharedPointer<ProcessItem> pi = m_processItems[i];
         img.load(pi->m_inFile);
 
         float w = img.width();

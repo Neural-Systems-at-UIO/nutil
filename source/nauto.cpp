@@ -83,10 +83,8 @@ void Nauto::Execute()
     m_status = Status::Working;
     Util::CancelSignal = false;
 
-    if (m_pm!=nullptr)
-        delete m_pm;
 
-    m_pm = ProcessManagerFactory::CreateProcessManager(m_type);
+    m_pm = QSharedPointer<ProcessManager>(ProcessManagerFactory::CreateProcessManager(m_type));
 
     if (m_pm==nullptr) {
         LMessage::lMessage.Error("Unknown operation type specified in sheet: "+m_type);

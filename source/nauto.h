@@ -10,7 +10,7 @@
 #include "source/LBook/lbook.h"
 #include "source/LBook/lbookxlnt.h"
 #include "source/IO/nutiltemplate.h"
-
+#include <QSharedPointer>
 
 //using namespace libxl;
 
@@ -34,7 +34,7 @@ public:
     QString m_filename;
     QString m_sheetIndex;
     int m_elapsedTime;
-    ProcessManager* m_pm = nullptr;
+    QSharedPointer<ProcessManager> m_pm = nullptr;
 
     Counter m_mainCounter;
 

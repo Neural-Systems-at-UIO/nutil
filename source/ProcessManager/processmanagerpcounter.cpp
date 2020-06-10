@@ -9,7 +9,7 @@ float ProcessManagerPCounter::CalculateRamNeededInGB()
     if (m_processItems.count()==0)
         return 0;
 
-    ProcessItem* pi = m_processItems[0];
+    QSharedPointer<ProcessItem> pi = m_processItems[0];
     float singleFile = Util::getImageFileSizeInGB(m_inputDir+  pi->m_inFile +"."+pi->m_filetype);
     //    qDebug() << "Singlefile: " << singleFile;
     return singleFile*m_numProcessors*2.5; // 3 files open at the same time... around
@@ -128,7 +128,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 
             QString inFileSingle = inFile.split('.')[0];
-            ProcessItem* pi = new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx",0, QPointF(1,1), inFileSingle, m_outputDir);
+            auto pi = QSharedPointer<ProcessItem>(new ProcessItem(inFileSingle, m_outputDir+ inFileSingle + ".xlsx",0, QPointF(1,1), inFileSingle, m_outputDir));
             pi->m_pixelAreaScale = m_areaScale;//*m_sheet->readNum(y,x+1);
 
             if (pi->m_pixelAreaScale==0) {
@@ -213,7 +213,7 @@ void ProcessManagerPCounter::Execute()
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {
-        m_processes.append(new NutilProcess());
+        m_processes.append(QSharedPointer<NutilProcess>(new NutilProcess()));
     }
     SetParameters();
 
@@ -236,7 +236,7 @@ void ProcessManagerPCounter::Execute()
 
 #pragma omp parallel for num_threads(m_numProcessors)
     for (int i=0;i<m_processes.length();i++) {
-        ProcessItem* pi = m_processItems[i];
+        auto pi = m_processItems[i];
 
 
         //        qDebug() << "Pcounter: " << pi->m_inFile;
@@ -377,16 +377,16 @@ void ProcessManagerPCounter::Execute()
 
     }
     //    QVector<ProcessItem*> m_processItems;
-    //  QVector<NutilProcess*> m_processes;
+    //  QVector<QSharedPointer<NutilProcess>> m_processes;
     reports = Reports();
 
 
     m_processFinished = true;
-    for (int i=0;i<m_processItems.count();i++)
+/*    for (int i=0;i<m_processItems.count();i++)
         delete m_processItems.takeAt(i);
     for (int i=0;i<m_processes.count();i++)
         delete m_processes.takeAt(i);
-
+*/
     m_processItems.clear();
     m_processes.clear();
 
