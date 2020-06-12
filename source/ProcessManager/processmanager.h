@@ -20,8 +20,8 @@ public:
 
     bool m_processFinished;
 
-    QVector<ProcessItem*> m_processItems;
-    QVector<NutilProcess*> m_processes;
+    QVector<QSharedPointer<ProcessItem>> m_processItems;
+    QVector<QSharedPointer<NutilProcess>> m_processes;
 
 
     QString m_excelInputFilename="";

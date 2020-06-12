@@ -23,7 +23,7 @@ bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
         }
         QString outFile = inFile.split(".").first()+".tif";
 
-        m_processItems.append(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, 0, QPointF(1,1), outFile, m_outputDir));
+        m_processItems.append(QSharedPointer<ProcessItem>(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, 0, QPointF(1,1), outFile, m_outputDir)));
 //        return true;
     }
     if (!Verify()) {
@@ -41,7 +41,7 @@ void ProcessManagerTiffCreator::Execute()
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {
-        m_processes.append(new NutilProcess());
+        m_processes.append(QSharedPointer<NutilProcess>(new NutilProcess()));
     }
     SetParameters();
 
@@ -54,7 +54,7 @@ void ProcessManagerTiffCreator::Execute()
 
     for (int i=0;i<m_processes.length();i++) {
         QImage img;
-        ProcessItem* pi = m_processItems[i];
+        auto pi = m_processItems[i];
         if (pi->m_inFile.toLower().contains(".tif")) {
             LTiff t;
 //            qDebug() << "HERE";

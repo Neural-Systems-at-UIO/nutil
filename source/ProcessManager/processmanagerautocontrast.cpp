@@ -41,7 +41,7 @@ void ProcessManagerAutoContrast::Execute()
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {
-        m_processes.append(new NutilProcess());
+        m_processes.append(QSharedPointer<NutilProcess>(QSharedPointer<NutilProcess>(new NutilProcess())));
     }
     SetParameters();
 
@@ -53,7 +53,7 @@ void ProcessManagerAutoContrast::Execute()
     m_mainCounter = Counter(m_processes.length(),"",false);
 #pragma omp parallel for
     for (int i=0;i<m_processes.length();i++) {
-        ProcessItem* pi = m_processItems[i];
+        QSharedPointer<ProcessItem> pi = m_processItems[i];
         m_processes[i]->AutoContrast(pi->m_inFile, pi->m_outFile, m_compression, m_background, m_outputDir);
         m_mainCounter.Tick();
     }

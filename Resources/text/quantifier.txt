@@ -20,6 +20,7 @@ output_report_type; 1; ;Output report type; list; CSV, HTML; CSV
 custom_region_type; 1; analysis_type=QUINT; Customised reports; list; Default, Custom; Default
 custom_region_file; 1; custom_region_type=Custom,analysis_type=QUINT ; Custom report file;  file;
 coordinate_extraction; 1; analysis_type=QUINT;Coordinate extraction;list; All, None, Slices, Summary; All
+coordinate_random_distortion; 1; analysis_type=QUINT;Coordinate random distortion;number; 0
 pixel_density; 1; analysis_type=QUINT;Point cloud density ; number; 1
 nifti_size; 1; analysis_type=QUINT;Nifti size ; list; 0,64,128,256,512; 0
 output_region_id; 1; ; Write region ID text to image files; list; Yes, No; Yes

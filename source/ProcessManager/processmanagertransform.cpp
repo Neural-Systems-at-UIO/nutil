@@ -75,7 +75,7 @@ bool ProcessManagerTransform::Build(NutilTemplate* data)
 //        qDebug() << "Scales : " << scaleX << scaleY;
 
         QPointF scale(scaleX, scaleY);
-        m_processItems.append(new ProcessItem(inFile, m_outputDir+ outFile, angle, scale, outFile, m_outputDir));
+        m_processItems.append(QSharedPointer<ProcessItem>(new ProcessItem(inFile, m_outputDir+ outFile, angle, scale, outFile, m_outputDir)));
         y++;
 //        return true;
     }
@@ -99,7 +99,7 @@ void ProcessManagerTransform::Execute()
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {
-        m_processes.append(new NutilProcess());
+        m_processes.append(QSharedPointer<NutilProcess>(new NutilProcess()));
     }
     SetParameters();
 
@@ -115,7 +115,7 @@ void ProcessManagerTransform::Execute()
 #pragma omp parallel for num_threads(m_numProcessors)
 
     for (int i=0;i<m_processes.length();i++) {
-        ProcessItem* pi = m_processItems[i];
+        QSharedPointer<ProcessItem> pi = m_processItems[i];
 
         //m_processes[i]->InitializeCounter(pi->m_inFile, m_autoClip, m_thumbnailSize);
 

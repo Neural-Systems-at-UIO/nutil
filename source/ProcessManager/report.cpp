@@ -94,7 +94,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
 // Create Report for RefAtlasRegions_all slices combined
 
-void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, QVector<NutilProcess*> processes, QVector<ProcessItem*> items, QString units, QString bookType)
+void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType)
 {
     LBook* book = LBookFactory::Create(bookType);
 //    LSheet* sheet = book->CreateSheet("All");
@@ -122,7 +122,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
         al->count = 0;
 
     }
-    for (NutilProcess* process: processes) {
+    for (QSharedPointer<NutilProcess> process: processes) {
         for (Area& a: process->m_areas) {
             //if (a->atlasLabel->index==al->index)
             {
@@ -182,7 +182,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
 // Create Reports for RefAtlasRegions_slices
 
-void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLabels, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, QString units, QString bookType)
+void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLabels, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType)
 {
     LBook* book = LBookFactory::Create(bookType);
     /*   QVector<AtlasLabel*> sorted;
@@ -255,7 +255,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
 
 // Create object reports
 
-void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, AtlasLabels* labels, QString units, QString bType)
+void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, AtlasLabels* labels, QString units, QString bType)
 {
     LBook* book = LBookFactory::Create(bType);
     LSheet* summary = book->GetSheet(0);
@@ -368,7 +368,7 @@ void Reports::CreateSliceReports(QString filename , QVector<NutilProcess*> proce
 
 // Create CustomRegions_slice reports
 
-void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, AtlasLabels *labels, QString bType)
+void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, AtlasLabels *labels, QString bType)
 {
     LMessage::lMessage.Log("Generating summary report");
     LBook* book = LBookFactory::Create(bType);
@@ -561,7 +561,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<NutilProcess *> proc
 
 // Create coordinate files in json format
 
-void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize)
+void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize)
 {
 
     QString o;
@@ -602,7 +602,7 @@ void Reports::Create3DSummary(QString filename , QVector<NutilProcess*> processe
 }
 
 
-void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize)
+void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize)
 {
 
     QString o;
@@ -681,7 +681,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<NutilProcess*> proc
         LMessage::lMessage.Message("WARNING: Some of the area matrices were not initialized. Please make sure that you are using a correct anchor xml file!");
 }
 
-void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, QVector<ProcessItem *> items, int size)
+void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, int size)
 {
     Nifti n;
     n.Create(QVector3D(size,size,size),Nifti::DataType::DT_RGB, 24);
@@ -744,7 +744,7 @@ void Reports::CreateNifti(QString filename, QVector<NutilProcess *> processes, Q
 
 // Create coordinate_slice json files
 
-void Reports::Create3DSliceJson(QString filename , QVector<NutilProcess*> processes, QVector<ProcessItem*> items, float xyzSize)
+void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize)
 {
 
 
@@ -844,11 +844,11 @@ void Reports::Create3DSliceJson(QString filename , QVector<NutilProcess*> proces
 }
 
 
-void Report::FindAreasOfInterest(QVector<NutilProcess *>& processes)
+void Report::FindAreasOfInterest(QVector<QSharedPointer<NutilProcess>>& processes)
 {
     m_areasOfInterest.clear();
     for (long i : m_IDs) {
-        for (NutilProcess* np : processes)
+        for (QSharedPointer<NutilProcess> np : processes)
             for (Area& a: np->m_areas)
                 if (a.atlasLabel!=nullptr) {
 /*                    if (i==182305705)
@@ -922,7 +922,7 @@ void Reports::CreateBook(QString filename, QString type)
 
 }
 
-void Reports::CreateSheets(QVector<NutilProcess*>& processes,AtlasLabels* atlasLabels, QString units, bool hasAreaSplitting)
+void Reports::CreateSheets(QVector<QSharedPointer<NutilProcess>>& processes,AtlasLabels* atlasLabels, QString units, bool hasAreaSplitting)
 {
     if (!m_book)
         return;

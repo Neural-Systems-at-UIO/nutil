@@ -53,7 +53,7 @@ void AreaFinder3D::Execute()
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {
-        m_processes.append(new NutilProcess());
+        m_processes.append(QSharedPointer<NutilProcess>(new NutilProcess()));
     }
 
     if (m_processes.length()==0)
@@ -73,7 +73,7 @@ void AreaFinder3D::Execute()
 
 //#pragma omp parallel for
     for (int i=0;i<m_processes.length();i++) {
-        ProcessItem* pi = m_processItems[i];
+        QSharedPointer<ProcessItem> pi = m_processItems[i];
 
 /*        if (atlasFile=="") {
             LMessage::lMessage.Error("Could not find any atlas flat file!");
