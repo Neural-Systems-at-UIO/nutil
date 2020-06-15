@@ -15,6 +15,7 @@
 #include "source/IO/nutiltemplate.h"
 #include "source/dialognewfile.h"
 #include "source/dialoggeneratedata.h"
+#include <QSharedPointer>
 
 namespace Ui {
     class MainWindow;
@@ -25,10 +26,11 @@ class UpdateThread : public QThread
 {
     Q_OBJECT
 public:
-    Nauto* m_nauto;
+
+    QSharedPointer<Nauto> m_nauto;
 
     bool quit = false;
-    void Init(Nauto* n) {
+    void Init(QSharedPointer<Nauto> n) {
         m_nauto = n;
     }
 
@@ -40,11 +42,12 @@ public:
 
         while (!quit) {
             msleep(25);
-
-            m_nauto->BuildInfo();
-            emit TextChanged(m_nauto->m_mainInfo);
-            if (LMessage::lMessage.changed())
-               emit MessageChanged(LMessage::lMessage.Build());
+            if (m_nauto!=nullptr) {
+                m_nauto->BuildInfo();
+                emit TextChanged(m_nauto->m_mainInfo);
+                if (LMessage::lMessage.changed())
+                    emit MessageChanged(LMessage::lMessage.Build());
+            }
         }
 
     }
@@ -58,14 +61,15 @@ signals:
 class WorkerThread : public QThread
 {
 public:
-    Nauto* m_nauto;
-    void Init(Nauto *n) {
+    QSharedPointer<Nauto> m_nauto;
+    void Init(QSharedPointer<Nauto> n) {
         m_nauto = n;
     }
 
     Q_OBJECT
     void run()  {
-        m_nauto->Execute();
+        if (m_nauto!=nullptr)
+            m_nauto->Execute();
     }
 
 };
@@ -138,10 +142,10 @@ private slots:
     void on_actionNutil_Duplicator_triggered();
 
 private:
-    Nauto m_nauto;
+    QSharedPointer<Nauto> m_nauto;
     NutilTemplate m_nt;
     UpdateThread* m_updateThread;
-    WorkerThread* m_workerThread = nullptr;
+    QSharedPointer<WorkerThread> m_workerThread = nullptr;
 
     QElapsedTimer m_timer;
 

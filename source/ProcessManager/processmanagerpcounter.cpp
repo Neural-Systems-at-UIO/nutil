@@ -31,7 +31,6 @@ void ProcessManagerPCounter::LoadXML()
 
 bool ProcessManagerPCounter::Build(NutilTemplate* data)
 {
-
     m_processItems.clear();
     Data::data.m_globalMessage="";
 
@@ -336,46 +335,7 @@ void ProcessManagerPCounter::Execute()
 
 
     if (!Data::data.abort)
-    {
-
-
-        QString RefAtlasname = "RefAtlasRegions.xlsx";
-        if (m_dataType != QUINT) {
-            RefAtlasname = "Regions.xlsx";
-        }
-        if (m_reportType!=REPORTTYPE_NONE) {
-
-            reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
-            if (m_customRegionType=="custom" || m_customRegionType=="default") {
-                reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ m_prefix+"CustomRegions.xlsx", m_outputFileType);
-                reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
-            }
-            if (m_areaSplitting == 0.0)
-                reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
-
-            reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
-            reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
-        }
-
-        if (m_output3DPoints=="all") {
-            reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
-            reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale);
-        }
-        if (m_output3DPoints=="summary") {
-            reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
-        }
-        if (m_output3DPoints=="slices") {
-            reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale);
-        }
-
-        //  m_infoText = "Creating 3D point cloud";
-        Data::data.m_globalMessage = "Creating NIFTI";
-
-        if (m_outputNifti)
-            reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
-
-
-    }
+        BuildReports();
     //    QVector<ProcessItem*> m_processItems;
     //  QVector<QSharedPointer<NutilProcess>> m_processes;
     reports = Reports();
@@ -585,6 +545,47 @@ void ProcessManagerPCounter::SetupFakeReports()
 
 void ProcessManagerPCounter::CleanupFakeReports()
 {
+
+}
+
+void ProcessManagerPCounter::BuildReports()
+{
+
+
+    QString RefAtlasname = "RefAtlasRegions.xlsx";
+    if (m_dataType != QUINT) {
+        RefAtlasname = "Regions.xlsx";
+    }
+    if (m_reportType!=REPORTTYPE_NONE) {
+
+        reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
+        if (m_customRegionType=="custom" || m_customRegionType=="default") {
+            reports.CreateBook(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+ m_prefix+"CustomRegions.xlsx", m_outputFileType);
+            reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
+        }
+        if (m_areaSplitting == 0.0)
+            reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
+
+        reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+        reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+    }
+
+    if (m_output3DPoints=="all") {
+        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
+        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale);
+    }
+    if (m_output3DPoints=="summary") {
+        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale);
+    }
+    if (m_output3DPoints=="slices") {
+        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale);
+    }
+
+    //  m_infoText = "Creating 3D point cloud";
+    Data::data.m_globalMessage = "Creating NIFTI";
+
+    if (m_outputNifti)
+        reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
 
 }
 

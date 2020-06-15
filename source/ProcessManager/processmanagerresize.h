@@ -9,6 +9,9 @@ class ProcessManagerResize : public ProcessManagerTiffCreator {
 public:
 
     ProcessManagerResize();
+    ~ProcessManagerResize() {
+
+    }
     bool m_isPercent = false;
 //    bool Build(NutilTemplate* data) override;
     void Execute() override;

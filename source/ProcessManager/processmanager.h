@@ -16,6 +16,9 @@ class ProcessManager
 {
 public:
     ProcessManager();
+    virtual ~ProcessManager() {
+
+    }
     LParameter m_parameters;
 
     bool m_processFinished;

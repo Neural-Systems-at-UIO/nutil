@@ -15,6 +15,7 @@ public:
     QString m_name;
     LSheet();
 
+
     virtual double readNum(int i, int j) = 0;
     virtual long readLong(int i, int j) = 0;
     virtual QString readStr(int i, int j) = 0;

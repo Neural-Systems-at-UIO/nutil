@@ -24,7 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_updateThread, SIGNAL(MessageChanged(QString)), this, SLOT(OnMessageTextChanged(QString)));
     connect(&m_nt, SIGNAL(emitUpdate()), this, SLOT(on_EmitUpdate()));
     connect(&m_nt, SIGNAL(emitRePopulate()), this, SLOT(on_RePopulate()));
-    m_updateThread->Init(&m_nauto);
+    m_nauto = QSharedPointer<Nauto>(new Nauto());
+    m_updateThread->Init(m_nauto);
     m_updateThread->start();
     Data::data.m_settings = &m_settings;
 #ifdef IS_BETA
@@ -110,7 +111,7 @@ void MainWindow::Load(QString f)
                                                     tr("Open Excel document"), "..\\TestData\\", tr("Excel Files (*.xlsx)"));
     if (fileName=="")
         return;
-    m_nauto.Load(fileName);
+    m_nauto->Load(fileName);
     FillSheetCombo();
 }
 */
@@ -129,11 +130,15 @@ void MainWindow::on_btnStart_clicked()
     m_timer = QElapsedTimer();
      m_timer.start();
 
+//    while(m_workerThread->isRunning())
+  //      QThread::sleep(1000);
 
-    m_nauto.m_numThreads = ui->leProcessors->text().toInt();
-    m_nauto.m_data = &m_nt;
-    m_workerThread = new WorkerThread();
-    m_workerThread->Init(&m_nauto);
+
+    m_nauto->m_numThreads = ui->leProcessors->text().toInt();
+    m_nauto->m_data = &m_nt;
+    if (m_workerThread==nullptr)
+        m_workerThread = QSharedPointer<WorkerThread>(new WorkerThread());
+    m_workerThread->Init(m_nauto);
     m_workerThread->start();
 
     ui->tabMain->setCurrentIndex(2);
@@ -170,7 +175,7 @@ void MainWindow::on_leProcessors_returnPressed()
     int i=ui->leProcessors->text().toInt(&ok,10);
     if (!ok || i<1 || i>omp_get_max_threads()) {
         ui->leProcessors->setText(QString::number(omp_get_max_threads()));
-        m_nauto.m_numThreads=omp_get_max_threads();
+        m_nauto->m_numThreads=omp_get_max_threads();
     }
 }
 
@@ -197,26 +202,23 @@ void MainWindow::AppQuit()
         }
 
     }
-    m_nauto.Release();
+    m_nauto->Release();
     QApplication::quit();
 }
 
 void MainWindow::Abort()
 {
     if (m_workerThread) {
-
         Util::CancelSignal = true;
 
-        if (m_nauto.m_status != Nauto::Status::Idle) {
+        if (m_nauto->m_status != Nauto::Status::Idle) {
 
-            while (!m_nauto.m_pm->m_processFinished) {
+            while (!m_nauto->m_pm->m_processFinished) {
                 m_workerThread->wait(200);
             }
             m_workerThread->terminate();
         }
-        delete m_workerThread;
-        m_workerThread = nullptr;
-        m_nauto.m_status = Nauto::Status::Idle;
+        m_nauto->m_status = Nauto::Status::Idle;
     }
 
 }
@@ -230,7 +232,7 @@ void MainWindow::closeEvent(QCloseEvent * event)
 void MainWindow::UpdateInfoTimer()
 {
     m_elapsedTimer=m_timer.elapsed();
-    if (!(m_nauto.m_status == Nauto::Idle))
+    if (!(m_nauto->m_status == Nauto::Idle))
         ui->lblElapsedTime->setText("Elapsed time: " + Util::MilisecondToString(m_elapsedTimer));
 }
 

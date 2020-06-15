@@ -9,7 +9,6 @@ QT += core gui
 QT += network
 TEMPLATE      = app
 
-
 #DEFINES += IS_BETA IGNORE_DOWNLOAD
 DEFINES += IGNORE_DOWNLOAD
 
