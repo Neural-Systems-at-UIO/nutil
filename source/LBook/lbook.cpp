@@ -6,7 +6,7 @@ LBook::LBook()
 }
 
 
-LSheet *LBook::getSheetIndex(int idx)
+QSharedPointer<LSheet> LBook::getSheetIndex(int idx)
 {
     if (idx>=m_sheets.count())
         return nullptr;
@@ -17,9 +17,6 @@ LSheet *LBook::getSheetIndex(int idx)
 
 void LBook::Release()
 {
-    for (int i=0;i<m_sheets.count();i++)
-        delete m_sheets[i];
-
     m_sheets.clear();
 
 }

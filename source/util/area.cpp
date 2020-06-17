@@ -1,7 +1,20 @@
 #include "area.h"
 
+
+bool DoSomething() {
+//    jfdshdsfkjdsa
+//    return isTrue;
+}
+
+
 Area::Area()
 {
+
+
+
+
+//   DrawLine(center, up);
+
 
 }
 

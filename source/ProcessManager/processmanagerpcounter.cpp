@@ -519,7 +519,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             sbook->Load("temp.xlsx");
             QFile::remove("temp.xlsx");
 
-            LSheet* reportSheet = sbook->GetSheet(0);
+            QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
             if (reportSheet == nullptr) {
                 LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
                 Data::data.abort = true;
@@ -589,7 +589,7 @@ void ProcessManagerPCounter::BuildReports()
 
 }
 
-void ProcessManagerPCounter::GenerateReports(LSheet *m_sheet)
+void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
 {
     int i = 0;
     bool hasNext = true;

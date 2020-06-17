@@ -19,9 +19,9 @@ public:
 
     void Load(QString filename) override;
     void Save(QString filename) override;
-    LSheet* CreateSheet(QString sheetName) override;
-    LSheet* GetSheet(int idx) override;
-    LSheet* GetSheet(QString name) override;
+    QSharedPointer<LSheet> CreateSheet(QString sheetName) override;
+    QSharedPointer<LSheet> GetSheet(int idx) override;
+    QSharedPointer<LSheet> GetSheet(QString name) override;
     QStringList sheet_titles() override;
 
     void RemoveSheet(int index);

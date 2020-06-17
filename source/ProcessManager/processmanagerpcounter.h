@@ -73,7 +73,7 @@ public:
     void CleanupFakeReports();
     void BuildReports();
 
-    void GenerateReports(LSheet* m_sheet);
+    void GenerateReports(QSharedPointer<LSheet> m_sheet);
     bool Verify() override { return true; }
 
 };

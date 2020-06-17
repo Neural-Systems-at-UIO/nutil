@@ -172,7 +172,7 @@ void LBookCSV::Save(QString filename)
 
 
     for (auto l: m_sheets)
-        dynamic_cast<LSheetCSV*>(l)->Save(filename);
+        qSharedPointerDynamicCast<LSheetCSV>(l)->Save(filename);
 
 }
 
@@ -180,9 +180,9 @@ void LBookCSV::Save(QString filename)
 
 
 
-LSheet *LBookCSV::CreateSheet(QString sheetName)
+QSharedPointer<LSheet> LBookCSV::CreateSheet(QString sheetName)
 {
-    LSheetCSV* ls = new LSheetCSV();
+    QSharedPointer<LSheetCSV> ls = QSharedPointer<LSheetCSV>(new LSheetCSV());
     ls->m_name = sheetName;
     m_sheets.append(ls);
     m_titles.append(sheetName);
@@ -190,7 +190,7 @@ LSheet *LBookCSV::CreateSheet(QString sheetName)
 
 }
 
-LSheet *LBookCSV::GetSheet(int idx)
+QSharedPointer<LSheet> LBookCSV::GetSheet(int idx)
 {
     if (idx<m_sheets.count())
         return m_sheets[idx];
@@ -198,7 +198,7 @@ LSheet *LBookCSV::GetSheet(int idx)
     return nullptr;
 }
 
-LSheet *LBookCSV::GetSheet(QString name)
+QSharedPointer<LSheet>LBookCSV::GetSheet(QString name)
 {
     for (auto l: m_sheets)
         if (l->m_name==name)

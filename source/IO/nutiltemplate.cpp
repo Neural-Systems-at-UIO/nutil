@@ -727,7 +727,7 @@ void NutilTemplate::FillFromExcel(QTableWidget *tw)
         return;
     QSharedPointer<LBook> book = QSharedPointer<LBookXlnt>(new LBookXlnt);
     book->Load(fileName);
-    LSheet* l = book->GetSheet(0);
+    QSharedPointer<LSheet> l = book->GetSheet(0);
     int row = 1;
     int col = 0;
 

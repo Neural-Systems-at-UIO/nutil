@@ -45,7 +45,7 @@ class LBook
 public:
     LBook();
 
-    QVector<LSheet*> m_sheets;
+    QVector<QSharedPointer<LSheet>> m_sheets;
 
     virtual QStringList sheet_titles() = 0;
 
@@ -53,11 +53,11 @@ public:
     virtual void RemoveSheet(int index) = 0;
     virtual void Load(QString filename) = 0;
     virtual void Save(QString filename) = 0;
-    virtual LSheet* CreateSheet(QString sheetName) = 0;
-    virtual LSheet* GetSheet(int idx) = 0;
-    virtual LSheet* GetSheet(QString sheetName) = 0;
+    virtual QSharedPointer<LSheet> CreateSheet(QString sheetName) = 0;
+    virtual QSharedPointer<LSheet> GetSheet(int idx) = 0;
+    virtual QSharedPointer<LSheet> GetSheet(QString sheetName) = 0;
 
-    LSheet* getSheetIndex(int idx);
+    QSharedPointer<LSheet> getSheetIndex(int idx);
     void Release();
 
 

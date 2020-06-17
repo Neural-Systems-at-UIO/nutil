@@ -21,25 +21,25 @@ void LBookXlnt::Save(QString filename)
     m_book.save(filename.toStdString());
 }
 
-LSheet* LBookXlnt::CreateSheet(QString sheetName)
+QSharedPointer<LSheet> LBookXlnt::CreateSheet(QString sheetName)
 {
     QString org = sheetName;
-    for (LSheet* s : m_sheets)
+    for (QSharedPointer<LSheet> s : m_sheets)
         if (s->m_name == sheetName) {
             LMessage::lMessage.Error("Two excel sheets are identical, ignoring creating last sheet: '" + sheetName + "'");
             return nullptr;
         }
 //    m_book.create_sheet();
-//    LSheet* l = new LSheetXlnt(m_book.copy_sheet(m_book.sheet_by_index(0)));
-    LSheet* l = new LSheetXlnt(this);
-    xlnt::worksheet* sheet =  ((LSheetXlnt*)l)->m_sheet;
+//    QSharedPointer<LSheet> l = new LSheetXlnt(m_book.copy_sheet(m_book.sheet_by_index(0)));
+    QSharedPointer<LSheet> l = QSharedPointer<LSheetXlnt>(new LSheetXlnt(this));
+    xlnt::worksheet* sheet =  qSharedPointerDynamicCast<LSheetXlnt>(l)->m_sheet;
 
     sheet->rows().clear_cells();
         // Create sheet CRASHES
-//    LSheet* l = new LSheetXlnt(m_book.create_sheet());
+//    QSharedPointer<LSheet> l = new LSheetXlnt(m_book.create_sheet());
     if (sheetName.count()>22) sheetName = sheetName.left(24);
    // qDebug() << sheetName;
-    for (LSheet* s : m_sheets)
+    for (QSharedPointer<LSheet> s : m_sheets)
         if (s->m_name == sheetName) {
             sheetName = QString::number(m_book.sheet_count()+1) + sheetName;
             LMessage::lMessage.Message("Two excel sheets are identical, ignoring '"+org+"' and creating based on count: "+sheetName);
@@ -52,22 +52,22 @@ LSheet* LBookXlnt::CreateSheet(QString sheetName)
     return l;
 }
 
-LSheet* LBookXlnt::GetSheet(int idx)
+QSharedPointer<LSheet> LBookXlnt::GetSheet(int idx)
 {
-    LSheet* l = getSheetIndex(idx);
+    QSharedPointer<LSheet> l = getSheetIndex(idx);
     if (l!=nullptr)
         return l;
 
-    l = new LSheetXlnt(m_book.sheet_by_index(idx));
+    l = QSharedPointer<LSheetXlnt>(new LSheetXlnt(m_book.sheet_by_index(idx)));
     m_sheets.append(l);
     return l;
 }
 
-LSheet *LBookXlnt::GetSheet(QString name)
+QSharedPointer<LSheet> LBookXlnt::GetSheet(QString name)
 {
     if (!m_book.contains(name.toStdString()))
         return nullptr;
-    LSheetXlnt* lx = new LSheetXlnt(m_book.sheet_by_title(name.toStdString()));
+    QSharedPointer<LSheetXlnt> lx = QSharedPointer<LSheetXlnt>(new LSheetXlnt(m_book.sheet_by_title(name.toStdString())));
     m_sheets.append(lx);
     return lx;
 }

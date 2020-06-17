@@ -7,7 +7,7 @@
 
 void Report::GenerateSheet(LBook* book, QString units)
 {
-    LSheet* sheet = book->CreateSheet(m_filename);
+    QSharedPointer<LSheet>  sheet = book->CreateSheet(m_filename);
 
     if(sheet)
     {
@@ -45,7 +45,7 @@ void Report::GenerateSheet(LBook* book, QString units)
 
 void Reports::CreateSummary(AtlasLabels* atlasLabels)
 {
-    LSheet* sheet = m_book->GetSheet(0);//CreateSheet("Summary");
+    QSharedPointer<LSheet>  sheet = m_book->GetSheet(0);//CreateSheet("Summary");
     Calculate(atlasLabels);
     sheet->setName("All");
 
@@ -97,8 +97,8 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType)
 {
     LBook* book = LBookFactory::Create(bookType);
-//    LSheet* sheet = book->CreateSheet("All");
-    LSheet* sheet = book->GetSheet(0);
+//    QSharedPointer<LSheet>  sheet = book->CreateSheet("All");
+    QSharedPointer<LSheet>  sheet = book->GetSheet(0);
 
 //    if (dynamic_cast<LBookXlnt*>(book))
   //      book->RemoveSheet(1);
@@ -195,7 +195,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
 
 
     for (int i=0;i<processes.length();i++) {
-        LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
+        QSharedPointer<LSheet>  sheet = book->CreateSheet(items[i]->m_reportName);
         int y = 1;
 
         for (AtlasLabel* al: atlasLabels->atlases) {
@@ -258,7 +258,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
 void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, AtlasLabels* labels, QString units, QString bType)
 {
     LBook* book = LBookFactory::Create(bType);
-    LSheet* summary = book->GetSheet(0);
+    QSharedPointer<LSheet>  summary = book->GetSheet(0);
 
     double sumPixel=0;
     double sumArea = 0;
@@ -287,7 +287,7 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
 
 
         //qDebug() << "  Generating sliced report : " << items[i]->m_reportName;
-        LSheet* sheet = book->CreateSheet(items[i]->m_reportName);
+        QSharedPointer<LSheet>  sheet = book->CreateSheet(items[i]->m_reportName);
         // Header
         cnt.Tick();
         Data::data.m_globalMessage = "Creating individual section reports: " + cnt.getPercentFormatted();
@@ -372,15 +372,15 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
 {
     LMessage::lMessage.Log("Generating summary report");
     LBook* book = LBookFactory::Create(bType);
-//    LSheet* summary = book->GetSheet(0);
+//    QSharedPointer<LSheet>  summary = book->GetSheet(0);
 
     Counter cnt(items.count()*m_reports.count(),"");
 
     for (int i=0;i<items.count();i++) {
 //        qDebug() << "  Generating section report : " << items[i]->m_reportName;
 
-        LSheet* sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
-//        LSheet* sheet = book->CreateSheet("sheet"+QString::number(i));
+        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
+//        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i));
 
 
 // Define column titles (CustomRegion_slice reports)
