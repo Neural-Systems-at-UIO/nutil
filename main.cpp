@@ -101,6 +101,11 @@ void CreateValidator() {
 
 void SharonImageTest(int px, int py, int width, int height) {
 
+
+
+
+
+
     QImage img(1024,768, QImage::Format_ARGB32);
     img.fill(Qt::red);
 

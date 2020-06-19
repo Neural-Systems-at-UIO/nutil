@@ -55,6 +55,7 @@ void ProcessManagerResize::Execute()
 
 }
 
+
 void ProcessManagerResize::ReadHeader(NutilTemplate* data)
 {
     ProcessManager::ReadHeader(data);
