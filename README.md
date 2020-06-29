@@ -20,8 +20,8 @@ Nutil contains an auto updater that checks the servers for a new version on each
 # Authors
 Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Jan G Bjaalie. 
 # Licence
-Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
-GNU General Public License v3
+- Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+- GNU General Public License v3
 
 # References
 Nutil is a key component of the QUINT workflow for quantification and spatial analysis of labelled features in histological rodent brain section images: 
