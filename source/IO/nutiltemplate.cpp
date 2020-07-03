@@ -334,10 +334,10 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
                     nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
                 }
 
-               });
+            });
 
 
-                #else
+#else
 
             QLineEdit* le = new QLineEdit(nti->m_value);
             le->setStyleSheet("background-color: #"+QString::number(NutilTemplateItem::StringToColor(nti->m_value).rgb(),16));
@@ -349,12 +349,12 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
                 nti->m_value = le->text();
                 nti->m_color = NutilTemplateItem::StringToColor(nti->m_value);
                 le->setStyleSheet("background-color: #"+QString::number(nti->m_color.rgb(),16));
-          });
+            });
 
 
 
 
-                #endif
+#endif
 
         }
 

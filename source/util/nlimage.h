@@ -91,6 +91,7 @@ public:
     void ApplyMask(QString maskFile, QVector3D useColor, QColor background);
 
     void Release();
+    void FractalAnalyze();
     void FindAreas(QColor color, QVector3D colorWidth,Counter* counter, QVector<Area>* areas, int pixelCutoff, int pMax);
 
     void FillAreaDFS(Area& area, const int i, const int j, const QColor& testColor, const QVector3D& spread,int pMax);

@@ -127,6 +127,17 @@ void SharonImageTest(int px, int py, int width, int height) {
 }
 
 
+void Fractal() {
+    NLIQImage img;
+    img.Load("/Users/leuat/Downloads/uk.png");
+    img.FractalAnalyze();
+//    img.m_image = new QImage();
+  //  img.m_image->Load("~/Downloads/uk.png");
+    //QImage img("~/Downloads/uk.png");
+
+}
+
+
 
 int main(int argc, char *argv[])
 {
@@ -135,10 +146,8 @@ int main(int argc, char *argv[])
 #endif
 
 
-//
-//    SharonImageTest(x, y, 300 , 200);
+//    Fractal();
 
-    //CreateValidator();
 
     if (argc == 1)  {
         QApplication a(argc, argv);

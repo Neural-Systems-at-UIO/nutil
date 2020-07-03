@@ -96,6 +96,12 @@ void NLImage::Release()
 
 }
 
+void NLImage::FractalAnalyze()
+{
+    if (m_image==nullptr)
+        return;
+}
+
 void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter, QVector<Area>* m_areas,int pixelCutoff, int pMax)
 {
 
@@ -132,9 +138,9 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
 //                    qDebug() << pix.red();
 
                 bool found = Util::QVector3DIsClose( pix, testColor, colorWidth );
-                if (!(pix.red()==255 && pix.green()==255 && pix.blue()==255))
-                   if (rand()%1000>998)
-                       qDebug() << "TESTING  " << found << pix.red() << pix.green()<<pix.blue();
+   //             if (!(pix.red()==255 && pix.green()==255 && pix.blue()==255))
+//                   if (rand()%1000>998)
+ //                      qDebug() << "TESTING  " << found << pix.red() << pix.green()<<pix.blue();
 //                if (pix == testColor) {
                 if (found) {
                     Area area;

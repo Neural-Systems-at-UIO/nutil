@@ -58,8 +58,10 @@ public:
     }
 
     bool Load(QString filename) override {
-        if (!QFile::exists(filename))
+        if (!QFile::exists(filename)) {
+            qDebug() << "NLIQImage::Load : Could not find file: " << filename;
             return false;
+        }
         m_image = QImage();
         m_image.load(filename);
         if (m_image.format()!=QImage::Format_RGB32) {
@@ -68,10 +70,14 @@ public:
   //          m_image = img;
         }
 
+        qDebug() << "SIZE " << m_image.width();
+
         return true;
 
     }
 
+    void FractalAnalyze();
+    QPointF BoxCount(int boxSize, QColor searchColor);
 
     void Save(QString filename) override {
         m_image.save(filename);
