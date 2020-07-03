@@ -35,6 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLayout>
 #include <QComboBox>
 #include <QEvent>
+#include <QDebug>
 #include <QMessageBox>
 #include <QPixmap>
 #include <QDirIterator>
@@ -70,6 +71,11 @@ public:
     }
     static QColor StringToColor(QString col) {
         QStringList l = col.trimmed().simplified().split(",");
+        if (l.count()==3) l<<"255";
+        if (l.count()<3) {
+            qDebug() << "Error reading color: " << col;
+            return Qt::black;
+        }
         return QColor(l[0].toFloat(),l[1].toFloat(),l[2].toFloat(),l[3].toFloat());
     }
 

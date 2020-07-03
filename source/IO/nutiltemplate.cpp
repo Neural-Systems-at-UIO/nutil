@@ -314,13 +314,18 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
         }
 
         if (nti->m_type==NutilTemplateItem::COLOR) {
+
+            #ifndef __APPLE__
+
             QPushButton* btn = new QPushButton("");
             btn->setStyleSheet("background-color: #"+QString::number(NutilTemplateItem::StringToColor(nti->m_value).rgb(),16));
 
             m_grid->addWidget(btn,row,valueColumn);
 
+
             QObject::connect(btn, &QPushButton::clicked, [=]() {
                 //nti->m_color = QColorDialog::getColor(nti->m_color, nullptr );
+
                 QColor c = QColorDialog::getColor(nti->m_color, nullptr );
                 if (c.isValid())
                 {
@@ -329,8 +334,27 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
                     nti->m_value = NutilTemplateItem::colorToString(nti->m_color);
                 }
 
+               });
 
-            });
+
+                #else
+
+            QLineEdit* le = new QLineEdit(nti->m_value);
+            le->setStyleSheet("background-color: #"+QString::number(NutilTemplateItem::StringToColor(nti->m_value).rgb(),16));
+
+            m_grid->addWidget(le,row,valueColumn);
+
+
+            QObject::connect(le, &QLineEdit::editingFinished, [=]() {
+                nti->m_value = le->text();
+                nti->m_color = NutilTemplateItem::StringToColor(nti->m_value);
+                le->setStyleSheet("background-color: #"+QString::number(nti->m_color.rgb(),16));
+          });
+
+
+
+
+                #endif
 
         }
 

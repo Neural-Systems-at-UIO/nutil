@@ -115,7 +115,7 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
             m_index->setPixel(i,j, unset.rgba());
 
     counter->Init(m_image->width()*m_image->height());
-//    qDebug() << "A";
+    qDebug() << "Color threshold : " << testColor << colorWidth;
     for (int i=0;i<m_image->width();i++)
         for (int j=0;j<m_image->height();j++) {
             counter->Tick();
@@ -132,7 +132,9 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
 //                    qDebug() << pix.red();
 
                 bool found = Util::QVector3DIsClose( pix, testColor, colorWidth );
-
+                if (!(pix.red()==255 && pix.green()==255 && pix.blue()==255))
+                   if (rand()%1000>998)
+                       qDebug() << "TESTING  " << found << pix.red() << pix.green()<<pix.blue();
 //                if (pix == testColor) {
                 if (found) {
                     Area area;

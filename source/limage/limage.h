@@ -48,7 +48,6 @@ public:
         Release();
     }
     LImageSupports m_supports;
-
     static unsigned char TypeToChar(Type t);
     static Type CharToType(unsigned char c);
 
