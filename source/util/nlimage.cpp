@@ -622,6 +622,7 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
                         currentArea->m_width = m_image->width();
                         currentArea->m_height = m_image->height();
                         currentArea->m_mat = a.m_mat;
+                        currentArea->m_planeNormal = a.m_planeNormal;
 
                     }
                     currentArea->m_points.append(orgP);

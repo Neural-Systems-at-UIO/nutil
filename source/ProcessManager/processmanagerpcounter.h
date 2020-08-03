@@ -46,6 +46,8 @@ public:
     QStringList m_files;
     QString m_prefix ="";
 
+    double m_coordinateRandomSpread = 0.0;
+
 
     QString m_reportDirectory = "Reports";
     QString m_imageDirectory = "Images";

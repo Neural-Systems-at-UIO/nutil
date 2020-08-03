@@ -37,6 +37,7 @@ public:
     QPointF m_center;
     double m_pixelArea=0;
     QMatrix4x4 m_mat;
+    QVector3D m_planeNormal;
     bool m_matrixInitialized = false;
     double m_area=0;
     double m_areaScale = 0;

@@ -523,7 +523,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
             y++;
 
 
-            summary->Set(yy,0,a.m_pixelArea);
+            ry->Set(yy,0,a.m_pixelArea);
             summary->Set(yy,1,a.m_area);
             summary->Set(yy,3,a.m_center.x());
             summary->Set(yy,4,a.m_center.y());
@@ -561,7 +561,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
 
 // Create coordinate files in json format
 
-void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize)
+void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread)
 {
 
     QString o;
@@ -578,10 +578,11 @@ void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilPro
 
 
             for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
-                QPointF& p =a->m_points[k];
+/*                QPointF& p =a->m_points[k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
-                v=v*a->m_mat;
+                v=v*a->m_mat;*/
+                QVector3D v = InvProject(a->m_points[k],a,spread);
                 o +=QString::number(v.x()) + ",";
                 o +=QString::number(v.y()) + ",";
                 o +=QString::number(v.z()) + "\n";
@@ -602,7 +603,7 @@ void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilPro
 }
 
 
-void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize)
+void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread)
 {
 
     QString o;
@@ -645,14 +646,15 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
             for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
-                QPointF& p =a->m_points[(int)k];
+                QVector3D v = InvProject(a->m_points[(int)k],a,spread);
+ /*               QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
-                QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
+                QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);*/
                 if (!a->m_matrixInitialized) {
 //                    qDebug() << "ERROR : Area Matrix not initialized! ";
                     matrixError = true;
                 }
-                v=v*a->m_mat;
+//                v=v*a->m_mat;
 
 
 
@@ -742,9 +744,34 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
     qDebug() << "done.";
 }
 
+QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread)
+{
+    QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
+    v=v*a->m_mat;
+
+    if (rndSpread>0.0) {
+        double val = ((rand()%1000)/1000.0-0.5) * rndSpread;
+//        if (rand()%100>98)
+  //          qDebug() << val << a->m_planeNormal;
+        v += a->m_planeNormal*val;
+    }
+
+/*    if (rndSpread>0.0) {
+        double valx = ((rand()%1000)/1000.0-0.5) * rndSpread;
+        double valy = ((rand()%1000)/1000.0-0.5) * rndSpread;
+        double valz = ((rand()%1000)/1000.0-0.5) * rndSpread;
+//        if (rand()%100>98)
+  //          qDebug() << val << a->m_planeNormal;
+        v += QVector3D(valx,valy,valz);
+    }
+*/
+
+    return v;
+}
+
 // Create coordinate_slice json files
 
-void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize)
+void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread)
 {
 
 
@@ -808,10 +835,11 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
             for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
-                QPointF& p =a->m_points[k];
+/*                QPointF& p =a->m_points[k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
-                v=v*a->m_mat;
+                v=v*a->m_mat;*/
+                QVector3D v = InvProject(a->m_points[k],a,spread);
 
                 if (cnt2!=0) data+=",\n";
 //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
