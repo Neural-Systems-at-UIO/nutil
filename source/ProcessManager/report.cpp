@@ -576,13 +576,14 @@ void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilPro
         for (Area* a: m_reports[i].m_areasOfInterest)
             {
 
-
+            QVector3D invCenter = InvProject(a->m_center,a,0);
             for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
 /*                QPointF& p =a->m_points[k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;*/
-                QVector3D v = InvProject(a->m_points[k],a,spread);
+                QVector3D alt;
+                QVector3D v = InvProject(a->m_points[k],a,spread, invCenter,&alt);
                 o +=QString::number(v.x()) + ",";
                 o +=QString::number(v.y()) + ",";
                 o +=QString::number(v.z()) + "\n";
@@ -642,11 +643,18 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
 
 
 //            if (cnt!=0) o+=",";
+            a->CalculateStatistics();
+            QVector3D invCenter = InvProject(a->m_center,a,0);
+    //        qDebug() << "CENTER "<< a->m_center;
+
+            double val = ((rand()%1000)/1000.0-0.5) * spread;
+
 
             for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
-                QVector3D v = InvProject(a->m_points[(int)k],a,spread);
+                QVector3D alt;
+                QVector3D v = InvProject(a->m_points[(int)k],a,val,invCenter, &alt);
  /*               QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);*/
@@ -661,7 +669,8 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
                 if (cnt2!=0) o+=",\n";
 //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
                 o+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
-
+//                o+=",\n";
+  //              o+=QString::number(alt.x())+ ","+QString::number(alt.y())+","+QString::number(alt.z());
 
                 cnt2++;
              }
@@ -744,27 +753,20 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
     qDebug() << "done.";
 }
 
-QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread)
+QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint)
 {
-    QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
+    QVector3D v( p.x()/a->m_width,p. y()/a->m_height,1);
     v=v*a->m_mat;
 
     if (rndSpread>0.0) {
-        double val = ((rand()%1000)/1000.0-0.5) * rndSpread;
-//        if (rand()%100>98)
-  //          qDebug() << val << a->m_planeNormal;
-        v += a->m_planeNormal*val;
+        v += a->m_planeNormal*rndSpread;
     }
+    if (altPoint!=nullptr) {
+        QVector3D v2 = v-invCenter;
+        *altPoint = QVector3D(v2.z(),v2.x(),v2.y())+invCenter;
 
-/*    if (rndSpread>0.0) {
-        double valx = ((rand()%1000)/1000.0-0.5) * rndSpread;
-        double valy = ((rand()%1000)/1000.0-0.5) * rndSpread;
-        double valz = ((rand()%1000)/1000.0-0.5) * rndSpread;
-//        if (rand()%100>98)
-  //          qDebug() << val << a->m_planeNormal;
-        v += QVector3D(valx,valy,valz);
+
     }
-*/
 
     return v;
 }
@@ -831,6 +833,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
 */
 
 //            if (cnt!=0) o+=",";
+            QVector3D invCenter = InvProject(a->m_center,a,0);
 
             for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
@@ -839,7 +842,8 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;*/
-                QVector3D v = InvProject(a->m_points[k],a,spread);
+                QVector3D alt;
+                QVector3D v = InvProject(a->m_points[k],a,spread, invCenter, &alt);
 
                 if (cnt2!=0) data+=",\n";
 //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";

@@ -70,7 +70,7 @@ public:
   //          m_image = img;
         }
 
-        qDebug() << "SIZE " << m_image.width();
+//        qDebug() << "SIZE " << m_image.width();
 
         return true;
 

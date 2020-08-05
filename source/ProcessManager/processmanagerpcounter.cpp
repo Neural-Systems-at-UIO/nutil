@@ -273,7 +273,7 @@ void ProcessManagerPCounter::Execute()
         if (!Data::data.abort)
             m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background,m_colorThreshold, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax, maskFile, m_customMaskInclusionColors);
 
-        LMessage::lMessage.Log("  Quantifier done for " +pi->m_inFile);
+//        LMessage::lMessage.Log("  Quantifier done for " +pi->m_inFile);
         for (Area&a : m_processes[i]->m_areas) {
             a.m_mat = mat;
             a.m_matrixInitialized = true;
@@ -298,7 +298,7 @@ void ProcessManagerPCounter::Execute()
             //          break;
 
 
-            LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
+//            LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
             if (!Data::data.abort)
             {
                 QVector3D col = QVector3D(m_customMaskInclusionColors.red(),m_customMaskInclusionColors.green(),m_customMaskInclusionColors.blue());
