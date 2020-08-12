@@ -16,10 +16,19 @@ NLImageTiff::NLImageTiff()
 
 void NLIQImage::FractalAnalyze()
 {
-    for (int i=m_image.width()/8;i>2;i--) {
-        QPointF p1 = BoxCount(10,QColor(0,0,0));
-//        qDebug() << "B1 : " << p1.x();
+    LGraph g;
+    g.Initialize(100,20,m_image.width()/8);
+    float prev = 1;
+    for (int i=m_image.width()/4;i>2;i--) {
+        QPointF p1 = BoxCount(i,QColor(0,0,0));
+        qDebug() << "Count : " << p1.x();
+        g.set(i,p1.x());
+        //g.set(i,prev/p1.x());
+        prev = p1.x();
+
+
         }
+    g.SaveText("plot1.txt");
 }
 
 QPointF NLIQImage::BoxCount(int boxSize, QColor searchColor)

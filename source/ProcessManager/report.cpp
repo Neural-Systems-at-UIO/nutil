@@ -654,7 +654,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
                 QVector3D alt;
-                QVector3D v = InvProject(a->m_points[(int)k],a,val,invCenter, &alt);
+                QVector3D v = InvProject(a->m_points[(int)k],a,spread,invCenter, &alt);
  /*               QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);*/
@@ -759,7 +759,10 @@ QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D in
     v=v*a->m_mat;
 
     if (rndSpread>0.0) {
-        v += a->m_planeNormal*rndSpread;
+        double val = ((rand()%1000)/1000.0-0.5) * rndSpread;
+
+//        v += a->m_planeNormal*rndSpread;
+        v += a->m_planeNormal*val;
     }
     if (altPoint!=nullptr) {
         QVector3D v2 = v-invCenter;
