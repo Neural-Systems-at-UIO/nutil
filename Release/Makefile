@@ -333,6 +333,7 @@ DIST          = ../Resources/text/quantifier.txt \
 		../../../../Qt/5.15.0/clang_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/5.15.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../../Qt/5.15.0/clang_64/mkspecs/features/spec_post.prf \
+		../.qmake.stash \
 		../../../../Qt/5.15.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/5.15.0/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../../Qt/5.15.0/clang_64/mkspecs/features/toolchain.prf \
@@ -641,6 +642,7 @@ Makefile: ../Nutil.pro ../../../Qt/5.15.0/clang_64/mkspecs/features/spec_pre.prf
 		../../../Qt/5.15.0/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.15.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.15.0/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt/5.15.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.15.0/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../Qt/5.15.0/clang_64/mkspecs/features/toolchain.prf \
@@ -826,6 +828,7 @@ Makefile: ../Nutil.pro ../../../Qt/5.15.0/clang_64/mkspecs/features/spec_pre.prf
 ../../../Qt/5.15.0/clang_64/mkspecs/features/qt_config.prf:
 ../../../Qt/5.15.0/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Qt/5.15.0/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt/5.15.0/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt/5.15.0/clang_64/mkspecs/features/mac/sdk.prf:
 ../../../Qt/5.15.0/clang_64/mkspecs/features/toolchain.prf:
@@ -910,6 +913,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r Nutil.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -967,6 +971,7 @@ qrc_resources.cpp: ../resources.qrc \
 		../Resources/text/help/quantifier/custom_region_file.rtf \
 		../Resources/text/help/quantifier/type.rtf \
 		../Resources/text/help/quantifier/global_pixel_scale.rtf \
+		../Resources/text/help/quantifier/coordinate_random_distortion.rtf \
 		../Resources/text/help/quantifier/extraction_color.rtf \
 		../Resources/text/help/quantifier/output_region_id.rtf \
 		../Resources/text/help/quantifier/pattern_match.rtf \
