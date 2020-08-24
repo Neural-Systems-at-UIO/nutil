@@ -24,6 +24,8 @@ Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Jan G Bjaalie.
 - GNU General Public License v3
 
 # References
+Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Post-processing Toolbox for Histological Rodent Brain Section Images. Front. Neuroinform. 14:37. doi: 10.3389/fninf.2020.00037
+
 Nutil is a key component of the QUINT workflow for quantification and spatial analysis of labelled features in histological rodent brain section images: 
 
 Yates SC, Groeneboom NE, Coello C, et al. & Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075
