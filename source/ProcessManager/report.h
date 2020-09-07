@@ -82,8 +82,8 @@ public:
     void CreateSheets( QVector<QSharedPointer<NutilProcess>>& processes,AtlasLabels* atlasLabels, QString unit, bool hasAreaSplitting);
     void CreateSummary(AtlasLabels* atlasLabels);
     void CreateRefAtlasRegions( QString filename, AtlasLabels* atlasLabels,QVector<QSharedPointer<NutilProcess>> processes,QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType);
-    void CreateRefAtlasRegionsSlices( QString filename, AtlasLabels* atlasLabels,QVector<QSharedPointer<NutilProcess>> processes,QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType);
-    void CreateSliceReports(QString filename,  QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items,AtlasLabels* labels, QString units, QString bType);
+    void CreateRefAtlasRegionsSlices( QString filename, AtlasLabels* atlasLabels,QVector<QSharedPointer<NutilProcess>> processes,QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType, bool displayID);
+    void CreateSliceReports(QString filename,  QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items,AtlasLabels* labels, QString units, QString bType, bool displayID);
     void CreateCustomRegions(QString filename,  QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items,AtlasLabels* labels, QString bType);
 
     void Create3DSummary(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread);

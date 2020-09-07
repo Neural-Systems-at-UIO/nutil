@@ -352,7 +352,7 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, double scale
 
 }
 */
-void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols, QString maskFile, QColor customMaskInclusionColors, bool outputRegionID)
+void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m_areas,QVector<QVector<long>> reportList, QVector<QColor> cols, QString maskFile, QColor customMaskInclusionColors, bool outputRegionID, bool displayID)
 {
     QRgb off = QColor(255,255,255,255).rgba();
 
@@ -473,17 +473,24 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
 
     NLIQImage* qi = dynamic_cast<NLIQImage*>(m_index);
-    if (qi!=nullptr && !Data::data.isConsole && outputRegionID) {
+    if (qi!=nullptr && !Data::data.isConsole) {
         QPainter painter(&qi->m_image);
         QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
         painter.setPen(penHText);
         QFont fnt = QFont("Times", 8, QFont::Normal);
         fnt.setStyleStrategy(QFont::NoAntialias);
         painter.setFont(fnt);
-  //      long l = 312782592;
-        for (Area& a: *m_areas) {
-            if (a.atlasLabel!=nullptr)
-                painter.drawText(a.m_center*scale,  QString::number(a.atlasLabel->index));
+        //      long l = 312782592;
+              for (Area& a: *m_areas) {
+            if (a.atlasLabel!=nullptr) {
+                int y = 0;
+                if (outputRegionID) {
+                  painter.drawText(a.m_center*scale,  QString::number(a.atlasLabel->index));
+                  y+=10;
+                }
+                if (displayID)
+                  painter.drawText(a.m_center*scale + QPoint(0,y),  QString::number(a.id));
+            }
 //            painter.drawText(a.m_center*scale,  QString::number(l));
         }
     }

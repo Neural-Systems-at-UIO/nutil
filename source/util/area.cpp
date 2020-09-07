@@ -1,11 +1,13 @@
 #include "area.h"
 
+int Area::s_area_id_counter = 0;
 
 
 Area::Area()
 {
 
-
+    id = s_area_id_counter;
+    s_area_id_counter++;
 
 
 //   DrawLine(center, up);

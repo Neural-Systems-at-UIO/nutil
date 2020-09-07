@@ -40,6 +40,8 @@ public:
     QVector3D m_planeNormal;
     bool m_matrixInitialized = false;
     double m_area=0;
+    long id = 0;
+    static int s_area_id_counter;
     double m_areaScale = 0;
     double m_width,m_height;
     QColor color;

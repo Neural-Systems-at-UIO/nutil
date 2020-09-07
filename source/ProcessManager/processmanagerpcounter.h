@@ -64,7 +64,7 @@ public:
     bool m_outputNifti = false;
     QString m_output3DPoints = "no";
     QString m_outputFileType = "xlsx";
-
+    bool m_displayLabelID = false;
 
     enum DataType {QUINT, NONE };
     DataType m_dataType=QUINT;

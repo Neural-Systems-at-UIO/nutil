@@ -37,7 +37,8 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     int x = 1;
     int y = 22;
     Data::data.abort = false;
-
+    // Reset area counter
+    Area::s_area_id_counter = 0;
 
     if (m_dataType==QUINT)
         LoadXML();
@@ -312,7 +313,7 @@ void ProcessManagerPCounter::Execute()
             m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
 //            LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
             if (!Data::data.abort)
-                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+m_prefix+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors, m_outputRegionNumbers);
+                m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+m_prefix+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors, m_outputRegionNumbers, m_displayLabelID);
             m_mainCounter.Tick();
         }
         m_processes[i]->m_counter.m_progress = 100;
@@ -409,6 +410,8 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     //if select mouse reference atlas, automatically use the CustomRegionMouse resource file
     // this is not yet implemented for rat
+
+    m_displayLabelID = data->Get("display_label_id").toLower()=="yes";
 
     m_reportSheetName = "";
     if (data->Get("custom_region_type").toLower()=="custom")
@@ -578,9 +581,9 @@ void ProcessManagerPCounter::BuildReports()
             reports.CreateSheets(m_processes, &m_labels, m_units, m_areaSplitting==1.0);
         }
         if (m_areaSplitting == 0.0)
-            reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType);
+            reports.CreateSliceReports(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"Objects.xlsx", m_processes, m_processItems, &m_labels, m_units,m_outputFileType,m_displayLabelID);
 
-        reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
+        reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType,m_displayLabelID);
         reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
     }
 

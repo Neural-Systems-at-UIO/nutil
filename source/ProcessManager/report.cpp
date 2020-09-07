@@ -182,7 +182,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
 // Create Reports for RefAtlasRegions_slices
 
-void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLabels, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType)
+void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLabels, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType, bool displayID)
 {
     LBook* book = LBookFactory::Create(bookType);
     /*   QVector<AtlasLabel*> sorted;
@@ -255,7 +255,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
 
 // Create object reports
 
-void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, AtlasLabels* labels, QString units, QString bType)
+void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, AtlasLabels* labels, QString units, QString bType, bool displayID)
 {
     LBook* book = LBookFactory::Create(bType);
     QSharedPointer<LSheet>  summary = book->GetSheet(0);
@@ -302,6 +302,8 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
         sheet->writeStr(0,5,"Region ID");
   //      sheet->writeStr(2,6,"Region Area");
         sheet->writeStr(0,6,"Region Name");
+        if (displayID)
+            sheet->writeStr(0,6,"Area ID");
    //     sheet->writeStr(0,7,"Cutoff reached");
   // max object size cut off: objects greater in size were divided into max size or smaller. This feature should be removed.
         int y = 1;
@@ -327,6 +329,9 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
                 //sheet->Set(y,6,a.atlasLabel->area);
                 sheet->writeStr(y,6,a.atlasLabel->name);
             }
+            if (displayID)
+                sheet->Set(y,7,a.id);
+
             y++;
 
 // Define column content (object_slice report)
@@ -338,6 +343,7 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
             summary->writeStr(yy,3,units);
             summary->Set(yy,4,a.m_center.x());
             summary->Set(yy,5,a.m_center.y());
+
 //            summary->writeStr(yy,8,items[i]->m_id);
 
             if (a.atlasLabel!=nullptr) {
