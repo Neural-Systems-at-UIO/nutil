@@ -423,6 +423,13 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (m_dataType == QUINT) {
         QString labelType = data->Get("label_file");
         //       qDebug() << "Labl type:" <<labelType;
+        if (labelType.toLower() == "custom") {
+            m_labelFile = data->Get("custom_label_file");
+            //m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
+            if (data->Get("custom_region_type").toLower()!="custom") {
+                LMessage::lMessage.Message("Warning: you are using a custom label file without a custom report file.");
+            }
+        }
         if (labelType == "Allen Mouse Brain 2015") {
             m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
             if (data->Get("custom_region_type").toLower()=="default")
