@@ -283,6 +283,9 @@ QImage* LTiff::ToQImage()
     SetupBuffers();
     AllocateBuffers();
     QImage* img = new QImage(m_width, m_height,QImage::Format_RGB32);
+//    qDebug() <<"TOQIMAGE " <<m_height <<m_tileHeight << m_width << m_tileWidth;
+    if (m_tileHeight==0) m_tileHeight++;
+    if (m_tileWidth==0) m_tileWidth++;
     for (int y = 0; y < m_height; y += m_tileHeight) {
         for (int x = 0; x < m_width; x += m_tileWidth) {
 

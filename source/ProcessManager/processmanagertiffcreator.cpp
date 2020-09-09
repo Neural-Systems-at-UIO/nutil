@@ -11,7 +11,7 @@ bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
 
     m_processItems.clear();
     QDir directory(m_inputDir);
-    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png",QDir::Files);
+    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png" <<"*.tiff" <<"*.tif",QDir::Files);
     for (QString filename: images) {
         QStringList inFileSplit = filename.split("/");
         QString inFile = (inFileSplit[inFileSplit.count()-1]);
@@ -55,15 +55,11 @@ void ProcessManagerTiffCreator::Execute()
     for (int i=0;i<m_processes.length();i++) {
         QImage img;
         auto pi = m_processItems[i];
-        if (pi->m_inFile.toLower().contains(".tif")) {
-            LTiff t;
-//            qDebug() << "HERE";
-            t.Open(pi->m_inFile);
-  //          exit(1);
-            img = *t.ToQImage();
-        }
-        else
-            img.load(pi->m_inFile);
+        img.load(pi->m_inFile);
+
+//        qDebug() << "TEST";
+        img.save(pi->m_inFile.toLower()+".png");
+
 
         LTiff t;
         t.FromQIMage(pi->m_outFile,img,m_compression,m_tileSize, m_processes[i]->m_counter);

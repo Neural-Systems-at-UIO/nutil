@@ -68,19 +68,12 @@ void LMessage::EndOK()
 
 void LMessage::SendFile()
 {
-    qDebug() << "Mailing logfile... ";
-//    QDesktopServices::openUrl(QUrl("mailto:?to=nicolaas.groeneboom@gmail.com&subject=The subject of an email&body=Here is some email body text\nHALLABALLA", QUrl::TolerantMode));
+    return;
+/*    qDebug() << "Mailing logfile... ";
     QProcess p;
- /*   QFile f(m_logFileName);
-    qDebug() << "SIZE: "<<f.size();
-    f.close();*/
     p.execute("curl", QStringList() <<"smtps://smtp.gmail.com:465" << "--mail-from" <<"nutiluio@gmail.com" <<"--mail-rcpt" <<"nutiluio@gmail.com" << "-ssl" <<"-u"
               <<"nutiluio@gmail.com:LompeSvette90" << "-T" << m_logFileName );
-//            curl smtp://smtp.gmail.com:587 -v --mail-from \"SENDER.EMAIL@gmail.com\" --mail-rcpt \"RECEIVER.EMAIL@gmail.com\" --ssl -u SENDER.EMAIL@gmail.com:PASSWORD -T \"ATTACHMENT.FILE\" -k --anyauth
-//    qDebug() << QFile::si
-//    p.waitForFinished(10000);
- //   QThread::sleep(1);
-    EndOK();
+    EndOK();*/
 }
 
 void LMessage::Error(QString s)
