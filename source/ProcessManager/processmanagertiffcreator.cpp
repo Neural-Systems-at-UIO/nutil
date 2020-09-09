@@ -58,10 +58,11 @@ void ProcessManagerTiffCreator::Execute()
         img.load(pi->m_inFile);
 
 
-
         LTiff t;
         t.FromQIMage(pi->m_outFile,img,m_compression,m_tileSize, m_processes[i]->m_counter);
         //m_processes[i]->AutoContrast(pi->m_inFile, pi->m_outFile, m_compression, m_background, m_outputDir);
+        LMessage::lMessage.Message("New tiled TIFF file: <font color=\"yellow\">"+pi->m_outFile+"</font>");
+
         m_mainCounter.Tick();
     }
     m_processFinished = true;
