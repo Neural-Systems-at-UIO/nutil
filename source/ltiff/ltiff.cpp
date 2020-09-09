@@ -239,7 +239,7 @@ void LTiff::FromQIMage(QString filename, QImage &img, QString comp, int tileSize
     m_photo = 2;
     m_config =1;
 
-    qDebug() << "From QImage: " << filename;
+//    qDebug() << "From QImage: " << filename;
 
     ApplyParameters();
     SetupBuffers();

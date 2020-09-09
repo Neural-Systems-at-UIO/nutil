@@ -57,8 +57,6 @@ void ProcessManagerTiffCreator::Execute()
         auto pi = m_processItems[i];
         img.load(pi->m_inFile);
 
-//        qDebug() << "TEST";
-        img.save(pi->m_inFile.toLower()+".png");
 
 
         LTiff t;
