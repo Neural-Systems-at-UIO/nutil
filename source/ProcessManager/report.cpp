@@ -303,7 +303,7 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
   //      sheet->writeStr(2,6,"Region Area");
         sheet->writeStr(0,6,"Region Name");
         if (displayID)
-            sheet->writeStr(0,6,"Area ID");
+            sheet->writeStr(0,7,"Object ID");
    //     sheet->writeStr(0,7,"Cutoff reached");
   // max object size cut off: objects greater in size were divided into max size or smaller. This feature should be removed.
         int y = 1;
