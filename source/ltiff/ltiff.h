@@ -50,7 +50,7 @@ class LTiffBufferList {
 public:
     QVector<LTiffBuffer*> buffers;
     QVector<LTiffBuffer*> stack;
-
+    int m_size;
     ~LTiffBufferList() {
         Release();
     }
@@ -80,6 +80,7 @@ public:
 
     void Init(int count, uint32 size) {
         Release();
+        m_size =  size;
 //        qDebug() << "Initializing buffer count:" << count;
         for (int i=0;i<count;i++) {
             tdata_t buf = _TIFFmalloc(size);
@@ -96,7 +97,13 @@ public:
             if (b->m_x== -1)
                 return b;
 
-        return nullptr;
+        qDebug() << "Appending new buffer.." << rand()%100;
+       tdata_t buf = _TIFFmalloc(m_size);
+       LTiffBuffer* tbuf = new LTiffBuffer(buf, -1, -1);
+       buffers.append(tbuf);
+
+
+        return tbuf;
     }
 
     void UpdateBuffer() {
@@ -113,7 +120,7 @@ public:
         //for (LTiffBuffer* tbuf : stack) {
         for (int i=stack.count()-1;i>=0;i--) {
             LTiffBuffer* tbuf = stack[i];
-            if (tbuf->m_x == x && tbuf->m_y==y)
+            if (tbuf->m_x == (uint32)x && tbuf->m_y==(uint32)y)
                 return tbuf;
         }
 
@@ -152,7 +159,7 @@ public:
 
     const QString m_compressionTypes[11] = {"not specified", "none", "CCITT RLE", "CCITT G3", "CCITT G4", "LZW", "JPEG", "JPEG New Style", "Deflate (adobe)", "9","10"};
 
-    static const int max_thread_num = 16;
+    static const int max_thread_num = 32;
 
     LTiffBufferList bufferStack;
 
