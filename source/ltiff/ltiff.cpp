@@ -625,7 +625,7 @@ QColor LTiff::GetTiledRGB(int x, int y, int thread_num) {
 void LTiff::SetupBuffers()
 {
     AllocateBuffers();
-    bufferStack.Init(32, TIFFTileSize(m_tif));
+    bufferStack.Init(2, TIFFTileSize(m_tif));
 
 }
 
