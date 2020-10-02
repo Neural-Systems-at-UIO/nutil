@@ -1,4 +1,5 @@
 #include "processmanagertiffcreator.h"
+#include "source/data.h"
 
 ProcessManagerTiffCreator::ProcessManagerTiffCreator()
 {
@@ -61,7 +62,7 @@ void ProcessManagerTiffCreator::Execute()
         LTiff t;
         t.FromQIMage(pi->m_outFile,img,m_compression,m_tileSize, m_processes[i]->m_counter);
         //m_processes[i]->AutoContrast(pi->m_inFile, pi->m_outFile, m_compression, m_background, m_outputDir);
-        LMessage::lMessage.Message("New tiled TIFF file: <font color=\"yellow\">"+pi->m_outFile+"</font>");
+        LMessage::lMessage.Message("New tiled TIFF file: <font color=\""+Data::data.warningColor.name()+"\">"+pi->m_outFile+"</font>");
 
         m_mainCounter.Tick();
     }

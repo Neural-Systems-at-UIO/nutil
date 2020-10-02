@@ -1,6 +1,7 @@
 #include "lmessage.h"
 #include <QDateTime>
 #include <QDebug>
+#include "source/data.h"
 
 LMessage LMessage::lMessage;
 
@@ -79,7 +80,7 @@ void LMessage::SendFile()
 void LMessage::Error(QString s)
 {
     AppendMainLog("ERROR: " + s );
-    m_messages.append(QDateTime::currentDateTime().toString() + " : <font color=\"red\">" +  s + "</font>");
+    m_messages.append(QDateTime::currentDateTime().toString() + " : <font color=\""+Data::data.errorColor.name()+"\">" +  s + "</font>");
     Maintain();
 
 }

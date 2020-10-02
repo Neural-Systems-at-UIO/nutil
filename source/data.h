@@ -30,6 +30,10 @@ public:
     bool m_hasAreaSplitting = true;
     void Redraw();
     QString comma = ",";
+
+    QColor warningColor = Qt::blue;
+    QColor errorColor = Qt::red;
+
 };
 
 #endif // DATA_H

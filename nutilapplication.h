@@ -19,6 +19,7 @@ private:
     bool Transform();
     void PrintUsage();
     bool Batch();
+    void Validator(QString directory);
 };
 
 #endif // NUTILAPPLICATION_H

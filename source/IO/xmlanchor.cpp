@@ -2,6 +2,7 @@
 #include <QXmlDefaultHandler>
 #include <QXmlStreamReader>
 #include "source/util/lmessage.h"
+#include "source/data.h"
 
 XMLAnchor::XMLAnchor()
 {
@@ -16,7 +17,7 @@ XMLData XMLAnchor::findData(QString name)
     }
 
 //    qDebug() << "Could not find xmldata for:" << name;
-    LMessage::lMessage.Message("<font color=\"yellow\">Warning: Could not find xmldata in .xml file for slice '" + name +"', so 3D data will be incorrect. Please make sure that there exists a corresponding field in the xml file!</font>");
+    LMessage::lMessage.Message("<font color=\"" + Data::data.warningColor.name()+ "\">Warning: Could not find xmldata in .xml file for slice '" + name +"', so 3D data will be incorrect. Please make sure that there exists a corresponding field in the xml file!</font>");
 
     return XMLData();
 

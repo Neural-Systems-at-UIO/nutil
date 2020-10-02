@@ -10,6 +10,7 @@
 #include <QNetworkReply>
 #include "source/util/updater.h"
 #include "source/Validator/nutilvalidator.h"
+#include "source/data.h"
 
 #pragma comment(linker,"/STACK:18000000");
 #pragma comment(linker,"/HEAP:18000000");
@@ -35,7 +36,7 @@ void setDarkPalette(QApplication& a) {
     darkPalette.setColor(QPalette::HighlightedText, Qt::black);
 
     a.setPalette(darkPalette);
-
+    Data::data.warningColor = Qt::yellow;
     a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
 }
 

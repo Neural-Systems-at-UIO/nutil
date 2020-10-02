@@ -57,6 +57,17 @@ void NutilApplication::exec()
         PrintUsage();
         exit(1);
     }
+
+    if (m_argv[1].toLower() == "validator") {
+        if (m_argv.count()<=2) {
+            cout << "Nutil Self-Validtor requires a specifically set-up directory as parameter 2";
+            exit(1);
+        }
+        Validator(m_argv[2]);
+        return;
+    }
+
+
     QString file = m_argv[1];
 
     int numThreads = omp_get_max_threads();
@@ -211,7 +222,7 @@ bool NutilApplication::Transform()
 
 void NutilApplication::PrintUsage()
 {
-    cout << "Nutil version 0.03" << endl << endl;
+    cout << "Welcome to Nutil" << endl << endl;
     cout << "Supported file formats: ";
     qDebug() << QImageReader::supportedImageFormats() << endl;
 
@@ -239,4 +250,10 @@ bool NutilApplication::Batch()
 //    n.Execute();
 
     return true;
+}
+
+void NutilApplication::Validator(QString directory)
+{
+    cout << "Welcome to the Nutil Self-validator!" <<endl;
+
 }
