@@ -110,6 +110,10 @@ public:
     }
 
 
+    static bool CompareIdenticalFiles(QString fa, QString fb);
+    static QByteArray loadBinaryFile(QString filename);
+
+
     static float getFreeRam();
 
 
@@ -123,7 +127,7 @@ public:
 
     static QString findFileInDirectory(QString search,QString dir, QString extension, QString exclusion);
     static QString findFileInDirectory(QStringList search,QString dir, QString extension, QString exclusion);
-    static void findFilesInSubDirectories(QStringList* lst, QString dir, QString extension);
+    static void findFilesInSubDirectories(QStringList* lst, QString dir, QString extension, bool fullName=false);
 
     static QString findFileInSubDirectories(QString file, QString dir, QString extension);
     static QString listFiles(QDir directory, QString searchFile);

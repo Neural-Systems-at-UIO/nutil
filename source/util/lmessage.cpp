@@ -38,6 +38,8 @@ void LMessage::Log(QString s)
 
 void LMessage::AppendMainLog(QString s)
 {
+    if (Data::data.quiet)
+        return;
     m_logMessages.append( s );
     QFile f(m_logFileName);
     if (f.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {

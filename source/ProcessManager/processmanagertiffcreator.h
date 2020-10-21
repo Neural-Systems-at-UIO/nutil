@@ -30,6 +30,9 @@ public:
     QString m_compression = "jpg";
     int m_tileSize;
 
+
+    QStringList m_supportedFiles = QStringList() << "*.jpg" << "*.jpeg" << "*.png" <<"*.tiff" <<"*.tif";
+
     ProcessManagerTiffCreator();
 
     bool Build(NutilTemplate* data) override;

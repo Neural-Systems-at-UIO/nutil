@@ -28,6 +28,7 @@ public:
     static Data data;
     bool isConsole = false;
     bool m_hasAreaSplitting = true;
+    bool quiet = false;
     void Redraw();
     QString comma = ",";
 

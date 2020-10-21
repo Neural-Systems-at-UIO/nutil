@@ -60,14 +60,13 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
 {
 
 
-    qDebug() << "Loading tiled tiff file:" << inFile;
 
     LTiff tif;
     int writeCompression;
     if (!LoadAndVerifyTiff(tif, inFile, writeCompression, compression))
         return false;
 
-    tif.PrintImageInfo();
+//    tif.PrintImageInfo();
 //    exit(1);
 
     otif.m_boundsMin = QVector3D(0,0,0);
@@ -79,8 +78,8 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
     //qDebug() << "Finding bounds..";
     //tif.FindBounds(background);
 
-
-    qDebug() << "Transforming to file " << outFile << " with compression " << tif.m_compressionTypes[writeCompression];
+    if (!Data::data.quiet)
+        qDebug() << "Transforming to file " << outFile << " with compression " << tif.m_compressionTypes[writeCompression];
 
     m_infoText =  "rotating " + QString::number(angle/(2*M_PI)*360,'f',2) + " degrees" ;
     otif.Transform(tif, angle, scale, 0,0, background, colorScale, &m_counter);
@@ -94,6 +93,8 @@ bool NutilProcess::TransformTiff(QString inFile, QString outFile, QString compre
     otif.Close();
 
     if (autoClip && renameFile!="") {
+        if (!Data::data.quiet)
+            qDebug() << "Transforming to file " << outFile << " with compression " << tif.m_compressionTypes[writeCompression];
         qDebug() << "Renaming from " << renameFile << " to "  << outFile;
         QFile file (outFile);
         file.remove();
@@ -153,6 +154,13 @@ bool NutilProcess::GenerateThumbnail(QString inFile, QString outFile, float thum
     LTiff tif;
     if (!tif.Open(inFile))
         return false;
+
+    if (!TIFFIsTiled(tif.m_tif)) {
+//        qDebug() << "************ HERE";
+        LMessage::lMessage.Error("Error: this tiff file is not tiled. Please use the other transformation method for non-tiled tiffs.");
+        return false;
+    }
+
 
 /*    tif.PrintImageInfo();
     exit(1);
@@ -239,7 +247,6 @@ bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector3D colorWid
 
 bool NutilProcess::LoadAndVerifyTiff(LTiff &tif, QString inFile, int &writeCompression, QString compression)
 {
-    qDebug() << "Loading tiled tiff file:" << inFile;
 
     if (!tif.Open(inFile)) {
         QString s = "";
@@ -250,14 +257,15 @@ bool NutilProcess::LoadAndVerifyTiff(LTiff &tif, QString inFile, int &writeCompr
         LMessage::lMessage.Error("Could not open tiff file + '"+inFile + "'! " + s);
         Data::data.abort=true;
         Util::CancelSignal=true;
-
         return false;
     }
+
     if (!TIFFIsTiled(tif.m_tif)) {
+//        qDebug() << "************ HERE";
         LMessage::lMessage.Error("Error: this tiff file is not tiled. Please use the other transformation method for non-tiled tiffs.");
         return false;
     }
-//    else qDebug() << "IS TILED";
+  //  else qDebug() << "TIFF IS TILED";
 
 
 

@@ -199,6 +199,7 @@ bool LTiff::Open(QString filename)
         qDebug() << "CANNOT OPEN TIFF FILE : " << filename;
         return false;
     }
+
     TIFFGetField(m_tif, TIFFTAG_IMAGEWIDTH, &m_width);
     TIFFGetField(m_tif, TIFFTAG_IMAGELENGTH, &m_height);
     TIFFGetField(m_tif, TIFFTAG_TILEWIDTH, &m_tileWidth);
@@ -215,6 +216,8 @@ bool LTiff::Open(QString filename)
         m_noTilesX = m_width/m_tileWidth;
         m_noTilesY = m_height/m_tileHeight;
     }
+//        qDebug() << "TIFF FILE NOT TILED  "<< m_filename;
+
 
     return true;
 }

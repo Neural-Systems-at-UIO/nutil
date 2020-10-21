@@ -263,8 +263,8 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1067</width>
-             <height>543</height>
+             <width>81</width>
+             <height>28</height>
             </rect>
            </property>
            <widget class="QWidget" name="layoutWidget">

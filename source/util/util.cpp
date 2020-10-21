@@ -146,6 +146,26 @@ QString Util::getBaseFilename(QString fn)
 
 }
 
+bool Util::CompareIdenticalFiles(QString fa, QString fb)
+{
+    QByteArray ba = loadBinaryFile(fa);
+    QByteArray bb = loadBinaryFile(fb);
+    if (ba.count()!=bb.count())
+        return false;
+    for (long l=0;l<ba.size();l++)
+        if (ba.at(l)!=bb.at(l))
+            return false;
+    return true;
+}
+
+QByteArray Util::loadBinaryFile(QString filename) {
+    QFile file(filename);
+    file.open(QIODevice::ReadOnly);
+    QByteArray ba = file.readAll();
+    file.close();
+    return ba;
+}
+
 float Util::getFreeRam()
 {
 #ifdef _WIN32
@@ -299,21 +319,26 @@ QString Util::listFiles(QDir directory, QString searchFile)
 
 
 
-void Util::findFilesInSubDirectories(QStringList* lst, QString directory, QString extension)
+void Util::findFilesInSubDirectories(QStringList* lst, QString directory, QString extension, bool fullName)
 {
     QDir dir(directory);
     QFileInfoList list = dir.entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
     foreach(QFileInfo finfo, list) {
             if (finfo.isDir())
-                findFilesInSubDirectories(lst, finfo.absoluteFilePath(), extension);
+                findFilesInSubDirectories(lst, finfo.absoluteFilePath(), extension,fullName);
             else
-                if (finfo.fileName().toLower().endsWith(extension))
-                    lst->append(finfo.fileName());
+                if (finfo.fileName().toLower().endsWith(extension)) {
+                    if (!fullName)
+                        lst->append(finfo.fileName());
+                    else
+                        lst->append(finfo.filePath());
+                }
 
 
     }
 
 }
+
 
 
 QString Util::findFileInSubDirectories(QString search, QString dir, QString extension)

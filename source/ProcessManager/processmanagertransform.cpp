@@ -120,7 +120,6 @@ void ProcessManagerTransform::Execute()
         //m_processes[i]->InitializeCounter(pi->m_inFile, m_autoClip, m_thumbnailSize);
 
         if (!m_onlyThumbs) {
-
             m_processes[i]->TransformTiff(pi->m_inFile, pi->m_outFile, m_compression, pi->m_angle, pi->m_scale, m_background, m_colorSpread, m_autoClip.toLower()=="yes");
             if (Data::data.abort || Util::CancelSignal) {
                 LMessage::lMessage.Log("User aborting!");
@@ -138,10 +137,14 @@ void ProcessManagerTransform::Execute()
 
             if (m_thumbnailSize!=0) {
 
+            bool ok = true;
             if (!m_onlyThumbs)
-                m_processes[i]->GenerateThumbnail(pi->m_outFile, thumbOut,m_thumbnailSize);
+                ok = m_processes[i]->GenerateThumbnail(pi->m_outFile, thumbOut,m_thumbnailSize);
             else
-                m_processes[i]->GenerateThumbnail(pi->m_inFile, thumbOut,m_thumbnailSize);
+                ok = m_processes[i]->GenerateThumbnail(pi->m_inFile, thumbOut,m_thumbnailSize);
+
+//            if (!ok)
+  //              Data::data.abort = true;
 
             }
             }

@@ -97,7 +97,7 @@ public:
             if (b->m_x== -1)
                 return b;
 
-        qDebug() << "Appending new buffer.." << rand()%100;
+//        qDebug() << "Appending new buffer.." << rand()%100;
        tdata_t buf = _TIFFmalloc(m_size);
        LTiffBuffer* tbuf = new LTiffBuffer(buf, -1, -1);
        buffers.append(tbuf);

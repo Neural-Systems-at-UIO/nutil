@@ -12,7 +12,7 @@ bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
 
     m_processItems.clear();
     QDir directory(m_inputDir);
-    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png" <<"*.tiff" <<"*.tif",QDir::Files);
+    QStringList images = directory.entryList(m_supportedFiles,QDir::Files);
     for (QString filename: images) {
         QStringList inFileSplit = filename.split("/");
         QString inFile = (inFileSplit[inFileSplit.count()-1]);
@@ -27,6 +27,14 @@ bool ProcessManagerTiffCreator::Build(NutilTemplate* data)
         m_processItems.append(QSharedPointer<ProcessItem>(new ProcessItem(m_inputDir+  inFile, m_outputDir+ outFile, 0, QPointF(1,1), outFile, m_outputDir)));
 //        return true;
     }
+
+    if (images.count()==0) {
+        LMessage::lMessage.Error("Could not find any png/jpg files in the specified directory. Please check your input parameters.");
+        //m_status = Status::Idle;
+        return false;
+
+    }
+
     if (!Verify()) {
         m_processItems.clear();
         return false;

@@ -38,7 +38,7 @@ bool Execute(QString fileName, int numThreads) {
         QElapsedTimer t;
         t.start();
         nauto.Execute();
-     //   qDebug() << "Operation complete in "<<Util::;
+        //   qDebug() << "Operation complete in "<<Util::;
 
     }
     catch (QString e) {
@@ -58,12 +58,12 @@ void NutilApplication::exec()
         exit(1);
     }
 
-    if (m_argv[1].toLower() == "validator") {
-        if (m_argv.count()<=2) {
+    if (m_argv[1].toLower() == "validate") {
+        /*        if (m_argv.count()>=2) {
             cout << "Nutil Self-Validtor requires a specifically set-up directory as parameter 2";
             exit(1);
-        }
-        Validator(m_argv[2]);
+        }*/
+        Validator();
         return;
     }
 
@@ -96,7 +96,7 @@ bool NutilApplication::RotateTiff()
     float scale =  m_argv[6].toFloat();
     QColor background = QColor(m_argv[7].toFloat(), m_argv[8].toFloat(), m_argv[9].toFloat(),m_argv[10].toFloat());
 
-    qDebug() << "Loading tiled tiff file:" << inFile;
+    //    qDebug() << "Loading tiled tiff file:" << inFile;
 
 
     LTiff tif;
@@ -139,7 +139,7 @@ bool NutilApplication::RotateTiff()
 
 
     qDebug() << "Transforming to file " << outFile << " with compression " << tif.m_compressionTypes[writeCompression];
-//    otif.Transform(tif, angle, scale, 0,0, background, m_);
+    //    otif.Transform(tif, angle, scale, 0,0, background, m_);
 
     tif.Close();
     otif.Close();
@@ -162,7 +162,7 @@ bool NutilApplication::Transform()
 
     //cout << "infile: "  << inFile.toStdString() << endl;
     //cout << "angle: "  << angle << endl;
-    qDebug() << "LOADING " << inFile;
+    //    qDebug() << "LOADING " << inFile;
     QImage image(inFile);
     if (image.isNull()) {
         qDebug() << "COULD NOT LOAD FILE";
@@ -229,9 +229,9 @@ void NutilApplication::PrintUsage()
     cout << "Usage: "<< endl;
     cout << "  Nutil <file>" << endl;
     cout << " " << endl;
-//    cout << "    batch [ excel file ] [ int sheet no ]" << endl;
-//    cout << "    transform [img input] [img output] [angle in rad] [scale] [bg col r] [bg col g] [bg col b] [bg col a]"<<endl;
-//    cout << "    transform_tiff [img input] [img output] [compression = none, jpeg, lzw] [angle in rad] [scale] [bg col b] [bg col g] [bg col r] [bg col a]" << endl;
+    //    cout << "    batch [ excel file ] [ int sheet no ]" << endl;
+    //    cout << "    transform [img input] [img output] [angle in rad] [scale] [bg col r] [bg col g] [bg col b] [bg col a]"<<endl;
+    //    cout << "    transform_tiff [img input] [img output] [compression = none, jpeg, lzw] [angle in rad] [scale] [bg col b] [bg col g] [bg col r] [bg col a]" << endl;
     cout << " " << endl;
     cout << "If anything crashes or acts naughy, don't hesitate contacting leuat@irio.co.uk" << endl;
     cout << "" << endl;
@@ -246,14 +246,84 @@ bool NutilApplication::Batch()
     }
     QString inFile = m_argv[2];
     int sheetIndex =  m_argv[3].toInt();
-//    Nauto n(inFile, sheetIndex);
-//    n.Execute();
+    //    Nauto n(inFile, sheetIndex);
+    //    n.Execute();
 
     return true;
 }
 
-void NutilApplication::Validator(QString directory)
+
+void NutilApplication::PrintFailure() {
+    cout<<"    ▓█████  ██▓███   ██▓ ▄████▄       █████▒▄▄▄       ██▓ ██▓     "<<endl;
+    cout<<"    ▓█   ▀ ▓██░  ██▒▓██▒▒██▀ ▀█     ▓██   ▒▒████▄    ▓██▒▓██▒    "<<endl;
+    cout<<"    ▒███   ▓██░ ██▓▒▒██▒▒▓█    ▄    ▒████ ░▒██  ▀█▄  ▒██▒▒██░    "<<endl;
+    cout<<"    ▒▓█  ▄ ▒██▄█▓▒ ▒░██░▒▓▓▄ ▄██▒   ░▓█▒  ░░██▄▄▄▄██ ░██░▒██░    "<<endl;
+    cout<<"    ░▒████▒▒██▒ ░  ░░██░▒ ▓███▀ ░   ░▒█░    ▓█   ▓██▒░██░░██████▒"<<endl;
+    cout<<"    ░░ ▒░ ░▒▓▒░ ░  ░░▓  ░ ░▒ ▒  ░    ▒ ░    ▒▒   ▓▒█░░▓  ░ ▒░▓  ░"<<endl;
+    cout<<"     ░ ░  ░░▒ ░      ▒ ░  ░  ▒       ░       ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░"<<endl;
+    cout<<"       ░   ░░        ▒ ░░            ░ ░     ░   ▒    ▒ ░  ░ ░   "<<endl;
+    cout<<"       ░  ░          ░  ░ ░                      ░  ░ ░      ░  ░"<<endl;
+    cout << endl;
+    cout << "Nutil self-validator failed. Please check the file comparisons for errors!"<<endl<<endl;;
+
+}
+
+void NutilApplication::PrintSuccess()
+{
+    cout<<"    .▄▄ · ▄• ▄▌ ▄▄·  ▄▄· ▄▄▄ ..▄▄ · .▄▄ · ▄▄ "<<endl;
+    cout<<"    ▐█ ▀. █▪██▌▐█ ▌▪▐█ ▌▪▀▄.▀·▐█ ▀. ▐█ ▀. ██▌"<<endl;
+    cout<<"    ▄▀▀▀█▄█▌▐█▌██ ▄▄██ ▄▄▐▀▀▪▄▄▀▀▀█▄▄▀▀▀█▄▐█·"<<endl;
+    cout<<"    ▐█▄▪▐█▐█▄█▌▐███▌▐███▌▐█▄▄▌▐█▄▪▐█▐█▄▪▐█.▀ "<<endl;
+    cout<<"     ▀▀▀▀  ▀▀▀ ·▀▀▀ ·▀▀▀  ▀▀▀  ▀▀▀▀  ▀▀▀▀  ▀ "<<endl;
+    cout << endl;
+    cout << "Everything seems to be in order. Go ahead an publish, Sharon!" << endl;
+}
+
+
+void NutilApplication::Validator()
 {
     cout << "Welcome to the Nutil Self-validator!" <<endl;
 
+
+    // First, got through transform files
+    cout<<" _____                     __  "<<endl;
+    cout<<"|_   _| __ __ _ _ __  ___ / _| ___  _ __ _ __ ___  "<<endl;
+    cout<<"  | || '__/ _` | '_ \\/ __| |_ / _ \\| '__| '_ ` _ \\ "<<endl;
+    cout<<"  | || | | (_| | | | \\__ \\  _| (_) | |  | | | | | |"<<endl;
+    cout<<"  |_||_|  \\__,_|_| |_|___/_|  \\___/|_|  |_| |_| |_|"<<endl<<endl;
+    Data::data.quiet = true;
+    cout << "Executing TRANSFORM..."<<endl;
+    Execute("T/batch.nut",4);
+    if (!CompareFiles("T/out","png")) {
+        PrintFailure();
+        return;
+    }
+    if (!CompareFiles("T/out","tif")) {
+        PrintFailure();
+        return;
+    }
+    cout << endl << endl;
+    PrintSuccess();
+
+}
+
+bool NutilApplication::CompareFiles(QString directory, QString extension)
+{
+    QStringList lst;
+    Util::findFilesInSubDirectories(&lst, directory, extension, true);
+    for (QString f : lst) {
+        QString comp = f;
+        comp = comp.replace("out","correct");
+        QString f1 = comp;
+        QString f2 = f;
+        cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";
+        bool ret = Util::CompareIdenticalFiles(comp,f);
+        QString r = ret?"true":"false";
+        cout << r.toStdString() <<endl;
+        if (ret == false) {
+            cout << "************ ERROR : Files are not identical! Aborting... " << endl;
+            return false;
+        }
+    }
+    return true;
 }

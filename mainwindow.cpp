@@ -150,9 +150,13 @@ void MainWindow::on_btnStart_clicked()
 
 void MainWindow::PrivateUpdate()
 {
+    int org = ui->scrollArea->verticalScrollBar()->value();
+
     QWidget* w = new QWidget(this);
     w->setLayout(ui->gridTemplate);
     ui->scrollArea->setWidget(w);
+
+    ui->scrollArea->verticalScrollBar()->setValue(org);
 
 }
 
@@ -165,8 +169,8 @@ void MainWindow::on_EmitUpdate()
 
 void MainWindow::on_RePopulate()
 {
-    m_nt.Populate(ui);
 
+    m_nt.Populate(ui);
 }
 
 void MainWindow::on_leProcessors_returnPressed()
@@ -255,8 +259,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 
 void MainWindow::OnInfoTextChanged(QString info)
 {
+    int org = ui->txtInfo->verticalScrollBar()->value();
     ui->txtInfo->setText(info);
     UpdateInfoTimer();
+    ui->txtInfo->verticalScrollBar()->setValue(org);
 }
 
 void MainWindow::OnMessageTextChanged(QString msg)
@@ -338,7 +344,7 @@ void MainWindow::on_btnSave_clicked()
     QString fileName = m_nt.m_openFile;
     if (fileName=="") {
         fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                                   m_nt.Get("name"),
+                                   m_nt.m_openFile,
                                    tr("Nutil (*.nut)"));
     }
     if (fileName!="") {
@@ -350,7 +356,7 @@ void MainWindow::on_btnSave_clicked()
 void MainWindow::on_btnLoad_2_clicked()
 {
    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                   "",
+                                   m_nt.m_openFile,
                                    tr("Nutil (*.nut)"));
 
     if (fileName!="") {
@@ -381,7 +387,7 @@ void MainWindow::on_lstRecent_itemDoubleClicked(QListWidgetItem *item)
 void MainWindow::on_btnSaveAs_clicked()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File As"),
-                                   m_nt.Get("name"),
+                                   m_nt.m_openFile,
                                    tr("Nutil (*.nut)"));
     if (fileName!="") {
         m_nt.Save(fileName);

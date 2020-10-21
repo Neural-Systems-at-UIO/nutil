@@ -19,7 +19,11 @@ private:
     bool Transform();
     void PrintUsage();
     bool Batch();
-    void Validator(QString directory);
+    void Validator();
+
+    void PrintFailure();
+    void PrintSuccess();
+    bool CompareFiles(QString directory, QString extension);
 };
 
 #endif // NUTILAPPLICATION_H
