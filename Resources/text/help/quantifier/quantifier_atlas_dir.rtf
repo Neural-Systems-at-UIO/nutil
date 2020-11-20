@@ -2,20 +2,21 @@
 Navigate to the folder containing the brain atlas maps.
 <hr>
 <h3>Generating the atlas maps</h3>
-The brain atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with the QuickNII software. Nonlinear refinements may be done with the VisuAlign software (https://www.nitrc.org/projects/quicknii and https://www.nitrc.org/projects/visualign).
-
+The brain atlas maps are customised to match the cutting plane and proportions of the brain sections.
+They are generated with the QuickNII software (without nonlinear refinement) or with the VisuAlign software (with nonlinear refinemenent).
 <h3>Atlas map requirements</h3>
 <br>
 <table width="100%">
 <tr>
 <td>
 <ul>
-<li>May be generated with QuickNII with or without nonlinear refinement with VisuAlign (both software generate atlas maps in FLAT format). </li>
-<li>must have the same proportions, but not necessarily the same size as the segmentations<br>
+<li>Must be in FLAT format.
+<li>To generate atlas maps, first register the sections to a reference atlas with QuickNII. Atlas maps can now be generated. If further refinements are needed, a JSON file may be exported from QuickNII and opened in VisuAlign. VisuAlign enables nonlinear adjustments.
+<li>The atlas maps must be created from images that have the same proportions, but not necessarily the same size as the segmentations<br>
 (they are usually smaller than the segmentations: see the QuickNII manual for more information)</li>
 <li>file names must include a unique ID that is also present in the file name of the corresponding segmentation <br>
 (ideally in the format sXXX where XXX represents the section number; the section number should reflect the serial order and spacing of the sections)</li>
-<li>M
+<li>
 </ul>
 </td>
 <td>
