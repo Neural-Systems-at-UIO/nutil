@@ -60,15 +60,53 @@ public:
     }
 };
 
-class XMLAnchor
-{
+
+class AbstractAnchor {
 public:
-    XMLAnchor();
+    //AbstractAnchor()  {}
+
+    //  XMLAnchor();
     QVector<XMLData> m_data;
 
     XMLData findData(QString filename);
 
+    virtual void Load(QString file) = 0;
+
+};
+
+
+class XMLAnchor : public AbstractAnchor
+{
+public:
+
     void Load(QString file);
+};
+
+
+class JSONAnchor : public AbstractAnchor
+{
+public:
+//    JSONAnchor();
+    QVector<XMLData> m_data;
+
+    void Load(QString file);
+};
+
+class AnchorFactory {
+public:
+    static AbstractAnchor* Load(QString file) {
+        AbstractAnchor* anchor = nullptr;
+        if (file.toLower().endsWith(".xml"))
+            anchor = new XMLAnchor();
+        if (file.toLower().endsWith(".json"))
+            anchor = new JSONAnchor();
+        if (anchor==nullptr) {
+            qDebug() << "ERROR: Unknown file type when loading anchor (not xml/json).";
+            return nullptr;
+        }
+        anchor->Load(file);
+        return anchor;
+    }
 };
 
 #endif // XMLANCHOR_H

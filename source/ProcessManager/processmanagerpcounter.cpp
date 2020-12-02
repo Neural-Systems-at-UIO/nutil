@@ -20,7 +20,8 @@ void ProcessManagerPCounter::LoadXML()
 {
 
     if (QFile::exists(m_anchorFile))
-        m_xmlAnchor.Load(m_anchorFile);
+        m_xmlAnchor = AnchorFactory::Load(m_anchorFile);
+//        m_xmlAnchor.Load(m_anchorFile);
     else {
         LMessage::lMessage.Message("Could not find anchor file: " + m_anchorFile + ". Please specify in the input xml file!" );
         Data::data.abort = true;
@@ -137,7 +138,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
             }
 
             //qDebug() << name;
-            pi->m_xmlData =m_xmlAnchor.findData(name);
+            pi->m_xmlData =m_xmlAnchor->findData(name);
             pi->m_id = name;//m_sheet->readStr(y,x+2);
             pi->m_reportName = name.split(".").first(); //m_sheet->readStr(y,x+2);
             //            if (pi->m_reportName=="")  pi->m_reportName = QString::number(m_sheet->readNum(y,x+2));

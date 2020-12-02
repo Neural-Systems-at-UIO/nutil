@@ -749,6 +749,7 @@ void NutilTemplate::FillFromExcel(QTableWidget *tw)
         return;
     if (!QFile::exists(fileName))
         return;
+
     QSharedPointer<LBook> book = QSharedPointer<LBookXlnt>(new LBookXlnt);
     book->Load(fileName);
     QSharedPointer<LSheet> l = book->GetSheet(0);
@@ -759,7 +760,7 @@ void NutilTemplate::FillFromExcel(QTableWidget *tw)
         qDebug() << "NutilTemplate::FillFromExcel book returned 0, should not happen "<<book->m_sheets.count();
         return;
     }
-
+    int cnt = 0;
     while (l->readStr(row,col)!="") {
         int y = tw->rowCount();
         tw->insertRow(y);
@@ -769,7 +770,11 @@ void NutilTemplate::FillFromExcel(QTableWidget *tw)
         tw->setItem(y, 3, new QTableWidgetItem(QString::number(l->readNum(row,col+3))));
         tw->setItem(y, 4, new QTableWidgetItem(QString::number(l->readNum(row,col+4))));
         row++;
+        cnt++;
     }
+    QMessageBox msgBox;
+    msgBox.setText(QString::number(cnt)+" rows of data was added from '"+fileName+"'");
+    msgBox.exec();
 
 
 }

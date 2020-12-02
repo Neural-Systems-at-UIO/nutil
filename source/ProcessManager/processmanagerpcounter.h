@@ -87,7 +87,7 @@ public:
 
     float CalculateRamNeededInGB() override;
 
-    XMLAnchor m_xmlAnchor;
+    AbstractAnchor* m_xmlAnchor = nullptr;
     void LoadXML();
     bool Build(NutilTemplate* data) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);

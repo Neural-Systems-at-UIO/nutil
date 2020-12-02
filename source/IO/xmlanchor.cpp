@@ -3,13 +3,16 @@
 #include <QXmlStreamReader>
 #include "source/util/lmessage.h"
 #include "source/data.h"
-
+#include <QJsonDocument>
+#include <QObject>
+#include "source/util/util.h"
+/*
 XMLAnchor::XMLAnchor()
 {
 
 }
-
-XMLData XMLAnchor::findData(QString name)
+*/
+XMLData AbstractAnchor::findData(QString name)
 {
     for (XMLData& d : m_data) {
         if (d.m_filename.contains(name))
@@ -93,4 +96,50 @@ void XMLAnchor::Load(QString file)
             LMessage::lMessage.Error("Error: Error parsing xml anchoring file: " + xml.errorString());
 
            }
+}
+
+void JSONAnchor::Load(QString file)
+{
+
+    QString val = Util::loadTextFile(file);
+
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+
+    //get the jsonObject
+    QJsonObject jObject = doc.object();
+
+    //convert the json object to variantmap
+    QVariantMap mainMap = jObject.toVariantMap();
+
+    //convert the json object to variantmap
+    QVariantList dataList = mainMap["slices"].toList();
+
+    for (int i=0;i<dataList.count();i++) {
+        QVariantMap map = dataList[i].toMap();
+        XMLData d;
+        d.m_filename = map.value("filename").toString();
+        d.m_nr = map.value("nr").toInt();
+        d.m_width = map.value("width").toInt();
+        d.m_height = map.value("height").toInt();
+        QVariantList anLst = map.value("anchoring").toList();
+//        qDebug() << anLst.count() << anLst;
+
+        d.m_o = QVector3D(anLst[0].toFloat(), anLst[1].toFloat(),anLst[2].toFloat());
+        d.m_u = QVector3D(anLst[3].toFloat(), anLst[4].toFloat(),anLst[5].toFloat());
+        d.m_v = QVector3D(anLst[6].toFloat(), anLst[7].toFloat(),anLst[8].toFloat());
+
+//        qDebug() << d.m_filename << d.m_nr << d.m_width << d.m_height;
+//                    qDebug() << d.m_o;
+//                    qDebug() << d.m_v;
+
+       // qDebug() << "Adding slice:" << d.m_filename;
+
+        m_data.append(d);
+
+
+//        qDebug() << fileMap.keys();
+    }
+
+  //  exit(1);
+
 }
