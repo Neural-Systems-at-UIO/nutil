@@ -15,6 +15,7 @@ XMLAnchor::XMLAnchor()
 XMLData AbstractAnchor::findData(QString name)
 {
     for (XMLData& d : m_data) {
+ //       qDebug() <
         if (d.m_filename.contains(name))
             return d;
     }
