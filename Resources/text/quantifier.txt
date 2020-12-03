@@ -5,7 +5,7 @@ quantifier_input_dir; 0 ;; Segmentation folder; directory;
 quantifier_atlas_dir; 0 ; analysis_type=QUINT ; Brain atlas map folder; directory;
 label_file; 0 ; analysis_type=QUINT ;Reference atlas; list; Allen Mouse Brain 2015,Allen Mouse Brain 2017, WHS Atlas Rat v2, WHS Atlas Rat v3, Custom; Allen Mouse Brain 2015
 custom_label_file; 0 ; label_file=Custom ;Custom reference atlas; file;
-xml_anchor_file; 0 ; analysis_type=QUINT; Anchored XML file; file;
+xml_anchor_file; 0 ; analysis_type=QUINT; XML or JSON anchoring file; file;
 quantifier_output_dir; 0 ;; Output folder; directory;
 output_report; 0 ;;Output reports; list; All, None; All
 extraction_color ; 0; ; Object colour ; color ; 255,0,0,255

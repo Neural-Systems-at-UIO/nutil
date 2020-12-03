@@ -1,12 +1,12 @@
-<h2>XML file</h2>
-Navigate to the XML file containing the anchoring information. This is generated with the QuickNII software.
-<hr>
+<h2>XML or JSON file</h2>
+Navigate to the XML or JSON file containing the anchoring information. Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used. They all contain the linear registration info that is needed here.
+
 <h3>Requirement</h3>
-The image names in the XML file must include a unique ID. These must correspond to the unique IDs in the files names of the segmentations and atlas maps.
+The image names in the XML/ JSON file must include a unique ID. These must correspond to the unique IDs in the files names of the segmentations and atlas maps.
 <br>
 <br>
 We recommend altering the file names prior to segmentation and QuickNII registration to ensure file name consistency.
 
-<h3>VisuAlign</h3>
-Nonlinear adjustment of the atlas maps with VisuAlign does not alter the coordinate information contained in the xml file. The xml file from QuickNII is therefore used either in combination
-with the atlas maps from QuickNII or from VisuAlign. For more information see the user manual.
+<h3>Nonlinear adjustment</h3>
+Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the JSON file. Therefore, either the JSON file from QuickNII or from VisuAlign may be used. Quantifier is also compatible with the XML file from QuickNII.
+For more information see the user manual.
