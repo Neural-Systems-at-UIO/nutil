@@ -87,7 +87,7 @@ class JSONAnchor : public AbstractAnchor
 {
 public:
 //    JSONAnchor();
-    QVector<XMLData> m_data;
+//    QVector<XMLData> m_data;
 
     void Load(QString file);
 };
