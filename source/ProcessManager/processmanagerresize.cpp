@@ -24,6 +24,19 @@ void ProcessManagerResize::Execute()
 
     m_mainCounter = Counter(m_processes.length(),"",false);
 
+    for (int i=0;i<m_processes.length();i++) {
+        QSharedPointer<ProcessItem> pi = m_processItems[i];
+        if (pi->m_inFile.toLower().contains(".tif")) {
+            QImage img;
+            qDebug() << "TRYING TO LOAD";
+            img.load(pi->m_inFile);
+            qDebug() << "ENDED";
+        }
+
+    }
+
+
+
 #pragma omp parallel for
 
     for (int i=0;i<m_processes.length();i++) {
