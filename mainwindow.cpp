@@ -11,7 +11,7 @@
 
 
 
-float MainWindow::Version = 0.405;
+float MainWindow::Version = 0.406;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

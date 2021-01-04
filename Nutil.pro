@@ -15,7 +15,7 @@ DEFINES += IGNORE_DOWNLOAD
 
 
 win32:RC_ICONS += nutil.ico
-ICON = nutil.icns
+ICON = nutil.
 
 
 # The following define makes your compiler emit warnings if you use
@@ -47,7 +47,7 @@ macx {
 
 
 QMAKE_CXXFLAGS_DEBUG -= -O2
-QMAKE_CXXFLAGS_RELEASE += -Os
+QMAKE_CXXFLAGS_RELEASE += -O2
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # You can also make your code fail to compile if you use deprecated APIs.
