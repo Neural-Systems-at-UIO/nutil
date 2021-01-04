@@ -150,19 +150,22 @@ void MainWindow::on_btnStart_clicked()
 
 void MainWindow::PrivateUpdate()
 {
-    int org = ui->scrollArea->verticalScrollBar()->value();
-
+/*    int org = ui->scrollArea->verticalScrollBar()->value();
+    qDebug() << "CALLED "<<(rand()%100) << " with ORG "<<org;
+*/
     QWidget* w = new QWidget(this);
     w->setLayout(ui->gridTemplate);
     ui->scrollArea->setWidget(w);
 
-    ui->scrollArea->verticalScrollBar()->setValue(org);
+    ui->scrollArea->verticalScrollBar()->setValue(m_scrollValue);
 
 }
 
 void MainWindow::on_EmitUpdate()
 {
-     QTimer::singleShot(25, [=]() {
+    m_scrollValue = ui->scrollArea->verticalScrollBar()->value();
+//    qDebug() <<"BEFORE" <<(rand()%100) << " with ORG "<<org;
+     QTimer::singleShot(2, [=]() {
             PrivateUpdate();
      } );
 }
