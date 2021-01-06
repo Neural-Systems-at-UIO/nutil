@@ -1,9 +1,12 @@
 #QT -= gui
-QT += gui  websockets
+QT += gui
+QT += xml
+#websockets
 #CONFIG += static
 CONFIG += c++11 console
 CONFIG += app_bundle
-QT += xml
+
+
 QT += widgets
 QT += core gui
 QT += network
@@ -25,7 +28,9 @@ ICON = nutil.
 DEFINES += QT_DEPRECATED_WARNINGS USE_LIBTIFF
 
 win32-msvc*{
-    QMAKE_CXXFLAGS += -openmp
+    QMAKE_CXXFLAGS += -openmp -Zc:twoPhase-
+#    QT_LIBS += -lQtXml
+
 }
 
 

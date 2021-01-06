@@ -50,8 +50,8 @@ void Buffer2D::Set(const int i, const QVector3D& v)
 
 void Buffer2D::DrawBox(Buffer2D* backImage,  const int i, const int j, const int size, QVector3D val) {
     QVector3D mark = QVector3D(1,1,1);
-    for (int x=max(0, i-size/2);x<=min(m_size-1, i+size/2);x++)
-        for (int y=max(0, j-size/2);y<=min(m_size-1, j+size/2);y++) {
+    for (int x=std::max(0, i-size/2);x<=std::min(m_size-1, i+size/2);x++)
+        for (int y=std::max(0, j-size/2);y<=std::min(m_size-1, j+size/2);y++) {
             QVector3D refval = backImage->Get(x,y);
             if (refval.x()==0) {
                 Set(x,y,val);
@@ -145,12 +145,12 @@ void Buffer2D::RenderStars(int noStars, int baseSize, int sizeSpread, float stre
         int y = rand() % m_size;
 
 
-        float cx = min ((double)rand()/(double)RAND_MAX + 0.6 ,1.0);
-        float cy = min ((float)rand()/(float)RAND_MAX + 0.6f ,cx);
-        float cz = min ((double)rand()/(double)RAND_MAX + 0.6 ,1.0);
+        float cx = std::min ((double)rand()/(double)RAND_MAX + 0.6 ,1.0);
+        float cy = std::min ((float)rand()/(float)RAND_MAX + 0.6f ,cx);
+        float cz = std::min ((double)rand()/(double)RAND_MAX + 0.6 ,1.0);
 
 
-        float sz = max(Random::nextGaussian(baseSize, sizeSpread), baseSize/3.0);
+        float sz = std::max(Random::nextGaussian(baseSize, sizeSpread), baseSize/3.0);
 
 
         int asz = (int)(sz*m_size)/245.0;

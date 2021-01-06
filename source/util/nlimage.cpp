@@ -161,7 +161,7 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
         }
   //  qDebug() << "B";
 
-    qSort(m_areas->begin(), m_areas->end());
+    std::sort(m_areas->begin(), m_areas->end());
 }
 
 
@@ -412,9 +412,9 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
                 QColor c = QColor(m_testImage->pixel(p.x(), p.y()));
                 QColor c2 =QColor(m_index->getPixel(i,j));
                 if (c2.red()>=250 && c2.green()>=250 && c2.blue()>250 ) {
-                    c.setRed(min((int)(c.red()*0.7 + c2.red()*0),255));
-                    c.setGreen(min((int)(c.green()*0.7 + c2.green()*0),255));
-                    c.setBlue(min((int)(c.blue()*0.7 + c2.blue()*0),255));
+                    c.setRed(std::min((int)(c.red()*0.7 + c2.red()*0),255));
+                    c.setGreen(std::min((int)(c.green()*0.7 + c2.green()*0),255));
+                    c.setBlue(std::min((int)(c.blue()*0.7 + c2.blue()*0),255));
                     m_index->setPixel(i,j,c.rgba());
                 }
 

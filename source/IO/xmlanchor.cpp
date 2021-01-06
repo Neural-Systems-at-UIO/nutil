@@ -1,5 +1,5 @@
 #include "xmlanchor.h"
-#include <QXmlDefaultHandler>
+//#include <QXmlDefaultHandler>
 #include <QXmlStreamReader>
 #include "source/util/lmessage.h"
 #include "source/data.h"
@@ -63,10 +63,10 @@ void XMLAnchor::Load(QString file)
             if(token == QXmlStreamReader::StartElement)
             {
                 /* If it's named persons, we'll go to the next.*/
-                if (xml.name()=="series") {
+                if (xml.name()==QString("series")) {
                     //continue;
                 }
-                if(xml.name() == "slice") {
+                if(xml.name() == QString("slice")) {
 
                     XMLData d;
                     QXmlStreamAttributes attributes = xml.attributes();

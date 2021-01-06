@@ -59,7 +59,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 
-using namespace std;
+//using namespace std;
 
 class Util {
 
@@ -67,26 +67,12 @@ public:
 
     static QElapsedTimer globalTimer;
 
-    static void Tokenize(const string& str,
-                         vector<string>& tokens,
-                         const string& delimiters = " ");
-
-
-    static void string2char(string s, char* to);
-    static string toString(double d, string param);
-    static string toString(double d);
-    static string toString(int d);
-
 
     static bool QVector3DIsClose(QColor a, QColor b, QVector3D spread);
 
             static bool QVector3DIsClose(QVector3D a, QVector3D b, QVector3D spread);
 
     static bool CancelSignal;
-    static const char* read_textfile(string filename);
-    static void verify_file(string filename);
-    static bool verify_file_bool(string filename);
-    static string trim(string s);
     static QString path;
 
     static QVector3D vecFromString(QString s);
@@ -147,7 +133,7 @@ public:
     }
 
     static QVector3D floor(const QVector3D v) {
-        return QVector3D( max(0.0f, v.x()), max(0.0f,v.y()), max(0.0f,v.z())  );
+        return QVector3D( std::max(0.0f, v.x()), std::max(0.0f,v.y()), std::max(0.0f,v.z())  );
     }
 
     static QVector3D Rotate2D(QVector3D point, QVector3D center, float angle) {
@@ -230,8 +216,8 @@ public:
     static void drawBox(QImage* backImage, QImage* img, int i, int j, int size, QRgb color) {
         int imageSize = img->width();
         QRgb mark = QColor(1,1,1).rgba();
-        for (int x=max(0, i-size/2);x<=min(imageSize-1, i+size/2);x++)
-            for (int y=max(0, j-size/2);y<=min(imageSize-1, j+size/2);y++) {
+        for (int x=std::max(0, i-size/2);x<=std::min(imageSize-1, i+size/2);x++)
+            for (int y=std::max(0, j-size/2);y<=std::min(imageSize-1, j+size/2);y++) {
                 QColor col = QColor::fromRgba(backImage->pixel(x,y));
                 if (col.red()==0) {
                     img->setPixel(x,y,color);
@@ -299,7 +285,7 @@ public:
         return str;
     }
     static QVector3D maxQvector3D(const QVector3D a, const QVector3D b) {
-        return QVector3D(max(a.x(), b.x()),max(a.y(), b.y()),max(a.z(), b.z()));
+        return QVector3D(std::max(a.x(), b.x()),std::max(a.y(), b.y()),std::max(a.z(), b.z()));
     }
 
     inline static bool Mollweide(QVector3D& out, float i, float j, float l0, float R, float size) {
