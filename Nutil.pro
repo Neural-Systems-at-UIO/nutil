@@ -29,7 +29,7 @@ win32-msvc*{
 }
 
 
-macx {
+macx:x86 {
     QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
     QMAKE_CXXFLAGS += -Ofast
     INCLUDEPATH += /usr/local/include/
@@ -42,6 +42,28 @@ macx {
 
     LIBS += -L/usr/local/lib /usr/local/lib/libomp.dylib -lomp
 
+
+}
+
+macx {
+    QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
+    QMAKE_CXXFLAGS += -Ofast
+    INCLUDEPATH += /usr/local/include/
+    INCLUDEPATH += /opt/homebrew/include/
+    LIBS += -L/usr/local/lib/
+    LIBS += -L/opt/local/lib
+
+    LIBS += -ltiff
+#    LIBS += /opt/homebrew/lib/libtiff.a
+
+#    LIBS += -L$$PWD/lib/    -lxlnt
+    LIBS += -L$$PWD/lib/   $$PWD/lib/libxlnt-arm.dylib
+    #LIBS += -L/usr/local/opt/libomp/lib -lomp
+
+    LIBS += -L/opt/homebrew/lib /opt/homebrew/lib/libomp.dylib -lomp
+
+    QMAKE_APPLE_DEVICE_ARCHS=arm64
+    CONFIG += arm64
 
 }
 

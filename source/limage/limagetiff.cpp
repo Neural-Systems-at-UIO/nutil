@@ -3,7 +3,8 @@
 #ifndef TARGET_OS_MAC
 #include <omp.h>
 #else
-#include "/usr/local/opt/libomp/include/omp.h"
+//#include "/usr/local/opt/libomp/include/omp.h"
+#include <omp.h>
 #endif
 
 LImageTiff::LImageTiff()
@@ -30,7 +31,7 @@ LImageTiff::~LImageTiff()
 
 void LImageTiff::Initialize(int width, int height)
 {
-    Release();
+//    Release();
     m_width = width;
     m_height = height;
     m_qImage = new QImage(width, height, QImage::Format_ARGB32);

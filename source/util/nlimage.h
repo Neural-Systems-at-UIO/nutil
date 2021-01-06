@@ -34,7 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef TARGET_OS_MAC
 #include "xlnt/xlnt.hpp"
 #else
-#include "/usr/local/include/xlnt/xlnt.hpp"
+//#include "/usr/local/include/xlnt/xlnt.hpp"
+#include "xlnt/xlnt.hpp"
 #endif
 
 

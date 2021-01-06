@@ -10,14 +10,18 @@
 #ifndef TARGET_OS_MAC
 #include <omp.h>
 #else
-#include "/usr/local/opt/libomp/include/omp.h"
+#include <omp.h>
+//#include "/usr/local/opt/libomp/include/omp.h"
 #endif
 #include "source/util/counter.h"
 #include "source/nauto.h"
-
 //#include <tiffio.h>
 
-using namespace std;
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <algorithm>
+//using namespace std;
 
 NutilApplication::NutilApplication(int argc, char *argv[])
 {
@@ -85,7 +89,7 @@ void NutilApplication::exec()
 
 bool NutilApplication::RotateTiff()
 {
-    QCoreApplication::addLibraryPath("imageformats");
+/*    QCoreApplication::addLibraryPath("imageformats");
     if (m_argc!=11) {
         return false;
     }
@@ -143,14 +147,14 @@ bool NutilApplication::RotateTiff()
 
     tif.Close();
     otif.Close();
-
+*/
     return true;
 
 }
 
 bool NutilApplication::Transform()
 {
-    QCoreApplication::addLibraryPath("imageformats");
+  /*  QCoreApplication::addLibraryPath("imageformats");
     if (m_argc!=10) {
         return false;
     }
@@ -215,14 +219,14 @@ bool NutilApplication::Transform()
     }
     //    imageWriter.close();
     Q_TIMER_ELAPSED("Saving");
-
+*/
     return true;
 
 }
 
 void NutilApplication::PrintUsage()
 {
-    cout << "Welcome to Nutil" << endl << endl;
+  /*  cout << "Welcome to Nutil" << endl << endl;
     cout << "Supported file formats: ";
     qDebug() << QImageReader::supportedImageFormats() << endl;
 
@@ -236,7 +240,7 @@ void NutilApplication::PrintUsage()
     cout << "If anything crashes or acts naughy, don't hesitate contacting leuat@irio.co.uk" << endl;
     cout << "" << endl;
     cout << "" << endl;
-
+*/
 }
 
 bool NutilApplication::Batch()

@@ -4,7 +4,8 @@
 #ifndef TARGET_OS_MAC
 #include <omp.h>
 #else
-#include "/usr/local/opt/libomp/include/omp.h"
+#include <omp.h>
+//#include "/usr/local/opt/libomp/include/omp.h"
 #endif
 #include "source/util/lmessage.h"
 #include "source/util/random.h"
