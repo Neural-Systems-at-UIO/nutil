@@ -26,14 +26,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QElapsedTimer>
 #include "source/util/util.h"
 
-using namespace std;
+//using namespace std;
 
 class Counter {
 public:
     int ticks;
     float Max;
     int current, currentTick;
-    string str;
+    std::string str;
     bool outputClams;
     long prevTime;
     float m_progress = 0;
@@ -49,17 +49,17 @@ public:
         return "<font size=\"+1\">[<b>"+getPercent() +"</b>]</font>";
     }
     Counter() {}
-    Counter(int m, string s, bool output) {
+    Counter(int m, std::string s, bool output) {
         outputClams = output;
         if (outputClams)
-            cout << s << endl;
+            std::cout << s << std::endl;
         Init(m);
     }
 
-    Counter(int m, string s) {
+    Counter(int m, std::string s) {
         str = s;
         outputClams = true;
-        cout << s << endl;
+        std::cout << s << std::endl;
         Init(m);
 
     }
@@ -72,7 +72,7 @@ public:
         currentTick = -1;
         outputClams = false;
         if (outputClams)
-            cout << "[";
+            std::cout << "[";
 
         ttimer.start();
         prevTime = ttimer.elapsed();
@@ -99,11 +99,11 @@ public:
         if (outputClams)
         {
             currentTick = percent;
-            cout << "\r" <<str << " " << QString::number( percent,'f',1).toStdString() << "%" << "    " << Util:: MilisecondToString(timeLeft).toStdString() << " of total "  <<Util::MilisecondToString(totalTime).toStdString() << "                                                  ";
-            cout.flush();
+            std::cout << "\r" <<str << " " << QString::number( percent,'f',1).toStdString() << "%" << "    " << Util:: MilisecondToString(timeLeft).toStdString() << " of total "  <<Util::MilisecondToString(totalTime).toStdString() << "                                                  ";
+            std::cout.flush();
             if (percent==100-ticks)
                 if (outputClams)
-                    cout << "]" << endl;;
+                    std::cout << "]" << std::endl;;
         }
         current++;
     }

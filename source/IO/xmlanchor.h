@@ -22,9 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef XMLANCHOR_H
 #define XMLANCHOR_H
 
-#include <QXmlSimpleReader>
+//#include <QXmlSimpleReader>
 #include <QVector3D>
-#include <QXmlAttributes>
+//#include <QXmlAttributes>
 #include <QVector>
 #include <QDebug>
 

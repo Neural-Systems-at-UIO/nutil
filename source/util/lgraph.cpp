@@ -109,8 +109,8 @@ void LGraph::getMinMaxY()
     m_miny = 1E30;
     m_maxy = -1E30;
     for (int i=0;i<m_noBins;i++) {
-        m_miny = min(m_value[i], m_miny);
-        m_maxy = max(m_value[i], m_maxy);
+        m_miny = std::min(m_value[i], m_miny);
+        m_maxy = std::max(m_value[i], m_maxy);
     }
 }
 
@@ -199,7 +199,7 @@ void LGraph::Std() {
 /*void LGraph::Normalize() {
     double m = -1E20;
     for (int i=0;i<m_noBins;i++)
-        m = max(m_value[i], m);
+        m = std::max(m_value[i], m);
 
 
     for (int i=0;i<m_noBins;i++)
@@ -224,7 +224,7 @@ void LGraph::SaveText(QString fileName) {
             QTextStream stream(&file);
 
             for (int i=0;i<m_noBins;i++) {
-                stream << m_index[i] << "  " << m_value[i] << endl;
+                stream << m_index[i] << "  " << m_value[i] << "\n";// << std:endl;
 //                qDebug() << m_index[i] << " " << m_value[i];
             }
         }
@@ -236,7 +236,7 @@ void LGraph::SaveText(QString fileName) {
     // find min
     double m = 1E20;
     for (int i=0;i<m_noBins;i++)
-        m = min(m_value[i], m);
+        m = std::min(m_value[i], m);
 
     for (int i=0;i<m_noBins;i++) {
         m_value[i] = exp(-(m_value[i]-m));

@@ -105,13 +105,14 @@ void DialogTiff::mouseReleaseEvent(QMouseEvent *e)
 
 void DialogTiff::wheelEvent(QWheelEvent *event)
 {
-    float f = event->delta()/100.0f;
+//    float f = event->delta()/100.0f;
+    float f = event->angleDelta().y()/100.0f;
 
     //if (QApplication::keyboardModifiers() & Qt::ControlModifier)
     {
         m_updateThread->m_zoom *=1 - f*0.05;
-        m_updateThread->m_zoom = min(m_updateThread->m_zoom, 1.0f);
-        m_updateThread->m_zoom = max(m_updateThread->m_zoom, 0.001f);
+        m_updateThread->m_zoom = std::min(m_updateThread->m_zoom, 1.0f);
+        m_updateThread->m_zoom = std::max(m_updateThread->m_zoom, 0.001f);
         float t = 0.0f;
         m_updateThread->m_zoomCenter = (m_updateThread->m_zoomCenter*t + (1-t)*m_updateThread->m_currentPos);//*(2-2*m_zoom);
         Data::data.redrawOutput = true;

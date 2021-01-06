@@ -8,6 +8,7 @@
 #include <QTextEdit>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <iostream>
 
 NutilTemplate::NutilTemplate()
 {
@@ -688,7 +689,7 @@ void NutilTemplate::Save(QString fname)
     for (QString k: m_sortList) {
         NutilTemplateItem* nti = m_items[k];
         QString s = nti->m_name + " = " + nti->m_value;
-        str << s << endl;
+        str << s << "\n";
     }
 
     f.close();

@@ -14,73 +14,6 @@ QElapsedTimer Util::globalTimer;
 bool Util::CancelSignal = false;
 
 
-void Util::Tokenize(const string& str,
-                      vector<string>& tokens,
-                      const string& delimiters)
-{
-  // Skip delimiters at beginning.
-  string s = str;
-  int wn= s.find(13);
-  if (wn!=-1) s.erase(wn,1);
-  
-  string::size_type lastPos = s.find_first_not_of(delimiters, 0);
-  // Find first "non-delimiter".
-  string::size_type pos     = s.find_first_of(delimiters, lastPos);
-  
-  while (string::npos != pos || string::npos != lastPos)
-    {
-      // Found a token, add it to the vector.
-      tokens.push_back(s.substr(lastPos, pos - lastPos));
-      // Skip delimiters.  Note the "not_of"
-      lastPos = s.find_first_not_of(delimiters, pos);
-      // Find next "non-delimiter"
-      pos = s.find_first_of(delimiters, lastPos);
-    }
-  
-}	
-
-
-  
-const char* Util::read_textfile(string filename) {
-  ifstream f(filename.c_str(), ios::in);
-  string cnt, sum;
-  sum = "";
-  while(!f.eof()) {
-    f >> cnt; 
-    sum = sum + cnt;
-  }
-  f.close();       
-  return sum.c_str();           
-}
-
-
-void Util::verify_file(string filename) {
-  ifstream f(filename.c_str(), ios::in | ios::binary);
-  if (!f.is_open())
-    throw string("Unable to find file: " + filename);
-  f.close();
-}
-bool Util::verify_file_bool(string filename) {
-  ifstream f(filename.c_str(), ios::in | ios::binary);
-  if (!f.is_open())
-    return false;
-  f.close();
-  return true;
-}
-
-
-string Util::trim(string strin)
-{
-  string str = strin;
-  string::size_type pos = str.find_last_not_of(' ');
-  if(pos != string::npos) {
-    str.erase(pos + 1);
-    pos = str.find_first_not_of(' ');
-    if(pos != string::npos) str.erase(0, pos);
-  }
-  else str.erase(str.begin(), str.end());
-  return str;
-}
 
 QColor Util::colorScale(QColor &col, int mean, int std)
 {
@@ -221,7 +154,7 @@ float Util::getAmountOfInstalledMemory()
 #endif
 }
 
-string Util::c2x(int x, int y) {
+std::string Util::c2x(int x, int y) {
     std::string s ="";
     int k=y/26;
     if (k!=0) s = s+char('A' + k-1);

@@ -117,7 +117,7 @@ long LSheetXlnt::readLong(int i, int j)
 
 QString LSheetXlnt::readStr(int i, int j)
 {
-    return QString::fromStdString(m_sheet->cell(Util::c2x(i,j)).value<string>());
+    return QString::fromStdString(m_sheet->cell(Util::c2x(i,j)).value<std::string>());
 }
 
 
