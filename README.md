@@ -8,14 +8,19 @@ Nutil is written in C++ using standard Qt libraries, and is optimised for parall
 - Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/)
 - LibXLNT for Excel file I/O (https://github.com/tfussell/xlnt/)
 
-# Prerequisites
-In order to compile from scratch, the following software components are also required:
-- The “lelib” library: https://github.com/leuat/lelib/).
-- Microsoft Visual C++ compiler (MSVC)
-- Qt Creator 5+
+# Compiling from source 
+1.In order to compile from scratch, the following software components are also required:
 
-Nutil can be compiled to work on Mac/Linux with little effort.
-Nutil contains an auto updater that checks the servers for a new version on each run. If a new 173 version is found, it is downloaded and extracted automatically.
+** Microsoft Visual C++ 2019 compiler (MSVC) on windows (https://visualstudio.microsoft.com/vs/features/cplusplus/)
+** XCode (Clang) on macos
+** Gnu C++ compiler on linux
+1. Download and install Qt Creator (https://www.qt.io/download)
+ Install the Qt framework version 6 or above
+2. Install git
+3. Clone this repository to a folder
+4. Open the project file in Qt 
+5. Set up a build path to the project (projects->build->build directory)
+6. Compile and run! (ctrl+r)
 
 # Authors
 Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Jan G Bjaalie. 
