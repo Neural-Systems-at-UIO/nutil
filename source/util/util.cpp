@@ -284,8 +284,8 @@ QString Util::findFileInSubDirectories(QString search, QString dir, QString exte
 }
 
 float Util::clamp(float val, const float mi, const float ma) {
-    val = min(ma, val);
-    val = max(mi, val);
+    val = std::min(ma, val);
+    val = std::max(mi, val);
     return val;
 }
 
@@ -294,9 +294,9 @@ QColor Util::Gamma(QColor c, float xexp, float shift)
     float x = c.red();
     float y = c.green();
     float z = c.blue();
-    x = pow(x - shift, xexp);
-    y = pow(y - shift, xexp);
-    z = pow(z - shift, xexp);
+    x = std::pow(x - shift, xexp);
+    y = std::pow(y - shift, xexp);
+    z = std::pow(z - shift, xexp);
     x = clamp(x,0,255);
     y = clamp(y,0,255);
     z = clamp(z,0,255);
@@ -325,7 +325,7 @@ QString Util::getFileName(QString dir, QString baseName, QString type)
             filename = filename.replace(baseName, "");
             filename = filename.replace("."+type, "");
             int num = filename.toInt();
-            maxNumber = max(maxNumber, num);
+            maxNumber = std::max(maxNumber, num);
         }
     }
     maxNumber++;
