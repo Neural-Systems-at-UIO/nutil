@@ -168,7 +168,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
             //sheet->Set(y,,10);
 
-            if (al->area!=0.0 && !isnan(al->extra2.x()/al->area))
+            if (al->area!=0.0 && !al->area !=0)
                 sheet->Set(y,9,al->extra2.x()/al->area);
  //           if (al->areaScaled!=0)
    //             sheet->Set(y,10,al->extra2.y()/al->areaScaled);

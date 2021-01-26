@@ -76,10 +76,16 @@ void XMLAnchor::Load(QString file)
                     d.m_height = attributes.value("height").toInt();
                     QStringList anLst = attributes.value("anchoring").toString().split("&");
                     //qDebug() << anLst.count();
-                    d.m_o = QVector3D(anLst[0].split("=")[1].toFloat(), anLst[1].split("=")[1].toFloat(),anLst[2].split("=")[1].toFloat());
-                    d.m_u = QVector3D(anLst[3].split("=")[1].toFloat(), anLst[4].split("=")[1].toFloat(),anLst[5].split("=")[1].toFloat());
-                    d.m_v = QVector3D(anLst[6].split("=")[1].toFloat(), anLst[7].split("=")[1].toFloat(),anLst[8].split("=")[1].toFloat());
+                    if (anLst.count()<9) {
+                        LMessage::lMessage.Message("Error loading XML anchor file '"+file+"', anchor matrix for slice '"+ QString::number(d.m_nr)+"'. <br>Please make sure that the XML anchor file is valid, or else 3D coordinate data will be incorrect.");
+//                        Data::data.abort = true;
+  //                      return;
+                    } else {
 
+                        d.m_o = QVector3D(anLst[0].split("=")[1].toFloat(), anLst[1].split("=")[1].toFloat(),anLst[2].split("=")[1].toFloat());
+                        d.m_u = QVector3D(anLst[3].split("=")[1].toFloat(), anLst[4].split("=")[1].toFloat(),anLst[5].split("=")[1].toFloat());
+                        d.m_v = QVector3D(anLst[6].split("=")[1].toFloat(), anLst[7].split("=")[1].toFloat(),anLst[8].split("=")[1].toFloat());
+                    }
 //                    qDebug() << d.m_o;
 //                    qDebug() << d.m_v;
 
