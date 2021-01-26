@@ -77,5 +77,6 @@
         <file>Resources/text/help/quantifier/coordinate_random_distortion.rtf</file>
         <file>Resources/text/help/quantifier/custom_label_file.rtf</file>
         <file>Resources/text/help/quantifier/display_label_id.rtf</file>
+        <file>Resources/text/help/quantifier/custom_mask_directory.rtf</file>
     </qresource>
 </RCC>

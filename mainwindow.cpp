@@ -11,7 +11,7 @@
 
 
 
-float MainWindow::Version = 0.406;
+float MainWindow::Version = 0.408;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -150,9 +150,6 @@ void MainWindow::on_btnStart_clicked()
 
 void MainWindow::PrivateUpdate()
 {
-/*    int org = ui->scrollArea->verticalScrollBar()->value();
-    qDebug() << "CALLED "<<(rand()%100) << " with ORG "<<org;
-*/
     QWidget* w = new QWidget(this);
     w->setLayout(ui->gridTemplate);
     ui->scrollArea->setWidget(w);
@@ -164,7 +161,6 @@ void MainWindow::PrivateUpdate()
 void MainWindow::on_EmitUpdate()
 {
     m_scrollValue = ui->scrollArea->verticalScrollBar()->value();
-//    qDebug() <<"BEFORE" <<(rand()%100) << " with ORG "<<org;
      QTimer::singleShot(2, [=]() {
             PrivateUpdate();
      } );
@@ -173,7 +169,10 @@ void MainWindow::on_EmitUpdate()
 void MainWindow::on_RePopulate()
 {
 
-    m_nt.Populate(ui);
+//    QTimer::singleShot(4, [=]() {
+//           PrivateUpdate();
+           m_nt.Populate(ui);
+//    } );
 }
 
 void MainWindow::on_leProcessors_returnPressed()
