@@ -5,7 +5,7 @@
 
 #include <cstdio>
 
-using namespace std;
+//using namespace std;
 
 DownloadManager::DownloadManager(QObject *parent)
     : QObject(parent)
@@ -84,7 +84,7 @@ void DownloadManager::startNextDownload()
 
     // prepare the output
     printf("Downloading %s...\n", url.toEncoded().constData());
-    downloadTime.start();
+//    downloadTime.start();
 }
 
 void DownloadManager::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -92,7 +92,7 @@ void DownloadManager::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
     progressBar.setStatus(bytesReceived, bytesTotal);
 
     // calculate the download speed
-    double speed = bytesReceived * 1000.0 / downloadTime.elapsed();
+    /*double speed = bytesReceived * 1000.0 / downloadTime.elapsed();
     QString unit;
     if (speed < 1024) {
         unit = "bytes/sec";
@@ -107,6 +107,7 @@ void DownloadManager::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
     progressBar.setMessage(QString::fromLatin1("%1 %2")
                            .arg(speed, 3, 'f', 1).arg(unit));
     progressBar.update();
+    */
 }
 
 void DownloadManager::downloadFinished()
@@ -168,7 +169,7 @@ void DownloadManager::reportRedirect()
 
 #include <cstdio>
 
-using namespace std;
+//using namespace std;
 
 void TextProgressBar::clear()
 {

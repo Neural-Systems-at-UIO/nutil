@@ -22,9 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef XMLANCHOR_H
 #define XMLANCHOR_H
 
-#include <QXmlSimpleReader>
+//#include <QXmlSimpleReader>
 #include <QVector3D>
-#include <QXmlAttributes>
+//#include <QXmlAttributes>
 #include <QVector>
 #include <QDebug>
 
@@ -86,8 +86,6 @@ public:
 class JSONAnchor : public AbstractAnchor
 {
 public:
-//    JSONAnchor();
-//    QVector<XMLData> m_data;
 
     void Load(QString file);
 };
@@ -95,6 +93,7 @@ public:
 class AnchorFactory {
 public:
     static AbstractAnchor* Load(QString file) {
+
         AbstractAnchor* anchor = nullptr;
         if (file.toLower().endsWith(".xml"))
             anchor = new XMLAnchor();

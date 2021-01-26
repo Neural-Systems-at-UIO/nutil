@@ -32,7 +32,7 @@ void LTiff::SetCompression(QString type)
 
 void LTiff::GetMinMax(int count, QColor &minCol, QColor &maxCol, LGraph& hist)
 {
-    //*counter = Counter((int)(length*width),"GetMinMax ", false);
+    //*counter = Counter((int)(length*width),"GetMinstd::max( ", false);
     AllocateBuffers();
     minCol = QColor(255,255,255);
     maxCol = QColor(0,0,0);
@@ -72,8 +72,8 @@ void LTiff::GetMinMax(int count, QColor &minCol, QColor &maxCol, LGraph& hist)
                     minCol = color;
                 }
                 if (len>minVal) {
-                    maxVal = len;
-                    maxCol = color;
+                   maxVal = len;
+                   maxCol = color;
                 }
                 }
                 //hist.Add(len);
@@ -356,7 +356,7 @@ void LTiff::FindBoundsOld(QColor background)
     m_boundsMin = QVector3D(m_width,m_height,0);
     m_boundsMax = QVector3D(0, 0,0);
 
-    qDebug() << "Finding bounds..." << endl;
+//    qDebug() << "Finding bounds..."
     for (int i=0;i<N;i++) {
         float x = rand()%m_width;
         float y = rand()%m_height;
@@ -366,16 +366,16 @@ void LTiff::FindBoundsOld(QColor background)
 
         }
         else {
-            m_boundsMax.setX(max(m_boundsMax.x(), x));
-            m_boundsMax.setY(max(m_boundsMax.y(), y));
-            m_boundsMin.setX(min(m_boundsMin.x(), x));
-            m_boundsMin.setY(min(m_boundsMin.y(), y));
+            m_boundsMax.setX(std::max(m_boundsMax.x(), x));
+            m_boundsMax.setY(std::max(m_boundsMax.y(), y));
+            m_boundsMin.setX(std::min(m_boundsMin.x(), x));
+            m_boundsMin.setY(std::min(m_boundsMin.y(), y));
         }
         bufferStack.UpdateBuffer();
     }
     qDebug() << "Bounds found: ";
     qDebug() << "  Min: " << m_boundsMin;
-    qDebug() << "  Max: " << m_boundsMax;
+    qDebug() << "  std::max(: " << m_boundsMax;
 }
 
 /*
@@ -522,19 +522,19 @@ void LTiff::CreateFromMeta(LTiff &oTiff, short compression, float rotationAngle,
         c4 = Util::Rotate2D(c4, center, rotationAngle);
 
         QVector3D newMin, newMax;
-        m_boundsMax.setX(max(c1.x(), c2.x()));
-        m_boundsMax.setX(max(m_boundsMax.x(), c3.x()));
-        m_boundsMax.setX(max(m_boundsMax.x(), c4.x()));
-        m_boundsMax.setY(max(c1.y(), c2.y()));
-        m_boundsMax.setY(max(m_boundsMax.y(), c3.y()));
-        m_boundsMax.setY(max(m_boundsMax.y(), c4.y()));
+        m_boundsMax.setX(std::max(c1.x(), c2.x()));
+        m_boundsMax.setX(std::max(m_boundsMax.x(), c3.x()));
+        m_boundsMax.setX(std::max(m_boundsMax.x(), c4.x()));
+        m_boundsMax.setY(std::max(c1.y(), c2.y()));
+        m_boundsMax.setY(std::max(m_boundsMax.y(), c3.y()));
+        m_boundsMax.setY(std::max(m_boundsMax.y(), c4.y()));
 
-        m_boundsMin.setX(min(c1.x(), c2.x()));
-        m_boundsMin.setX(min(m_boundsMin.x(), c3.x()));
-        m_boundsMin.setX(min(m_boundsMin.x(), c4.x()));
-        m_boundsMin.setY(min(c1.y(), c2.y()));
-        m_boundsMin.setY(min(m_boundsMin.y(), c3.y()));
-        m_boundsMin.setY(min(m_boundsMin.y(), c4.y()));
+        m_boundsMin.setX(std::min(c1.x(), c2.x()));
+        m_boundsMin.setX(std::min(m_boundsMin.x(), c3.x()));
+        m_boundsMin.setX(std::min(m_boundsMin.x(), c4.x()));
+        m_boundsMin.setY(std::min(c1.y(), c2.y()));
+        m_boundsMin.setY(std::min(m_boundsMin.y(), c3.y()));
+        m_boundsMin.setY(std::min(m_boundsMin.y(), c4.y()));
 
 
 
@@ -587,7 +587,7 @@ void LTiff::CopyAllData(LTiff &oTiff)
 
         }
 
-    cout << "\nDone!" << endl;
+    std::cout << "\nDone!" << std::endl;
 }
 
 QColor LTiff::GetTiledRGB(int x, int y, int thread_num) {
@@ -685,10 +685,10 @@ void LTiff::Transform(LTiff &oTiff, float angle, QPointF scale, int tx, int ty, 
                     else {
                         float dx = x+i;//(xx + centerx)*scale.x();
                         float dy = y+j;//(xx + centerx)*scale.x();
-                        m_boundsMax.setX(max(m_boundsMax.x(), dx));
-                        m_boundsMin.setX(min(m_boundsMin.x(), dx));
-                        m_boundsMax.setY(max(m_boundsMax.y(), dy));
-                        m_boundsMin.setY(min(m_boundsMin.y(), dy));
+                        m_boundsMax.setX(std::max(m_boundsMax.x(), dx));
+                        m_boundsMin.setX(std::min(m_boundsMin.x(), dx));
+                        m_boundsMax.setY(std::max(m_boundsMax.y(), dy));
+                        m_boundsMin.setY(std::min(m_boundsMin.y(), dy));
 //                        qDebug() << "NEW BOUNDS: " << m_boundsMin << m_boundsMax;
                     }
 

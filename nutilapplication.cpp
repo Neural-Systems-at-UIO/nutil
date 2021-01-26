@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <algorithm>
-//using namespace std;
+#include <iostream>
 
 NutilApplication::NutilApplication(int argc, char *argv[])
 {
@@ -64,7 +64,7 @@ void NutilApplication::exec()
 
     if (m_argv[1].toLower() == "validate") {
         /*        if (m_argv.count()>=2) {
-            cout << "Nutil Self-Validtor requires a specifically set-up directory as parameter 2";
+            std::cout << "Nutil Self-Validtor requires a specifically set-up directory as parameter 2";
             exit(1);
         }*/
         Validator();
@@ -164,8 +164,8 @@ bool NutilApplication::Transform()
     float scale =  m_argv[5].toFloat();
     QColor background = QColor(m_argv[6].toFloat(), m_argv[7].toFloat(), m_argv[8].toFloat(),m_argv[9].toFloat());
 
-    //cout << "infile: "  << inFile.toStdString() << endl;
-    //cout << "angle: "  << angle << endl;
+    //std::cout << "infile: "  << inFile.toStdString() << std::endl;
+    //std::cout << "angle: "  << angle << std::endl;
     //    qDebug() << "LOADING " << inFile;
     QImage image(inFile);
     if (image.isNull()) {
@@ -186,7 +186,7 @@ bool NutilApplication::Transform()
     Counter counter = Counter(image.width()*image.height(),"Rotating ", false);
 #pragma omp parallel for
     for (int i=0;i<image.width();i++) {
-        //        cout<<"threads="<<omp_get_num_threads()<<endl;
+        //        std::cout<<"threads="<<omp_get_num_threads()<<std::endl;
         for (int j=0;j<image.height();j++) {
 
             float x = (i - centerx)*scale;
@@ -202,7 +202,7 @@ bool NutilApplication::Transform()
             counter.Tick();
         }
     }
-    cout << endl;
+    std::cout << std::endl;
     Q_TIMER_ELAPSED("Rotation");
     //QFile file(outFile);
     QImageWriter   imageWriter( outFile );
@@ -226,21 +226,21 @@ bool NutilApplication::Transform()
 
 void NutilApplication::PrintUsage()
 {
-  /*  cout << "Welcome to Nutil" << endl << endl;
-    cout << "Supported file formats: ";
-    qDebug() << QImageReader::supportedImageFormats() << endl;
+    std::cout << "Welcome to Nutil" << std::endl << std::endl;
+    std::cout << "Supported file formats: ";
+    qDebug() << QImageReader::supportedImageFormats();
 
-    cout << "Usage: "<< endl;
-    cout << "  Nutil <file>" << endl;
-    cout << " " << endl;
-    //    cout << "    batch [ excel file ] [ int sheet no ]" << endl;
-    //    cout << "    transform [img input] [img output] [angle in rad] [scale] [bg col r] [bg col g] [bg col b] [bg col a]"<<endl;
-    //    cout << "    transform_tiff [img input] [img output] [compression = none, jpeg, lzw] [angle in rad] [scale] [bg col b] [bg col g] [bg col r] [bg col a]" << endl;
-    cout << " " << endl;
-    cout << "If anything crashes or acts naughy, don't hesitate contacting leuat@irio.co.uk" << endl;
-    cout << "" << endl;
-    cout << "" << endl;
-*/
+    std::cout << "Usage: "<< std::endl;
+    std::cout << "  Nutil <file>" << std::endl;
+    std::cout << " " << std::endl;
+    //    std::cout << "    batch [ excel file ] [ int sheet no ]" << std::endl;
+    //    std::cout << "    transform [img input] [img output] [angle in rad] [scale] [bg col r] [bg col g] [bg col b] [bg col a]"<<std::endl;
+    //    std::cout << "    transform_tiff [img input] [img output] [compression = none, jpeg, lzw] [angle in rad] [scale] [bg col b] [bg col g] [bg col r] [bg col a]" << std::endl;
+    std::cout << " " << std::endl;
+    std::cout << "If anything crashes or acts naughy, don't hesitate contacting leuat@irio.co.uk" << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "" << std::endl;
+
 }
 
 bool NutilApplication::Batch()
@@ -258,45 +258,45 @@ bool NutilApplication::Batch()
 
 
 void NutilApplication::PrintFailure() {
-    cout<<"    ▓█████  ██▓███   ██▓ ▄████▄       █████▒▄▄▄       ██▓ ██▓     "<<endl;
-    cout<<"    ▓█   ▀ ▓██░  ██▒▓██▒▒██▀ ▀█     ▓██   ▒▒████▄    ▓██▒▓██▒    "<<endl;
-    cout<<"    ▒███   ▓██░ ██▓▒▒██▒▒▓█    ▄    ▒████ ░▒██  ▀█▄  ▒██▒▒██░    "<<endl;
-    cout<<"    ▒▓█  ▄ ▒██▄█▓▒ ▒░██░▒▓▓▄ ▄██▒   ░▓█▒  ░░██▄▄▄▄██ ░██░▒██░    "<<endl;
-    cout<<"    ░▒████▒▒██▒ ░  ░░██░▒ ▓███▀ ░   ░▒█░    ▓█   ▓██▒░██░░██████▒"<<endl;
-    cout<<"    ░░ ▒░ ░▒▓▒░ ░  ░░▓  ░ ░▒ ▒  ░    ▒ ░    ▒▒   ▓▒█░░▓  ░ ▒░▓  ░"<<endl;
-    cout<<"     ░ ░  ░░▒ ░      ▒ ░  ░  ▒       ░       ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░"<<endl;
-    cout<<"       ░   ░░        ▒ ░░            ░ ░     ░   ▒    ▒ ░  ░ ░   "<<endl;
-    cout<<"       ░  ░          ░  ░ ░                      ░  ░ ░      ░  ░"<<endl;
-    cout << endl;
-    cout << "Nutil self-validator failed. Please check the file comparisons for errors!"<<endl<<endl;;
+    std::cout<<"    ▓█████  ██▓███   ██▓ ▄████▄       █████▒▄▄▄       ██▓ ██▓     "<<std::endl;
+    std::cout<<"    ▓█   ▀ ▓██░  ██▒▓██▒▒██▀ ▀█     ▓██   ▒▒████▄    ▓██▒▓██▒    "<<std::endl;
+    std::cout<<"    ▒███   ▓██░ ██▓▒▒██▒▒▓█    ▄    ▒████ ░▒██  ▀█▄  ▒██▒▒██░    "<<std::endl;
+    std::cout<<"    ▒▓█  ▄ ▒██▄█▓▒ ▒░██░▒▓▓▄ ▄██▒   ░▓█▒  ░░██▄▄▄▄██ ░██░▒██░    "<<std::endl;
+    std::cout<<"    ░▒████▒▒██▒ ░  ░░██░▒ ▓███▀ ░   ░▒█░    ▓█   ▓██▒░██░░██████▒"<<std::endl;
+    std::cout<<"    ░░ ▒░ ░▒▓▒░ ░  ░░▓  ░ ░▒ ▒  ░    ▒ ░    ▒▒   ▓▒█░░▓  ░ ▒░▓  ░"<<std::endl;
+    std::cout<<"     ░ ░  ░░▒ ░      ▒ ░  ░  ▒       ░       ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░"<<std::endl;
+    std::cout<<"       ░   ░░        ▒ ░░            ░ ░     ░   ▒    ▒ ░  ░ ░   "<<std::endl;
+    std::cout<<"       ░  ░          ░  ░ ░                      ░  ░ ░      ░  ░"<<std::endl;
+    std::cout << std::endl;
+    std::cout << "Nutil self-validator failed. Please check the file comparisons for errors!"<<std::endl<<std::endl;;
 
 }
 
 void NutilApplication::PrintSuccess()
 {
-    cout<<"    .▄▄ · ▄• ▄▌ ▄▄·  ▄▄· ▄▄▄ ..▄▄ · .▄▄ · ▄▄ "<<endl;
-    cout<<"    ▐█ ▀. █▪██▌▐█ ▌▪▐█ ▌▪▀▄.▀·▐█ ▀. ▐█ ▀. ██▌"<<endl;
-    cout<<"    ▄▀▀▀█▄█▌▐█▌██ ▄▄██ ▄▄▐▀▀▪▄▄▀▀▀█▄▄▀▀▀█▄▐█·"<<endl;
-    cout<<"    ▐█▄▪▐█▐█▄█▌▐███▌▐███▌▐█▄▄▌▐█▄▪▐█▐█▄▪▐█.▀ "<<endl;
-    cout<<"     ▀▀▀▀  ▀▀▀ ·▀▀▀ ·▀▀▀  ▀▀▀  ▀▀▀▀  ▀▀▀▀  ▀ "<<endl;
-    cout << endl;
-    cout << "Everything seems to be in order. Go ahead an publish, Sharon!" << endl;
+    std::cout<<"    .▄▄ · ▄• ▄▌ ▄▄·  ▄▄· ▄▄▄ ..▄▄ · .▄▄ · ▄▄ "<<std::endl;
+    std::cout<<"    ▐█ ▀. █▪██▌▐█ ▌▪▐█ ▌▪▀▄.▀·▐█ ▀. ▐█ ▀. ██▌"<<std::endl;
+    std::cout<<"    ▄▀▀▀█▄█▌▐█▌██ ▄▄██ ▄▄▐▀▀▪▄▄▀▀▀█▄▄▀▀▀█▄▐█·"<<std::endl;
+    std::cout<<"    ▐█▄▪▐█▐█▄█▌▐███▌▐███▌▐█▄▄▌▐█▄▪▐█▐█▄▪▐█.▀ "<<std::endl;
+    std::cout<<"     ▀▀▀▀  ▀▀▀ ·▀▀▀ ·▀▀▀  ▀▀▀  ▀▀▀▀  ▀▀▀▀  ▀ "<<std::endl;
+    std::cout << std::endl;
+    std::cout << "Everything seems to be in order. Go ahead an publish, Sharon!" << std::endl;
 }
 
 
 void NutilApplication::Validator()
 {
-    cout << "Welcome to the Nutil Self-validator!" <<endl;
+    std::cout << "Welcome to the Nutil Self-validator!" <<std::endl;
 
 
     // First, got through transform files
-    cout<<" _____                     __  "<<endl;
-    cout<<"|_   _| __ __ _ _ __  ___ / _| ___  _ __ _ __ ___  "<<endl;
-    cout<<"  | || '__/ _` | '_ \\/ __| |_ / _ \\| '__| '_ ` _ \\ "<<endl;
-    cout<<"  | || | | (_| | | | \\__ \\  _| (_) | |  | | | | | |"<<endl;
-    cout<<"  |_||_|  \\__,_|_| |_|___/_|  \\___/|_|  |_| |_| |_|"<<endl<<endl;
+    std::cout<<" _____                     __  "<<std::endl;
+    std::cout<<"|_   _| __ __ _ _ __  ___ / _| ___  _ __ _ __ ___  "<<std::endl;
+    std::cout<<"  | || '__/ _` | '_ \\/ __| |_ / _ \\| '__| '_ ` _ \\ "<<std::endl;
+    std::cout<<"  | || | | (_| | | | \\__ \\  _| (_) | |  | | | | | |"<<std::endl;
+    std::cout<<"  |_||_|  \\__,_|_| |_|___/_|  \\___/|_|  |_| |_| |_|"<<std::endl<<std::endl;
     Data::data.quiet = true;
-    cout << "Executing TRANSFORM..."<<endl;
+    std::cout << "Executing TRANSFORM..."<<std::endl;
     Execute("T/batch.nut",4);
     if (!CompareFiles("T/out","png")) {
         PrintFailure();
@@ -306,7 +306,7 @@ void NutilApplication::Validator()
         PrintFailure();
         return;
     }
-    cout << endl << endl;
+    std::cout << std::endl << std::endl;
     PrintSuccess();
 
 }
@@ -320,12 +320,12 @@ bool NutilApplication::CompareFiles(QString directory, QString extension)
         comp = comp.replace("out","correct");
         QString f1 = comp;
         QString f2 = f;
-        cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";
+        std::cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";
         bool ret = Util::CompareIdenticalFiles(comp,f);
         QString r = ret?"true":"false";
-        cout << r.toStdString() <<endl;
+        std::cout << r.toStdString() <<std::endl;
         if (ret == false) {
-            cout << "************ ERROR : Files are not identical! Aborting... " << endl;
+            std::cout << "************ ERROR : Files are not identical! Aborting... " << std::endl;
             return false;
         }
     }

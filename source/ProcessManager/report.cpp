@@ -75,7 +75,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
             if (Data::data.m_hasAreaSplitting)
                 sheet->writeStr(i,4,"N/A");
             else
-                sheet->Set(i,4, r.m_areasOfInterest.count());
+                sheet->Set(i,4, (long)r.m_areasOfInterest.count());
             sheet->Set(i,5, r.m_totalPixelArea);
             sheet->Set(i,6, r.m_totalArea);
             sheet->writeStr(i,7, r.m_unit);

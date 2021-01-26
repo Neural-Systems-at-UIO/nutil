@@ -118,7 +118,7 @@ public:
 
 private:
     void PrivateUpdate();
-
+    int m_scrollValue;
 
 private slots:
 //    void on_btnLoad_clicked();

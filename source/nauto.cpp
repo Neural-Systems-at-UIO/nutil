@@ -6,7 +6,6 @@
 #include "source/ProcessManager/processmanagerfactory.h"
 #include "source/data.h"
 #include "mainwindow.h"
-using namespace std;
 /*
 Nauto::Nauto(QString filename, int sheetIndex)
 {
@@ -178,7 +177,7 @@ void Nauto::BuildInfo()
 
     for (int i=0;i<m_pm->m_processes.length();i++) {
         float progress = m_pm->m_processes[i]->getProgress();
-        total+=min(progress,100.0f);
+        total+=std::min(progress,100.0f);
         if (progress<100 && progress >0)
         {
             //float degrees = m_pm.m_processItems[i]->m_angle;

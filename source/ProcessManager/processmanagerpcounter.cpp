@@ -248,18 +248,16 @@ void ProcessManagerPCounter::Execute()
                     m_processItems[i]->m_xmlData.m_o-m_processItems[i]->m_xmlData.m_v,
                     m_processItems[i]->m_xmlData.m_o-m_processItems[i]->m_xmlData.m_u).normalized();
 
-//        qDebug() << normal;
-  //      exit(1);
 
         QString maskFile = "";
+        // Process masks
         if (m_useCustomMask) {
 
-            maskFile = Util::findFileInDirectory(QStringList() << "mask" << pi->m_id,m_inputDir,"png","");
+            maskFile = Util::findFileInDirectory(QStringList() << "mask" << pi->m_id,m_maskDir,"png","");
             if (maskFile==""){
                 LMessage::lMessage.Error("  Could not find mask file for " +pi->m_inFile);
                 Data::data.abort = true;
             }
-
 
             if (!Util::VerifyImageFileSize(maskFile,8192*2)){
                 LMessage::lMessage.Error("  Mask file '" +pi->m_inFile+"' has too large dimensions! Make sure that the file size is less than 2048x2048");
@@ -389,6 +387,10 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
     m_inputDir = data->Get("quantifier_input_dir")+"/"; //Util::fixFolder(m_sheet->readStr(4,1));
+    m_maskDir = data->Get("custom_mask_directory")+"/"; //Util::fixFolder(m_sheet->readStr(4,1));
+    if (m_maskDir == "/")
+        m_maskDir = m_inputDir;
+
     m_outputDir = data->Get("quantifier_output_dir")+"/";
     //    float col_r = m_sheet->readNum(3,1);
     //  float col_g = m_sheet->readNum(3,2);

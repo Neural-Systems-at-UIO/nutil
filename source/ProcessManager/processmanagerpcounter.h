@@ -35,7 +35,7 @@ public:
 
     AtlasLabels m_labels;
 
-    QString m_inputDir, m_outputDir;
+    QString m_inputDir, m_outputDir, m_maskDir;
     QString m_atlasDir;
     QString m_labelFile;
     QString m_anchorFile;

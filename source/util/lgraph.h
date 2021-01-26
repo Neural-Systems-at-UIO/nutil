@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 #include "spline.h"
 
-using namespace std;
+//using namespace std;
 
 #include <QVector>
 #include <QPointF>

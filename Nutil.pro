@@ -1,12 +1,17 @@
 #QT -= gui
-QT += gui  websockets
+QT += gui
+QT += xml
+#websockets
 #CONFIG += static
 CONFIG += c++11 console
 CONFIG += app_bundle
-QT += xml
+
+
 QT += widgets
 QT += core gui
 QT += network
+ARCH = $$QMAKE_HOST.arch
+
 TEMPLATE      = app
 
 #DEFINES += IS_BETA IGNORE_DOWNLOAD
@@ -15,7 +20,7 @@ DEFINES += IGNORE_DOWNLOAD
 
 
 win32:RC_ICONS += nutil.ico
-ICON = nutil.icns
+ICON = nutil.png
 
 
 # The following define makes your compiler emit warnings if you use
@@ -25,11 +30,16 @@ ICON = nutil.icns
 DEFINES += QT_DEPRECATED_WARNINGS USE_LIBTIFF
 
 win32-msvc*{
-    QMAKE_CXXFLAGS += -openmp
+    QMAKE_CXXFLAGS += -openmp -Zc:twoPhase-
+#    QT_LIBS += -lQtXml
+
 }
 
 
-macx:x86 {
+macx {
+
+    contains(ARCH, x86_64) |contains(ARCH, amd64): {
+
     QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
     QMAKE_CXXFLAGS += -Ofast
     INCLUDEPATH += /usr/local/include/
@@ -41,11 +51,9 @@ macx:x86 {
     #LIBS += -L/usr/local/opt/libomp/lib -lomp
 
     LIBS += -L/usr/local/lib /usr/local/lib/libomp.dylib -lomp
+    }
 
-
-}
-
-macx {
+    contains(ARCH, arm64): {
     QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
     QMAKE_CXXFLAGS += -Ofast
     INCLUDEPATH += /usr/local/include/
@@ -65,11 +73,13 @@ macx {
     QMAKE_APPLE_DEVICE_ARCHS=arm64
     CONFIG += arm64
 
+
+    }
 }
 
 
 QMAKE_CXXFLAGS_DEBUG -= -O2
-QMAKE_CXXFLAGS_RELEASE += -Os
+QMAKE_CXXFLAGS_RELEASE += -O2
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # You can also make your code fail to compile if you use deprecated APIs.
