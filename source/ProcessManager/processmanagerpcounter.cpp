@@ -531,6 +531,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             LBook* sbook = new LBookXlnt();
             if (QFile::exists("temp.xlsx"))
                QFile::remove("temp.xlsx");
+
             QFile::copy(m_reportSheetName,"temp.xlsx");
 #ifdef _WIN32
             QFile f("temp.xlsx");

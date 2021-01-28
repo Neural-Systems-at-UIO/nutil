@@ -4,7 +4,7 @@
 
 void LBookXlnt::Load(QString filename)
 {
-    m_book.load(filename.toStdString());
+     m_book.load(filename.toStdString());
 }
 
 void LBookXlnt::Save(QString filename)

@@ -5,11 +5,12 @@
 
 #ifdef _WIN32
 //#include <sysinfoapi.h>
+#define NOMINMAX
 #include <windows.h>
+#undef NOMINMAX
 #endif
 #include <algorithm>
 //#include <QtGlobal>
-
 QString Util::path = "";
 QElapsedTimer Util::globalTimer;
 bool Util::CancelSignal = false;

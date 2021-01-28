@@ -38,11 +38,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QElapsedTimer>
 #include <QTextStream>
 #include <QDebug>
+#include <algorithm>
 #include <QElapsedTimer>
 #include <QLayout>
 #include <QLayoutItem>
 #include <QWidget>
+#include <cmath>
 #include <QImageReader>
+
+
 //#include "random.h"
 
 #define Q_TIMER_START()  \
