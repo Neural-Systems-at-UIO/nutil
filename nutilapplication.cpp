@@ -289,6 +289,25 @@ void NutilApplication::Validator()
     std::cout << "Welcome to the Nutil Self-validator!" <<std::endl;
 
 
+    // First, got through quantifier
+
+
+std::cout << "  █████   █    ██  ▄▄▄       ███▄    █ ▄▄▄█████▓ ██▓  █████▒██▓▓█████  ██▀███  "<<std::endl;
+std::cout << "▒██▓  ██▒ ██  ▓██▒▒████▄     ██ ▀█   █ ▓  ██▒ ▓▒▓██▒▓██   ▒▓██▒▓█   ▀ ▓██ ▒ ██▒"<<std::endl;
+std::cout << "▒██▒  ██░▓██  ▒██░▒██  ▀█▄  ▓██  ▀█ ██▒▒ ▓██░ ▒░▒██▒▒████ ░▒██▒▒███   ▓██ ░▄█ ▒"<<std::endl;
+std::cout << "░██  █▀ ░▓▓█  ░██░░██▄▄▄▄██ ▓██▒  ▐▌██▒░ ▓██▓ ░ ░██░░▓█▒  ░░██░▒▓█  ▄ ▒██▀▀█▄  "<<std::endl;
+std::cout << "░▒███▒█▄ ▒▒█████▓  ▓█   ▓██▒▒██░   ▓██░  ▒██▒ ░ ░██░░▒█░   ░██░░▒████▒░██▓ ▒██▒"<<std::endl;
+std::cout << "░░ ▒▒░ ▒ ░▒▓▒ ▒ ▒  ▒▒   ▓▒█░░ ▒░   ▒ ▒   ▒ ░░   ░▓   ▒ ░   ░▓  ░░ ▒░ ░░ ▒▓ ░▒▓░"<<std::endl;
+std::cout << " ░ ▒░  ░ ░░▒░ ░ ░   ▒   ▒▒ ░░ ░░   ░ ▒░    ░     ▒ ░ ░      ▒ ░ ░ ░  ░  ░▒ ░ ▒░"<<std::endl;
+std::cout << "   ░   ░  ░░░ ░ ░   ░   ▒      ░   ░ ░   ░       ▒ ░ ░ ░    ▒ ░   ░     ░░   ░ "<<std::endl;
+std::cout << "    ░       ░           ░  ░         ░           ░          ░     ░  ░   ░     "<<std::endl;
+
+
+    Data::data.quiet = true;
+    if (!ValidateRun("Q",QStringList() << "png" << "csv"))
+        return;
+
+
     // First, got through transform files
     std::cout<<" _____                     __  "<<std::endl;
     std::cout<<"|_   _| __ __ _ _ __  ___ / _| ___  _ __ _ __ ___  "<<std::endl;
@@ -297,17 +316,25 @@ void NutilApplication::Validator()
     std::cout<<"  |_||_|  \\__,_|_| |_|___/_|  \\___/|_|  |_| |_| |_|"<<std::endl<<std::endl;
     Data::data.quiet = true;
     std::cout << "Executing TRANSFORM..."<<std::endl;
-    Execute("T/batch.nut",4);
-    if (!CompareFiles("T/out","png")) {
-        PrintFailure();
-        return;
-    }
-    if (!CompareFiles("T/out","tif")) {
-        PrintFailure();
-        return;
-    }
     std::cout << std::endl << std::endl;
+    if (!ValidateRun("T",QStringList() << "png" << "tif"))
+        return;
     PrintSuccess();
+
+}
+
+bool NutilApplication::ValidateRun(QString dir, QStringList checkFiles)
+{
+    qDebug() << "Executing..";
+    Execute(dir+"/batch.nut",4);
+    for (QString s : checkFiles) {
+        qDebug() << "Validating results for : " << s;
+        if (!CompareFiles(dir+"/out","png")) {
+            PrintFailure();
+            return false;
+        }
+    }
+    return true;
 
 }
 
@@ -320,11 +347,12 @@ bool NutilApplication::CompareFiles(QString directory, QString extension)
         comp = comp.replace("out","correct");
         QString f1 = comp;
         QString f2 = f;
-        std::cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";
+//        std::cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";
         bool ret = Util::CompareIdenticalFiles(comp,f);
         QString r = ret?"true":"false";
-        std::cout << r.toStdString() <<std::endl;
+  //      std::cout << r.toStdString() <<std::endl;
         if (ret == false) {
+            std::cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";
             std::cout << "************ ERROR : Files are not identical! Aborting... " << std::endl;
             return false;
         }

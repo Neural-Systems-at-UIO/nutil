@@ -20,7 +20,7 @@ private:
     void PrintUsage();
     bool Batch();
     void Validator();
-
+    bool ValidateRun(QString file, QStringList checkFiles);
     void PrintFailure();
     void PrintSuccess();
     bool CompareFiles(QString directory, QString extension);
