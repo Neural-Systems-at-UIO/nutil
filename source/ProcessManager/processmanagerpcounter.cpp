@@ -77,8 +77,9 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
   //                              qDebug() << "MATCH << "<<match.captured(0);
-                if (!s.toLower().contains("mask"))
+                if (!s.toLower().contains("mask")) {
                     newFiles.append(match.captured(0));
+                }
 
             }
             //            if (regExp.mat)
@@ -234,11 +235,12 @@ void ProcessManagerPCounter::Execute()
     Data::data.m_currentPath = m_outputDir;
 
 
-
 #pragma omp parallel for num_threads(m_numProcessors)
     for (int i=0;i<m_processes.length();i++) {
         auto pi = m_processItems[i];
 
+        if (Data::data.abort)
+            continue;
 
         //        qDebug() << "Pcounter: " << pi->m_inFile;
 
@@ -269,9 +271,12 @@ void ProcessManagerPCounter::Execute()
 
         }
 
-
+//        qDebug() << Data::data.abort;
         if (!Data::data.abort)
             m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background,m_colorThreshold, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax, maskFile, m_customMaskInclusionColors);
+
+        if (Data::data.abort)
+            continue;
 
 //        LMessage::lMessage.Log("  Quantifier done for " +pi->m_inFile);
         for (Area&a : m_processes[i]->m_areas) {

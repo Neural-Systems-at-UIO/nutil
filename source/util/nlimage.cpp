@@ -39,10 +39,13 @@ void NLImage::Load(QString filename)
     {
         qDebug() << "Error opening file: " + filename;
         LMessage::lMessage.Error("Error opening file: " + filename);
+        Data::data.abort = true;
+
     }
     if (m_image->width()==0) {
         qDebug() << "Error opening file (size 0): " + filename;
         LMessage::lMessage.Error("Error opening file (size 0): " + filename);
+        Data::data.abort = true;
     }
 
 

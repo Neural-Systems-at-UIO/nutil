@@ -75,7 +75,6 @@ void XMLAnchor::Load(QString file)
                     d.m_width = attributes.value("width").toInt();
                     d.m_height = attributes.value("height").toInt();
                     QStringList anLst = attributes.value("anchoring").toString().split("&");
-                    //qDebug() << anLst.count();
                     if (anLst.count()<9) {
                         LMessage::lMessage.Message("Error loading XML anchor file '"+file+"', anchor matrix for slice '"+ QString::number(d.m_nr)+"'. <br>Please make sure that the XML anchor file is valid, or else 3D coordinate data will be incorrect.");
 //                        Data::data.abort = true;

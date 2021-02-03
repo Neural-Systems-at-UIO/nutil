@@ -150,6 +150,7 @@ int main(int argc, char *argv[])
 
    // Fractal();
 
+    QImageReader::setAllocationLimit(4096);
 
     if (argc == 1)  {
         QApplication a(argc, argv);
