@@ -695,7 +695,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
     file.close();
     LMessage::lMessage.Message("****** Count of pixels " + QString::number(tcount));
     if (matrixError)
-        LMessage::lMessage.Message("WARNING: Some of the area matrices were not initialized. Please make sure that you are using a correct anchor xml file!");
+        LMessage::lMessage.Message("WARNING: Some of the area matrices were not initialized. Please make sure that you are using the correct anchor XML or JSON file.");
 }
 
 void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, int size)
