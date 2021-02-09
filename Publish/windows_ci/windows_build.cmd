@@ -6,7 +6,7 @@ echo "Qmake.."
 qmake Nutil.pro 
 echo "Compiling.."
 dir %Qt5_DIR%
-%Qt5_DIR%\jom.exe -f Makefile.Release
+..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 cd release
 windeployqt.exe .
