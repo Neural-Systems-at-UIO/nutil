@@ -36,15 +36,14 @@ jobs:
 
 
     - name: Write version file
-      uses: brettdorrans/write-version-to-file@master
-      with:
-        filename: '/.VERSION'
+      run: "git describe >version.txt"
+      shell: cmd
 
     - name: log pre 1
       run: dir
       shell: cmd
-      
+
     - name: log pre 1
-      run: "type /.VERSION"
+      run: "type version.txt"
       shell: cmd
 
