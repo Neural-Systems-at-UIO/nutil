@@ -28,9 +28,9 @@ jobs:
       run: dir 
       shell: cmd
     - name: Compile
-      run : "Publish\windows_ci\windows_build.cmd"
+      run : "Publish\\windows_ci\\windows_build.cmd"
     - name: Build_app
-      run : "Publish\windows_ci\build_dir.cmd"
+      run : "Publish\\windows_ci\\build_dir.cmd"
     - name: Zipping  
         with:
           files: nutil 
