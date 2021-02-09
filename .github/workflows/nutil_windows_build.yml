@@ -26,6 +26,8 @@ jobs:
     - name: log
       run: dir 
       shell: cmd
+    - name: MSVC_vars
+      run : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
     - name: qmake
       run: "qmake Nutil.pro"
     - name: make
