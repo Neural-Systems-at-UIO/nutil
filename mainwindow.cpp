@@ -10,7 +10,6 @@
 
 
 
-
 float MainWindow::Version = 0.408;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -31,7 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef IS_BETA
     ui->lblMain->setText("NeSys Utilities BETA " + QString::number(Version) +"\nFor internal use only.");
 #else
-    ui->lblMain->setText("NeSys Utilities " + QString::number(Version));
+    QString v = "[  ]";
+    if (QFile::exists("version.txt"))
+        v = Util::loadTextFile("version.txt");
+    ui->lblMain->setText("NeSys Utilities " + v);
 #endif
 
 //    ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
