@@ -36,7 +36,7 @@ jobs:
 
 
     - name: Write version file
-      run: "git describe >version.txt"
+      run: "echo ${{ steps.tag_version.outputs.new_tag }}>version.txt"
       shell: cmd
 
     - name: log pre 1
