@@ -53,7 +53,8 @@ jobs:
         body: |
           Automated Release by GitHub Action CI
         draft: false
-        prerelease: true      - name: Upload Release Asset (x64)
+        prerelease: true      
+    - name: Upload Release Asset (x64)
       id: upload-release-asset-x64
       uses: actions/upload-release-asset@v1
       env:
