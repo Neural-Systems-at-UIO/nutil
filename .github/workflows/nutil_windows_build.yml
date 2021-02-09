@@ -1,0 +1,61 @@
+name: C/C++ CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: .
+  # Configuration type to build.
+  # You can convert this to a build matrix if you need coverage of multiple configuration types.
+  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  BUILD_CONFIGURATION: Release    
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: papeloto/action-zip@v1
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2 
+      with:
+        version: '6.0.1'
+        tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.14.0-0,qt.tools.qtcreator'
+    - name: log pre 1
+      run: dir
+      shell: cmd
+    - name: Compile
+      run : "Publish\\windows_ci\\windows_build.cmd"
+    - name: Build_app
+      run : "Publish\\windows_ci\\build_dir.cmd"
+    - name: Zipping  
+      uses: papeloto/action-zip@v1
+      with:
+        files: nutil 
+        dest: nutil_win.zip
+          
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Automated Release by GitHub Action CI
+        draft: false
+        prerelease: true      
+    - name: Upload Release Asset (x64)
+      id: upload-release-asset-x64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./nutil_win$_{{ github.ref }}.zip
+        asset_name: nutil_win$_{{ github.ref }}.zip
+        asset_content_type: application/zip
