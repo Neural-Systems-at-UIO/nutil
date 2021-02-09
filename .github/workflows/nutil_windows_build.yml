@@ -31,11 +31,17 @@ jobs:
       run : "Publish\\windows_ci\\windows_build.cmd"
     - name: Build_app
       run : "Publish\\windows_ci\\build_dir.cmd"
+    - name: log 2
+      run: dir 
+      shell: cmd
     - name: Zipping  
-        with:
-          files: nutil 
+      with:
+        files: nutil 
           dest: nutil_win.zip
           
+    - name: log 3
+      run: dir 
+      shell: cmd
     - name: Create Release
         id: create_release
         uses: actions/create-release@latest
