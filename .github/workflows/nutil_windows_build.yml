@@ -22,6 +22,7 @@ jobs:
       uses: mathieudutour/github-tag-action@v5.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}      
+        initial_version: "0.4.8"
     - uses: actions/checkout@v2
     - uses: papeloto/action-zip@v1
     - name: Add MSBuild to PATH
@@ -44,7 +45,7 @@ jobs:
         files: nutil 
         dest: nutil_win.zip
           
-          
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@latest
