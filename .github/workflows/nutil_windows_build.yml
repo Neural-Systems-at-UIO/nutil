@@ -24,15 +24,6 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}      
 
 
-    - uses: actions/checkout@v2
-    - uses: papeloto/action-zip@v1
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v2 
-      with:
-        version: '6.0.1'
-        tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.14.0-0,qt.tools.qtcreator'
 
 
     - name: Write version file
