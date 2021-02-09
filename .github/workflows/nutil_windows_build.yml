@@ -37,7 +37,7 @@ jobs:
     - name: Zipping  
       with:
         files: nutil 
-          dest: nutil_win.zip
+        dest: nutil_win.zip
           
     - name: log 3
       run: dir 
