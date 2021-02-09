@@ -34,7 +34,12 @@ jobs:
     - name: log 2
       run: dir 
       shell: cmd
-      
+    - name: Zipping  
+      uses: papeloto/action-zip@v1
+      with:
+        files: nutil 
+        dest: nutil_win.zip
+          
     - name: log 3
       run: dir 
       shell: cmd
