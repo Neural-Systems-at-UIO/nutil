@@ -24,8 +24,11 @@ jobs:
       with:
         version: '6.0.1'
         tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.14.0-0,qt.tools.qtcreator'
-    - name: log
-      run: dir 
+    - name: log pre 1
+      run: dir ..
+      shell: cmd
+    - name: log pre 2
+      run: dir ..
       shell: cmd
     - name: Compile
       run : "Publish\\windows_ci\\windows_build.cmd"
