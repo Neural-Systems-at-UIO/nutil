@@ -267,8 +267,10 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, double scale
         for (int j=0;j<refImage.height();j++) {
             bool canTest=true;
             if (useMask) {
+
                 int ix = i*dx;
-                int iy = i*dy;
+                int iy = j*dy;
+
                 QVector3D c = Util::fromColor(maskImage.pixelColor(ix,iy));
                 if (!Util::QVector3DIsClose(c,maskColor,QVector3D(1,1,1))) {
                     canTest=false;
