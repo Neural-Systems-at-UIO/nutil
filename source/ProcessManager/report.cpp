@@ -242,7 +242,9 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 sheet->Set(y,7,al->extra2.y());
                 sheet->writeStr(y,8,units);
                 sheet->Set(y,9,0);
-                 if (al->area!=0)
+
+//                 if (al->area!=0)
+                     if (regionAreaScaled!=0)
   //                  sheet->Set(y,9,al->extra2.x()/al->area);
 //                 if (al->area!=0)
                     sheet->Set(y,9,std::min(al->extra2.x()/regionAreaScaled,1.0));

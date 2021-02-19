@@ -216,9 +216,6 @@ void ProcessManagerPCounter::Execute()
     Data::data.m_maskedOutColor = Qt::black;
 
     if (m_background==Qt::black && m_useCustomMask)  {
-           //LMessage::lMessage.Error("The color 'black' cannot be used as the segmentation color in conjunction with using masks. Please change the color into something non-black.");
-        //Data::data.abort = true;
-        //return;
         Data::data.m_maskedOutColor = Qt::red;
     }
 
