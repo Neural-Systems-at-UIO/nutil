@@ -477,7 +477,8 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_files = data->Get("files").trimmed().simplified().split(",");
 
     m_pixelCutoff = data->Get("object_min_size").toFloat();
-    m_pixelCutoffMax = data->Get("object_max_size").toFloat();
+//    m_pixelCutoffMax = data->Get("object_max_size").toFloat();
+    m_pixelCutoffMax = 100000; // NOT USED!
     m_areaScale = data->Get("global_pixel_scale").toFloat();
     m_areaSplitting = data->Get("object_splitting").toLower()=="yes"?1:0;
 

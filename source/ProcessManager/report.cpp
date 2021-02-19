@@ -390,7 +390,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
     for (int i=0;i<items.count();i++) {
 //        qDebug() << "  Generating section report : " << items[i]->m_reportName;
 
-        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
+//        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
+        QSharedPointer<LSheet>  sheet = book->CreateSheet(items[i]->m_reportName);
 //        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i));
 
 

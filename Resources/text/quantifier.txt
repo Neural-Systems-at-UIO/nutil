@@ -11,7 +11,7 @@ output_report; 0 ;;Output reports; list; All, None; All
 extraction_color ; 0; ; Object colour ; color ; 255,0,0,255
 object_splitting; 0; analysis_type=QUINT;Object Splitting; list; Yes, No; Yes
 object_min_size; 1; ;Minimum object size; number; 1
-object_max_size; 1; ;Maximum object size; number; 100000
+#object_max_size; 1; ;Maximum object size; number; 100000
 global_pixel_scale; 1; ;Pixel scale (area per pixel); number; 1
 quantifier_pixel_scale_unit; 1; ; Pixel scale unit; list; pixels, um2, mm2; pixels
 use_custom_masks; 1; ;Custom masks (optional); list; Yes, No; No

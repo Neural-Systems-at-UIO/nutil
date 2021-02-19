@@ -128,6 +128,8 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
 
     counter->Init(m_image->width()*m_image->height());
 //    qDebug() << "Color threshold : " << testColor << colorWidth;
+
+
     for (int i=0;i<m_image->width();i++)
         for (int j=0;j<m_image->height();j++) {
             counter->Tick();
@@ -156,7 +158,8 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
                         FillAreaDFS(area, i,j, testColor, colorWidth, pMax);
 
                     area.CalculateStatistics();
-
+                    //if (area.m_pixelArea!=0)
+                    //    qDebug() << area.m_pixelArea;
                     if (area.m_pixelArea>=pixelCutoff) {
                         m_areas->append(area);
 //                        qDebug() << "Area found" << m_areas->size() << " ," << area.m_pixelArea;
@@ -174,7 +177,7 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
 void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& testColor, const QVector3D& spread,int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
-    if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
+//    if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
     // First test if this is unset
     if (QColor(m_index->getPixel(i,j)) == unset) {
         m_index->setPixel(i,j,set.rgba());
@@ -203,7 +206,7 @@ void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& te
 void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &testColor, const QVector3D& spread,int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
-    if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
+   // if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
     // First test if this is unset
 
 
@@ -213,6 +216,8 @@ void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &te
     while (queue.count()!=0) {
         QPoint q = queue.last();
         queue.removeLast();
+//        if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
+
         if (QColor(m_index->getPixel(q.x(),q.y())) == unset) {
             m_index->setPixel(q.x(),q.y(),set.rgba());
             //qDebug() << i << ", " << j << " :" << m_index->width() << ", " << m_index->height() ;
