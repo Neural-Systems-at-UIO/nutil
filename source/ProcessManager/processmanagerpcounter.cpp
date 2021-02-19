@@ -212,6 +212,17 @@ void ProcessManagerPCounter::Execute()
     }
     QFile::copy(m_excelInputFilename, m_outputDir + "/" + m_excelInputFilename.split("/").last());
 
+
+    Data::data.m_maskedOutColor = Qt::black;
+
+    if (m_background==Qt::black && m_useCustomMask)  {
+           //LMessage::lMessage.Error("The color 'black' cannot be used as the segmentation color in conjunction with using masks. Please change the color into something non-black.");
+        //Data::data.abort = true;
+        //return;
+        Data::data.m_maskedOutColor = Qt::red;
+    }
+
+
     m_processFinished = false;
     ClearProcesses();
     for (int i=0;i<m_processItems.length();i++) {

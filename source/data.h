@@ -15,6 +15,7 @@ public:
     bool forceRedraw = false;
     bool redrawFileList = false;
     bool m_isQuickNII = true;
+    QColor m_maskedOutColor = Qt::black;
     QString m_globalMessage = "";
     bool abort = false;
     bool requestSaveAs = false;

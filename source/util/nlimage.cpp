@@ -60,6 +60,9 @@ void NLImage::ApplyMask(QString maskFile, QVector3D useColor, QColor background)
     QColor testColor(1,1,1);
     if (background==testColor)
         testColor = QColor(0,0,0);
+
+    testColor = Data::data.m_maskedOutColor;
+
     for (int j=0;j<m_image->height();j++)
         for (int i=0;i<m_image->width();i++) {
             //QVector3D imgCol = Util::fromColor(QColor(m_image->getPixel(i,j)));
