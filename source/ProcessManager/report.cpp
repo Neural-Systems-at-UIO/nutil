@@ -407,6 +407,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
         sheet->writeStr(0,7, "Area unit");
         sheet->writeStr(0,8, "Load");
 
+
         int j=1;
         for (Report& r : m_reports) {
 
