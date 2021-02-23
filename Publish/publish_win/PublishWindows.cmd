@@ -9,7 +9,7 @@ xcopy /s %dir%\*.dll nutil\program
 xcopy /e ..\source\* nutil
 xcopy Nutil.cmd nutil\
 xcopy 7z.exe nutil\
-xcopy /e dll\* nutil\program
+xcopy /e /s dll\* nutil\program
 move nutil\program\nutil.exe nutil\program\nutil_program.exe
 
 
