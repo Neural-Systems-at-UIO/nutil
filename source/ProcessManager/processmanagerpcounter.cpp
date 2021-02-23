@@ -73,7 +73,6 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         QRegularExpression re(m_regexp);
         QStringList newFiles;
         for (QString s: files) {
-//            qDebug() << "Testing file " << s ;
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
   //                              qDebug() << "MATCH << "<<match.captured(0);

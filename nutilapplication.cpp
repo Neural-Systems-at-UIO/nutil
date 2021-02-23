@@ -260,7 +260,7 @@ bool NutilApplication::Batch()
 
 
 void NutilApplication::PrintFailure() {
-    std::cout<<"    ▓█████  ██▓███   ██▓ ▄████▄       █████▒▄▄▄       ██▓ ██▓     "<<std::endl;
+/*    std::cout<<"    ▓█████  ██▓███   ██▓ ▄████▄       █████▒▄▄▄       ██▓ ██▓     "<<std::endl;
     std::cout<<"    ▓█   ▀ ▓██░  ██▒▓██▒▒██▀ ▀█     ▓██   ▒▒████▄    ▓██▒▓██▒    "<<std::endl;
     std::cout<<"    ▒███   ▓██░ ██▓▒▒██▒▒▓█    ▄    ▒████ ░▒██  ▀█▄  ▒██▒▒██░    "<<std::endl;
     std::cout<<"    ▒▓█  ▄ ▒██▄█▓▒ ▒░██░▒▓▓▄ ▄██▒   ░▓█▒  ░░██▄▄▄▄██ ░██░▒██░    "<<std::endl;
@@ -269,18 +269,21 @@ void NutilApplication::PrintFailure() {
     std::cout<<"     ░ ░  ░░▒ ░      ▒ ░  ░  ▒       ░       ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░"<<std::endl;
     std::cout<<"       ░   ░░        ▒ ░░            ░ ░     ░   ▒    ▒ ░  ░ ░   "<<std::endl;
     std::cout<<"       ░  ░          ░  ░ ░                      ░  ░ ░      ░  ░"<<std::endl;
-    std::cout << std::endl;
+    std::cout << std::endl;*/
+    std::cout << "******* FAILURE!" <<std::endl;
     std::cout << "Nutil self-validator failed. Please check the file comparisons for errors!"<<std::endl<<std::endl;;
 
 }
 
 void NutilApplication::PrintSuccess()
 {
-    std::cout<<"    .▄▄ · ▄• ▄▌ ▄▄·  ▄▄· ▄▄▄ ..▄▄ · .▄▄ · ▄▄ "<<std::endl;
+/*    std::cout<<"    .▄▄ · ▄• ▄▌ ▄▄·  ▄▄· ▄▄▄ ..▄▄ · .▄▄ · ▄▄ "<<std::endl;
     std::cout<<"    ▐█ ▀. █▪██▌▐█ ▌▪▐█ ▌▪▀▄.▀·▐█ ▀. ▐█ ▀. ██▌"<<std::endl;
     std::cout<<"    ▄▀▀▀█▄█▌▐█▌██ ▄▄██ ▄▄▐▀▀▪▄▄▀▀▀█▄▄▀▀▀█▄▐█·"<<std::endl;
     std::cout<<"    ▐█▄▪▐█▐█▄█▌▐███▌▐███▌▐█▄▄▌▐█▄▪▐█▐█▄▪▐█.▀ "<<std::endl;
-    std::cout<<"     ▀▀▀▀  ▀▀▀ ·▀▀▀ ·▀▀▀  ▀▀▀  ▀▀▀▀  ▀▀▀▀  ▀ "<<std::endl;
+    std::cout<<"     ▀▀▀▀  ▀▀▀ ·▀▀▀ ·▀▀▀  ▀▀▀  ▀▀▀▀  ▀▀▀▀  ▀ "<<std::endl;*/
+    std::cout << "Success!" <<std::endl;
+
     std::cout << std::endl;
 }
 

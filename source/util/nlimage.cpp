@@ -486,7 +486,8 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
 
     NLIQImage* qi = dynamic_cast<NLIQImage*>(m_index);
-    if (qi!=nullptr && !Data::data.isConsole) {
+//    if (qi!=nullptr && !Data::data.isConsole) {
+        if (qi!=nullptr) {
         QPainter painter(&qi->m_image);
         QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
         painter.setPen(penHText);
