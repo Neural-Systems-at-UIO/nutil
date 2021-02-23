@@ -84,6 +84,20 @@ QString Util::getBaseFilename(QString fn)
 
 bool Util::CompareIdenticalFiles(QString fa, QString fb)
 {
+    if (fa.toLower().endsWith(".png")) {
+        QImage i1(fa);
+        QImage i2(fa);
+        if (i1.width()!=i2.width()) return false;
+        if (i1.height()!=i2.height()) return false;
+        for (int j=0;j<i1.height();j++)
+            for (int i=0;i<i1.width();i++) {
+                if (i1.pixel(i,j)!=i2.pixel(i,j))
+                    return false;
+            }
+        return true;
+    }
+
+
     QByteArray ba = loadBinaryFile(fa);
     QByteArray bb = loadBinaryFile(fb);
     if (ba.count()!=bb.count())

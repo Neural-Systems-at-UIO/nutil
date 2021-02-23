@@ -36,3 +36,16 @@ Yates SC, Groeneboom NE, Coello C, et al. & Bjaalie JG (2019) QUINT: Workflow fo
 
 # Acknowledgements
 This project was supported by the EBRAINS research infrastructure, funded from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 785907 (Human Brain Project SGA2) and Specific Grant Agreement No. 945539 (Human Brain Project SGA3).
+
+# Changelog
+
+v0.5.10 *** 23.02.2020 
+- Introduced changelog to the readme.md
+- Nutil validator compares png pixels instead of binary data
+
+v0.5.9 *** 23.02.2020 
+- Fixed up Nutil validator output text to be clean
+- Added qtiff.dll to the CI build of Nutil due to lack of native tiff support. TiffCreator should work now. 
+
+
+ 

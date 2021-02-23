@@ -27,6 +27,7 @@ public:
     unsigned char currentColor = 0;
     bool currentIsColor = false;
     static Data data;
+    bool consoleWarning1Printed = false;
     bool isConsole = false;
     bool m_hasAreaSplitting = true;
     bool quiet = false;

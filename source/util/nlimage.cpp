@@ -486,8 +486,14 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
 
     NLIQImage* qi = dynamic_cast<NLIQImage*>(m_index);
-//    if (qi!=nullptr && !Data::data.isConsole) {
-        if (qi!=nullptr) {
+
+    if (qi!=nullptr && Data::data.isConsole && !Data::data.consoleWarning1Printed) {
+        qDebug() << "Warning: since you are running Nutil as a console application, region ID numbers will not be printed onto the output images.";
+        Data::data.consoleWarning1Printed = true;
+    }
+
+    if (qi!=nullptr && !Data::data.isConsole) {
+//        if (qi!=nullptr) {
         QPainter painter(&qi->m_image);
         QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
         painter.setPen(penHText);
