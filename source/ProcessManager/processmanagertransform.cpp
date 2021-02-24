@@ -54,7 +54,9 @@ bool ProcessManagerTransform::Build(NutilTemplate* data)
             return false;
         }
 
-        QString outFile = d[1].trimmed() + ".tif";
+        QString outFile = d[1].trimmed();
+        if (!(outFile.toLower().endsWith(".tif") || outFile.toLower().endsWith(".tiff")))
+            outFile+=".tif";
         if (outFile==".tif") {
 
             LMessage::lMessage.Error("Output file not specified for : '"+inFile+"'.");
