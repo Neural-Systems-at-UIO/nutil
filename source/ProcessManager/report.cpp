@@ -168,7 +168,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
             //sheet->Set(y,,10);
 
-            if (al->area!=0.0 && !al->area !=0)
+            if (al->area!=0.0)
                 sheet->Set(y,9,al->extra2.x()/al->area);
  //           if (al->areaScaled!=0)
    //             sheet->Set(y,10,al->extra2.y()/al->areaScaled);
@@ -231,7 +231,8 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 sheet->writeStr(y,1,al->name);
                 sheet->Set(y,2,al->sliceArea[i],0);
                     // the 0 here here defines the number of decimal places displayed for column 2
-                sheet->Set(y,3,al->sliceArea[i] * items[i]->m_pixelAreaScale );
+                double regionAreaScaled = al->sliceArea[i] * items[i]->m_pixelAreaScale;
+                sheet->Set(y,3,regionAreaScaled );
                 sheet->writeStr(y,4,units);
                 if (Data::data.m_hasAreaSplitting)
                     sheet->writeStr(y,5,"N/A");
@@ -241,8 +242,12 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 sheet->Set(y,7,al->extra2.y());
                 sheet->writeStr(y,8,units);
                 sheet->Set(y,9,0);
-                 if (al->area!=0)
-                    sheet->Set(y,9,al->extra2.x()/al->area);
+
+//                 if (al->area!=0)
+                     if (regionAreaScaled!=0)
+  //                  sheet->Set(y,9,al->extra2.x()/al->area);
+//                 if (al->area!=0)
+                    sheet->Set(y,9,std::min(al->extra2.x()/regionAreaScaled,1.0));
                 y++;
             }
 
@@ -385,7 +390,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
     for (int i=0;i<items.count();i++) {
 //        qDebug() << "  Generating section report : " << items[i]->m_reportName;
 
-        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
+//        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
+        QSharedPointer<LSheet>  sheet = book->CreateSheet(items[i]->m_reportName);
 //        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i));
 
 
@@ -400,6 +406,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
         sheet->writeStr(0,6, "Object area");
         sheet->writeStr(0,7, "Area unit");
         sheet->writeStr(0,8, "Load");
+
 
         int j=1;
         for (Report& r : m_reports) {

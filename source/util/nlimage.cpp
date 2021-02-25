@@ -60,6 +60,9 @@ void NLImage::ApplyMask(QString maskFile, QVector3D useColor, QColor background)
     QColor testColor(1,1,1);
     if (background==testColor)
         testColor = QColor(0,0,0);
+
+    testColor = Data::data.m_maskedOutColor;
+
     for (int j=0;j<m_image->height();j++)
         for (int i=0;i<m_image->width();i++) {
             //QVector3D imgCol = Util::fromColor(QColor(m_image->getPixel(i,j)));
@@ -125,6 +128,8 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
 
     counter->Init(m_image->width()*m_image->height());
 //    qDebug() << "Color threshold : " << testColor << colorWidth;
+
+
     for (int i=0;i<m_image->width();i++)
         for (int j=0;j<m_image->height();j++) {
             counter->Tick();
@@ -153,7 +158,8 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
                         FillAreaDFS(area, i,j, testColor, colorWidth, pMax);
 
                     area.CalculateStatistics();
-
+                    //if (area.m_pixelArea!=0)
+                    //    qDebug() << area.m_pixelArea;
                     if (area.m_pixelArea>=pixelCutoff) {
                         m_areas->append(area);
 //                        qDebug() << "Area found" << m_areas->size() << " ," << area.m_pixelArea;
@@ -171,7 +177,7 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
 void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& testColor, const QVector3D& spread,int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
-    if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
+//    if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
     // First test if this is unset
     if (QColor(m_index->getPixel(i,j)) == unset) {
         m_index->setPixel(i,j,set.rgba());
@@ -200,7 +206,7 @@ void NLImage::FillAreaDFS(Area &area, const int i, const int j, const QColor& te
 void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &testColor, const QVector3D& spread,int pMax)
 {
     if (i>m_index->width()-2 || i<=0 || j>m_index->height()-2 || j<=0) return;
-    if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
+   // if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
     // First test if this is unset
 
 
@@ -210,6 +216,8 @@ void NLImage::FillAreaBFS(Area &area, const int i, const int j, const QColor &te
     while (queue.count()!=0) {
         QPoint q = queue.last();
         queue.removeLast();
+//        if (area.m_points.size()>=pMax) { area.m_areaHasReachedCutoff=true;return;}
+
         if (QColor(m_index->getPixel(q.x(),q.y())) == unset) {
             m_index->setPixel(q.x(),q.y(),set.rgba());
             //qDebug() << i << ", " << j << " :" << m_index->width() << ", " << m_index->height() ;
@@ -267,8 +275,10 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, double scale
         for (int j=0;j<refImage.height();j++) {
             bool canTest=true;
             if (useMask) {
+
                 int ix = i*dx;
-                int iy = i*dy;
+                int iy = j*dy;
+
                 QVector3D c = Util::fromColor(maskImage.pixelColor(ix,iy));
                 if (!Util::QVector3DIsClose(c,maskColor,QVector3D(1,1,1))) {
                     canTest=false;
@@ -476,7 +486,14 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
 
     NLIQImage* qi = dynamic_cast<NLIQImage*>(m_index);
+
+    if (qi!=nullptr && Data::data.isConsole && !Data::data.consoleWarning1Printed) {
+        qDebug() << "Warning: since you are running Nutil as a console application, region ID numbers will not be printed onto the output images.";
+        Data::data.consoleWarning1Printed = true;
+    }
+
     if (qi!=nullptr && !Data::data.isConsole) {
+//        if (qi!=nullptr) {
         QPainter painter(&qi->m_image);
         QPen penHText(QColor("#001010"));//Here lines are also drawn using this color
         painter.setPen(penHText);

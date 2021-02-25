@@ -6,6 +6,8 @@
 #include <QImageReader>
 #include <QImageWriter>
 #include <QDebug>
+#include <iostream>
+#include <cstdlib>
 #include "source/util/util.h"
 #ifndef TARGET_OS_MAC
 #include <omp.h>
@@ -16,12 +18,12 @@
 #include "source/util/counter.h"
 #include "source/nauto.h"
 //#include <tiffio.h>
-
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <algorithm>
 #include <iostream>
+#include <stdlib.h>
 
 NutilApplication::NutilApplication(int argc, char *argv[])
 {
@@ -67,8 +69,8 @@ void NutilApplication::exec()
             std::cout << "Nutil Self-Validtor requires a specifically set-up directory as parameter 2";
             exit(1);
         }*/
-        Validator();
-        return;
+        if (!Validator())
+            exit(1);
     }
 
 
@@ -258,7 +260,7 @@ bool NutilApplication::Batch()
 
 
 void NutilApplication::PrintFailure() {
-    std::cout<<"    ▓█████  ██▓███   ██▓ ▄████▄       █████▒▄▄▄       ██▓ ██▓     "<<std::endl;
+/*    std::cout<<"    ▓█████  ██▓███   ██▓ ▄████▄       █████▒▄▄▄       ██▓ ██▓     "<<std::endl;
     std::cout<<"    ▓█   ▀ ▓██░  ██▒▓██▒▒██▀ ▀█     ▓██   ▒▒████▄    ▓██▒▓██▒    "<<std::endl;
     std::cout<<"    ▒███   ▓██░ ██▓▒▒██▒▒▓█    ▄    ▒████ ░▒██  ▀█▄  ▒██▒▒██░    "<<std::endl;
     std::cout<<"    ▒▓█  ▄ ▒██▄█▓▒ ▒░██░▒▓▓▄ ▄██▒   ░▓█▒  ░░██▄▄▄▄██ ░██░▒██░    "<<std::endl;
@@ -267,24 +269,26 @@ void NutilApplication::PrintFailure() {
     std::cout<<"     ░ ░  ░░▒ ░      ▒ ░  ░  ▒       ░       ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░"<<std::endl;
     std::cout<<"       ░   ░░        ▒ ░░            ░ ░     ░   ▒    ▒ ░  ░ ░   "<<std::endl;
     std::cout<<"       ░  ░          ░  ░ ░                      ░  ░ ░      ░  ░"<<std::endl;
-    std::cout << std::endl;
+    std::cout << std::endl;*/
+    std::cout << "******* FAILURE!" <<std::endl;
     std::cout << "Nutil self-validator failed. Please check the file comparisons for errors!"<<std::endl<<std::endl;;
 
 }
 
 void NutilApplication::PrintSuccess()
 {
-    std::cout<<"    .▄▄ · ▄• ▄▌ ▄▄·  ▄▄· ▄▄▄ ..▄▄ · .▄▄ · ▄▄ "<<std::endl;
+/*    std::cout<<"    .▄▄ · ▄• ▄▌ ▄▄·  ▄▄· ▄▄▄ ..▄▄ · .▄▄ · ▄▄ "<<std::endl;
     std::cout<<"    ▐█ ▀. █▪██▌▐█ ▌▪▐█ ▌▪▀▄.▀·▐█ ▀. ▐█ ▀. ██▌"<<std::endl;
     std::cout<<"    ▄▀▀▀█▄█▌▐█▌██ ▄▄██ ▄▄▐▀▀▪▄▄▀▀▀█▄▄▀▀▀█▄▐█·"<<std::endl;
     std::cout<<"    ▐█▄▪▐█▐█▄█▌▐███▌▐███▌▐█▄▄▌▐█▄▪▐█▐█▄▪▐█.▀ "<<std::endl;
-    std::cout<<"     ▀▀▀▀  ▀▀▀ ·▀▀▀ ·▀▀▀  ▀▀▀  ▀▀▀▀  ▀▀▀▀  ▀ "<<std::endl;
+    std::cout<<"     ▀▀▀▀  ▀▀▀ ·▀▀▀ ·▀▀▀  ▀▀▀  ▀▀▀▀  ▀▀▀▀  ▀ "<<std::endl;*/
+    std::cout << "Success!" <<std::endl;
+
     std::cout << std::endl;
-    std::cout << "Everything seems to be in order. Go ahead an publish, Sharon!" << std::endl;
 }
 
 
-void NutilApplication::Validator()
+bool NutilApplication::Validator()
 {
     std::cout << "Welcome to the Nutil Self-validator!" <<std::endl;
 
@@ -292,48 +296,31 @@ void NutilApplication::Validator()
     // First, got through quantifier
 
 
-std::cout << "  █████   █    ██  ▄▄▄       ███▄    █ ▄▄▄█████▓ ██▓  █████▒██▓▓█████  ██▀███  "<<std::endl;
-std::cout << "▒██▓  ██▒ ██  ▓██▒▒████▄     ██ ▀█   █ ▓  ██▒ ▓▒▓██▒▓██   ▒▓██▒▓█   ▀ ▓██ ▒ ██▒"<<std::endl;
-std::cout << "▒██▒  ██░▓██  ▒██░▒██  ▀█▄  ▓██  ▀█ ██▒▒ ▓██░ ▒░▒██▒▒████ ░▒██▒▒███   ▓██ ░▄█ ▒"<<std::endl;
-std::cout << "░██  █▀ ░▓▓█  ░██░░██▄▄▄▄██ ▓██▒  ▐▌██▒░ ▓██▓ ░ ░██░░▓█▒  ░░██░▒▓█  ▄ ▒██▀▀█▄  "<<std::endl;
-std::cout << "░▒███▒█▄ ▒▒█████▓  ▓█   ▓██▒▒██░   ▓██░  ▒██▒ ░ ░██░░▒█░   ░██░░▒████▒░██▓ ▒██▒"<<std::endl;
-std::cout << "░░ ▒▒░ ▒ ░▒▓▒ ▒ ▒  ▒▒   ▓▒█░░ ▒░   ▒ ▒   ▒ ░░   ░▓   ▒ ░   ░▓  ░░ ▒░ ░░ ▒▓ ░▒▓░"<<std::endl;
-std::cout << " ░ ▒░  ░ ░░▒░ ░ ░   ▒   ▒▒ ░░ ░░   ░ ▒░    ░     ▒ ░ ░      ▒ ░ ░ ░  ░  ░▒ ░ ▒░"<<std::endl;
-std::cout << "   ░   ░  ░░░ ░ ░   ░   ▒      ░   ░ ░   ░       ▒ ░ ░ ░    ▒ ░   ░     ░░   ░ "<<std::endl;
-std::cout << "    ░       ░           ░  ░         ░           ░          ░     ░  ░   ░     "<<std::endl;
+    QDirIterator it(".", QDir::Dirs | QDir::NoDotAndDotDot);
+    while (it.hasNext()) {
+        Data::data.quiet = true;
+        QString dir = it.next();
+        qDebug() << "Executing : "<<dir;
+        if (!ValidateRun(dir,QStringList() << "png" << "tif"<<"tiff" << "csv" <<"html")) {
+            PrintFailure();
+            return false;
+        }
 
-
-    Data::data.quiet = true;
-    if (!ValidateRun("Q",QStringList() << "png" << "csv"))
-        return;
-
-
-    // First, got through transform files
-    std::cout<<" _____                     __  "<<std::endl;
-    std::cout<<"|_   _| __ __ _ _ __  ___ / _| ___  _ __ _ __ ___  "<<std::endl;
-    std::cout<<"  | || '__/ _` | '_ \\/ __| |_ / _ \\| '__| '_ ` _ \\ "<<std::endl;
-    std::cout<<"  | || | | (_| | | | \\__ \\  _| (_) | |  | | | | | |"<<std::endl;
-    std::cout<<"  |_||_|  \\__,_|_| |_|___/_|  \\___/|_|  |_| |_| |_|"<<std::endl<<std::endl;
-    Data::data.quiet = true;
-    std::cout << "Executing TRANSFORM..."<<std::endl;
-    std::cout << std::endl << std::endl;
-    if (!ValidateRun("T",QStringList() << "png" << "tif"))
-        return;
+    }
     PrintSuccess();
-
+    return true;
 }
 
 bool NutilApplication::ValidateRun(QString dir, QStringList checkFiles)
 {
-    qDebug() << "Executing..";
-    Execute(dir+"/batch.nut",4);
+    Execute(dir+"/batch.nut",8);
     for (QString s : checkFiles) {
         qDebug() << "Validating results for : " << s;
-        if (!CompareFiles(dir+"/out","png")) {
-            PrintFailure();
+        if (!CompareFiles(dir+"/out",s)) {
             return false;
         }
     }
+    qDebug() << "Success!";
     return true;
 
 }
@@ -347,9 +334,9 @@ bool NutilApplication::CompareFiles(QString directory, QString extension)
         comp = comp.replace("out","correct");
         QString f1 = comp;
         QString f2 = f;
-//        std::cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";
         bool ret = Util::CompareIdenticalFiles(comp,f);
         QString r = ret?"true":"false";
+//        qDebug()  << "Comparing '" << comp << "' and '"<<f<<"' : " <<r ;
   //      std::cout << r.toStdString() <<std::endl;
         if (ret == false) {
             std::cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";

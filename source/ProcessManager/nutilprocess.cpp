@@ -240,6 +240,8 @@ bool NutilProcess::PCounter(QString inFile, QColor testColor, QVector3D colorWid
     if (maskFile!="")
         lImage.ApplyMask(maskFile,QVector3D(maskColor.red(), maskColor.green(), maskColor.blue()), testColor);
 
+//    lImage.image()->Save(inFile+"_test.png");
+
     m_infoText = "Finding areas";
     lImage.FindAreas(testColor, colorWidth, &m_counter, areas, pixelCutoff, pMax);
 

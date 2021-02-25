@@ -15,6 +15,7 @@ public:
     bool forceRedraw = false;
     bool redrawFileList = false;
     bool m_isQuickNII = true;
+    QColor m_maskedOutColor = Qt::black;
     QString m_globalMessage = "";
     bool abort = false;
     bool requestSaveAs = false;
@@ -26,6 +27,7 @@ public:
     unsigned char currentColor = 0;
     bool currentIsColor = false;
     static Data data;
+    bool consoleWarning1Printed = false;
     bool isConsole = false;
     bool m_hasAreaSplitting = true;
     bool quiet = false;

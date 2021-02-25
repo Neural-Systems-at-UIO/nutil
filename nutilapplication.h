@@ -19,7 +19,7 @@ private:
     bool Transform();
     void PrintUsage();
     bool Batch();
-    void Validator();
+    bool Validator();
     bool ValidateRun(QString file, QStringList checkFiles);
     void PrintFailure();
     void PrintSuccess();
