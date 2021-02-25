@@ -84,6 +84,10 @@ QString Util::getBaseFilename(QString fn)
 
 bool Util::CompareIdenticalFiles(QString fa, QString fb)
 {
+    if (fa.toLower().endsWith(".csv")) {
+        qDebug().noquote() << Util::loadTextFile(fa);
+        qDebug().noquote() << Util::loadTextFile(fb);
+    }
 
     if (fa.toLower().endsWith(".png")) {
         QImage i1(fa);
