@@ -1,0 +1,5 @@
+Object pixels;Object area;units;Center X;Center Y;Region ID;Region Name;;;;;;;;;;;;;;;;;
+100;100;pixels;113.500000;148.500000;672;Caudoputamen;;;;;;;;;;;;;;;;;
+100;100;pixels;292.500000;156.500000;672;Caudoputamen;;;;;;;;;;;;;;;;;
+25;25;pixels;133;272;754;Olfactory tubercle;;;;;;;;;;;;;;;;;
+25;25;pixels;289;272;754;Olfactory tubercle;;;;;;;;;;;;;;;;;
