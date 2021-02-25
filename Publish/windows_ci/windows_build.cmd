@@ -8,10 +8,10 @@ REM dir D:\a\nutil\Qt\Tools\QtCreator /s
 REM jom.exe -f Makefile.Release
 D:\a\nutil\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
-dir .
+REM dir .
 cd Release
-dir .
+REM dir .
 windeployqt.exe .
 
-cd ..\Publish\publish_win
-call PublishWindows.cmd
+REM cd ..\Publish\publish_win
+REM call PublishWindows.cmd
