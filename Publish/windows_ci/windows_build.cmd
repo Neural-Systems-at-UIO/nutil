@@ -13,5 +13,5 @@ cd Release
 dir .
 windeployqt.exe .
 
-cd Publish\publish_win
+cd ..\Publish\publish_win
 call PublishWindows.cmd
