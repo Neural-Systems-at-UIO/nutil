@@ -5,9 +5,9 @@ REM set uploadScript=C:\Users\leuat\Documents\GitHub\uploadScript\upload_win_nig
 echo "Qmake.."
 qmake Nutil.pro 
 echo "Compiling.."
-dir D:\a\nutil\Qt
-jom.exe -f Makefile.Release
-..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
+dir D:\a\nutil\Qt\Tools\QtCreator\bin\
+REM jom.exe -f Makefile.Release
+D:\a\nutil\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 cd release
 dir .

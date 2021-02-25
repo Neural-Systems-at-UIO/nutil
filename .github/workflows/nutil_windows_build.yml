@@ -31,7 +31,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2 
       with:
-        version: '5.15.0'
+        version: '5.15.2'
         tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.14.0-0,qt.tools.qtcreator'
 
 
