@@ -16,4 +16,3 @@ windeployqt.exe .
 
 cd ..\Publish\publish_win
 call PublishWindows.cmd
-#call %uploadScript%
