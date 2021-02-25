@@ -315,12 +315,12 @@ bool NutilApplication::ValidateRun(QString dir, QStringList checkFiles)
 {
     Execute(dir+"/batch.nut",8);
     for (QString s : checkFiles) {
-        qDebug() << "Validating results for : " << s;
-        if (!CompareFiles(dir+"/out",s)) {
+        qDebug().noquote() << "Validating results for : " << s;
+        if (!CompareFiles(dir+"/correct",s)) {
             return false;
         }
     }
-    qDebug() << "Success!";
+    qDebug().noquote() << "All files from job '"+dir+"' are OK.";
     return true;
 
 }
@@ -331,9 +331,15 @@ bool NutilApplication::CompareFiles(QString directory, QString extension)
     Util::findFilesInSubDirectories(&lst, directory, extension, true);
     for (QString f : lst) {
         QString comp = f;
-        comp = comp.replace("out","correct");
+        comp = comp.replace("correct","out");
         QString f1 = comp;
         QString f2 = f;
+        if (!QFile::exists(comp)) {
+            std::cout << "************ ERROR : Could not find output file:  "<<comp.toStdString() << std::endl;
+            return false;
+
+        }
+
         bool ret = Util::CompareIdenticalFiles(comp,f);
         QString r = ret?"true":"false";
 //        qDebug()  << "Comparing '" << comp << "' and '"<<f<<"' : " <<r ;

@@ -84,6 +84,7 @@ QString Util::getBaseFilename(QString fn)
 
 bool Util::CompareIdenticalFiles(QString fa, QString fb)
 {
+
     if (fa.toLower().endsWith(".png")) {
         QImage i1(fa);
         QImage i2(fa);
