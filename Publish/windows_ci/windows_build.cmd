@@ -9,8 +9,9 @@ dir %Qt5_DIR%
 ..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 cd release
+dir .
 windeployqt.exe .
 
-cd %dir%\Publish\publish_win
+cd ..\Publish\publish_win
 call PublishWindows.cmd
-call %uploadScript%
+#call %uploadScript%
