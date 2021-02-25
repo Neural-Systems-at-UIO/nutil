@@ -1,3 +1,3 @@
 cd validator
-nutil\program\nutil_program.exe validate
+..\nutil\program\nutil_program.exe validate
 
