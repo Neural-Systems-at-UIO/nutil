@@ -44,6 +44,8 @@ jobs:
       run : "Publish\\windows_ci\\windows_build.cmd"
     - name: Build_app
       run : "Publish\\windows_ci\\build_dir.cmd"
+    - name: Nutil_validator
+      run : "Publish\\windows_ci\\validator.cmd"
     - name: Zipping  
       uses: papeloto/action-zip@v1
       with:
