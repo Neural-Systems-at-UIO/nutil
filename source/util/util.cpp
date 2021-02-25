@@ -100,7 +100,7 @@ bool Util::CompareIdenticalFiles(QString fa, QString fb)
 
     if (fa.toLower().endsWith(".csv")) {
         QString a = Util::loadTextFile(fa);
-        QString b = Util::loadTextFile(fa);
+        QString b = Util::loadTextFile(fb);
         QStringList l1 = a.trimmed().simplified().remove("\n").split(";");
         QStringList l2 = b.trimmed().simplified().remove("\n").split(";");
         for (int i=0;i<l1.count();i++) {
