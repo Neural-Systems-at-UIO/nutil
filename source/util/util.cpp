@@ -84,10 +84,6 @@ QString Util::getBaseFilename(QString fn)
 
 bool Util::CompareIdenticalFiles(QString fa, QString fb)
 {
-    if (fa.toLower().endsWith(".csv")) {
-        qDebug().noquote() << Util::loadTextFile(fa);
-        qDebug().noquote() << Util::loadTextFile(fb);
-    }
 
     if (fa.toLower().endsWith(".png")) {
         QImage i1(fa);
@@ -108,8 +104,14 @@ bool Util::CompareIdenticalFiles(QString fa, QString fb)
     if (ba.count()!=bb.count())
         return false;
     for (long l=0;l<ba.size();l++)
-        if (ba.at(l)!=bb.at(l))
+        if (ba.at(l)!=bb.at(l)) {
+            if (fa.toLower().endsWith(".csv")) {
+                qDebug().noquote() << Util::loadTextFile(fa);
+                qDebug().noquote() << Util::loadTextFile(fb);
+            }
+
             return false;
+        }
     return true;
 }
 
