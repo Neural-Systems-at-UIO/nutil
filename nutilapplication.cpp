@@ -348,14 +348,14 @@ bool NutilApplication::CompareFiles(QString directory, QString extension)
             std::cout << "Comparing '" << f1.remove(QDir().currentPath()).toStdString() << "' and '"<<f2.remove(QDir().currentPath()).toStdString()<<"' : ";
             std::cout << "************ ERROR : Files are not identical! Aborting... " << std::endl;
             if (comp.toLower().endsWith("csv")) {
-              qDebug() << Util::loadTextFile(comp);
-             qDebug() << Util::loadTextFile(f);
+                std::cout << Util::loadTextFile(comp).toStdString();
+                std::cout << Util::loadTextFile(f).toStdString();
 
             }
+/*            qDebug() << comp << f;
             qDebug() << Util::loadTextFile(comp);
-           qDebug() << Util::loadTextFile(f);
-
-            return false;
+           qDebug() << Util::loadTextFile(f);*/
+ return false;
         }
     }
     return true;
