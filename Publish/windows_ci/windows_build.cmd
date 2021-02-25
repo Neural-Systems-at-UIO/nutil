@@ -7,7 +7,8 @@ qmake Nutil.pro
 echo "Compiling.."
 dir ..\Qt\Tools\
 dir ..\Qt\Tools\QtCreator\bin
-..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
+jom.exe -f Makefile.Release
+rem ..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release
 
 cd release
 dir .
