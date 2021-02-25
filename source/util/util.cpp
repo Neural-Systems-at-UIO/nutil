@@ -98,6 +98,17 @@ bool Util::CompareIdenticalFiles(QString fa, QString fb)
         return true;
     }
 
+    if (fa.toLower().endsWith(".csv")) {
+        QString a = Util::loadTextFile(fa);
+        QString b = Util::loadTextFile(fa);
+        QStringList l1 = a.trimmed().simplified().remove("\n").split(";");
+        QStringList l2 = b.trimmed().simplified().remove("\n").split(";");
+        for (int i=0;i<l1.count();i++) {
+            if (l1[i].trimmed()!=l2[i].trimmed())
+                return false;
+        }
+        return true;
+    }
 
     QByteArray ba = loadBinaryFile(fa);
     QByteArray bb = loadBinaryFile(fb);
