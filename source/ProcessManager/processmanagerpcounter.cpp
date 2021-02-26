@@ -76,6 +76,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
                 if (!s.toLower().contains("mask")) {
+
                     newFiles.append(match.captured(0));
                 }
 
