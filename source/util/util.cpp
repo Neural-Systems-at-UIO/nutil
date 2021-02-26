@@ -103,6 +103,9 @@ bool Util::CompareIdenticalFiles(QString fa, QString fb)
         QString b = Util::loadTextFile(fb);
         QStringList l1 = a.trimmed().simplified().remove("\n").split(";");
         QStringList l2 = b.trimmed().simplified().remove("\n").split(";");
+        if (l1.count()!=l2.count())
+            return false;
+
         for (int i=0;i<l1.count();i++) {
             if (l1[i].trimmed()!=l2[i].trimmed())
                 return false;
