@@ -75,7 +75,6 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         for (QString s: files) {
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
-  //                              qDebug() << "MATCH << "<<match.captured(0);
                 if (!s.toLower().contains("mask")) {
                     newFiles.append(match.captured(0));
                 }
