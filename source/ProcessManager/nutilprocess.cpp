@@ -265,7 +265,7 @@ bool NutilProcess::LoadAndVerifyTiff(LTiff &tif, QString inFile, int &writeCompr
 
     if (!TIFFIsTiled(tif.m_tif)) {
 //        qDebug() << "************ HERE";
-        LMessage::lMessage.Error("Error: this tiff file is not tiled. Please use the other transformation method for non-tiled tiffs.");
+        LMessage::lMessage.Error("Error: file '"+inFile+"'is not tiled. Please use the other transformation method for non-tiled tiffs.");
         return false;
     }
   //  else qDebug() << "TIFF IS TILED";

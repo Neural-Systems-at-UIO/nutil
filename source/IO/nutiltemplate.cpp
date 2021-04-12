@@ -9,6 +9,7 @@
 #include <QFileDialog>
 #include <QColorDialog>
 #include <iostream>
+#include "source/data.h"
 
 NutilTemplate::NutilTemplate()
 {
@@ -683,6 +684,15 @@ void NutilTemplate::Save(QString fname)
 
     m_openFile = fname;
 
+    NutilTemplateItem* nti = new NutilTemplateItem();
+
+    QString id = "nutil_version";
+
+    nti->m_name = id;
+    nti->m_value = Data::data.version;
+    nti->m_type = NutilTemplateItem::STRING;
+    m_items[id] = nti;
+    m_sortList.append(id);
     QFile f(fname);
     f.open(QFile::WriteOnly | QFile::Text);
     QTextStream str(&f);

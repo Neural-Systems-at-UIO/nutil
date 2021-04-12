@@ -75,8 +75,12 @@ void LSheetCSV::SaveAsHTML(QString basename)
     if (QFile::exists(fn))
         QFile::remove(fn);
 
-    if (m_height==0 && m_width==0)
+
+    if (m_height==0 || m_width==0)
         return;
+
+
+
 
 
     QFile file(fn);

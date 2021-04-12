@@ -9,8 +9,9 @@ class Data
 {
 public:
     Data();
-    float version = 0.01;
+//    float version = 0.01;
     bool redrawOutput=false;
+    QString version ="";
     bool redrawInput=false;
     bool forceRedraw = false;
     bool redrawFileList = false;

@@ -30,10 +30,11 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef IS_BETA
     ui->lblMain->setText("NeSys Utilities BETA " + QString::number(Version) +"\nFor internal use only.");
 #else
-    QString v = "[  ]";
+    QString v = "??";
     if (QFile::exists("version.txt"))
         v = Util::loadTextFile("version.txt");
     ui->lblMain->setText("NeSys Utilities " + v);
+    Data::data.version = v;
 #endif
 
 //    ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
