@@ -10,12 +10,12 @@ Nutil is written in C++ using standard Qt libraries, and is optimised for parall
 
 # Compiling from source 
 1.In order to compile from scratch, the following software components are also required:
- * Microsoft Visual C++ 2019 compiler (MSVC) on windows, community version (https://visualstudio.microsoft.com/vs/features/cplusplus/)
- * XCode (Clang) on macos
- * Gnu C++ compiler on linux
+ * On Windows, Microsoft Visual C++ 2019 compiler (MSVC), community version (https://visualstudio.microsoft.com/vs/features/cplusplus/)
+ * On macOS, XCode (Clang) 
+ * On Linux, Gnu C++ compiler
 2. Download and install Qt Creator for open source users (https://www.qt.io/download)
- Install the Qt framework version 6 or above
-3. Install git
+ Install the Qt framework version 6 or above (create a user account, custom install, select newest version and MSVC 2019).
+3. Install git (https://desktop.github.com/)
 4. Clone this repository to a folder (in github desktop: file->clone repository)
 5. Open the project file in Qt (file->open file or project)
 6. Set up a build path to the project (projects->build->build directory)
