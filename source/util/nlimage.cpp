@@ -567,6 +567,8 @@ void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString 
 */
             if (al!=nullptr) {
                 a.atlasLabel = al;
+
+
             }
         }
 
@@ -636,6 +638,11 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
                 AtlasLabel* al = labels.get(index, refImage.m_newFormat);
 
                 if (al!=nullptr) {
+                    if (al->index==607344862)
+                        qDebug() << "LABEL IS "<<607344862<< " with index " <<index << al->name;
+  //                  if (al->index==313)
+    //                    qDebug() << "LABEL IS "<<313<< " with index " <<index<< al->name;
+
                     //a.atlasLabel = al;
                     Area* currentArea = nullptr;
                     for (Area& ar : splitAreas) {
@@ -664,6 +671,7 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
             a.CalculateStatistics();
             a.m_area += a.m_pixelArea*pixelAreaScale;
             a.m_areaScale = pixelAreaScale*scale;
+
         }
 
         newAreas.append(splitAreas);
