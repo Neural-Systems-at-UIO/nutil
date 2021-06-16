@@ -41,6 +41,13 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     // Reset area counter
     Area::s_area_id_counter = 0;
 
+
+    if (QFile::exists("version.txt")) {
+        QFile::copy("version.txt",m_outputDir+"/"+"version.txt");
+        qDebug() << "copying to " <<m_outputDir+"/"+"version.txt";
+    }
+
+
     if (m_dataType==QUINT)
         LoadXML();
 

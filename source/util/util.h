@@ -258,14 +258,13 @@ public:
 
     static QString getFileName(QString dir, QString baseName, QString type);
 
-    static QString loadTextFile(QString filename) {
-        QFile file(filename);
-        file.open(QIODevice::ReadOnly);
-        QTextStream in(&file);
-        QString data = in.readAll();
-        file.close();
-        return data;
-    }
+    static QString loadTextFile(QString filename);
+
+
+
+    static void SaveTextFile(QString fname, QString text);
+
+
 
     static QString MilisecondToString(int ms) {
 //        ms+=1000;

@@ -30,9 +30,12 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef IS_BETA
     ui->lblMain->setText("NeSys Utilities BETA " + QString::number(Version) +"\nFor internal use only.");
 #else
-    QString v = "??";
+    QString v = "Development version";
     if (QFile::exists("version.txt"))
         v = Util::loadTextFile("version.txt");
+    else {
+        Util::SaveTextFile("version.txt",v);
+    }
     ui->lblMain->setText("NeSys Utilities " + v);
     Data::data.version = v;
 #endif

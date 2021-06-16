@@ -364,6 +364,30 @@ QString Util::getFileName(QString dir, QString baseName, QString type)
 
 }
 
+QString Util::loadTextFile(QString filename) {
+    QFile file(filename);
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString data = in.readAll();
+    file.close();
+    return data;
+}
+
+void Util::SaveTextFile(QString fname, QString text)
+{
+    if (QFile::exists(fname)) {
+        QFile::remove(fname);
+    }
+    if (fname=="")
+        return;
+    QFile file(fname);
+    file.open(QIODevice::WriteOnly| QIODevice::Text);
+    QTextStream f(&file);
+    f<<text;
+    file.close();
+
+}
+
 
 
 float Util::smoothstep(float edge0, float edge1, float x)
