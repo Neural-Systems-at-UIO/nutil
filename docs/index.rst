@@ -3,6 +3,7 @@
 ===============================================================
 
 **Introduction**
+----------------
 
 Nutil simplifies the pre-and-post processing of 2D brain image data from mouse and rat. Nutil is developed as a standalone application and requires no experience to execute. The user specifies the input and output folders and the parameters for the pre-and post-processing operations in the Nutil graphical user interface (GUI).
 
@@ -33,6 +34,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 
 
 **Installation and usage**
+--------------------------
 
 *Nutil* is a stand-alone 64-bit Windows application. There are no installation procedures, just extract the folder and double click on "Nutil.cmd". Nutil is an integral part of the QUINT workflow developed by the Nesys laboratory.
 
