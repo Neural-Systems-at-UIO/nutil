@@ -1,18 +1,9 @@
 
+**Nutil: Neuroscience Image Processing and Analysis Utilities**
 
-..
+**Introduction**
 
-   **Nutil: Neuroscience Image Processing and Analysis Utilities**
-
-
-
-   **Introduction**
-
-   Nutil simplifies the pre-and-post processing of 2D brain image data
-   from mouse and rat. Nutil is developed as a standalone application
-   and requires no experience to execute. The user specifies the input
-   and output folders and the parameters for the pre-and post-
-   processing operations in the Nutil graphical user interface (GUI).
+Nutil simplifies the pre-and-post processing of 2D brain image data from mouse and rat. Nutil is developed as a standalone applicationand requires no experience to execute. The user specifies the input and output folders and the parameters for the pre-and post-processing operations in the Nutil graphical user interface (GUI).
 
    Pre-processing operations include conversion of images from JPEG, PNG
    and untiled TIFF to tiled TIFF format (*TiffCreator)*; 2D
