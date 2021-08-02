@@ -9,7 +9,9 @@ Pre-processing operations include conversion of images from JPEG, PNG and untile
 
 Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the regional quantification of features such as cells in histological image series of rodent brain, with the regions defined by a reference atlas, such as the Allen Mouse Brain reference atlas or the Waxholm Space Atlas of the Sprague Dawley rat brain. All functions operate in batch, and operate in parallel on multiple CPUs.
 
+
 **PLEASE visit the EBRAINS page for information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information:**
+
 
 **Nutil enables four operations detailed further in this user guide:**
 
