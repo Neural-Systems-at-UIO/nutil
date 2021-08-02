@@ -59,6 +59,8 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 
 
 |
+
+
 **Operation: TiffCreator**
 --------------------------
 
@@ -77,6 +79,7 @@ TiffCreator converts JPEG, PNG, BMP, GIF and untiled TIFF images to the tiled TI
  
 Nutil includes an inbuilt user manual accessed via the “Help” buttons.
 
+|
 
 
 **Operation: Transform**
@@ -98,7 +101,8 @@ The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transf
 5. Press “Start” and wait until the process is complete. 
 
 
-..
+|
+
 
 **Operation: Resize**
 ----------------------
@@ -116,13 +120,17 @@ The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transf
 4. Nutil automatically detects the number of core processor available (8 in the example). Choose one less than the total available to ensure adequate processing power (6 or 7 here) and press “Start”. Wait until the process is complete.  
 5. The PNG files save automatically in the specified output folder.
 
+|
 
 **Operation: Quantifier**
 -------------------------
 
 **Quantifier** is an integral part of the QUINT workflow, and enables the regional quantification of features extracted from histological images, based on a reference atlas such as the Allen Mouse Brain Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat.
 
+|
+
 **File naming requirements**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *The file names of the *segmentation files* and the *brain atlas maps* that correspond to a particular section image must contain the same unique ID.
 
@@ -142,7 +150,7 @@ As Quantifier scans and detects the _s part of the name, the file name should no
 *Quantifier also supports user-defined IDs using regular expressions – RegExp. For more information see the “help” button in the Nutil GUI.
 
 
-..
+|
 
 **Input files**
 ~~~~~~~~~~~~~~~
@@ -190,7 +198,7 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 **OBS! Make sure your XML or JSON file has anchoring information for every section image in your dataset.**
 |
 
-..
+|
 
 **Running Quantifier**
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -241,7 +249,7 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
 
 
-..
+|
 
 **Quantifier settings explained**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -270,7 +278,8 @@ The mask feature is optional. It allows the application of masks to define which
 | |image16| |
 +-----------+
 
-..
+
+|
 
 **Customised reports**
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -286,6 +295,8 @@ The custom regions are compilations of reference atlas regions. Users have the o
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image11.png
       :width: 6.3in
       :height: 0.61941in
+      
+|
 
 **How to define your own regions**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -314,7 +325,7 @@ Use the default .xlsx may be used as a guide for filling out the template.
 
 
 
-..
+|
 
 **How to interpret the output**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -325,48 +336,22 @@ Use the default .xlsx may be used as a guide for filling out the template.
       :width: 5.88611in
       :height: 2.86512in
 
-   **RefAtlasRegions**
+**RefAtlasRegions**
+   
+Report with output organised based on all the regions in the reference atlas: per section and for the whole series (all sections combined).  
 
-+-----------------------------------------------------------------+---+
-|    Report with output organised based on all the regions in the |   |
-|    reference atlas: per section and for the whole series (all   |   |
-|    sections combined).                                          |   |
-|                                                                 |   |
-| +-----------------------------------------------------------+   |   |
-| |    | **IMPORTANT**: The *Allen Mouse Brain Reference      |   |   |
-| |      Atlas* includes regions that are not actually        |   |   |
-| |      delineated in the atlas. These regions are either    |   |   |
-| |      big regions that have been delineated into smaller   |   |   |
-| |      regions and so are not assigned to any pixels in the |   |   |
-| |      reference atlas, or are smaller regions that are not |   |   |
-| |      delineated. In the reports, these regions have no    |   |   |
-| |      results (zero for region pixels and for object       |   |   |
-| |      pixels) and should be excluded from analysis.        |   |   |
-| |    | The **Clear Label ID** covers objects that fall      |   |   |
-| |      outside of the atlas maps.                           |   |   |
-| +-----------------------------------------------------------+   |   |
-+=================================================================+===+
-| **CustomRegions**                                               |   |
-+-----------------------------------------------------------------+---+
+IMPORTANT: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
+ 
+**CustomRegions**
 
-..
+Reports with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx: per section and for the whole series
 
-   | Reports with the output organised based on the customised regions
-     defined in the
-   | CustomRegionsTemplate.xlsx: per section and for the whole series.
+**Objects**
 
-   **Objects**
-
-   List of all the objects in the whole series and per section. By
-   switching “ON” the “display object IDs in image file and reports”
-   feature, a unique ID is assigned to each object in your dataset.
-   These IDs are then displayed in the image files and in the object
-   reports.
+List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are then displayed in the image files and in the object reports.  
 
 
-..
-
-   In each report, interpret the results as follows:
+In each report, interpret the results as follows:
 
 +----------------------+----------------------------------------------+
 |    **Region pixels** |    No. of pixels representing the region.    |
@@ -392,67 +377,23 @@ Use the default .xlsx may be used as a guide for filling out the template.
 |                      |    pixels).                                  |
 +----------------------+----------------------------------------------+
 
+|
+
 **2. IMAGES**
 
-+--------------------------------------------+-------------------+---+
-|  Segmentations superimposed on the atlas  | |image19|         |   |
-| maps in PNG                                |                   |   |
-|                                            |                   |   |
-|    format.                                 |                   |   |
-|                                            |                   |   |
-|  The object colours are assigned based on |                   |   |
-| the customised                             |                   |   |
-|                                            |                   |   |
-|    regions. If no regions are specified,   |                   |   |
-|    or object falls outside of the          |                   |   |
-|    specified areas, the objects are shown  |                   |   |
-|    in red by default.                      |                   |   |
-+============================================+===================+===+
-|                                            |    [STRIKEOUT:16] |   |
-+--------------------------------------------+-------------------+---+
-   |
-|                       |                   |                       |
-|                       |                   | .. image:: cfad7c6d   |
-|                       |                   | 57444e3b93185b655ab92 |
-|                       |                   | 2e0/media/image15.png |
-|                       |                   |    :width: 2.68889in  |
-|                       |                   |    :height: 2.03483in |
-|                       |                   |                       |
-|                       |                   | +-----------+         |
-|                       |                   | | |image22| |         |
-|                       |                   | +-----------+         |
-+=======================+===================+=======================+
-| **3. COORDINATES**    |                   |                       |
-|                       |                   |                       |
-|    | JSON files       |                   |                       |
-|      containing point |                   |                       |
-|      clouds that can  |                   |                       |
-|      be visualised    |                   |                       |
-|      with the         |                   |                       |
-|      *MeshView Atlas  |                   |                       |
-|      Viewer*.         |                   |                       |
-|    | The vWiki link   |                   |                       |
-|      here:            |                   |                       |
-|                       |                   |                       |
-| **4. NUT file**       |                   |                       |
-|                       |                   |                       |
-|    The NUT file is a  |                   |                       |
-|    text file          |                   |                       |
-|    containing the     |                   |                       |
-|    analysis settings. |                   |                       |
-|    This can be loaded |                   |                       |
-|    into Nutil         |                   |                       |
-|    Quantifier with    |                   |                       |
-|    the “load” button. |                   |                       |
-|                       |                   |                       |
-|    To view, open with |                   |                       |
-|    *Notepad.*         |                   |                       |
-+-----------------------+-------------------+-----------------------+
-|                       |    [STRIKEOUT:17] |                       |
-+-----------------------+-------------------+-----------------------+
+* Segmentations superimposed on the atlas maps in PNG format.  
+* The object colours are assigned based on the customised regions. If no regions are specified, or object falls outside of the specified areas, the objects are shown in red by default
 
+**3. COORDINATES**  
+ 
+* JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
+* The viewer is available via the MediaWiki link here: www.nitrc.org/projects/meshview.
 
-..
+**4. NUT file** 
+
+The NUT file is a text file containing the analysis settings. This can be loaded into Nutil Quantifier with the “load” button. To view, open with Notepad.
+
+|
 
 **Technical information**
 -------------------------
