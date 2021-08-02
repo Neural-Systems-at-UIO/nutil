@@ -58,7 +58,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 
 
 ..
-
+|
 **Operation: TiffCreator**
 --------------------------
 
