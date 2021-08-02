@@ -1,5 +1,6 @@
-..
+
 **Nutil: Neuroscience Image Processing and Analysis Utilities**
+===============================================================
 
 **Introduction**
 
