@@ -34,17 +34,15 @@
 
    **Nutil enables four operations detailed further in this user guide:**
 
-*A. TiffCreator:* convert JPEG, PNG and normal TIFF images to tiled
+A. TiffCreator: convert JPEG, PNG and normal TIFF images to tiled
 TIFF format
 
-*B. Transform:* rename, rotate, resize and compile thumbnails of large
+B. Transform: rename, rotate, resize and compile thumbnails of large
 tiled TIFF images 
 
-*C. Quantifier*: for the batch extraction,
-quantification and spatial analysis of labelling segmented from 2D mouse or rat brain section images (for example,
-   immunohistochemical labelling).
+C. Quantifier: for the batch extraction, quantification and spatial analysis of labelling segmented from 2D mouse or rat brain section images (for example, immunohistochemical labelling).
 
-*D. Resize:* for resizing JPEG/PNG images with output in PNG format.
+D. Resize: for resizing JPEG/PNG images with output in PNG format.
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image1.png
       :width: 2.87083in
