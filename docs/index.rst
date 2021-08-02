@@ -15,13 +15,13 @@
    processing operations in the Nutil graphical user interface (GUI).
 
    Pre-processing operations include conversion of images from JPEG, PNG
-   and untiled TIFF to tiled TIFF format (**TiffCreator)**; 2D
+   and untiled TIFF to tiled TIFF format (*TiffCreator)*; 2D
    transformations of large tiled TIFF images (rotation, flipping and
    scaling) in addition to renaming, copying and downsizing
-   (**Transform**); and resizing of JPEG, PNG and TIFF images with
-   output in PNG format (**Resize**).
+   (*Transform*); and resizing of JPEG, PNG and TIFF images with
+   output in PNG format (*Resize*).
 
-   Post-processing (**Quantifier**) is used for the QUINT workflow. It
+   Post-processing (*Quantifier*) is used for the QUINT workflow. It
    enables the regional quantification of features such as cells in
    histological image series of rodent brain, with the regions defined
    by a reference atlas, such as the Allen Mouse Brain reference atlas
@@ -32,19 +32,19 @@
    workflow, and to find tutorials, examples of use, demo videos and
    software download information:**
 
-   *Nutil* enables four operations detailed further in this user guide:
+   **Nutil enables four operations detailed further in this user guide:**
 
-**A. TiffCreator:** convert JPEG, PNG and normal TIFF images to tiled
+*A. TiffCreator:* convert JPEG, PNG and normal TIFF images to tiled
 TIFF format
 
-**B. Transform:** rename, rotate, resize and compile thumbnails of large
-tiled TIFF images **C. Quantifier**: for the batch extraction,
-quantification and spatial analysis of labelling
+*B. Transform:* rename, rotate, resize and compile thumbnails of large
+tiled TIFF images 
 
-   segmented from 2D mouse or rat brain section images (for example,
+*C. Quantifier*: for the batch extraction,
+quantification and spatial analysis of labelling segmented from 2D mouse or rat brain section images (for example,
    immunohistochemical labelling).
 
-**D. Resize:** for resizing JPEG/PNG images with output in PNG format.
+*D. Resize:* for resizing JPEG/PNG images with output in PNG format.
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image1.png
       :width: 2.87083in
@@ -59,14 +59,6 @@ quantification and spatial analysis of labelling
    installation procedures, just extract the folder and double click on
    "Nutil.cmd". Nutil is an integral part of the QUINT workflow
    developed by the Nesys laboratory.
-
-   **Documentation:**
-
-   **Download:**
-
-   **Report issu**
-
-   **Slack workspa** .com
 
    **Licence**:
 
