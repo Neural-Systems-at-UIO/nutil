@@ -52,13 +52,6 @@ quantification and spatial analysis of labelling
 
    **Figure 1**: Nutil GUI.
 
-== =
-\  2
-== =
-
-=================================== ===================================
-   Version 0.0511, updated 25.02.21  Lab: Neural Systems Laboratory, IMB
-=================================== ===================================
 
 **Installation and usage**
 
@@ -106,9 +99,6 @@ quantification and spatial analysis of labelling
 \                                  [STRIKEOUT:3]
 =============================== ================
 
-=================================== ===================================
-   Version 0.0511, updated 25.02.21  Lab: Neural Systems Laboratory, IMB
-=================================== ===================================
 
 ..
 
@@ -152,14 +142,6 @@ simple text file in .NUT
    Nutil includes an inbuilt user manual accessed via the “Help”
    buttons.
 
-== =
-\  4
-== =
-
-=================================== ===================================
-   Version 0.0511, updated 25.02.21  Lab: Neural Systems Laboratory, IMB
-=================================== ===================================
-
 ..
 
    **Operation:**\ **Transform**
@@ -198,9 +180,6 @@ simple text file in .NUT
 |                                                  |    [STRIKEOUT:5] |
 +--------------------------------------------------+------------------+
 
-=================================== ===================================
-   Version 0.0511, updated 25.02.21  Lab: Neural Systems Laboratory, IMB
-=================================== ===================================
 
 ..
 
@@ -249,9 +228,6 @@ simple text file in .NUT
 |                                                  |    [STRIKEOUT:6] |
 +--------------------------------------------------+------------------+
 
-=================================== ===================================
-   Version 0.0511, updated 25.02.21  Lab: Neural Systems Laboratory, IMB
-=================================== ===================================
 
 **Operation: Quantifier**
 
@@ -300,14 +276,6 @@ simple text file in .NUT
 
    information see the “help” button in the Nutil GUI.
 
-== =
-\  7
-== =
-
-+-------------------------------+---+-------------------------------+
-|    Version 0.0511, updated    |   |    Lab: Neural Systems        |
-|    25.02.21                   |   |    Laboratory, IMB            |
-+-------------------------------+---+-------------------------------+
 
 ..
 
@@ -378,10 +346,6 @@ simple text file in .NUT
 |                                                  |    [STRIKEOUT:8] |
 +--------------------------------------------------+------------------+
 
-+-------------------------------+---+-------------------------------+
-|    Version 0.0511, updated    |   |    Lab: Neural Systems        |
-|    25.02.21                   |   |    Laboratory, IMB            |
-+-------------------------------+---+-------------------------------+
 
 ..
 
@@ -440,14 +404,6 @@ simple text file in .NUT
    **OBS! Make sure your XML or JSON file has anchoring information for
    every section image in your dataset.**
 
-== =
-\  9
-== =
-
-+-------------------------------+---+-------------------------------+
-|    Version 0.0511, updated    |   |    Lab: Neural Systems        |
-|    25.02.21                   |   |    Laboratory, IMB            |
-+-------------------------------+---+-------------------------------+
 
 ..
 
@@ -518,13 +474,8 @@ altered (e.g. min
 |    Unique ID format         |    \_sXXX…                            |
 +-----------------------------+---------------------------------------+
 
-== ==
-\  10
-== ==
 
-+-------------------------------+---+-------------------------------+
-|    Version 0.0511, updated    |   |    Lab: Neural Systems        |
-|    25.02.21                   |   |    Laboratory, IMB            |
+
 +===============================+===+===============================+
 | 7. Press “Save as”. This      |   |                               |
 | saves a copy of the settings  |   |                               |
@@ -558,14 +509,6 @@ altered (e.g. min
 
    **Figure 6:** Quantifier advanced settings GUI
 
-== ==
-\  11
-== ==
-
-+-------------------------------+---+-------------------------------+
-|    Version 0.0511, updated    |   |    Lab: Neural Systems        |
-|    25.02.21                   |   |    Laboratory, IMB            |
-+-------------------------------+---+-------------------------------+
 
 ..
 
@@ -767,14 +710,6 @@ the image and coordinate output (for display purposes only).
    These IDs are then displayed in the image files and in the object
    reports.
 
-== ==
-\  15
-== ==
-
-+-------------------------------+---+-------------------------------+
-|    Version 0.0511, updated    |   |    Lab: Neural Systems        |
-|    25.02.21                   |   |    Laboratory, IMB            |
-+-------------------------------+---+-------------------------------+
 
 ..
 
@@ -822,11 +757,7 @@ the image and coordinate output (for display purposes only).
 +============================================+===================+===+
 |                                            |    [STRIKEOUT:16] |   |
 +--------------------------------------------+-------------------+---+
-
-+-----------------------+-------------------+-----------------------+
-|    Version 0.0511,    |                   |    Lab: Neural        |
-|    updated 25.02.21   |                   |    Systems            |
-|                       |                   |    Laboratory, IMB    |
+   |
 |                       |                   |                       |
 |                       |                   | .. image:: cfad7c6d   |
 |                       |                   | 57444e3b93185b655ab92 |
@@ -867,9 +798,6 @@ the image and coordinate output (for display purposes only).
 |                       |    [STRIKEOUT:17] |                       |
 +-----------------------+-------------------+-----------------------+
 
-=================================== ===================================
-   Version 0.0511, updated 25.02.21  Lab: Neural Systems Laboratory, IMB
-=================================== ===================================
 
 ..
 
@@ -935,13 +863,6 @@ the image and coordinate output (for display purposes only).
    Creative Commons Attribution-NonCommercial-ShareAlike 4.0
    International
 
-== ==
-\  18
-== ==
-
-================================ ======================================
-Version 0.0511, updated 25.02.21     Lab: Neural Systems Laboratory, IMB
-================================ ======================================
 
 **Cite**
 
@@ -972,9 +893,7 @@ Can be found on
 
 **Slack workspace for informal discussion:** quint-uiq9333.slack.com
 
-== ==
-\  19
-== ==
+
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
    :width: 6.30139in
