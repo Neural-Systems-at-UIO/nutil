@@ -17,7 +17,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
                                 
 ..                              
                                 
-   **Figure 2**: QUINT workflow 
+   **Figure 1**: QUINT workflow 
 
 
 **PLEASE visit the EBRAINS page for information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information:**
