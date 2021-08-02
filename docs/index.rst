@@ -13,7 +13,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 
 **Nutil enables four operations detailed further in this user guide:**
 
-1. TiffCreator: convert JPEG, PNG and normal TIFF images to tiled
+(1) TiffCreator: convert JPEG, PNG and normal TIFF images to tiled
 TIFF format
 
 2. Transform: rename, rotate, resize and compile thumbnails of large
