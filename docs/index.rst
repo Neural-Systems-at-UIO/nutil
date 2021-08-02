@@ -60,6 +60,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 ..
 
 **Operation: TiffCreator**
+--------------------------
 
 TiffCreator converts JPEG, PNG, BMP, GIF and untiled TIFF images to the tiled TIFF format that is compatible with Transform. TiffCreator operates in batch, converting all the images in an input folder and saving them in the specified output folder.  
 
@@ -97,7 +98,8 @@ simple text file in .NUT
 
 ..
 
-   **Operation:**\ **Transform**
+**Operation: Transform**
+------------------------
 
    | **Transform** allows the batch renaming, rotation, resizing and
      thumbnail compilation of tiled TIFF images (max size: 4 GB).
@@ -136,7 +138,8 @@ simple text file in .NUT
 
 ..
 
-   **Operation: Resize**
+**Operation: Resize**
+----------------------
 
    **Resize** enables rapid resizing of PNG, JPEG and untiled TIFF
    images by application of a resize factor or a fixed pixel width. The
@@ -183,24 +186,17 @@ simple text file in .NUT
 
 
 **Operation: Quantifier**
+-------------------------
 
-   **Quantifier** is an integral part of the QUINT workflow, and enables
-   the regional quantification of features extracted from histological
-   images, based on a reference atlas such as the Allen Mouse Brain
-   Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat.
+**Quantifier** is an integral part of the QUINT workflow, and enables the regional quantification of features extracted from histological images, based on a reference atlas such as the Allen Mouse Brain Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat.
 
-   **File naming** **requirements**
+**File naming requirements**
 
-    The file names of the *segmentation files* and the *brain atlas
-   maps* that correspond to a
+"*"The file names of the *segmentation files* and the *brain atlas
+   maps* that correspond to a particular section image must contain the same unique ID.
 
-   particular section image must contain the same unique ID.
-
-    These unique IDs must also be present in the *XML/JSON file*
-   containing the anchoring
-
-   information. This happens automatically as long as the images that
-   are anchored with *QuickNII* contain the unique IDs.
+"*"These unique IDs must also be present in the *XML/JSON file*
+   containing the anchoring information. This happens automatically as long as the images that are anchored with *QuickNII* contain the unique IDs.
 
 +----------------------------------------------------------------------+
 |    **OBS!** The sXXX naming convention applies to both **QuickNII**  |
@@ -211,7 +207,7 @@ simple text file in .NUT
 
 ..
 
-   |  **Quantifier** support\ *s* IDs in the format: sXXX.., with XXX..
+Quantifier support\ *s* IDs in the format: sXXX.., with XXX..
      representing the section number. The section number should reflect
      the serial order and spacing of the sections (e.g. s002, s006, s010
      for every 4th section starting with section 2). The IDs must match
@@ -232,7 +228,8 @@ simple text file in .NUT
 
 ..
 
-   **Input files**
+**Input files**
+~~~~~~~~~~~~~~~
 
 +--------------------------------------------------+------------------+
 | 1. **Segmentations**                             | +-----------+    |
@@ -360,7 +357,8 @@ simple text file in .NUT
 
 ..
 
-   **Running Quantifier**
+**Running Quantifier**
+~~~~~~~~~~~~~~~~~~~~~~
 
 +-----------+
 | |image13| |
@@ -465,7 +463,8 @@ altered (e.g. min
 
 ..
 
-   **Quantifier settings explained**
+**Quantifier settings explained**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    *Nutil* has “help” buttons throughout with information on each
    parameter.
@@ -525,35 +524,23 @@ altered (e.g. min
    an analysis of the left hand side of an image with the mask shown
    here, specify black (RGB code: 0,0,0).
 
-== ==
-\  12
-== ==
 
-+-------------------------------+---+-------------------------------+
-|    Version 0.0511, updated    |   |    Lab: Neural Systems        |
-|    25.02.21                   |   |    Laboratory, IMB            |
-+-------------------------------+---+-------------------------------+
 
 ..
 
-   **Customised reports**
+**Customised reports**
+~~~~~~~~~~~~~~~~~~~~~~
 
-   Quantifier generates two or three sets of reports:
+Quantifier generates two or three sets of reports:
 
- *RefAtlasRegion* reports contain quantifications per atlas region
-based on the finest level of
+"*" *RefAtlasRegion* reports contain quantifications per atlas region
+based on the finest level of granularity of the atlas.
 
-   granularity of the atlas.
+"*" *CustomRegion* reports contain quantifications for broader regions,
+such as cortex and hippocampus (“default”), or user defined regions (“custom”).
 
- *CustomRegion* reports contain quantifications for broader regions,
-such as cortex and
+"*" *Object* reports contain information about individual objects and are only generated with object splitting switched OFF.
 
-   hippocampus (“default”), or user defined regions (“custom”).
-
- *Object* reports contain information about individual objects and are
-only generated with object
-
-   | splitting switched OFF.
    | The custom regions are compilations of reference atlas regions.
      Users have the option to either define their own using the
      CustomRegionsTemplate.xlsx, or to use the default regions included
@@ -568,20 +555,13 @@ only generated with object
       :width: 6.3in
       :height: 0.61941in
 
-   **How to define your own regions**
+**How to define your own regions**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. To define your own regions, use the *CustomRegionsTemplate.xlsx* that
-is included in the Nutil
+is included in the Nutil package, and populate as described below:
 
-   package, and populate as described below:
 
-== ==
-\  13
-== ==
-
-================================ ======================================
-Version 0.0511, updated 25.02.21     Lab: Neural Systems Laboratory, IMB
-================================ ======================================
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image12.png
    :width: 4.80278in
@@ -606,18 +586,12 @@ the image and coordinate output (for display purposes only).
 | NOTE: The default .xlsx may be used as a guide for filling out the
   template.
 
-== ==
-\  14
-== ==
 
-+-------------------------------+---+-------------------------------+
-|    Version 0.0511, updated    |   |    Lab: Neural Systems        |
-|    25.02.21                   |   |    Laboratory, IMB            |
-+-------------------------------+---+-------------------------------+
 
 ..
 
-   **How to interpret the output**
+**How to interpret the output**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. Reports** (CSV or HTML format)
 
@@ -754,99 +728,56 @@ the image and coordinate output (for display purposes only).
 
 ..
 
-   **Technical information**
+**Technical information**
+-------------------------
 
-   **Development platform**
+*Download:* https://www.nitrc.org/projects/nutil/ 
 
-   **Download:**
+Nutil is written as a stand-alone windows 64-bit application written in Qt C++, which enables the full usage of both memory and processor cores. Nutil can be downloaded and compiled from the github page. When performing batch processes, Nutil will utilise all cores available on the system.  
 
-   *Nutil* is writ application written in Qt C++, which enables the full
-   usage of both memory and processor cores. *Nutil* can be downloaded
-   and compiled from the github page. When performing batch processes,
-   *Nutil* will utilise all cores available on the system.
+The external libraries that are used in Nutil are: 
+ 
+"*" Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/) 
+"*" LibXLNT for excel file IO (https://github.com/tfussell/xlnt/) 
 
-= ==========================================================
- == =======================================================
-  \     The external libraries that are used in *Nutil* are:
-    
-        Libtiff for fast and efficient
-     
-        | LibXLNT for excel file IO (
-        | **TiffCreator**
-  == =======================================================
-  
-  
-  
-  
-= ==========================================================
+**TiffCreator**
 
-..
+TiffCreator produces tiled TIFF files from JPEG, PNG and standard TIFF images, and employs the support of multiple CPUs for efficient, parallelised operations. 
 
-   TiffCreator produces tiled TIFF files from JPEG, PNG and standard
-   TIFF images, and employs the support of multiple CPUs for efficient,
-   parallelised operations.
+**Transform** 
 
-   **Transform**
+Transform enables rotations, scaling and thumbnail compilation of large tiff files (currently up to 4GB).  
 
-   *Transform* enables rotations, scaling and thumbnail compilation of
-   large tiff files (currently up to 4GB).
+**Quantifier**
 
-   **Quantifier**
+Quantifier identifies individual binary objects in a PNG file, while matching these to output from QuickNII. The method first finds and sorts areas by using a standard pixel filler routine. Afterwards, a random area pixel is chosen as the look-up in the binary QuickNII label slice for this particular image. When all areas have been assigned a label ID, multiple selections of predefined area IDs are assembled (ID list from the excel input file), and finally output reports are assembled and written to disk (in xlsl format). In addition, original ilastik .png files with colour/ID coding added to underlying atlas slice data are assembled and saved to the output folder. 
 
-   | *Quantifier* identifies individual binary objects in a PNG file,
-     while matching these to output from *QuickNII*. The method first
-     finds and sorts areas by using a standard pixel filler routine.
-     Afterwards, a random area pixel is chosen as the look-up in the
-     binary *QuickNII* label slice for this particular image. When all
-     areas have been assigned a label ID, multiple selections of
-     pre-defined area IDs are assembled (ID list from the excel input
-     file), and finally output
-   | reports are assembled and written to disk (in xlsl format). In
-     addition, original ilastik .png files with colour/ID coding added
-     to underlying atlas slice data are assembled and saved to the
-     output *folder*.
+**Authors**
 
-   **Authors**
+Nicolaas E Groeneboom, Sharon C. Yates, Maja A. Puchades, Jan G. Bjaalie. 
 
-   Nicolaas E Groeneboom, Sharon C. Yates, Maja A. Puchades, Jan G.
-   Bjaalie.
+**Licence**
 
-   **Licence**
-
-   Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International
-
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International 
 
 **Cite**
+Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Postprocessing Toolbox for Histological Rodent Brain Section Images. Front. Neuroinform. 14:37. doi: 10.3389/fninf.2020.00037
 
-Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre-
-and Post-processing Toolbox for Histological Rodent Brain Section
-Images. Front. Neuroinform. 14:37. doi: 10.3389/fninf.2020.00037
-
-Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth
-H-U, Hartlage-Rübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA
-and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial
-Analysis of Features in Histological Images From Rodent Brain. Front.
-Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075.
+Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, HartlageRübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075. 
 
 **Acknowledgements**
 
-Nutil was development with support from the European Union’s Horizon
-2020 Framework Programme for Research and Innovation under the Specific
-Grant Agreement No. 720270 (Human Brain Project SGA1) and Specific Grant
-Agreement No. 785907 (Human Brain Project SGA2).
+Nutil was development with support from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 720270 (Human Brain Project SGA1) and Specific Grant Agreement No. 785907 (Human Brain Project SGA2). 
 
 **Release notes**
 
-Can be found on
+Can be found on https://www.nitrc.org/frs/?group_id=1365 
 
-**Contact us**
+**Contact us** 
 
-**Report issues:** https://github.com/Neural-Systems-at-UIO/nutil
+Report issues: https://github.com/Neural-Systems-at-UIO/nutil 
 
-**Slack workspace for informal discussion:** quint-uiq9333.slack.com
-
-
+**Slack workspace for informal discussion:** quint-uiq9333.slack.com 
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
    :width: 6.30139in
