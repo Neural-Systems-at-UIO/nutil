@@ -1,4 +1,4 @@
-
+..
 **Nutil: Neuroscience Image Processing and Analysis Utilities**
 
 **Introduction**
@@ -28,6 +28,7 @@ D. Resize: for resizing JPEG/PNG images with output in PNG format.
       :height: 2.19564in
 
    **Figure 1**: Nutil GUI.
+
 
 
 **Installation and usage**
