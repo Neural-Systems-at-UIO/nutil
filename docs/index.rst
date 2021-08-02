@@ -3,27 +3,15 @@
 
 **Introduction**
 
-Nutil simplifies the pre-and-post processing of 2D brain image data from mouse and rat. Nutil is developed as a standalone applicationand requires no experience to execute. The user specifies the input and output folders and the parameters for the pre-and post-processing operations in the Nutil graphical user interface (GUI).
+Nutil simplifies the pre-and-post processing of 2D brain image data from mouse and rat. Nutil is developed as a standalone application and requires no experience to execute. The user specifies the input and output folders and the parameters for the pre-and post-processing operations in the Nutil graphical user interface (GUI).
 
-   Pre-processing operations include conversion of images from JPEG, PNG
-   and untiled TIFF to tiled TIFF format (*TiffCreator)*; 2D
-   transformations of large tiled TIFF images (rotation, flipping and
-   scaling) in addition to renaming, copying and downsizing
-   (*Transform*); and resizing of JPEG, PNG and TIFF images with
-   output in PNG format (*Resize*).
+Pre-processing operations include conversion of images from JPEG, PNG and untiled TIFF to tiled TIFF format (*TiffCreator)*; 2D transformations of large tiled TIFF images (rotation, flipping and scaling) in addition to renaming, copying and downsizing (*Transform*); and resizing of JPEG, PNG and TIFF images with output in PNG format (*Resize*).
 
-   Post-processing (*Quantifier*) is used for the QUINT workflow. It
-   enables the regional quantification of features such as cells in
-   histological image series of rodent brain, with the regions defined
-   by a reference atlas, such as the Allen Mouse Brain reference atlas
-   or the Waxholm Space Atlas of the Sprague Dawley rat brain. All
-   functions operate in batch, and operate in parallel on multiple CPUs.
+Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the regional quantification of features such as cells in histological image series of rodent brain, with the regions defined by a reference atlas, such as the Allen Mouse Brain reference atlas or the Waxholm Space Atlas of the Sprague Dawley rat brain. All functions operate in batch, and operate in parallel on multiple CPUs.
 
-   **PLEASE visit the EBRAINS page for information about the QUINT
-   workflow, and to find tutorials, examples of use, demo videos and
-   software download information:**
+**PLEASE visit the EBRAINS page for information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information:**
 
-   **Nutil enables four operations detailed further in this user guide:**
+**Nutil enables four operations detailed further in this user guide:**
 
 A. TiffCreator: convert JPEG, PNG and normal TIFF images to tiled
 TIFF format
