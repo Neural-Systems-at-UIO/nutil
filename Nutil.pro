@@ -92,6 +92,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 SOURCES += main.cpp \
     source/IO/nutiltemplate.cpp \
     source/LBook/lbookhtml.cpp \
+    source/ProcessManager/processmanagerng.cpp \
     source/ProcessManager/processmanagerresize.cpp \
     source/Validator/nutilvalidator.cpp \
     source/data.cpp \
@@ -148,6 +149,7 @@ HEADERS += \
     nutilapplication.h \
     source/IO/nutiltemplate.h \
     source/LBook/lbookhtml.h \
+    source/ProcessManager/processmanagerng.h \
     source/ProcessManager/processmanagerresize.h \
     source/Validator/nutilvalidator.h \
     source/data.h \

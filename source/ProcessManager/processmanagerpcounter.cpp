@@ -44,7 +44,6 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
     if (QFile::exists("version.txt")) {
         QFile::copy("version.txt",m_outputDir+"/"+"version.txt");
-        qDebug() << "copying to " <<m_outputDir+"/"+"version.txt";
     }
 
 
