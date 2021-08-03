@@ -25,19 +25,10 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 **Nutil enables four operations**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. *TiffCreator*: convert JPEG, PNG and normal TIFF images to tiled TIFF format.
-
-|
-
-2. *Transform*: rename, rotate, resize and compile thumbnails of large tiled TIFF images.
-
-|
-
-3. *Quantifier*: for the batch extraction, quantification and spatial analysis of labelling segmented from 2D mouse or rat brain section images (for example, immunohistochemical labelling).
-
-|
-
-4. *Resize*: for resizing JPEG/PNG images with output in PNG format.
+1. **TiffCreator**: convert JPEG, PNG and normal TIFF images to tiled TIFF format.
+2. **Transform**: rename, rotate, resize and compile thumbnails of large tiled TIFF images.
+3. **Quantifier**: for the batch extraction, quantification and spatial analysis of labelling segmented from 2D mouse or rat brain section images (for example, immunohistochemical labelling).
+4. **Resize**: for resizing JPEG/PNG images with output in PNG format.
 
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image1.png
@@ -239,7 +230,7 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 +-----------------------------+---------------------------------------+
 |    Nifti size               |    0 (no nifti file generated)        |
 +-----------------------------+---------------------------------------+
-|    Unique ID format         |    \_sXXX…                            |
+|    Unique ID format         |    _sXXX…                             |
 +-----------------------------+---------------------------------------+
 
 |
