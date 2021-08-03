@@ -134,7 +134,7 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
 **A. How to prepare the input files**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- **1. File naming requirement**
+**1. File naming requirement**
 
 * The file names of the *segmentation files* and the *atlas maps* that correspond to a particular section image must contain the same unique ID. These unique IDs must also be present in the XML or JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs.
 
@@ -146,7 +146,7 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
 
 |
 
- **2. Preparing the segmentations**
+**2. Preparing the segmentations**
  
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. 
 
@@ -166,9 +166,9 @@ We recommend the Pixel and Object Classification workflows in the ilastik softwa
 
 |
 
- **3. Preparing the atlas maps** 
+**3. Preparing the atlas maps** 
  
-The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with either the *QuickNII* software that applies linear registration only, or with the *VisuAlign* software that applies nonlinear refinement to an existing QuickNII anchoring file. The atlas maps are in .FLAT format. 
+The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with either the QuickNII software that applies linear registration only, or with the VisuAlign software that applies nonlinear refinement to an existing QuickNII anchoring file. The atlas maps are in .FLAT format and cannot be viewed. The image below shows the information contained in the atlas map, but is not the .FLAT file itself.  
  
 Visit and download here: https://ebrains.eu/service/quicknii-and-visualign 
  
@@ -177,23 +177,23 @@ Visit and download here: https://ebrains.eu/service/quicknii-and-visualign
 +----------+
  |
  
- **4. Preparing the XML or JSON file containing the anchoring information.**
+**4. Preparing the XML or JSON file containing the anchoring information.**
  
 Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used. They all contain the linear registration information that is needed to generate coordinate output. Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the file. 
 
-**QuickNII**
+ **QuickNII**
 
-* QuickNII is a standalone software for affine spatial registration (anchoring) of section images - typically high resolution histological images - to a reference atlas such as the Allen Mouse Brain Atlas or the Waxholm Atlas of the Sprague Dawley Rat. In QuickNII, the reference atlas is transformed to match anatomical landmarks in the experimental images. In this way, the spatial relationship between experimental image and atlas is defined, without introducing transformations in the original experimental images. 
+ * QuickNII is a standalone software for affine spatial registration (anchoring) of section images - typically high resolution histological images - to a reference atlas such as the Allen Mouse Brain Atlas or the Waxholm Atlas of the Sprague Dawley Rat. In QuickNII, the reference atlas is transformed to match anatomical landmarks in the experimental images. In this way, the spatial relationship between experimental image and atlas is defined, without introducing transformations in the original experimental images. 
 
-* Once all the sections are registered, QuickNII may be used to generate atlas maps that match the cutting plane and proportions of the experimental image data. The anchoring information (coordinates) is saved and stored in an XML or JSON file.   
+ * Once all the sections are registered, QuickNII may be used to generate atlas maps that match the cutting plane and proportions of the experimental image data. The anchoring information (coordinates) is saved and stored in an XML or JSON file.   
  
-* The registration is user-guided with some automation. Following anchoring of a limited number of sections containing key landmarks, transformations are propagated across the entire series of images to reduce the manual work required. These propagations must be validated by visual inspection and typically require fine adjustments for most sections. A user manual that describes how to use QuickNII in the context of the QUINT workflow is included as part of the Nutil package. See: QuickNII userguide. 
+ * The registration is user-guided with some automation. Following anchoring of a limited number of sections containing key landmarks, transformations are propagated across the entire series of images to reduce the manual work required. These propagations must be validated by visual inspection and typically require fine adjustments for most sections. A user manual that describes how to use QuickNII in the context of the QUINT workflow is included as part of the Nutil package. See: QuickNII userguide. 
 
-**VisuAlign**
+ **VisuAlign**
 
-* VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration (the 2D-to-3D registration is performed with QuickNII and stored in the JSON file). It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
+ * VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration (the 2D-to-3D registration is performed with QuickNII and stored in the JSON file). It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
  
-* Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and
+ * Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and
 drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
 
 |
