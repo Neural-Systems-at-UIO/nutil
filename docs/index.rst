@@ -46,7 +46,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 
 |
 
-   .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image1.png
+.. image:: cfad7c6d57444e3b93185b655ab922e0/media/image1.png
 
 
 |
