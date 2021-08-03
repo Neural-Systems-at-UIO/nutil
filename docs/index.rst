@@ -158,10 +158,8 @@ Any image analysis software may be used to generate the segmentations as long as
   
   * Quantifier is only able to extract one RGB (Red Green Blue) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI (e.g. the objects in the segmentation here are red, which is RGB colour code: 255,0,0).
   
+image11
 
-+----------+
-| |image12||
-+----------+
 |
 
  **3. Preparing the atlas maps** 
@@ -170,6 +168,10 @@ The atlas maps are customised to match the cutting plane and proportions of the 
  
  Visit and download here: https://ebrains.eu/service/quicknii-and-visualign 
  
+image12
++----------+
+||image12| |
++----------+
  |
  
  **4. Preparing the XML or JSON file containing the anchoring information.**
