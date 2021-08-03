@@ -288,13 +288,9 @@ Quantifier generates two or three sets of reports:
 * CustomRegion reports contain quantifications for broader regions, such as cortex and hippocampus (“default”), or user defined regions (“custom”).  
 * Object reports contain information about individual objects and are only generated with object splitting switched OFF.  
  
-The custom regions are compilations of reference atlas regions. Users have the option to either define their own using the CustomRegionsTemplate.xlsx, or to use the default regions included in the Nutil software. More information on the default regions are found in the CustomRegion files in the Nutil package (see folder titled “CustomRegion” and navigate to the xlsx file that corresponds to your atlas). The “default” option is a whole brain analysis. It includes all the reference atlas regions subdivided into broad regions. 
+The custom regions are compilations of reference atlas regions. Users have the option to either define their own using the CustomRegionsTemplate.xlsx, or to use the default regions included in the Nutil software. 
 
-   .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image11.png
-      :width: 6.3in
-      :height: 0.61941in
-      
-|
+More information on the default regions are found in the CustomRegion files in the Nutil package (see folder titled “CustomRegion” and navigate to the xlsx file that corresponds to your atlas). The “default” option is a whole brain analysis. It includes all the reference atlas regions subdivided into broad regions. 
 
 1. To define your own regions, use the *CustomRegionsTemplate.xlsx* that
 is included in the Nutil package, and populate as described below:
@@ -317,7 +313,6 @@ For mouse, see the ABAHier2015.xlsx or ABAHier2017.xlsx file for the full list o
 For rat, see the WHS_rat_atlas_v2.xlsx or WHS_rat_atlas_v3.xlsx file for the full list of regions and IDs.  
  
 Use the default .xlsx may be used as a guide for filling out the template.  
-
 
 
 |
