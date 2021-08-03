@@ -150,7 +150,7 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
  
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. 
 
-We recommend the Pixel and Object Classification workflows in the ilastik software with the Glasbey lookup table applied with Fiji. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
+ **ilastik** We recommend the use of the Pixel and Object Classification workflows in the ilastik software with the Glasbey lookup table applied with Fiji. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
 
 **Requirement:**
 
@@ -175,7 +175,7 @@ Visit and download here: https://ebrains.eu/service/quicknii-and-visualign
 +----------+
 | |image12||
 +----------+
- |
+|
  
 **4. Preparing the XML or JSON file containing the anchoring information.**
  
@@ -193,8 +193,7 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
  * VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration (the 2D-to-3D registration is performed with QuickNII and stored in the JSON file). It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
  
- * Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and
-drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
+ * Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
 
 |
 **OBS! Make sure your XML or JSON file has anchoring information for every section image in your dataset.**
