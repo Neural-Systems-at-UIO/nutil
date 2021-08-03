@@ -150,44 +150,18 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
  
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. We recommend the Pixel and Object Classification workflows in the ilastik software with the Glasbey lookup table applied with Fiji. ilastik is a versatile image analysis tool specifically designed for the classification, segmentation and analysis of biological images based on supervised machine learning algorithms. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
 
-  **Requirement:**
-  * Must be indexed 8-bit or 24-bit RGB images in PNG format.
+**Requirement:**
+
+* Must be indexed 8-bit or 24-bit RGB images in PNG format.
   
   * Must have the same proportions as the images used to generate the atlas maps (not the same proportions as the actual atlas maps as QuickNII alters the proportions slightly). They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
   
   * Quantifier is only able to extract one RGB (Red Green Blue) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI (e.g. the objects in the segmentation here are red, which is RGB colour code: 255,0,0).
   
-+----------+
-| |image7| |
-+----------+ 
-+----------+
-| |image8| |
-+----------+ 
-+----------+
-| |image9| |
-+----------+ 
-+----------+
-| |image10| |
-+----------+ 
-+----------+
-| |image11| |
-+----------+ 
-+----------+
-| |image12| |
-+----------+ 
-+----------+
-| |image13| |
-+----------+ 
-+----------+
-| |image14| |
-+----------+ 
-+----------+
-| |image15| |
-+----------+ 
-+----------+
-| |image16| |
-+----------+ 
 
++----------+
+| |image12||
++----------+
 |
 
  **3. Preparing the atlas maps** 
@@ -226,11 +200,10 @@ drag of markers placed on the image. The adjusted atlas maps may then be exporte
 **B. How to run Quantifier**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+-----------+
-| |image13| |
-+-----------+
++----------+
+| |image13||
++----------+
 
-..
 
 1. Create three new folders: for example, titled “Segmentations”, “Atlas_maps” and “Output”. Transfer the segmentations to the segmentation folder, the atlas maps to the atlas map folder. Leave the output folder empty. 
 2. To begin, click “New”. Enter a name for your project. 
