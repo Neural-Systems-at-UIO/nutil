@@ -51,7 +51,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 
 |
 
-**Operation: TiffCreator**
+**Operation 1: TiffCreator**
 --------------------------
 
 **How to run TiffCreator**
@@ -74,7 +74,7 @@ Nutil includes an inbuilt user manual accessed via the “Help” buttons.
 |
 
 
-**Operation: Transform**
+**Operation 2: Transform**
 ------------------------
 
 **How to run Transform**
@@ -97,7 +97,7 @@ The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transf
 |
 
 
-**Operation: Resize**
+**Operation 3: Resize**
 ----------------------
 
 **How to run Resize**
@@ -117,14 +117,14 @@ The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transf
 
 |
 
-**Operation: Quantifier**
+**Operation 4: Quantifier**
 -------------------------
 
 *Quantifier* is an integral part of the QUINT workflow, and enables the regional quantification of features extracted from histological images based on a reference atlas such as the Allen Mouse Brain Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat. 
 
 Quantifier requires three sets of input: segmentation images, atlas maps, and anchoring information in XML or JSON format. It generates three sets of output: reports with quantifications per atlas region, overlay images with the segmentations superimposed on the atlas maps, and coordinate files for visualising the extracted objects in the 3D brain viewer *Meshview*. As the QUINT workflow is relatively complex, and requires the use of several software packages including ilastik, QuickNII and Nutil Quantifier, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the output files.     
 
-**A. How to prepare the input files**
+**A. Preparing the Quantifier input files**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. File naming requirement**
