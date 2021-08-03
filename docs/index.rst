@@ -19,7 +19,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
  
 
 **PLEASE visit the EBRAINS page for information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information:**
-|
+
 
 **Nutil enables four operations detailed further in this user guide:**
 
@@ -60,6 +60,9 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 **Operation: TiffCreator**
 --------------------------
 
+**How to run TiffCreator**
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 *TiffCreator* converts JPEG, PNG, BMP, GIF and untiled TIFF images to the tiled TIFF format that is compatible with Transform. TiffCreator operates in batch, converting all the images in an input folder and saving them in the specified output folder.  
 
 +----------+
@@ -80,6 +83,9 @@ Nutil includes an inbuilt user manual accessed via the “Help” buttons.
 
 **Operation: Transform**
 ------------------------
+
+**How to run Transform**
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Transform* enables the batch renaming, rotation, resizing and thumbnail compilation of tiled TIFF images (max size: 4 GB).  
  
@@ -102,6 +108,9 @@ The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transf
 
 **Operation: Resize**
 ----------------------
+
+**How to run Resize**
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Resize* enables rapid resizing of PNG, JPEG and untiled TIFF images by application of a resize factor or a fixed pixel width. The output images are in PNG format and are suited for ilastik segmentation.
 
