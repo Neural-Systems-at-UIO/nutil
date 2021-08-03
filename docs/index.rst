@@ -150,7 +150,11 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
  
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. 
 
- **ilastik** We recommend the use of the Pixel and Object Classification workflows in the ilastik software with the Glasbey lookup table applied with Fiji. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
+ **ilastik** 
+ 
+  * We recommend the use of the Pixel and Object Classification workflows in the ilastik software with the Glasbey lookup table applied with Fiji. 
+  * A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. 
+  * ilastik is available to download at: http://ilastik.org/download.html.  
 
 **Requirement:**
 
