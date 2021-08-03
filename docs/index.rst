@@ -91,17 +91,15 @@ Nutil includes an inbuilt user manual accessed via the “Help” buttons.
  
 The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transform or generate images that are bigger than 4 GB.  
 
-+----------+
-| |image3| |
-+----------+
-
-|
 1. Click “New”. Select “Transform”. 
 2. Select the input folder (containing the images to be transformed), output folder and enter the transformation parameters in the Nutil GUI. The GUI includes an inbuilt user manual accessed via the “Help” buttons.  
 3. Once everything is filled in press the “Save as” button. This saves a copy of the transformation parameters in a simple text file in .NUT format. This is for your own records, but may also be reloaded into Nutil via the “load” button. 
 4. Nutil automatically detects the number of core processor available (8 in the example). Choose one less than the total available to ensure adequate processing power (6 or 7 here). 
 5. Press “Start” and wait until the process is complete. 
 
++----------+
+| |image3| |
++----------+
 
 |
 
@@ -114,16 +112,15 @@ The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transf
 
 *Resize* enables rapid resizing of PNG, JPEG and untiled TIFF images by application of a resize factor or a fixed pixel width. The output images are in PNG format and are suited for ilastik segmentation.
 
-+----------+
-| |image6| |
-+----------+
-
-|
 1. To begin, click “New”. Select “Resize”. 
 2. Select the input folder, output folder and resize factor in the Nutil GUI (see the “help” buttons for more information).  
 3. Press “Save as”. This saves a copy of the parameters in a simple text file in .NUT format. This is for your future records but may also be reloaded into Nutil via the “load” button. 
 4. Nutil automatically detects the number of core processor available (8 in the example). Choose one less than the total available to ensure adequate processing power (6 or 7 here) and press “Start”. Wait until the process is complete.  
 5. The PNG files save automatically in the specified output folder.
+
++----------+
+| |image6| |
++----------+
 
 |
 
@@ -134,37 +131,62 @@ The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transf
 
 Quantifier requires three sets of input: segmentation images, atlas maps, and anchoring information in XML or JSON format. It generates three sets of output: reports with quantifications per atlas region, overlay images with the segmentations superimposed on the atlas maps, and coordinate files for visualising the extracted objects in the 3D brain viewer *Meshview*. As the QUINT workflow is relatively complex, and requires the use of several software packages including ilastik, QuickNII and Nutil Quantifier, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the output files.     
 
-
-
 **A. How to prepare the input files**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. File naming requirement**
 
-* The file names of the *segmentation files* and the *brain atlas maps* that correspond to a particular section image must contain the same unique ID.
+* The file names of the *segmentation files* and the *atlas maps* that correspond to a particular section image must contain the same unique ID. These unique IDs must also be present in the XML or JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs.
 
-* These unique IDs must also be present in the XML/JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs. 
+* By default Quantifier supports IDs in the format: _sXXX.., with XXX.. representing the section number. The section number should reflect the serial order and spacing of the sections as this is a requirement for the QuickNII software (e.g. _s002, _s006, _s010 for every 4th section starting with section 2). Example: tg2345_MMSH_s001_segmentation.png. It is fine to include a string of letters and numbers followed by the unique ID. As Quantifier scans and detects the "_s" part of the name, the file name should not contain additional "_s". Example that would not work: tg2345_MMSH_ss_s001.png.
 
-**The sXXX naming convention applies to both QuickNII and Quantifier. We therefore recommend changing the file names as the first step in the QUINT workflow. This can be done with Transform.** 
-
-* Quantifier supports IDs in the format: sXXX.., with XXX.. representing the section number. The section number should reflect the serial order and spacing of the sections (e.g. s002, s006, s010 for every 4th section starting with section 2). The IDs must match those in the XML or JSON file.   
+**As the _sXXX naming convention applies to both QuickNII and Quantifier, we strongly recommend changing the file names as the first step in the QUINT workflow. This can be done with Transform.**
  
-Example: tg2345_MMSH_s001_segmentation.png  (It is fine to include a string of letters and numbers followed by the unique ID).  
- 
-As Quantifier scans and detects the _s part of the name, the file name should not contain additional _s’. Example that would not work: tg2345_MMSH_ss_s001.png 
- 
-*Quantifier also supports user-defined IDs using regular expressions – RegExp. For more information see the “help” button in the Nutil GUI.
+* Quantifier also supports user-defined IDs using regular expressions – RegExp. This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information on this see the “help” button in the Nutil GUI or contact user support.  
 
 |
 
 **2. Preparing the segmentations**
  
-Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. We use the Pixel and Object Classification workflows in the ilastik software (ilastik.org) with the Glasbey lookup table applied with Fiji. ilastik is a versatile image analysis tool specifically designed for the classification, segmentation and analysis of biological images based on supervised machine learning algorithms. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package. See: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
+Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. We recommend the Pixel and Object Classification workflows in the ilastik software with the Glasbey lookup table applied with Fiji. ilastik is a versatile image analysis tool specifically designed for the classification, segmentation and analysis of biological images based on supervised machine learning algorithms. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
 
   **Requirement:**
-  * Must be indexed 8-bit or 24-bit RGB images in PNG format.  
-  * Must have the same proportions as the images used to generate the atlas maps (not the same proportions as the actual atlas maps as QuickNII alters the proportions slightly). They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.  
-  * Quantifier is only able to extract one RGB (Red Green Blue) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI (e.g. the objects in the segmentation here are red, which is RGB colour code: 255,0,0). 
+  * Must be indexed 8-bit or 24-bit RGB images in PNG format.
+  
+  * Must have the same proportions as the images used to generate the atlas maps (not the same proportions as the actual atlas maps as QuickNII alters the proportions slightly). They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
+  
+  * Quantifier is only able to extract one RGB (Red Green Blue) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI (e.g. the objects in the segmentation here are red, which is RGB colour code: 255,0,0).
+  
++----------+
+| |image7| |
++----------+ 
++----------+
+| |image8| |
++----------+ 
++----------+
+| |image9| |
++----------+ 
++----------+
+| |image10| |
++----------+ 
++----------+
+| |image11| |
++----------+ 
++----------+
+| |image12| |
++----------+ 
++----------+
+| |image13| |
++----------+ 
++----------+
+| |image14| |
++----------+ 
++----------+
+| |image15| |
++----------+ 
++----------+
+| |image16| |
++----------+ 
 
 |
 
@@ -192,7 +214,8 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
 * VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration (the 2D-to-3D registration is performed with QuickNII and stored in the JSON file). It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
  
-* Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
+* Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and
+drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
 
 |
 **OBS! Make sure your XML or JSON file has anchoring information for every section image in your dataset.**
