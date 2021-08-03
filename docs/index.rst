@@ -127,7 +127,7 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
 **A. Preparing the Quantifier input files**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- **1. File naming requirement**
+**1. File naming requirement**
 
 * The file names of the *segmentation files* and the *atlas maps* that correspond to a particular section image must contain the same unique ID. These unique IDs must also be present in the XML or JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs.
 
@@ -163,18 +163,14 @@ Any image analysis software may be used to generate the segmentations as long as
 
 **3. Preparing the atlas maps** 
  
-The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with either the QuickNII software that applies linear registration only, or with the VisuAlign software that applies nonlinear refinement to an existing QuickNII anchoring file. The atlas maps are in .FLAT format and cannot be viewed. The image below shows the information contained in the atlas map, but is not the .FLAT file itself.  
- 
-Visit and download here: https://ebrains.eu/service/quicknii-and-visualign 
- 
+The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with either the QuickNII software that applies linear registration only, or with the VisuAlign software that applies nonlinear refinement to an existing QuickNII anchoring file. The atlas maps are in .FLAT format and cannot be directly viewed. The image below shows the information contained in the atlas map, but is not the .FLAT file itself.
+
+
 +----------+
 | |image12||
 +----------+
+
 |
- 
-**4. Preparing the XML or JSON file containing the anchoring information.**
- 
-Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used. They all contain the linear registration information that is needed to generate coordinate output. Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the file. 
 
    **QuickNII**
 
@@ -190,6 +186,11 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
    * Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
 
+  Visit and download QuickNII and VisuAlign here: https://ebrains.eu/service/quicknii-and-visualign 
+
+**4. Preparing the XML or JSON file containing the anchoring information.**
+ 
+Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used. They all contain the linear registration information that is needed to generate coordinate output. Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the file. 
 
 **OBS! Make sure your XML or JSON file has anchoring information for every section image in your dataset.**
 
