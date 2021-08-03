@@ -134,7 +134,7 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
 **A. How to prepare the input files**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**1. File naming requirement**
+ **1. File naming requirement**
 
 * The file names of the *segmentation files* and the *atlas maps* that correspond to a particular section image must contain the same unique ID. These unique IDs must also be present in the XML or JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs.
 
@@ -146,7 +146,7 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
 
 |
 
-**2. Preparing the segmentations**
+ **2. Preparing the segmentations**
  
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. 
 
@@ -170,7 +170,7 @@ We recommend the Pixel and Object Classification workflows in the ilastik softwa
  
 The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with either the *QuickNII* software that applies linear registration only, or with the *VisuAlign* software that applies nonlinear refinement to an existing QuickNII anchoring file. The atlas maps are in .FLAT format. 
  
- Visit and download here: https://ebrains.eu/service/quicknii-and-visualign 
+Visit and download here: https://ebrains.eu/service/quicknii-and-visualign 
  
 +----------+
 | |image12||
