@@ -201,8 +201,6 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 **OBS! Make sure your XML or JSON file has anchoring information for every section image in your dataset.**
 |
 
-|
-
 **B. How to run Quantifier**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -244,6 +242,9 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 |    Unique ID format         |    \_sXXX…                            |
 +-----------------------------+---------------------------------------+
 
++----------+
+| |image13||
++----------+
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image9.png
       :width: 6.30139in
