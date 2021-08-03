@@ -197,16 +197,13 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
  
  * Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
 
-|
+
 **OBS! Make sure your XML or JSON file has anchoring information for every section image in your dataset.**
+
 |
 
 **B. How to run Quantifier**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------+
-| |image13||
-+----------+
 
 
 1. Create three new folders: for example, titled “Segmentations”, “Atlas_maps” and “Output”. Transfer the segmentations to the segmentation folder, the atlas maps to the atlas map folder. Leave the output folder empty. 
@@ -242,11 +239,12 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 |    Unique ID format         |    \_sXXX…                            |
 +-----------------------------+---------------------------------------+
 
+|
 +----------+
 | |image13||
 +----------+
 
-   .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image9.png
+.. image:: cfad7c6d57444e3b93185b655ab922e0/media/image9.png
       :width: 6.30139in
       :height: 3.41511in
 
