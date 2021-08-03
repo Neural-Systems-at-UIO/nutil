@@ -21,8 +21,8 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 **PLEASE visit the EBRAINS page for more information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information.**
 
 
-**Nutil enables four operations detailed further in this user guide:**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Nutil enables four operations:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. *TiffCreator*: convert JPEG, PNG and normal TIFF images to tiled TIFF format.
 
@@ -40,7 +40,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 |
 
 
-**Installation and usage**
+**Installation and Usage**
 --------------------------
 
 *Nutil* is a stand-alone 64-bit Windows application. There are no installation procedures, just extract the folder and double click on "Nutil.cmd". Nutil is an integral part of the QUINT workflow developed by the Nesys laboratory.
@@ -53,10 +53,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 
 **Funding**: This work was supported by the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 720270 (Human Brain Project SGA1) and Specific Grant Agreement No. 785907 (Human Brain Project SGA2). 
  
-
-
 |
-
 
 **Operation: TiffCreator**
 --------------------------
@@ -394,8 +391,8 @@ Nutil is written as a stand-alone windows 64-bit application written in Qt C++, 
 
 The external libraries that are used in Nutil are: 
  
-"*" Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/) 
-"*" LibXLNT for excel file IO (https://github.com/tfussell/xlnt/) 
+* Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/) 
+* LibXLNT for excel file IO (https://github.com/tfussell/xlnt/) 
 
 **TiffCreator**
 
@@ -420,7 +417,7 @@ Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 **Cite**
 Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Postprocessing Toolbox for Histological Rodent Brain Section Images. Front. Neuroinform. 14:37. doi: 10.3389/fninf.2020.00037
 
-Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, HartlageRübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075. 
+**Also described in** Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, HartlageRübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075. 
 
 **Acknowledgements**
 
