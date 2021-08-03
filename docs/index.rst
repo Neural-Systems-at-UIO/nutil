@@ -18,20 +18,19 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
                             
  
 
-**PLEASE visit the EBRAINS page for information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information.**
+**PLEASE visit the EBRAINS page for more information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information.**
 
-|
 
 **Nutil enables four operations detailed further in this user guide:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. TiffCreator: convert JPEG, PNG and normal TIFF images to tiled TIFF format.
+1. *TiffCreator*: convert JPEG, PNG and normal TIFF images to tiled TIFF format.
 
-2. Transform: rename, rotate, resize and compile thumbnails of large tiled TIFF images 
+2. *Transform*: rename, rotate, resize and compile thumbnails of large tiled TIFF images 
 
-3. Quantifier: for the batch extraction, quantification and spatial analysis of labelling segmented from 2D mouse or rat brain section images (for example, immunohistochemical labelling).
+3. *Quantifier*: for the batch extraction, quantification and spatial analysis of labelling segmented from 2D mouse or rat brain section images (for example, immunohistochemical labelling).
 
-4. Resize: for resizing JPEG/PNG images with output in PNG format.
+4. *Resize*: for resizing JPEG/PNG images with output in PNG format.
 
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image1.png
