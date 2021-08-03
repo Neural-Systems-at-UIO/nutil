@@ -2,9 +2,6 @@
 **Nutil: Neuroscience Image Processing and Analysis Utilities**
 ===============================================================
 
-.. toctree::
- :maxdepth: 3
- :numbered:
 |
 **Introduction**
 ----------------
