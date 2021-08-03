@@ -127,15 +127,15 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
 **A. Preparing the Quantifier input files**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  **1. File naming requirement**
+ **1. File naming requirement**
 
-  * The file names of the *segmentation files* and the *atlas maps* that correspond to a particular section image must contain the same unique ID. These unique IDs must also be present in the XML or JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs.
+* The file names of the *segmentation files* and the *atlas maps* that correspond to a particular section image must contain the same unique ID. These unique IDs must also be present in the XML or JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs.
 
-  * By default Quantifier supports IDs in the format: _sXXX.., with XXX.. representing the section number. The section number should reflect the serial order and spacing of the sections as this is a requirement for the QuickNII software (e.g. _s002, _s006, _s010 for every 4th section starting with section 2). Example: tg2345_MMSH_s001_segmentation.png. It is fine to include a string of letters and numbers followed by the unique ID. As Quantifier scans and detects the "_s" part of the name, the file name should not contain additional "_s". Example that would not work: tg2345_MMSH_ss_s001.png.
+* By default Quantifier supports IDs in the format: _sXXX.., with XXX.. representing the section number. The section number should reflect the serial order and spacing of the sections as this is a requirement for the QuickNII software (e.g. _s002, _s006, _s010 for every 4th section starting with section 2). Example: tg2345_MMSH_s001_segmentation.png. It is fine to include a string of letters and numbers followed by the unique ID. As Quantifier scans and detects the "_s" part of the name, the file name should not contain additional "_s". Example that would not work: tg2345_MMSH_ss_s001.png.
 
-  **As the _sXXX naming convention applies to both QuickNII and Quantifier, we strongly recommend changing the file names as the first step in the QUINT workflow. This can be done with Transform.**
+**As the _sXXX naming convention applies to both QuickNII and Quantifier, we strongly recommend changing the file names as the first step in the QUINT workflow. This can be done with Transform.**
 
-  * Quantifier also supports user-defined IDs using regular expressions – RegExp. This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information on this see the “help” button in the Nutil GUI or contact user support.  
+* Quantifier also supports user-defined IDs using regular expressions – RegExp. This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information on this see the “help” button in the Nutil GUI or contact user support.  
 
 |
 
@@ -143,9 +143,9 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
  
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. 
 
- **ilastik** 
- 
- We recommend the use of the Pixel and Object Classification workflows in the ilastik software with the Glasbey lookup table applied with Fiji. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
+   **ilastik** 
+
+   We recommend the use of the Pixel and Object Classification workflows in the ilastik software with the Glasbey lookup table applied with Fiji. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
 
 **Requirement:**
 
@@ -176,19 +176,19 @@ Visit and download here: https://ebrains.eu/service/quicknii-and-visualign
  
 Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used. They all contain the linear registration information that is needed to generate coordinate output. Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the file. 
 
- **QuickNII**
+   **QuickNII**
 
- * QuickNII is a standalone software for affine spatial registration (anchoring) of section images - typically high resolution histological images - to a reference atlas such as the Allen Mouse Brain Atlas or the Waxholm Atlas of the Sprague Dawley Rat. In QuickNII, the reference atlas is transformed to match anatomical landmarks in the experimental images. In this way, the spatial relationship between experimental image and atlas is defined, without introducing transformations in the original experimental images. 
+   * QuickNII is a standalone software for affine spatial registration (anchoring) of section images - typically high resolution histological images - to a reference atlas such as the Allen Mouse Brain Atlas or the Waxholm Atlas of the Sprague Dawley Rat. In QuickNII, the reference atlas is transformed to match anatomical landmarks in the experimental images. In this way, the spatial relationship between experimental image and atlas is defined, without introducing transformations in the original experimental images. 
 
- * Once all the sections are registered, QuickNII may be used to generate atlas maps that match the cutting plane and proportions of the experimental image data. The anchoring information (coordinates) is saved and stored in an XML or JSON file.   
- 
- * The registration is user-guided with some automation. Following anchoring of a limited number of sections containing key landmarks, transformations are propagated across the entire series of images to reduce the manual work required. These propagations must be validated by visual inspection and typically require fine adjustments for most sections. A user manual that describes how to use QuickNII in the context of the QUINT workflow is included as part of the Nutil package. See: QuickNII userguide. 
+   * Once all the sections are registered, QuickNII may be used to generate atlas maps that match the cutting plane and proportions of the experimental image data. The anchoring information (coordinates) is saved and stored in an XML or JSON file.   
 
- **VisuAlign**
+   * The registration is user-guided with some automation. Following anchoring of a limited number of sections containing key landmarks, transformations are propagated across the entire series of images to reduce the manual work required. These propagations must be validated by visual inspection and typically require fine adjustments for most sections. A user manual that describes how to use QuickNII in the context of the QUINT workflow is included as part of the Nutil package. See: QuickNII userguide. 
 
- * VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration (the 2D-to-3D registration is performed with QuickNII and stored in the JSON file). It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
- 
- * Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
+   **VisuAlign**
+
+   * VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration (the 2D-to-3D registration is performed with QuickNII and stored in the JSON file). It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
+
+   * Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may then be exported in .FLAT format and are compatible with Quantifier. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual that describes how to use VisuAlign in the context of the QUINT workflow is included as part of the Nutil package. See: VisuAlign userguide.
 
 
 **OBS! Make sure your XML or JSON file has anchoring information for every section image in your dataset.**
