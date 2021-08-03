@@ -1,3 +1,6 @@
+.. toctree::
+  
+  index
 
 **Nutil: Neuroscience Image Processing and Analysis Utilities**
 ===============================================================
