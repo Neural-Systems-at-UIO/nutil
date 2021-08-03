@@ -6,7 +6,7 @@
 **Introduction**
 ----------------
 
-Nutil simplifies the pre-and-post processing of 2D brain image data from mouse and rat. Nutil is developed as a standalone application and requires no experience to execute. The user specifies the input and output folders and the parameters for the pre-and post-processing operations in the Nutil graphical user interface (GUI).
+*Nutil* simplifies the pre-and-post processing of 2D brain image data from mouse and rat. Nutil is developed as a standalone application and requires no experience to execute. The user specifies the input and output folders and the parameters for the pre-and post-processing operations in the Nutil graphical user interface (GUI).
 
 Pre-processing operations include conversion of images from JPEG, PNG and untiled TIFF to tiled TIFF format (*TiffCreator)*; 2D transformations of large tiled TIFF images (rotation, flipping and scaling) in addition to renaming, copying and downsizing (*Transform*); and resizing of JPEG, PNG and TIFF images with output in PNG format (*Resize*).
 
@@ -15,11 +15,8 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 +----------+                    
 | |image1| |                    
 +----------+                    
-                                
-..                              
-                                
+                            
  
-
 
 **PLEASE visit the EBRAINS page for information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information:**
 |
@@ -34,7 +31,6 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 
 4. Resize: for resizing JPEG/PNG images with output in PNG format.
 
-..
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image1.png
       :width: 2.87083in
@@ -64,7 +60,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 **Operation: TiffCreator**
 --------------------------
 
-TiffCreator converts JPEG, PNG, BMP, GIF and untiled TIFF images to the tiled TIFF format that is compatible with Transform. TiffCreator operates in batch, converting all the images in an input folder and saving them in the specified output folder.  
+*TiffCreator* converts JPEG, PNG, BMP, GIF and untiled TIFF images to the tiled TIFF format that is compatible with Transform. TiffCreator operates in batch, converting all the images in an input folder and saving them in the specified output folder.  
 
 +----------+
 | |image2| |
@@ -125,23 +121,24 @@ The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transf
 **Operation: Quantifier**
 -------------------------
 
-**Quantifier** is an integral part of the QUINT workflow, and enables the regional quantification of features extracted from histological images, based on a reference atlas such as the Allen Mouse Brain Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat.
+*Quantifier* is an integral part of the QUINT workflow, and enables the regional quantification of features extracted from histological images based on a reference atlas such as the Allen Mouse Brain Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat. 
 
-|
-
-**File naming requirements**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-*The file names of the *segmentation files* and the *brain atlas maps* that correspond to a particular section image must contain the same unique ID.
-
-*These unique IDs must also be present in the XML/JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs.
-
-|
-**OBS! The sXXX naming convention applies to both QuickNII and Quantifier. We therefore recommend changing the file names as the first step in the QUINT workflow. This can be done with Transform.** 
-|
+Quantifier requires three sets of input: segmentation images, atlas maps, and anchoring information in XML or JSON format. It generates three sets of output: reports with quantifications per atlas region, overlay images with the segmentations superimposed on the atlas maps, and coordinate files for visualising the extracted objects in the 3D brain viewer *Meshview*. As the QUINT workflow is relatively complex, and requires the use of several software packages including ilastik, QuickNII and Nutil Quantifier, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the output files.     
 
 
-*Quantifier supports IDs in the format: sXXX.., with XXX.. representing the section number. The section number should reflect the serial order and spacing of the sections (e.g. s002, s006, s010 for every 4th section starting with section 2). The IDs must match those in the XML or JSON file.   
+
+**A. How to prepare the input files**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**1. File naming requirement**
+
+* The file names of the *segmentation files* and the *brain atlas maps* that correspond to a particular section image must contain the same unique ID.
+
+* These unique IDs must also be present in the XML/JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs. 
+
+**The sXXX naming convention applies to both QuickNII and Quantifier. We therefore recommend changing the file names as the first step in the QUINT workflow. This can be done with Transform.** 
+
+* Quantifier supports IDs in the format: sXXX.., with XXX.. representing the section number. The section number should reflect the serial order and spacing of the sections (e.g. s002, s006, s010 for every 4th section starting with section 2). The IDs must match those in the XML or JSON file.   
  
 Example: tg2345_MMSH_s001_segmentation.png  (It is fine to include a string of letters and numbers followed by the unique ID).  
  
@@ -149,34 +146,28 @@ As Quantifier scans and detects the _s part of the name, the file name should no
  
 *Quantifier also supports user-defined IDs using regular expressions – RegExp. For more information see the “help” button in the Nutil GUI.
 
+|
+
+**2. Preparing the segmentations**
+ 
+Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. We use the Pixel and Object Classification workflows in the ilastik software (ilastik.org) with the Glasbey lookup table applied with Fiji. ilastik is a versatile image analysis tool specifically designed for the classification, segmentation and analysis of biological images based on supervised machine learning algorithms. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package. See: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html.  
+
+  **Requirement:**
+  * Must be indexed 8-bit or 24-bit RGB images in PNG format.  
+  * Must have the same proportions as the images used to generate the atlas maps (not the same proportions as the actual atlas maps as QuickNII alters the proportions slightly). They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.  
+  * Quantifier is only able to extract one RGB (Red Green Blue) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI (e.g. the objects in the segmentation here are red, which is RGB colour code: 255,0,0). 
 
 |
 
-**Input files**
-~~~~~~~~~~~~~~~
-
-**1. Segmentations**
+ **3. Preparing the atlas maps** 
  
-Any image analysis software may be used to generate the segmentations. We use the Pixel and Object Classification workflows in the ilastik software (ilastik.org) with the Glasbey lookup table applied with Fiji.  
-
-**Requirement:**
-* Must be indexed 8-bit or 24-bit RGB images in PNG format.  
-* Must have the same proportions as the images used to generate the atlas maps (not the same proportions as the actual atlas maps as QuickNII alters the proportions slightly). They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.  
-* Quantifier is only able to extract one RGB (Red Green Blue) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI (e.g. the objects in the segmentation here are red, which is RGB colour code: 255,0,0). 
-
-**ilastik**
-
-* ilastik is a versatile image analysis tool specifically designed for the classification, segmentation and analysis of biological images based on supervised machine learning algorithms. 
-* A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package. See: ilastik userguide. 
-* ilastik is available at: http://ilastik.org/download.html 
- 
- **2. Brain atlas maps** 
- 
-The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with the QuickNII software (linear registration only) or with the VisuAlign software (if nonlinear refinements are required). They are in .FLAT format. 
+The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with either the *QuickNII* software that applies linear registration only, or with the *VisuAlign* software that applies nonlinear refinement to an existing QuickNII anchoring file. The atlas maps are in .FLAT format. 
  
  Visit and download here: https://ebrains.eu/service/quicknii-and-visualign 
  
- **3. XML or JSON file containing the anchoring information.**
+ |
+ 
+ **4. Preparing the XML or JSON file containing the anchoring information.**
  
 Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used. They all contain the linear registration information that is needed to generate coordinate output. Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the file. 
 
@@ -200,8 +191,8 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
 |
 
-**Running Quantifier**
-~~~~~~~~~~~~~~~~~~~~~~
+**B. How to run Quantifier**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +-----------+
 | |image13| |
@@ -248,23 +239,22 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
       :height: 3.41511in
 
 
-
 |
 
-**Quantifier settings explained**
+**C. Quantifier settings explained**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nutil has “help” buttons throughout with information on each parameter.  
 
 Some of the Quantifier settings are described in more detail below:  
 
-**Object splitting**
+**1. Object splitting**
 
 In Quantifier, users must specify whether to turn on or off “object splitting”. Object splitting divides segmented objects that overlap atlas regions, with individual pixels assigned their precise location. This gives accurate load measurements (load is the percentage of the region occupied by objects), but invalidates the object counts.
 
 Recommendation:  Select NO for small objects to get accurate object counts (e.g. cells).  Select YES for large objects that overlap atlas regions (e.g. connectivity data). This gives precise load output. See the help button for more information. 
  
-**Custom masks**
+**2. Custom masks**
 
 The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This is particularly useful for investigating expression differences in the right and left hemisphere, as a mask can be applied to differentiate the two sides.  
 
@@ -278,11 +268,9 @@ The mask feature is optional. It allows the application of masks to define which
 | |image16| |
 +-----------+
 
-
 |
 
-**Customised reports**
-~~~~~~~~~~~~~~~~~~~~~~
+**3. Customised reports: how to define your own regions**
 
 Quantifier generates two or three sets of reports: 
 
@@ -297,9 +285,6 @@ The custom regions are compilations of reference atlas regions. Users have the o
       :height: 0.61941in
       
 |
-
-**How to define your own regions**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. To define your own regions, use the *CustomRegionsTemplate.xlsx* that
 is included in the Nutil package, and populate as described below:
@@ -327,10 +312,10 @@ Use the default .xlsx may be used as a guide for filling out the template.
 
 |
 
-**How to interpret the output**
+**D. How to interpret the output**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Reports (CSV or HTML format) 
+**1. Reports (CSV or HTML format)** 
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
       :width: 5.88611in
