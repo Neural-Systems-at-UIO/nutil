@@ -7,6 +7,8 @@
    
    
 .. toctree::
+   :caption: Operations
+   :numbered:
    :maxdepth: 3
 
    TiffCreator
