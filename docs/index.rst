@@ -1,6 +1,6 @@
 .. toctree::
    :caption: Nutil: Neuroscience Image Processing and Analysis Utilities
-   :maxdepth: 7
+   :maxdepth: 3
 
    introduction
    installation
@@ -8,5 +8,10 @@
    Transform
    Resize
    Quantifier
-   Technical
    
+   
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   Technical
