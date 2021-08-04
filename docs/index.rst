@@ -5,4 +5,8 @@
    introduction
    installation
    TiffCreator
+   Transform
+   Resize
+   Quantifier
+   Technical
    
