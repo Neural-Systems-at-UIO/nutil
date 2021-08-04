@@ -1,4 +1,4 @@
-**Operation 3: Resize**
+**Resize**
 ----------------------
 
 **How to run Resize**
