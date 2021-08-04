@@ -1,11 +1,11 @@
-**Operation 4: Quantifier**
+**Quantifier**
 -------------------------
 
 *Quantifier* is an integral part of the QUINT workflow, and enables the regional quantification of features extracted from histological images based on a reference atlas such as the Allen Mouse Brain Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat. 
 
 Quantifier requires three sets of input: segmentation images, atlas maps, and anchoring information in XML or JSON format. It generates three sets of output: reports with quantifications per atlas region, overlay images with the segmentations superimposed on the atlas maps, and coordinate files for visualising the extracted objects in the 3D brain viewer *Meshview*. As the QUINT workflow is relatively complex, and requires the use of several software packages including ilastik, QuickNII and Nutil Quantifier, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the output files.     
 
-**A. Preparing the Quantifier input files**
+**Preparing the Quantifier input files**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. File naming requirement**
@@ -20,7 +20,7 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
 
 |
 
-**2. Preparing the segmentations**
+**Preparing the segmentations**
  
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. 
 
@@ -44,7 +44,7 @@ Any image analysis software may be used to generate the segmentations as long as
    
 |
 
-**3. Preparing the atlas maps** 
+**Preparing the atlas maps** 
  
 The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with either the QuickNII software that applies linear registration only, or with the VisuAlign software that applies nonlinear refinement to an existing QuickNII anchoring file. The atlas maps are in .FLAT format and cannot be directly viewed. The image below shows the information contained in the atlas map, but is not the .FLAT file itself.
 
@@ -78,7 +78,7 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
 |
 
-**B. How to run Quantifier**
+**How to run Quantifier**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -127,7 +127,7 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
 |
 
-**C. Quantifier settings explained**
+**Quantifier settings explained**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nutil has “help” buttons throughout with information on each parameter.  
@@ -193,7 +193,7 @@ Use the default .xlsx may be used as a guide for filling out the template.
 
 |
 
-**D. How to interpret the output**
+**How to interpret the output**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. Reports (CSV or HTML format)** 
