@@ -1,4 +1,4 @@
-**Operation 2: Transform**
+**Transform**
 ------------------------
 
 **How to run Transform**
