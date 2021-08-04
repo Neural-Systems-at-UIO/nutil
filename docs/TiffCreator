@@ -1,4 +1,4 @@
-**Operation 1: TiffCreator**
+**TiffCreator**
 --------------------------
 
 **How to run TiffCreator**
