@@ -2,7 +2,7 @@
    :caption: Nutil: Neuroscience Image Processing and Analysis Utilities
    :maxdepth: 1
 
-   instroduction
+   introduction
 
 
 **Nutil: Neuroscience Image Processing and Analysis Utilities**
