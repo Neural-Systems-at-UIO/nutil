@@ -9,7 +9,6 @@
 .. toctree::
    :maxdepth: 3
 
-
    TiffCreator
    Transform 
    Resize
