@@ -1,6 +1,7 @@
 .. toctree::
    :caption: Nutil: Neuroscience Image Processing and Analysis Utilities
-   :maxdepth: 2
+   :maxdepth: 3
 
    introduction
    installation
+   everything
