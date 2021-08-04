@@ -4,8 +4,14 @@
 
    introduction
    installation
+   
+   
+.. toctree::
+   :maxdepth: 3
+
+
    TiffCreator
-   Transform
+   Transform 
    Resize
    Quantifier
    
