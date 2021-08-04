@@ -4,4 +4,5 @@
 
    introduction
    installation
-   everything
+   TiffCreator
+   
