@@ -20,7 +20,7 @@ Quantifier requires three sets of input: segmentation images, atlas maps, and an
 
 |
 
-**Preparing the segmentations**
+**2. Preparing the segmentations**
  
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. 
 
@@ -44,7 +44,7 @@ Any image analysis software may be used to generate the segmentations as long as
    
 |
 
-**Preparing the atlas maps** 
+**3. Preparing the atlas maps** 
  
 The atlas maps are customised to match the cutting plane and proportions of the brain sections. They are generated with either the QuickNII software that applies linear registration only, or with the VisuAlign software that applies nonlinear refinement to an existing QuickNII anchoring file. The atlas maps are in .FLAT format and cannot be directly viewed. The image below shows the information contained in the atlas map, but is not the .FLAT file itself.
 
@@ -190,29 +190,28 @@ For rat, see the WHS_rat_atlas_v2.xlsx or WHS_rat_atlas_v3.xlsx file for the ful
  
 Use the default .xlsx may be used as a guide for filling out the template.  
 
-
 |
 
 **How to interpret the output**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**1. Reports (CSV or HTML format)** 
+**1. REPORTS** 
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
       :width: 5.88611in
       :height: 2.86512in
 
-**RefAtlasRegions**
+**RefAtlasRegion report**
    
 Report with output organised based on all the regions in the reference atlas: per section and for the whole series (all sections combined).  
 
 IMPORTANT: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
  
-**CustomRegions**
+**CustomRegion report**
 
 Reports with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx: per section and for the whole series
 
-**Objects**
+**Object report**
 
 List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are then displayed in the image files and in the object reports.  
 
@@ -255,7 +254,7 @@ In each report, interpret the results as follows:
 * JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
 * The viewer is available via the MediaWiki link here: www.nitrc.org/projects/meshview.
 
-**4. NUT file** 
+**4. NUT FILE** 
 
 The NUT file is a text file containing the analysis settings. This can be loaded into Nutil Quantifier with the “load” button. To view, open with Notepad.
 
