@@ -11,7 +11,7 @@ QT += widgets
 QT += core gui
 QT += network
 ARCH = $$QMAKE_HOST.arch
-
+ARCH = arm64
 TEMPLATE      = app
 
 #DEFINES += IS_BETA IGNORE_DOWNLOAD
