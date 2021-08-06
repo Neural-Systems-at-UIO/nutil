@@ -21,3 +21,11 @@
    :maxdepth: 1
 
    Technical
+   
+.. toctree::
+   :caption: Other QUINT software
+   :maxdepth: 3
+
+   Ilastik
+   :maxdepth: 3
+   :hidden:
