@@ -4,17 +4,13 @@
 **Introduction**
 -----------------
 
-* This manual was written by Sharon Yates from the Nesys Laboratory at the University of Oslo to describe the use of *ilastik* for the purposes of the QUINT workflow only.
+* This manual was written by the Nesys group at the University of Oslo with input from the ilastik team to describe the use of *ilastik* for the purposes of the QUINT workflow only.
 
 * *ilastik* is a versatile image analysis tool specifically designed for the batch classification, segmentation and analysis of biological images based on supervised machine learning algorithms.
 
 * *ilastik* has many additional functions and workflows that are not mentioned in this manual. For more information see:
 
-**Yates SC**, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H,
-  Demuth H-U, Hartlage-Rübsamen M, Roßner S, Leergaard T, Kreshuk A,
-  Puchades MA and Bjaalie JG (2019) **QUINT: Workflow for Quantification
-  and Spatial Analysis of Features in Histological Images From Rodent
-  Brain.** Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075.
+
 
 **Installation and Usage**
 --------------------------
@@ -490,7 +486,7 @@ analysis.
 
    **Technical information**
 
-   **Description**
+**Description**
 
    | *ilastik* is a simple, user-friendly tool for interactive image
      classification, segmentation and analysis. It is built as a modular
@@ -503,7 +499,7 @@ analysis.
      subvolumes, followed by complete volume analysis in offline batch
      mode. Using it requires no experience in image processing.
 
-   **Developers**
+**Developers**
 
    *ilastik* is developed by the inat thertby theheir financial support
    does not implysem
@@ -514,21 +510,22 @@ analysis.
    information may be out of date. For the latest updates, see the
    *ilastik* documentation.
 
-   **License**
+**License**
 
    ilastik is distributed under GNU General Public License as published
    by the Free Software Foundation; either version 2 of the License, or
    any later version, with a to allow extensions of ilastik not covered
    under the GNU General ee thefor details.
 
-   **How to cite**
+**How to cite**
 
-   | **ilastik: interactive machine learning for (bio)image analysis**
-   | Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N. Straehle,
-     Bernhard X. Kausler, Carsten Haubold, Martin Schiegg, Janez Ales,
-     Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote
-     Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe,
-     Fred A. Hamprecht & Anna Kreshuk in: Nature Methods, (2019)
+ **ilastik: interactive machine learning for (bio)image analysis**
+ 
+Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N. Straehle, Bernhard X. Kausler, Carsten Haubold, Martin Schiegg, Janez Ales, Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe, Fred A. Hamprecht & Anna Kreshuk in: Nature Methods, (2019)
+     
+ **QUINT workflow**
+     
+Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, Hartlage-Rübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075.
 
    **Contact**
 
