@@ -1,76 +1,51 @@
 **ilastik: Generating segmentations for the QUINT workflow**
+============================================================
 
 **Introduction**
+-----------------
 
-| This manual was written by Sharon Yates from the Nesys Laboratory at
-  the University of Oslo to describe the use of *ilastik* for the
-  purposes of the QUINT workflow only.
-| *ilastik* is a versatile image analysis tool specifically designed for
-  the batch classification, segmentation and analysis of biological
-  images based on supervised machine learning algorithms.
-| *ilastik* has many additional functions and workflows that are not
-  mentioned in this manual. For more information see:
-| **Yates SC**, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H,
+* This manual was written by Sharon Yates from the Nesys Laboratory at the University of Oslo to describe the use of *ilastik* for the purposes of the QUINT workflow only.
+
+* *ilastik* is a versatile image analysis tool specifically designed for the batch classification, segmentation and analysis of biological images based on supervised machine learning algorithms.
+
+* *ilastik* has many additional functions and workflows that are not mentioned in this manual. For more information see:
+
+**Yates SC**, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H,
   Demuth H-U, Hartlage-Rübsamen M, Roßner S, Leergaard T, Kreshuk A,
   Puchades MA and Bjaalie JG (2019) **QUINT: Workflow for Quantification
   and Spatial Analysis of Features in Histological Images From Rodent
   Brain.** Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075.
 
-**Installation and usage**
+**Installation and Usage**
+--------------------------
 
-+-----------------------------------------------------------------+---+
-| The *ilastik* program can be downloaded here:                   |   |
-| See the *ilastik* website for the most up to date information.  |   |
-| For use of ilastik in relation to QUINT:                        |   |
-| https://github.com/Neural-Systems-at-UIO/nutil/issues           |   |
-| Other ilastik issues may be reported here and will be directed  |   |
-| to the ilastik team: https://github.com/ilastik/ilastik/issues  |   |
-+=================================================================+===+
-|                                                                 |   |
-+-----------------------------------------------------------------+---+
+* The ilastik program can be downloaded here: http://ilastik.org/download.html
 
-**Analysis approach for series of section images from rodent brain**
+* See the ilastik website for the most up to date information.
 
-There are two main approaches for the analysis of rodent brain section
-images.
+* For use of ilastik in relation to QUINT: https://github.com/Neural-Systems-at-UIO/nutil/issues  
 
-| 1. Pixel classification only (with two or more classes)
-| 2. Pixel classification with two classes (*immunoreactivity* and
-  *background*), followed by
+* Other ilastik issues may be reported here and will be directed to the ilastik team: https://github.com/ilastik/ilastik/issues 
 
-   object classification with two classes (*objects* *e.g. cells* and
+
+**Segmentation with ilastik**
+------------------------------
+
+There are two main approaches for the segmentation of rodent brain section images with ilastik.
+
+1. Pixel classification only (with two or more classes)
+2. Pixel classification with two classes (*immunoreactivity* and
+  *background*), followed by object classification with two classes (*objects* *e.g. cells* and
    *artefact*).
 
 **Which approach is best for my dataset?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+---+-----------------------------------------------------+----------+
-| - |    The best approach is determined by trial and     |          |
-|   |    error.                                           |          |
-| - |                                                     |          |
-+===+=====================================================+==========+
-|   |    The first approach is quick and easy, and is the | |image5| |
-|   |    method of choice as long as it produces          |          |
-|   |    satisfactory output. It is suited for images in  |          |
-|   |    which there are clear differences in the colour, |          |
-|   |    intensity and / or texture of the features of    |          |
-|   |    interest (e.g. cells) versus the background and  |          |
-|   |    other structures. For example:                   |          |
-+---+-----------------------------------------------------+----------+
-|   |    The second approach is more time consuming, but  | |image6| |
-|   |    may give a better result if there is             |          |
-|   |    non-specific labelling in the image that is      |          |
-|   |    similar in appearance to the labelling of        |          |
-|   |    interest. This is because the object             |          |
-|   |    classification workflow can filter out           |          |
-|   |    non-specific labelling based on object level     |          |
-|   |    features such as size and shape.                 |          |
-+---+-----------------------------------------------------+----------+
-|   |    The classical example is *cells* and *edge       |          |
-|   |    staining*, which are both extracted by pixel     |          |
-|   |    classification, but have different object shapes |          |
-|   |    and so are easy to differentiate with object     |          |
-|   |    classification (round versus long and thin).     |          |
-+---+-----------------------------------------------------+----------+
+|image5|
+
+|image6|
+
+
 
 **Image pre-processing**
 
