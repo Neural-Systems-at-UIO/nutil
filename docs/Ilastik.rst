@@ -184,186 +184,74 @@ customized LUT as a .LUT file. Apply to a whole folder of images with the Batch 
 **Which pixel classification features should I select?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-| The features and scales to select are those that distinguish the
-  different classes in the image. As it is not always obvious which
-  features and scales distinguish the classes, it is best to select all
-  the features and scales for the pixel classification in the first
-  instance. Selecting fewer features and scales may speed up the
-  analysis, so refining the selection may be helpful at a later stage.
-| Note that the scale corresponds to the pixel diameter of the feature.
-  For example, if a textural pattern has a pixel size of 4, the scale of
-  the texture has a sigma of 4. As the maximum scale of the features
-  available in *ilastik* is 10, *ilastik* is not capable of recognising
-  objects based on edge if the objects are larger than approximately 60
-  pixels (the whole object should be visible in 10 x 10 pixel window).
+The features and scales to select are those that distinguish the different classes in the image.  As it is not always obvious which features and scales distinguish the classes, it is best to select all the features and scales for the pixel classification in the first instance. Selecting fewer features and scales may speed up the analysis, so refining the selection may be helpful at a later stage.
+
+Note that the scale corresponds to the pixel diameter of the feature. For example, if a textural pattern has a pixel size of 4, the scale of the texture has a sigma of 4.  As the maximum scale of the features available in ilastik is 10, ilastik is not capable of recognising objects based on edge if the objects are larger than approximately 60 pixels (the whole object should be visible in 10 x 10 pixel window).  
+
 
 **Which images should I upload in the Input Data applet?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Only training images should be uploaded in the **Input Data** applet
-(~10 is good).
+Only training images should be uploaded in the **Input Data** applet (~10 is good).
 
 **What are training images?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Training images are a subset of the whole image series that you annotate
-in the training phase. Choose images that contain labelling that is
-representative of the labelling in the whole series. It is good to
-select images that span the full volume, as labelling often varies in
-different anatomical regions (for example, every 4th section). The same
-subset can be used for the pixel and object classification workflows.
+Training images are a subset of the whole image series that you annotate in the training phase. Choose images that contain labelling that is representative of the labelling in the whole series. It is good to select images that span the full volume, as labelling often varies in different anatomical regions (for example, every 4th section). The same subset can be used for the pixel and object classification workflows. 
 
 **How many classes should I use?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The number of classes to annotate will depend on the classification
-approach.
+The number of classes to annotate will depend on the classification approach. 
+-	For Pixel Classification only, create 2 or more classes, depending on the number of visually distinct classes. For example: labelling, non-specific labelling, artefact (e.g. marks on the coverslip, etc) and background. 
+-	For Pixel Classification with Object Classification, annotate two classes in each classification step (see section 3).  
 
-+---+-------------------------------------------------------------------------+
-| - | +---+-----------------------------------------------------------------+ |
-|   | |   |    For Pixel Classification only, create 2 or more classes,     | |
-| - | |   |    depending on the number of visually distinct classes. For    | |
-|   | |   |    example: labelling, non-specific labelling, artefact (e.g.   | |
-|   | |   |    marks on the coverslip, etc) and background.                 | |
-|   | |   |                                                                 | |
-|   | |   |    For Pixel Classification with Object Classification,         | |
-|   | |   |    annotate two classes in each classification step (see        | |
-|   | |   |    section 3).                                                  | |
-|   | +---+-----------------------------------------------------------------+ |
-|   |                                                                         |
-|   | -                                                                       |
-|   |                                                                         |
-|   | -                                                                       |
-+---+-------------------------------------------------------------------------+
 
 **Which part of the image, and how much, should I label?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Start by zooming-in and annotating a few pixels of each class that
-clearly belong to their respective class. Turn the ‘live update’ on to
-visualize the predictions. The ‘uncertainty’ overlay can be switched on
-to identify pixels with uncertain class prediction (it identifies these
-pixels in bright blue). By specifically annotating these pixels, the
-prediction quickly improves.
+Start by zooming-in and annotating a few pixels of each class that clearly belong to their respective class.  Turn the ‘live update’ on to visualize the predictions. The ‘uncertainty’ overlay can be switched on to identify pixels with uncertain class prediction (it identifies these pixels in bright blue).  By specifically annotating these pixels, the prediction quickly improves.  
+Note that even just a few pixels annotated incorrectly can disrupt the prediction.  If in doubt, it is better to delete annotations and start again, rather than continuing with the annotation.  By ticking the ‘segmentation’ box you can visualize the final segmentation based on the classifier.  When you are happy with this, stop annotating and test the applicability of the trained classifier on the next training image.
 
-| Note that even just a few pixels annotated incorrectly can disrupt the
-  prediction. If in doubt, it is better to delete annotations and start
-  again, rather than continuing with the annotation. By ticking the
-  ‘segmentation’ box you can visualize the final segmentation based on
-  the
-| classifier. When you are happy with this, stop annotating and test the
-  applicability of the trained classifier on the next training image
-  (see the next FAQ).
 
-**How do I test the applicability of the trained classifier to the whole
-series?**
+**How do I test the applicability of the trained classifier to the whole series?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To test the ability of the trained classifier to segment a new image,
-select ‘current view’ in the Training applet and choose a new training
-image from the drop-down menu. Press ‘live update’ and view the
-‘segmentation’ overlay. If you are not happy with the classification you
-can annotate pixels on the new image to improve the prediction. When
-happy with the result, the trained classifier can be tested on a third
-image. Continue this processes until you are satisfied that the
-classifier is optimally trained for the image series. You are now ready
-for batch processing.
+To test the ability of the trained classifier to segment a new image, select ‘current view’ in the Training applet and choose a new training image from the drop-down menu.  Press ‘live update’ and view the ‘segmentation’ overlay.  If you are not happy with the classification you can annotate pixels on the new image to improve the prediction.  When happy with the result, the trained classifier can be tested on a third image.  Continue this processes until you are satisfied that the classifier is optimally trained for the image series.  You are now ready for batch processing.
 
 **Which export settings should I select?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The file type to export will depend on the plan for the next step of
-analysis.
+The file type to export will depend on the plan for the next step of analysis. 
 
-+---+-----------------------------------------------------------------+
-| - |    In the Pixel Classification workflow, export                 |
-|   |    Simple_Segmentation.PNG to visualize the segmentation, or    |
-| - |    Prediction_maps.H5 to continue with Object Classification.   |
-|   |                                                                 |
-| - |    In the Object Classification workflow, export                |
-|   |    Object_Predictions.PNG.                                      |
-| - |                                                                 |
-|   |    The **PNG images** should be export as **unsigned 8-bit      |
-|   |    images**.                                                    |
-|   |                                                                 |
-|   |    Do not alter the output location. The default export         |
-|   |    location is the folder in which the *ilastik* file is        |
-|   |    located. If the output location is altered, the file will    |
-|   |    fail to export. This is a bug in the system!                 |
-+---+-----------------------------------------------------------------+
+* In the Pixel Classification workflow, export Simple_Segmentation.PNG to visualize the segmentation, or Prediction_maps.H5 to continue with Object Classification.
+* In the Object Classification workflow, export Object_Predictions.PNG.
+* The PNG images should be export as unsigned 8-bit images. 
+* Do not alter the output location. The default export location is the folder in which the ilastik file is located.  If the output location is altered, the file will fail to export.  This is a bug in the system!  
 
-**Help!ilastik keeps crashing. I have very large images. What do I do?**
 
-+---+-----------------------------------------------------------------+
-| - |    Whilst *ilastik* has the computational power to process very |
-|   |    large images, the viewer in the *ilastik* user interface is  |
-|   |    not able to process whole images that are very large in the  |
-|   |    “live” mode. For large images in the training phase, it is   |
-|   |    therefore important to remain zoomed-                        |
-+---+-----------------------------------------------------------------+
+**Help! ilastik keeps crashing. I have very large images. What do I do?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+---+-------------------------------------------------------------------------+
-| - | +---+-----------------------------------------------------------------+ |
-|   | |   |    in in the viewer when the live update is switched on. This   | |
-| - | |   |    is especially true if many classes are labelled and many     | |
-|   | |   |    features selected. As a general rule of thumb, keep the      | |
-| - | |   |    portion of the image that is visible in the viewer to below  | |
-|   | |   |    3000 x 3000 pixels. The absolute value will depend on the    | |
-|   | |   |    number of classes and features selected.                     | |
-|   | |   |                                                                 | |
-|   | |   |    For very large images, be more selective with the features   | |
-|   | |   |    for classification, and label as few classes as possible.    | |
-|   | |   |                                                                 | |
-|   | |   |    If all else fails, it is possible to split large images into | |
-|   | |   |    tiles and process tiles individually.                        | |
-|   | |   |                                                                 | |
-|   | |   |    Note that exportation of the segmented images will take      | |
-|   | |   |    time. One large image (e.g. 30,000 x 30,000 pixels) may take | |
-|   | |   |    2 hours to export. Image analysis can be run overnight in    | |
-|   | |   |    the batch mode.                                              | |
-|   | +---+-----------------------------------------------------------------+ |
-|   |                                                                         |
-|   | -                                                                       |
-|   |                                                                         |
-|   | -                                                                       |
-|   |                                                                         |
-|   | -                                                                       |
-+---+-------------------------------------------------------------------------+
+* While ilastik has the computational power to process very large images, the viewer in the ilastik user interface is not able to process whole images that are very large in the “live” mode. For large images in the training phase, it is therefore important to remain zoomed-in in the viewer when the live update is switched on. This is especially true if many classes are labelled and many features selected.  As a general rule of thumb, keep the portion of the image that is visible in the viewer to below 3000 x 3000 pixels.  The absolute value will depend on the number of classes and features selected.
+* For very large images, be more selective with the features for classification, and label as few classes as possible.  
+* If all else fails, it is possible to split large images into tiles and process tiles individually.   
+* Note that exportation of the segmented images will take time.  One large image (e.g. 30,000 x 30,000 pixels) may take 2 hours to export.  Image analysis can be run overnight in the batch mode.            
 
-..
 
 **Technical information**
 --------------------------
 
-**Description**
-
-   | *ilastik* is a simple, user-friendly tool for interactive image
-     classification, segmentation and analysis. It is built as a modular
-     software framework, which currently has
-   | for automated (supervised) pixel- and object-level classification,
-     automated utomated object tracking, semi-automated segmentation and
-     object
-   | counting without detection. Most analysis operations are performed
-     lazily, which enables targeted interactive processing of data
-     subvolumes, followed by complete volume analysis in offline batch
-     mode. Using it requires no experience in image processing.
-
 **Developers**
 
-   *ilastik* is developed by the inat thertby theheir financial support
-   does not implysem
+ilastik is developed by the ilastik team in Anna Kreshuk's lab at the European Molecular Biology Laboratory, with partial financial support from the DFG, the Human Brain Project and SFB 1129. Their financial support does not imply endorsement of the software. 
 
-   This manual was written by the Nesys Group at the University of Oslo
-   for the use of the *ilastik* software as part of the QUINT workflow,
-   and includes tips and tricks from the *ilastik* team. Some of this
-   information may be out of date. For the latest updates, see the
-   *ilastik* documentation.
+This manual was written by the Nesys Group at the University of Oslo for the use of ilastik as part of the QUINT workflow, and includes tips and tricks from the ilastik team. Some of this information may be out of date. For the latest updates, see the official ilastik documentation.  
+
 
 **License**
 
-   ilastik is distributed under GNU General Public License as published
-   by the Free Software Foundation; either version 2 of the License, or
-   any later version, with a to allow extensions of ilastik not covered
-   under the GNU General ee thefor details.
+ilastik is distributed under GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or any later version, with a special exception to allow extensions of ilastik not covered under the GNU General Public License. See the license page for details. 
 
 **How to cite**
 
@@ -377,7 +265,7 @@ Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, Hartl
 
    **Contact**
 
-   Report bugs here:
+Report bugs here: https://github.com/ilastik/ilastik/issues
 
 .. |image1| image:: 2e9537b09637491fa83410e3e364d5c5/media/image1.png
    :width: 1.36389in
