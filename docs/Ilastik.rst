@@ -255,17 +255,14 @@ ilastik is distributed under GNU General Public License as published by the Free
 
 **How to cite**
 
- **ilastik: interactive machine learning for (bio)image analysis**
+**ilastik: interactive machine learning for (bio)image analysis**
  
 Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N. Straehle, Bernhard X. Kausler, Carsten Haubold, Martin Schiegg, Janez Ales, Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe, Fred A. Hamprecht & Anna Kreshuk in: Nature Methods, (2019)
      
- **QUINT workflow**
+**QUINT workflow**
      
 Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, Hartlage-Rübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075.
 
-   **Contact**
-
-Report bugs here: https://github.com/ilastik/ilastik/issues
 
 .. |image1| image:: 2e9537b09637491fa83410e3e364d5c5/media/image1.png
    :width: 1.36389in
