@@ -43,59 +43,31 @@ The best approach is determined by trial and error.
 
 |image5|
 
-2. -	The second approach is more time consuming, but may give a better result if there is non-specific labelling in the image that is similar in appearance to the labelling. This is because the object classification workflow can filter out non-specific labelling based on object level features such as size and shape. A classical example is cells and edge staining, which are both extracted by pixel classification, but have different object shapes and so are easy to differentiate with object classification (round cells versus long and thin edge staining). For example: 
+2. The second approach is more time consuming, but may give a better result if there is non-specific labelling in the image that is similar in appearance to the labelling. This is because the object classification workflow can filter out non-specific labelling based on object level features such as size and shape. A classical example is cells and edge staining, which are both extracted by pixel classification, but have different object shapes and so are easy to differentiate with object classification (round cells versus long and thin edge staining). For example: 
 
 |image6|
 
 
-
 **Image pre-processing**
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. The Pixel Classification algorithm extracts image pixels based on
-their colour, intensity
+1.	The Pixel Classification algorithm extracts image pixels based on their colour, intensity and / or texture on a scale up to 10 sigma. This means that the algorithm recognises edges or objects that fall within a 10 x 10 pixel window. For the best result, resize the images so that the objects (e.g. cells) fall well within this window, but without loss of important information (e.g. small cells). 
 
-   and / or texture on a scale up to 10 sigma. This means that the
-   algorithm recognises edges
+The optimal resize factor will depend on the original size of the images and the size of the features to extract, and is determined by trial and error. A resize factor of 0.2 or 0.1 may be a good starting point. 
 
-   | or objects that fall within a 10 x 10 pixel window. For the best
-     result, resize the images so that the objects (e.g. cells) fall
-     well within this window, but without loss of important information
-     (e.g. small cells).
-   | The optimal resize factor will depend on the original size of the
-     images, and the size of the features that you wish to extract, and
-     is determined by trial and error. A resize factor of 0.2 or 0.1 may
-     be a good starting point.
+2.	ilastik supports many file formats. PNG works well. It does not support tiled TIFFs. https://www.ilastik.org/documentation/basics/dataselection
 
-2. *ilastik* supports many file formats. PNG works well. It does not
-support tiled TIFFs.
+3.	To resize the images, use Nutil, Fiji or another image analysis software. In Nutil: 
+ * the Resize feature enables conversion of PNG or JPEG images to PNG format. 
+ * the Transform feature is designed to transform tiled TIFF images with output in tiled TIFF format, but also has the option to generate thumbnails in PNG format. To generate images for ilastik only, switch on the “only create thumbnails” feature under the advanced settings and enter the desired resize factor. 
 
-3. To resize the images, use Fiji, Adobe Photoshop or another image
-analysis software.
-
-   Alternatively, use the *Resize* or *Transform* feature in the *Nutil*
-   software.
-
-+---+-----------------------------------------------------------------+
-| - |    The *Resize* feature enables conversion of PNG or JPEG       |
-|   |    images to PNG format.                                        |
-| - |                                                                 |
-|   |    The *Transform* feature is designed to transform tiled TIFF  |
-|   |    images with output in tiled TIFF format, but also has the    |
-|   |    option to generate thumbnails in PNG format. To generate     |
-|   |    images for ilastik only, switch on the “only create          |
-|   |    thumbnails” feature under the advanced settings and enter    |
-|   |    the desired resize factor.                                   |
-+---+-----------------------------------------------------------------+
 
 **Pixel Classification Workflow**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   For a quick introduction, watch:
+   For a quick introduction, watch: https://www.youtube.com/watch?v=5N0XYW9gRZY&feature=youtu.be
 
-1. Open the *ilastik* programme.
-
-   Under ‘Create New Project’ select ‘Pixel Classification’. Save the
-   project under a new file name in the same location as the images for
-   analysis (create a new folder).
+1. Open the *ilastik* programme. Under ‘Create New Project’ select ‘Pixel Classification’. Save the project under a new file name in the same location as the images for analysis (create a new folder). 
 
    .. image:: 2e9537b09637491fa83410e3e364d5c5/media/image3.png
       :width: 3.34444in
@@ -107,12 +79,7 @@ analysis software.
       :width: 2.76667in
       :height: 1.59511in
 
-   In the **Input data** applet, select ‘Add New’. Add one or more
-   images for the purpose of training the classifier (*training
-   images*). Convert the format of the images to HDF5 to increase the
-   processing speed. To do this, highlight the uploaded images, select
-   ‘storage’ and change from ‘relative link’ to ‘copied to project
-   file’. Save the project.
+In the **Input data** applet, select ‘Add New’.  Add one or more images for the purpose of training the classifier (training images). Convert the format of the images to HDF5 to increase the processing speed.  To do this, highlight the uploaded images, select ‘storage’ and change from ‘relative link’ to ‘copied to project file’.  Save the project.
 
    .. image:: 2e9537b09637491fa83410e3e364d5c5/media/image5.png
       :width: 4.07083in
@@ -124,192 +91,73 @@ analysis software.
       :width: 6.16667in
       :height: 1.23194in
 
-   Select the features and scales that can be used to discern the
-   objects or classes-of-interest: for most datasets, all the features
-   should be selected. *See FAQ for advice on selecting* *good
-   features.*
+Select the features and scales that can be used to discern the objects or classes of interest:  for most datasets, all the features should be selected. See FAQ for advice on selecting good features.
 
-4. Select the **Training** applet. To scroll around the image, press
-**shift** and use the mouse
+4. Select the **Training** applet. To scroll around the image, press **shift** and use the mouse wheel to navigate. To zoom, press **ctrl** and use the mouse wheel to zoom in and out. Click ‘add label’ to create two or more classes. See FAQ for advice on the number of classes to use.
 
-   wheel to navigate. To zoom, press **ctrl** and use the mouse wheel to
-   zoom in and out. Click ‘add label’ to create two or more classes.
-   *See FAQ for advice on the number of* *classes to use*.
+5. Label some example pixels of each class with the paintbrush, and remove labels with the eraser. Select ‘live update’ to begin the machine learning and prediction process.  Turning on the uncertainty overlay, by clicking on the uncertainty eye, will help in the labelling process as it identifies pixels of which ilastik is unsure of the class.  By correctly labelling these pixels, the prediction rapidly improves. See FAQ for advice on placing labels.   
 
-5. Label some example pixels of each class with the paintbrush, and
-remove labels with the
+6.	The ‘probability’ and ‘segmentation’ overlays should be turned on to inspect the final result. 
 
-   eraser. Select ‘live update’ to begin the machine learning and
-   prediction process. Turning on the *uncertainty* overlay, by clicking
-   on the uncertainty eye, will help in the labelling process as it
-   identifies pixels of which ilastik is unsure of the class. By
-   correctly labelling these pixels, the prediction rapidly improves.
-   *See FAQ for advice on placing labels.*
+7.	On completion of training, select the Prediction Export applet.  Export “probability maps” in HDF5 format, and “simple_segmentation” images in 8-bit PNG format in turn, with the default settings. Do not alter the export location. The files will automatically save in the same location as the input files. 
 
-6. The ‘probability’ and ‘segmentation’ overlays should be turned on to
-inspect the final
+8.	The files can either be exported individually by clicking the export button in the Prediction Export applet, or in batch (see step 9). 
 
-   result.
+9.	For batch processing of images with the trained classifier, select the Batch Processing applet.  Upload the images to be analysed, and select ‘process all files’.  The time taken to process the files will depend on the size and number of files selected.  
 
-7. On completion of training, select the **Prediction Export** applet.
-Export “probability
+10.	 Save the ilastik file before closing. 
 
-   maps” in HDF5 format, and “simple_segmentation” images in 8-bit PNG
-   format in turn, with the default settings. Do not alter the export
-   location. The files will automatically save in the same location as
-   the input files.
-
-8. The files can either be exported individually by clicking the export
-button in the
-
-   Prediction Export applet, or in batch (see step 9).
-
-9. For batch processing of images with the trained classifier, select
-the **Batch Processing**
-
-   applet. Upload the images to be analysed, and select ‘process all
-   files’. The time taken to process the files will depend on the size
-   and number of files selected.
-
-10. Save the *ilastik* file before closing.
-
-NOTE: Save the ilastik file frequently during the annotation process.
+**NOTE: Save the ilastik file frequently during the annotation process**.
 
 **Object Classification Workflow**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. There are three options on the *ilastik* start up page for running
-Object Classification.
+1.	There are three options on the ilastik start up page for running Object Classification.  Choose the Object Classification with Raw Data and Pixel Prediction Maps as input.  It is not advisable to use Pixel Classification + Object Classification. This file type is easily corrupted.
 
-   Choose the *Object Classification with Raw Data and Pixel Prediction
-   Maps as input*\ **.** It is not advisable to use Pixel Classification
-   + Object Classification. This file type is easily corrupted.
+2.	Save the object classification file in the same folder as the raw images for analysis.  If the images are moved after the ilastik file is created, the link between the ilastik file and the images may be lost, resulting in a corrupted file.
 
-2. Save the object classification file in the same folder as the raw
-images for analysis. If the
+3.	In the Input Data applet, upload the original images and their respective probability maps in HDF5 format (output from the pixel classification).    
 
-   images are moved after the *ilastik* file is created, the link
-   between the *ilastik* file and the images may be lost, resulting in a
-   corrupted file.
+4.	In the Threshold and Size Filter applet, select:
+* The simple method.
+* The input channel that corresponds to the label of interest. 
+* Smoothing factor for the x and y axis. In general, the same value should be selected for each. Determine the most appropriate factor by trial and error: the goal is to achieve object shapes that are most representative of the real data. Zero is often advisable – in which case no smoothing filter is applied.
+* Threshold. The probability threshold can range from 0 to 1: with zero representing no exclusion of pixels; and 1 representing exclusion of all pixels except those with 100% probability of belonging to the class-of-interest. In reality only the pixels that were manually annotated in the Pixel Classification workflow have a 100% probability of belonging to the class-of-interest. A good compromise is 0.4.
 
-+----------------------------------+----------------------------------+
-| 3. In the **Input Data** applet, |                                  |
-| upload the original images and   |                                  |
-| their respective probability     |                                  |
-| maps                             |                                  |
-|                                  |                                  |
-|    in HDF5 format (output from   |                                  |
-|    the pixel classification).    |                                  |
-|                                  |                                  |
-| 4. In the **Threshold and Size   |                                  |
-| Filter** applet, select:         |                                  |
-+==================================+==================================+
-|    -                             |    The *simple* method.          |
-+----------------------------------+----------------------------------+
-|    -                             |    The input channel that        |
-|                                  |    corresponds to the label of   |
-|                                  |    interest.                     |
-+----------------------------------+----------------------------------+
-|    -                             |    Smoothing factor for the x    |
-|                                  |    and y axis. In general, the   |
-|                                  |    same value should be          |
-+----------------------------------+----------------------------------+
-|    selected for each. Determine  |                                  |
-|    the most appropriate factor   |                                  |
-|    by trial and error: the goal  |                                  |
-|    often advisable – in which    |                                  |
-|    case no smoothing filter is   |                                  |
-|    applied.                      |                                  |
-|                                  |                                  |
-|    is to achieve object shapes   |                                  |
-|    that are most representative  |                                  |
-|    of the real data. Zero is     |                                  |
-+----------------------------------+----------------------------------+
-|    -                             | Threshold. The probability       |
-|                                  | threshold can range from 0 to 1: |
-|                                  | with zero representing           |
-+----------------------------------+----------------------------------+
-|    no exclusion of pixels; and 1 |                                  |
-|    representing exclusion of all |                                  |
-|    pixels except those with      |                                  |
-|                                  |                                  |
-|    100% probability of belonging |                                  |
-|    to the class-of-interest. In  |                                  |
-|    reality only the pixels that  |                                  |
-|    were manually annotated in    |                                  |
-|    the Pixel Classification      |                                  |
-|    workflow have a 100%          |                                  |
-|    probability of belonging to   |                                  |
-|    the class-of-interest. A good |                                  |
-|    compromise is 0.4.            |                                  |
-|                                  |                                  |
-| 5. In the **Object Feature       |                                  |
-| Selection** applet, select all   |                                  |
-| the features (except those       |                                  |
-| relating to                      |                                  |
-|                                  |                                  |
-|    location within the image).   |                                  |
-|                                  |                                  |
-| 6. In the **Object               |                                  |
-| Classification** applet, create  |                                  |
-| two classes (label and artefact) |                                  |
-| and label some                   |                                  |
-|                                  |                                  |
-|    example objects of each       |                                  |
-|    class. Tick the live update   |                                  |
-|    box. Continue annotating      |                                  |
-|    until you are happy with the  |                                  |
-|    predictions.                  |                                  |
-+----------------------------------+----------------------------------+
+5.	In the Object Feature Selection applet, select all the features (except those relating to location within the image).
 
-7. In the **Object Information Export** applet, export “Object
-Predictions” in 8-bit PNG
+6.	In the Object Classification applet, create two classes (label and artefact) and label some example objects of each class. Tick the live update box.  Continue annotating until you are happy with the predictions. 
 
-   format. Do not change the default export location.
+7.	In the Object Information Export applet, export “Object Predictions” in 8-bit PNG format.  Do not change the default export location.
 
-8. For batch processing, use the Batch Processing applet. Upload the raw
-images and
+8.	For batch processing, use the Batch Processing applet. Upload the raw images and corresponding prediction maps and “process all files”.
 
-   corresponding prediction maps and “process all files”.
 
 **Applying the Glasbey Lookup table**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The 8-bit PNG output of ilastik (Simple_Segmentations and
-Object_Predictions) are always black or white in appearance. To
-visualise the results, and make them compatible with Nutil Quantifier,
-apply the Glasbey lookup table (LUT) to the images with NIH ImageJ/Fiji.
+The 8-bit PNG output of ilastik (Simple_Segmentations and Object_Predictions) are always black or white in appearance. To visualise the results, and make them compatible with Nutil Quantifier, apply the Glasbey lookup table (LUT) to the images with NIH ImageJ/Fiji.  
 
-|image7|\ |image8|
+|image8|
 
-+---+
-|   |
-+---+
+1.	Download the NIH ImageJ tool.
+2.	Open the image inImageJ. The image appears black (or white). 
+3.	Apply the Glasbey lookup table by selecting Image > Lookup Tables > Glasbey.  This assigns a different colour to each label. Save the image in PNG format. They are now compatible with Nutil Quantifier. 
 
-| **Figure showing ilastik output with (right) and without (left)
-  Glasbey LUT applied**.
-| 1. Download the NIH ImageJ tool.
-| 2. **Open** the image inImageJ. The image appears black (or white).
-| 3. Apply the Glasbey lookup table by selecting **Image** > **Lookup
-  Tables > Glasbey**. This
 
-   assigns a different colour to each label. **Save** the image in PNG
-   format. They are now compatible with Nutil Quantifier.
+**Customise the LUT**
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Customise the colours**
-
-In some cases you may wish to alter the applied colours. To do this,
-select **Image** > **Color** > **Edit LUT**. The LUT applies colours
-from the top left hand corner (first colour is ignored). Click on each
-colour to alter it. Then **Save** the customised LUT and **save** the
-image in PNG format.
+In some cases you may wish to alter the applied colours. To do this, select Image > Color > Edit LUT. The LUT applies colours from the top left hand corner (first colour is ignored). Click on each colour to alter it. Then Save the customised LUT and save the image in PNG format. 
 
 .. image:: 2e9537b09637491fa83410e3e364d5c5/media/image9.png
    :width: 2.25in
    :height: 2.43956in
 
-**Batch processing: Apply the Glasbey to a folder of images**
+**Batch processing: Apply the Glasbey LUT to a folder of images**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. To apply the Glasbey lookup table to a whole folder of segmented
-images, select
+1. To apply the Glasbey lookup table to a whole folder of segmented images, select:
 
    **Process >Batch> Macro**; select the input and output folders,
    required file type, and type the following code in the macro box:
@@ -320,27 +168,21 @@ images, select
 +----------+
 
 2. To apply the customized LUT to a folder of images, first save the
-customized LUT as
-
-   a .LUT file. Apply to a whole folder of images with the Batch
-   Processing feature. Select: **Process** > **Batch** > **Macro**.
-   Select the input and output directories and output format PNG, and
-   type the following macro:
+customized LUT as a .LUT file. Apply to a whole folder of images with the Batch Processing feature. Select: **Process** > **Batch** > **Macro**. Select the input and output directories and output format PNG, and type the following macro:
 
    open(“C:\\......\\....\\....\\filename.lut”);
 
-   *Note: Make sure to update the directory so it locates the
-   customized.lut file and ensure the macro*
-
-   *is written with double back slashes.*
+   **Note: Make sure to update the directory so it locates the customized.lut file and ensure the macro is written with double back slashes.**
 
    .. image:: 2e9537b09637491fa83410e3e364d5c5/media/image11.png
       :width: 4.39583in
       :height: 1.85088in
 
 **FAQ and troubleshooting**
+---------------------------
 
 **Which pixel classification features should I select?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 | The features and scales to select are those that distinguish the
   different classes in the image. As it is not always obvious which
@@ -356,11 +198,13 @@ customized LUT as
   pixels (the whole object should be visible in 10 x 10 pixel window).
 
 **Which images should I upload in the Input Data applet?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Only training images should be uploaded in the **Input Data** applet
 (~10 is good).
 
 **What are training images?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Training images are a subset of the whole image series that you annotate
 in the training phase. Choose images that contain labelling that is
@@ -370,6 +214,7 @@ different anatomical regions (for example, every 4th section). The same
 subset can be used for the pixel and object classification workflows.
 
 **How many classes should I use?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The number of classes to annotate will depend on the classification
 approach.
@@ -392,6 +237,7 @@ approach.
 +---+-------------------------------------------------------------------------+
 
 **Which part of the image, and how much, should I label?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Start by zooming-in and annotating a few pixels of each class that
 clearly belong to their respective class. Turn the ‘live update’ on to
@@ -423,6 +269,7 @@ classifier is optimally trained for the image series. You are now ready
 for batch processing.
 
 **Which export settings should I select?**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The file type to export will depend on the plan for the next step of
 analysis.
@@ -484,7 +331,8 @@ analysis.
 
 ..
 
-   **Technical information**
+**Technical information**
+--------------------------
 
 **Description**
 
