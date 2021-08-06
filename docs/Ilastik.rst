@@ -6,10 +6,9 @@
 
 * This manual was written by the Nesys group at the University of Oslo with input from the ilastik team to describe the use of *ilastik* for the QUINT workflow only.
 
-* *ilastik* is a versatile image analysis tool specifically designed for the batch classification, segmentation and analysis of biological images based on supervised machine learning algorithms.
+* *ilastik* is a versatile image analysis tool designed for the batch classification, segmentation and analysis of biological images based on supervised machine learning algorithms.
 
 * *ilastik* has many additional functions and workflows that are not mentioned in this manual. For more information see the www.ilastik.org
-
 
 
 **Installation and Usage**
@@ -20,50 +19,52 @@
 * See the ilastik website for the most up to date information.
 
 
+**Preparing the images for ilastik**
+---------------------------------
 
+**Image size**
+
+As a general rule the histological images should be downscaled before segmenting with ilastik. This improves the output quality and speeds up the analysis. 
+
+The optimal resize factor will depend on the original size of the images and the size of the features to be extracted, and is determined by trial and error. The Pixel Classification algorithm extracts image pixels based on their colour, intensity and / or texture on a scale up to 10 sigma. This means that the algorithm recognises edges or objects that fall within a 10 x 10 pixel window. For the best result, resize the images so that the objects (e.g. cells) fall well within this window, but without loss of important information (e.g. small cells).  A resize factor of 0.2 or 0.1 may be a good starting point. 
+
+**File format**
+
+ilastik supports many file formats. PNG works well. It does not support tiled TIFFs. https://www.ilastik.org/documentation/basics/dataselection
+
+**Software Recommendations**
+
+Nutil enables image resizing, renaming and file format conversion and is specifically designed for histological images from mouse and rat. 
+
+ * the Resize feature enables conversion of PNG or JPEG images to PNG format. 
+ * the Transform feature is designed to transform tiled TIFF images with output in tiled TIFF format, but also has the option to generate thumbnails in PNG format. To generate images for ilastik only, switch on the “only create thumbnails” feature under the advanced settings and enter the desired resize factor. Transform also enables rotation of images and file renaming to comply with the QUINT naming convention.  
 
 **Segmentation with ilastik**
 ------------------------------
 
-There are two main approaches for the segmentation of rodent brain section images with ilastik.
+There are two main approaches for the segmentation of brain section images with ilastik.
 
 1. Pixel classification only (with two or more classes)
-2. Pixel classification with two classes (*immunoreactivity* and
-  *background*), followed by object classification with two classes (*objects* *e.g. cells* and
+2. Pixel classification with two classes (*immunoreactivity* and *background*), followed by object classification with two classes (*objects* *e.g. cells* and
    *artefact*).
 
-**Which approach is best for my dataset?**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Which approach is best?**
 
-The best approach is determined by trial and error.
+The best approach depends on the appearance of the labelling in the images and is determine by trial and error.
 
-1. The first approach is quick and easy, and is the method of choice as long as it produces satisfactory output. It is suited for images in which there are clear differences in the colour, intensity and / or texture of the features of interest (e.g. cells) versus the background and other structures. For example:
+1. The first approach is quick and easy, and is the method of choice as long as it produces satisfactory output. It is suited for images in which there are clear differences in the colour, intensity and / or texture of the features of interest (e.g. cells) relative to the background and other structures. For example:
 
 |image5|
 
-2. The second approach is more time consuming, but may give a better result if there is non-specific labelling in the image that is similar in appearance to the labelling. This is because the object classification workflow can filter out non-specific labelling based on object level features such as size and shape. A classical example is cells and edge staining, which are both extracted by pixel classification, but have different object shapes and so are easy to differentiate with object classification (round cells versus long and thin edge staining). For example: 
+2. The second approach is more time consuming, but may give a better output if there is non-specific labelling in the image that is similar in appearance to the labelling-of-interest. This is because the object classification workflow can filter out non-specific labelling based on object level features such as size and shape. A classical example is cells and edge staining of similar colour and intensity that are both extracted by pixel classification, but have different object shapes and so are easy to differentiate with object classification (round cells versus long and thin edge staining). For example: 
 
 |image6|
 
 
-**Image pre-processing**
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-1.	The Pixel Classification algorithm extracts image pixels based on their colour, intensity and / or texture on a scale up to 10 sigma. This means that the algorithm recognises edges or objects that fall within a 10 x 10 pixel window. For the best result, resize the images so that the objects (e.g. cells) fall well within this window, but without loss of important information (e.g. small cells). 
-
-The optimal resize factor will depend on the original size of the images and the size of the features to extract, and is determined by trial and error. A resize factor of 0.2 or 0.1 may be a good starting point. 
-
-2.	ilastik supports many file formats. PNG works well. It does not support tiled TIFFs. https://www.ilastik.org/documentation/basics/dataselection
-
-3.	To resize the images, use Nutil, Fiji or another image analysis software. In Nutil: 
- * the Resize feature enables conversion of PNG or JPEG images to PNG format. 
- * the Transform feature is designed to transform tiled TIFF images with output in tiled TIFF format, but also has the option to generate thumbnails in PNG format. To generate images for ilastik only, switch on the “only create thumbnails” feature under the advanced settings and enter the desired resize factor. 
-
-
-**Pixel Classification Workflow**
+**1. Pixel Classification Workflow**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   For a quick introduction, watch: https://www.youtube.com/watch?v=5N0XYW9gRZY&feature=youtu.be
+For a quick introduction, watch: https://www.youtube.com/watch?v=5N0XYW9gRZY&feature=youtu.be
 
 1. Open the *ilastik* programme. Under ‘Create New Project’ select ‘Pixel Classification’. Save the project under a new file name in the same location as the images for analysis (create a new folder). 
 
@@ -107,7 +108,7 @@ Select the features and scales that can be used to discern the objects or classe
 
 **NOTE: Save the ilastik file frequently during the annotation process**.
 
-**Object Classification Workflow**
+**2. Object Classification Workflow**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1.	There are three options on the ilastik start up page for running Object Classification.  Choose the Object Classification with Raw Data and Pixel Prediction Maps as input.  It is not advisable to use Pixel Classification + Object Classification. This file type is easily corrupted.
@@ -131,35 +132,31 @@ Select the features and scales that can be used to discern the objects or classe
 8.	For batch processing, use the Batch Processing applet. Upload the raw images and corresponding prediction maps and “process all files”.
 
 
-**Applying the Glasbey Lookup table**
+**3. Applying the Glasbey Lookup table**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The 8-bit PNG output of ilastik (Simple_Segmentations and Object_Predictions) are always black or white in appearance. To visualise the results, and make them compatible with Nutil Quantifier, apply the Glasbey lookup table (LUT) to the images with NIH ImageJ/Fiji.  
+The 8-bit PNG output of ilastik (Simple_Segmentations and Object_Predictions) are always black or white in appearance. To visualise the results, and make them compatible with Nutil Quantifier, apply the Glasbey lookup table (LUT) to the images with NIH ImageJ or Fiji.  
 
 |image8|
 
 1.	Download the NIH ImageJ tool.
-2.	Open the image inImageJ. The image appears black (or white). 
+2.	Open the image in ImageJ. The image appears black (or white). 
 3.	Apply the Glasbey lookup table by selecting Image > Lookup Tables > Glasbey.  This assigns a different colour to each label. Save the image in PNG format. They are now compatible with Nutil Quantifier. 
 
 
 **Customise the LUT**
-~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In some cases you may wish to alter the applied colours. To do this, select Image > Color > Edit LUT. The LUT applies colours from the top left hand corner (first colour is ignored). Click on each colour to alter it. Then Save the customised LUT and save the image in PNG format. 
+In some cases you may wish to alter the applied colours. To do this, select Image > Color > Edit LUT. The LUT applies colours from the top left hand corner (first colour is not used). Click on each colour to alter it. Then Save the customised LUT and save the image in PNG format. 
 
 .. image:: 2e9537b09637491fa83410e3e364d5c5/media/image9.png
    :width: 2.25in
    :height: 2.43956in
 
 **Batch processing: Apply the Glasbey LUT to a folder of images**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. To apply the Glasbey lookup table to a whole folder of segmented images, select:
 
-   **Process >Batch> Macro**; select the input and output folders,
-   required file type, and type the following code in the macro box:
-   **run("Glasbey");**
+**Process >Batch> Macro**; select the input and output folders, required file type, and type the following code in the macro box: **run("Glasbey");**
 
 +----------+
 | |image9| |
@@ -170,7 +167,7 @@ customized LUT as a .LUT file. Apply to a whole folder of images with the Batch 
 
    open(“C:\\......\\....\\....\\filename.lut”);
 
-   **Note: Make sure to update the directory so it locates the customized.lut file and ensure the macro is written with double back slashes.**
+   **Note: Make sure to update the directory so it locates the customized.lut file, and ensure the macro is written with double back slashes.**
 
    .. image:: 2e9537b09637491fa83410e3e364d5c5/media/image11.png
       :width: 4.39583in
@@ -179,7 +176,7 @@ customized LUT as a .LUT file. Apply to a whole folder of images with the Batch 
 **FAQ and troubleshooting**
 ---------------------------
 
-**Which pixel classification features should I select?**
+**1. Which pixel classification features should I select?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The features and scales to select are those that distinguish the different classes in the image.  As it is not always obvious which features and scales distinguish the classes, it is best to select all the features and scales for the pixel classification in the first instance. Selecting fewer features and scales may speed up the analysis, so refining the selection may be helpful at a later stage.
@@ -187,37 +184,38 @@ The features and scales to select are those that distinguish the different class
 Note that the scale corresponds to the pixel diameter of the feature. For example, if a textural pattern has a pixel size of 4, the scale of the texture has a sigma of 4.  As the maximum scale of the features available in ilastik is 10, ilastik is not capable of recognising objects based on edge if the objects are larger than approximately 60 pixels (the whole object should be visible in 10 x 10 pixel window).  
 
 
-**Which images should I upload in the Input Data applet?**
+**2. Which images should I upload in the Input Data applet?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Only training images should be uploaded in the **Input Data** applet (~10 is good).
 
-**What are training images?**
+**3. What are training images?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Training images are a subset of the whole image series that you annotate in the training phase. Choose images that contain labelling that is representative of the labelling in the whole series. It is good to select images that span the full volume, as labelling often varies in different anatomical regions (for example, every 4th section). The same subset can be used for the pixel and object classification workflows. 
 
-**How many classes should I use?**
+**4. How many classes should I use?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The number of classes to annotate will depend on the classification approach. 
--	For Pixel Classification only, create 2 or more classes, depending on the number of visually distinct classes. For example: labelling, non-specific labelling, artefact (e.g. marks on the coverslip, etc) and background. 
--	For Pixel Classification with Object Classification, annotate two classes in each classification step (see section 3).  
+* For Pixel Classification only, create two or more classes. As a general rule, the fewer the better. 
+* For Pixel Classification with Object Classification, annotate two classes in each classification step.  
 
 
-**Which part of the image, and how much, should I label?**
+**5. Which part of the image, and how much, should I label?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Start by zooming-in and annotating a few pixels of each class that clearly belong to their respective class.  Turn the ‘live update’ on to visualize the predictions. The ‘uncertainty’ overlay can be switched on to identify pixels with uncertain class prediction (it identifies these pixels in bright blue).  By specifically annotating these pixels, the prediction quickly improves.  
-Note that even just a few pixels annotated incorrectly can disrupt the prediction.  If in doubt, it is better to delete annotations and start again, rather than continuing with the annotation.  By ticking the ‘segmentation’ box you can visualize the final segmentation based on the classifier.  When you are happy with this, stop annotating and test the applicability of the trained classifier on the next training image.
+Start by zooming-in and annotating a few pixels of each class that clearly belong to their respective class.  Turn on the ‘live update’ to view the predictions. The ‘uncertainty’ overlay can be switched on to identify pixels with uncertain class prediction (it identifies these pixels in bright blue).  By annotating these pixels, the prediction quickly improves.
+
+Note that even just a few incorrectly annotated pixels can disrupt the prediction.  If in doubt, it is better to delete annotations and start again, rather than continuing with the annotation.  By ticking the ‘segmentation’ box you can view the final segmentation based on the classifier.  When you are happy with this, stop annotating and test the trained classifier on the next training image.
 
 
-**How do I test the applicability of the trained classifier to the whole series?**
+**6. How do I test the trained classifier on the other images in the series?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To test the ability of the trained classifier to segment a new image, select ‘current view’ in the Training applet and choose a new training image from the drop-down menu.  Press ‘live update’ and view the ‘segmentation’ overlay.  If you are not happy with the classification you can annotate pixels on the new image to improve the prediction.  When happy with the result, the trained classifier can be tested on a third image.  Continue this processes until you are satisfied that the classifier is optimally trained for the image series.  You are now ready for batch processing.
+To test the ability of the trained classifier to segment a new image, select ‘current view’ in the Training applet and choose a new training image from the drop-down menu.  Press ‘live update’ and view the ‘segmentation’ overlay.  If you are not happy with the classification you can annotate pixels on the new image to improve the prediction.  When satisfied with the result, the trained classifier can be tested on a third image.  Continue this processes until you are satisfied that the classifier is optimally trained for the image series.  You are now ready for batch processing.
 
-**Which export settings should I select?**
+**7. Which export settings should I select?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The file type to export will depend on the plan for the next step of analysis. 
@@ -233,7 +231,7 @@ The file type to export will depend on the plan for the next step of analysis.
 
 * While ilastik has the computational power to process very large images, the viewer in the ilastik user interface is not able to process whole images that are very large in the “live” mode. For large images in the training phase, it is therefore important to remain zoomed-in in the viewer when the live update is switched on. This is especially true if many classes are labelled and many features selected.  As a general rule of thumb, keep the portion of the image that is visible in the viewer to below 3000 x 3000 pixels.  The absolute value will depend on the number of classes and features selected.
 * For very large images, be more selective with the features for classification, and label as few classes as possible.  
-* If all else fails, it is possible to split large images into tiles and process tiles individually.   
+* If all else fails, it is possible to split large images into tiles and process tiles individually. These have to be stitched before continuing with the QUINT workflow. 
 * Note that exportation of the segmented images will take time.  One large image (e.g. 30,000 x 30,000 pixels) may take 2 hours to export.  Image analysis can be run overnight in the batch mode.            
 
 
@@ -244,12 +242,12 @@ The file type to export will depend on the plan for the next step of analysis.
 
 ilastik is developed by the ilastik team in Anna Kreshuk's lab at the European Molecular Biology Laboratory, with partial financial support from the DFG, the Human Brain Project and SFB 1129. Their financial support does not imply endorsement of the software. 
 
-This manual was written by the Nesys Group at the University of Oslo for the use of ilastik as part of the QUINT workflow, and includes tips and tricks from the ilastik team. Some of this information may be out of date. For the latest updates, see the official ilastik documentation.  
+This manual was written by the Nesys Group at the University of Oslo for the use of ilastik for the QUINT workflow, and includes tips and tricks from the ilastik team. Some of this information may be out of date. For the latest updates, see the official ilastik documentation.  
 
 
 **License**
 
-ilastik is distributed under GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or any later version, with a special exception to allow extensions of ilastik not covered under the GNU General Public License. See the license page for details. 
+ilastik is distributed under GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or any later version, with a special exception to allow extensions of ilastik not covered under the GNU General Public License.
 
 **How to cite**
 
