@@ -15,9 +15,7 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 **PLEASE visit the EBRAINS page for more information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information.**
 
 |
-
-**Nutil enables four operations**
----------------------------------
+**Nutil operations**
 
 1. **TiffCreator**: convert JPEG, PNG and normal TIFF images to tiled TIFF format.
 2. **Transform**: rename, rotate, resize and compile thumbnails of large tiled TIFF images.
