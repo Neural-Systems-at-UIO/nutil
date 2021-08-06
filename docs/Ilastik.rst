@@ -1,5 +1,5 @@
-**ilastik: Generating segmentations for the QUINT workflow**
-============================================================
+**Generating segmentations with ilastik**
+======================================
 
 **Introduction**
 -----------------
