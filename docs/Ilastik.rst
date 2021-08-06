@@ -41,7 +41,13 @@ There are two main approaches for the segmentation of rodent brain section image
 **Which approach is best for my dataset?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The best approach is determined by trial and error.
+
+1. The first approach is quick and easy, and is the method of choice as long as it produces satisfactory output. It is suited for images in which there are clear differences in the colour, intensity and / or texture of the features of interest (e.g. cells) versus the background and other structures. For example:
+
 |image5|
+
+2. -	The second approach is more time consuming, but may give a better result if there is non-specific labelling in the image that is similar in appearance to the labelling. This is because the object classification workflow can filter out non-specific labelling based on object level features such as size and shape. A classical example is cells and edge staining, which are both extracted by pixel classification, but have different object shapes and so are easy to differentiate with object classification (round cells versus long and thin edge staining). For example: 
 
 |image6|
 
