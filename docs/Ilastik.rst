@@ -1,9 +1,6 @@
 **ilastik**
 ===========
 
-**Generating segmentations with ilastik**
------------------------------------------
-
 **Introduction**
 -----------------
 
@@ -21,7 +18,7 @@
 
 * See the ilastik website for the most up to date information.
 
-
+|
 **Preparing the images for ilastik**
 ---------------------------------
 
@@ -41,7 +38,8 @@ Nutil enables image resizing, renaming and file format conversion and is specifi
 
  * the Resize feature enables conversion of PNG or JPEG images to PNG format. 
  * the Transform feature is designed to transform tiled TIFF images with output in tiled TIFF format, but also has the option to generate thumbnails in PNG format. To generate images for ilastik only, switch on the “only create thumbnails” feature under the advanced settings and enter the desired resize factor. Transform also enables rotation of images and file renaming to comply with the QUINT naming convention.  
-
+ 
+|
 **Segmentation with ilastik**
 ------------------------------
 
@@ -176,6 +174,7 @@ customized LUT as a .LUT file. Apply to a whole folder of images with the Batch 
       :width: 4.39583in
       :height: 1.85088in
 
+|
 **FAQ and troubleshooting**
 ---------------------------
 
