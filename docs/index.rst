@@ -29,8 +29,4 @@
    
    Ilastik
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   
-   QuickNII
+
