@@ -38,6 +38,7 @@ Yates SC, Groeneboom NE, Coello C, et al. & Bjaalie JG (2019) QUINT: Workflow fo
 This project was supported by the EBRAINS research infrastructure, funded from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 785907 (Human Brain Project SGA2) and Specific Grant Agreement No. 945539 (Human Brain Project SGA3).
 
 # Changelog
+
 0.5.11-0.5.38 ** 26.02.2020
 - Updated CI script, testing
 - Self-validator implemented in CI and updated to support csv etc
