@@ -1,6 +1,7 @@
 #include "lbookcsv.h"
 #include <QTextStream>
 #include "source/data.h"
+#include <math.h>
 
 QString &LSheetCSV::get(int j, int i) {
 //    qDebug() << "LBookCSV::get";
@@ -12,8 +13,11 @@ QString &LSheetCSV::get(int j, int i) {
         bool isOk = false;
         double someVal = m_data[idx].toDouble(&isOk);
         if (isOk) {
-            if ((someVal-floor(someVal)) ==0.0)
+            if ((someVal-floor(someVal)) ==0.0) {
                 m_data[idx] = QString::number((int)someVal,10);
+
+            }
+//            qDebug() <<someVal<<"replacing"<<m_data[idx];
 
         }
         return m_data[idx];
@@ -94,6 +98,7 @@ void LSheetCSV::SaveAsHTML(QString basename)
         QString str = "<tr>";
         for (int i=0;i<m_width;i++) {
             str=str+"<td>"+get(j,i) + "</td>";
+           // qDebug() << get(j,i);
         }
         str = str + "</tr>";
         stream << str << "\n";
@@ -101,7 +106,10 @@ void LSheetCSV::SaveAsHTML(QString basename)
     }
 
     stream << "</table>\n";
+
     file.close();
+ //   QString f = Util::loadTextFile(fn);
+//    qDebug() <<f;
 
     if (QFile(fn).size()==0)
         QFile::remove(fn);
@@ -126,6 +134,8 @@ QString LSheetCSV::readStr(int i, int j)
 
 void LSheetCSV::Set(int i, int j, double val, int dec)
 {
+//    if (val!=0)
+  //      qDebug() << "LSheetCSV::SETTING" <<QString::number(val) <<dec;
     if (dec==-1)
         set(i,j,QString::number(val,'d'));
     else

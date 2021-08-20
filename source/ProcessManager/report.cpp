@@ -151,6 +151,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
         {
             sheet->Set(y,0,al->index);
             sheet->writeStr(y,1,al->name);
+//            qDebug() << "WTF0 : "<< al->area<<al->extra2.x();
             sheet->Set(y,2,al->area,0);
 
                 // the 0 here defines the number of decimal places displayed
@@ -168,8 +169,10 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
             //sheet->Set(y,,10);
 
-            if (al->area!=0.0)
+            if (al->area!=0.0) { // object pixels/region pixels
                 sheet->Set(y,9,al->extra2.x()/al->area);
+      //          qDebug() << "WTF : "<<al->extra2.x()<<al->area<<al->extra2.x()/al->area<<QString::number(al->extra2.x()/al->area,'d');
+            }
  //           if (al->areaScaled!=0)
    //             sheet->Set(y,10,al->extra2.y()/al->areaScaled);
 
@@ -247,7 +250,8 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                      if (regionAreaScaled!=0)
   //                  sheet->Set(y,9,al->extra2.x()/al->area);
 //                 if (al->area!=0)
-                    sheet->Set(y,9,std::min(al->extra2.x()/regionAreaScaled,1.0));
+                         if (al->sliceArea[i]!=0)
+                    sheet->Set(y,9,std::min(al->extra2.x()/al->sliceArea[i],1.0));
                 y++;
             }
 

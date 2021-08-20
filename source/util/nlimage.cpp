@@ -371,6 +371,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
     if (m_index!=nullptr)
         delete m_index;
+
     m_index = createImage(scale*m_image->width(), scale*m_image->height());//QImage(QSize(scale*m_image->width(), scale*m_image->height()),QImage::Format_RGB32);
 
 
@@ -638,8 +639,8 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
                 AtlasLabel* al = labels.get(index, refImage.m_newFormat);
 
                 if (al!=nullptr) {
-                    if (al->index==607344862)
-                        qDebug() << "LABEL IS "<<607344862<< " with index " <<index << al->name;
+//                    if (al->index==607344862)
+  //                      qDebug() << "LABEL IS "<<607344862<< " with index " <<index << al->name;
   //                  if (al->index==313)
     //                    qDebug() << "LABEL IS "<<313<< " with index " <<index<< al->name;
 

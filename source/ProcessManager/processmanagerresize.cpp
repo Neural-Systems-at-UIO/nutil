@@ -28,9 +28,9 @@ void ProcessManagerResize::Execute()
         QSharedPointer<ProcessItem> pi = m_processItems[i];
         if (pi->m_inFile.toLower().contains(".tif")) {
             QImage img;
-            qDebug() << "TRYING TO LOAD";
+//            qDebug() << "TRYING TO LOAD";
             img.load(pi->m_inFile);
-            qDebug() << "ENDED";
+  //          qDebug() << "ENDED";
         }
 
     }
@@ -43,7 +43,7 @@ void ProcessManagerResize::Execute()
         QImage img;
         QSharedPointer<ProcessItem> pi = m_processItems[i];
         img.load(pi->m_inFile);
-
+        qDebug() << "Loading "<<pi->m_inFile<<img.width();
         float w = img.width();
 
         float newWidth = m_tileSize;
