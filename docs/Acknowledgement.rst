@@ -25,5 +25,5 @@ Can be found here https://www.nitrc.org/frs/?group_id=1365
 
 **Contact us** 
 
-For user support and to report issues contact us at: support@ebrains.eu
+For user support and to report issues: support@ebrains.eu
 
