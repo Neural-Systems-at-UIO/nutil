@@ -1,5 +1,5 @@
 # Nutil
-Nutil aims to both simplify and streamline the mechanism of pre-and-post processing 2D brain image data from mouse and rat. 
+Nutil aims to simplify and streamline the mechanism of pre-and-post processing 2D brain imaging data from mouse and rat. It is an integral part of the QUINT workflow for regional quantification of labelled objects such as cells in histological imaging data. 
 
 For installation and user instructions see: https://nutil.readthedocs.io/en/latest/ 
 
