@@ -37,7 +37,7 @@ Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Pos
 
 **Acknowledgements**
 
-Nutil was developed with funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Framework Partnership Agreement No. 650003 (HBP FPA).
+Nutil is developed by the Neural Systems Laboratory at the Institute of Basic Medical Sciences, University of Oslo, Norway, with support from the EBRAINS infrastructure, and funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Framework Partnership Agreement No. 650003 (HBP FPA).
 
 **Release notes**
 
@@ -45,6 +45,4 @@ Can be found on https://www.nitrc.org/frs/?group_id=1365
 
 **Contact us** 
 
-Report issues: https://github.com/Neural-Systems-at-UIO/nutil 
-
-**Slack workspace for informal discussion:** quint-uiq9333.slack.com 
+Report issues: support@ebrains.eu 
