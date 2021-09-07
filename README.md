@@ -39,6 +39,9 @@ Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Pos
 # Also described in
 Yates SC, Groeneboom NE, Coello C, et al. & Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075
 
+# Contact us
+support@ebrains.eu
+
 # Changelog
 
 0.5.11-0.5.38 ** 26.02.2020
