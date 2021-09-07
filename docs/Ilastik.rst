@@ -240,16 +240,9 @@ The file type to export will depend on the plan for the next step of analysis.
 **Technical information**
 --------------------------
 
-**Developers**
+This manual was written by the Neural Systems Laboratory at the University of Oslo, Norway, for the use of ilastik for the QUINT workflow, and includes tips and tricks from the ilastik team. Some of this information may be out of date. 
 
-ilastik is developed by the ilastik team in Anna Kreshuk's lab at the European Molecular Biology Laboratory, with partial financial support from the DFG, the Human Brain Project and SFB 1129. Their financial support does not imply endorsement of the software. 
-
-This manual was written by the Nesys Group at the University of Oslo for the use of ilastik for the QUINT workflow, and includes tips and tricks from the ilastik team. Some of this information may be out of date. For the latest updates, see the official ilastik documentation.  
-
-
-**License**
-
-ilastik is distributed under GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or any later version, with a special exception to allow extensions of ilastik not covered under the GNU General Public License.
+For the latest updates and user documentation see: https://www.ilastik.org/ 
 
 **How to cite**
 
@@ -261,11 +254,6 @@ Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N. Straehle, Bernhard X. 
      
 Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, Hartlage-Rübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075.
 
-**Contact us**
-
-* For use of ilastik in relation to QUINT: https://github.com/Neural-Systems-at-UIO/nutil/issues  
-
-* Other ilastik issues may be reported here and will be directed to the ilastik team: https://github.com/ilastik/ilastik/issues 
 
 
 .. |image1| image:: 2e9537b09637491fa83410e3e364d5c5/media/image1.png
