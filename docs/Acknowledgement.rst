@@ -8,7 +8,7 @@ Nicolaas E Groeneboom, Sharon C. Yates, Maja A. Puchades, Jan G. Bjaalie.
 
 **Licence**
 
-GPL-3.0 License
+GNU General Public License version 3
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International 
 
 **Cite**
