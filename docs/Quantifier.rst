@@ -205,7 +205,9 @@ Use the default .xlsx may be used as a guide for filling out the template.
    
 Report with output organised based on all the regions in the reference atlas: per section and for the whole series (all sections combined).  
 
-IMPORTANT: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
+**IMPORTANT**: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
+
+The **Clear Label** ID covers objects that fall outside of the atlas maps
  
 **CustomRegion report**
 

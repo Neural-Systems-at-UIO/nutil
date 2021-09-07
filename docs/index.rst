@@ -4,6 +4,8 @@
 
    introduction
    installation
+   Technical
+   Acknowledgement
    
    
 .. toctree::
@@ -16,11 +18,6 @@
    Resize
    Quantifier
    
-   
-.. toctree::
-   :maxdepth: 1
-
-   Technical
    
 .. toctree::
    :caption: Other QUINT software
