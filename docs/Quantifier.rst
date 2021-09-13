@@ -6,7 +6,7 @@
 Quantifier requires three sets of input: segmentation images, atlas maps, and anchoring information in XML or JSON format. It generates three sets of output: reports with quantifications per atlas region, overlay images with the segmentations superimposed on the atlas maps, and coordinate files for visualising the extracted objects in the 3D brain viewer *Meshview*. As the QUINT workflow is relatively complex, and requires the use of several software packages including ilastik, QuickNII and Nutil Quantifier, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the output files.     
 
 **Preparing the Quantifier input files**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. File naming requirement**
 
@@ -127,14 +127,8 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
 |
 
-**Quantifier settings explained**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Nutil has “help” buttons throughout with information on each parameter.  
-
-Some of the Quantifier settings are described in more detail below:  
-
-**1. Object splitting**
+**Object splitting explained**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In Quantifier, users must specify whether to turn “object splitting” ON or OFF. Object splitting divides segmented objects that overlap atlas regions, with individual pixels assigned to their precise location. This gives accurate load measurements (load is the percentage of the region occupied by objects), but invalidates the object counts as objects that overlap region boundaries will be divided into two or more objects. With object splitting switched OFF, the object counts are correct, but the load measurements may be incorrect since objects that overlap region boundaries will be assigned to one of the regions at random, potentially skewing the load calculations. This is especially true if objects are large, since a large object that overlaps many regions (e.g. 1000 pixels) may be assigned to a small region (e.g. 100 pixels) giving a crazy load output (1000%).
 
@@ -144,7 +138,8 @@ Select YES for large objects that overlap atlas regions (e.g. connectivity data)
 
 See the help buttons in Nutil for more information. 
  
-**2. Custom masks**
+**Custom masks explained**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This is particularly useful for investigating expression differences in the right and left hemisphere, as a mask can be applied to differentiate the two sides.  
 
@@ -160,20 +155,20 @@ The mask feature is optional. It allows the application of masks to define which
 
 |
 
-**3. Customised reports: how to define your own regions**
+**3. Customised reports explained~**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Quantifier generates two or three sets of reports: 
+Quantifier generates several sets of reports:  
 
 * RefAtlasRegion reports contain quantifications per atlas region based on the finest level of granularity of the atlas. 
-* CustomRegion reports contain quantifications for broader regions, such as cortex and hippocampus (“default”), or user defined regions (“custom”).  
-* Object reports contain information about individual objects and are only generated with object splitting switched OFF.  
+* CustomRegion reports contain quantifications for broader regions (compilations of reference atlas regions), such as cortex and hippocampus (“default”), or user defined regions (“custom”).  
+* Object reports contain information about individual objects, and are generated with object splitting switched OFF only.  
  
-The custom regions are compilations of reference atlas regions. Users have the option to either define their own using the CustomRegionsTemplate.xlsx, or to use the default regions included in the Nutil software. 
+Users have the option to generate CustomRegion reports based on your own compilations of reference atlas regions. To do this, customised regions are defined by the user using the CustomRegionsTemplate.xlsx, with the "custom" option selected in the Nutil GUI. Alternatively, run the analysis with the "default" regions included in the Nutil software. 
 
 More information on the default regions are found in the CustomRegion files in the Nutil package (see folder titled “CustomRegion” and navigate to the xlsx file that corresponds to your atlas). The “default” option is a whole brain analysis. It includes all the reference atlas regions subdivided into broad regions. 
 
-1. To define your own regions, use the *CustomRegionsTemplate.xlsx* that
-is included in the Nutil package, and populate as described below:
+1. To define your own regions, use the *CustomRegionsTemplate.xlsx* that is included in the Nutil package, and populate as shown below:
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image12.png
    :width: 4.80278in
