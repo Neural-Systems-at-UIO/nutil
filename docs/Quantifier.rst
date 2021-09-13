@@ -5,7 +5,7 @@
 
 Quantifier requires three sets of input: segmentation images, atlas maps, and anchoring information in XML or JSON format. It generates three sets of output: reports with quantifications per atlas region, overlay images with the segmentations superimposed on the atlas maps, and coordinate files for visualising the extracted objects in the 3D brain viewer *Meshview*. As the QUINT workflow is relatively complex, and requires the use of several software packages including ilastik, QuickNII and Nutil Quantifier, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the output files.     
 
-**Preparing the Quantifier input files**
+**Preparing the input files**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. File naming requirement**
@@ -137,6 +137,7 @@ Select NO for small objects to get accurate object counts (e.g. cells).
 Select YES for large objects that overlap atlas regions (e.g. connectivity data). This gives precise load output. 
 
 See the help buttons in Nutil for more information. 
+
  
 **Custom masks explained**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
