@@ -155,15 +155,15 @@ The mask feature is optional. It allows the application of masks to define which
 
 |
 
-**3. Customised reports explained~**
+**Customised reports explained**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Quantifier generates several sets of reports:  
 
 * RefAtlasRegion reports contain quantifications per atlas region based on the finest level of granularity of the atlas. 
-* CustomRegion reports contain quantifications for broader regions (compilations of reference atlas regions), such as cortex and hippocampus (“default”), or user defined regions (“custom”).  
+* CustomRegion reports contain quantifications for broader regions. These broader regions are compilations of reference atlas regions, and may either be user defined ("custom") or the default regions included in the Nutil software ("default"). Some examples of default regions include hippocampus and cortex. 
 * Object reports contain information about individual objects, and are generated with object splitting switched OFF only.  
- 
+
 Users have the option to generate CustomRegion reports based on your own compilations of reference atlas regions. To do this, customised regions are defined by the user using the CustomRegionsTemplate.xlsx, with the "custom" option selected in the Nutil GUI. Alternatively, run the analysis with the "default" regions included in the Nutil software. 
 
 More information on the default regions are found in the CustomRegion files in the Nutil package (see folder titled “CustomRegion” and navigate to the xlsx file that corresponds to your atlas). The “default” option is a whole brain analysis. It includes all the reference atlas regions subdivided into broad regions. 
