@@ -5,7 +5,7 @@
    introduction
    installation
    Technical
-   Acknowledgement
+   acknow
    
    
 .. toctree::
