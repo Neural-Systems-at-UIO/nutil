@@ -214,11 +214,11 @@ The **Clear Label** ID covers objects that fall outside of the atlas maps
  
 **CustomRegion report**
 
-Reports with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. A default template is provided as part of the Nutil package and is used : per section and for the whole series
+Report with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. These are compilations of reference atlas regions and are either user defined ("custom") or the default regions that are inbuild in the Nutil software. For more information see the "Customised regions explained" section. A report is provided for the whole series (all sections combined) and per section. 
 
 **Object report**
 
-List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are then displayed in the image files and in the object reports.  
+Report with a List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. Object reports are not generated with object splitting switched "ON".   
 
 
 In each report, interpret the results as follows:
@@ -227,22 +227,26 @@ In each report, interpret the results as follows:
 |    **Region pixels** |    No. of pixels representing the region.    |
 +======================+==============================================+
 |    **Region area**   |    Area representing the region              |
+|                      |    (= Region pixels x pixel scale)           |
 +----------------------+----------------------------------------------+
 |    **Area unit**     |    Region area unit                          |
+|                           (this is the unit of the pixel scale)     |
 +----------------------+----------------------------------------------+
 |    **Object count**  |    No. of objects located in the region.     |
 |                      |                                              |
-|                      |    | NOTE: Object counts are not generated   |
-|                      |      if object splitting is                  |
-|                      |    | switched “on”.                          |
+|                      |    Object counts are not generated           |
+|                      |    if object splitting is switched "ON".     |
+|                           In this case N/A is displayed.            |
+|                      |                                              |
 +----------------------+----------------------------------------------+
 |    **Object pixels** |    No. of pixels representing objects in     |
 |                      |    this region.                              |
 +----------------------+----------------------------------------------+
-|    **Object area**   |    Area representing objects in this region. |
+|    **Object area**   |    Area representing objects in this region.
+|                      |    (= object pixels x pixel scale)
 +----------------------+----------------------------------------------+
 |    **Load**          |    Ratio of Object pixels to Region pixels   |
-|                      |    (Object pixels/Region                     |
+|                      |    (Object pixels / Region                   |
 |                      |                                              |
 |                      |    pixels).                                  |
 +----------------------+----------------------------------------------+
