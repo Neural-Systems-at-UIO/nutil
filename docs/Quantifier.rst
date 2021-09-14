@@ -167,23 +167,21 @@ The mask feature is optional. It allows the application of masks to define which
 Quantifier generates several sets of reports:  
 
 * RefAtlasRegion reports contain quantifications per atlas region based on the finest level of granularity of the atlas. 
-* CustomRegion reports contain quantifications for broader regions. These broader regions are compilations of reference atlas regions, and may either be user defined ("custom") or the default regions included in the Nutil software ("default"). Some examples of default regions include hippocampus and cortex. 
+* CustomRegion reports contain quantifications for broader regions. These broader regions are compilations of reference atlas regions, and may either be user defined ("custom") or the default regions included in the Nutil software ("default"). 
 * Object reports contain information about individual objects, and are generated with object splitting switched OFF only.  
 
-Users have the option to generate CustomRegion reports based on your own compilations of reference atlas regions. To do this, customised regions are defined by the user using the CustomRegionsTemplate.xlsx, with the "custom" option selected in the Nutil GUI. Alternatively, run the analysis with the "default" regions included in the Nutil software. 
+For the customised reports, the simplest option is to run the analysis with the "default" regions that are inbuilt in the Nutil software, and are assigned by selecting "default". More information on the default regions are found in the CustomRegion files in the Nutil package (located in the CustomRegion folder, there is a separate file for each atlas). The “default” option is a whole brain analysis, which means it includes all the reference atlas regions subdivided into broader regions. For example, for the Allen Mouse Brain Atlas v3, 2017, the custom regions are the cortex, fiber tracts, hippocampus, olfactory regions, hypothalamus, regions in the striatum and pallidum, midbrain - hindbrain - and medulla, thalamus, cerebellum, and ventricular system. 
 
-More information on the default regions are found in the CustomRegion files in the Nutil package (see folder titled “CustomRegion” and navigate to the xlsx file that corresponds to your atlas). The “default” option is a whole brain analysis. It includes all the reference atlas regions subdivided into broad regions. 
-
-1. To define your own regions, use the *CustomRegionsTemplate.xlsx* that is included in the Nutil package, and populate as shown below:
+Alternatively, users have the option to generate CustomRegion reports based on their own compilations of reference atlas regions. To do this, customised regions are defined by the user using the CustomRegionsTemplate.xlsx, which is located in the CustomRegion folder and is part of the Nutil package. In this case, the user selects the "custom" option in the Nutil GUI and navigates to the populated template. Fill in the template exactly as shown below:
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image12.png
    :width: 4.80278in
    :height: 3.60427in
 |
 
-**ROW 1:** assign your own names to the regions (e.g. Cortex).
+**ROW 1:** assign your own names to the regions (For example, cortex. This is for your information only).
 
-**ROW 2:** assign colours to the regions. Do this by typing a RGB colour code in the following format: 255;0;0 (for red). This colour will be assigned to the objects located in the custom region for the purposes of the image and coordinate output (for display purposes only).
+**ROW 2:** assign colours to the regions. Do this by typing a RGB colour code in the following format: 255;0;0 (for red). This colour will be assigned to the objects located in the custom region for the purposes of the image output and coordinate output (for display purposes only).
 
 **ROW 3:** enter the colour name (this is for your information only).
 
@@ -193,7 +191,7 @@ For mouse, see the ABAHier2015.xlsx or ABAHier2017.xlsx file for the full list o
  
 For rat, see the WHS_rat_atlas_v2.xlsx or WHS_rat_atlas_v3.xlsx file for the full list of regions and IDs.  
  
-Use the default .xlsx may be used as a guide for filling out the template.  
+The default .xlsx may be used as a guide for filling out the template.  
 
 |
 
@@ -208,7 +206,7 @@ Use the default .xlsx may be used as a guide for filling out the template.
 
 **RefAtlasRegion report**
    
-Report with output organised based on all the regions in the reference atlas: per section and for the whole series (all sections combined).  
+Report with output organised based on all the regions in the reference atlas. There is one report for the whole series (all sections combined) and one per section.
 
 **IMPORTANT**: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
 
@@ -216,7 +214,7 @@ The **Clear Label** ID covers objects that fall outside of the atlas maps
  
 **CustomRegion report**
 
-Reports with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx: per section and for the whole series
+Reports with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. A default template is provided as part of the Nutil package and is used : per section and for the whole series
 
 **Object report**
 
