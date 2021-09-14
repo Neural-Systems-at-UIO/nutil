@@ -130,13 +130,18 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 **Object splitting explained**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In Quantifier, users must specify whether to turn “object splitting” ON or OFF. Object splitting divides segmented objects that overlap atlas regions, with individual pixels assigned to their precise location. This gives accurate load measurements (load is the percentage of the region occupied by objects), but invalidates the object counts as objects that overlap region boundaries will be divided into two or more objects. With object splitting switched OFF, the object counts are correct, but the load measurements may be incorrect since objects that overlap region boundaries will be assigned to one of the regions at random, potentially skewing the load calculations. This is especially true if objects are large, since a large object that overlaps many regions (e.g. 1000 pixels) may be assigned to a small region (e.g. 100 pixels) giving a crazy load output (1000%).
+In Quantifier, users must specify whether to turn “object splitting” ON or OFF. 
 
-RECOMMENDATION:  
+With object splitting switched ON, segmented objects that overlap atlas regions are divided into parts, with the individual object pixels assigned to their precise regional location. This ensures accurate regional load measurements (load is the percentage of the region occupied by objects), but invalidates the object counts as some objects will be split and counted more than once.  
+
+With object splitting switched OFF, the object counts are correct, but the load measurements may be inaccurate since objects that overlap region boundaries will be assigned to one of the regions at random, potentially skewing the regional load calculations. This is especially true if objects are large, since a large object that overlaps many regions (e.g. 1000 pixels) may be assigned to a small region (e.g. 100 pixels) giving false load output (1000% load in this case, which is nonsensical).
+
+**Recommendation:**  
+
 Select NO for small objects to get accurate object counts (e.g. cells).  
-Select YES for large objects that overlap atlas regions (e.g. connectivity data). This gives precise load output. 
+Select YES for large objects that overlap atlas regions (e.g. connectivity data, or densely packed cells or features). This gives precise load output. 
 
-See the help buttons in Nutil for more information. 
+See the help buttons in Nutil for an example image.  
 
  
 **Custom masks explained**
