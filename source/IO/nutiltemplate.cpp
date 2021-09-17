@@ -208,6 +208,9 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
         if (nti->m_isHidden)
             continue;
 
+        if (nti->m_name=="nutil_version")
+            continue;
+
         bool breakHere = false;
 
         for (int i=0;i<nti->m_depID.count();i++) {
