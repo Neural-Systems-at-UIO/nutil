@@ -5,8 +5,8 @@
 
 Quantifier requires three sets of input: segmentation images, atlas maps, and anchoring information in XML or JSON format. It generates three sets of output: reports with quantifications per atlas region, overlay images with the segmentations superimposed on the atlas maps, and coordinate files for visualising the extracted objects in the 3D brain viewer *Meshview*. As the QUINT workflow is relatively complex, and requires the use of several software packages including ilastik, QuickNII and Nutil Quantifier, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the output files.     
 
-**Preparing the Quantifier input files**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Preparing the input files**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. File naming requirement**
 
@@ -127,20 +127,25 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 
 |
 
-**Quantifier settings explained**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Object splitting explained**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nutil has “help” buttons throughout with information on each parameter.  
+In Quantifier, users must specify whether to turn “object splitting” ON or OFF. 
 
-Some of the Quantifier settings are described in more detail below:  
+With object splitting switched ON, segmented objects that overlap atlas regions are divided into parts, with the individual object pixels assigned to their precise regional location. This ensures accurate regional load measurements (load is the percentage of the region occupied by objects), but invalidates the object counts as some objects will be split and counted more than once.  
 
-**1. Object splitting**
+With object splitting switched OFF, the object counts are correct, but the load measurements may be inaccurate since objects that overlap region boundaries will be assigned to one of the regions at random, potentially skewing the regional load calculations. This is especially true if objects are large, since a large object that overlaps many regions (e.g. 1000 pixels) may be assigned to a small region (e.g. 100 pixels) giving false load output (1000% load in this case, which is nonsensical).
 
-In Quantifier, users must specify whether to turn on or off “object splitting”. Object splitting divides segmented objects that overlap atlas regions, with individual pixels assigned their precise location. This gives accurate load measurements (load is the percentage of the region occupied by objects), but invalidates the object counts.
+**Recommendation:**  
 
-Recommendation:  Select NO for small objects to get accurate object counts (e.g. cells).  Select YES for large objects that overlap atlas regions (e.g. connectivity data). This gives precise load output. See the help button for more information. 
+Select NO for small objects to get accurate object counts (e.g. cells).  
+Select YES for large objects that overlap atlas regions (e.g. connectivity data, or densely packed cells or features). This gives precise load output. 
+
+See the help buttons in Nutil for an example image.  
+
  
-**2. Custom masks**
+**Custom masks explained**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This is particularly useful for investigating expression differences in the right and left hemisphere, as a mask can be applied to differentiate the two sides.  
 
@@ -156,29 +161,27 @@ The mask feature is optional. It allows the application of masks to define which
 
 |
 
-**3. Customised reports: how to define your own regions**
+**Customised reports explained**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Quantifier generates two or three sets of reports: 
+Quantifier generates several sets of reports:  
 
 * RefAtlasRegion reports contain quantifications per atlas region based on the finest level of granularity of the atlas. 
-* CustomRegion reports contain quantifications for broader regions, such as cortex and hippocampus (“default”), or user defined regions (“custom”).  
-* Object reports contain information about individual objects and are only generated with object splitting switched OFF.  
- 
-The custom regions are compilations of reference atlas regions. Users have the option to either define their own using the CustomRegionsTemplate.xlsx, or to use the default regions included in the Nutil software. 
+* CustomRegion reports contain quantifications for broader regions. These broader regions are compilations of reference atlas regions, and may either be user defined ("custom") or the default regions included in the Nutil software ("default"). 
+* Object reports contain information about individual objects, and are generated with object splitting switched OFF only.  
 
-More information on the default regions are found in the CustomRegion files in the Nutil package (see folder titled “CustomRegion” and navigate to the xlsx file that corresponds to your atlas). The “default” option is a whole brain analysis. It includes all the reference atlas regions subdivided into broad regions. 
+For the customised reports, the simplest option is to run the analysis with the "default" regions that are inbuilt in the Nutil software, and are assigned by selecting "default". More information on the default regions are found in the CustomRegion files in the Nutil package (located in the CustomRegion folder, there is a separate file for each atlas). The “default” option is a whole brain analysis, which means it includes all the reference atlas regions subdivided into broader regions. For example, for the Allen Mouse Brain Atlas v3, 2017, the custom regions are the cortex, fiber tracts, hippocampus, olfactory regions, hypothalamus, regions in the striatum and pallidum, midbrain - hindbrain - and medulla, thalamus, cerebellum, and ventricular system. 
 
-1. To define your own regions, use the *CustomRegionsTemplate.xlsx* that
-is included in the Nutil package, and populate as described below:
+Alternatively, users have the option to generate CustomRegion reports based on their own compilations of reference atlas regions. To do this, customised regions are defined by the user using the CustomRegionsTemplate.xlsx, which is located in the CustomRegion folder and is part of the Nutil package. In this case, the user selects the "custom" option in the Nutil GUI and navigates to the populated template. Fill in the template exactly as shown below:
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image12.png
    :width: 4.80278in
    :height: 3.60427in
 |
 
-**ROW 1:** assign your own names to the regions (e.g. Cortex).
+**ROW 1:** assign your own names to the regions (For example, cortex. This is for your information only).
 
-**ROW 2:** assign colours to the regions. Do this by typing a RGB colour code in the following format: 255;0;0 (for red). This colour will be assigned to the objects located in the custom region for the purposes of the image and coordinate output (for display purposes only).
+**ROW 2:** assign colours to the regions. Do this by typing a RGB colour code in the following format: 255;0;0 (for red). This colour will be assigned to the objects located in the custom region for the purposes of the image output and coordinate output (for display purposes only).
 
 **ROW 3:** enter the colour name (this is for your information only).
 
@@ -188,7 +191,7 @@ For mouse, see the ABAHier2015.xlsx or ABAHier2017.xlsx file for the full list o
  
 For rat, see the WHS_rat_atlas_v2.xlsx or WHS_rat_atlas_v3.xlsx file for the full list of regions and IDs.  
  
-Use the default .xlsx may be used as a guide for filling out the template.  
+The default .xlsx may be used as a guide for filling out the template.  
 
 |
 
@@ -203,17 +206,19 @@ Use the default .xlsx may be used as a guide for filling out the template.
 
 **RefAtlasRegion report**
    
-Report with output organised based on all the regions in the reference atlas: per section and for the whole series (all sections combined).  
+Report with output organised based on all the regions in the reference atlas. There is one report for the whole series (all sections combined) and one per section.
 
-IMPORTANT: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
+**IMPORTANT**: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
+
+The **Clear Label** ID covers objects that fall outside of the atlas maps
  
 **CustomRegion report**
 
-Reports with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx: per section and for the whole series
+Report with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. These are compilations of reference atlas regions and are either user defined ("custom") or the default regions that are inbuild in the Nutil software. For more information see the "Customised regions explained" section. A report is provided for the whole series (all sections combined) and per section. 
 
 **Object report**
 
-List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are then displayed in the image files and in the object reports.  
+Report with a List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. Object reports are not generated with object splitting switched "ON".   
 
 
 In each report, interpret the results as follows:
@@ -222,22 +227,26 @@ In each report, interpret the results as follows:
 |    **Region pixels** |    No. of pixels representing the region.    |
 +======================+==============================================+
 |    **Region area**   |    Area representing the region              |
+|                      |    (= Region pixels x pixel scale)           |
 +----------------------+----------------------------------------------+
 |    **Area unit**     |    Region area unit                          |
+|                           (this is the unit of the pixel scale)     |
 +----------------------+----------------------------------------------+
 |    **Object count**  |    No. of objects located in the region.     |
 |                      |                                              |
-|                      |    | NOTE: Object counts are not generated   |
-|                      |      if object splitting is                  |
-|                      |    | switched “on”.                          |
+|                      |    Object counts are not generated           |
+|                      |    if object splitting is switched "ON".     |
+|                           In this case N/A is displayed.            |
+|                      |                                              |
 +----------------------+----------------------------------------------+
 |    **Object pixels** |    No. of pixels representing objects in     |
 |                      |    this region.                              |
 +----------------------+----------------------------------------------+
-|    **Object area**   |    Area representing objects in this region. |
+|    **Object area**   |    Area representing objects in this region.
+|                      |    (= object pixels x pixel scale)
 +----------------------+----------------------------------------------+
 |    **Load**          |    Ratio of Object pixels to Region pixels   |
-|                      |    (Object pixels/Region                     |
+|                      |    (Object pixels / Region                   |
 |                      |                                              |
 |                      |    pixels).                                  |
 +----------------------+----------------------------------------------+

@@ -1,12 +1,9 @@
-**Installation and Usage**
+**Installation requirements**
 --------------------------
 
-*Nutil* is a stand-alone 64-bit Windows application. There are no installation procedures, just extract the folder and double click on "Nutil.cmd". Nutil is an integral part of the QUINT workflow developed by the Nesys laboratory.
+*Nutil* is a stand-alone 64-bit Windows application. Nutil is downloaded as a zip archive file and can be extracted and run anywhere on the computer by double click on "Nutil.cmd". No installation executable is necessary, and the directory can be moved around the file system as required. Settings data are stored in the local program folder.
 
-**Licence**: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International 
+**Hardware Requirements**
 
-**Cite**: Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Post-processing Toolbox for Histological Rodent Brain Section Images. Front. Neuroinform. 14:37. doi: 10.3389/fninf.2020.00037 
+Nutil is a stand-alone program that can be executed on either a server, desktop or laptop computer. Nutil will employ all the cores available on the system. While there are no specific hardware limitations, the processing time is dependent on the system’s compute power. The more cores and memory available, the faster the operations will be performed. Running Nutil on a single-core laptop is also possible.
 
-**Also described in**: Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, Hartlage-Rübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075. 
-
-**Funding**: This work was supported by the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Specific Grant Agreement No. 720270 (Human Brain Project SGA1) and Specific Grant Agreement No. 785907 (Human Brain Project SGA2). 
