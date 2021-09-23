@@ -11,7 +11,7 @@ Nutil is written in C++ using standard Qt libraries, and is optimised for parall
 - LibXLNT for Excel file I/O (https://github.com/tfussell/xlnt/)
 
 # Compiling from source 
-1.In order to compile from scratch, the following software components are also required:
+1. In order to compile from scratch, the following software components are also required:
  * On Windows, Microsoft Visual C++ 2019 compiler (MSVC), community version (https://visualstudio.microsoft.com/vs/features/cplusplus/)
  * On macOS, XCode (Clang) 
  * On Linux, Gnu C++ compiler
