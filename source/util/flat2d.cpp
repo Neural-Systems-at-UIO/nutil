@@ -27,9 +27,8 @@ unsigned int Flat2D::pixel(int i, int j)
         return m_data_i[i+ j*m_width];
     if (m_bpp==2)
         return m_data_s[i+ j*m_width];
-
     if (m_bpp==1) {
-        return m_data_b[i+j*m_width];
+        return (uchar)m_data_b[i+j*m_width];
     }
     return 0;
 }

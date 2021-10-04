@@ -403,6 +403,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
         if (counter)
             counter->Tick();
+
         for (QPointF qp: a.m_points) {
             for (int i=0;i<1;i++)
             for (int j=0;j<1;j++)
@@ -419,6 +420,9 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
         for (int i=0;i<m_index->width();i++)
             for (int j=0;j<m_index->height();j++) {
                 QPoint p((float)i/(float)m_index->width()*(float)m_testImage->width(),(float)j/(float)m_index->height()*(float)m_testImage->height());
+                if (rand()%1000>997) {
+                    qDebug() << m_index->width() << "vs" <<m_testImage->width();
+                }
                 if (p.x()<0) p.setX(0);
                 if (p.y()<0) p.setY(0);
                 if (p.x()>m_testImage->width()-1) p.setX(m_testImage->width()-1);
@@ -557,6 +561,7 @@ void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString 
         a.m_height = m_image->height();
 
         long index = refImage.pixel(p.x()*refImage.width(),p.y()*refImage.height() );
+
         //if (index!=0)
         {
             AtlasLabel* al = labels.get(index, refImage.m_newFormat);
