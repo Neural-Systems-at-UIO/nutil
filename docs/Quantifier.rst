@@ -170,13 +170,15 @@ Quantifier generates several sets of reports:
 * CustomRegion reports contain quantifications for broader regions. These broader regions are compilations of reference atlas regions, and may either be user defined ("custom") or the default regions included in the Nutil software ("default"). 
 * Object reports contain information about individual objects, and are generated with object splitting switched OFF only.  
 
-For the customised reports, the simplest option is to run the analysis with the "default" regions that are built into the Nutil software, and are assigned by selecting "default". 
+**Customised reports**
+
+1. For the customised reports, the simplest option is to run the analysis with the "default" regions that are built into the Nutil software, and are assigned by selecting "default". 
 
 More information on the default regions are found in the CustomRegion files in the Nutil package (located in the CustomRegion folder, there is a separate file for each atlas). The “default” option is a whole brain analysis, which means it includes all the reference atlas regions subdivided into broader regions. 
 
 *For example, for the Allen Mouse Brain Atlas v3, 2017, the custom regions are the cortex, fiber tracts, hippocampus, olfactory regions, hypothalamus, regions in the striatum and pallidum, midbrain - hindbrain - and medulla, thalamus, cerebellum, and ventricular system*. 
 
-Alternatively, users have the option to generate CustomRegion reports based on their own compilations of reference atlas regions. To do this, customised regions are defined by the user using the CustomRegionsTemplate.xlsx, which is located in the CustomRegion folder and is part of the Nutil package. In this case, the user selects the "custom" option in the Nutil GUI and navigates to the populated template. Fill in the template exactly as shown below:
+2. Alternatively, users have the option to generate CustomRegion reports based on their own compilations of reference atlas regions. To do this, customised regions are defined by the user using the CustomRegionsTemplate.xlsx, which is located in the CustomRegion folder and is part of the Nutil package. In this case, the user selects the "custom" option in the Nutil GUI and navigates to the populated template. Fill in the template exactly as shown below:
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image12.png
    :width: 4.80278in
