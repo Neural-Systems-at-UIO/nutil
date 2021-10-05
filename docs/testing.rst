@@ -9,8 +9,10 @@ As Nutil is a highly flexible software with many options for customised analysis
 
 **Quality assurance**
 
-* We strongly recommend that **ALL** data that comes from Nutil is validated externally by the user prior to research use, as mistakes in image preparation (for example, preparation of the segmentations and the atlas maps) and set-up (for example, selection of the Quantifier settings) may invalidate the output. This recommendation is particularly applicable to analyses performed with features that are not tested as part of the automated validation procedure. 
+* We strongly recommend that **ALL** data that comes from Nutil is validated externally by the user prior to research use, as mistakes in image preparation (for example, preparation of the segmentations and the atlas maps) and set-up (for example, selection of the Quantifier settings) may invalidate the output. There may also be errors in the Nutil output due to bugs that have not yet detected. This recommendation is particularly applicable to analyses performed with features that are not tested as part of the automated validation procedure. 
 
 * Currently only mouse brain datasets are included as part of the automated validation procedure. 
 
 * The implementation of the Waxholm Space Atlas of the Sprague Dawley rat v4 in Nutil has not been thoroughly tested.  
+
+* If you detect errors please inform us by emailing support@ebrains.eu
