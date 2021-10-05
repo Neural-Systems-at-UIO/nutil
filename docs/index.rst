@@ -11,6 +11,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    acknow
    release
    testing
+   support
    
    
 .. toctree::
