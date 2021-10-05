@@ -9,6 +9,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    installation
    Technical
    acknow
+   release
    
    
 .. toctree::
