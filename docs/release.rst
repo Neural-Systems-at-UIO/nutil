@@ -4,13 +4,15 @@
 **Nutil v0.6.0_stable**
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This release does not introduce new features but fixes recently discovered bugs affecting the Quantifier reports in some older versions of Nutil:
+This release does not introduce new features but fixes recently discovered bugs affecting the Quantifier reports in some older versions of Nutil.  
 
-*Bug 1*: Regional load output in the slice reports are incorrect for Nutil v0.4.0 – v0.5.0. The other results in the reports are correct.
+*Bug 1*: Regional load output in the slice reports are incorrect for Nutil v0.4.0 – v0.5.0: the other results in the reports are correct. For Nutil v0.6.0_stable, Bug 1 has been fixed for Quantifier analyses run with a pixel scale = 1. A pixel scale of 1 is the default option in Nutil and will be applied in most cases. However, on application of a pixel scale > 1 or < 1, the regional load outputs in the slice reports remain erroneous. This will be fixed in the next version. 
 
 *Bug 2*: When using the mask feature: region pixels, region areas and loads in the reports are incorrect for Nutil v0.4.3 – v0.5.0. This bug does not affect analyses run without masks.
 
 As the bugs affected core Quantifier functionality, we have introduced more stringent quality assurance routines, with continuous integration  and automatic validation based on an expanded collection of ground truth datasets. We will provide more information about this in a future release. 
+
+
 
 **Nutil v0.5.0**
 ~~~~~~~~~~~~~~~~
