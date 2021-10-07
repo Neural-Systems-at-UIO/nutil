@@ -21,7 +21,7 @@ void ProcessManagerPCounter::LoadXML()
 
     if (QFile::exists(m_anchorFile))
         m_xmlAnchor = AnchorFactory::Load(m_anchorFile);
-//        m_xmlAnchor.Load(m_anchorFile);
+    //        m_xmlAnchor.Load(m_anchorFile);
     else {
         LMessage::lMessage.Message("Could not find anchor file: " + m_anchorFile + ". Please specify in the input xml file!" );
         Data::data.abort = true;
@@ -284,18 +284,18 @@ void ProcessManagerPCounter::Execute()
 
         }
 
-//        qDebug() << Data::data.abort;
+        //        qDebug() << Data::data.abort;
         if (!Data::data.abort)
             m_processes[i]->PCounter(m_inputDir+  pi->m_inFile +"."+pi->m_filetype, m_background,m_colorThreshold, &m_processes[i]->m_areas, m_pixelCutoff, m_pixelCutoffMax, maskFile, m_customMaskInclusionColors);
 
         if (Data::data.abort)
             continue;
 
-//        LMessage::lMessage.Log("  Quantifier done for " +pi->m_inFile);
+        //        LMessage::lMessage.Log("  Quantifier done for " +pi->m_inFile);
         for (Area&a : m_processes[i]->m_areas) {
             a.m_mat = mat;
             a.m_matrixInitialized = true;
-//            qDebug() << normal;
+            //            qDebug() << normal;
             a.m_planeNormal = normal;
 
         }
@@ -316,7 +316,7 @@ void ProcessManagerPCounter::Execute()
             //          break;
 
 
-//            LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
+            //            LMessage::lMessage.Log("Anchoring: " + pi->m_inFile);
             if (!Data::data.abort)
             {
                 QVector3D col = QVector3D(m_customMaskInclusionColors.red(),m_customMaskInclusionColors.green(),m_customMaskInclusionColors.blue());
@@ -328,13 +328,13 @@ void ProcessManagerPCounter::Execute()
             }
 
             m_processItems[i]->m_atlasAreaScaled = m_processes[i]->lImage.m_totalPixelArea;
-//            LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
+            //            LMessage::lMessage.Log("Saving image areas :"+ pi->m_inFile);
             if (!Data::data.abort)
                 m_processes[i]->lImage.SaveAreasImage(m_outputDir + QDir::separator() + m_imageDirectory + QDir::separator()+m_prefix+ pi->m_inFile + ".png",&m_processes[i]->m_counter, &m_processes[i]->m_areas, reports.getList(),cols,maskFile,m_customMaskInclusionColors, m_outputRegionNumbers, m_displayLabelID);
             m_mainCounter.Tick();
         }
         m_processes[i]->m_counter.m_progress = 100;
-//        LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
+        //        LMessage::lMessage.Log("Releasing: " + pi->m_inFile);
         //        LMessage::lMessage.Message("<a href=\"file://"+m_outputDir+"\">"+m_outputDir+"</a>");
 
         // 37 49 71
@@ -367,7 +367,7 @@ void ProcessManagerPCounter::Execute()
 
 
     m_processFinished = true;
-/*    for (int i=0;i<m_processItems.count();i++)
+    /*    for (int i=0;i<m_processItems.count();i++)
         delete m_processItems.takeAt(i);
     for (int i=0;i<m_processes.count();i++)
         delete m_processes.takeAt(i);
@@ -480,7 +480,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v4.label";
             if (data->Get("custom_region_type").toLower()=="default")
                 m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v4.xlsx";
-
+           //LMessage::lMessage.Message("Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.");
         }
     }
 
@@ -488,7 +488,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     m_files = data->Get("files").trimmed().simplified().split(",");
 
     m_pixelCutoff = data->Get("object_min_size").toFloat();
-//    m_pixelCutoffMax = data->Get("object_max_size").toFloat();
+    //    m_pixelCutoffMax = data->Get("object_max_size").toFloat();
     m_pixelCutoffMax = 100000; // NOT USED!
     m_areaScale = data->Get("global_pixel_scale").toFloat();
     m_areaSplitting = data->Get("object_splitting").toLower()=="yes"?1:0;
@@ -523,7 +523,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
     m_outputFileType = data->Get("output_report_type").toLower();
-/*    if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
+    /*    if (!(m_outputFileType.toLower()=="xlsx" || m_outputFileType.toLower()=="csv")) {
         LMessage::lMessage.Error("Error: report type must be specified (xlsx or csv).");
         Data::data.abort = true;
         return;
@@ -555,7 +555,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
             LBook* sbook = new LBookXlnt();
             if (QFile::exists("temp.xlsx"))
-               QFile::remove("temp.xlsx");
+                QFile::remove("temp.xlsx");
 
             QFile::copy(m_reportSheetName,"temp.xlsx");
 #ifdef _WIN32
@@ -582,6 +582,17 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
     }
+
+
+    if (m_dataType == QUINT) {
+        QString labelType = data->Get("label_file");
+
+        if (labelType == "WHS Atlas Rat v4") {
+            LMessage::lMessage.Message("<font color=\"#FF0000\"> Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.</font>");
+        }
+    }
+
+
 }
 
 void ProcessManagerPCounter::SetupFakeReports()
@@ -642,10 +653,10 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
     int x = 1;
     // As long as a next one exist (x-axis reports)
     while (hasNext) {
-//        qDebug() << "Starting..:";
+        //        qDebug() << "Starting..:";
         QString excelName = m_sheet->readStr(i,x);
-  //             qDebug() << excelName << i << " " << x;
-    //           qDebug() << m_sheet->readStr(i+1,x);
+        //             qDebug() << excelName << i << " " << x;
+        //           qDebug() << m_sheet->readStr(i+1,x);
         if (excelName.simplified()!="") {
             QColor reportColor = m_sheet->readCol(i+1,x);
 
@@ -677,7 +688,7 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
     for (Report& r: reports.m_reports)
         r.m_unit = m_units;
 
-//    qDebug() << "DONE reading excel sheet";
+    //    qDebug() << "DONE reading excel sheet";
 }
 
 

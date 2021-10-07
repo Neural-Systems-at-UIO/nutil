@@ -78,7 +78,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -265,8 +265,8 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1066</width>
-             <height>551</height>
+             <width>1070</width>
+             <height>550</height>
             </rect>
            </property>
            <widget class="QWidget" name="layoutWidget">
@@ -419,6 +419,20 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="text">
          <string>Stop</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnUserdocs">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>User documentation</string>
         </property>
        </widget>
       </item>

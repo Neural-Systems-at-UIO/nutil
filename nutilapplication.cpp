@@ -33,6 +33,8 @@ NutilApplication::NutilApplication(int argc, char *argv[])
 }
 
 bool Execute(QString fileName, int numThreads) {
+
+
     try {
         Data::data.isConsole = true;
         NutilTemplate nt;

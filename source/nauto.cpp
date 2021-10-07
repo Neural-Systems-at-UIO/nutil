@@ -60,6 +60,7 @@ void Nauto::Load(QString filename)
 */
 void Nauto::Execute()
 {
+
     if (m_status!=Status::Idle) {
         LMessage::lMessage.Error("Cannot start new job before previous is finished");
         return;

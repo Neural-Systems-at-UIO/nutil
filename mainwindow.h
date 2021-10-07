@@ -163,6 +163,8 @@ private slots:
 
     void on_actionNutil_Duplicator_triggered();
 
+    void on_btnUserdocs_clicked();
+
 private:
     QSharedPointer<Nauto> m_nauto;
     NutilTemplate m_nt;
