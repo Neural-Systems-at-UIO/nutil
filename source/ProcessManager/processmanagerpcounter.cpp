@@ -473,13 +473,13 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         if (labelType == "WHS Atlas Rat v3") {
             m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v3.label";
             if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v3.xlsx";
+                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v3_v2.xlsx";
 
         }
         if (labelType == "WHS Atlas Rat v4") {
             m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v4.label";
             if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v3.xlsx";
+                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v4.xlsx";
 
         }
     }
