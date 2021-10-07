@@ -72,12 +72,13 @@
         <file>Resources/CustomRegions/CustomRegionMouse_2015.xlsx</file>
         <file>Resources/CustomRegions/CustomRegionMouse_2017.xlsx</file>
         <file>Resources/CustomRegions/CustomRegionRat_v2.xlsx</file>
-        <file>Resources/CustomRegions/CustomRegionRat_v3.xlsx</file>
         <file>Resources/text/help/quantifier/output_region_id.rtf</file>
         <file>Resources/text/help/quantifier/coordinate_random_distortion.rtf</file>
         <file>Resources/text/help/quantifier/custom_label_file.rtf</file>
         <file>Resources/text/help/quantifier/display_label_id.rtf</file>
         <file>Resources/text/help/quantifier/custom_mask_directory.rtf</file>
         <file>Resources/labels/WHS_Atlas_Rat_Brain_v4.label</file>
+        <file>Resources/CustomRegions/CustomRegionRat_v3_v2.xlsx</file>
+        <file>Resources/CustomRegions/CustomRegionRat_v4.xlsx</file>
     </qresource>
 </RCC>
