@@ -447,7 +447,15 @@ void MainWindow::on_btnClearData_clicked()
 
 }
 
+
 void MainWindow::on_actionNutil_Duplicator_triggered()
 {
     m_nt.Duplicator("/home/leuat/code/nutildata/input/duptest");
 }
+
+
+void MainWindow::on_btnUserdocs_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://nutil.readthedocs.io/en/latest/", QUrl::TolerantMode));
+}
+
