@@ -1,6 +1,16 @@
 **Release notes**
 --------------------------
 
+**Nutil v0.7.0**
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* This release introduces a new reference atlas: the Waxholm Space Atlas of the Sprague Dawley rat v4 (WHSv4). The citation policy has been updated in the Nutil GUI and Nutil readthedoc for use of the Waxholm Space Atlas. 
+* The default customised regions for the WHSv3 have been updated. See the customised region.xlsx that are included in the Nutil package for more information. 
+* Bug 1 that was discovered in Nutil v0.5.0 and partially fixed in v0.6.0 has been fully fixed in this version: the regional load outputs in the slice reports are now correct irrespective of the pixel scale. 
+* The user documentation has been considerably improved. All user manuals have been removed from the Nutil package, and replaced with a "user documentation" button in the Nutil GUI with a direct link to the Nutil readthedocs. These are updated on a regular basis, and also include user documentation for use of ilastik for the QUINT workflow. 
+* Improvements to error and warning messaging, and updates to the help text in the Nutil GUI. 
+
+
 **Nutil v0.6.0_stable**
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
