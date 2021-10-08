@@ -16,7 +16,6 @@
 #pragma comment(linker,"/HEAP:18000000");
 
 
-
 void setDarkPalette(QApplication& a) {
     a.setStyle(QStyleFactory::create("Fusion"));
     QPalette darkPalette;
