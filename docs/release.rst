@@ -11,7 +11,7 @@
 * Improvements to error and warning messaging, and updates to the help text in the Nutil GUI. 
 
 
-**Nutil v0.6.0_stable**
+**Nutil v0.6.0**
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 This release does not introduce new features but fixes recently discovered bugs affecting the Quantifier reports in some older versions of Nutil.  
