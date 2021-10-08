@@ -31,5 +31,6 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    :hidden:
    
    Ilastik
+   QuickNII_Vis
 
 
