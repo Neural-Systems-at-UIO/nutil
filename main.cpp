@@ -17,7 +17,6 @@
 
 
 
-
 void setDarkPalette(QApplication& a) {
     a.setStyle(QStyleFactory::create("Fusion"));
     QPalette darkPalette;
