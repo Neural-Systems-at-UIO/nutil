@@ -30,7 +30,8 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    :maxdepth: 2
    :hidden:
    
-   Ilastik
    QuickNII_Vis
+   Ilastik
+   
 
 
