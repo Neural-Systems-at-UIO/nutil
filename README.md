@@ -40,24 +40,8 @@ Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Pos
 Yates SC, Groeneboom NE, Coello C, et al. & Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. doi: 10.3389/fninf.2019.00075
 
 # Contact us
-support@ebrains.eu
+Report issues here on github or email: support@ebrains.eu
 
-# Changelog
-
-0.5.11-0.5.38 ** 26.02.2020
-- Updated CI script, testing
-- Self-validator implemented in CI and updated to support csv etc
-
-v0.5.11 *** 24.02.2020 
-- Transform output tiff files do not get an extra ".tif" if the file already ends with ".tiff" or ".tif"
-
-v0.5.10 *** 23.02.2020 
-- Introduced changelog to the readme.md
-- Nutil validator compares png pixels instead of binary data
-
-v0.5.9 *** 23.02.2020 
-- Fixed up Nutil validator output text to be clean
-- Added qtiff.dll to the CI build of Nutil due to lack of native tiff support. TiffCreator should work now. 
 
 
  
