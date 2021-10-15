@@ -13,16 +13,27 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    testing
    support
    
-   
 .. toctree::
-   :caption: Operations
+   :caption: Operations: preprocessing
    :numbered:
    :maxdepth: 3
 
    TiffCreator
    Transform 
    Resize
-   Quantifier
+   
+.. toctree::
+   :caption: Operations: postprocessing
+   :numbered:
+   :maxdepth: 3
+   
+   QuantifierIntro
+   QuantifierInput
+   QuantifierRun
+   QuantifierOB
+   QuantifierMasks
+   QuantifierReports
+   QuantifierOutput
    
    
 .. toctree::
