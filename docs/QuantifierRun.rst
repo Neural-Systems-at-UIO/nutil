@@ -35,14 +35,6 @@
 |    Unique ID format         |    _sXXX…                             |
 +-----------------------------+---------------------------------------+
 
-|
-+----------+
-| |image13||
-+----------+
-
-.. image:: cfad7c6d57444e3b93185b655ab922e0/media/image9.png
-      :width: 6.30139in
-      :height: 3.41511in
 
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
