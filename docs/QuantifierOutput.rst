@@ -2,6 +2,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **1. REPORTS** 
+================
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
       :width: 5.88611in
@@ -57,16 +58,19 @@ In each report, interpret the results as follows:
 |
 
 **2. IMAGES**
+==============
 
 * Segmentations superimposed on the atlas maps in PNG format.  
 * The object colours are assigned based on the customised regions. If no regions are specified, or object falls outside of the specified areas, the objects are shown in red by default
 
 **3. COORDINATES**  
- 
+===================
+
 * JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
 * The viewer is available via the MediaWiki link here: www.nitrc.org/projects/meshview.
 
 **4. NUT FILE** 
+=================
 
 The NUT file is a text file containing the analysis settings. This can be loaded into Nutil Quantifier with the “load” button. To view, open with Notepad.
 
