@@ -1,4 +1,4 @@
-**Installation requirements**
+**Installation**
 --------------------------
 
 *Nutil* is a stand-alone 64-bit Windows application. Nutil is downloaded as a zip archive file and can be extracted and run anywhere on the computer by double click on "Nutil.cmd". No installation executable is necessary, and the directory can be moved around the file system as required. Settings data are stored in the local program folder.
