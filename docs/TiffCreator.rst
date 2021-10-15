@@ -1,10 +1,9 @@
 **TiffCreator**
 --------------------------
 
-**How to run TiffCreator**
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+The TiffCreator operation converts JPEG, PNG, BMP, GIF and untiled TIFF images to the tiled TIFF format that is compatible with Transform. TiffCreator operates in batch, converting all the images in an input folder and saving them in the specified output folder. 
 
-*TiffCreator* converts JPEG, PNG, BMP, GIF and untiled TIFF images to the tiled TIFF format that is compatible with Transform. TiffCreator operates in batch, converting all the images in an input folder and saving them in the specified output folder.  
+**How to run TiffCreator**
 
 1. To begin, click "New". Select "TiffCreator". 
 2. Select the input folder (containing the images to be converted), output folder and enter the TiffCreator parameters in the Nutil GUI (e.g. output compression type).  
