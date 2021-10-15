@@ -15,7 +15,6 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    
 .. toctree::
    :caption: Operations: preprocessing
-   :numbered:
    :maxdepth: 3
 
    TiffCreator
