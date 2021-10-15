@@ -3,7 +3,7 @@
 
 The Resize operation enables rapid resizing of PNG, JPEG and untiled TIFF images by application of a resize factor or a fixed pixel width. The output images are in PNG format and are suited for ilastik segmentation.
 
-**How to run Resize**
+**How to run the Resize operation**
 
 1. To begin, click “New”. Select “Resize”. 
 2. Select the input folder, output folder and resize factor in the Nutil GUI (see the “help” buttons for more information).  
