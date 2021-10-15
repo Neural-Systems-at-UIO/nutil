@@ -1,4 +1,4 @@
-**Quantifier**
+**Introduction**
 -------------------------
 
 *Quantifier* is an integral part of the QUINT workflow, and enables the regional quantification of features extracted from histological images based on a reference atlas such as the Allen Mouse Brain Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat. For an overview watch: https://www.youtube.com/watch?v=yPkAbSfla_c 
