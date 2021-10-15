@@ -22,7 +22,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    Resize
    
 .. toctree::
-   :caption: Operations: post-processing
+   :caption: Operation: Quantifier
    :numbered:
    :maxdepth: 3
    
