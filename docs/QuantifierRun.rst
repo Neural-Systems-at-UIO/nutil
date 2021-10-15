@@ -11,7 +11,7 @@
 7. Press “Save as”. This saves a copy of the settings in a simple text file in .NUT format. This is useful for future reference, and may be reloaded into Nutil via the “load” button (for example, to repeat the analysis on a new set of images). 
 8. Nutil automatically detects the number of core processor (threads) available on the computer (8 in the example). To ensure adequate processing power, choose one less than the total available (6 or 7 here) and press “Start”. Wait until the process is complete.  
 9. The output files are automatically saved in the specified output folder. 
-|
+
 
 +-----------------------------+---------------------------------------+
 |    **Advanced Parameter**   |    **Default settings**               |
