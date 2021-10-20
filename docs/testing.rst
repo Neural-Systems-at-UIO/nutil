@@ -15,4 +15,4 @@ As Nutil is a highly flexible software with many options for customised analysis
 
 * The implementation of the Waxholm Space Atlas of the Sprague Dawley rat v4 in Nutil has not been thoroughly tested.  
 
-* If you detect errors please inform us by emailing support@ebrains.eu
+* If you detect errors please inform us by posting an issue on our `Nutil Github page <https://github.com/Neural-Systems-at-UIO/nutil/issues/>` or by contacting  support@ebrains.eu.
