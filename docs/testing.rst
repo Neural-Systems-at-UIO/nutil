@@ -33,15 +33,15 @@ For a more thorough validation, the Validator is initiated manually on a local m
 
 1. Synthetic dataset described in the validation section of Groeneboom et al, 2020 (DOI: 10.3389/fninf.2020.00037). This comprised two sections, with objects of known size and anatomical location in the Allen Mouse Brain Atlas CCF3 v2015. 
 
-.. image:: 57b5b25cd16c46909387f0c6b0d53548/media/image1.png
-   :width: 2.87in
-   :height: 2.81in
+   .. image:: 57b5b25cd16c46909387f0c6b0d53548/media/image1.png
+      :width: 2.87in
+      :height: 2.81in
 
 2. Same dataset as above but with hemisphere masks applied to validate the mask feature. 
 
-.. image:: 57b5b25cd16c46909387f0c6b0d53548/media/image2.png
-   :width: 5.725in
-   :height: 3.83056in
+   .. image:: 57b5b25cd16c46909387f0c6b0d53548/media/image2.png
+      :width: 5.725in
+      :height: 3.83056in
 
 3. Synthetic dataset composed of three sections with objects of known size and anatomical location in the Waxholm Space Atlas of the Sprague Dawley rat v4. 
 
