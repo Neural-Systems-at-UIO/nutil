@@ -19,7 +19,9 @@ As Nutil is a highly flexible software with many options for customised analysis
 **Automated validation**
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Nutil has been expanded to include a Validator feature (implemented on 22.02.21). This directly compares PNG, TIF, TIFF, CSV and HTML output files from two sets of Nutil analyses, with any differences flagged. It is set up so that the output from a new version of Nutil is compared to ground truth data with known output, to ensure that any bugs in the code are picked up prior to release. On implementation of new Nutil features that alter the output structure, these ground truth datasets have to be updated, as the Nutil output and ground truth must be identical to pass the validation procedure. Two validation systems have been implemented that utilise the Validator: 
+An automatic validator feature was implemented on 22.02.21. This directly compares PNG, TIF, TIFF, CSV and HTML output files from two sets of Nutil analyses, with any differences flagged. It is set up so that the output from new versions of Nutil are compared to ground truth data with known output, to ensure that any errors or bugs in the code are picked up prior to release. In order to pass the validation procedure, the Nutil output and ground truth must be identical. 
+
+Two validation systems have been implemented that utilise the Validator: 
 
 **1.	Automated validation on Github that initiates with each git push** 
 
@@ -27,11 +29,13 @@ Nutil is open-source and shared with continuous integration (CI) and automatic v
 
 **2.	Automated validation on a local machine**
 
-For a more thorough validation, the Validator is initiated manually on a local machine with a larger collection of test datasets.
+For a more thorough validation, the Validator is initiated manually on a local machine with a larger collection of test datasets. These are not shared on Github.
 
 **Ground truth datasets**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Synthetic dataset described in the validation section of Groeneboom et al, 2020 (DOI: 10.3389/fninf.2020.00037). This comprised two sections, with objects of known size and anatomical location utilising the Allen Mouse Brain Atlas CCF3 v2015. 
+
 2. Same dataset as above but with hemisphere masks applied to validate the mask feature. 
+
 3. Synthetic dataset composed of three sections with objects of known size and anatomical location in the Waxholm Space Atlas of the Sprague Dawley rat v4. 
