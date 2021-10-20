@@ -16,7 +16,7 @@ As Nutil is a highly flexible software with many options for customised analysis
 **Automated validation**
 ~~~~~~~~~~~~~~~~~~~~~~
 
-An automatic validator feature was implemented on 22.02.21. This directly compares PNG, TIF, TIFF, CSV and HTML output files from two sets of Nutil analyses, with any differences flagged. It is set up so that the output from new versions of Nutil are compared to ground truth data with known output, to ensure that any errors or bugs in the code are picked up prior to release. In order to pass the validation procedure, the Nutil output and ground truth must be identical. 
+An automatic validator feature was implemented in Nutil on 22.02.21. This directly compares PNG, TIF, TIFF, CSV and HTML output files from two sets of Nutil analyses, with any differences flagged. It is set up so that the output from new versions of Nutil are compared to ground truth data with known output, to ensure that any errors or bugs in the code are picked up prior to release. In order to pass the validation procedure, the Nutil output and ground truth must be identical. 
 
 Two validation systems have been implemented that utilise the Validator: 
 
