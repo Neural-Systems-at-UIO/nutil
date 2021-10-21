@@ -228,7 +228,7 @@ The file type to export will depend on the plan for the next step of analysis.
 * Do not alter the output location. The default export location is the folder in which the ilastik file is located.  If the output location is altered, the file will fail to export.  This is a bug in the system!  
 
 
-**Help! ilastik keeps crashing. I have very large images. What do I do?**
+**8. Help! ilastik keeps crashing. I have very large images. What do I do?**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * While ilastik has the computational power to process very large images, the viewer in the ilastik user interface is not able to process whole images that are very large in the “live” mode. For large images in the training phase, it is therefore important to remain zoomed-in in the viewer when the live update is switched on. This is especially true if many classes are labelled and many features selected.  As a general rule of thumb, keep the portion of the image that is visible in the viewer to below 3000 x 3000 pixels.  The absolute value will depend on the number of classes and features selected.
