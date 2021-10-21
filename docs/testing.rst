@@ -19,9 +19,9 @@ An automatic validator feature was implemented in Nutil on 22.02.21. This direct
 
 Two validation systems have been implemented that utilise the Validator: 
 
-**1.	Automated validation on Github that initiates with each git push** 
+**1.	Automated validation on Github that initiates with each pre-release** 
 
-Nutil is open-source and shared with continuous integration (CI) and automatic validation on Github. This means that for each push a new pre-release is compiled, and used to process three small test datasets on a virtual machine in an automatic procedure. The output of these procedures are compared to corresponding ground truth data with the Validator, with a pre-release on Github if the output matches the ground truth exactly. If the Validator detects differences, the pre-release is blocked and the differences are flagged. We then investigate and fix any code errors before pushing again to initiate a repeat of the validation. 
+Nutil is open-source and shared with continuous integration (CI) and automatic validation on Github. For the automatic validation Nutil is compiled and used to process four small test datasets on a virtual machine in an automatic procedure. The output of these procedures are compared to corresponding ground truth data with the Validator, with a release on Github if the output matches the ground truth exactly. If the Validator detects differences, the release is blocked and the differences are flagged. We then investigate and fix any code errors before releasing again to initiate a repeat of the validation. 
 
 **2.	Automated validation on a local machine**
 
@@ -35,4 +35,6 @@ For a more thorough validation, the Validator is initiated manually on a local m
 2. Same dataset as above but with hemisphere masks applied to validate the mask feature. 
 
 3. Synthetic dataset composed of three sections with objects of known size and anatomical location in the Waxholm Space Atlas of the Sprague Dawley rat v4. 
+
+4. Transform dataset.
 
