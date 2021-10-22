@@ -1,0 +1,5 @@
+Object pixels;Object area;units;Center X;Center Y;Region ID;Region Name;;;;;;;;;;;;;;;;;
+250000;250000;pixels;2084.500000;5809.500000;4;Molecular cell layer of the cerebellum;;;;;;;;;;;;;;;;;
+90000;90000;pixels;1466.500000;3081.500000;433;Parietal association cortex, medial area;;;;;;;;;;;;;;;;;
+90000;90000;pixels;2699.500000;3111.500000;67;corpus callosum and associated subcortical white matter;;;;;;;;;;;;;;;;;
+40000;40000;pixels;2036.500000;1964.500000;411;Cingulate area 1;;;;;;;;;;;;;;;;;

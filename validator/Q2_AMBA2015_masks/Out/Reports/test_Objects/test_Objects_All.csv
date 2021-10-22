@@ -1,0 +1,9 @@
+Section ID;Object pixels;Object area;units;Center X;Center Y;Region ID;Region Name;;;;;;;;;;;;;;;;
+_s0218;100;100;pixels;296.500000;205.500000;797;Zona incerta;;;;;;;;;;;;;;;;
+_s0218;100;100;pixels;392.500000;260.500000;961;Piriform area;;;;;;;;;;;;;;;;
+_s0218;25;25;pixels;292;85;382;Field CA1;;;;;;;;;;;;;;;;
+_s0218;25;25;pixels;356;140;463;Field CA3;;;;;;;;;;;;;;;;
+_s0218;4;4;pixels;287.500000;160.500000;1020;Posterior complex of the thalamus;;;;;;;;;;;;;;;;
+_s0218;4;4;pixels;404.500000;135.500000;847;Primary auditory area, layer 5;;;;;;;;;;;;;;;;
+_s0314;100;100;pixels;292.500000;156.500000;672;Caudoputamen;;;;;;;;;;;;;;;;
+_s0314;25;25;pixels;289;272;754;Olfactory tubercle;;;;;;;;;;;;;;;;

@@ -1,0 +1,13 @@
+   **Segmentation** **Atlas maps Overlay image**
+
+.. image:: 57b5b25cd16c46909387f0c6b0d53548/media/image1.png
+   :width: 5.74167in
+   :height: 5.63333in
+
+.. image:: 57b5b25cd16c46909387f0c6b0d53548/media/image2.png
+   :width: 5.725in
+   :height: 3.83056in
+
+   .. image:: 57b5b25cd16c46909387f0c6b0d53548/media/image3.png
+      :width: 4.87083in
+      :height: 5.41667in
