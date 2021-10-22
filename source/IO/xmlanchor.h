@@ -64,6 +64,7 @@ public:
 class AbstractAnchor {
 public:
     //AbstractAnchor()  {}
+    QString m_atlas="";
 
     //  XMLAnchor();
     QVector<XMLData> m_data;

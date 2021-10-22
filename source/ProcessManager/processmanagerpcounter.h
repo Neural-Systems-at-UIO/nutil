@@ -49,6 +49,15 @@ public:
     double m_coordinateRandomSpread = 0.0;
 
 
+    QMap<QString, QString> atlasQuickniiMap{
+        {"ABA_Mouse_CCFv3_2015_25um", "Allen Mouse Brain 2015"},
+        {"ABA_Mouse_CCFv3_2017_25um", "Allen Mouse Brain 2017"},
+        {"WHS_SD_Rat_v2_39um", "WHS Atlas Rat v2"},
+        {"WHS_SD_Rat_v3_39um", "WHS Atlas Rat v3"},
+        {"WHS_SD_Rat_v4_39um", "WHS Atlas Rat v4"},
+                                   };
+
+
     QString m_reportDirectory = "Reports";
     QString m_imageDirectory = "Images";
     QString m_coordinateDirectory = "Coordinates";
@@ -88,7 +97,7 @@ public:
     float CalculateRamNeededInGB() override;
 
     AbstractAnchor* m_xmlAnchor = nullptr;
-    void LoadXML();
+    void LoadXML(NutilTemplate* data);
     bool Build(NutilTemplate* data) override;
     void Execute() override; //(QString compression, QColor background, bool autoClip, int thumbnailSize, QString thumbType);
     void ReadHeader(NutilTemplate* data) override;

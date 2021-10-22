@@ -16,7 +16,7 @@ float ProcessManagerPCounter::CalculateRamNeededInGB()
 
 }
 
-void ProcessManagerPCounter::LoadXML()
+void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
 {
 
     if (QFile::exists(m_anchorFile))
@@ -25,6 +25,27 @@ void ProcessManagerPCounter::LoadXML()
     else {
         LMessage::lMessage.Message("Could not find anchor file: " + m_anchorFile + ". Please specify in the input xml file!" );
         Data::data.abort = true;
+    }
+
+    // Verify that the atlas specified in the anchor file is the same as the current run
+    if (m_dataType==QUINT) {
+        QString labelType = data->Get("label_file");
+
+        if (m_xmlAnchor!=nullptr) {
+            qDebug() << "*** ATLAS: " +m_xmlAnchor->m_atlas;
+            if (!atlasQuickniiMap.contains(m_xmlAnchor->m_atlas)) {
+                // Unknown anchoring data?
+                LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: unrecognized atlas map '"+m_xmlAnchor->m_atlas+"' in the anchor file. Might be a potential problem, please make sure that the atlas is correct!</font>");
+
+            }
+            else {
+                if (atlasQuickniiMap[m_xmlAnchor->m_atlas]!=labelType) {
+                    LMessage::lMessage.Message("<font color=\"#FF0000\">Error: Atlas map specified in the anchor file not the same as specified in nutil. Please make sure that these are identical types. ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
+                    Data::data.abort = true;
+                }
+
+            }
+        }
     }
 
 }
@@ -48,7 +69,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 
     if (m_dataType==QUINT)
-        LoadXML();
+        LoadXML(data);
 
     if (m_pixelCutoffMax<=m_pixelCutoff) {
         LMessage::lMessage.Error("Error: max pixel cutoff cannot be lower than lower pixel cutoff.");
@@ -65,6 +86,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     }
     QStringList files;
     Util::findFilesInSubDirectories(&files,m_inputDir,"png");
+
 
     // Unique ID format
 
@@ -93,6 +115,8 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
     }
 
 
+    if (Data::data.abort)
+        return false;
 
 
     //    bool done = false;
@@ -482,6 +506,8 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
                 m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v4.xlsx";
            //LMessage::lMessage.Message("Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.");
         }
+
+
     }
 
 
@@ -588,7 +614,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         QString labelType = data->Get("label_file");
 
         if (labelType == "WHS Atlas Rat v4") {
-            LMessage::lMessage.Message("<font color=\"#FF0000\"> Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.</font>");
+            LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.</font>");
         }
     }
 

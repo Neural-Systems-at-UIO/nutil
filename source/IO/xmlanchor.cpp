@@ -65,6 +65,9 @@ void XMLAnchor::Load(QString file)
                 /* If it's named persons, we'll go to the next.*/
                 if (xml.name()==QString("series")) {
                     //continue;
+                    QXmlStreamAttributes attributes = xml.attributes();
+                    m_atlas = attributes.value("target").toString().split(".").first();
+//                    qDebug() << "ATlas is : "<<m_atlas<<attributes.value("target").toString();
                 }
                 if(xml.name() == QString("slice")) {
 
@@ -119,6 +122,9 @@ void JSONAnchor::Load(QString file)
 
     //convert the json object to variantmap
     QVariantList dataList = mainMap["slices"].toList();
+
+    //convert the json object to variantmap
+    m_atlas = mainMap["target"].toString().split(".").first();
 
     for (int i=0;i<dataList.count();i++) {
         QVariantMap map = dataList[i].toMap();

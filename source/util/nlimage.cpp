@@ -420,9 +420,9 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
         for (int i=0;i<m_index->width();i++)
             for (int j=0;j<m_index->height();j++) {
                 QPoint p((float)i/(float)m_index->width()*(float)m_testImage->width(),(float)j/(float)m_index->height()*(float)m_testImage->height());
-                if (rand()%1000>997) {
+/*                if (rand()%1000>997) {
                     qDebug() << m_index->width() << "vs" <<m_testImage->width();
-                }
+                }*/
                 if (p.x()<0) p.setX(0);
                 if (p.y()<0) p.setY(0);
                 if (p.x()>m_testImage->width()-1) p.setX(m_testImage->width()-1);
