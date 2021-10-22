@@ -50,6 +50,7 @@ void LSheetCSV::Save(QString basename)
     QFile file(fn);
     file.open(QIODevice::ReadWrite);
     QTextStream stream(&file);
+    //stream<<"sep=;\n";
     for (int j=0;j<m_height;j++) {
         QString s;
         for (int i=0;i<m_width;i++) {

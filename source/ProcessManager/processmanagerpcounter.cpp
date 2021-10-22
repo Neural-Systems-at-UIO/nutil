@@ -464,7 +464,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     if (m_dataType == QUINT) {
         m_atlasDir = data->Get("quantifier_atlas_dir");
-        m_coordinateRandomSpread = data->Get("coordinate_random_distortion").toDouble();
+        m_coordinateRandomSpread = 0;//data->Get("coordinate_random_distortion").toDouble();
     }
 
 

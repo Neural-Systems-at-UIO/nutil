@@ -139,7 +139,7 @@ void MainWindow::on_btnStart_clicked()
 //    while(m_workerThread->isRunning())
   //      QThread::sleep(1000);
 
-
+    Data::data.abort = false;
     m_nauto->m_numThreads = ui->leProcessors->text().toInt();
     m_nauto->m_data = &m_nt;
     if (m_workerThread==nullptr)
