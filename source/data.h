@@ -16,6 +16,7 @@ public:
     bool forceRedraw = false;
     bool redrawFileList = false;
     bool m_isQuickNII = true;
+    bool addCsvSeparator = false;
     QColor m_maskedOutColor = Qt::black;
     QString m_globalMessage = "";
     bool abort = false;

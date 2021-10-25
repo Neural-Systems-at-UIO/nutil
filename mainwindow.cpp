@@ -140,6 +140,7 @@ void MainWindow::on_btnStart_clicked()
   //      QThread::sleep(1000);
 
     Data::data.abort = false;
+    Data::data.addCsvSeparator = m_settings.getdouble("csv_separator")==1.0;
     m_nauto->m_numThreads = ui->leProcessors->text().toInt();
     m_nauto->m_data = &m_nt;
     if (m_workerThread==nullptr)
