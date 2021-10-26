@@ -8,8 +8,7 @@ More stringent quality assurance routines were introduced in February 2021 in li
 As Nutil is a highly flexible software with many options for customised analysis, and has evolved over time in response to users’ needs, not all features have been tested to the same extent. The core functionality is tested more extensively than less central features. The testing status of each feature will be added here in due course. 
 
 * We strongly recommend that ALL data from Nutil is validated externally by the user prior to research use, as mistakes in image preparation and set-up (e.g. creation of the atlas maps and segmentations, and selection of the Quantifier settings) may invalidate the output. This recommendation is particularly applicable to analyses performed with features that are not tested as part of the automated validation procedure as there may be software bugs that are not yet discovered. 
-* Currently only mouse brain datasets are included as part of the automated validation procedure.  
-* If you detect errors please inform us by posting an issue on our Nutil Github page https://github.com/Neural-Systems-at-UIO/nutil/issues or by contacting support@ebrains.eu.
+* If you detect errors please inform us by posting an issue on our Github page https://github.com/Neural-Systems-at-UIO/nutil/issues or by contacting support@ebrains.eu.
 
 
 **Automated validation**
@@ -40,5 +39,11 @@ For a more thorough validation, the Validator is initiated manually on a local m
 **Feature testing status**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+1. Reference atlases - (Allen mouse brain / Waxholm Space Atlas of the Sprague Dawley rat) - validated
+2. Area splitting (YES/NO) - validated
+3. Mask feature - validated
+4. Customised reports - (default/custom) - validated
+5. Minimum object size - validated
+6. Pixel scale unit - validated 
 
 
