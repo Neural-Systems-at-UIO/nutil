@@ -40,7 +40,7 @@ For a more thorough validation, the Validator is initiated manually on a local m
 **Feature testing status**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. **Reference atlases** - (Allen mouse brain / Waxholm Space Atlas of the Sprague Dawley rat) - validated.
+1. Reference atlases - (Allen mouse brain / Waxholm Space Atlas of the Sprague Dawley rat) - validated.
 2. Object colour - standard colours are validated (black 0,0,0 , white 255,255,255, blue 0,0,255, red 255,0,0).
 3. Object splitting - (YES/NO) - validated.
 4. Mask feature - validated.
