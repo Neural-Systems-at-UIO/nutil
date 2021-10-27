@@ -7,8 +7,9 @@ More stringent quality assurance routines were introduced in February 2021 in li
 
 As Nutil is a highly flexible software with many options for customised analysis, and has evolved over time in response to users’ needs, not all features have been tested to the same extent. The core functionality is tested more extensively than less central features. The testing status of each feature will be added here in due course. 
 
-* We strongly recommend that ALL data from Nutil is validated externally by the user prior to research use, as mistakes in image preparation and set-up (e.g. creation of the atlas maps and segmentations, and selection of the Quantifier settings) may invalidate the output. This recommendation is particularly applicable to analyses performed with features that are not tested as part of the automated validation procedure as there may be software bugs that are not yet discovered. 
-* If you detect errors please inform us by posting an issue on our Github page https://github.com/Neural-Systems-at-UIO/nutil/issues or by contacting support@ebrains.eu.
+* We strongly recommend that ALL data from Nutil is validated externally by the user prior to research use, as mistakes in image preparation and set-up (e.g. creation of the atlas maps and segmentations, and selection of the Quantifier settings) may invalidate the output. 
+* This recommendation is particularly applicable to analyses performed with features that are not tested as part of the automated validation procedure as there may be software bugs that are not yet discovered. 
+* If you detect errors please inform us by posting an issue on Github https://github.com/Neural-Systems-at-UIO/nutil/issues or by contacting support@ebrains.eu.
 
 
 **Automated validation**
@@ -39,11 +40,26 @@ For a more thorough validation, the Validator is initiated manually on a local m
 **Feature testing status**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Reference atlases - (Allen mouse brain / Waxholm Space Atlas of the Sprague Dawley rat) - validated
-2. Area splitting (YES/NO) - validated
-3. Mask feature - validated
-4. Customised reports - (default/custom) - validated
-5. Minimum object size - validated
-6. Pixel scale unit - validated 
+**Reference atlases:** (Allen mouse brain / Waxholm Space Atlas of the Sprague Dawley rat) - validated.
+**Object colour:** standard colours are validated (black 0,0,0 , white 255,255,255, blue 0,0,255, red 255,0,0).
+**Object splitting** (YES/NO) - validated.
+**Mask feature** - validated.
+**Customised reports** - (default/custom) - validated.
+**Minimum object size** - validated.
+**Pixel scale** - validated. 
+**Pixel scale unit** - validated.
+**Output report type** - CSV is validated. HTML has not been extensively tested, some errors known here, but nothing significant. 
+**Coordinate extraction** - the output "looks" right but this has not been validated thoroughly. 
+**Coordinate random distortion** - do not use, there is a bug here. This feature will be removed in future versions. 
+**Point cloud density** - the output "looks" right but this has not been validated thoroughly.
+**Nifti size** - not validated.
+**Display object IDs** - No known bugs but not validated thoroughly. 
+**Display region IDS** - No known bugs but not validated thoroughly.
+**Unique ID format** - (_sXXX / user) - no known bugs. 
+
+In some instances, a bug may only occur with certain combinations of settings (for example, with white objects and with the mask feature swithed ON). Be aware that it is not possible to test every combination, and so bugs may remain despite being marked up as "validated" above.
+
+
+
 
 
