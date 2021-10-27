@@ -40,24 +40,24 @@ For a more thorough validation, the Validator is initiated manually on a local m
 **Feature testing status**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Reference atlases:** (Allen mouse brain / Waxholm Space Atlas of the Sprague Dawley rat) - validated.
-**Object colour:** standard colours are validated (black 0,0,0 , white 255,255,255, blue 0,0,255, red 255,0,0).
-**Object splitting** (YES/NO) - validated.
-**Mask feature** - validated.
-**Customised reports** - (default/custom) - validated.
-**Minimum object size** - validated.
-**Pixel scale** - validated. 
-**Pixel scale unit** - validated.
-**Output report type** - CSV is validated. HTML has not been extensively tested, some errors known here, but nothing significant. 
-**Coordinate extraction** - the output "looks" right but this has not been validated thoroughly. 
-**Coordinate random distortion** - do not use, there is a bug here. This feature will be removed in future versions. 
-**Point cloud density** - the output "looks" right but this has not been validated thoroughly.
-**Nifti size** - not validated.
-**Display object IDs** - No known bugs but not validated thoroughly. 
-**Display region IDS** - No known bugs but not validated thoroughly.
-**Unique ID format** - (_sXXX / user) - no known bugs. 
+**1. Reference atlases:** (Allen mouse brain / Waxholm Space Atlas of the Sprague Dawley rat) - validated.
+**2. Object colour:** standard colours are validated (black 0,0,0 , white 255,255,255, blue 0,0,255, red 255,0,0).
+**3. Object splitting** (YES/NO) - validated.
+**4. Mask feature** - validated.
+**5. Customised reports** - (default/custom) - validated.
+**6. Minimum object size** - validated.
+**7. Pixel scale** - validated. 
+**8. Pixel scale unit** - validated.
+**9. Output report type** - CSV is validated. HTML has not been extensively tested, some errors known here, but nothing significant. 
+**10. Coordinate extraction** - the output "looks" right but this has not been validated thoroughly. 
+**11. Coordinate random distortion** - do not use, there is a bug here. This feature will be removed in future versions. 
+**12. Point cloud density** - the output "looks" right but this has not been validated thoroughly.
+**13. Nifti size** - not validated.
+**14. Display object IDs** - No known bugs but not validated thoroughly. 
+**15. Display region IDS** - No known bugs but not validated thoroughly.
+**16. Unique ID format** - (_sXXX / user) - no known bugs. 
 
-In some instances, a bug may only occur with certain combinations of settings (for example, with white objects and with the mask feature swithed ON). Be aware that it is not possible to test every combination, and so bugs may remain despite being marked up as "validated" above.
+In some instances, a bug may only occur with certain combinations of settings (for example, with white objects and with the mask feature swithed ON). Be aware that it is not possible to test every combination, and so in rare instances bugs may remain despite being marked up as "validated" above.
 
 
 
