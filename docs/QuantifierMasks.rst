@@ -1,5 +1,5 @@
 **Custom masks explained**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===========================
 
 The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This is particularly useful for investigating expression differences in the right and left hemisphere, as a mask can be applied to differentiate the two sides.  
 
