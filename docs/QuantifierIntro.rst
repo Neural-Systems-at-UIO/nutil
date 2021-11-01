@@ -5,13 +5,13 @@ Quantifier is an integral part of the QUINT workflow, and enables the regional q
 
 For an overview watch: https://www.youtube.com/watch?v=yPkAbSfla_c 
 
-Quantifier requires three sets of input: 
+**Quantifier requires three sets of input:**
 
 1. segmentation images 
 2. atlas maps
 3. anchoring information in XML or JSON format
 
-It generates three sets of output: 
+**It generates three sets of output:**
 
 1. reports with quantifications per atlas region
 2. overlay images with the segmentations superimposed on the atlas maps
