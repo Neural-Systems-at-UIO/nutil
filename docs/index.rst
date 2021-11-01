@@ -30,7 +30,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    QuantifierIntro
    QuantifierInput
    QuantifierRun
-   QuantifierOB
+   QuantifierOS
    QuantifierMasks
    QuantifierReports
    QuantifierOutput
