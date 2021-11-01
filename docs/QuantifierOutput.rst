@@ -1,14 +1,15 @@
 **How to interpret the output**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+================================
 
 **Reports** 
-================
+-------------
 
    .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
       :width: 5.88611in
       :height: 2.86512in
 
 **RefAtlasRegion report**
+~~~~~~~~~~~~~~~~~~~~~~~~~~
    
 Report with output organised based on all the regions in the reference atlas. There is one report for the whole series (all sections combined) and one per section.
 
@@ -17,10 +18,12 @@ Report with output organised based on all the regions in the reference atlas. Th
 The **Clear Label** ID covers objects that fall outside of the atlas maps
  
 **CustomRegion report**
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Report with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. These are compilations of reference atlas regions and are either user defined ("custom") or the default regions that are inbuild in the Nutil software. For more information see the "Customised regions explained" section. A report is provided for the whole series (all sections combined) and per section. 
 
 **Object report**
+~~~~~~~~~~~~~~~~~~
 
 Report with a List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. Object reports are not generated with object splitting switched "ON".   
 
@@ -58,19 +61,19 @@ In each report, interpret the results as follows:
 |
 
 **Images**
-==============
+------------
 
 * Segmentations superimposed on the atlas maps in PNG format.  
 * The object colours are assigned based on the customised regions. If no regions are specified, or object falls outside of the specified areas, the objects are shown in red by default
 
 **Coordinates**  
-===================
+----------------
 
 * JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
 * The viewer is available via the MediaWiki link here: www.nitrc.org/projects/meshview.
 
 **NUT file** 
-=================
+--------------
 
 The NUT file is a text file containing the analysis settings. This can be loaded into Nutil Quantifier with the “load” button. To view, open with Notepad.
 
