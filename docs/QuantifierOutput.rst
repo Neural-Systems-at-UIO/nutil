@@ -30,33 +30,27 @@ In each report, interpret the results as follows:
 
 
 
-+----------------------+----------------------------------------------+
-|    **Region pixels** |    No. of pixels representing the region.    |
-+======================+==============================================+
-|    **Region area**   |    Area representing the region              |
-|                      |    (= Region pixels x pixel scale)           |
-+----------------------+----------------------------------------------+
-|    **Area unit**     |    Region area unit                          |
-|                           (this is the unit of the pixel scale)     |
-+----------------------+----------------------------------------------+
-|    **Object count**  |    No. of objects located in the region.     |
-|                      |                                              |
-|                      |    Object counts are not generated           |
-|                      |    if object splitting is switched "ON".     |
-|                           In this case N/A is displayed.            |
-|                      |                                              |
-+----------------------+----------------------------------------------+
-|    **Object pixels** |    No. of pixels representing objects in     |
-|                      |    this region.                              |
-+----------------------+----------------------------------------------+
-|    **Object area**   |    Area representing objects in this region. |
-|                      |    (= object pixels x pixel scale)           |
-+----------------------+----------------------------------------------+
-|    **Load**          |    Ratio of Object pixels to Region pixels   |
-|                      |    (Object pixels / Region                   |
-|                      |                                              |
-|                      |    pixels).                                  |
-+----------------------+----------------------------------------------+
++----------------------+-------------------------------------------------------------------------------+
+|    **Region pixels** |    No. of pixels representing the region.                                     |
++======================+===============================================================================+
+|    **Region area**   |    Area representing the region (region pixels x pixel scale).                |
+|                      |                                                                               |
++----------------------+-------------------------------------------------------------------------------+
+|    **Area unit**     |    Region area unit (unit of the pixel scale).                                |
+|                      |                                                                               |
++----------------------+-------------------------------------------------------------------------------+
+|    **Object count**  |    Number of objects located in the region (N/A if object splitting "ON").    |
+|                      |                                                                               |
++----------------------+-------------------------------------------------------------------------------+
+|    **Object pixels** |    Number of pixels representing objects in this region.                      |
+|                      |                                                                               |
++----------------------+-------------------------------------------------------------------------------+
+|    **Object area**   |    Area representing objects in this region (object pixels x pixel scale).    |
+|                      |                                                                               |
++----------------------+-------------------------------------------------------------------------------+
+|    **Load**          |    Ratio of Object pixels to Region pixels (Object pixels / Region pixels).   |
+|                      |                                                                               |
++----------------------+-------------------------------------------------------------------------------+
 
 
 **Images**
