@@ -28,6 +28,8 @@ Object reports are not generated with object splitting switched "ON".
 
 In each report, interpret the results as follows:
 
+
+
 +----------------------+----------------------------------------------+
 |    **Region pixels** |    No. of pixels representing the region.    |
 +======================+==============================================+
@@ -47,8 +49,8 @@ In each report, interpret the results as follows:
 |    **Object pixels** |    No. of pixels representing objects in     |
 |                      |    this region.                              |
 +----------------------+----------------------------------------------+
-|    **Object area**   |    Area representing objects in this region.
-|                      |    (= object pixels x pixel scale)
+|    **Object area**   |    Area representing objects in this region. |
+|                      |    (= object pixels x pixel scale)           |
 +----------------------+----------------------------------------------+
 |    **Load**          |    Ratio of Object pixels to Region pixels   |
 |                      |    (Object pixels / Region                   |
