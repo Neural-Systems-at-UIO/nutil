@@ -1,32 +1,30 @@
 **How to interpret the output**
 ================================
 
-**Reports** 
--------------
-
-   .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
-      :width: 5.88611in
-      :height: 2.86512in
-
 **RefAtlasRegion report**
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
    
 Report with output organised based on all the regions in the reference atlas. There is one report for the whole series (all sections combined) and one per section.
 
 **IMPORTANT**: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
 
 The **Clear Label** ID covers objects that fall outside of the atlas maps
+
+   .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
+      :width: 5.88611in
+      :height: 2.86512in
  
 **CustomRegion report**
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 Report with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. These are compilations of reference atlas regions and are either user defined ("custom") or the default regions that are inbuild in the Nutil software. For more information see the "Customised regions explained" section. A report is provided for the whole series (all sections combined) and per section. 
 
 **Object report**
-~~~~~~~~~~~~~~~~~~
+-------------------
 
-Report with a List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. Object reports are not generated with object splitting switched "ON".   
+Report with a List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. 
 
+Object reports are not generated with object splitting switched "ON".   
 
 In each report, interpret the results as follows:
 
