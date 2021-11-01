@@ -56,7 +56,6 @@ In each report, interpret the results as follows:
 |                      |    pixels).                                  |
 +----------------------+----------------------------------------------+
 
-|
 
 **Images**
 ------------
