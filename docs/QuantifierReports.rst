@@ -1,4 +1,4 @@
-**Customised reports explained**
+**CustomRegion reports explained**
 =================================
 
 Quantifier generates several sets of reports:  
