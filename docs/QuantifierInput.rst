@@ -142,4 +142,3 @@ Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may b
 .. |image22| image:: cfad7c6d57444e3b93185b655ab922e0/media/image16.png
    :width: 2.59306in
    :height: 3.53443in
-
