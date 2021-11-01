@@ -1,5 +1,5 @@
 **How to run Quantifier**
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==========================
 
 
 1. Create three new folders: for example, titled “Segmentations”, “Atlas_maps” and “Output”. Transfer the segmentations to the segmentation folder, the atlas maps to the atlas map folder. Leave the output folder empty. 
