@@ -19,7 +19,6 @@
 Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below. 
 
 **Requirement:**
-~~~~~~~~~~~~~~~~~~
 
 * Must be indexed 8-bit or 24-bit RGB images in PNG format.
   
@@ -31,12 +30,15 @@ Any image analysis software may be used to generate the segmentations as long as
 | |image11||
 +----------+
 
-|
 
-**ilastik**
-~~~~~~~~~~~~
+**Software recommendations**
 
-   We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations with the Glasbey lookup table applied with Fiji to visualise the output. A user manual that describes how to use ilastik in the context of the QUINT workflow is included as part of the Nutil package, see: ilastik userguide. ilastik is available to download at: http://ilastik.org/download.html. 
+**Ilastik**: We recommend the pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with Fiji to visualise the output. See the ilastik section of this ReadtheDoc for instructions. ilastik is available to download at: http://ilastik.org/download.html. 
+
+**QuPath**: QuPath is an alternative that can be used to generate the segmentations. https://qupath.github.io/
+
+**Fiji**: Fiji is also useful https://imagej.net/software/fiji/ 
+
 
 **Preparing the atlas maps** 
 --------------------------------
@@ -67,7 +69,7 @@ The atlas maps are customised to match the cutting plane and proportions of the 
 
   Visit and download QuickNII and VisuAlign here: https://ebrains.eu/service/quicknii-and-visualign 
 
-**Preparing the XML or JSON file containing the anchoring information.**
+**Preparing the XML or JSON file.**
 ----------------------------------------------------------------------------
  
 Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used. They all contain the linear registration information that is needed to generate coordinate output. Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the file. 
