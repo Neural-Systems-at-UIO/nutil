@@ -38,11 +38,11 @@ Any image analysis software may be used to generate the segmentations as long as
 
 * Image size: They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
 
- **While Nutil technically supports segmentations of any size as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images before segmenting with ilastik**. 
+ **While Nutil supports segmentations of any size, as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images before segmenting with ilastik**. 
 
- Downscaling has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning   algorithms used by ilastik (see the ilastik section of the ReadtheDoc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory.  
+ Downscaling has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning   algorithms used by ilastik (see the ilastik section of the Read the Doc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory.  
 
-* Internal properties: Quantifier is only able to extract one Red Green Blue (RGB) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI. For example, the objects in the segmentation here are red, which is RGB colour code: 255,0,0).
+* Internal properties: Quantifier is only able to extract one Red Green Blue (RGB) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the Nutil GUI. For example, the objects in the segmentation here are red, so extract RGB colour: 255,0,0.
   
 +----------+
 | |image11||
@@ -50,7 +50,7 @@ Any image analysis software may be used to generate the segmentations as long as
 
 **Software recommendations**
 
-**Ilastik**: We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with Fiji to visualise the output. See the ilastik section of this ReadtheDoc for instructions. ilastik is available to download at: http://ilastik.org/download.html. 
+**Ilastik**: We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with Fiji to visualise the output. See the ilastik section of this Read the Doc for instructions. ilastik is available to download here: http://ilastik.org/download.html. 
 
 **QuPath**: QuPath is an alternative that can be used to generate the segmentations. https://qupath.github.io/
 
