@@ -17,14 +17,14 @@ The **Clear Label** ID covers objects that fall outside of the atlas maps
 **CustomRegion report**
 ------------------------
 
-Report with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. These are compilations of reference atlas regions and are either user defined ("custom") or the default regions that are inbuild in the Nutil software. For more information see the "Customised regions explained" section. A report is provided for the whole series (all sections combined) and per section. 
+Report with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. These are compilations of reference atlas regions and are either defined by the user ("custom") or are the default regions that are in-build in the Nutil software. For more information see the "Customised regions explained" section. A report is provided for the whole series (all sections combined) and per section. 
 
 **Object report**
 -------------------
 
-Report with a List of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. 
+Report with a list of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. 
 
-Object reports are not generated with object splitting switched "ON".   
+Object reports are not generated with object splitting switched "ON" as this feature invalidates the object counts.   
 
 In each report, interpret the results as follows:
 
@@ -58,7 +58,7 @@ In each report, interpret the results as follows:
 ------------
 
 * Segmentations superimposed on the atlas maps in PNG format.  
-* The object colours are assigned based on the customised regions. If no regions are specified, or object falls outside of the specified areas, the objects are shown in red by default
+* The object colours are assigned based on the customised regions. If no regions are specified, or object falls outside of the specified areas, the objects are displayed in red by default.
 
 **Coordinates**  
 ----------------
@@ -69,7 +69,9 @@ In each report, interpret the results as follows:
 **NUT file** 
 --------------
 
-The NUT file is a text file containing the analysis settings. This can be loaded into Nutil Quantifier with the “load” button. To view, open with Notepad.
+The NUT file is a text file that contains the parameters that were used for the Nutil analysis. This can be loaded into Nutil Quantifier with the “load” button to recreate an analysis. 
+
+To view its content, open the NUT file with Notepad. As the NUT file is an internal document intended for the transfer of metadata only, it is not always easy to interpret. Some of the parameters stored in the file are conditional on other fields, and so are not activated unless the condition is met. For example, the custom_mask_colour field is not applied unless use_custom_masks = Yes. However, the NUT file does contain information about the Nutil version used for the analysis, and can give clues to potential errors and so is useful for problem solving. 
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
    :width: 6.30139in
