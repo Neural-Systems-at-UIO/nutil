@@ -23,7 +23,7 @@ Atlas map: tg2345_MMSH_s001_nl.flat
 It is fine to include a string of letters and numbers followed by the unique ID. As Quantifier scans and detects the "_s" part of the name, the file name should not contain additional "_s". Example that would not work: tg2345_MMSH_ss_s001.png.
 
 
-**Preparing the segmentations**
+**Preparing the Segmentations**
 ------------------------------------
  
 Any image analysis software may be used to generate the segmentations as long as the segmentations meet the requirements listed below. 
