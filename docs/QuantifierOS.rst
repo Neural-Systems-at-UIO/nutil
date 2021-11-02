@@ -10,9 +10,10 @@ With object splitting switched OFF, the object counts are correct, but the load 
 **Recommendation:** 
 
 Select NO for small objects to get accurate object counts (e.g. cells).  
+
 Select YES for large objects that overlap atlas regions (e.g. connectivity data, or densely packed cells or features). This gives precise load output. 
 
-See the help buttons in Nutil for an example image.  
+See the object splitting help button in Nutil for an example image.  
 
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
