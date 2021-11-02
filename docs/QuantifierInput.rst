@@ -88,7 +88,7 @@ File format: The atlas maps are in .FLAT format and cannot be viewed directly. T
 Visit and download QuickNII and VisuAlign here: https://ebrains.eu/service/quicknii-and-visualign 
 
 
-**Preparing the XML or JSON file.**
+**Preparing the XML or JSON file**
 -------------------------------------
  
 Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used here. 
