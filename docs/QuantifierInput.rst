@@ -65,27 +65,27 @@ File format: The atlas maps are in .FLAT format and cannot be viewed directly. T
 +----------+
 
 
-  **QuickNII**
-  ~~~~~~~~~~~~
+**QuickNII**
+~~~~~~~~~~~~
 
-  * QuickNII is a standalone software for affine spatial registration (anchoring) of section images - typically high resolution histological images - to a reference atlas such as the Allen Mouse Brain Atlas or the Waxholm Atlas of the Sprague Dawley Rat. In QuickNII, the reference atlas is transformed to match anatomical landmarks in the experimental images. In this way, the spatial relationship between experimental image and atlas is defined, without introducing transformations in the original experimental images. 
+* QuickNII is a standalone software for affine spatial registration (anchoring) of section images - typically high resolution histological images - to a reference atlas such as the Allen Mouse Brain Atlas or the Waxholm Atlas of the Sprague Dawley Rat. In QuickNII, the reference atlas is transformed to match anatomical landmarks in the experimental images. In this way, the spatial relationship between experimental image and atlas is defined, without introducing transformations in the original experimental images. 
 
-  * Once all the sections are registered, QuickNII may be used to generate atlas maps that match the cutting plane and proportions of the experimental image data. The anchoring information (coordinates) is saved and stored in an XML or JSON file.   
+* Once all the sections are registered, QuickNII may be used to generate atlas maps that match the cutting plane and proportions of the experimental image data. The anchoring information (coordinates) is saved and stored in an XML or JSON file.   
 
-  * The registration is user-guided with some automation. Following anchoring of a limited number of sections containing key landmarks, transformations are propagated across the entire series of images to reduce the manual work required. These propagations must be validated by visual inspection and typically require fine adjustments for most sections. A user manual is provided here: https://quicknii.readthedocs.io/en/latest/ 
+* The registration is user-guided with some automation. Following anchoring of a limited number of sections containing key landmarks, transformations are propagated across the entire series of images to reduce the manual work required. These propagations must be validated by visual inspection and typically require fine adjustments for most sections. A user manual is provided here: https://quicknii.readthedocs.io/en/latest/ 
 
-  **VisuAlign**
-  ~~~~~~~~~~~~~~
+**VisuAlign**
+~~~~~~~~~~~~~~
 
-  * VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration. The 2D-to-3D registration is performed with QuickNII and stored in the JSON file. It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
+* VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration. The 2D-to-3D registration is performed with QuickNII and stored in the JSON file. It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
 
-  * Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may be exported in .FLAT format. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual is provided here: https://visualign.readthedocs.io/en/latest/
+* Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may be exported in .FLAT format. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual is provided here: https://visualign.readthedocs.io/en/latest/
 
 Visit and download QuickNII and VisuAlign here: https://ebrains.eu/service/quicknii-and-visualign 
 
 
 **Preparing the XML or JSON file.**
-----------------------------------------------------------------------------
+-------------------------------------
  
 Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used here. 
 
