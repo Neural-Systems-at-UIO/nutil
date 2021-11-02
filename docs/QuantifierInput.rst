@@ -38,7 +38,7 @@ Any image analysis software may be used to generate the segmentations as long as
 
 * Image size: They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
 
- **While Nutil supports segmentations of any size, as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images before segmenting with ilastik**. 
+ **While Nutil supports segmentations of any size - as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images before segmenting with ilastik**. 
 
  Downscaling has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning   algorithms used by ilastik (see the ilastik section of the Read the Doc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory.  
 
