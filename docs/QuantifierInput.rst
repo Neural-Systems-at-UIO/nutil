@@ -36,7 +36,9 @@ Any image analysis software may be used to generate the segmentations as long as
 
 * Image size: They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
 
-**While Nutil technically supports segmentations of any size as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images before segmenting with ilastik or another image analysis software. Downscaling has several advantages. It almost always improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning algorithms used by ilastik (see the ilastik section of the ReadtheDoc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory.**  
+ **While Nutil technically supports segmentations of any size as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images before segmenting with ilastik**. 
+
+ Downscaling has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning   algorithms used by ilastik (see the ilastik section of the ReadtheDoc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory.  
 
 * Internal properties: Quantifier is only able to extract one Red Green Blue (RGB) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI. For example, the objects in the segmentation here are red, which is RGB colour code: 255,0,0).
   
