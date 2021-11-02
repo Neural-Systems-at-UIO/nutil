@@ -131,8 +131,8 @@ Note: Nonlinear adjustment of the atlas maps with VisuAlign does not alter the l
    :width: 4.1in
    :height: 2.8in
 .. |image12| image:: cfad7c6d57444e3b93185b655ab922e0/media/image7.png
-   :width: 1.76111in
-   :height: 1.39185in
+   :width: 3.5in
+   :height: 2.8in
 .. |image13| image:: cfad7c6d57444e3b93185b655ab922e0/media/image8.png
    :width: 5.90694in
    :height: 2.724in
