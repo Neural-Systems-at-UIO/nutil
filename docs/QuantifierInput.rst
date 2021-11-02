@@ -4,13 +4,23 @@
 **File naming requirement**
 -------------------------------
 
-* The file names of the *segmentation files* and the *atlas maps* that correspond to a particular section image must contain the same unique ID. These unique IDs must also be present in the XML or JSON file containing the anchoring information. This happens automatically as long as the images that are anchored with QuickNII contain the unique IDs.
+**It is strongly recommended to change the file names of the histological images as the first step of the QUINT workflow. By using images that follow the file naming convention as input for ilastik, QuickNII and VisuAlign, the output files from these software will also comply with the naming convention, and are- thereby directly compatible with Nutil Quantifier.**
 
-* By default Quantifier supports IDs in the format: _sXXX.., with XXX.. representing the section number. The section number should reflect the serial order and spacing of the sections as this is a requirement for the QuickNII software (e.g. _s002, _s006, _s010 for every 4th section starting with section 2). Example: tg2345_MMSH_s001_segmentation.png. It is fine to include a string of letters and numbers followed by the unique ID. As Quantifier scans and detects the "_s" part of the name, the file name should not contain additional "_s". Example that would not work: tg2345_MMSH_ss_s001.png.
+* The file names of the segmentation and the atlas map that correspond to a particular section image must contain the same unique ID, and should follow the _sXXX... file naming convention, with XXX.. representing the section number (this is not restricted to three digits, _sXXXX also works). 
 
-**As the _sXXX naming convention applies to both QuickNII and Quantifier, we strongly recommend changing the file names as the first step in the QUINT workflow. This can be done with Transform.**
+* The section number should reflect the serial order and spacing of the sections as this is a requirement for QuickNII (e.g. _s02, _s06, _s10 for every 4th section starting with section 2). 
 
-* Quantifier also supports user-defined IDs using regular expressions – RegExp. This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information on this see the “help” button in the Nutil GUI or contact user support.  
+* The unique IDs must also be present in the XML or JSON file containing the registration information (check this by opening with Notepad). This happens automatically as long as the file names of the histological images that are used for the QuickNII registration contain the unique IDs.
+
+* Quantifier also supports user-defined IDs using regular expressions – RegExp. This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information see the “help” button in the Nutil GUI or contact user support.  
+
+**Examples that comply with the naming convention:** 
+
+Histological image: tg2345_MMSH_s001.png. 
+Segmentation image: tg2345_MMSH_s001_segmentation.png. 
+Atlas map: tg2345_MMSH_s001_nl.flat
+
+It is fine to include a string of letters and numbers followed by the unique ID. As Quantifier scans and detects the "_s" part of the name, the file name should not contain additional "_s". Example that would not work: tg2345_MMSH_ss_s001.png.
 
 
 **Preparing the segmentations**
@@ -22,7 +32,7 @@ Any image analysis software may be used to generate the segmentations as long as
 
 * Must be indexed 8-bit or 24-bit RGB images in PNG format.
   
-* Must have the same proportions as the images used to generate the atlas maps (not the same proportions as the actual atlas maps as QuickNII alters the proportions slightly). They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
+* Must have the same proportions as the histological images used to generate the atlas maps (not the same proportions as the actual atlas maps as QuickNII alters the proportions slightly). They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
   
 * Quantifier is only able to extract one RGB (Red Green Blue) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the GUI (e.g. the objects in the segmentation here are red, which is RGB colour code: 255,0,0).
   
@@ -30,6 +40,9 @@ Any image analysis software may be used to generate the segmentations as long as
 | |image11||
 +----------+
 
+* While Nutil will support segmentations of any size as long as there is enough memory installed on the computer used, it is highly recommended to downscale the histological images before segmenting with ilastik or another image analysis software. 
+
+Downscaling has several advantages. It typically improves the quality of the segmention as it removes noise from the image. It alsoWhile Nutil Quantifier supports images 
 
 **Software recommendations**
 
