@@ -38,7 +38,7 @@ Any image analysis software may be used to generate the segmentations as long as
 
 * Image size: They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
 
- **We do not recommend running Quantifier on segmented PNG images larger than around 10000x10000 pixels. While Nutil supports segmentations of any size up to this limit - as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images as much as possible before segmenting them. ** 
+ **We do not recommend running Quantifier on segmented PNG images larger than around 10000x10000 pixels. While Nutil supports segmentations of any size up to this limit - as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images as much as possible before segmenting them.** 
 
  Downscaling has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning   algorithms used by ilastik (see the ilastik section of the Read the Doc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory. The aim here is to downscale as much as possible but without losing information from the images that is actually important.The downscaling factor should be determined by trial and error and should be applied consistenty to all the images in the series. 
 
