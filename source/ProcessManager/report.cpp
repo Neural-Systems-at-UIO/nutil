@@ -284,6 +284,7 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
     summary->writeStr(0,5,"Center Y");
     summary->writeStr(0,6,"Region ID");
     summary->writeStr(0,7,"Region Name");
+    summary->writeStr(0,8,"Custom Region");
     //summary->writeStr(0,8,"Slice");
 
     int yy=1;
@@ -362,7 +363,12 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
 //                summary->Set(yy,6,a.atlasLabel->area);
                 summary->writeStr(yy,7,a.atlasLabel->name);
             }
-
+            for (auto& rep : m_reports) {
+                for (auto& id : rep.m_IDs) {
+                    if (id==a.atlasLabel->index)
+                        summary->Set(yy,8,rep.m_filename);
+                }
+            }
             yy++;
 
 
