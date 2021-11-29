@@ -51,7 +51,8 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
             else {
                 if (atlasQuickniiMap[m_xmlAnchor->m_atlas]!=labelType) {
 
-                    //LMessage::lMessage.Message("<font color=\"#FF0000\">Error: Atlas map specified in the anchor file not the same as specified in nutil. Please make sure that these are identical types. ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
+//                    LMessage::lMessage.Message("<font color=\"#FF0000\">Error: Atlas map specified in the anchor file not the same as specified in nutil. Please make sure that these are identical types. ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
+                    LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: Atlas map specified in the anchor file not the same as specified in nutil. Overriding with the specified type: ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
                     //Data::data.abort = true;
                     m_overrideLabelFile = atlasQuickniiMap[m_xmlAnchor->m_atlas];
                 }
@@ -484,6 +485,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         QString labelType = data->Get("label_file");
         if (m_overrideLabelFile!="")
             labelType = m_overrideLabelFile;
+
         //       qDebug() << "Labl type:" <<labelType;
         if (labelType.toLower() == "custom") {
             m_labelFile = data->Get("custom_label_file");
