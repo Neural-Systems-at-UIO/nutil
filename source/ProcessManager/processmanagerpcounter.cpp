@@ -19,6 +19,16 @@ float ProcessManagerPCounter::CalculateRamNeededInGB()
 void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
 {
 
+    if (!QFile::exists(m_anchorFile)) {
+        QDir dir(m_atlasDir);
+        foreach( const QFileInfo& entry, dir.entryInfoList( QStringList() << "*.json"<<"*.xml", QDir::Files | QDir::Hidden | QDir::NoSymLinks ) ) {
+           m_anchorFile = entry.absoluteFilePath();
+           LMessage::lMessage.Message("Automatically assumed anchor file: "+m_anchorFile);
+           break;
+        }
+    }
+
+
     if (QFile::exists(m_anchorFile))
         m_xmlAnchor = AnchorFactory::Load(m_anchorFile);
     //        m_xmlAnchor.Load(m_anchorFile);
