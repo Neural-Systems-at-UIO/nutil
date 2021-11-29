@@ -43,6 +43,7 @@ public:
     QString m_reportSheetName;
     QString m_units = "mm";
     QString m_patternType;
+    QString m_overrideLabelFile="";
     QStringList m_files;
     QString m_prefix ="";
 
