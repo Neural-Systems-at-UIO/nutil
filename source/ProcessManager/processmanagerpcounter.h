@@ -109,6 +109,8 @@ public:
     void GenerateReports(QSharedPointer<LSheet> m_sheet);
     bool Verify() override { return true; }
 
+    void setupLabelFiles(NutilTemplate* data);
+
 };
 
 

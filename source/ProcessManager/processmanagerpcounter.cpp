@@ -55,6 +55,8 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
                     LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: Atlas map specified in the anchor file not the same as specified in nutil. Overriding with the specified type: ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
                     //Data::data.abort = true;
                     m_overrideLabelFile = atlasQuickniiMap[m_xmlAnchor->m_atlas];
+                    // Make sure values are set
+                    setupLabelFiles(data);
                 }
 
             }
@@ -481,50 +483,9 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     }
 
 
-    if (m_dataType == QUINT) {
-        QString labelType = data->Get("label_file");
-        if (m_overrideLabelFile!="")
-            labelType = m_overrideLabelFile;
+    if (m_dataType == QUINT)
+        setupLabelFiles(data);
 
-        //       qDebug() << "Labl type:" <<labelType;
-        if (labelType.toLower() == "custom") {
-            m_labelFile = data->Get("custom_label_file");
-            //m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
-            if (data->Get("custom_region_type").toLower()!="custom") {
-                LMessage::lMessage.Message("Warning: you are using a custom label file without a custom report file.");
-            }
-        }
-        if (labelType == "Allen Mouse Brain 2015") {
-            m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
-            if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
-        }
-        if (labelType == "Allen Mouse Brain 2017") {
-            m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
-            if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
-        }
-        if (labelType == "WHS Atlas Rat v2") {
-            m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
-            if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v2.xlsx";
-
-        }
-        if (labelType == "WHS Atlas Rat v3") {
-            m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v3.label";
-            if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v3_v2.xlsx";
-
-        }
-        if (labelType == "WHS Atlas Rat v4") {
-            m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v4.label";
-            if (data->Get("custom_region_type").toLower()=="default")
-                m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v4.xlsx";
-           //LMessage::lMessage.Message("Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.");
-        }
-
-
-    }
 
 
     m_files = data->Get("files").trimmed().simplified().split(",");
@@ -733,4 +694,48 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
     //    qDebug() << "DONE reading excel sheet";
 }
 
+void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
+{
+    QString labelType = data->Get("label_file");
+    if (m_overrideLabelFile!="") {
+        labelType = m_overrideLabelFile;
+    }
 
+    //       qDebug() << "Labl type:" <<labelType;
+    if (labelType.toLower() == "custom") {
+        m_labelFile = data->Get("custom_label_file");
+        //m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
+        if (data->Get("custom_region_type").toLower()!="custom") {
+            LMessage::lMessage.Message("Warning: you are using a custom label file without a custom report file.");
+        }
+    }
+    if (labelType == "Allen Mouse Brain 2015") {
+        m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
+        if (data->Get("custom_region_type").toLower()=="default")
+            m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
+    }
+    if (labelType == "Allen Mouse Brain 2017") {
+        m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
+        if (data->Get("custom_region_type").toLower()=="default")
+            m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
+    }
+    if (labelType == "WHS Atlas Rat v2") {
+        m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
+        if (data->Get("custom_region_type").toLower()=="default")
+            m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v2.xlsx";
+
+    }
+    if (labelType == "WHS Atlas Rat v3") {
+        m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v3.label";
+        if (data->Get("custom_region_type").toLower()=="default")
+            m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v3_v2.xlsx";
+
+    }
+    if (labelType == "WHS Atlas Rat v4") {
+        m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v4.label";
+        if (data->Get("custom_region_type").toLower()=="default")
+            m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v4.xlsx";
+       //LMessage::lMessage.Message("Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.");
+    }
+
+}
