@@ -79,12 +79,20 @@ for df in all_data:
 
 	for i in range(0,len(df)):
 		key = df['Region Name'][i].lower().split(",")[0]
-		#print(key)
 		if (od[i]!=0):
-			if (not key in dmap):
-				dmap[key] = []
+			if typ==0:
+				if (key not in dmap):
+					dmap[key] = []
 
-			dmap[key].append(od[i])
+				dmap[key].append(od[i])
+
+			if typ==1:
+				if (key not in dmap):
+					dmap[key] = [0]
+
+				dmap[key][0] +=od[i]
+
+
 
 
 
@@ -120,9 +128,10 @@ for key in dmap:
 #	print(len(dmap[key]))
 
 	if sz>=0 and typ==0:
-		xticks.append(key)
-		xp.append(sx + (sz)/2.0)
-		xp_colors.append((c[0],c[1],c[2]))
+		if (key not in xticks):
+			xticks.append(key)
+			xp.append(sx + (sz)/2.0)
+			xp_colors.append((c[0],c[1],c[2]))
 
 
 
