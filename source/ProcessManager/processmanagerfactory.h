@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "source/ProcessManager/processmanagerautocontrast.h"
 #include "source/ProcessManager/processmanagertiffcreator.h"
 #include "source/ProcessManager/processmanagerresize.h"
+#include "source/ProcessManager/processmanagerneuroglancer.h"
 
 class ProcessManagerFactory {
 public:
@@ -43,6 +44,8 @@ public:
             return new ProcessManagerTiffCreator();
         if (pm_type.toLower() == "resize")
             return new ProcessManagerResize();
+        if (pm_type.toLower() == "neuroglancer")
+            return new ProcessManagerNeuroglancer();
 
         return nullptr;
     }

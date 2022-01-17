@@ -627,11 +627,12 @@ void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilPro
 }
 
 
-void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread)
+void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread, QString atlasType)
 {
 
     QString o;
-
+//    o+="{\n";
+  //  o+="\"atlas_type\" : \""+atlasType+"\",\n";
     o+="[\n";
     int cnt=0;
 
@@ -705,6 +706,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
     }
 
     o+="\n]\n";
+//    o+="}";
     QFile file (filename);
     file.open(QFile::Text | QFile::WriteOnly);
     QTextStream outstream(&file);

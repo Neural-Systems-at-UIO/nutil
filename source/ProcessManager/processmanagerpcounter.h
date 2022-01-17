@@ -38,6 +38,7 @@ public:
     QString m_inputDir, m_outputDir, m_maskDir;
     QString m_atlasDir;
     QString m_labelFile;
+    QString m_labelType;
     QString m_anchorFile;
     QString m_regexp;
     QString m_reportSheetName;

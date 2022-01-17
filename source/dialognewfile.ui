@@ -60,6 +60,11 @@
      <string>Resize</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>Neuroglancer</string>
+    </property>
+   </item>
   </widget>
   <widget class="QPushButton" name="btnOK">
    <property name="geometry">

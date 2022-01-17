@@ -631,11 +631,11 @@ void ProcessManagerPCounter::BuildReports()
     }
 
     if (m_output3DPoints=="all") {
-        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread);
+        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread,m_labelType);
         reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread);
     }
     if (m_output3DPoints=="summary") {
-        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread);
+        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread, m_labelType);
     }
     if (m_output3DPoints=="slices") {
         reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread);
@@ -697,6 +697,7 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
 void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
 {
     QString labelType = data->Get("label_file");
+    m_labelType = labelType;
     if (m_overrideLabelFile!="") {
         labelType = m_overrideLabelFile;
     }

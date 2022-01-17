@@ -92,6 +92,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 SOURCES += main.cpp \
     source/IO/nutiltemplate.cpp \
     source/LBook/lbookhtml.cpp \
+    source/ProcessManager/processmanagerneuroglancer.cpp \
     source/ProcessManager/processmanagerng.cpp \
     source/ProcessManager/processmanagerresize.cpp \
     source/Validator/nutilvalidator.cpp \
@@ -119,6 +120,7 @@ SOURCES += main.cpp \
     source/LBook/lbook.cpp \
     source/LBook/lbookxlnt.cpp \
     source/unittest.cpp \
+    source/util/neuroglancer.cpp \
     source/util/nlimage.cpp \
     source/util/lmessage.cpp \
     source/util/lparameter.cpp \
@@ -149,6 +151,7 @@ HEADERS += \
     nutilapplication.h \
     source/IO/nutiltemplate.h \
     source/LBook/lbookhtml.h \
+    source/ProcessManager/processmanagerneuroglancer.h \
     source/ProcessManager/processmanagerng.h \
     source/ProcessManager/processmanagerresize.h \
     source/Validator/nutilvalidator.h \
@@ -177,6 +180,7 @@ HEADERS += \
     source/LBook/lbook.h \
     source/LBook/lbookxlnt.h \
     source/unittest.h \
+    source/util/neuroglancer.h \
     source/util/nlimage.h \
     source/util/lmessage.h \
     source/util/lparameter.h \

@@ -87,7 +87,7 @@ public:
     void CreateCustomRegions(QString filename,  QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items,AtlasLabels* labels, QString bType);
 
     void Create3DSummary(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread);
-    void Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread);
+    void Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread, QString atlasType);
     void Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread);
 
     void CreateNifti(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, int size);
