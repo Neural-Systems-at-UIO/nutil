@@ -7,13 +7,19 @@ import math
 import matplotlib.ticker as mtick
 
 if len(sys.argv)<2:
-	print("Usage: python plot_reference_atlas_regions [nutil directory]")
+	print("Usage: python plot_reference_atlas_regions [nutil directory] [type]")
 	exit(1)
 
 
 report_files = glob.glob(sys.argv[1]+"/**/*RefAtlasRegions.csv", recursive = True)
 #report_files = glob.glob(sys.argv[1]+"/**/*RefAtlasRegions_*.csv", recursive = True)
 atlas_files = glob.glob(sys.argv[1]+"/**/*.label", recursive = True)
+
+
+typ = 0
+if (len(sys.argv)==3):
+	typ = int(sys.argv[2])
+
 
 
 color_map = {}
@@ -86,8 +92,12 @@ xx = 0
 fig, ax = plt.subplots()
 xticks = []
 xp = []
-fig.set_figwidth(10)
-fig.set_figheight(5)
+if (typ==0):
+	fig.set_figwidth(10)
+	fig.set_figheight(5)
+if (typ==1):
+	fig.set_figwidth(8)
+	fig.set_figheight(8)
 xp_colors = []
 td = []
 for key in dmap:
@@ -96,36 +106,56 @@ for key in dmap:
 	x=[]
 	sx = xx
 	sz = 0
+	c = color_map[key]
 	for val in dmap[key]:
 		d.append(val)
 		td.append(val)
 		x.append(xx)
 		xx = xx + 1
 		sz = sz + 1
+		if (typ==1):
+			xticks.append(key)
+			xp_colors.append((c[0],c[1],c[2]))
 
 #	print(len(dmap[key]))
 
-	c = color_map[key]
-	if sz>=0:
+	if sz>=0 and typ==0:
 		xticks.append(key)
 		xp.append(sx + (sz)/2.0)
 		xp_colors.append((c[0],c[1],c[2]))
 
 
 
-	p1 = ax.bar(x,d, width=2.0, color=(c[0],c[1],c[2]))
+	if (typ==0):
+		ax.bar(x,d, width=2.0, color=(c[0],c[1],c[2]))
+		ax.set_ylabel('Load')
 	#ax.bar_label(p1, label_type='center')
-	ax.set_ylabel('Load')
 
-ticks = plt.xticks(xp, xticks,rotation = 45, fontsize=6)
+if (typ==0):
+	ticks = plt.xticks(xp, xticks,rotation = 45, fontsize=6)
 
 
-for label in ax.get_xmajorticklabels():
-    label.set_horizontalalignment("right")
+	for label in ax.get_xmajorticklabels():
+		label.set_horizontalalignment("right")
 
-fmt = '%.2f%%' # Format you want the ticks, e.g. '40%'
-yticks = mtick.FormatStrFormatter(fmt)
-ax.yaxis.set_major_formatter(yticks)
+
+	fmt = '%.2f%%' # Format you want the ticks, e.g. '40%'
+	yticks = mtick.FormatStrFormatter(fmt)
+	ax.yaxis.set_major_formatter(yticks)
+
+	ax.xaxis.set_ticks_position('bottom') 
+	[t.set_color(i) for (i,t) in
+ 		zip(xp_colors,ax.xaxis.get_ticklabels())]
+
+
+if (typ==1):
+	plt.rcParams['font.size'] = 6.0
+	patches, txt = plt.pie(td,  shadow=False, startangle=90, colors=xp_colors, labels=xticks, labeldistance = 1.05, rotatelabels=1, radius = 1.0)
+	#ax.get_yaxis().set_visible(False)
+	[t.set_color(i) for (i,t) in
+ 		zip(xp_colors,txt)]
+
+
 
 avg = sum(td)/len(td)
 sigma = 0.0
@@ -140,11 +170,8 @@ sigma = math.sqrt(sigma)
 #for ticklabel, tickcolor in zip(plt.gca().get_xticklabels(), xp_colors):
 #   ticklabel.set_color(tickcolor)
 
-ax.xaxis.set_ticks_position('bottom') 
-[t.set_color(i) for (i,t) in
- zip(xp_colors,ax.xaxis.get_ticklabels())]
-
-plt.tight_layout()
+if typ==0:
+	plt.tight_layout()
 plt.savefig('ref_plot.png',dpi=180)
 plt.show()
 plt.draw()
