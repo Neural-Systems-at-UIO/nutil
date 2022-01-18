@@ -144,6 +144,9 @@ for key in dmap:
 		ax.set_ylabel('Load')
 	#ax.bar_label(p1, label_type='center')
 
+	
+# this is a bar chart
+
 if (typ==0):
 	ticks = plt.xticks(xp, xticks,rotation = 45, fontsize=6)
 
@@ -160,7 +163,8 @@ if (typ==0):
 	[t.set_color(i) for (i,t) in
  		zip(xp_colors,ax.xaxis.get_ticklabels())]
 
-
+# this is a pie chart
+	
 if (typ==1):
 	plt.rcParams['font.size'] = 6.0
 	patches, txt = plt.pie(td,  shadow=False, startangle=90, colors=xp_colors, labels=xticks, labeldistance = 1.05, rotatelabels=1, radius = 1.0)
