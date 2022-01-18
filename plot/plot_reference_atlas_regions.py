@@ -137,7 +137,7 @@ for key in dmap:
 			xp.append(sx + (sz)/2.0)
 			xp_colors.append((c[0],c[1],c[2]))
 
-
+# this is a bar chart
 
 	if (typ==0):
 		ax.bar(x,d, width=2.0, color=(c[0],c[1],c[2]))
@@ -145,7 +145,7 @@ for key in dmap:
 	#ax.bar_label(p1, label_type='center')
 
 	
-# this is a bar chart
+
 
 if (typ==0):
 	ticks = plt.xticks(xp, xticks,rotation = 45, fontsize=6)
@@ -163,7 +163,7 @@ if (typ==0):
 	[t.set_color(i) for (i,t) in
  		zip(xp_colors,ax.xaxis.get_ticklabels())]
 
-# this is a pie chart
+# this is a pie chart. It uses matplotlib.pyplot.pie
 	
 if (typ==1):
 	plt.rcParams['font.size'] = 6.0
