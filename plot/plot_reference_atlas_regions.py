@@ -6,6 +6,10 @@ import glob
 import math
 import matplotlib.ticker as mtick
 
+
+# python3 plot_reference_atlas_regions.py [ nutil_output_dir ] [type]”
+# where type = 0 is regular bars, type=1 is pie chart
+
 if len(sys.argv)<2:
 	print("Usage: python plot_reference_atlas_regions [nutil directory] [type]")
 	exit(1)
