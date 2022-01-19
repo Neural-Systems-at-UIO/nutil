@@ -679,7 +679,7 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
 
             reports.m_reports.push_back(Report(excelName, ids,reportColor));
 
-            LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");
+//            LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");
 
             //qDebug() << excelName << " , " << ids;
 

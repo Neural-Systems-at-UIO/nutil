@@ -987,7 +987,7 @@ void Reports::CreateSheets(QVector<QSharedPointer<NutilProcess>>& processes,Atla
     if (!m_book)
         return;
 
-    LMessage::lMessage.Log("Finding areas of interest");
+//    LMessage::lMessage.Log("Finding areas of interest");
     Data::data.m_globalMessage = "Creating sheets 1/3";
 
     for (Report& r: m_reports)
