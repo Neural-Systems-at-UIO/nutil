@@ -11,7 +11,7 @@ import matplotlib.ticker as mtick
 # where type = 0 is regular bars, type=1 is pie chart
 
 if len(sys.argv)<2:
-	print("Usage: python plot_reference_atlas_regions [nutil directory] [type]")
+	print("Usage: python plot_reference_atlas_regions [nutil directory] [type] [parameters]")
 	exit(1)
 
 
@@ -20,9 +20,17 @@ report_files = glob.glob(sys.argv[1]+"/**/*RefAtlasRegions.csv", recursive = Tru
 atlas_files = glob.glob(sys.argv[1]+"/**/*.label", recursive = True)
 
 
+doplot = True
+
+
 typ = 0
 if (len(sys.argv)==3):
 	typ = int(sys.argv[2])
+if (len(sys.argv)>3):
+	for i in range(3,len(sys.argv)):
+		s = sys.argv[i].lower()
+		if (s=="-noplot"):
+			doplot = False
 
 
 
@@ -210,5 +218,6 @@ sigma = math.sqrt(sigma)
 if typ==0:
 	plt.tight_layout()
 plt.savefig('ref_plot.png',dpi=180)
-plt.show()
-plt.draw()
+if doplot:
+	plt.show()
+	plt.draw()
