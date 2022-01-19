@@ -227,13 +227,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
     }
 
-    Util::CreateDir(m_outputDir+QDir::separator()+m_reportDirectory);
-    Util::CreateDir(m_outputDir+QDir::separator()+m_coordinateDirectory);
-    Util::CreateDir(m_outputDir+QDir::separator()+m_imageDirectory);
 
-
-    if (!QDir(m_outputDir).exists())
-        QDir().mkdir(m_outputDir);
 
 
 
@@ -452,6 +446,15 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         m_maskDir = m_inputDir;
 
     m_outputDir = data->Get("quantifier_output_dir")+"/";
+
+    if (!QDir(m_outputDir).exists())
+        QDir().mkdir(m_outputDir);
+
+    Util::CreateDir(m_outputDir+QDir::separator()+m_reportDirectory);
+    Util::CreateDir(m_outputDir+QDir::separator()+m_coordinateDirectory);
+    Util::CreateDir(m_outputDir+QDir::separator()+m_imageDirectory);
+
+
     //    float col_r = m_sheet->readNum(3,1);
     //  float col_g = m_sheet->readNum(3,2);
     //float col_b = m_sheet->readNum(3,3);
