@@ -283,6 +283,12 @@ QString Util::listFiles(QDir directory, QString searchFile)
         return "";
 }
 
+void Util::CopyFileHard(QString a, QString b)
+{
+    auto data = Util::loadTextFile(a);
+    Util::SaveTextFile(b,data);
+}
+
 
 
 void Util::findFilesInSubDirectories(QStringList* lst, QString directory, QString extension, bool fullName)

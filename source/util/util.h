@@ -136,6 +136,7 @@ public:
         return QVector3D( r*sin(t)*cos(p), r*sin(t)*sin(p), r*cos(t)  );
     }
 
+    static void CopyFileHard(QString a, QString b);
     static QVector3D floor(const QVector3D v) {
         return QVector3D( std::max(0.0f, v.x()), std::max(0.0f,v.y()), std::max(0.0f,v.z())  );
     }

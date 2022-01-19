@@ -61,6 +61,9 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
 
             }
         }
+        Util::CopyFileHard(m_labelFile, m_outputDir+"/"+ QFileInfo(m_labelFile).fileName());
+//        QFile::copy(;
+
     }
 
 }
@@ -739,5 +742,4 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
        //LMessage::lMessage.Message("Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.");
     }
 
-    QFile::copy(m_labelFile, m_outputDir+"/"+ QFileInfo(m_labelFile).fileName());
 }
