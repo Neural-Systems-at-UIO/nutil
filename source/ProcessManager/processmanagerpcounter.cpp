@@ -42,7 +42,7 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
         QString labelType = data->Get("label_file");
 
         if (m_xmlAnchor!=nullptr) {
-            qDebug() << "*** ATLAS: " +m_xmlAnchor->m_atlas;
+            //qDebug() << "*** ATLAS: " +m_xmlAnchor->m_atlas;
             if (!atlasQuickniiMap.contains(m_xmlAnchor->m_atlas)) {
                 // Unknown anchoring data?
                 LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: unrecognized atlas map '"+m_xmlAnchor->m_atlas+"' in the anchor file. Might be a potential problem, please make sure that the atlas is correct!</font>");
@@ -739,4 +739,5 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
        //LMessage::lMessage.Message("Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.");
     }
 
+    QFile::copy(m_labelFile, m_outputDir+ QFileInfo(m_labelFile).fileName());
 }

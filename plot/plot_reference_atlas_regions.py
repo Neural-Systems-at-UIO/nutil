@@ -72,7 +72,11 @@ for r in report_files:
 
 # create map of data
 
+
+
+
 dmap = {}
+dmapCnt = {}
 for df in all_data:
 #	od = df['Region area']
 	od = df['Load']
@@ -83,14 +87,24 @@ for df in all_data:
 			if typ==0:
 				if (key not in dmap):
 					dmap[key] = []
+					dmapCnt[key] = 0
 
 				dmap[key].append(od[i])
 
 			if typ==1:
 				if (key not in dmap):
 					dmap[key] = [0]
+					dmapCnt[key] = 0
 
 				dmap[key][0] +=od[i]
+				dmapCnt[key]+=1
+
+
+if typ==1:
+	for key in dmap:
+		j = dmapCnt[key]
+		if (j!=0):
+			dmap[key][0]/=j
 
 
 
@@ -108,6 +122,7 @@ if (typ==1):
 	fig.set_figheight(8)
 xp_colors = []
 td = []
+explode = []
 for key in dmap:
 
 	d=[]
@@ -121,6 +136,11 @@ for key in dmap:
 		x.append(xx)
 		xx = xx + 1
 		sz = sz + 1
+		expl = 0
+		if ("visual" in key):
+			expl = 0.3
+		expl = val
+		explode.append(expl)
 		if (typ==1):
 			xticks.append(key)
 			xp_colors.append((c[0],c[1],c[2]))
@@ -159,7 +179,7 @@ if (typ==0):
 
 if (typ==1):
 	plt.rcParams['font.size'] = 6.0
-	patches, txt = plt.pie(td,  shadow=False, startangle=90, colors=xp_colors, labels=xticks, labeldistance = 1.05, rotatelabels=1, radius = 1.0)
+	patches, txt = plt.pie(td,  shadow=False, startangle=90, colors=xp_colors, labels=xticks, labeldistance = 1.05, rotatelabels=1, radius = 1.0, explode=explode)
 	#ax.get_yaxis().set_visible(False)
 	[t.set_color(i) for (i,t) in
  		zip(xp_colors,txt)]
