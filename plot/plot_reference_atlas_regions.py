@@ -195,7 +195,7 @@ if (typ==0):
 	
 if (typ==1):
 	plt.rcParams['font.size'] = 6.0
-	patches, txt = plt.pie(td,  shadow=False, startangle=90, colors=xp_colors, labels=xticks, labeldistance = 1.05, rotatelabels=1, radius = 1.0, explode=explode)
+	patches, txt = plt.pie(td,  normalize=True, shadow=False, startangle=90, colors=xp_colors, labels=xticks, labeldistance = 1.05, rotatelabels=1, radius = 1.0, explode=explode)
 	#ax.get_yaxis().set_visible(False)
 	[t.set_color(i) for (i,t) in
  		zip(xp_colors,txt)]
