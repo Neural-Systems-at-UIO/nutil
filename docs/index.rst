@@ -12,6 +12,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    release
    testing
    support
+   publications
    
 .. toctree::
    :caption: Pre-processing operations
