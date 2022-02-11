@@ -54,11 +54,12 @@ In each report, interpret the results as follows:
 +----------------------+-------------------------------------------------------------------------------+
 
 
-**Images**
-------------
+**Overlay images**
+-----------------
 
 * Segmentations superimposed on the atlas maps in PNG format.  
 * The object colours are assigned based on the customised regions. If no regions are specified, or object falls outside of the specified areas, the objects are displayed in red by default.
+* The **object ID** assigned to an object (for the purpose of identification in the Object report), as well as the **reference atlas region ID** corresponding to its location, may be printed on the overlay images by switching "ON" these options in the "Advanced Settings" for Nutil Quantifier. If both these are switched "ON", the **reference atlas region ID** is printed at the top and the **object ID** at the bottom.   
 
 **Coordinates**  
 ----------------
