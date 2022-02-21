@@ -120,6 +120,11 @@ void JSONAnchor::Load(QString file)
     //convert the json object to variantmap
     QVariantMap mainMap = jObject.toVariantMap();
 
+    if (mainMap.contains("bucket")) {
+        LoadWebNII(mainMap);
+        return;
+    }
+
     //convert the json object to variantmap
     QVariantList dataList = mainMap["slices"].toList();
 
@@ -153,5 +158,53 @@ void JSONAnchor::Load(QString file)
     }
 
   //  exit(1);
+
+}
+
+void JSONAnchor::LoadWebNII(QVariantMap &mainMap)
+{
+    //convert the json object to variantmap
+    QVariantList dataList = mainMap["bucket"].toList();
+
+    //convert the json object to variantmap
+    m_atlas = mainMap["target"].toString().split(".").first();
+
+
+
+    //convert the json object to variantmap
+    QVariantList slices = mainMap["slices"].toList();
+
+    for (int i=0;i<slices.count();i++) {
+        QVariantMap map = slices[i].toMap();
+        XMLData d;
+
+        d.m_filename = map.value("filename").toString();
+        d.m_filename = d.m_filename.remove(".tif").remove(".png");
+        qDebug() << map.value("filename").toString();
+        d.m_nr = i+1;//map.value("nr").toInt();
+        d.m_width = map.value("width").toInt();
+        d.m_height = map.value("height").toInt();
+        if (map.contains("anchoring")) {
+            QVariantList anLst = map.value("anchoring").toList();
+    //        qDebug() << anLst.count() << anLst;
+
+            d.m_o = QVector3D(anLst[0].toFloat(), anLst[1].toFloat(),anLst[2].toFloat());
+            d.m_u = QVector3D(anLst[3].toFloat(), anLst[4].toFloat(),anLst[5].toFloat());
+            d.m_v = QVector3D(anLst[6].toFloat(), anLst[7].toFloat(),anLst[8].toFloat());
+        }
+        else {
+            LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: Slice "+QString::number(d.m_nr)+" lacks anchoring ("+d.m_filename+")</font>");
+        }
+//        qDebug() << d.m_filename << d.m_nr << d.m_width << d.m_height;
+//                    qDebug() << d.m_o;
+//                    qDebug() << d.m_v;
+
+       // qDebug() << "Adding slice:" << d.m_filename;
+
+        m_data.append(d);
+
+
+//        qDebug() << fileMap.keys();
+    }
 
 }

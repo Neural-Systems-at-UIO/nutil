@@ -89,6 +89,7 @@ class JSONAnchor : public AbstractAnchor
 public:
 
     void Load(QString file);
+    void LoadWebNII(QVariantMap& map);
 };
 
 class AnchorFactory {

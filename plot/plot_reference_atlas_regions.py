@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import glob
 import math
+from mpl_toolkits.mplot3d import proj3d
 import matplotlib.ticker as mtick
 
 
@@ -199,6 +200,9 @@ if (typ==1):
 	#ax.get_yaxis().set_visible(False)
 	[t.set_color(i) for (i,t) in
  		zip(xp_colors,txt)]
+
+
+
 
 
 

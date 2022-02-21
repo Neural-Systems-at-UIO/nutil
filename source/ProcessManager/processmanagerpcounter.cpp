@@ -445,7 +445,14 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (m_maskDir == "/")
         m_maskDir = m_inputDir;
 
-    m_outputDir = data->Get("quantifier_output_dir")+"/";
+    m_outputDir = data->Get("quantifier_output_dir");
+    if (m_outputDir.trimmed()=="") {
+        LMessage::lMessage.Error("Error: output directory not specified. ");
+        Data::data.abort = true;
+        return;
+
+    }
+    m_outputDir+="/";
 
     if (!QDir(m_outputDir).exists())
         QDir().mkdir(m_outputDir);
