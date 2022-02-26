@@ -8,7 +8,7 @@
 
 * *ilastik* is a versatile image analysis tool designed for the batch classification, segmentation and analysis of biological images based on supervised machine learning algorithms.
 
-* *ilastik* has many additional functions and workflows that are not mentioned in this manual. For more information see www.ilastik.org
+* *ilastik* has many additional functions and workflows that are not mentioned in this manual.
 
 
 **Installation and Usage**
