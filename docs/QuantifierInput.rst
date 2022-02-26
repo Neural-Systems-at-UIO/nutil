@@ -5,9 +5,9 @@
 -------------------------------
 
 .. note::
-   It is strongly recommended to change the file names of the histological images as the first step of the QUINT workflow.** 
+   **It is strongly recommended to change the file names of the histological images as the first step of the QUINT workflow.** 
 
-   By using images that follow the file naming convention for ilastik, QuickNII and VisuAlign, the output files from these software will also comply with the naming convention,    and are thereby directly compatible with Nutil Quantifier.**
+   **By using images that follow the file naming convention for ilastik, QuickNII and VisuAlign, the output files from these software will also comply with the naming              convention, and are thereby directly compatible with Nutil Quantifier.**
 
 * The file name of the segmentation and the atlas map that corresponds to a particular section must contain the same unique ID, and should follow the _sXXX... file naming convention, with XXX.. representing the section number (this is not restricted to three digits, sXXXXX... is also fine). 
 
