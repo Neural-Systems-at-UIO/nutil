@@ -45,11 +45,9 @@ Any image analysis software may be used to generate the segmentations as long as
 .. note::
    They do not have the same proportions as the actual atlas maps as QuickNII alters the proportions slightly. 
 
-3. **Image size:** They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size. 
+3. **Image size:** They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size. It is recommended to downscale the images prior to segmentation. This has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning algorithms used by ilastik (see the ilastik section). It will also speed up Nutil analysis, and prevent crashes due to insufficient memory. 
 
 .. note::
-   Downscaling the images prior to segmentation has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning algorithms used by ilastik (see the ilastik section). It will also speed up Nutil analysis, and prevent crashes due to insufficient memory. 
-
    The aim is to downscale the images as much as possible but without losing information from the images that is actually important. The downscaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
 
 .. warning::
