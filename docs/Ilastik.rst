@@ -111,7 +111,8 @@ Select the features and scales that can be used to discern the objects or classe
 
 10.	 Save the ilastik file before closing. 
 
-**NOTE: Save the ilastik file frequently during the annotation process**.
+.. note::
+   Save the ilastik file frequently during the annotation process.
 
 **2. Object Classification Workflow**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -172,7 +173,8 @@ customized LUT as a .LUT file. Apply to a whole folder of images with the Batch 
 
    open(“C:\\......\\....\\....\\filename.lut”);
 
-   **Note: Make sure to update the directory so it locates the customized.lut file, and ensure the macro is written with double back slashes.**
+.. note::
+   Make sure to update the directory so it locates the customized.lut file, and ensure the macro is written with double back slashes.
 
    .. image:: 2e9537b09637491fa83410e3e364d5c5/media/image11.png
       :width: 4.39583in
