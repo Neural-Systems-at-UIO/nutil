@@ -31,23 +31,24 @@ It is fine to include a string of letters and numbers followed by the unique ID.
 **Preparing the Segmentations**
 ------------------------------------
  
-Any image analysis software may be used to generate the segmentations as long as the segmentations meet the requirements listed below. 
+Any image analysis software may be used to generate the segmentations as long as the segmentations meet the requirements listed below:
 
 **Requirement:**
 
-* Image Format: Must be indexed 8-bit or 24-bit RGB images in PNG format.
+* Image Format: Must be indexed 8-bit or 24-bit Red Green Blue (RGB) images in PNG format.
   
 * Image proportions: Must have the same proportions as the histological images used to generate the atlas maps. Note: They do not have the same proportions as the actual atlas maps as QuickNII alters the proportions slightly. 
 
 * Image size: They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
 
+Internal properties: Quantifier is only able to extract one RGB colour at a time. Apply one RBG colour to all of the objects-of-interest, and specify this colour in the Nutil GUI. For example, the objects in the segmentation here are red, so extract RGB colour: 255,0,0.
+
+Downscaling the images prior to segmentation has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning algorithms used by ilastik (see the ilastik section). It will also speed up Nutil analysis, and prevent crashes due to insufficient memory. The aim is to downscale the images as much as possible but without losing information from the images that is actually important. The downscaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
+
 .. warning::
    We do not recommend running Quantifier on segmented PNG images larger than around 10000 x 10000 pixels. While Nutil supports segmentations of any size, up to this limit - as long as there is enough memory installed on the computer - it is highly recommended to downscale the histological images as much as possible before segmenting them. 
 
-Downscaling has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning   algorithms used by ilastik (see the ilastik section of the Read the Doc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory. The aim here is to downscale as much as possible but without losing information from the images that is actually important. The downscaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
 
-* Internal properties: Quantifier is only able to extract one Red Green Blue (RGB) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the Nutil GUI. For example, the objects in the segmentation here are red, so extract RGB colour: 255,0,0.
-  
 +----------+
 | |image11||
 +----------+
