@@ -4,15 +4,17 @@
 **File naming requirement**
 -------------------------------
 
-**It is strongly recommended to change the file names of the histological images as the first step of the QUINT workflow. By using images that follow the file naming convention as input for ilastik, QuickNII and VisuAlign, the output files from these software will also comply with the naming convention, and are thereby directly compatible with Nutil Quantifier.**
+**It is strongly recommended to change the file names of the histological images as the first step of the QUINT workflow.** 
 
-* The file names of the segmentation and the atlas map that correspond to a particular section image must contain the same unique ID, and should follow the _sXXX... file naming convention, with XXX.. representing the section number (this is not restricted to three digits, _sXXXX also works). 
+**By using images that follow the file naming convention for ilastik, QuickNII and VisuAlign, the output files from these software will also comply with the naming convention, and are thereby directly compatible with Nutil Quantifier.**
+
+* The file name of the segmentation and the atlas map that corresponds to a particular section must contain the same unique ID, and should follow the _sXXX... file naming convention, with XXX.. representing the section number (this is not restricted to three digits, sXXXXX... is also fine). 
 
 * The section number should reflect the serial order and spacing of the sections as this is a requirement for QuickNII. For example, _s02, _s06, _s10 for every 4th section starting with section 2. 
 
-* The unique IDs must also be present in the XML or JSON file containing the registration information (check this by opening with Notepad). This happens automatically as long as the file names of the histological images that are used for the QuickNII registration contain the unique IDs.
+* The unique IDs must also be present in the XML or JSON file containing the registration information (check this by opening with Notepad). This happens automatically as long as the file names of the images that are used for the QuickNII registration contain the unique IDs.
 
-* Quantifier also supports user-defined IDs using regular expressions – RegExp. This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information see the “help” button in the Nutil GUI or contact user support.  
+* Nutil Quantifier also supports user-defined IDs using regular expressions – RegExp. This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information see the “help” button in the Nutil GUI or contact user support.  
 
 **Examples that comply with the naming convention:** 
 
