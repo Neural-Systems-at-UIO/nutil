@@ -7,7 +7,7 @@
 .. note::
    **It is strongly recommended to change the file names of the histological images as the first step of the QUINT workflow.** 
 
-   **By using images that follow the file naming convention for ilastik, QuickNII and VisuAlign, the output files from these software will also comply with the naming              convention, and are thereby directly compatible with Nutil Quantifier.**
+   **By using images that follow the file naming convention for ilastik, QuickNII and VisuAlign, the output files from these software will also comply with the naming convention, and are thereby directly compatible with Nutil Quantifier.**
 
 * The file name of the segmentation and the atlas map that corresponds to a particular section must contain the same unique ID, and should follow the _sXXX... file naming convention, with XXX.. representing the section number (this is not restricted to three digits, sXXXXX... is also fine). 
 
@@ -41,7 +41,8 @@ Any image analysis software may be used to generate the segmentations as long as
 
 * Image size: They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
 
- **We do not recommend running Quantifier on segmented PNG images larger than around 10000x10000 pixels. While Nutil supports segmentations of any size up to this limit - as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images as much as possible before segmenting them.** 
+.. warning::
+   **We do not recommend running Quantifier on segmented PNG images larger than around 10000x10000 pixels. While Nutil supports segmentations of any size up to this    limit - as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images as much as possible before        segmenting them.** 
 
  Downscaling has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning   algorithms used by ilastik (see the ilastik section of the Read the Doc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory. The aim here is to downscale as much as possible but without losing information from the images that is actually important. The downscaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
 
@@ -51,13 +52,15 @@ Any image analysis software may be used to generate the segmentations as long as
 | |image11||
 +----------+
 
-**Software recommendations**
+.. note::
 
-**Ilastik**: We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with Fiji to visualise the output. See the ilastik section of this Read the Doc for instructions. ilastik is available to download here: http://ilastik.org/download.html. 
+    **Software recommendations**
 
-**QuPath**: QuPath is an alternative that can be used to generate the segmentations. https://qupath.github.io/
+    **Ilastik**: We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with Fiji to visualise the output. See the ilastik section of this Read the Doc for instructions. ilastik is available to download here: http://ilastik.org/download.html. 
 
-**Fiji**: Fiji is also useful https://imagej.net/software/fiji/ 
+    **QuPath**: QuPath is an alternative that can be used to generate the segmentations. https://qupath.github.io/
+
+    **Fiji**: Fiji is also useful https://imagej.net/software/fiji/ 
 
 
 **Preparing the Atlas Maps** 
