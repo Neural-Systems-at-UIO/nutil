@@ -21,7 +21,7 @@
 +----------+                    
                             
 
-**PLEASE visit our EBRAINS page for more information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information.** 
+**PLEASE visit** `EBRAINS <https://ebrains.eu/service/quint/>`_ **for more information about the QUINT workflow and to find tutorials, examples of use, demo videos and software download information.** 
 
 https://ebrains.eu/service/quint/
 
