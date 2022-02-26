@@ -39,7 +39,8 @@
 **Warnings and error messages**
 --------------------------------
 
-**WARNING: Some of the area matrices were not initialized.**
+.. warning::
+   WARNING: Some of the area matrices were not initialized.
 
 This warning informs you that the JSON or XML file contains info about sections that are not included in the analysis. For example, if you run an analysis for a few sections only. This is not a problem - the analysis will produce correct results - but alerts you to missing sections in case this was not intended. 
 
