@@ -69,7 +69,7 @@ For a quick introduction, watch:
 
 .. raw:: html
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5N0XYW9gRZY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/5N0XYW9gRZY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 1. Open the *ilastik* programme. Under ‘Create New Project’ select ‘Pixel Classification’. Save the project under a new file name in the same location as the images for analysis (create a new folder). 
 
