@@ -66,7 +66,8 @@ In each report, interpret the results as follows:
 ----------------
 
 * JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
-* The viewer is available via the MediaWiki link here: www.nitrc.org/projects/meshview.
+* The viewer is available via the `MediaWiki link here. <https://www.nitrc.org/projects/meshview>`_
+
 
 .. warning::
    Currently the coordinates generated with Nutil are based on the linear transformation only and do not take into account the nonlinear transformation.   
