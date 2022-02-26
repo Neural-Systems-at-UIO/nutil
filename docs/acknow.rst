@@ -5,15 +5,9 @@ Nutil is an integral part of the QUINT workflow, and is developed by the Neural 
 
 **Authors**: Nicolaas E Groeneboom, Sharon C. Yates, Maja A. Puchades, Jan G. Bjaalie. 
 
-**Licence**
+**Licence**: GNU General Public License version 3. Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International 
 
-GNU General Public License version 3.
-
-Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International 
-
-**Acknowledgements**
-
-Nutil was developed with support from the EBRAINS infrastructure, and funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Framework Partnership Agreement No. 650003 (HBP FPA).
+**Acknowledgements**: Nutil was developed with support from the EBRAINS infrastructure, and funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Framework Partnership Agreement No. 650003 (HBP FPA).
 
 **How to cite the tool**
 
