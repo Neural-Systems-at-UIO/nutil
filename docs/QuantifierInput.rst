@@ -31,7 +31,7 @@ It is fine to include a string of letters and numbers followed by the unique ID.
 **Preparing the Segmentations**
 ------------------------------------
  
-Any image analysis software may be used to generate the segmentations as long as they meet the requirements listed below:
+Any image analysis software may be used to generate the segmentations as long as they meet the following requirements:
 
 **Requirement:**
 
@@ -55,7 +55,7 @@ Any image analysis software may be used to generate the segmentations as long as
 .. warning::
    We do not recommend running Quantifier on segmented PNG images larger than around 10000 x 10000 pixels. While Nutil supports segmentations of any size, up to this limit - as long as there is enough memory installed on the computer - it is highly recommended to downscale the histological images as much as possible before segmenting them. 
 
-
+Example segmentation
 +----------+
 | |image11||
 +----------+
