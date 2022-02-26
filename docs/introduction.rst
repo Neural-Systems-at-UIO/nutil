@@ -1,7 +1,7 @@
 **Introduction**
 ----------------
 
-*Nutil* simplifies the pre-and-post processing of 2D histological images from mouse and rat brain. It is an integral part of the QuickNII - ilastik - Nutil (QUINT) workflow for regional quantification of features such as cells, with the regions defined by a reference atlas (Allen Mouse Brain Atlas or the Waxholm Space Atlas of the Sprague Dawley rat). It also supports transformation, file format conversion and renaming of the huge histological images that are typical of microscopy. 
+Nutil simplifies the pre-and-post processing of 2D histological images from mouse and rat brain. It is an integral part of the QuickNII - ilastik - Nutil (QUINT) workflow for regional quantification of features such as cells, with the regions defined by a reference atlas (Allen Mouse Brain Atlas or the Waxholm Space Atlas of the Sprague Dawley rat). It also supports transformation, file format conversion and renaming of the huge histological images that are typical of microscopy. 
 
 Nutil is developed as a standalone application and requires no coding experience to execute. The user specifies the input and output folders and the parameters for the pre-and post-processing operations in the Nutil graphical user interface (GUI). All functions operate in batch, and operate in parallel on multiple CPUs. 
 
