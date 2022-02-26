@@ -11,9 +11,9 @@ Report with output organised based on all the regions in the reference atlas. Th
 
    The **Clear Label** ID covers objects that fall outside of the atlas maps
 
-   .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
-      :width: 5.88611in
-      :height: 2.86512in
+.. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
+    :width: 5.88611in
+    :height: 2.86512in
  
 **CustomRegion report**
 ------------------------
