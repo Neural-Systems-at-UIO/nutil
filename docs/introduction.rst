@@ -24,7 +24,9 @@ Nutil is developed as a standalone application and requires no coding experience
 +----------+                    
                             
 
-**PLEASE visit** `EBRAINS <https://ebrains.eu/service/quint/>`_ **for more information about the QUINT workflow and to find tutorials, examples of use, and software download information.** 
+.. note::
+
+   **PLEASE visit** `EBRAINS <https://ebrains.eu/service/quint/>`_ **for more information about the QUINT workflow and to find tutorials, examples of use, and          software download information.** 
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
    :width: 6.30139in
