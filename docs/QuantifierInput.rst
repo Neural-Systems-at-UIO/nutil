@@ -38,9 +38,12 @@ Any image analysis software may be used to generate the segmentations as long as
 1. **Format:** Must be indexed 8-bit or 24-bit Red Green Blue (RGB) images in PNG format.
 
 .. note::
-   Internal properties: Quantifier is only able to extract one RGB colour at a time. Apply one RBG colour to all of the objects-of-interest, and specify this colour in the Nutil GUI. For example, the objects in the segmentation here are red, so extract RGB colour: 255,0,0.
+   Quantifier is only able to extract one RGB colour at a time. Apply one RBG colour to all the objects-of-interest, and specify this colour in the Nutil GUI. For example, the objects in the segmentation here are red, so extract RGB colour: 255,0,0.
   
-2. **Image proportions:** Must have the same proportions as the histological images used to generate the atlas maps. Note: They do not have the same proportions as the actual atlas maps as QuickNII alters the proportions slightly. 
+2. **Image proportions:** Must have the same proportions as the histological images used to generate the atlas maps. 
+
+.. note::
+   They do not have the same proportions as the actual atlas maps as QuickNII alters the proportions slightly. 
 
 3. **Image size:** They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size. 
 
