@@ -14,6 +14,10 @@ Post-processing (*Quantifier*) is used for the QUINT workflow. It enables the re
 3. **Quantifier**: for the batch extraction, quantification and spatial analysis of labelling segmented from 2D mouse or rat brain section images (for example, immunohistochemical labelling).
 4. **Resize**: for resizing JPEG/PNG images with output in PNG format.
 
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/n-gQigcGMJ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 +----------+                    
 | |image1| |                    
 +----------+                    
