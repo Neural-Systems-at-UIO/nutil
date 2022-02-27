@@ -113,6 +113,6 @@ This warning informs you that the JSON or XML file contains info about sections 
 .. |image22| image:: cfad7c6d57444e3b93185b655ab922e0/media/image16.png
    :width: 2.59306in
    :height: 3.53443in
-.. |image23| image:: cfad7c6d57444e3b93185b655ab922e0/media/image17.png
+.. |image23| image:: cfad7c6d57444e3b93185b655ab922e0/media/Image17.PNG
    :width: 2.59306in
    :height: 3.53443in
