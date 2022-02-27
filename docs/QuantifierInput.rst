@@ -35,7 +35,7 @@ Any image analysis software may be used to generate the segmentations as long as
 
 **Requirement:**
 
-1. **Format:** Must be indexed 8-bit or 24-bit Red Green Blue (RGB) images in ``.PNG format.
+1. **Format:** Must be indexed 8-bit or 24-bit Red Green Blue (RGB) images in .PNG format.
 
    Quantifier is only able to extract one RGB colour at a time. Apply one RBG colour to all the objects-of-interest, and specify this colour in the Nutil GUI. For example, the objects in the segmentation here are red, so extract RGB colour: 255,0,0.
   
@@ -70,7 +70,7 @@ Any image analysis software may be used to generate the segmentations as long as
  
 The atlas maps are generated with `QuickNII <https://quicknii.readthedocs.io/en/latest/>`_, which applies linear registration of the sections to the atlas, or with `VisuAlign <https://visualign.readthedocs.io/en/latest/>`_ that applies nonlinear refinement to an existing QuickNII registration. The VisuAlign atlas maps are thereby typically more accurate than the QuickNII atlas maps, but also take more time to produce. The atlas maps are customised to match the cutting plane and proportions of the brain sections. 
 
-File format: The atlas maps are in ``.FLAT format and cannot be viewed directly. The image below shows the information contained in an atlas map, but is not the ``.FLAT file itself.
+File format: The atlas maps are in .FLAT format and cannot be viewed directly. The image below shows the information contained in an atlas map, but is not the .FLAT file itself.
 
 +----------+
 | |image12||
