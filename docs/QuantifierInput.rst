@@ -91,7 +91,7 @@ File format: The atlas maps are in .FLAT format and cannot be viewed directly. T
 
 * VisuAlign is a standalone desktop tool for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration performed with QuickNII. 
 
-* Open the JSON file from QuickNII in VisuAlign and apply manual adjustments by drop and drag of markers placed on the image. The adjusted atlas maps may be exported in ``.FLAT format. 
+* Open the JSON file from QuickNII in VisuAlign and apply manual adjustments by drop and drag of markers placed on the image. The adjusted atlas maps may be exported in .FLAT format. 
 
 * VisuAlign does not update the linear coordinate information contained in the JSON file. 
 
