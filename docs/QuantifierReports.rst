@@ -1,11 +1,8 @@
 **Customised reports explained**
 =================================
 
-Quantifier generates several sets of reports:  
+Quantifier generates several sets of reports, including CustomRegion reports. These contain quantifications for broader regions: the broad regions are compilations of reference atlas regions, and may either be user-defined ("custom") or the default regions included in the Nutil software ("default"). 
 
-* RefAtlasRegion reports contain quantifications per atlas region based on the finest level of granularity of the atlas. 
-* CustomRegion reports contain quantifications for broader regions. These broader regions are compilations of reference atlas regions, and may either be user defined ("custom") or the default regions included in the Nutil software ("default"). 
-* Object reports contain information about individual objects, and are generated with object splitting switched OFF only.  
 
 **CustomRegion reports**
 -----------------------
@@ -14,7 +11,7 @@ Quantifier generates several sets of reports:
 
   More information on the default regions are found in the CustomRegion files in the Nutil package (located in the CustomRegion folder, there is a separate file for each atlas). The “default” option is a whole brain analysis, which means it includes all the reference atlas regions subdivided into broader regions. 
 
-  *For example, for the Allen Mouse Brain Atlas v3 - 2017, the custom regions are the cortex, fiber tracts, hippocampus, olfactory regions, hypothalamus, regions in the striatum and pallidum, midbrain - hindbrain - and medulla, thalamus, cerebellum, and ventricular system*. 
+  *For example, for the Allen Mouse Brain Atlas v3 - 2017, the custom regions are; the cortex; fiber tracts; hippocampus; olfactory regions; hypothalamus; regions in the striatum and pallidum; midbrain - hindbrain - and medulla; thalamus; cerebellum; and ventricular system*. 
 
 2. Alternatively, users have the option to generate CustomRegion reports based on their own compilations of reference atlas regions. To do this, customised regions are defined by the user using the CustomRegionsTemplate.xlsx, which is located in the CustomRegion folder and is part of the Nutil package. In this case, the user selects the "custom" option in the Nutil GUI and navigates to the populated template. Fill in the template exactly as shown below:
 
