@@ -114,5 +114,5 @@ This warning informs you that the JSON or XML file contains info about sections 
    :width: 2.59306in
    :height: 3.53443in
 .. |image23| image:: cfad7c6d57444e3b93185b655ab922e0/media/Image17.PNG
-   :width: 2.30556in
-   :height: 1.53537in
+   :width: 6.3in
+   :height: 3.5in
