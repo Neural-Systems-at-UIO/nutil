@@ -28,10 +28,10 @@ For each report, interpret the results as follows:
 |                      |                                                                               |
 +----------------------+-------------------------------------------------------------------------------+
 
-The main output are:
+The main results are:
 
-* Load. This refers to the % regional load (% coverage of the region). Use this with object splitting switched ON.  
-* Count. This is a count of segmented objects that fall within the region. Use this for small objects only, with object splitting switched OFF.  
+* Load. This refers to the % regional load (% coverage of the region). Use this with object splitting switched ON (object splitting OFF may invalidate the % load).  
+* Count. This is a count of segmented objects that fall within the region. Use this for small objects only, with object splitting switched OFF (object splitting ON may invalidate the counts).
 
 See `Object splitting explained. <https://nutil.readthedocs.io/en/latest/QuantifierOS.html>`_
 
