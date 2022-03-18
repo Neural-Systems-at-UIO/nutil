@@ -8,6 +8,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    introduction
    installation
    Technical
+   NutilCmd
    acknow
    release
    testing
@@ -31,7 +32,6 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    QuantifierIntro
    QuantifierInput
    QuantifierRun
-   QuantifierRunCMD
    QuantifierOS
    QuantifierMasks
    QuantifierReports
