@@ -6,9 +6,10 @@ Nutil is a standalone application with a graphical user interface (GUI) that doe
 To use Nutil as a command line tool:
 -------------------------------------
 * set up a unique .NUT file for each image series and save them in a folder.
-* Navigate to the process_folder.bat file in the Nutil software using the command line. Enter the path to the folder containing the .NUT files and type the no. of threads to use for the analysis.
+* Navigate to the process_folder.bat file in the Nutil software using the command line. 
+* Enter the path to the folder containing the .NUT files, and type the no. of core processors (threads) to use for the analysis.
 
-For example:: 
+Windows example:: 
 
   C:\nutil\program>process_folder.bat   Z:\HBP_Analytics\Nutil_data\batch   4
 
