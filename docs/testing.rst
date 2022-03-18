@@ -21,7 +21,7 @@ Two validation systems have been implemented that utilise the Validator:
 
 **1.	Automated validation on Github that initiates with each pre-release** 
 
-Nutil is open-source and shared with continuous integration (CI) and automatic validation on Github. For the automatic validation Nutil is compiled and used to process four small test datasets on a virtual machine in an automatic procedure. The output of these procedures are compared to corresponding ground truth data with the Validator, with a release on Github if the output matches the ground truth exactly. If the Validator detects differences, the release is blocked and the differences are flagged. We then investigate and fix any code errors before releasing again to initiate a repeat of the validation.
+Nutil is open-source and shared with continuous integration and automatic validation on Github. For automatic validation, Nutil is compiled and used to process four small test datasets on a virtual machine. The result of these procedures are compared to corresponding ground truth data with the Validator, with a release on Github if the output matches the ground truth exactly. If the Validator detects differences, the release is blocked and the differences are flagged. We then investigate and fix any code errors before releasing again to initiate a repeat of the validation.
 
 **Ground truth datasets**
 
@@ -57,7 +57,7 @@ For a more thorough validation, the Validator is initiated manually on a local m
 15. Display region IDS - No known bugs but not validated thoroughly.
 16. Unique ID format - (_sXXX / user) - no known bugs. 
 
-In some instances, a bug may only occur with certain combinations of settings (for example, with white objects and with the mask feature swithed ON). Be aware that it is not possible to test every combination, and so in rare instances bugs may remain despite being marked up as "validated" above.
+In some instances, a bug may only occur with certain combinations of settings (for example, with white objects and with the mask feature swithed ON). Be aware that it is not possible to test every combination, and so in rare instances bugs may remain despite being marked as "validated" above.
 
 
 
