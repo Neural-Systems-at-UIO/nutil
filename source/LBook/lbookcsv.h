@@ -64,7 +64,7 @@ public:
   //  xlnt::worksheet* m_sheet;
 
     QVector<QString> m_data;
-    int m_width = 24;
+    int m_width = 128;
     int m_height = 0;
 
     QString& get(int i, int j);

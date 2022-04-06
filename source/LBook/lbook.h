@@ -69,8 +69,8 @@ public:
     QVector<QSharedPointer<LSheet>> m_sheets;
 
     virtual QStringList sheet_titles() = 0;
-
-
+    bool m_ignoreColors = false;
+    QChar m_separator = ';';
     virtual void RemoveSheet(int index) = 0;
     virtual void Load(QString filename) = 0;
     virtual void Save(QString filename) = 0;

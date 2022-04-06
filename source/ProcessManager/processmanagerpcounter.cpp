@@ -563,25 +563,38 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
         if (QFile::exists(m_reportSheetName)) {
 
-            if (!m_reportSheetName.toLower().endsWith(".xlsx")) {
+            if (!m_reportSheetName.toLower().endsWith(".xlsx") && !m_reportSheetName.toLower().endsWith(".txt")) {
                 LMessage::lMessage.Error("Error: custom region file must be xlsx");
                 Data::data.abort = true;
                 return;
             }
+            LBook* sbook = nullptr;
+            if (m_reportSheetName.toLower().endsWith(".txt")) {
+                sbook = new LBookCSV();
+                sbook->m_separator = '\t';
+                sbook->m_ignoreColors = true;
+                sbook->Load(m_reportSheetName);
+                sbook->m_sheets.remove(0,1);
 
-            LBook* sbook = new LBookXlnt();
-            if (QFile::exists("temp.xlsx"))
-                QFile::remove("temp.xlsx");
+            }
+            else {
+                sbook = new LBookXlnt();
+                if (QFile::exists("temp.xlsx"))
+                    QFile::remove("temp.xlsx");
 
-            QFile::copy(m_reportSheetName,"temp.xlsx");
+                QFile::copy(m_reportSheetName,"temp.xlsx");
 #ifdef _WIN32
-            QFile f("temp.xlsx");
-            f.setPermissions(QFile::ReadOther | QFile::WriteOther);
+                QFile f("temp.xlsx");
+                f.setPermissions(QFile::ReadOther | QFile::WriteOther);
 #endif
-            sbook->Load("temp.xlsx");
-            QFile::remove("temp.xlsx");
+                sbook->Load("temp.xlsx");
+                QFile::remove("temp.xlsx");
+            }
 
             QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
+
+
+
             if (reportSheet == nullptr) {
                 LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
                 Data::data.abort = true;
@@ -671,7 +684,6 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
     while (hasNext) {
         //        qDebug() << "Starting..:";
         QString excelName = m_sheet->readStr(i,x);
-        //             qDebug() << excelName << i << " " << x;
         //           qDebug() << m_sheet->readStr(i+1,x);
         if (excelName.simplified()!="") {
             QColor reportColor = m_sheet->readCol(i+1,x);

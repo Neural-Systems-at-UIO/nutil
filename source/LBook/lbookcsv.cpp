@@ -28,9 +28,13 @@ QString &LSheetCSV::get(int j, int i) {
 
 void LSheetCSV::set(int j, int i, QString val) {
     if (j>=m_height) {
-        m_height = j+1;
+        m_height=j+1;
         m_data.resize(m_height*m_width);
-
+//        qDebug() << "resizing to "<<m_height;
+    }
+    if (i+j*m_width>=m_data.size()) {
+        qDebug() << "Error: "<<i<<j<<" is larger than data size";
+        return;
     }
     m_data[i+j*m_width] = val;
 }
@@ -170,8 +174,24 @@ void LBookCSV::RemoveSheet(int index)
 
 void LBookCSV::Load(QString filename)
 {
+    auto txt = Util::loadTextFile(filename);
+    auto lines = txt.split("\n");
+    int y = 0;
 
-}
+    auto sheet = CreateSheet("custom report");
+
+    for (auto&l : lines) {
+        auto lst = l.split(m_separator);
+        for (int x=0;x<lst.length();x++)
+            if ((lst[x]!="\r") && lst[x]!="")
+                sheet->Set(y,x,lst[x]);
+        y++;
+        if (m_ignoreColors)
+            if (y==2) y+=1;
+
+    }
+
+    }
 
 void LBookCSV::Save(QString filename)
 {

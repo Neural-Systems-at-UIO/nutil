@@ -263,9 +263,15 @@ void Nifti::Create(QVector3D dim, Nifti::DataType type, int bpp)
     header.dim[1] = dim.x();
     header.dim[2] = dim.y();
     header.dim[3] = dim.z();
+    header.dim[4] = 1;
+
+    header.pixdim[0]=1;
+    header.pixdim[1]=1;
+    header.pixdim[2]=1;
 
     header.datatype = setDataType(type);
     header.bitpix = bpp;
+//    qDebug() << "Nifti header type: " <<header.datatype << header.bitpix;
     BytesPerPixel = header.bitpix / 8;
 
 
