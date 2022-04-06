@@ -4,15 +4,18 @@
 **File naming requirement**
 -------------------------------
 
-**It is strongly recommended to change the file names of the histological images as the first step of the QUINT workflow. By using images that follow the file naming convention as input for ilastik, QuickNII and VisuAlign, the output files from these software will also comply with the naming convention, and are thereby directly compatible with Nutil Quantifier.**
+.. note::
+   It is strongly recommended to change the names of the histological images as the first step of the QUINT workflow. 
 
-* The file names of the segmentation and the atlas map that correspond to a particular section image must contain the same unique ID, and should follow the _sXXX... file naming convention, with XXX.. representing the section number (this is not restricted to three digits, _sXXXX also works). 
+   By using images that follow the naming convention for QuickNII, VisuAlign and ilastik, the output files from these software will also comply with the naming convention, and are thereby directly compatible with Nutil Quantifier.
+
+* The file name of the segmentation and the atlas map that corresponds to a particular section must contain the same unique ID, and should follow the _sXXX... file naming convention, with XXX.. representing the section number (this is not restricted to three digits). 
 
 * The section number should reflect the serial order and spacing of the sections as this is a requirement for QuickNII. For example, _s02, _s06, _s10 for every 4th section starting with section 2. 
 
-* The unique IDs must also be present in the XML or JSON file containing the registration information (check this by opening with Notepad). This happens automatically as long as the file names of the histological images that are used for the QuickNII registration contain the unique IDs.
+* The unique IDs must also be present in the XML or JSON file from QuickNII or VisuAlign containing the registration information (check this by opening with Notepad). This happens automatically as long as the file names of the images that are used for the QuickNII registration contain the unique IDs.
 
-* Quantifier also supports user-defined IDs using regular expressions – RegExp. This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information see the “help” button in the Nutil GUI or contact user support.  
+* Nutil Quantifier also supports user-defined IDs using regular expressions (RegExp). This means that it is possible to get round the _sXXX... naming convention. While this is not recommended, it is useful in some cases. For more information see the “help” button in the Nutil GUI or contact user support.  
 
 **Examples that comply with the naming convention:** 
 
@@ -28,39 +31,44 @@ It is fine to include a string of letters and numbers followed by the unique ID.
 **Preparing the Segmentations**
 ------------------------------------
  
-Any image analysis software may be used to generate the segmentations as long as the segmentations meet the requirements listed below. 
+Any image analysis software may be used to generate the segmentations as long as they meet the following requirements:
 
 **Requirement:**
 
-* Image Format: Must be indexed 8-bit or 24-bit RGB images in PNG format.
+1. **Format:** Must be indexed 8-bit or 24-bit Red Green Blue (RGB) images in .PNG format.
+
+   Quantifier is only able to extract one RGB colour at a time. Apply one RBG colour to all the objects-of-interest, and specify this colour in the Nutil GUI. For example, the objects in the segmentation here are red, so extract RGB colour: 255,0,0.
   
-* Image proportions: Must have the same proportions as the histological images used to generate the atlas maps. Note: They do not have the same proportions as the actual atlas maps as QuickNII alters the proportions slightly. 
+2. **Image proportions:** Must have the same proportions as the histological images used to generate the atlas maps. 
 
-* Image size: They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size.
+   They do not have the same proportions as the actual atlas maps as QuickNII alters the proportions slightly. 
 
- **We do not recommend running Quantifier on segmented PNG images larger than around 10000x10000 pixels. While Nutil supports segmentations of any size up to this limit - as long as there is enough memory installed on the computer, it is highly recommended to downscale the histological images as much as possible before segmenting them.** 
+3. **Image size:** They do not need to be the same size as the images used to generate the atlas maps, and are typically larger in size. It is recommended to downscale the images prior to segmentation. This has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning algorithms used by ilastik (see the ilastik section). It will also speed up Nutil analysis, and prevent crashes due to insufficient memory. 
 
- Downscaling has several advantages. It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning   algorithms used by ilastik (see the ilastik section of the Read the Doc for more info). It will also speed up the Nutil analysis a lot, and will prevent crashes due to insufficient memory. The aim here is to downscale as much as possible but without losing information from the images that is actually important. The downscaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
+   The aim is to downscale the images as much as possible but without losing information from the images that is actually important. The downscaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
 
-* Internal properties: Quantifier is only able to extract one Red Green Blue (RGB) colour at a time. Apply one RBG colour to all of the objects of interest, and specify this colour code in the Nutil GUI. For example, the objects in the segmentation here are red, so extract RGB colour: 255,0,0.
-  
+.. warning::
+   We do not recommend running Quantifier on segmented PNG images larger than around 10000 x 10000 pixels. While Nutil supports segmentations of any size, up to this limit - as long as there is enough memory installed on the computer - it is highly recommended to downscale the histological images as much as possible before segmenting them. 
+
 +----------+
 | |image11||
 +----------+
 
-**Software recommendations**
+.. note::
 
-**Ilastik**: We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with Fiji to visualise the output. See the ilastik section of this Read the Doc for instructions. ilastik is available to download here: http://ilastik.org/download.html. 
+    **Software recommendations**
 
-**QuPath**: QuPath is an alternative that can be used to generate the segmentations. https://qupath.github.io/
+    `Ilastik: <http://ilastik.org/download.html>`_ We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with FIJI to visualise the output. See the ilastik section of this Read the Doc for instructions.
 
-**Fiji**: Fiji is also useful https://imagej.net/software/fiji/ 
+    `QuPath: <https://qupath.github.io/QuPath>`_ is an alternative that can be used to generate the segmentations. In some cases QuPath may perform better than ilastik.
+
+    `FIJI ImageJ: <https://imagej.net/software/fiji/>`_ Fiji is also useful for generating segmentations. 
 
 
 **Preparing the Atlas Maps** 
 --------------------------------
  
-The atlas maps are generated with QuickNII, which applies linear registration of the sections to the atlas, or with VisuAlign that applies nonlinear refinement to an existing QuickNII registration. The VisuAlign atlas maps are thereby typically more accurate than the QuickNII atlas maps, but also take more time to produce. The atlas maps are customised to match the cutting plane and proportions of the brain sections. 
+The atlas maps are generated with `QuickNII <https://quicknii.readthedocs.io/en/latest/>`_, which applies linear registration of the sections to the atlas, or with `VisuAlign <https://visualign.readthedocs.io/en/latest/>`_ that applies nonlinear refinement to an existing QuickNII registration. The VisuAlign atlas maps are thereby typically more accurate than the QuickNII atlas maps, but also take more time to produce. The atlas maps are customised to match the cutting plane and proportions of the brain sections. 
 
 File format: The atlas maps are in .FLAT format and cannot be viewed directly. The image below shows the information contained in an atlas map, but is not the .FLAT file itself.
 
@@ -72,30 +80,34 @@ File format: The atlas maps are in .FLAT format and cannot be viewed directly. T
 **QuickNII**
 ~~~~~~~~~~~~
 
-* QuickNII is a standalone software for affine spatial registration (anchoring) of section images - typically high resolution histological images - to a reference atlas such as the Allen Mouse Brain Atlas or the Waxholm Atlas of the Sprague Dawley Rat. In QuickNII, the reference atlas is transformed to match anatomical landmarks in the experimental images. In this way, the spatial relationship between experimental image and atlas is defined, without introducing transformations in the original experimental images. 
+* QuickNII is a standalone desktop tool for affine spatial registration of section images to a reference atlas such as the Allen Mouse Brain Atlas or the Waxholm Atlas of the Sprague Dawley Rat. In QuickNII, the reference atlas is transformed to match anatomical landmarks in the experimental images. In this way, the spatial relationship between experimental image and atlas is defined, without introducing transformations in the original experimental images. 
 
-* Once all the sections are registered, QuickNII may be used to generate atlas maps that match the cutting plane and proportions of the experimental image data. The anchoring information (coordinates) is saved and stored in an XML or JSON file.   
+* QuickNII may be used to generate atlas maps that match the cutting plane and proportions of the experimental images. The registration information (coordinates) is saved and stored in an XML or JSON file.   
 
-* The registration is user-guided with some automation. Following anchoring of a limited number of sections containing key landmarks, transformations are propagated across the entire series of images to reduce the manual work required. These propagations must be validated by visual inspection and typically require fine adjustments for most sections. A user manual is provided here: https://quicknii.readthedocs.io/en/latest/ 
+* The registration is user-guided with some automation. Following anchoring of a limited number of sections containing key landmarks, transformations are propagated across the entire series of images to reduce the manual work required. These propagations must be validated by visual inspection and typically require fine adjustments for most sections.
 
 **VisuAlign**
 ~~~~~~~~~~~~~~
 
-* VisuAlign is a standalone software for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration. The 2D-to-3D registration is performed with QuickNII and stored in the JSON file. It is used to make manual adjustments to the atlas maps to better match the sections. The adjustments are nonlinear.  
+* VisuAlign is a standalone desktop tool for applying nonlinear refinements (inplane) to an existing affine 2D-to-3D registration performed with QuickNII. 
 
-* Open the JSON file from QuickNII in VisuAlign and apply adjustments by simple drop and drag of markers placed on the image. The adjusted atlas maps may be exported in .FLAT format. VisuAlign does not update the linear coordinate information contained in the JSON file. A user manual is provided here: https://visualign.readthedocs.io/en/latest/
+* Open the JSON file from QuickNII in VisuAlign and apply manual adjustments by drop and drag of markers placed on the image. The adjusted atlas maps may be exported in .FLAT format. 
 
-Visit and download QuickNII and VisuAlign here: https://ebrains.eu/service/quicknii-and-visualign 
+* VisuAlign does not update the linear coordinate information contained in the JSON file. 
+
+Visit and download `QuickNII and VisuAlign. <https://ebrains.eu/service/quicknii-and-visualign>`_ 
 
 
 **Preparing the XML or JSON file**
 -------------------------------------
  
 Either the XML or JSON file from QuickNII, or the JSON file from VisuAlign may be used here. 
+ 
+.. note::
 
-Note: Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the file. The linear coordinate information is the part that is extracted to generate the coordinate output and so any file may be used.  
-
-**Make sure your XML or JSON file has anchoring information for every section image in your dataset.**
+   Nonlinear adjustment of the atlas maps with VisuAlign does not alter the linear coordinate information contained in the file. The linear coordinate information is the part that is extracted to generate the coordinate output and so any file may be used. 
+   
+   Make sure your XML or JSON file has anchoring information for every section image in your dataset.
 
 
 

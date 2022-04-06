@@ -4,19 +4,19 @@
 **Introduction**
 -----------------
 
-* This manual was written by the Nesys group at the University of Oslo with input from the ilastik team to describe the use of *ilastik* for the QUINT workflow only.
+* This manual was written by the Nesys group at the University of Oslo with input from the ilastik team to describe the use of `ilastik <http://ilastik.org/>`_ for the QUINT workflow only.
 
 * *ilastik* is a versatile image analysis tool designed for the batch classification, segmentation and analysis of biological images based on supervised machine learning algorithms.
 
-* *ilastik* has many additional functions and workflows that are not mentioned in this manual. For more information see the www.ilastik.org
+* *ilastik* has many additional functions and workflows that are not mentioned in this manual.
 
 
 **Installation and Usage**
 --------------------------
 
-* The ilastik program can be downloaded here: http://ilastik.org/download.html
+* The ilastik program can be `downloaded here. <http://ilastik.org/download.html>`_
 
-* See the ilastik website for the most up to date information.
+* See the ilastik website for the most up-to-date information.
 
 |
 **Preparing the images for ilastik**
@@ -30,7 +30,7 @@ The optimal resize factor will depend on the original size of the images and the
 
 **File format**
 
-ilastik supports many file formats. PNG works well. It does not support tiled TIFFs. https://www.ilastik.org/documentation/basics/dataselection
+ilastik supports many `file formats. <https://www.ilastik.org/documentation/basics/dataselection>`_ PNG works well. It does not support tiled TIFFs.
 
 **Software Recommendations**
 
@@ -65,7 +65,11 @@ The best approach depends on the appearance of the labelling in the images and i
 **1. Pixel Classification Workflow**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For a quick introduction, watch: https://www.youtube.com/watch?v=5N0XYW9gRZY&feature=youtu.be
+For a quick introduction, watch: 
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/5N0XYW9gRZY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 1. Open the *ilastik* programme. Under ‘Create New Project’ select ‘Pixel Classification’. Save the project under a new file name in the same location as the images for analysis (create a new folder). 
 
@@ -107,7 +111,8 @@ Select the features and scales that can be used to discern the objects or classe
 
 10.	 Save the ilastik file before closing. 
 
-**NOTE: Save the ilastik file frequently during the annotation process**.
+.. note::
+   Save the ilastik file frequently during the annotation process.
 
 **2. Object Classification Workflow**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -168,7 +173,8 @@ customized LUT as a .LUT file. Apply to a whole folder of images with the Batch 
 
    open(“C:\\......\\....\\....\\filename.lut”);
 
-   **Note: Make sure to update the directory so it locates the customized.lut file, and ensure the macro is written with double back slashes.**
+.. note::
+   Make sure to update the directory so it locates the customized.lut file, and ensure the macro is written with double back slashes.
 
    .. image:: 2e9537b09637491fa83410e3e364d5c5/media/image11.png
       :width: 4.39583in

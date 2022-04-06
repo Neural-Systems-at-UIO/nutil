@@ -1,34 +1,9 @@
 **How to interpret the output**
 ================================
 
-**RefAtlasRegion report**
-----------------------------
-   
-Report with output organised based on all the regions in the reference atlas. There is one report for the whole series (all sections combined) and one per section.
+Nutil generates up to three sets of reports, overlay images and a .NUT file. The sections below give more information on each type of file. 
 
-**IMPORTANT**: The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels) and should be excluded from analysis.  
-
-The **Clear Label** ID covers objects that fall outside of the atlas maps
-
-   .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
-      :width: 5.88611in
-      :height: 2.86512in
- 
-**CustomRegion report**
-------------------------
-
-Report with the output organised based on the customised regions defined in the CustomRegionsTemplate.xlsx. These are compilations of reference atlas regions and are either defined by the user ("custom") or are the default regions that are in-build in the Nutil software. For more information see the "Customised regions explained" section. A report is provided for the whole series (all sections combined) and per section. 
-
-**Object report**
--------------------
-
-Report with a list of all the objects in the whole series and per section. By switching “ON” the “display object IDs in image file and reports” feature, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. 
-
-Object reports are not generated with object splitting switched "ON" as this feature invalidates the object counts.   
-
-In each report, interpret the results as follows:
-
-
+For each report, interpret the results as follows:
 
 +----------------------+-------------------------------------------------------------------------------+
 |    **Region pixels** |    Number of pixels representing the region.                                  |
@@ -53,6 +28,40 @@ In each report, interpret the results as follows:
 |                      |                                                                               |
 +----------------------+-------------------------------------------------------------------------------+
 
+The main results are:
+
+* Load. This refers to the % regional load (% coverage of the region). Use this with object splitting switched ON (object splitting OFF may invalidate the % load).  
+* Count. This is a count of segmented objects that fall within the region. Use this for small objects only, with object splitting switched OFF (object splitting ON may invalidate the counts).
+
+See `Object splitting explained. <https://nutil.readthedocs.io/en/latest/QuantifierOS.html>`_
+
+
+
+**RefAtlasRegion report**
+----------------------------
+   
+RefAtlasRegion reports contain quantifications per atlas-region based on the finest level of granularity of the atlas. There is one report for the whole series (all sections combined) and one per section.
+
+.. note::
+   The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels). They should be excluded from analysis.  
+
+   The **Clear Label** ID covers objects that fall outside of the atlas maps
+
+.. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
+    :width: 5.88611in
+    :height: 2.86512in
+ 
+**CustomRegion report**
+------------------------
+
+CustomRegion reports contain quantifications for broader regions. These broader regions are compilations of reference atlas regions, and may either be user-defined ("custom") or the default regions included in the Nutil software ("default"). For more information see the "Customised regions explained" section. A report is provided for the whole series (all sections combined) and per section. 
+
+**Object report**
+-------------------
+
+Object reports contain information about individual objects: it lists all the objects in the whole series and per section. As object splitting invalidates the object counts, this report is only generated when the object splitting feature is switched "OFF". 
+
+By switching “ON” the “display object IDs in image file and reports”, a unique ID is assigned to each object in your dataset. These IDs are displayed in the image files and in the object reports to enable identification. 
 
 **Overlay images**
 -----------------
@@ -65,17 +74,17 @@ In each report, interpret the results as follows:
 ----------------
 
 * JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
-* The viewer is available via the MediaWiki link here: www.nitrc.org/projects/meshview.
+* The viewer is available via the `MediaWiki link here. <https://www.nitrc.org/projects/meshview>`_
 
-**IMPORTANT** 
-Currently the coordinates generated with Nutil are based on the linear transformation only and do not take into account the nonlinear transformation.   
+.. warning::
+   Currently the coordinates generated with Nutil are based on the linear transformation only and do not take into account the nonlinear transformation.   
 
 **NUT file** 
 --------------
 
-The NUT file is a text file that contains the parameters that were used for the Nutil analysis. This can be loaded into Nutil Quantifier with the “load” button to recreate an analysis. 
+The NUT file is a text file that contains the parameters that were used for the Nutil analysis. This can be loaded into Nutil Quantifier with the “load” button to recreate the analysis. 
 
-To view its content, open the NUT file with Notepad. As the NUT file is an internal document intended for the transfer of metadata only, it is not always easy to interpret. Some of the parameters stored in the file are conditional on other fields, and so are not activated unless the condition is met. For example, the custom_mask_colour field is not applied unless use_custom_masks = Yes. However, the NUT file does contain information about the Nutil version used for the analysis, and can give clues to potential errors and so is useful for problem solving. 
+To view its content, open the NUT file in Notepad. As the NUT file is an internal document intended for the transfer of metadata only, it is not always easy to interpret. Some of the parameters stored in the file are conditional on other fields, and so are not activate unless the condition is met. For example, the custom_mask_colour field is not applied unless use_custom_masks = Yes. However, the NUT file does contain information about the Nutil version used for the analysis, and can give clues to potential errors and is useful for problem solving. 
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
    :width: 6.30139in

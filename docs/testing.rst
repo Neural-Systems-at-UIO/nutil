@@ -5,9 +5,9 @@ Nutil is a highly flexible pre- and post- processing toolbox for histological im
 
 More stringent quality assurance routines were introduced in February 2021 in light of several bugs discovered in Nutil affecting core Quantifier functionality (see the release notes for more information about the bugs). The routines include continuous integration and automated validation on Github, based on a collection of ground truth datasets. 
 
-As Nutil is a highly flexible software with many options for customised analysis, and has evolved over time in response to users’ needs, not all features have been tested to the same extent. The core functionality is tested more extensively than less central features. The testing status of each feature will be added here in due course. 
+As Nutil is a highly flexible software with many options for customised analysis that has evolved over time in response to users’ needs, not all features have been tested to the same extent. The core functionality is tested more extensively than less central features. The testing status of each feature is listed below. 
 
-* We strongly recommend that ALL data from Nutil is validated externally by the user prior to research use, as mistakes in image preparation and set-up (e.g. creation of the atlas maps and segmentations, and selection of the Quantifier settings) may invalidate the output. 
+* We strongly recommend that ALL data from Nutil is validated externally by the user prior to research use, as mistakes in image preparation and set-up may invalidate the output. 
 * This recommendation is particularly applicable to analyses performed with features that are not tested as part of the automated validation procedure as there may be software bugs that are not yet discovered. 
 * If you detect errors please inform us by posting an issue on Github https://github.com/Neural-Systems-at-UIO/nutil/issues or by contacting support@ebrains.eu.
 
@@ -21,7 +21,7 @@ Two validation systems have been implemented that utilise the Validator:
 
 **1.	Automated validation on Github that initiates with each pre-release** 
 
-Nutil is open-source and shared with continuous integration (CI) and automatic validation on Github. For the automatic validation Nutil is compiled and used to process four small test datasets on a virtual machine in an automatic procedure. The output of these procedures are compared to corresponding ground truth data with the Validator, with a release on Github if the output matches the ground truth exactly. If the Validator detects differences, the release is blocked and the differences are flagged. We then investigate and fix any code errors before releasing again to initiate a repeat of the validation.
+Nutil is open-source and shared with continuous integration and automatic validation on Github. For automatic validation, Nutil is compiled and used to process four small test datasets on a virtual machine. The result of these procedures are compared to corresponding ground truth data with the Validator, with a release on Github if the output matches the ground truth exactly. If the Validator detects differences, the release is blocked and the differences are flagged. We then investigate and fix any code errors before releasing again to initiate a repeat of the validation.
 
 **Ground truth datasets**
 
@@ -57,7 +57,7 @@ For a more thorough validation, the Validator is initiated manually on a local m
 15. Display region IDS - No known bugs but not validated thoroughly.
 16. Unique ID format - (_sXXX / user) - no known bugs. 
 
-In some instances, a bug may only occur with certain combinations of settings (for example, with white objects and with the mask feature swithed ON). Be aware that it is not possible to test every combination, and so in rare instances bugs may remain despite being marked up as "validated" above.
+In some instances, a bug may only occur with certain combinations of settings (for example, with white objects and with the mask feature swithed ON). Be aware that it is not possible to test every combination, and so in rare instances bugs may remain despite being marked as "validated" above.
 
 
 
