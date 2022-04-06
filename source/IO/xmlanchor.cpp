@@ -21,7 +21,7 @@ XMLData AbstractAnchor::findData(QString name)
     }
 
 //    qDebug() << "Could not find xmldata for:" << name;
-    LMessage::lMessage.Message("<font color=\"" + Data::data.warningColor.name()+ "\">Warning: Could not find xmldata in .xml file for slice '" + name +"', so 3D data will be incorrect. Please make sure that there exists a corresponding field in the xml file!</font>");
+    LMessage::lMessage.Message("<font color=\"" + Data::data.warningColor.name()+ "\">Warning: Could not find data in .xml or .json file for slice '" + name +"', so 3D data will be incorrect. Please make sure that there exists a corresponding field in the xml or json file!</font>");
 
     return XMLData();
 
