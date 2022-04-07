@@ -25,6 +25,8 @@ private slots:
     void on_pushButton_clicked();
 
 
+    void on_btnPython_clicked();
+
 private:
     Ui::DialogSettings *ui;
 };

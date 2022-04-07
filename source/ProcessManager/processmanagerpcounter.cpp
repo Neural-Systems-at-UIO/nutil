@@ -2,7 +2,7 @@
 #include <QStringList>
 #include "source/data.h"
 #include <QImageReader>
-
+#include <QProcessEnvironment>
 
 float ProcessManagerPCounter::CalculateRamNeededInGB()
 {
@@ -395,8 +395,10 @@ void ProcessManagerPCounter::Execute()
      * */
 
 
-    if (!Data::data.abort)
+    if (!Data::data.abort) {
         BuildReports();
+        GeneratePythonPlots();
+    }
     //    QVector<ProcessItem*> m_processItems;
     //  QVector<QSharedPointer<NutilProcess>> m_processes;
     reports = Reports();
@@ -717,6 +719,39 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
         r.m_unit = m_units;
 
     //    qDebug() << "DONE reading excel sheet";
+}
+
+void ProcessManagerPCounter::GeneratePythonPlots()
+{
+
+    auto python = Data::data.m_settings->getString("python_path");
+    if (!QFile::exists(python)) {
+        LMessage::lMessage.Message("Python path not set, so plots will not be generated. Please set the correct path to your python executable, and make sure you have installed the python packages 'matplotlib', 'numpy' and 'pandas'.");
+        return;
+    }
+
+    Data::data.m_globalMessage = "Generating python plots";
+    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
+    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
+
+}
+
+void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString outputFile)
+{
+    auto python = Data::data.m_settings->getString("python_path");
+    QProcess p;
+    QStringList params;
+    p.setWorkingDirectory(m_outputDir);
+    auto ue = QProcessEnvironment::systemEnvironment();
+    p.setProcessEnvironment(ue);
+    params<<QCoreApplication::applicationDirPath() +file;
+    params<<m_outputDir<<type;
+    params<<"-noplot";
+    params<<"-outfile="+outputFile;
+    p.start(python,  params  );
+    p.waitForFinished();
+
+
 }
 
 void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)

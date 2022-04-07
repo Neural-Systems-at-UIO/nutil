@@ -98,6 +98,9 @@ public:
 
     float CalculateRamNeededInGB() override;
 
+
+
+
     AbstractAnchor* m_xmlAnchor = nullptr;
     void LoadXML(NutilTemplate* data);
     bool Build(NutilTemplate* data) override;
@@ -109,6 +112,8 @@ public:
     void BuildWithMasks();
     void GenerateReports(QSharedPointer<LSheet> m_sheet);
     bool Verify() override { return true; }
+    void GeneratePythonPlots();
+    void CallPythonPlot(QString file, QString type, QString outputFile);
 
     void setupLabelFiles(NutilTemplate* data);
 

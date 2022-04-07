@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import glob
 import math
-from mpl_toolkits.mplot3d import proj3d
+#from mpl_toolkits.mplot3d import proj3d
 import matplotlib.ticker as mtick
 
 
@@ -22,17 +22,18 @@ atlas_files = glob.glob(sys.argv[1]+"/**/*.label", recursive = True)
 
 
 doplot = True
-
+outfile = 'ref_plot.png'
 
 typ = 0
-if (len(sys.argv)==3):
+if (len(sys.argv)>=3):
 	typ = int(sys.argv[2])
 if (len(sys.argv)>3):
 	for i in range(3,len(sys.argv)):
 		s = sys.argv[i].lower()
 		if (s=="-noplot"):
 			doplot = False
-
+		if ("-outfile=" in s):
+			outfile = s.replace("-outfile=","")
 
 
 color_map = {}
@@ -221,7 +222,8 @@ sigma = math.sqrt(sigma)
 
 if typ==0:
 	plt.tight_layout()
-plt.savefig('ref_plot.png',dpi=180)
+        
+plt.savefig(outfile,dpi=180)
 if doplot:
 	plt.show()
 	plt.draw()
