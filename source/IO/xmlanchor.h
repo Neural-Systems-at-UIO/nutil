@@ -37,6 +37,7 @@ public:
     QVector3D m_o;
     QVector3D m_u;
     QVector3D m_v;
+    QVector<QVector4D> m_markers;
 
     XMLData() {}
 
