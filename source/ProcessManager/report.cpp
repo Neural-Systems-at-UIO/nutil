@@ -781,7 +781,8 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
 QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint)
 {
     QVector3D v( p.x()/a->m_width,p. y()/a->m_height,1);
-    v=v*a->m_mat;
+    v = CoordinateTransform::Linear(v,a->m_mat);
+
 
     if (rndSpread>0.0) {
         double val = ((rand()%1000)/1000.0-0.5) * rndSpread;

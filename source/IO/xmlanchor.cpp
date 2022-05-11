@@ -151,6 +151,8 @@ void JSONAnchor::Load(QString file)
             d.m_u = QVector3D(anLst[3].toFloat(), anLst[4].toFloat(),anLst[5].toFloat());
             d.m_v = QVector3D(anLst[6].toFloat(), anLst[7].toFloat(),anLst[8].toFloat());
         }
+        qDebug() << "CONTAINS MARKS " <<map.contains("marks");
+
 //        qDebug() << d.m_filename << d.m_nr << d.m_width << d.m_height;
 //                    qDebug() << d.m_o;
 //                    qDebug() << d.m_v;

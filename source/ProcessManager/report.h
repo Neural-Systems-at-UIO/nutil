@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "source/util/counter.h"
 #include "source/ProcessManager/processitem.h"
 #include "source/LBook/lbookfactory.h"
-
+#include "source/util/coordinatetransform.h"
 
 class Report {
 public:

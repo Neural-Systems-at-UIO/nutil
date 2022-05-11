@@ -741,6 +741,7 @@ void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString 
     auto python = Data::data.m_settings->getString("python_path");
     QProcess p;
     QStringList params;
+
     p.setWorkingDirectory(m_outputDir);
     auto ue = QProcessEnvironment::systemEnvironment();
     p.setProcessEnvironment(ue);

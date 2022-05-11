@@ -112,6 +112,7 @@ SOURCES += main.cpp \
     source/nauto.cpp \
     source/ProcessManager/nutilprocess.cpp \
     source/ProcessManager/processmanager.cpp \
+    source/util/coordinatetransform.cpp \
     source/util/downloadmanager.cpp \
     source/util/lgraph.cpp \
     source/util/area.cpp \
@@ -171,6 +172,7 @@ HEADERS += \
     source/nauto.h \
     source/ProcessManager/nutilprocess.h \
     source/ProcessManager/processmanager.h \
+    source/util/coordinatetransform.h \
     source/util/counter.h \
     source/util/downloadmanager.h \
     source/util/lgraph.h \
