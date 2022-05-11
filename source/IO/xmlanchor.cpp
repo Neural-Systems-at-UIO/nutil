@@ -151,6 +151,15 @@ void JSONAnchor::Load(QString file)
             d.m_u = QVector3D(anLst[3].toFloat(), anLst[4].toFloat(),anLst[5].toFloat());
             d.m_v = QVector3D(anLst[6].toFloat(), anLst[7].toFloat(),anLst[8].toFloat());
         }
+        if (map.contains("markers")) {
+            for (auto &&marker : map.value("markers").toList()) {
+                 auto &&coords = marker.toList();
+                 d.m_markers.append(QVector4D(coords[0].toFloat(),
+                                              coords[1].toFloat(),
+                                              coords[2].toFloat(),
+                                              coords[3].toFloat()));
+            }
+        }
 //        qDebug() << d.m_filename << d.m_nr << d.m_width << d.m_height;
 //                    qDebug() << d.m_o;
 //                    qDebug() << d.m_v;
