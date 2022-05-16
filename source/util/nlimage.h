@@ -107,8 +107,8 @@ public:
         Load(f);
     }
 
-    void AnchorSingle(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale, int slice, QString maskFile, QVector3D maskColor);
-    void AnchorSplitting(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, double pixelAreaScale, int slice, QString maskFile, QVector3D maskColor);
+    void AnchorSingle(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, float pixelAreaScale, int slice, QString maskFile, QVector3D maskColor, XMLData& data);
+    void AnchorSplitting(QString filenameStripped, QString atlasDir, QString labelFile, AtlasLabels& label,Counter *counter,QVector<Area>* areas, double pixelAreaScale, int slice, QString maskFile, QVector3D maskColor, XMLData& data);
     NLIParent* image();
 };
 

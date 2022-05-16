@@ -29,6 +29,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPoint>
 #include "source/util/atlaslabel.h"
 #include <QColor>
+
+class XMLData;
+
 class Area
 {
 public:
@@ -47,6 +50,7 @@ public:
     double m_width,m_height;
     QColor color;
     AtlasLabel* atlasLabel = nullptr;
+    XMLData *m_xmlData = nullptr;
     bool m_areaHasReachedCutoff = false;
 
     void CalculateStatistics();

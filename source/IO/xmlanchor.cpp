@@ -130,8 +130,6 @@ void JSONAnchor::Load(QString file)
 
     //convert the json object to variantmap
     m_atlas = mainMap["target"].toString().split(".").first();
-//    qDebug() << "target:" <<m_atlas << mainMap.keys() << mainMap["target"].toString() << dataList.count()<<mainMap["name"].toString();
-  //    exit(1);
     for (int i=0;i<dataList.count();i++) {
         QVariantMap map = dataList[i].toMap();
         XMLData d;
@@ -146,26 +144,27 @@ void JSONAnchor::Load(QString file)
         }
         else {
             QVariantList anLst = map.value("anchoring").toList();
-    //        qDebug() << anLst.count() << anLst;
             d.m_o = QVector3D(anLst[0].toFloat(), anLst[1].toFloat(),anLst[2].toFloat());
             d.m_u = QVector3D(anLst[3].toFloat(), anLst[4].toFloat(),anLst[5].toFloat());
             d.m_v = QVector3D(anLst[6].toFloat(), anLst[7].toFloat(),anLst[8].toFloat());
         }
-        qDebug() << "CONTAINS MARKS " <<map.contains("marks");
+//        qDebug() << "CONTAINS MARKS " <<map.contains("marksers");
 
-//        qDebug() << d.m_filename << d.m_nr << d.m_width << d.m_height;
-//                    qDebug() << d.m_o;
-//                    qDebug() << d.m_v;
-
-       // qDebug() << "Adding slice:" << d.m_filename;
+        if (map.contains("markers")) {
+            for (auto &&marker : map.value("markers").toList()) {
+                 auto &&coords = marker.toList();
+                 d.m_markers.append(QVector4D(coords[0].toFloat(),
+                                              coords[1].toFloat(),
+                                              coords[2].toFloat(),
+                                              coords[3].toFloat()));
+            }
+        }
 
         m_data.append(d);
 
 
-//        qDebug() << fileMap.keys();
     }
 
-  //  exit(1);
 
 }
 

@@ -122,12 +122,10 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
             QRegularExpressionMatch match = re.match(s);
             if (match.hasMatch()) {
                 if (!s.toLower().contains("mask")) {
-
                     newFiles.append(match.captured(0));
                 }
 
             }
-            //            if (regExp.mat)
         }
         m_files = newFiles;
     }
@@ -357,9 +355,9 @@ void ProcessManagerPCounter::Execute()
             {
                 QVector3D col = QVector3D(m_customMaskInclusionColors.red(),m_customMaskInclusionColors.green(),m_customMaskInclusionColors.blue());
                 if (m_areaSplitting!=1)
-                    m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile, col);
+                    m_processes[i]->lImage.AnchorSingle(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile, col,pi->m_xmlData);
                 else
-                    m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile, col);
+                    m_processes[i]->lImage.AnchorSplitting(pi->m_inFile, atlasFile, m_outputDir + pi->m_inFile + "_test.png", m_labels, &m_processes[i]->m_counter, &m_processes[i]->m_areas, pi->m_pixelAreaScale,i, maskFile, col,pi->m_xmlData);
 
             }
 

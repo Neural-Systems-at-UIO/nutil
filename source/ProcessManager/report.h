@@ -92,9 +92,9 @@ public:
 
     void CreateNifti(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, int size);
 
-    QVector3D InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint);
-    QVector3D InvProject(QPointF p, Area* a, double rndSpread) {
-        return InvProject(p,a,rndSpread,QVector3D(0,0,0), nullptr);
+    QVector3D InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint, CoordinateTransform* transform);
+    QVector3D InvProject(QPointF p, Area* a, double rndSpread, CoordinateTransform* transform) {
+        return InvProject(p,a,rndSpread,QVector3D(0,0,0), nullptr, transform);
     }
 
 

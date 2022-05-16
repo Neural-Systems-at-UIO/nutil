@@ -37,7 +37,8 @@ public:
     QVector3D m_o;
     QVector3D m_u;
     QVector3D m_v;
-    QVector<QVector3D> distortionPoints;
+    QVector<QVector4D> m_markers;
+
     XMLData() {}
 
     float* toMatrix() {

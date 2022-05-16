@@ -589,24 +589,27 @@ void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilPro
 
     QString o;
     o += "SCALE 3\n";
-
     for (int i=0;i<m_reports.count();i++) {
         QColor c = m_reports[i].m_color;
         QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
         o +="RGBA " + color +" \n";
         //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
         int count=0;
+
+
         for (Area* a: m_reports[i].m_areasOfInterest)
             {
+            CoordinateTransform transform(*a->m_xmlData);
 
-            QVector3D invCenter = InvProject(a->m_center,a,0);
+
+            QVector3D invCenter = InvProject(a->m_center,a,0,&transform);
             for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
 /*                QPointF& p =a->m_points[k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;*/
                 QVector3D alt;
-                QVector3D v = InvProject(a->m_points[k],a,spread, invCenter,&alt);
+                QVector3D v = InvProject(a->m_points[k],a,spread, invCenter,&alt, &transform);
                 o +=QString::number(v.x()) + ",";
                 o +=QString::number(v.y()) + ",";
                 o +=QString::number(v.z()) + "\n";
@@ -659,16 +662,17 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
             count+=m_reports[i].m_areasOfInterest[j]->m_points.count();
         if (cnt!=0) o+=",\n";
         o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number((int)(count/xyzSize))+",";
-        o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename+ "\",";
+        o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename.trimmed().simplified()+ "\",";
         o+="\"triplets\":[";
         int cnt2=0;
         cnt++;
         for (Area* a: m_reports[i].m_areasOfInterest) {
+            CoordinateTransform transform(*a->m_xmlData);
 
 
 //            if (cnt!=0) o+=",";
             a->CalculateStatistics();
-            QVector3D invCenter = InvProject(a->m_center,a,0);
+            QVector3D invCenter = InvProject(a->m_center,a,0,&transform);
     //        qDebug() << "CENTER "<< a->m_center;
 
             double val = ((rand()%1000)/1000.0-0.5) * spread;
@@ -678,7 +682,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
                 QVector3D alt;
-                QVector3D v = InvProject(a->m_points[(int)k],a,spread,invCenter, &alt);
+                QVector3D v = InvProject(a->m_points[(int)k],a,spread,invCenter, &alt, &transform);
  /*               QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);*/
@@ -778,16 +782,25 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
     qDebug() << "done.";
 }
 
-QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint)
+QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint, CoordinateTransform* transform)
 {
-    QVector3D v( p.x()/a->m_width,p. y()/a->m_height,1);
-    v = CoordinateTransform::Linear(v,a->m_mat);
+//    QVector3D v( p.x()/a->m_width,p. y()/a->m_height,1);
+    QVector3D v( p.x()/a->m_width*transform->m_xmlData->m_width,
+                 p.y()/a->m_height*transform->m_xmlData->m_height,1);
+//    qDebug() << a->m_width<<transform->m_xmlData->m_width;
 
+    if (transform->isNonLinear()) {
+        qDebug() << "Nonlinear";
+        v = transform->NonLinear(QVector2D(v.x(),v.y()));
+    }
+    else
+        v = transform->Linear(QVector2D(v.x(),v.y()));
+    //v = transform->Linear(QVector2D(v.x(),v.y()));
+  //  QVector3D v( p.x()/a->m_width,p. y()/a->m_height,1);
+    //    v=v*a->m_mat;
 
     if (rndSpread>0.0) {
         double val = ((rand()%1000)/1000.0-0.5) * rndSpread;
-
-//        v += a->m_planeNormal*rndSpread;
         v += a->m_planeNormal*val;
     }
     if (altPoint!=nullptr) {
@@ -845,7 +858,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
         QString data = "";
         for (Area* a: m_reports[i].m_areasOfInterest)
         {
-
+            CoordinateTransform transform(*a->m_xmlData);
             bool ok = false;
             for (int ka = 0;ka<processes[itm]->m_areas.count();ka++) {
                 if (a==&processes[itm]->m_areas[ka])
@@ -862,7 +875,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
 */
 
 //            if (cnt!=0) o+=",";
-            QVector3D invCenter = InvProject(a->m_center,a,0);
+            QVector3D invCenter = InvProject(a->m_center,a,0, &transform);
 
             for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
@@ -872,7 +885,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;*/
                 QVector3D alt;
-                QVector3D v = InvProject(a->m_points[k],a,spread, invCenter, &alt);
+                QVector3D v = InvProject(a->m_points[k],a,spread, invCenter, &alt, &transform);
 
                 if (cnt2!=0) data+=",\n";
 //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
@@ -885,7 +898,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
 
         }
         o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(cnt2)+",";
-        o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename+"\",";
+        o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename.trimmed().simplified()+"\",";
         o+="\"triplets\":[";
 
         o+=data;

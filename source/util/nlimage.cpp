@@ -292,7 +292,7 @@ void NLImage::CountAtlasArea(Flat2D &refImage, AtlasLabels &labels, double scale
                 {
                 m_totalPixelArea++;
 
-                AtlasLabel* al =labels.get(refImage.pixel(i,j), refImage.m_newFormat);
+                AtlasLabel* al = labels.get(refImage.pixel(i,j), refImage.m_newFormat);
 
               //  AtlasLabel* al =labels.get(refImage.pixel(i,j));
                 if (al!=nullptr) {
@@ -523,7 +523,7 @@ void NLImage::SaveAreasImage(QString filename,Counter *counter, QVector<Area>* m
 
 }
 
-void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice, QString maskFile, QVector3D maskColor)
+void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, float pixelAreaScale, int slice, QString maskFile, QVector3D maskColor, XMLData& data)
 {
 
     Flat2D refImage;
@@ -549,6 +549,7 @@ void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString 
         counter->Init(m_areas->count());
 
     for (Area& a: *m_areas) {
+        a.m_xmlData = &data;
         if (counter)
             counter->Tick();
         if (Data::data.abort)
@@ -588,7 +589,7 @@ void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString 
 }
 
 
-void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, double pixelAreaScale, int slice, QString maskFile, QVector3D maskColor)
+void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QString labelFile, AtlasLabels& labels,Counter *counter, QVector<Area>* m_areas, double pixelAreaScale, int slice, QString maskFile, QVector3D maskColor, XMLData& data)
 {
 
     Flat2D refImage;
@@ -619,6 +620,7 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
 
     QVector<Area> newAreas;
     for (Area& a: *m_areas) {
+        a.m_xmlData = &data;
         if (counter)
             counter->Tick();
         if (Data::data.abort)
@@ -663,6 +665,7 @@ void NLImage::AnchorSplitting(QString filenameStripped, QString atlasFile, QStri
                         currentArea->m_height = m_image->height();
                         currentArea->m_mat = a.m_mat;
                         currentArea->m_planeNormal = a.m_planeNormal;
+                        currentArea->m_xmlData = a.m_xmlData;
 
                     }
                     currentArea->m_points.append(orgP);
