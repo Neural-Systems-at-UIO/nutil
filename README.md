@@ -10,7 +10,7 @@ Nutil is written in C++ using standard Qt libraries, and is optimised for parall
 - Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/)
 - LibXLNT for Excel file I/O (https://github.com/tfussell/xlnt/)
 
-# Compiling from source 
+# Compiling from source (Windows)
 1. In order to compile from scratch, the following software components are also required:
  * On Windows, Microsoft Visual C++ 2019 compiler (MSVC), community version (https://visualstudio.microsoft.com/vs/features/cplusplus/)
  * On macOS, XCode (Clang) 
@@ -22,6 +22,18 @@ Nutil is written in C++ using standard Qt libraries, and is optimised for parall
 5. Open the project file in Qt (file->open file or project)
 6. Set up a build path to the project (projects->build->build directory)
 7. Compile and run! (ctrl+r)
+
+# Compiling from source on linux (debian-based)
+1. git clone https://github.com/Neural-Systems-at-UIO/nutil.git
+2. Move to the nutil directory : cd nutil
+3. Install the required packages: sudo apt-get install qt5-default qtchooser
+4. Run Qmake: qmake
+5. Compile: make -j 8 (number of threads)
+
+You can now run Nutil from the command line / bash scripts by simply running
+./Nutil myProject.nut 8
+or ./Nutil to use the GUI
+
 
 # Acknowledgements
 Nutil is an integral part of the QUINT workflow and is developed by the Neural Systems Laboratory at the Institute of Basic Medical Sciences, University of Oslo, Norway. Nutil was developed with support from the EBRAINS infrastructure, and funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Framework Partnership Agreement No. 650003 (HBP FPA).
