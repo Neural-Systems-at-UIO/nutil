@@ -122,7 +122,7 @@ bool NutilApplication::RotateTiff()
 
 
     if (!(tif.m_samplesPerPixel==3 && tif.m_bitsPerSample==8)) {
-        qDebug() << "Error! For now, lutil only supports big tiffs with RGB format";
+        qDebug() << "Error! For now, Nutil only supports big tiffs with RGB format";
         exit(1);
     }
 
