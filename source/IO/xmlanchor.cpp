@@ -138,7 +138,7 @@ void JSONAnchor::Load(QString file)
         d.m_width = map.value("width").toInt();
         d.m_height = map.value("height").toInt();
         if (!map.contains("anchoring")) {
-            LMessage::lMessage.Error("Error: the anchioring file is missing anchoring data for slice: '"+d.m_filename+"'. Please make sure that this slice is correctly anchored and validated before retrying.");
+            LMessage::lMessage.Error("Error: the anchoring file is missing anchoring data for section: '"+d.m_filename+"'. Please make sure that this section is correctly anchored and validated in QuickNII before retrying.");
             Data::data.abort = true;
             return;
         }
