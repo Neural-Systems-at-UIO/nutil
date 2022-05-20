@@ -22,3 +22,4 @@ jobs:
           github-token: ${{ secrets.ORG_KEY }}
           item-id: ${{ steps.addItem.outputs.itemId }}
           status: "To Do"
+          Project: "Nutil"
