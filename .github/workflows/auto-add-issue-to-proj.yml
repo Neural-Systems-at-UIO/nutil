@@ -1,29 +1,24 @@
-name: Auto Assign to Project(s)
+name: Add bugs to bugs project
 
 on:
   issues:
-    types: [opened, labeled]
-  pull_request:
-    types: [opened, labeled]
-
-env:
-  MY_GITHUB_TOKEN: ${{ secrets.ORG_KEY }}
+    types:
+      - opened
 
 jobs:
-  assign_one_project:
+  add-to-project:
+    name: Add issue to project
     runs-on: ubuntu-latest
-    name: Assign to One Project
     steps:
-    - name: Assign NEW issues and NEW pull requests to project 2
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event.action == 'opened'
-      with:
-        project: 'https://github.com/orgs/Neural-Systems-at-UIO/projects/2'
-        column_name: 'To Do'
-    - name: Assign issues and pull requests with `bug` label to project 3
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: 
-        contains(github.event.pull_request.labels.*.name, 'bug')
-      with:
-        project: 'https://github.com/orgs/Neural-Systems-at-UIO/projects/2'
-        column_name: 'In Progress'
+      - uses: actions/add-to-project@main
+        id: addItem
+        with:
+          project-url: https://github.com/orgs/Neural-Systems-at-UIO/projects/2
+          github-token: ${{ secrets.ORG_KEY }}
+
+      - uses: kalgurn/update-project-item-status@main
+        with:
+          project-url: https://github.com/orgs/Neural-Systems-at-UIO/projects/2
+          github-token: ${{ secrets.ORG_KEY }}
+          item-id: ${{ steps.addItem.outputs.itemId }}
+          status: "To Do"
