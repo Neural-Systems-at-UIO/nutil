@@ -20,7 +20,6 @@ report_files = glob.glob(sys.argv[1]+"/**/*RefAtlasRegions.csv", recursive = Tru
 #report_files = glob.glob(sys.argv[1]+"/**/*RefAtlasRegions_*.csv", recursive = True)
 atlas_files = glob.glob(sys.argv[1]+"/**/*.label", recursive = True)
 
-
 doplot = True
 outfile = 'ref_plot.png'
 
@@ -39,11 +38,9 @@ if (len(sys.argv)>3):
 color_map = {}
 
 def load_labels(file):
-	
 	with open(file,'r') as f:
-		line = f.readline()
-		while line:
-			line = f.readline().strip()
+		for line in f:
+			line = line.strip()
 			if (not line.startswith("#")):
 				line = line.replace("\"","").lower().split(",")[0]
 				lst = line.split('\t')

@@ -732,8 +732,8 @@ void ProcessManagerPCounter::GeneratePythonPlots()
 //    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
 //    CallPythonPlot("plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 //    qDebug() <<QDir::currentPath();
-    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
-    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
+    CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
+    CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 
 }
 
@@ -746,13 +746,14 @@ void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString 
     p.setWorkingDirectory(m_outputDir);
     auto ue = QProcessEnvironment::systemEnvironment();
     p.setProcessEnvironment(ue);
-    params<<QCoreApplication::applicationDirPath() +file;
+    params<< QCoreApplication::applicationDirPath() +file;
     params<<m_outputDir<<type;
     params<<"-noplot";
     params<<"-outfile="+outputFile;
     p.start(python,  params  );
     p.waitForFinished();
- //   qDebug() << p.readAllStandardError()<<p.readAllStandardOutput();
+    qDebug() << QCoreApplication::applicationDirPath() +file;
+//    qDebug().noquote() << p.readAllStandardError()<<p.readAllStandardOutput();
 
 }
 
