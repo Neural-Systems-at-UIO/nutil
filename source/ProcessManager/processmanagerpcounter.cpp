@@ -729,6 +729,9 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     }
 
     Data::data.m_globalMessage = "Generating python plots";
+//    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
+//    CallPythonPlot("plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
+//    qDebug() <<QDir::currentPath();
     CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
     CallPythonPlot("/../plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 
@@ -749,7 +752,7 @@ void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString 
     params<<"-outfile="+outputFile;
     p.start(python,  params  );
     p.waitForFinished();
-
+ //   qDebug() << p.readAllStandardError()<<p.readAllStandardOutput();
 
 }
 
