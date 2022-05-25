@@ -181,10 +181,15 @@ void LBookCSV::Load(QString filename)
     auto sheet = CreateSheet("custom report");
 
     for (auto&l : lines) {
+//        qDebug() << l;
         auto lst = l.split(m_separator);
         for (int x=0;x<lst.length();x++)
-            if ((lst[x]!="\r") && lst[x]!="")
+            if ((lst[x]!="\r") && lst[x]!="") {
+  //              if (x==0)
+    //                qDebug() << lst[x];
                 sheet->Set(y,x,lst[x]);
+            }
+
         y++;
         if (m_ignoreColors)
             if (y==2) y+=1;

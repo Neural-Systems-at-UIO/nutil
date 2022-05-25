@@ -67,7 +67,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
         int i = 1;
         for (Report& r : m_reports) {
-            sheet->writeStr(i,0, r.m_filename);
+            sheet->writeStr(i,0, r.m_filename.replace("\r","").replace("\n",""));
             sheet->Set(i,1, r.m_regionPixelArea,0);
              // the 0 here defines the number of decimal places
             sheet->Set(i,2, r.m_regionArea);
@@ -790,11 +790,12 @@ QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D in
 //    qDebug() << a->m_width<<transform->m_xmlData->m_width;
 
     if (transform->isNonLinear()) {
-        qDebug() << "Nonlinear";
+//        qDebug() << "Nonlinear";
         v = transform->NonLinear(QVector2D(v.x(),v.y()));
     }
     else
         v = transform->Linear(QVector2D(v.x(),v.y()));
+//    v = transform->Linear(QVector2D(v.x(),v.y()));
     //v = transform->Linear(QVector2D(v.x(),v.y()));
   //  QVector3D v( p.x()/a->m_width,p. y()/a->m_height,1);
     //    v=v*a->m_mat;

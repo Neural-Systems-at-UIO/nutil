@@ -133,8 +133,10 @@ void NLImage::FindAreas(QColor testColor, QVector3D colorWidth, Counter* counter
     for (int i=0;i<m_image->width();i++)
         for (int j=0;j<m_image->height();j++) {
             counter->Tick();
-            if (Data::data.abort)
+            if (Data::data.abort) {
+//                qDebug() << "Abort signal";
                 return;
+            }
 
             // Check if unset
 

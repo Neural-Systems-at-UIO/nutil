@@ -223,13 +223,15 @@ void MainWindow::Abort()
 {
     if (m_workerThread) {
         Util::CancelSignal = true;
+        Data::data.abort = true;
 
         if (m_nauto->m_status != Nauto::Status::Idle) {
+//            qDebug() << "Waiting for cancel..";
 
             while (!m_nauto->m_pm->m_processFinished) {
                 m_workerThread->wait(200);
             }
-            m_workerThread->terminate();
+//            m_workerThread->terminate();
         }
         m_nauto->m_status = Nauto::Status::Idle;
     }
