@@ -24,8 +24,8 @@ private:
     private:
         int e1, e2, e3;
         Matrix3x3 decomp;
-        float ax, ay, abx, aby, acx, acy;
-        float den, Mdenx, Mdeny, r2den;
+        double ax, ay, abx, aby, acx, acy;
+        double den, Mdenx, Mdeny, r2den;
 
     public:
         Triangle(int a, int b, int c, QVector<QVector4D> &vertices);
@@ -34,7 +34,7 @@ private:
         bool intriangle(float x, float y);
         bool incirc(float x, float y) {return d2(x*den, y*den, Mdenx, Mdeny) < r2den;}
         bool transform(float &x, float &y);
-        static float d2(float ax, float ay, float bx, float by) {return (ax-bx)*(ax-bx) + (ay-by)*(ay-by);}
+        static double d2(double ax, double ay, double bx, double by) {return (ax-bx)*(ax-bx) + (ay-by)*(ay-by);}
     };
 
     QMatrix4x4 m_linear;
