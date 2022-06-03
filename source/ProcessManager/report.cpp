@@ -787,15 +787,8 @@ QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D in
     QVector3D v( p.x()/a->m_width*transform->m_xmlData->m_width,
                  p.y()/a->m_height*transform->m_xmlData->m_height,1);
 
-    if (transform->isNonLinear()) {
-        v = transform->NonLinear(QVector2D(v.x(),v.y()));
-//        v = transform->Linear(QVector2D(v.x(),v.y()));
-    }
-    else {
-        v = transform->Linear(QVector2D(v.x(),v.y()));
-    }
 
-
+    v = transform->getProjection(v);
 
     if (rndSpread>0.0) {
         double val = ((rand()%1000)/1000.0-0.5) * rndSpread;

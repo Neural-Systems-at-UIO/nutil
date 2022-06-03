@@ -45,6 +45,7 @@ public:
     CoordinateTransform(XMLData &data);
     QVector3D Linear(QVector2D img_coords);
     QVector3D NonLinear(QVector2D img_coords);
+    QVector3D getProjection(QVector3D& p);
     bool isNonLinear();
 };
 

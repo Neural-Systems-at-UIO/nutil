@@ -24,7 +24,7 @@ custom_region_file; 1; custom_region_type=Custom,analysis_type=QUINT ; Custom re
 coordinate_extraction; 1; analysis_type=QUINT;Coordinate extraction;list; All, None, Slices, Summary; All
 #coordinate_random_distortion; 1; analysis_type=QUINT;Coordinate random distortion;number; 0
 pixel_density; 1; analysis_type=QUINT;Point cloud density ; number; 1
-nifti_size; 1; analysis_type=QUINT;Nifti size ; list; 0,64,128,256,512; 0
+#nifti_size; 1; analysis_type=QUINT;Nifti size ; list; 0,64,128,256,512; 0
 display_label_id; 1; ;Display object IDs in image file and reports ; list; Yes, No; No
 output_region_id; 1; ;Display region IDs in image files; list; Yes, No; Yes
 pattern_match ; 1; ;Unique ID format; list; _sXXX, user; _sXXX

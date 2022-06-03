@@ -515,7 +515,9 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     Data::data.m_hasAreaSplitting = m_areaSplitting;
     if (m_dataType==QUINT)
         m_anchorFile = data->Get("xml_anchor_file");
-    m_niftiSize = data->Get("nifti_size").toInt();//m_sheet->readNum(12,1);
+    if (data->m_items.contains("nifti_size"))
+        m_niftiSize = data->Get("nifti_size").toInt();//m_sheet->readNum(12,1);
+    else m_niftiSize = 0;
     m_xyzScale = data->Get("pixel_density").toInt();
     //m_units = m_sheet->readStr(10,2);
     m_units = data->Get("quantifier_pixel_scale_unit");

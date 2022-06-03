@@ -68,6 +68,16 @@ QVector3D CoordinateTransform::NonLinear(QVector2D img_coords){
     return QVector3D();
 }
 
+QVector3D CoordinateTransform::getProjection(QVector3D& v)
+{
+    if (isNonLinear())
+       return NonLinear(QVector2D(v.x(),v.y()));
+
+    return Linear(QVector2D(v.x(),v.y()));
+
+
+}
+
 bool CoordinateTransform::isNonLinear()
 {
     return m_xmlData->m_markers.count()!=0;
