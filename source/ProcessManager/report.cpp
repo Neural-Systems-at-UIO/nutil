@@ -784,21 +784,18 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
 
 QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint, CoordinateTransform* transform)
 {
-//    QVector3D v( p.x()/a->m_width,p. y()/a->m_height,1);
     QVector3D v( p.x()/a->m_width*transform->m_xmlData->m_width,
                  p.y()/a->m_height*transform->m_xmlData->m_height,1);
-//    qDebug() << a->m_width<<transform->m_xmlData->m_width;
 
     if (transform->isNonLinear()) {
-//        qDebug() << "Nonlinear";
         v = transform->NonLinear(QVector2D(v.x(),v.y()));
+//        v = transform->Linear(QVector2D(v.x(),v.y()));
     }
-    else
+    else {
         v = transform->Linear(QVector2D(v.x(),v.y()));
-//    v = transform->Linear(QVector2D(v.x(),v.y()));
-    //v = transform->Linear(QVector2D(v.x(),v.y()));
-  //  QVector3D v( p.x()/a->m_width,p. y()/a->m_height,1);
-    //    v=v*a->m_mat;
+    }
+
+
 
     if (rndSpread>0.0) {
         double val = ((rand()%1000)/1000.0-0.5) * rndSpread;

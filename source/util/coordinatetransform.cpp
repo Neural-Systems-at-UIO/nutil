@@ -53,6 +53,7 @@ CoordinateTransform::CoordinateTransform(XMLData &data) {
             }
         }
     }
+//    qDebug() <<m_triangles.size();
 }
 
 QVector3D CoordinateTransform::Linear(QVector2D img_coords){
