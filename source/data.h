@@ -13,6 +13,7 @@ public:
     bool redrawOutput=false;
     QString version ="";
     bool redrawInput=false;
+    bool isValidator = false;
     bool forceRedraw = false;
     bool redrawFileList = false;
     bool m_isQuickNII = true;

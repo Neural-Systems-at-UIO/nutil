@@ -729,6 +729,8 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
 
 void ProcessManagerPCounter::GeneratePythonPlots()
 {
+    if (Data::data.isValidator)
+        return;
 
     auto python = Data::data.m_settings->getString("python_path");
     if (!QFile::exists(python)) {

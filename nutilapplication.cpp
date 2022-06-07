@@ -297,7 +297,7 @@ bool NutilApplication::Validator()
 
     // First, got through quantifier
 
-
+    Data::data.isValidator = true;
     QDirIterator it(".", QDir::Dirs | QDir::NoDotAndDotDot);
     while (it.hasNext()) {
         Data::data.quiet = true;
