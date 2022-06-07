@@ -74,7 +74,7 @@ By switching “ON” the “display object IDs in image file and reports”, a 
 ----------------
 
 * JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
-* The viewer is available via the `MediaWiki link here. <https://www.nitrc.org/projects/meshview>`_
+* Links to Meshview are available `here. <https://meshview-for-brain-atlases.readthedocs.io/en/latest/Installation.html#links>`_
 
 .. warning::
    Currently the coordinates generated with Nutil are based on the linear transformation only and do not take into account the nonlinear transformation.   
