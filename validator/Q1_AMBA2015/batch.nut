@@ -5,7 +5,7 @@ quantifier_input_dir = Q1_AMBA2015/Input
 quantifier_atlas_dir = Q1_AMBA2015/Atlasmap
 label_file = Allen Mouse Brain 2015
 custom_label_file = 
-xml_anchor_file = Q1_AMBA2015/Atlasmap/79556738.xml
+xml_anchor_file = /Users/leuat/code/nutil/validator/Q1_AMBA2015/Atlasmap/79556738.xml
 quantifier_output_dir = Q1_AMBA2015/Out
 output_report = All
 extraction_color = 255,255,255,255
@@ -20,14 +20,9 @@ output_report_type = CSV
 custom_region_type = Default
 custom_region_file = 
 coordinate_extraction = All
-coordinate_random_distortion = 0
 pixel_density = 1
-nifti_size = 0
 display_label_id = No
 output_region_id = No
 pattern_match = _sXXX
 files = 
-nutil_version = v0.7.0
-
-
-nutil_version = v0.7.0
+nutil_version = Development version

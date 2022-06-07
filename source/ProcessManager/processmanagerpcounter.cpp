@@ -45,7 +45,7 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
             //qDebug() << "*** ATLAS: " +m_xmlAnchor->m_atlas;
             if (!atlasQuickniiMap.contains(m_xmlAnchor->m_atlas)) {
                 // Unknown anchoring data?
-                LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: unrecognized atlas map '"+m_xmlAnchor->m_atlas+"' in the anchor file. Might be a potential problem, please make sure that the atlas is correct!</font>");
+                LMessage::lMessage.Message("<font color=\"#FF7000\">Warning: unrecognized atlas map '"+m_xmlAnchor->m_atlas+"' in the anchor file. Might be a potential problem, please make sure that the atlas is correct!</font>");
 
             }
             else {
@@ -561,58 +561,58 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
 
-    if (m_dataType == QUINT)
+    if (m_dataType == QUINT) {
+        LBook* sbook = nullptr;
         if (m_customRegionType=="custom") {
-            if (QFile::exists(m_reportSheetName)) {
-
-                if (!m_reportSheetName.toLower().endsWith(".xlsx") && !m_reportSheetName.toLower().endsWith(".txt")) {
-                    LMessage::lMessage.Error("Error: custom region file must be xlsx");
-                    Data::data.abort = true;
-                    return;
-                }
-                LBook* sbook = nullptr;
-                if (m_reportSheetName.toLower().endsWith(".txt")) {
-                    sbook = new LBookCSV();
-                    sbook->m_separator = '\t';
-                    sbook->m_ignoreColors = true;
-                    sbook->Load(m_reportSheetName);
-                    sbook->m_sheets.remove(0,1);
-
-                }
-                else {
-                    sbook = new LBookXlnt();
-                    if (QFile::exists("temp.xlsx"))
-                        QFile::remove("temp.xlsx");
-
-                    QFile::copy(m_reportSheetName,"temp.xlsx");
-#ifdef _WIN32
-                    QFile f("temp.xlsx");
-                    f.setPermissions(QFile::ReadOther | QFile::WriteOther);
-#endif
-                    sbook->Load("temp.xlsx");
-                    QFile::remove("temp.xlsx");
-                }
-
-                QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
-
-
-
-                if (reportSheet == nullptr) {
-                    LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
-                    Data::data.abort = true;
-                    return;
-                }
-                else
-                    GenerateReports(reportSheet);
-
-            }
-            else {
+            if (!QFile::exists(m_reportSheetName)) {
                 LMessage::lMessage.Error("You need to specify a custom region report in the input settings.");
                 Data::data.abort = true;
 
             }
+
+            if (!m_reportSheetName.toLower().endsWith(".xlsx") && !m_reportSheetName.toLower().endsWith(".txt")) {
+                LMessage::lMessage.Error("Error: custom region file must be xlsx");
+                Data::data.abort = true;
+                return;
+            }
+            if (m_reportSheetName.toLower().endsWith(".txt")) {
+                sbook = new LBookCSV();
+                sbook->m_separator = '\t';
+                sbook->m_ignoreColors = true;
+                sbook->Load(m_reportSheetName);
+                sbook->m_sheets.remove(0,1);
+
+            }
+        }
+
+        else { // Load default
+            sbook = new LBookXlnt();
+            if (QFile::exists("temp.xlsx"))
+                QFile::remove("temp.xlsx");
+
+            QFile::copy(m_reportSheetName,"temp.xlsx");
+#ifdef _WIN32
+            QFile f("temp.xlsx");
+            f.setPermissions(QFile::ReadOther | QFile::WriteOther);
+#endif
+            sbook->Load("temp.xlsx");
+            QFile::remove("temp.xlsx");
+        }
+
+    QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
+
+
+
+    if (reportSheet == nullptr) {
+        LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
+        Data::data.abort = true;
+        return;
     }
-    if (m_dataType==NONE) {
+    else
+        GenerateReports(reportSheet);
+
+}
+if (m_dataType==NONE) {
         reports.m_reports.push_back(Report("Report", QStringList() << "1", m_background));
         for (Report& r: reports.m_reports)
             r.m_unit = m_units;
@@ -759,11 +759,11 @@ void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString 
     params<< QCoreApplication::applicationDirPath() +file;
     params<<m_outputDir<<type;
     params<<"-noplot";
-    params<<"-outfile="+outputFile;
+    params<<"-outfile="+m_outputDir+"/"+outputFile;
     p.start(python,  params  );
     p.waitForFinished();
-    qDebug() << QCoreApplication::applicationDirPath() +file;
-//    qDebug().noquote() << p.readAllStandardError()<<p.readAllStandardOutput();
+//    qDebug() << QCoreApplication::applicationDirPath() +file;
+    qDebug().noquote() << p.readAllStandardError()<<p.readAllStandardOutput();
 
 }
 
