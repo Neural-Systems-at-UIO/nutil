@@ -6,7 +6,6 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    :maxdepth: 3
 
    introduction
-   installation
    Technical
    NutilCmd
    acknow
