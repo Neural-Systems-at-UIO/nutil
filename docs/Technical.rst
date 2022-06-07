@@ -18,5 +18,14 @@ Transform enables rotations, scaling and thumbnail compilation of large tiff fil
 
 **Quantifier**
 
-Quantifier identifies individual binary objects in a PNG file, while matching these to output from QuickNII. The method first finds and sorts areas by using a standard pixel filler routine. Afterwards, a random area pixel is chosen as the look-up in the binary QuickNII label slice for this particular image. When all areas have been assigned a label ID, multiple selections of predefined area IDs are assembled (ID list from the excel input file), and finally output reports are assembled and written to disk (in xlsl format). In addition, original ilastik .png files with colour/ID coding added to underlying atlas slice data are assembled and saved to the output folder. 
+Quantifier identifies individual binary objects in a PNG file, while matching these to output from QuickNII. The method first finds and sorts areas by using a standard pixel filler routine. Afterwards, a random area pixel is chosen as the look-up in the binary QuickNII label slice for this particular image. When all areas have been assigned a label ID, multiple selections of predefined area IDs are assembled (ID list from the excel input file), and finally output reports are assembled and written to disk (in xlsl format). In addition, original ilastik .png files with colour/ID coding added to underlying atlas slice data are assembled and saved to the output folder.
+
+**Installation**
+--------------------------
+
+Nutil is a stand-alone 64-bit Windows application. Nutil is downloaded as a zip archive file and can be extracted and run anywhere on the computer by double click on "Nutil.cmd". No installation executable is necessary, and the directory can be moved around the file system as required. Settings data are stored in the local program folder.
+
+**Hardware Requirements**
+
+Nutil is a stand-alone program that can be executed on either a server, desktop or laptop computer. Nutil will employ all the cores available on the system. While there are no specific hardware limitations, the processing time is dependent on the system’s compute power. The more cores and memory available, the faster the operations will be performed. Running Nutil on a single-core laptop is also possible.
 
