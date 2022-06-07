@@ -141,6 +141,7 @@ public:
     QVector<QComboBox*> m_cmbBoxes;
 
     QString Get(QString val);
+    int GetInt(QString val);
 
 //    void Populate(QGridLayout* grid);
     void Populate(Ui::MainWindow* ui, bool sendSignal = true);

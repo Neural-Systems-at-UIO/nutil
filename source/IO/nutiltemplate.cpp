@@ -112,6 +112,8 @@ void NutilTemplate::LoadTemplate(QString fileName)
 QString NutilTemplate::Get(QString val)
 {
     if (m_items.contains(val)) {
+        if (m_items[val]==nullptr)
+            return "";
         QString v = m_items[val]->m_value;
         v = v.replace("#NNN","\n");
         return v;
@@ -120,6 +122,18 @@ QString NutilTemplate::Get(QString val)
     return "";
 }
 
+int NutilTemplate::GetInt(QString val)
+{
+    if (m_items.contains(val)) {
+        if (m_items[val]==nullptr)
+            return 0;
+        QString v = m_items[val]->m_value;
+        v = v.replace("#NNN","\n");
+        return v.toInt();
+    }
+    qDebug() << "NutilTemplate::GetInt error : could not find item for value '"<<val<<"'";
+    return 0;
+}
 
 
 void NutilTemplate::CreateBasicAdvancedOption(QGridLayout* grid, int& row)

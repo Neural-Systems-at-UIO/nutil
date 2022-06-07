@@ -516,9 +516,9 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (m_dataType==QUINT)
         m_anchorFile = data->Get("xml_anchor_file");
     if (data->m_items.contains("nifti_size"))
-        m_niftiSize = data->Get("nifti_size").toInt();//m_sheet->readNum(12,1);
+        m_niftiSize = data->GetInt("nifti_size");//m_sheet->readNum(12,1);
     else m_niftiSize = 0;
-    m_xyzScale = data->Get("pixel_density").toInt();
+    m_xyzScale = data->GetInt("pixel_density");
     //m_units = m_sheet->readStr(10,2);
     m_units = data->Get("quantifier_pixel_scale_unit");
 
@@ -562,50 +562,56 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
     if (m_dataType == QUINT)
+        if (m_customRegionType=="custom") {
+            if (QFile::exists(m_reportSheetName)) {
 
-        if (QFile::exists(m_reportSheetName)) {
+                if (!m_reportSheetName.toLower().endsWith(".xlsx") && !m_reportSheetName.toLower().endsWith(".txt")) {
+                    LMessage::lMessage.Error("Error: custom region file must be xlsx");
+                    Data::data.abort = true;
+                    return;
+                }
+                LBook* sbook = nullptr;
+                if (m_reportSheetName.toLower().endsWith(".txt")) {
+                    sbook = new LBookCSV();
+                    sbook->m_separator = '\t';
+                    sbook->m_ignoreColors = true;
+                    sbook->Load(m_reportSheetName);
+                    sbook->m_sheets.remove(0,1);
 
-            if (!m_reportSheetName.toLower().endsWith(".xlsx") && !m_reportSheetName.toLower().endsWith(".txt")) {
-                LMessage::lMessage.Error("Error: custom region file must be xlsx");
-                Data::data.abort = true;
-                return;
-            }
-            LBook* sbook = nullptr;
-            if (m_reportSheetName.toLower().endsWith(".txt")) {
-                sbook = new LBookCSV();
-                sbook->m_separator = '\t';
-                sbook->m_ignoreColors = true;
-                sbook->Load(m_reportSheetName);
-                sbook->m_sheets.remove(0,1);
+                }
+                else {
+                    sbook = new LBookXlnt();
+                    if (QFile::exists("temp.xlsx"))
+                        QFile::remove("temp.xlsx");
+
+                    QFile::copy(m_reportSheetName,"temp.xlsx");
+#ifdef _WIN32
+                    QFile f("temp.xlsx");
+                    f.setPermissions(QFile::ReadOther | QFile::WriteOther);
+#endif
+                    sbook->Load("temp.xlsx");
+                    QFile::remove("temp.xlsx");
+                }
+
+                QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
+
+
+
+                if (reportSheet == nullptr) {
+                    LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
+                    Data::data.abort = true;
+                    return;
+                }
+                else
+                    GenerateReports(reportSheet);
 
             }
             else {
-                sbook = new LBookXlnt();
-                if (QFile::exists("temp.xlsx"))
-                    QFile::remove("temp.xlsx");
-
-                QFile::copy(m_reportSheetName,"temp.xlsx");
-#ifdef _WIN32
-                QFile f("temp.xlsx");
-                f.setPermissions(QFile::ReadOther | QFile::WriteOther);
-#endif
-                sbook->Load("temp.xlsx");
-                QFile::remove("temp.xlsx");
-            }
-
-            QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
-
-
-
-            if (reportSheet == nullptr) {
-                LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
+                LMessage::lMessage.Error("You need to specify a custom region report in the input settings.");
                 Data::data.abort = true;
-                return;
-            }
-            else
-                GenerateReports(reportSheet);
 
-        }
+            }
+    }
     if (m_dataType==NONE) {
         reports.m_reports.push_back(Report("Report", QStringList() << "1", m_background));
         for (Report& r: reports.m_reports)
