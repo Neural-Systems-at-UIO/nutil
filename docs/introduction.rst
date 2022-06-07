@@ -8,6 +8,10 @@ Nutil simplifies the pre-and-post processing of images of histological sections 
 - It developed as a standalone application and requires no coding experience to execute. 
 - The user specifies the input and output folders and the parameters for the operations in the Nutil graphical user interface. All functions operate in batch, and operate in parallel on multiple CPUs. 
 
++----------+                    
+| |image1| |                    
++----------+       
+
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
    :width: 6.30139in
    :height: 2.33688in
@@ -28,9 +32,7 @@ Nutil simplifies the pre-and-post processing of images of histological sections 
 3. **Quantifier**: for the batch extraction, quantification and spatial analysis of labelling in mouse or rat brain sections (for example, immunohistochemical labelling).
 4. **Resize**: for resizing JPEG/PNG images with output in PNG format.
 
-+----------+                    
-| |image1| |                    
-+----------+                    
+             
                             
 
 .. note::
