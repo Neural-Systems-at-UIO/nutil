@@ -23,9 +23,12 @@ Quantifier identifies individual binary objects in a PNG file, while matching th
 **Installation**
 --------------------------
 
-Nutil is a stand-alone 64-bit Windows application. Nutil is downloaded as a zip archive file and can be extracted and run anywhere on the computer by double click on "Nutil.cmd". No installation executable is necessary, and the directory can be moved around the file system as required. Settings data are stored in the local program folder.
+- Nutil is a stand-alone 64-bit Windows application. 
+- Download as a zip archive file and extracted and run anywhere on the computer by double click on "Nutil.cmd". 
+- No installation executable is necessary, and the directory can be moved around the file system as required. Settings data are stored in the local program folder.
 
 **Hardware Requirements**
 
-Nutil is a stand-alone program that can be executed on either a server, desktop or laptop computer. Nutil will employ all the cores available on the system. While there are no specific hardware limitations, the processing time is dependent on the system’s compute power. The more cores and memory available, the faster the operations will be performed. Running Nutil on a single-core laptop is also possible.
+- Nutil can be executed on either a server, desktop or laptop computer. 
+- It will employ all the cores available on the system. While there are no specific hardware limitations, the processing time is dependent on the system’s compute power. The more cores and memory available, the faster the operations will be performed. Running Nutil on a single-core laptop is also possible.
 
