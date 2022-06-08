@@ -103,12 +103,19 @@ bool Util::CompareIdenticalFiles(QString fa, QString fb)
         QString b = Util::loadTextFile(fb);
         QStringList l1 = a.trimmed().simplified().remove("\n").split(";");
         QStringList l2 = b.trimmed().simplified().remove("\n").split(";");
-        if (l1.count()!=l2.count())
+        l1.removeAll(QString(""));
+        l2.removeAll(QString(""));
+//        qDebug() << l1 << l2;
+        if (l1.count()!=l2.count()) {
+            qDebug() << "CSV files do not have the same count of elements";
             return false;
+        }
 
         for (int i=0;i<l1.count();i++) {
-            if (l1[i].trimmed()!=l2[i].trimmed())
+            if (l1[i].trimmed()!=l2[i].trimmed()) {
+                qDebug() << "CSV file not equal for fields "<<l1[i]<<" and " <<l2[i];
                 return false;
+            }
         }
         return true;
     }
