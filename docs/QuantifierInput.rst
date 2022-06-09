@@ -48,7 +48,7 @@ Any image analysis software may be used to generate the segmentations as long as
    The aim is to downscale the images as much as possible but without losing information from the images that is actually important. The downscaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
 
 .. warning::
-   We do not recommend running Quantifier on segmented PNG images larger than around 10000 x 10000 pixels. While Nutil supports segmentations of any size, up to this limit - as long as there is enough memory installed on the computer - it is highly recommended to downscale the histological images as much as possible before segmenting them. 
+Nutil supports segmentations up to 32767 x 32767 pixels as long as there is enough memory installed on the computer (restriction of Qt: QImage class). But we do not recommend running Quantifier on images larger than around 10000 x 10000 pixels: downscale them as much as possible before segmenting them. 
 
 +----------+
 | |image11||
