@@ -67,7 +67,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 
         int i = 1;
         for (Report& r : m_reports) {
-            sheet->writeStr(i,0, r.m_filename.replace("\r","").replace("\n",""));
+            sheet->writeStr(i,0, r.m_filename.replace("\r","").replace("\n","").trimmed());
             sheet->Set(i,1, r.m_regionPixelArea,0);
              // the 0 here defines the number of decimal places
             sheet->Set(i,2, r.m_regionArea);
@@ -366,7 +366,7 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
             for (auto& rep : m_reports) {
                 for (auto& id : rep.m_IDs) {
                     if (id==a.atlasLabel->index)
-                        summary->Set(yy,8,rep.m_filename);
+                        summary->Set(yy,8,rep.m_filename.replace("\r","").replace("\n","").trimmed());
                 }
             }
             yy++;
@@ -474,7 +474,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
 
 // Define column content (CustomRegion reports)
 
-            sheet->writeStr(j,0, r.m_filename);
+            sheet->writeStr(j,0, r.m_filename.replace("\r","").replace("\n","").trimmed());
             sheet->Set(j,1, regionPixelArea,0);
                 // the 0 here defines the number of decimal places displayed
             sheet->Set(j,2, regionArea);

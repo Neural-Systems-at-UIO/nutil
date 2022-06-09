@@ -61,6 +61,7 @@ public:
 
 
     QString m_reportDirectory = "Reports";
+    QString m_plotsDirectory = "Plots";
     QString m_imageDirectory = "Images";
     QString m_coordinateDirectory = "Coordinates";
 

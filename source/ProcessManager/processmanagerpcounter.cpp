@@ -460,6 +460,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     Util::CreateDir(m_outputDir+QDir::separator()+m_reportDirectory);
     Util::CreateDir(m_outputDir+QDir::separator()+m_coordinateDirectory);
     Util::CreateDir(m_outputDir+QDir::separator()+m_imageDirectory);
+    Util::CreateDir(m_outputDir+QDir::separator()+m_plotsDirectory);
 
 
     //    float col_r = m_sheet->readNum(3,1);
@@ -759,7 +760,7 @@ void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString 
     params<< QCoreApplication::applicationDirPath() +file;
     params<<m_outputDir<<type;
     params<<"-noplot";
-    params<<"-outfile="+m_outputDir+"/"+outputFile;
+    params<<"-outfile="+m_outputDir+"/"+m_plotsDirectory+"/"+outputFile;
     p.start(python,  params  );
     p.waitForFinished();
 //    qDebug() << QCoreApplication::applicationDirPath() +file;
