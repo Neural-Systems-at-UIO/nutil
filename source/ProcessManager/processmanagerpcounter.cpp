@@ -748,7 +748,7 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 
-    Util::CopyFileHard("//..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
+    Util::CopyFileHard("..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
 
 }
 
