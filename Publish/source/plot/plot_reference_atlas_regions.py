@@ -167,7 +167,8 @@ for key in dmap:
 # this is a bar chart
 
 	if (typ==0):
-		ax.bar(x,d, width=2.0, color=(c[0],c[1],c[2]))
+#		ax.bar(x,d, width=2.0, color=(c[0],c[1],c[2]))
+		ax.bar(x,d,width=0.9, color=(c[0],c[1],c[2]))
 		ax.set_ylabel('Load')
 	#ax.bar_label(p1, label_type='center')
 

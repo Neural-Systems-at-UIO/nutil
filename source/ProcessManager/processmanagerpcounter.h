@@ -64,6 +64,7 @@ public:
     QString m_plotsDirectory = "Plots";
     QString m_imageDirectory = "Images";
     QString m_coordinateDirectory = "Coordinates";
+    QString m_scriptDirectory = "Scripts";
 
     int m_pixelCutoff;
     int m_pixelCutoffMax;

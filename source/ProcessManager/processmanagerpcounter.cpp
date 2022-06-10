@@ -461,6 +461,8 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     Util::CreateDir(m_outputDir+QDir::separator()+m_coordinateDirectory);
     Util::CreateDir(m_outputDir+QDir::separator()+m_imageDirectory);
     Util::CreateDir(m_outputDir+QDir::separator()+m_plotsDirectory);
+    Util::CreateDir(m_outputDir+QDir::separator()+m_scriptDirectory);
+
 
 
     //    float col_r = m_sheet->readNum(3,1);
@@ -746,6 +748,8 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 
+    Util::CopyFileHard("//..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
+
 }
 
 void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString outputFile)
@@ -764,7 +768,7 @@ void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString 
     p.start(python,  params  );
     p.waitForFinished();
 //    qDebug() << QCoreApplication::applicationDirPath() +file;
-    qDebug().noquote() << p.readAllStandardError()<<p.readAllStandardOutput();
+//    qDebug().noquote() << p.readAllStandardError()<<p.readAllStandardOutput();
 
 }
 
