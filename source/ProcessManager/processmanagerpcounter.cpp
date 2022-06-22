@@ -570,7 +570,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             if (!QFile::exists(m_reportSheetName)) {
                 LMessage::lMessage.Error("You need to specify a custom region report in the input settings.");
                 Data::data.abort = true;
-
+                return;
             }
 
             if (!m_reportSheetName.toLower().endsWith(".xlsx") && !m_reportSheetName.toLower().endsWith(".txt")) {
@@ -586,20 +586,23 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
                 sbook->m_sheets.remove(0,1);
 
             }
-        }
 
-        else { // Load default
-            sbook = new LBookXlnt();
-            if (QFile::exists("temp.xlsx"))
-                QFile::remove("temp.xlsx");
+            else { // Load default
+                sbook = new LBookXlnt();
+                if (QFile::exists("temp.xlsx"))
+                    QFile::remove("temp.xlsx");
 
-            QFile::copy(m_reportSheetName,"temp.xlsx");
+                if (!QFile::exists(m_reportSheetName))
+                    LMessage::lMessage.Error("Could not find the required hierarchy xml file: "+m_reportSheetName);
+
+                QFile::copy(m_reportSheetName,"temp.xlsx");
 #ifdef _WIN32
-            QFile f("temp.xlsx");
-            f.setPermissions(QFile::ReadOther | QFile::WriteOther);
+                QFile f("temp.xlsx");
+                f.setPermissions(QFile::ReadOther | QFile::WriteOther);
 #endif
-            sbook->Load("temp.xlsx");
-            QFile::remove("temp.xlsx");
+                sbook->Load("temp.xlsx");
+                QFile::remove("temp.xlsx");
+            }
         }
 
     QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
