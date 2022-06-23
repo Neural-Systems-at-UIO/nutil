@@ -36,17 +36,6 @@ if (len(sys.argv)>3):
 
 color_map = {}
 
-def load_labels(file):
-	with open(file,'r') as f:
-		for line in f:
-			line = line.strip()
-			if (not line.startswith("#")):
-				line = line.replace("\"","").lower().split(",")[0]
-				lst = line.split('\t')
-				if len(lst)==8:
-#					print(lst[7])
-					color_map[lst[7]] = [float(lst[1])/256.0,float(lst[2])/256.0,float(lst[3])/256.0]
-
 def load_colours(file):
 	csv = pd.read_csv(file, sep='\t')
 	names = csv['name']
