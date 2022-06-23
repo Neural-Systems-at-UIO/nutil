@@ -116,7 +116,7 @@ public:
     bool Verify() override { return true; }
     void GeneratePythonPlots();
     void CallPythonPlot(QString file, QString type, QString outputFile);
-
+    void SaveCustomReportColors(QSharedPointer<LSheet> sheet, QString fname);
     void setupLabelFiles(NutilTemplate* data);
 
 };

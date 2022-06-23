@@ -106,7 +106,7 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 // Define column titles (RefAtlasRegions_all)
 
     sheet->writeStr(0,0,"Region ID");
-    sheet->writeStr(0,1,"Region Name");
+    sheet->writeStr(0,1,"Region name");
     sheet->writeStr(0,2,"Region pixels");
     sheet->writeStr(0,3,"Region area");
     sheet->writeStr(0,4,"Area unit");
@@ -648,6 +648,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
 
     Counter cntr(m_reports.count(),"");
     int tcount = 0;
+//#pragma omp parallel for
     for (int i=0;i<m_reports.count();i++) {
 
         cntr.Tick();

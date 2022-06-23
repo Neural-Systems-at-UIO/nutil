@@ -603,11 +603,14 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
                 sbook->Load("temp.xlsx");
                 QFile::remove("temp.xlsx");
             }
+
+
         }
 
     QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
 
-
+    if (reportSheet != nullptr)
+        SaveCustomReportColors(reportSheet,m_outputDir+"/custom_report_colors.csv");
 
     if (reportSheet == nullptr) {
         LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
@@ -751,7 +754,12 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 
+    CallPythonPlot("//..//plot/plot_custom_regions.py","0","custom_regions_bars");
+    CallPythonPlot("//..//plot/plot_custom_regions.py","1","custom_regions_pie");
+
     Util::CopyFileHard("..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
+    Util::CopyFileHard("..//plot/plot_custom_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_custom_regions.py");
+    Util::CopyFileHard("..//plot/plot_lib.py",m_outputDir+"/"+m_scriptDirectory+"/plot_lib.py");
 
 }
 
@@ -773,6 +781,26 @@ void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString 
 //    qDebug() << QCoreApplication::applicationDirPath() +file;
 //    qDebug().noquote() << p.readAllStandardError()<<p.readAllStandardOutput();
 
+}
+
+void ProcessManagerPCounter::SaveCustomReportColors(QSharedPointer<LSheet> sheet, QString fname)
+{
+    QString txt ="";
+    bool done = false;
+    int x = 1;
+    txt+="name\t\colour\n";
+    while (!done) {
+        QString name = sheet->readStr(0,x).trimmed();
+        QString col = sheet->readStr(1,x).trimmed();
+//        qDebug() << name << col;
+        if (col!="")
+            txt+=name+"\t"+col+"\n";
+        x+=1;
+        if (name=="")
+            done = true;
+    }
+//    qDebug() << fname;
+    Util::SaveTextFile(fname,txt);
 }
 
 void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
