@@ -38,7 +38,7 @@
 
 **Python plots**
 -----------------
-Nutil v0.8.0 has a new automatic plotting feature. This will work if Python is installed on the computer (in addition to several Python packages such as numpy, pandas and matplotlib), with the Python.exe selecting in the Nutil File --> Settings.  
+Nutil v0.8.0 has a new automatic plotting feature. This will work if Python is installed on the computer, with the Python.exe selecting in Nutil through: File --> Settings. It is also necessary to install the following Python packages on your computer: numpy, pandas and matplotlib.
 
 **Warnings and error messages**
 --------------------------------
