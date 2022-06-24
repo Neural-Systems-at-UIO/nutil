@@ -1,5 +1,7 @@
 **Related publications**
 ----------------------------
+* Ham GX, Augustine GJ. Topologically Organized Networks in the Claustrum Reflect Functional Modularization. Frontiers in Neuroanatomy. 16 June 2022. 
+   https://doi.org/10.3389/fnana.2022.901807 
 
 * Bjerke IE, Cullity ER, Kjelsberg K, Charan KM, Leergaard TB, Kim JH. 
    DOPAMAP, high-resolution images of dopamine 1 and 2 receptor expression in developing and adult mouse brains. 
