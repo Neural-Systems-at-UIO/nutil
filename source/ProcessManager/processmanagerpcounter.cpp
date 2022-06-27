@@ -566,7 +566,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     if (m_dataType == QUINT) {
         LBook* sbook = nullptr;
-        if (m_customRegionType=="custom") {
+  //      if (m_customRegionType=="custom" || m_customRegionType=="default") {
             if (!QFile::exists(m_reportSheetName)) {
                 LMessage::lMessage.Error("You need to specify a custom region report in the input settings.");
                 Data::data.abort = true;
@@ -588,6 +588,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             }
 
             else { // Load default
+//                qDebug() << "Loading "+m_reportSheetName;
                 sbook = new LBookXlnt();
                 if (QFile::exists("temp.xlsx"))
                     QFile::remove("temp.xlsx");
@@ -605,7 +606,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
             }
 
 
-        }
+    //    }
 
     QSharedPointer<LSheet> reportSheet = sbook->GetSheet(0);
 
@@ -789,6 +790,7 @@ void ProcessManagerPCounter::SaveCustomReportColors(QSharedPointer<LSheet> sheet
     bool done = false;
     int x = 1;
     txt+="name\t\colour\n";
+  //  qDebug() << "here";
     while (!done) {
         QString name = sheet->readStr(0,x).trimmed();
         QString col = sheet->readStr(1,x).trimmed();
