@@ -59,8 +59,8 @@ def plot_all(typ, all_data, color_map, outfile, doplot, split_region_name):
     xp_colors = []
     td = []
     explode = []
-    for key in dmap:
 
+    for key in dmap:
         d=[]
         x=[]
         sx = xx

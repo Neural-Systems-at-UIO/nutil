@@ -40,10 +40,23 @@ color_map = {}
 def load_labels(file):
 	with open(file,'r') as f:
 		for line in f:
+			ol = line
 			line = line.strip()
 			if (not line.startswith("#")):
 				line = line.replace("\"","").lower().split(",")[0]
 				lst = line.split('\t')
+				if (len(lst)==1): # Hack for WHS brains
+					name = ol.split("\"")[1]
+					line = ol.replace("\""+name+"\"","").strip()
+					name = name.split(",")[0]
+					lst = line.strip().split(' ')
+					while("" in lst):
+						lst.remove("")
+						
+					lst.append(name)					
+
+#				print(lst)
+#				print(len(lst))
 				if len(lst)==8:
 #					print(lst[7])
 					color_map[lst[7]] = [float(lst[1])/256.0,float(lst[2])/256.0,float(lst[3])/256.0]
@@ -57,7 +70,6 @@ if len(report_files)==0:
 if len(atlas_files)==0:
 	print("Could not find any atlas files ")
 	exit(1)
-
 
 load_labels(atlas_files[0])
 
