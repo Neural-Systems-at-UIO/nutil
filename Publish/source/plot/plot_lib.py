@@ -108,7 +108,7 @@ def plot_all(typ, all_data, color_map, outfile, doplot, split_region_name):
             label.set_horizontalalignment("right")
 
 
-        fmt = '%.2f' # Format you want the ticks, e.g. '40%'
+        fmt = '%.3f' # Format you want the ticks, e.g. '40%'
         yticks = mtick.FormatStrFormatter(fmt)
         ax.yaxis.set_major_formatter(yticks)
 
