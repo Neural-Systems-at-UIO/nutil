@@ -101,7 +101,7 @@ bool Util::CompareIdenticalFiles(QString fa, QString fb)
     if (fa.toLower().endsWith(".csv")) {
 //        qDebug() << "Comparing CSV files:"+fa+" and "+fb;
         if (!QFile::exists(fb)) {
-            std::cout << "ERROR: Output file missing : "+fb;
+            std::cout << "ERROR: Output file missing : "<<fb.toStdString();
             return false;
         }
         QString a = Util::loadTextFile(fa);
@@ -118,7 +118,7 @@ bool Util::CompareIdenticalFiles(QString fa, QString fb)
 
         for (int i=0;i<l1.count();i++) {
             if (l1[i].trimmed()!=l2[i].trimmed()) {
-                std::cout << "CSV file not equal for fields "<<l1[i]<<" and " <<l2[i];
+                std::cout << "CSV file not equal for fields "<<(l1[i]).toStdString()<<" and " <<(l2[i]).toStdString();
                 return false;
             }
         }
