@@ -42,7 +42,7 @@ def load_labels(file):
 		for line in f:
 			ol = line
 			line = line.strip()
-			if (not line.startswith("#")):
+			if (not line.startswith("#") and line!=""):
 				line = line.replace("\"","").lower().split(",")[0]
 				lst = line.split('\t')
 				if (len(lst)==1): # Hack for WHS brains
