@@ -758,9 +758,9 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     CallPythonPlot("//..//plot/plot_custom_regions.py","0","custom_regions_bars");
     CallPythonPlot("//..//plot/plot_custom_regions.py","1","custom_regions_pie");
 
-    Util::CopyFileHard("..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
-    Util::CopyFileHard("..//plot/plot_custom_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_custom_regions.py");
-    Util::CopyFileHard("..//plot/plot_lib.py",m_outputDir+"/"+m_scriptDirectory+"/plot_lib.py");
+    Util::CopyFileHard("//..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
+    Util::CopyFileHard("//..//plot/plot_custom_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_custom_regions.py");
+    Util::CopyFileHard("//..//plot/plot_lib.py",m_outputDir+"/"+m_scriptDirectory+"/plot_lib.py");
 
 }
 
