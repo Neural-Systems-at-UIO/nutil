@@ -99,6 +99,11 @@ bool Util::CompareIdenticalFiles(QString fa, QString fb)
     }
 
     if (fa.toLower().endsWith(".csv")) {
+        qDebug() << "Comparing CSV files:"+fa+" and "+fb;
+        if (!QFile::exists(fb)) {
+            qDebug() << "ERROR: Output file missing : "+fb;
+            return false;
+        }
         QString a = Util::loadTextFile(fa);
         QString b = Util::loadTextFile(fb);
         QStringList l1 = a.trimmed().simplified().remove("\n").split(";");
