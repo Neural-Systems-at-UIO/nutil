@@ -1,0 +1,6 @@
+Q1 : General quantifier
+Q2 : Masks
+Q3 : WHS 
+Q4 : Q1 limited + area splitting ON
+Q5 : Q1 Limited + custom .txt 
+Q6 : Q1 Limited + custom .xlsx 
