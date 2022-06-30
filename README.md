@@ -55,6 +55,4 @@ Yates SC, Groeneboom NE, Coello C, et al. & Bjaalie JG (2019) QUINT: Workflow fo
 Report issues here on github or email: support@ebrains.eu
 
 
-
-
  
