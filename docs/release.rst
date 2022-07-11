@@ -6,6 +6,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is a major release with several new features. This includes:
+
 * Point clouds that reflect the nonlinear refinement applied with the VisuAlign software. 
 * Updated object reports.
 * Support for automatic generation of plots using Python scripts. These display the regional loads from the Reference Atlas reports and the Custom Region reports. 
