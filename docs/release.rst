@@ -2,17 +2,18 @@
 --------------------------
 
 
-**Nutil v0.8.0** (DOI: 10.25790/bml0cm.107)
+**Nutil v0.8.0** 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is a major release with several new features. This includes:
-•	Point clouds that reflect the nonlinear refinement applied with the VisuAlign software. 
-•	Updated object reports.
-•	Support for automatic generation of plots using Python scripts. These display the regional loads from the Reference Atlas reports and the Custom Region reports. 
-•	Support for defining the Custom Regions with hierarchy.txt files from the QCAlign software.
-•	Stop button in Nutil has been fixed.
-•	Improvements to error and warning messages.
-•	Updates to the help text in the Nutil GUI. 
+* Point clouds that reflect the nonlinear refinement applied with the VisuAlign software. 
+* Updated object reports.
+* Support for automatic generation of plots using Python scripts. These display the regional loads from the Reference Atlas reports and the Custom Region reports. 
+* Support for defining the Custom Regions with hierarchy.txt files from the QCAlign software.
+* Stop button in Nutil has been fixed.
+* Improvements to error and warning messages.
+* Updates to the help text in the Nutil GUI. 
+* This version has been assigned DOI: 10.25790/bml0cm.107
 
 
 **Nutil v0.7.0**
