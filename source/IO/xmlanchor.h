@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //#include <QXmlSimpleReader>
 #include <QVector3D>
+#include <QVector4D>
 //#include <QXmlAttributes>
 #include <QVector>
 #include <QDebug>
