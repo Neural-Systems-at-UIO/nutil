@@ -3,7 +3,7 @@ QT += gui
 QT += xml
 #websockets
 #CONFIG += static
-CONFIG += c++11 console
+CONFIG += c++11 c++17 cpp+14 console
 CONFIG += app_bundle
 
 

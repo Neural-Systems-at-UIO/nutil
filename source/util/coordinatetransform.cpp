@@ -1,6 +1,5 @@
 #include "coordinatetransform.h"
 #include "source/IO/xmlanchor.h"
-
 CoordinateTransform::CoordinateTransform(XMLData &data) {
     m_xmlData = &data;
     const auto width = data.m_width;
