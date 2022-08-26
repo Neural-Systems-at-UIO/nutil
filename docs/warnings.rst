@@ -1,4 +1,4 @@
-Warnings and error messages**
+**Warnings and error messages**
 --------------------------------------------------
 
 .. warning::
