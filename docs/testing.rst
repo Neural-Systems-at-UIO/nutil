@@ -1,5 +1,13 @@
-**Disclaimer - Quality Assurance**
+**Quality assurance / validation**
 ---------------------------------
+
+Nutil v0.7.0 and v0.8.0 are stable and validated with multiple ground truth datasets. 
+
+.. Warning::
+    It is not recommended to use Nutil v0.4.0 - v0.6.0 as they contain bugs that lead to incorrect results in some of the reports: see the release notes for more information.
+    
+**Validation** 
+~~~~~~~~~~~~~~~~~~~~~~
 
 Nutil is a highly flexible pre- and post- processing toolbox for histological images that enables format conversion (TiffCreator), transformation (Transform and Resize) and analysis (Quantifier). 
 
