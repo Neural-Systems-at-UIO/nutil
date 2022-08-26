@@ -12,7 +12,7 @@ This warning informs you that the JSON or XML file contains info about sections 
    
 This means what it says: Nutil can't find the relevant anchoring information in the .json file. This can happen for a number of reasons:
 
-1. The slice is missing in the .json file. Open the .json file in a text editor such as notebook and check.
-2. The slice is missing anchoring information. This happens if it has not been registered to the reference atlas in QuickNII or VisuAlign. Sometimes it happens because the registration info has not been saved in QuickNII for the slice (remember to confirm the registration!).
-4. The default ID format is selected in Nutil Quantifier (_sXXX), but the slice ID does not match this format. In this case, switch to "user" defined ID and define the ID using RegEx. It is also possible that the RegEx is incorrect: make sure it correspond to the ID.   
-3. The slice ID does not match the ID in the corresponding segmentation and atlas map. In this case, the IDs have to be revised so that they match across the board. We recommend using the _sXXX format.  
+* The slice is missing in the .json file. Open the .json file in a text editor such as notebook and check.
+* The slice is missing anchoring information. This happens if it has not been registered to the reference atlas in QuickNII or VisuAlign. Sometimes it happens because the registration info has not been saved in QuickNII for the slice (remember to confirm the registration!).
+* The default ID format is selected in Nutil Quantifier (_sXXX), but the slice ID does not match this format. In this case, switch to "user" defined ID and define the ID using RegEx. It is also possible that the RegEx is incorrect: make sure it correspond to the ID.   
+* The slice ID does not match the ID in the corresponding segmentation and atlas map. In this case, the IDs have to be revised so that they match across the board. We recommend using the _sXXX format.  
