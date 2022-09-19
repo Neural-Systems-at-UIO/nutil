@@ -37,14 +37,5 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    QuantifierOutput
    warnings
    
-   
-.. toctree::
-   :caption: Other QUINT software
-   :maxdepth: 2
-   :hidden:
-   
-   QuickNII_Vis
-   Ilastik
-   
 
 
