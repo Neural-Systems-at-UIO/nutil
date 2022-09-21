@@ -31,13 +31,11 @@ It is fine to include a string of letters and numbers followed by the unique ID.
  
 Any image analysis software may be used to generate the segmentations as long as they meet the following requirements:
 
-**Requirement:**
-
 1. **Format:** Must be indexed 8-bit or 24-bit Red Green Blue (RGB) images in PNG format.
 
    Quantifier is only able to quantify one RGB colour at a time. Apply one RBG colour to all the objects-of-interest, and specify this colour in the Nutil GUI. For example, the objects here are red, so extract RGB colour: 255,0,0.
   
-2. **Image proportions:** Must have the same proportions as the histological images used to generate the atlas maps. 
+2. **Image proportions:** Must have the same proportions as the images used to generate the atlas maps. 
 
    They do not have the same proportions as the actual atlas maps as QuickNII alters the proportions slightly. 
 
@@ -61,7 +59,7 @@ The aim is to downscale the images as much as possible but without losing inform
 
     **Software recommendations**
 
-    `Ilastik: <http://ilastik.org/download.html>`_ We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with FIJI to visualise the output. See the ilastik section of this Read the Doc for instructions.
+    `Ilastik: <http://ilastik.org/download.html>`_ We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with FIJI to visualise the output. See `here <https://quint-workflow.readthedocs.io/en/latest/Ilastik.html>`_ for instructions.
 
     `QuPath: <https://qupath.github.io/QuPath>`_ is an alternative that can be used to generate the segmentations. In some cases QuPath may perform better than ilastik.
 
