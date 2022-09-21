@@ -5,7 +5,7 @@
 -------------------------------
 
 .. tip::
-   It is recommended to change the names of the images to comply with the QUINT file naming convention as the first step of the QUINT workflow. 
+   It is recommended to change the names of the images to comply with the `QUINT file naming convention <https://quint-workflow.readthedocs.io/en/latest/Requirements.html#quint-naming-convention>`_ as the first step of the QUINT workflow. 
 
    By using images that follow the naming convention for QuickNII, VisuAlign and ilastik, the output files from these software will also comply with the naming convention, and are thereby directly compatible with **Quantifier**.
 
