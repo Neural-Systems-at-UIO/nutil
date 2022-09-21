@@ -83,7 +83,7 @@ File format: The atlas maps are in .FLAT format and cannot be viewed directly. T
 **Preparing the XML or JSON file**
 -------------------------------------
  
-Either the XML or JSON file from QuickNII, DeepSlice or VisuAlign may be used here.
+Either the XML or JSON file from `QuickNII <https://quint-workflow.readthedocs.io/en/latest/QuickNII.html>`_, `DeepSlice <https://quint-workflow.readthedocs.io/en/latest/DeepSlice.html>`_ or `VisuAlign <https://quint-workflow.readthedocs.io/en/latest/VisuAlign.html>`_ may be used here.
 
 
 
