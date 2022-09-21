@@ -1,4 +1,4 @@
-**How to interpret the output**
+**How to interpret the results**
 ================================
 
 Nutil generates up to three sets of reports, overlay images and a .NUT file. The sections below give more information on each type of file. 
