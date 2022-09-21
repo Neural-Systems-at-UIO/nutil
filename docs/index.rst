@@ -7,10 +7,10 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
 
    introduction
    Technical
-   NutilCmd
    acknow
    release
    testing
+   NutilCmd
    support
    
 .. toctree::
