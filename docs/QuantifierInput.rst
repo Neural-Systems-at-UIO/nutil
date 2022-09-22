@@ -31,7 +31,11 @@ It is fine to include a string of letters and numbers followed by the unique ID.
  
 Any image analysis software may be used to generate the segmentations as long as they meet the following requirements:
 
-1. **Format:** Must be indexed 8-bit or 24-bit Red Green Blue (RGB) images in PNG format.
++----------+
+| |image11||
++----------+
+
+1. **Format:** Must be indexed 8-bit or 24-bit images in PNG format.
 
    Quantifier is only able to quantify one RGB colour at a time. Apply one RBG colour to all the objects-of-interest, and specify this colour in the Nutil GUI. For example, the objects here are red, so extract RGB colour: 255,0,0.
   
@@ -50,10 +54,6 @@ They do not need to be the same size as the images used to generate the atlas ma
 * It speeds up Nutil analysis and prevent crashes due to insufficient memory. 
 
 The aim is to downscale the images as much as possible but without losing information from the images that is actually important. The optimal scaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
-
-+----------+
-| |image11||
-+----------+
 
 .. tip::
 
