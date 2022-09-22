@@ -18,9 +18,9 @@ Watch our video utorial:
 
 **Quantifier requires three sets of input:**
 
-1. Atlas maps in FLAT format: these are generate with QuickNII or VisuAlign.
-2. Atlas registration information in XML or JSON format: these are generated with QuickNII, VisuAlign or DeepSlice.
-3. Segmentations with the features to be quantified represented in a unique RGB colour (8-bit PNG format with RGB colours). These are generated with ilastik or another image analysis tool.
+1. Atlas maps in FLAT format (generate with QuickNII or VisuAlign).
+2. Registration information in XML or JSON format (generated with QuickNII, VisuAlign or DeepSlice).
+3. Segmentations with the features to be quantified in a unique RGB colour (indexed 8-bit PNG format) (generated with ilastik or another image analysis tool).
 
 **It generates three sets of results:**
 
