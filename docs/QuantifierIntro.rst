@@ -1,7 +1,7 @@
 **Introduction**
 ==================
 
-**Quantifier** is an integral part of the QUINT workflow. It support quantification of labelled features in images of histological sections from mouse and rat brain based on a reference atlas. The following atlases are currently supported:
+**Quantifier** is an integral part of the `QUINT workflow <https://quint-workflow.readthedocs.io>`_. It support quantification of labelled features in images of histological sections from mouse and rat brain based on a reference atlas. The following atlases are currently supported:
 
 * Allen Mouse Brain Atlas Common Coordinate Framework version 3 (2015 and 2017)
 * Waxholm Atlas of the Spraque Dawley Rat, version 2, 3 and 4. 
