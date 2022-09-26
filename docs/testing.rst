@@ -4,21 +4,21 @@
 Nutil v0.7.0 and v0.8.0 are stable and validated with multiple ground truth datasets. 
 
 .. Warning::
-    It is not recommended to use Nutil v0.4.0 - v0.6.0 as they contain bugs that cause incorrect results in some of the reports: see the release notes for more information.
+    It is not recommended to use Nutil v0.4.0 - v0.6.0: they contain bugs that lead to incorrect results in some of the reports: see the release notes for more information.
     
 **Validation** 
 ~~~~~~~~~~~~~~~~~~~~~
 
 More stringent quality assurance routines were introduced in February 2021 in light of several bugs discovered in Nutil affecting core Quantifier functionality (see the release notes for more information about the bugs). The routines include continuous integration and automated validation on Github, based on a collection of ground truth datasets. As Nutil has many options for customised analysis, which has evolved over time in response to users needs, not all features have been tested to the same extent. The core functionality is tested more extensively than less central features. The testing status of each feature is listed below. 
 
-* We strongly recommend that all data from Nutil is validated externally prior to research use, as mistakes in image preparation and set-up may invalidate the output. It is also possible that bugs remain, especially in features that have not been tested as part of the automated validation.  
+* We recommend that all data from Nutil is validated externally prior to research use, as mistakes in image preparation and set-up may invalidate the output. It is also possible that bugs remain, especially in features that have not been tested as part of the automated validation.  
 * If you detect errors please post an issue on Github https://github.com/Neural-Systems-at-UIO/nutil/issues or contact EBRAINS support: support@ebrains.eu.
 
 
 **Automated validation**
 ~~~~~~~~~~~~~~~~~~~~~~
 
-An automatic validator feature was implemented in Nutil on 22.02.21. This directly compares PNG, TIF, TIFF, CSV and HTML files from two sets of Nutil analyses, with any differences flagged. It is set up so that the output from new versions of Nutil are compared to ground truth data that have validated output, to ensure that any errors in the code are picked up prior to release. In order to pass the validation, the Nutil results and ground truth must be identical. 
+The automatic validator  was implemented in Nutil on 22.02.21: it directly compares PNG, TIF, TIFF, CSV and HTML files from two sets of Nutil analyses, with any differences flagged. It is set up so that the output from new versions of Nutil are compared to ground truth data that have validated output, to ensure that any errors in the code are picked up prior to release. In order to pass the validation, the Nutil results and ground truth must be identical. 
 
 Two validation systems have been implemented that utilise the Validator: 
 
@@ -62,7 +62,8 @@ For a more thorough validation, the Validator is initiated manually on a local m
 15. Display region IDS - No known bugs but not validated thoroughly.
 16. Unique ID format - (_sXXX / user) - no known bugs. 
 
-In some instances, a bug may only occur with certain combinations of settings. It is not possible to test every combination, and so in rare instances bugs may remain despite being marked as "validated" above.
+.. Warning::
+   In some instances, a bug may only occur with certain combinations of settings: It is not possible to test every combination, and so in rare instances bugs may remain despite being marked as "validated" above.
 
 
 
