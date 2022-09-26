@@ -5,7 +5,7 @@
 The Transform operation enables the batch renaming, rotation, resizing and thumbnail compilation of tiled TIFF images (max size: 4 GB). The transformed TIFF images are in TIFF format, and the thumbnails are in PNG format. 
 
 .. note::
-The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transform or generate images that are bigger than 4 GB. 
+   The tiled TIFF image format has an upper size limit of 4 GB. Nutil cannot transform or generate images that are bigger than 4 GB. 
 
 
 **How to run Transform**
