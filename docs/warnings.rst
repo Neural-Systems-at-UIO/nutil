@@ -31,7 +31,7 @@ This means that there is a discrepancy in the atlasmaps and segmentation: Nutil 
 Automatic atlas recognisition was implemented in Nutil v0.8.0. This means that Nutil selects the atlas version based on the information in the .xml or .json file, rather than relying on the information entered by the user in the Nutil GUI. This works well for the latest versions of QuickNII and VisuAlign. However, this warning will come up if an older version of QuickNII or VisuAlign is used, or a new atlas is used that has not been implemented in Nutil. This is not usually a problem as Nutil will instead use the information entered in the GUI by the user. If in doubt, open the .json file to check the atlas version.  
 
 
-Transform
+2. Transform
 ------------
 
 .. warning::
