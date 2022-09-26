@@ -1,7 +1,8 @@
 **Quality assurance / validation**
 ---------------------------------
 
-Nutil v0.7.0 and v0.8.0 are stable and validated with multiple ground truth datasets. 
+.. Note::
+   Nutil v0.7.0 and v0.8.0 are stable and validated with multiple ground truth datasets. 
 
 .. Warning::
     It is not recommended to use Nutil v0.4.0 - v0.6.0: they contain bugs that lead to incorrect results in some of the reports: see the release notes for more information.
