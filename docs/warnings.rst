@@ -1,13 +1,15 @@
 **Warnings and error messages**
 --------------------------------------------------
 
-1. Quantifier
---------------
+Quantifier
+-----------
+
 
 .. warning::
    WARNING: Some of the area matrices were not initialized.
 
-This warning informs you that the JSON or XML file contains info about sections that are not included in the analysis. For example, if you run an analysis for a few sections only. This is not a problem - the analysis will produce correct results - but alerts you to missing sections in case this was not intended. 
+* The JSON or XML file contains info about sections that are not included in the analysis: for example, if you run an analysis for a few sections only. 
+* This is not a problem, the analysis will generate correct results, but alerts you to missing sections in case this was not intended. 
 
 
 .. warning::
@@ -23,16 +25,19 @@ This means what it says: Nutil can't find the relevant anchoring information in 
 .. warning::
    ERROR: Could not find FLAT files that contains: _001.
    
-This means that there is a discrepancy in the atlasmaps and segmentation: Nutil will fail to run if there is a discrepancy. To fix this, either add the FLAT file for the missing section or remove the segmentation with this ID from the segmentation directory. 
+* This means that there is a discrepancy in the atlasmaps and segmentation: Nutil will fail to run if there is a discrepancy. 
+* To fix this, either add the FLAT file for the missing section or remove the segmentation with this ID from the segmentation directory. 
 
 .. warning::
    WARNING: Unrecognised atlas map in the anchor file. Might be a potential problem, please make sure the atlas is correct! 
    
-Automatic atlas recognisition was implemented in Nutil v0.8.0. This means that Nutil selects the atlas version based on the information in the .xml or .json file, rather than relying on the information entered by the user in the Nutil GUI. This works well for the latest versions of QuickNII and VisuAlign. However, this warning will come up if an older version of QuickNII or VisuAlign is used, or a new atlas is used that has not been implemented in Nutil. This is not usually a problem as Nutil will instead use the information entered in the GUI by the user. If in doubt, open the .json file to check the atlas version.  
+* Automatic atlas recognisition was implemented in Nutil v0.8.0. This means that Nutil selects the atlas version based on the information in the .xml or .json file, rather than relying on the information entered by the user in the Nutil GUI. This works well for the latest versions of QuickNII and VisuAlign. 
+* This warning will come up if older versionsof QuickNII or VisuAlign are used, or a new atlas is used that has not been implemented in Nutil. This is not usually a problem as Nutil will use the information entered in the GUI by the user. If in doubt, open the .json file to check the atlas version. 
+* Consider using the latest version of QuickNII or VisuAlign.  
 
 
-2. Transform
-------------
+Transform
+-----------
 
 .. warning::
    TIFFAppendtoStrip: Maximum TIFF file size exceeded.
