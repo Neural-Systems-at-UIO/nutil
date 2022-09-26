@@ -42,8 +42,8 @@ Transform
 .. warning::
    TIFFAppendtoStrip: Maximum TIFF file size exceeded.
    
-* Nutil cannot transform or generate images that are bigger than 4 GB: this warning means the images exceed this limit. 
-* This may happen even if the original images do not exceed 4 GB, since rotation adds extra white space to the image corners to retain the rectangular shape of the image. 
+* Nutil cannot transform or generate images that are larger than 4 GB: this warning means the images exceed this limit. 
+* This may happen even if the images do not exceed 4 GB since rotation adds extra space to the image corners to retain the rectangular shape of the image. 
 * If the original images are below 4GB but you get this warning, select JPEG compression. This will reduce the size of the images that are generated. 
    
   
