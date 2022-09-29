@@ -16,6 +16,8 @@
 
 Check out the following articles that have used **Nutil**:
 
+* Yao Y, Barger Z, Saffari Doost M, Tso CF, Darmohray D, Silverman D, Liu D, Ma C, Cetin A, Yao S, Zeng H, Dan Y. Cardiovascular baroreflex circuit moonlights in sleep control. Neuron. 2022 Sep 23:S0896-6273(22)00802-9. https://doi.org/10.1016/j.neuron.2022.08.027.
+
 * Ham GX, Augustine GJ. Topologically Organized Networks in the Claustrum Reflect Functional Modularization. Frontiers in Neuroanatomy. 16 June 2022. https://doi.org/10.3389/fnana.2022.901807 
 
 * Bjerke IE, Cullity ER, Kjelsberg K, Charan KM, Leergaard TB, Kim JH. DOPAMAP, high-resolution images of dopamine 1 and 2 receptor expression in developing and adult mouse brains. Sci Data. 2022 Apr 19;9(1):175. https://doi.org/10.1038/s41597-022-01268-8
