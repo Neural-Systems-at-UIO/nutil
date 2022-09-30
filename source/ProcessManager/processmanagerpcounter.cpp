@@ -786,7 +786,9 @@ void ProcessManagerPCounter::GeneratePythonPlots()
 
 void ProcessManagerPCounter::CallPythonPlot(QString file, QString type, QString outputFile)
 {
-    auto python = Data::data.m_settings->getString("python_path");
+    QString python = "/usr/bin/python3";
+    if (Data::data.m_settings!=nullptr)
+       python = Data::data.m_settings->getString("python_path");
     QProcess p;
     QStringList params;
 
