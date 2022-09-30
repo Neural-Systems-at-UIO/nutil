@@ -398,9 +398,11 @@ void ProcessManagerPCounter::Execute()
         BuildReports();
         qDebug() << "Generating python plots";
         GeneratePythonPlots();
+        qDebug() << "Done";
     }
     //    QVector<ProcessItem*> m_processItems;
     //  QVector<QSharedPointer<NutilProcess>> m_processes;
+    qDebug() << "Finishing up";
     reports = Reports();
 
 
