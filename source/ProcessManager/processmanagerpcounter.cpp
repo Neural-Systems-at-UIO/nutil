@@ -763,15 +763,19 @@ void ProcessManagerPCounter::GeneratePythonPlots()
 //    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
 //    CallPythonPlot("plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 //    qDebug() <<QDir::currentPath();
+    qDebug() << "A";
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 
+    qDebug() << "B";
     CallPythonPlot("//..//plot/plot_custom_regions.py","0","custom_regions_bars");
     CallPythonPlot("//..//plot/plot_custom_regions.py","1","custom_regions_pie");
 
+    qDebug() << "C";
     Util::CopyFileHard("//..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
     Util::CopyFileHard("//..//plot/plot_custom_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_custom_regions.py");
     Util::CopyFileHard("//..//plot/plot_lib.py",m_outputDir+"/"+m_scriptDirectory+"/plot_lib.py");
+    qDebug() << "D";
     EndTimer("Python plots");
 
 }
