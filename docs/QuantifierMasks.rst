@@ -6,7 +6,7 @@ The mask feature is optional. It allows the application of masks to define which
 * Create binary masks (black and white) in PNG format with an application such as NIH ImageJ, Adobe Photoshop or GIMP. These should have the same proportions as the segmentations but are typically smaller in size.
 
 .. note::
-   QMask is a small desktop tool developed in-house that enables automatic generation of masks to differentiate the right and left hemisphere. The tool is applied to the QuickNII or VisuAlign JSON and thereby creates masks that are customized for the image series. This tool has not yet been published but is available at request: contact user support.  
+   **QuickMask** is a desktop tool for automatically generating masks to differentiate the right and left hemisphere based on the QuickNII or VisuAlign registration. Peliminary versions of QuickMask tool are available for download on the respective NITRC pages for the tools. Contact user support for the user manual.  
 
 * To use the mask feature, select “yes”. This brings up a “custom mask folder” and “Custom mask colour” option.  
 * Name these with the unique ID for the section and a “_mask” extension. File name example: Bxb_hgt_s002_mask 

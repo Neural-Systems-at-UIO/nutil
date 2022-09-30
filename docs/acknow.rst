@@ -9,7 +9,7 @@ Nutil is an integral part of the QUINT workflow, and is developed by the Neural 
 
 **Acknowledgements**: Nutil was developed with support from the EBRAINS infrastructure, and funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Framework Partnership Agreement No. 650003 (HBP FPA).
 
-**How to cite the tool**
+**How to cite**
 
 * **Nutil:** Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Postprocessing Toolbox for Histological Rodent Brain Section Images. Front. Neuroinform. 14:37. doi: 10.3389/fninf.2020.00037
 

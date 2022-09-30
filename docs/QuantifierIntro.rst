@@ -1,12 +1,15 @@
 **Introduction**
 ==================
 
-Quantifier is an integral part of the QUINT workflow, and enables the regional-quantification of features extracted from histological images based on a reference atlas such as the Allen Mouse Brain Atlas (AMBA) or the Waxholm Atlas of the Spraque Dawley Rat. 
+**Quantifier** is an integral part of the `QUINT workflow <https://quint-workflow.readthedocs.io>`_. It support quantification of labelled features in images of histological sections from mouse and rat brain based on a reference atlas. The following atlases are currently supported:
 
-.. note::
-   QUINT does not support quantification for regions that fall outside of the atlas, or for quantification without use of an atlas. 
+* Allen Mouse Brain Atlas Common Coordinate Framework version 3 (2015 and 2017)
+* Waxholm Atlas of the Spraque Dawley Rat, version 2, 3 and 4. 
 
-For an overview watch our tutorial:
+.. Warning::
+   QUINT does not support quantification for regions that fall outside of the reference atlases, or quantification without use of an atlas. 
+
+Watch our video utorial:
 
 .. raw:: html
 
@@ -15,16 +18,16 @@ For an overview watch our tutorial:
 
 **Quantifier requires three sets of input:**
 
-1. Images with the features segmented
-2. Atlas maps
-3. Atlas registration information in XML or JSON format
+1. Atlas maps in FLAT format (generate with QuickNII or VisuAlign).
+2. Registration information in XML or JSON format (generated with QuickNII, VisuAlign or DeepSlice).
+3. Segmentations with the features to be quantified in a unique RGB colour (indexed 8-bit PNG format) (generated with ilastik or another image analysis tool).
 
-**It generates three sets of output:**
+**It generates three sets of results:**
 
-1. Reports with quantifications per atlas region
-2. Images with the segmentations superimposed on the atlas maps
-3. Coordinate files for visualising the extracted objects in the 3D brain viewer: Meshview. 
+1. Reports with counts and percentage coverage per reference atlas region. There is also the option to generate reports for customized regions (compilations of reference atlas regions) (CSV format). 
+2. Images with the segmentations superimposed on the atlas maps (PNG format).
+3. Point clouds for visualising the extracted objects in the Meshview Atlas Viewer (JSON format). 
 
-As the QUINT workflow is relatively complex, and requires the use of several software packages including ilastik, QuickNII and Nutil Quantifier, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the output files. 
+As the QUINT workflow requires the use of several software including QuickNII, Ilastik and Nutil, this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the results. 
 
 

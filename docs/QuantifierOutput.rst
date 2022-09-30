@@ -1,4 +1,4 @@
-**How to interpret the output**
+**How to interpret the results**
 ================================
 
 Nutil generates up to three sets of reports, overlay images and a .NUT file. The sections below give more information on each type of file. 
@@ -74,10 +74,10 @@ By switching “ON” the “display object IDs in image file and reports”, a 
 ----------------
 
 * JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
-* Links to Meshview are available `here. <https://meshview-for-brain-atlases.readthedocs.io/en/latest/Installation.html#links>`_
+* Links to Meshview are available `here. <https://quint-workflow.readthedocs.io/en/latest/Meshview.html>`_
 
 .. warning::
-   Currently the coordinates generated with Nutil are based on the linear transformation only and do not take into account the nonlinear transformation.   
+   The coordinates generated with Nutil version 0.8 reflect both the linear and nonlinear transformation applied with QuickNII and VisuAlign. Nutil version 0.4 - 0.7 are based on the linear transformation only and do not take into account the nonlinear transformation.   
 
 **NUT file** 
 --------------

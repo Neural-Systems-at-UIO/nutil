@@ -7,12 +7,11 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
 
    introduction
    Technical
-   NutilCmd
    acknow
    release
    testing
+   NutilCmd
    support
-   publications
    
 .. toctree::
    :caption: Pre-processing operations
@@ -35,15 +34,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    QuantifierMasks
    QuantifierReports
    QuantifierOutput
-   
-   
-.. toctree::
-   :caption: Other QUINT software
-   :maxdepth: 2
-   :hidden:
-   
-   QuickNII_Vis
-   Ilastik
+   warnings
    
 
 
