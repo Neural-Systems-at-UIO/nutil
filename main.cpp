@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 //    qputenv("QT_DEBUG_PLUGINS", QByteArray("1"));
   //          TestBigTiff();
 
-		//    QImageReader::setAllocationLimit(4096);
+    QImageReader::setAllocationLimit(4096);
 
     if (argc == 1)  {
         QApplication a(argc, argv);

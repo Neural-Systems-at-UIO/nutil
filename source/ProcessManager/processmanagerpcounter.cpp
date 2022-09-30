@@ -753,11 +753,13 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     if (Data::data.isValidator)
         return;
 
+    qDebug() << "00";
     auto python = Data::data.m_settings->getString("python_path");
     if (!QFile::exists(python)) {
         LMessage::lMessage.Message("Python path not set, so plots will not be generated. Please set the correct path to your python executable, and make sure you have installed the python packages 'matplotlib', 'numpy' and 'pandas'.");
         return;
     }
+    qDebug() << "1" << python;
     StartTimer();
     Data::data.m_globalMessage = "Generating python plots";
 //    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
