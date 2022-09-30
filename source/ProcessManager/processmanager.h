@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "source/ProcessManager/processitem.h"
 #include "source/util/lparameter.h"
 #include "source/IO/nutiltemplate.h"
+#include <QElapsedTimer>
 #include <QDirIterator>
 
 class ProcessManager
@@ -51,6 +52,11 @@ public:
     QString m_excelInputFilename="";
     Counter m_mainCounter;
     QColor m_background = QColor(255,255,255,255);
+    QElapsedTimer m_timer;
+
+
+    void StartTimer();
+    void EndTimer(QString text);
 
     int m_numProcessors = -1;
 

@@ -6,13 +6,13 @@ QT += xml
 CONFIG += c++11 c++17 c++14 console
 CONFIG += app_bundle
 
-
 QT += widgets
 QT += core gui
 QT += network
 ARCH = $$QMAKE_HOST.arch
 ARCH = arm64
 TEMPLATE      = app
+QTPLUGIN += qtiff
 
 #DEFINES += IS_BETA IGNORE_DOWNLOAD
 DEFINES += IGNORE_DOWNLOAD
@@ -44,11 +44,9 @@ macx {
     QMAKE_CXXFLAGS += -Ofast
     INCLUDEPATH += /usr/local/include/
     LIBS += -L/usr/local/lib/
-
     LIBS += -ltiff
 
-    LIBS += -L$$PWD/lib/    -lxlnt
-    #LIBS += -L/usr/local/opt/libomp/lib -lomp
+    LIBS += -L$$PWD/lib/    -lxlnt #LIBS += -L/usr/local/opt/libomp/lib -lomp
 
     LIBS += -L/usr/local/lib /usr/local/lib/libomp.dylib -lomp
     }

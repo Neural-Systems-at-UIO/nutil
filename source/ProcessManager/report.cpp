@@ -20,7 +20,7 @@ void Report::GenerateSheet(LBook* book, QString units)
         sheet->writeStr(0, 6, "Area name");
 
         for (int i=0;i<m_areasOfInterest.count();i++) {
-  //          qDebug() << i << " / " << m_areasOfInterest.count();
+            //          qDebug() << i << " / " << m_areasOfInterest.count();
             sheet->Set(1+i,0, m_areasOfInterest[i]->m_pixelArea);
             sheet->Set(1+i,1, m_areasOfInterest[i]->m_area);
             sheet->writeStr(1+i,2, units);
@@ -49,7 +49,7 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
     Calculate(atlasLabels);
     sheet->setName("All");
 
-// Define column titles (CustomRegions_all)
+    // Define column titles (CustomRegions_all)
 
     if (sheet) {
 
@@ -63,13 +63,13 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
         sheet->writeStr(0,7, "Area unit");
         sheet->writeStr(0,8, "Load");
 
-// Define column content (CustomRegions_all)
+        // Define column content (CustomRegions_all)
 
         int i = 1;
         for (Report& r : m_reports) {
             sheet->writeStr(i,0, r.m_filename.replace("\r","").replace("\n","").trimmed());
             sheet->Set(i,1, r.m_regionPixelArea,0);
-             // the 0 here defines the number of decimal places
+            // the 0 here defines the number of decimal places
             sheet->Set(i,2, r.m_regionArea);
             sheet->writeStr(i,3, r.m_unit);
             if (Data::data.m_hasAreaSplitting)
@@ -97,13 +97,13 @@ void Reports::CreateSummary(AtlasLabels* atlasLabels)
 void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, QString units, QString bookType)
 {
     LBook* book = LBookFactory::Create(bookType);
-//    QSharedPointer<LSheet>  sheet = book->CreateSheet("All");
+    //    QSharedPointer<LSheet>  sheet = book->CreateSheet("All");
     QSharedPointer<LSheet>  sheet = book->GetSheet(0);
 
-//    if (dynamic_cast<LBookXlnt*>(book))
-  //      book->RemoveSheet(1);
+    //    if (dynamic_cast<LBookXlnt*>(book))
+    //      book->RemoveSheet(1);
 
-// Define column titles (RefAtlasRegions_all)
+    // Define column titles (RefAtlasRegions_all)
 
     sheet->writeStr(0,0,"Region ID");
     sheet->writeStr(0,1,"Region name");
@@ -138,11 +138,11 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
     for (AtlasLabel* al: atlasLabels->atlases)
         sorted.append(al);
 
-//    qSort(sorted.begin(), sorted.end(),
-  //        [](const AtlasLabel* a, const AtlasLabel* b) -> bool { return a->extra2.y() > b->extra2.y(); });
+    //    qSort(sorted.begin(), sorted.end(),
+    //        [](const AtlasLabel* a, const AtlasLabel* b) -> bool { return a->extra2.y() > b->extra2.y(); });
 
 
-// Define column content (RefAtlasRegions_all)
+    // Define column content (RefAtlasRegions_all)
 
     int y = 1;
     for (AtlasLabel* al: sorted) {
@@ -151,10 +151,10 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
         {
             sheet->Set(y,0,al->index);
             sheet->writeStr(y,1,al->name);
-//            qDebug() << "WTF0 : "<< al->area<<al->extra2.x();
+            //            qDebug() << "WTF0 : "<< al->area<<al->extra2.x();
             sheet->Set(y,2,al->area,0);
 
-                // the 0 here defines the number of decimal places displayed
+            // the 0 here defines the number of decimal places displayed
             sheet->Set(y,3,al->areaScaled);
             sheet->writeStr(y,4,units);
             if (Data::data.m_hasAreaSplitting)
@@ -171,10 +171,10 @@ void Reports::CreateRefAtlasRegions(QString fileName, AtlasLabels *atlasLabels, 
 
             if (al->area!=0.0) { // object pixels/region pixels
                 sheet->Set(y,9,al->extra2.x()/al->area);
-      //          qDebug() << "WTF : "<<al->extra2.x()<<al->area<<al->extra2.x()/al->area<<QString::number(al->extra2.x()/al->area,'d');
+                //          qDebug() << "WTF : "<<al->extra2.x()<<al->area<<al->extra2.x()/al->area<<QString::number(al->extra2.x()/al->area,'d');
             }
- //           if (al->areaScaled!=0)
-   //             sheet->Set(y,10,al->extra2.y()/al->areaScaled);
+            //           if (al->areaScaled!=0)
+            //             sheet->Set(y,10,al->extra2.y()/al->areaScaled);
 
             y++;
         }
@@ -213,7 +213,7 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
             }
         }
 
-// Define column titles (RefAtlasRegions_slices)
+        // Define column titles (RefAtlasRegions_slices)
 
         sheet->writeStr(0,0,"Region ID");
         sheet->writeStr(0,1,"Region Name");
@@ -226,14 +226,14 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
         sheet->writeStr(0,8,"Area unit");
         sheet->writeStr(0,9,"Load");
 
-// Define column content (RefAtlasRegions_slices)
+        // Define column content (RefAtlasRegions_slices)
 
         for (AtlasLabel* al : atlasLabels->atlases) {
             {
                 sheet->Set(y,0,al->index);
                 sheet->writeStr(y,1,al->name);
                 sheet->Set(y,2,al->sliceArea[i],0);
-                    // the 0 here here defines the number of decimal places displayed for column 2
+                // the 0 here here defines the number of decimal places displayed for column 2
                 double regionAreaScaled = al->sliceArea[i] * items[i]->m_pixelAreaScale;
                 sheet->Set(y,3,regionAreaScaled );
                 sheet->writeStr(y,4,units);
@@ -246,12 +246,12 @@ void Reports::CreateRefAtlasRegionsSlices(QString filename, AtlasLabels *atlasLa
                 sheet->writeStr(y,8,units);
                 sheet->Set(y,9,0);
 
-//                 if (al->area!=0)
-                     if (regionAreaScaled!=0)
-  //                  sheet->Set(y,9,al->extra2.x()/al->area);
-//                 if (al->area!=0)
-                         if (al->sliceArea[i]!=0)
-                    sheet->Set(y,9,std::min(al->extra2.x()/al->sliceArea[i],1.0));
+                //                 if (al->area!=0)
+                if (regionAreaScaled!=0)
+                    //                  sheet->Set(y,9,al->extra2.x()/al->area);
+                    //                 if (al->area!=0)
+                    if (al->sliceArea[i]!=0)
+                        sheet->Set(y,9,std::min(al->extra2.x()/al->sliceArea[i],1.0));
                 y++;
             }
 
@@ -274,7 +274,7 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
     double totalSumPixel=0;
     double totalSumArea = 0;
 
-// Define column titles (object_slice report)
+    // Define column titles (object_slice report)
 
     summary->writeStr(0,0,"Section ID");
     summary->writeStr(0,1,"Object pixels");
@@ -301,7 +301,7 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
         // Header
         cnt.Tick();
         Data::data.m_globalMessage = "Creating individual section reports: " + cnt.getPercentFormatted();
-/*        sheet->writeStr(0,0,"Total pixel area");
+        /*        sheet->writeStr(0,0,"Total pixel area");
         sheet->writeStr(0,1,"Total object area");
         sheet->writeStr(0,2,"Total atlas area");*/
         sheet->writeStr(0,0,"Object pixels");
@@ -310,17 +310,17 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
         sheet->writeStr(0,3,"Center X");
         sheet->writeStr(0,4,"Center Y");
         sheet->writeStr(0,5,"Region ID");
-  //      sheet->writeStr(2,6,"Region Area");
+        //      sheet->writeStr(2,6,"Region Area");
         sheet->writeStr(0,6,"Region Name");
         if (displayID)
             sheet->writeStr(0,7,"Object ID");
-   //     sheet->writeStr(0,7,"Cutoff reached");
-  // max object size cut off: objects greater in size were divided into max size or smaller. This feature should be removed.
+        //     sheet->writeStr(0,7,"Cutoff reached");
+        // max object size cut off: objects greater in size were divided into max size or smaller. This feature should be removed.
         int y = 1;
-   //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
+        //     qDebug() << "  Writing areas : " << processes[i]->m_areas.count();
         for (Area& a: processes[i]->m_areas) {
             sheet->Set(y,0,a.m_pixelArea,0);
-                // the 0 here defines the number of decimal places displayed
+            // the 0 here defines the number of decimal places displayed
             sheet->Set(y,1,a.m_area);
             sheet->writeStr(y,2,units);
 
@@ -344,23 +344,23 @@ void Reports::CreateSliceReports(QString filename , QVector<QSharedPointer<Nutil
 
             y++;
 
-// Define column content (object_slice report)
+            // Define column content (object_slice report)
 
             summary->writeStr(yy,0,items[i]->m_reportName);
             summary->Set(yy,1,a.m_pixelArea,0);
-                // the 0 here defines the number of decimal places displayed
+            // the 0 here defines the number of decimal places displayed
             summary->Set(yy,2,a.m_area);
             summary->writeStr(yy,3,units);
             summary->Set(yy,4,a.m_center.x());
             summary->Set(yy,5,a.m_center.y());
 
-//            summary->writeStr(yy,8,items[i]->m_id);
+            //            summary->writeStr(yy,8,items[i]->m_id);
 
             if (a.atlasLabel!=nullptr) {
                 summary->Set(yy,6,a.atlasLabel->index);
-              //  if (a.atlasLabel->area!=a.atlasLabel->area)
-              //  qDebug() << a.atlasLabel->area;
-//                summary->Set(yy,6,a.atlasLabel->area);
+                //  if (a.atlasLabel->area!=a.atlasLabel->area)
+                //  qDebug() << a.atlasLabel->area;
+                //                summary->Set(yy,6,a.atlasLabel->area);
                 summary->writeStr(yy,7,a.atlasLabel->name);
             }
             for (auto& rep : m_reports) {
@@ -393,19 +393,19 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
 {
     LMessage::lMessage.Log("Generating summary report");
     LBook* book = LBookFactory::Create(bType);
-//    QSharedPointer<LSheet>  summary = book->GetSheet(0);
+    //    QSharedPointer<LSheet>  summary = book->GetSheet(0);
 
     Counter cnt(items.count()*m_reports.count(),"");
 
     for (int i=0;i<items.count();i++) {
-//        qDebug() << "  Generating section report : " << items[i]->m_reportName;
+        //        qDebug() << "  Generating section report : " << items[i]->m_reportName;
 
-//        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
+        //        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i)+"_"+items[i]->m_reportName);
         QSharedPointer<LSheet>  sheet = book->CreateSheet(items[i]->m_reportName);
-//        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i));
+        //        QSharedPointer<LSheet>  sheet = book->CreateSheet("sheet"+QString::number(i));
 
 
-// Define column titles (CustomRegion_slice reports)
+        // Define column titles (CustomRegion_slice reports)
 
         sheet->writeStr(0,0, "Region name");
         sheet->writeStr(0,1, "Region pixels");
@@ -426,17 +426,17 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
             float regionPixelArea=0;
             float regionArea=0;
             float totalPixelArea=0;//items[i]->m_pixelAreaScale;
-//            float totalArea=0;
+            //            float totalArea=0;
             float totalArea=0;//items[i]->m_atlasAreaScaled;
             int cnt=0;
 
-//            QVector<AtlasLabel*> lbls;
+            //            QVector<AtlasLabel*> lbls;
             for (Area& a: processes[i]->m_areas) {
 
-     //           totalPixelArea+=a.m_pixelArea;
-       //         totalArea+=a.m_mrea;
-//                regionPixelArea+=a.m_pixelArea;
-  //              regionArea+=a.m_area;
+                //           totalPixelArea+=a.m_pixelArea;
+                //         totalArea+=a.m_mrea;
+                //                regionPixelArea+=a.m_pixelArea;
+                //              regionArea+=a.m_area;
 
                 if (a.atlasLabel!=nullptr) {
 
@@ -449,19 +449,19 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
                 }
 
             }
-  //          qDebug() << "xxx";
+            //          qDebug() << "xxx";
             // Now total area
             for (AtlasLabel* al : labels->atlases) {
                 for (long ID: r.m_IDs)
                     if (ID==al->index) {
 
-                    regionPixelArea +=al->sliceArea[i];
-                    regionArea +=al->sliceAreaScaled[i];
+                        regionPixelArea +=al->sliceArea[i];
+                        regionArea +=al->sliceAreaScaled[i];
                     }
             }
-//            qDebug() << "TOTAL AREA: " <<" WITH : " << totalArea;
+            //            qDebug() << "TOTAL AREA: " <<" WITH : " << totalArea;
 
- /*           sheet->writeStr(0,0, "Region name");
+            /*           sheet->writeStr(0,0, "Region name");
             sheet->writeStr(0,1, "Region pixel area");
             sheet->writeStr(0,2, "Region area");
             sheet->writeStr(0,3, "Area unit");
@@ -472,11 +472,11 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
             sheet->writeStr(0,8, "Load");
 */
 
-// Define column content (CustomRegion reports)
+            // Define column content (CustomRegion reports)
 
             sheet->writeStr(j,0, r.m_filename.replace("\r","").replace("\n","").trimmed());
             sheet->Set(j,1, regionPixelArea,0);
-                // the 0 here defines the number of decimal places displayed
+            // the 0 here defines the number of decimal places displayed
             sheet->Set(j,2, regionArea);
             sheet->writeStr(j,3, r.m_unit);
             if (Data::data.m_hasAreaSplitting)
@@ -484,7 +484,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
             else
                 sheet->Set(j,4, cnt);
             sheet->Set(j,5, totalPixelArea,0);
-                // the 0 here defines the number of decimal places displayed
+            // the 0 here defines the number of decimal places displayed
             sheet->Set(j,6, totalArea);
             sheet->writeStr(j,7, r.m_unit);
             sheet->Set(j,8,0);
@@ -494,8 +494,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
                 sheet->Set(j,8, 0);
 
 
-//            if (regionArea>=1)
-  //              sheet->Set(j,9, totalArea/(float)regionArea);
+            //            if (regionArea>=1)
+            //              sheet->Set(j,9, totalArea/(float)regionArea);
 
             /*if (regionPixelArea>=1)
                 sheet->Set(j,8, totalPixelArea);
@@ -509,8 +509,8 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
     }
 
 
-        // Header
-/*        sheet->writeStr(0,0,"Total pixel area");
+    // Header
+    /*        sheet->writeStr(0,0,"Total pixel area");
         sheet->writeStr(0,1,"Total object area");
         sheet->writeStr(0,2,"Total atlas area");
         sheet->writeStr(2,0,"Object pixels");
@@ -573,12 +573,12 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
 
         */
 
-// Save files as .csv
+    // Save files as .csv
 
     book->Save(filename);
     if (QFile::exists(filename+".csv"))
         QFile::remove(filename+".csv");
-//    filename.csv
+    //    filename.csv
 
 }
 
@@ -598,13 +598,14 @@ void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilPro
 
 
         for (Area* a: m_reports[i].m_areasOfInterest)
-            {
+        {
             CoordinateTransform transform(*a->m_xmlData);
 
 
             QVector3D invCenter = InvProject(a->m_center,a,0,&transform);
+
             for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
-/*                QPointF& p =a->m_points[k];
+                /*                QPointF& p =a->m_points[k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;*/
@@ -634,21 +635,25 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
 {
 
     QString o;
-//    o+="{\n";
-  //  o+="\"atlas_type\" : \""+atlasType+"\",\n";
+    //    o+="{\n";
+    //  o+="\"atlas_type\" : \""+atlasType+"\",\n";
     o+="[\n";
     int cnt=0;
 
-//    for (int i=0;i<m_reports.count();i++)
-  //      k+=m_reports[i].m_areasOfInterest.count();
+    //    for (int i=0;i<m_reports.count();i++)
+    //      k+=m_reports[i].m_areasOfInterest.count();
 
     for (Report& r: m_reports)
-            r.FindAreasOfInterest(processes);
+        r.FindAreasOfInterest(processes);
     bool matrixError = false;
 
     Counter cntr(m_reports.count(),"");
     int tcount = 0;
-//#pragma omp parallel for
+
+
+
+
+
     for (int i=0;i<m_reports.count();i++) {
 
         cntr.Tick();
@@ -667,43 +672,50 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
         o+="\"triplets\":[";
         int cnt2=0;
         cnt++;
+        QVector<QVector<QVector3D>> list;
+        list.resize(omp_get_max_threads());
         for (Area* a: m_reports[i].m_areasOfInterest) {
             CoordinateTransform transform(*a->m_xmlData);
-
-
-//            if (cnt!=0) o+=",";
+            //            if (cnt!=0) o+=",";
             a->CalculateStatistics();
             QVector3D invCenter = InvProject(a->m_center,a,0,&transform);
-    //        qDebug() << "CENTER "<< a->m_center;
+            //        qDebug() << "CENTER "<< a->m_center;
 
             double val = ((rand()%1000)/1000.0-0.5) * spread;
 
 
-            for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
-//                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
+//#pragma omp parallel for
+            for (int k=0;k<a->m_points.count();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
+                //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
                 QVector3D alt;
                 QVector3D v = InvProject(a->m_points[(int)k],a,spread,invCenter, &alt, &transform);
- /*               QPointF& p =a->m_points[(int)k];
+                /*               QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);*/
                 if (!a->m_matrixInitialized) {
-//                    qDebug() << "ERROR : Area Matrix not initialized! ";
+                    //                    qDebug() << "ERROR : Area Matrix not initialized! ";
                     matrixError = true;
                 }
-//                v=v*a->m_mat;
+                list[omp_get_thread_num()].append(v);
+            }
+
+        }
+
+        for (auto& l:list) {
+            for (auto& v:l) {
+                //                v=v*a->m_mat;
 
 
 
                 if (cnt2!=0) o+=",\n";
-//                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
+                //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
                 o+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
-//                o+=",\n";
-  //              o+=QString::number(alt.x())+ ","+QString::number(alt.y())+","+QString::number(alt.z());
+                //                o+=",\n";
+                //              o+=QString::number(alt.x())+ ","+QString::number(alt.y())+","+QString::number(alt.z());
 
                 cnt2++;
-             }
-
+            }
 
         }
         o+="]}";
@@ -711,7 +723,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
     }
 
     o+="\n]\n";
-//    o+="}";
+    //    o+="}";
     QFile file (filename);
     file.open(QFile::Text | QFile::WriteOnly);
     QTextStream outstream(&file);
@@ -738,7 +750,7 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
     for (int i=0;i<m_reports.count();i++) {
         QColor c = m_reports[i].m_color;
         //qDebug() << c.red() << ", " << c.green() << ", " << c.blue() << "  : " << m_reports[i].m_areasOfInterest.count();
-  //      c= QColor(Qt::white);
+        //      c= QColor(Qt::white);
         cnt.Tick();
         Data::data.m_globalMessage="Generating nifti file : " + cnt.getPercentFormatted();
         for (Area* a: m_reports[i].m_areasOfInterest) {
@@ -747,20 +759,20 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
             //c.setBlue(rand()%255);
             //qDebug() << a->m_points.count();
             for (QPointF& p: a->m_points) {
-//                QPointF pp=a->m_center;
+                //                QPointF pp=a->m_center;
 
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;
-//                v=v/1;
+                //                v=v/1;
 
                 v.setX(v.x()/512*n.size.x() );
                 v.setY(v.y()/512*n.size.y());
                 v.setZ(v.z()/512*n.size.z());
 
-//                               if (rand()%100==0)
-  //                                 qDebug() << v;
+                //                               if (rand()%100==0)
+                //                                 qDebug() << v;
 
-/*                v = QVector3D(rand()%128, rand()%128, rand()%128);
+                /*                v = QVector3D(rand()%128, rand()%128, rand()%128);
                 v=v/4.0;
 */
                 //if (rand()%100>98) qDebug() << v;
@@ -811,10 +823,10 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
 {
 
 
-//    for (int i=0;i<m_reports.count();i++)
-  //      k+=m_reports[i].m_areasOfInterest.count();
+    //    for (int i=0;i<m_reports.count();i++)
+    //      k+=m_reports[i].m_areasOfInterest.count();
     for (Report& r: m_reports)
-            r.FindAreasOfInterest(processes);
+        r.FindAreasOfInterest(processes);
 
 
     int tcount = 0;
@@ -830,69 +842,96 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
         int k=0;
 
 
-    for (int i=0;i<m_reports.count();i++) {
+        for (int i=0;i<m_reports.count();i++) {
 
-        cntr.Tick();
-        Data::data.m_globalMessage = "Creating 3D point clouds (slices) : " + cntr.getPercentFormatted();
-        QColor c = m_reports[i].m_color;
-        QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
-        //o +="RGBA " + color +" \n";
-        //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
+            cntr.Tick();
+            Data::data.m_globalMessage = "Creating 3D point clouds (slices) : " + cntr.getPercentFormatted();
+            QColor c = m_reports[i].m_color;
+            QString color = QString::number((float)c.red()/255.0) + " " + QString::number((float)c.green()/255.0) + " " + QString::number((float)c.blue()/255.0) +" 1";
+            //o +="RGBA " + color +" \n";
+            //qDebug() << m_reports[i].m_filename << " " << m_reports[i].m_areasOfInterest.count();
 
-        int count = 0;//m_reports[i].m_areasOfInterest.count();
-        for (int j=0;j<m_reports[i].m_areasOfInterest.count();j++)
-            count+=m_reports[i].m_areasOfInterest[j]->m_points.count();
-        if (cnt!=0) o+=",\n";
-        int cnt2=0;
-        cnt++;
-
-
-        QString data = "";
-        for (Area* a: m_reports[i].m_areasOfInterest)
-        {
-            CoordinateTransform transform(*a->m_xmlData);
-            bool ok = false;
-            for (int ka = 0;ka<processes[itm]->m_areas.count();ka++) {
-                if (a==&processes[itm]->m_areas[ka])
-                    ok = true;
-            }
-            if (!ok)
-                continue;
+            int count = 0;//m_reports[i].m_areasOfInterest.count();
+            for (int j=0;j<m_reports[i].m_areasOfInterest.count();j++)
+                count+=m_reports[i].m_areasOfInterest[j]->m_points.count();
+            if (cnt!=0) o+=",\n";
+            int cnt2=0;
+            cnt++;
 
 
-//            qDebug() << "FOUND";
-/*            if (processes[itm]->m_areas.contains(*a)) {
+            QString data = "";
+            for (Area* a: m_reports[i].m_areasOfInterest)
+            {
+                CoordinateTransform transform(*a->m_xmlData);
+                bool ok = false;
+                for (int ka = 0;ka<processes[itm]->m_areas.count();ka++) {
+                    if (a==&processes[itm]->m_areas[ka])
+                        ok = true;
+                }
+                if (!ok)
+                    continue;
+
+
+                //            qDebug() << "FOUND";
+                /*            if (processes[itm]->m_areas.contains(*a)) {
                 qDebug() << "FOUND " << i;
             }
 */
 
-//            if (cnt!=0) o+=",";
-            QVector3D invCenter = InvProject(a->m_center,a,0, &transform);
+                //            if (cnt!=0) o+=",";
+                QVector3D invCenter = InvProject(a->m_center,a,0, &transform);
 
-            for (float k=0;k<a->m_points.count();k+=xyzSize) { //(a->m_points.count()/xyzSize)+1) {
-//                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
-                tcount++;
-/*                QPointF& p =a->m_points[k];
+                QVector<QVector<QVector3D>> list;
+                list.resize(omp_get_max_threads());
+//#pragma omp parallel for
+
+                for (int k=0;k<a->m_points.count();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
+                    //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
+                    tcount++;
+                    /*                QPointF& p =a->m_points[k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;*/
-                QVector3D alt;
-                QVector3D v = InvProject(a->m_points[k],a,spread, invCenter, &alt, &transform);
+                    QVector3D alt;
+                    QVector3D v = InvProject(a->m_points[k],a,spread, invCenter, &alt, &transform);
 
+
+                    list[omp_get_thread_num()].append(v);
+                    /*
                 if (cnt2!=0) data+=",\n";
 //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
                 data+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
 
 
-                cnt2++;
-             }
+                cnt2++;*/
+                }
+
+                for (auto& l:list) {
+                    for (auto& v:l) {
+                        //                v=v*a->m_mat;
+                        if (cnt2!=0) data+=",\n";
+                        //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
+                        data+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
+                        //                o+=",\n";
+                        //              o+=QString::number(alt.x())+ ","+QString::number(alt.y())+","+QString::number(alt.z());
+
+                        cnt2++;
+                    }
+
+                }
+
+
+//                qDebug() << data;
+
+
+
 
 
         }
         o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(cnt2)+",";
         o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename.trimmed().simplified()+"\",";
         o+="\"triplets\":[";
-
+//        qDebug() << data;
         o+=data;
 
         o+="]}";
@@ -905,8 +944,8 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
     outstream << o;
     file.close();
 
-    }
-    LMessage::lMessage.Message("****** Count of pixels " + QString::number(tcount));
+}
+LMessage::lMessage.Message("****** Count of pixels " + QString::number(tcount));
 }
 
 
@@ -917,19 +956,19 @@ void Report::FindAreasOfInterest(QVector<QSharedPointer<NutilProcess>>& processe
         for (QSharedPointer<NutilProcess> np : processes)
             for (Area& a: np->m_areas)
                 if (a.atlasLabel!=nullptr) {
-/*                    if (i==182305705)
+                    /*                    if (i==182305705)
                         if (i>18230570)
                         //if (a.atlasLabel->index>1000)
                         qDebug() << "Check: " << i << " vs " << a.atlasLabel->index;*/
-                     if (a.atlasLabel->index == i) {
+                    if (a.atlasLabel->index == i) {
                         m_areasOfInterest.append(&a);
-                     }
+                    }
 
                 }
 
 
     }
-//    qDebug() << "Found amount: " << m_areasOfInterest.count();
+    //    qDebug() << "Found amount: " << m_areasOfInterest.count();
 
 }
 
@@ -944,7 +983,7 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
             r.m_totalPixelArea+=a->m_pixelArea;
             r.m_totalArea +=a->m_area;
             a->color = r.m_color;
-//            if (rand()%100>98) qDebug() << r.m_color;
+            //            if (rand()%100>98) qDebug() << r.m_color;
         }
         for (long i: r.m_IDs)
         {
@@ -955,7 +994,7 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
             }
         }
 
-/*        QVector<long> used;
+        /*        QVector<long> used;
 
 
         for (long i: r.m_IDs)
@@ -980,7 +1019,7 @@ void Reports::Calculate(AtlasLabels* atlasLabels)
 
 void Reports::CreateBook(QString filename, QString type)
 {
-     m_book = LBookFactory::Create(type);
+    m_book = LBookFactory::Create(type);
 
     //m_book = xlCreateXMLBook();// for xlsx
     m_filename = filename;
@@ -993,11 +1032,11 @@ void Reports::CreateSheets(QVector<QSharedPointer<NutilProcess>>& processes,Atla
     if (!m_book)
         return;
 
-//    LMessage::lMessage.Log("Finding areas of interest");
+    //    LMessage::lMessage.Log("Finding areas of interest");
     Data::data.m_globalMessage = "Creating sheets 1/3";
 
     for (Report& r: m_reports)
-            r.FindAreasOfInterest(processes);
+        r.FindAreasOfInterest(processes);
     Data::data.m_globalMessage = "Creating sheets 2/3";
 
     LMessage::lMessage.Log("Creating summary ");
@@ -1007,11 +1046,11 @@ void Reports::CreateSheets(QVector<QSharedPointer<NutilProcess>>& processes,Atla
     Data::data.m_globalMessage = "Creating sheets 3/3";
 
     if (!hasAreaSplitting)
-    for (Report& r: m_reports) {
-        //qDebug() << r.m_filename;
-        r.GenerateSheet(m_book, units);
-        //qDebug() << "Done";
-    }
+        for (Report& r: m_reports) {
+            //qDebug() << r.m_filename;
+            r.GenerateSheet(m_book, units);
+            //qDebug() << "Done";
+        }
     LMessage::lMessage.Log("Saving report to " + m_filename);
     m_book->Save(m_filename);
 

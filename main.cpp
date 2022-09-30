@@ -65,7 +65,13 @@ void setSharonPalette(QApplication& a,float r, float g, float b) {
 }
 
 
-
+void TestBigTiff() {
+    QImage img0("/Users/leuat/code/nutildata/trans_fail/in/tiff.tiff");
+    qDebug() << img0.size();
+    QImage img("/Users/leuat/code/nutildata/trans_fail/in/TG5174_Chat_s001.tif");
+    qDebug() << img.size();
+    exit(1);
+}
 
 void CheckVersion() {
     Updater u;
@@ -100,7 +106,7 @@ void CreateValidator() {
     v.CreateSlicedMask("test_mask.png",1280,1024, 0.5, Qt::white, Qt::black);
 }
 
-
+/*
 void SharonImageTest(int px, int py, int width, int height) {
 
 
@@ -127,8 +133,8 @@ void SharonImageTest(int px, int py, int width, int height) {
 
     img.save("sharonTest.png");
 }
-
-
+*/
+/*
 void Fractal() {
     NLIQImage img;
     img.Load("/Users/leuat/Downloads/uk.png");
@@ -138,6 +144,7 @@ void Fractal() {
     //QImage img("~/Downloads/uk.png");
 
 }
+*/
 
 
 
@@ -146,9 +153,9 @@ int main(int argc, char *argv[])
 #ifndef IGNORE_DOWNLOAD
     CheckVersion();
 #endif
-
-
-   // Fractal();
+//  Q_IMPORT_PLUGIN( QTiffPlugin );
+//    qputenv("QT_DEBUG_PLUGINS", QByteArray("1"));
+  //          TestBigTiff();
 
 		//    QImageReader::setAllocationLimit(4096);
 

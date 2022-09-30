@@ -281,7 +281,7 @@ void ProcessManagerPCounter::Execute()
 
     Data::data.m_currentPath = m_outputDir;
 
-
+    StartTimer();
 #pragma omp parallel for num_threads(m_numProcessors)
     for (int i=0;i<m_processes.length();i++) {
         auto pi = m_processItems[i];
@@ -376,7 +376,7 @@ void ProcessManagerPCounter::Execute()
 
         m_processes[i]->ReleasePCounter();
     }
-
+    EndTimer("Quantifying");
     /*
 
 
@@ -394,7 +394,9 @@ void ProcessManagerPCounter::Execute()
 
 
     if (!Data::data.abort) {
+
         BuildReports();
+        qDebug() << "Generating python plots";
         GeneratePythonPlots();
     }
     //    QVector<ProcessItem*> m_processItems;
@@ -411,7 +413,7 @@ void ProcessManagerPCounter::Execute()
     m_processItems.clear();
     m_processes.clear();
 
-
+    qDebug() << "Done";
 }
 
 
@@ -660,6 +662,7 @@ void ProcessManagerPCounter::BuildReports()
     if (m_dataType != QUINT) {
         RefAtlasname = "Regions.xlsx";
     }
+    StartTimer();
     if (m_reportType!=REPORTTYPE_NONE) {
 
         reports.CreateCustomRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+"CustomRegions.xlsx", m_processes, m_processItems, &m_labels,m_outputFileType);
@@ -673,7 +676,8 @@ void ProcessManagerPCounter::BuildReports()
         reports.CreateRefAtlasRegionsSlices(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType,m_displayLabelID);
         reports.CreateRefAtlasRegions(m_outputDir + QDir::separator() + m_reportDirectory + QDir::separator()+m_prefix+RefAtlasname, &m_labels,m_processes, m_processItems, m_units, m_outputFileType);
     }
-
+    EndTimer("Reports");
+    StartTimer();
     if (m_output3DPoints=="all") {
         reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread,m_labelType);
         reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread);
@@ -684,12 +688,17 @@ void ProcessManagerPCounter::BuildReports()
     if (m_output3DPoints=="slices") {
         reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread);
     }
-
+    EndTimer("3D coordinates");
     //  m_infoText = "Creating 3D point cloud";
     Data::data.m_globalMessage = "Creating NIFTI";
 
-    if (m_outputNifti)
+    if (m_outputNifti) {
+        qDebug() << "Creating nifti";
+        StartTimer();
         reports.CreateNifti(m_outputDir + "test.nii", m_processes, m_processItems, m_niftiSize);
+        EndTimer("NIFTI file");
+    }
+    qDebug() << "Reports done";
 
 }
 
@@ -747,7 +756,7 @@ void ProcessManagerPCounter::GeneratePythonPlots()
         LMessage::lMessage.Message("Python path not set, so plots will not be generated. Please set the correct path to your python executable, and make sure you have installed the python packages 'matplotlib', 'numpy' and 'pandas'.");
         return;
     }
-
+    StartTimer();
     Data::data.m_globalMessage = "Generating python plots";
 //    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
 //    CallPythonPlot("plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
@@ -761,6 +770,7 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     Util::CopyFileHard("//..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
     Util::CopyFileHard("//..//plot/plot_custom_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_custom_regions.py");
     Util::CopyFileHard("//..//plot/plot_lib.py",m_outputDir+"/"+m_scriptDirectory+"/plot_lib.py");
+    EndTimer("Python plots");
 
 }
 

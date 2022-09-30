@@ -5,6 +5,17 @@ ProcessManager::ProcessManager()
 
 }
 
+void ProcessManager::StartTimer()
+{
+    m_timer.restart();
+}
+
+void ProcessManager::EndTimer(QString text)
+{
+    QString t = Util::MilisecondToString(m_timer.elapsed());
+    LMessage::lMessage.Message(text + " process time: <font color=\"#7FFF7F\">"+t+"</font>");
+}
+
 
 void ProcessManager::ClearProcesses()
 {
