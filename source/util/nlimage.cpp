@@ -569,11 +569,11 @@ void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString 
         {
             AtlasLabel* al = labels.get(index, refImage.m_newFormat);
 
-/*            if (rand()%100>98) {
+            if (rand()%100>98) {
                 qDebug() << "INDEX from FLAT FILE : " << QString::number(index);
                 qDebug() << "INDEX from ATLAS LABEL : " << QString::number(al->index) << " WITH NAME " << al->name;
             }
-*/
+
             if (al!=nullptr) {
                 a.atlasLabel = al;
 
