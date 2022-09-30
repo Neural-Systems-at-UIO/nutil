@@ -753,7 +753,6 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     if (Data::data.isValidator)
         return;
 
-//    qDebug() << "00";
     QString python = "/usr/bin/python3";
     if (Data::data.m_settings!=nullptr)
        python = Data::data.m_settings->getString("python_path");
@@ -761,25 +760,20 @@ void ProcessManagerPCounter::GeneratePythonPlots()
         LMessage::lMessage.Message("Python path not set, so plots will not be generated. Please set the correct path to your python executable, and make sure you have installed the python packages 'matplotlib', 'numpy' and 'pandas'.");
         return;
     }
-    qDebug() << "1" << python;
     StartTimer();
     Data::data.m_globalMessage = "Generating python plots";
 //    CallPythonPlot("/../plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
 //    CallPythonPlot("plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 //    qDebug() <<QDir::currentPath();
-    qDebug() << "A";
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","0","ref_plot_bars");
     CallPythonPlot("//..//plot/plot_reference_atlas_regions.py","1","ref_plot_pie");
 
-    qDebug() << "B";
     CallPythonPlot("//..//plot/plot_custom_regions.py","0","custom_regions_bars");
     CallPythonPlot("//..//plot/plot_custom_regions.py","1","custom_regions_pie");
 
-    qDebug() << "C";
     Util::CopyFileHard("//..//plot/plot_reference_atlas_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_reference_atlas_regions.py");
     Util::CopyFileHard("//..//plot/plot_custom_regions.py",m_outputDir+"/"+m_scriptDirectory+"/plot_custom_regions.py");
     Util::CopyFileHard("//..//plot/plot_lib.py",m_outputDir+"/"+m_scriptDirectory+"/plot_lib.py");
-    qDebug() << "D";
     EndTimer("Python plots");
 
 }

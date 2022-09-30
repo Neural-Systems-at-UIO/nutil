@@ -564,15 +564,23 @@ void NLImage::AnchorSingle(QString filenameStripped, QString atlasFile, QString 
         a.m_height = m_image->height();
 
         long index = refImage.pixel(p.x()*refImage.width(),p.y()*refImage.height() );
-
+/*        if ((p.x()>0.25 && p.x()<0.30 && p.y()>0.5 && p.y()<0.6))
+            qDebug() << "EXCEPTIONAL "<<index;*/
+        // 2685
+//        if (index<20)
+  //          qDebug()
         //if (index!=0)
         {
             AtlasLabel* al = labels.get(index, refImage.m_newFormat);
 
-            if (rand()%100>98) {
+/*            if (rand()%100>98) {
                 qDebug() << "INDEX from FLAT FILE : " << QString::number(index);
                 qDebug() << "INDEX from ATLAS LABEL : " << QString::number(al->index) << " WITH NAME " << al->name;
             }
+*/
+//            if (al->name.contains("oputamen"))
+//                if (index==997)
+  //              qDebug() << "FOUND CAUDA " <<al->index <<al->name;
 
             if (al!=nullptr) {
                 a.atlasLabel = al;
