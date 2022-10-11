@@ -35,6 +35,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    QuantifierReports
    QuantifierOutput
    warnings
+   FAQ
    
 
 
