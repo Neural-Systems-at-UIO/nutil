@@ -10,7 +10,7 @@ QT += widgets
 QT += core gui
 QT += network
 ARCH = $$QMAKE_HOST.arch
-ARCH = arm64
+#ARCH = arm64
 TEMPLATE      = app
 QTPLUGIN += qtiff
 
@@ -37,42 +37,43 @@ win32-msvc*{
 
 
 macx {
+    LIBS += -lomp
 
     contains(ARCH, x86_64) |contains(ARCH, amd64): {
 
-    QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
-    QMAKE_CXXFLAGS += -Ofast
-    INCLUDEPATH += /usr/local/include/
-    LIBS += -L/usr/local/lib/
-    LIBS += -ltiff
+        QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
+        QMAKE_CXXFLAGS += -Ofast
+        INCLUDEPATH += /usr/local/include/
+        LIBS += -L/usr/local/lib/
+        LIBS += -ltiff
 
-    LIBS += -L$$PWD/lib/    -lxlnt #LIBS += -L/usr/local/opt/libomp/lib -lomp
+        LIBS += -L$$PWD/lib/    -lxlnt #LIBS += -L/usr/local/opt/libomp/lib -lomp
 
-    LIBS += -L/usr/local/lib /usr/local/lib/libomp.dylib -lomp
+        LIBS += -L/usr/local/lib /usr/local/lib/libomp.dylib -lomp
     }
+
+#    QMAKE_CXXFLAGS += -Ofast
 
     contains(ARCH, arm64): {
-    QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
-    QMAKE_CXXFLAGS += -Ofast
-    INCLUDEPATH += /usr/local/include/
-    INCLUDEPATH += /opt/homebrew/include/
-    LIBS += -L/usr/local/lib/
-    LIBS += -L/opt/local/lib
-
-    LIBS += -ltiff
-#    LIBS += /opt/homebrew/lib/libtiff.a
-
-#    LIBS += -L$$PWD/lib/    -lxlnt
-    LIBS += -L$$PWD/lib/   $$PWD/lib/libxlnt-arm.dylib
-    #LIBS += -L/usr/local/opt/libomp/lib -lomp
-
-    LIBS += -L/opt/homebrew/lib /opt/homebrew/lib/libomp.dylib -lomp
-
-    QMAKE_APPLE_DEVICE_ARCHS=arm64
-    CONFIG += arm64
-
+        message("Arme meg!")
+        CONFIG += arm64
+        # OMP
+#        QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp
+        # TIFF
+        INCLUDEPATH += /usr/local/include/
+        LIBS += -L/usr/local/lib/
+        LIBS += -ltiff
+        # XLNT
+        LIBS += -L$$PWD/lib/   $$PWD/lib/libxlnt-arm.dylib
+        QMAKE_CXXFLAGS+= -I/opt/homebrew/opt/libomp/include
+        LIBS+= -L/opt/homebrew/opt/libomp/lib
 
     }
+    contains(ARCH, x86_64) |contains(ARCH, amd64):  {
+        QMAKE_CXXFLAGS+= -I/usr/local/opt/libomp/include
+
+   }
+
 }
 
 

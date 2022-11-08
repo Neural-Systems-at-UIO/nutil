@@ -30,7 +30,7 @@ void NeuroGlancer::Open(QString directory)
     m_size = QPoint(size[0].toInt(),size[1].toInt());
     LMessage::lMessage.Message("Chunk sizes (" + QString::number(m_chunkSize.x()) + ", "+QString::number(m_chunkSize.y())+")");
     LMessage::lMessage.Message("Image size (" + QString::number(m_size.x()) + "," +QString::number(m_chunkSize.y())+")");
-    m_chunkDir = directory + "/data/";
+    m_chunkDir = directory + scales["key"].toString()+"/";
 
 
 }
@@ -39,12 +39,14 @@ void NeuroGlancer::LoadAllChunks()
 {
     m_img = QImage(m_size.x(), m_size.y(), QImage::Format_ARGB32);
     m_img.fill(0);
+//    qDebug() << "chunk dir: "<<m_chunkDir;
     QDir directory(m_chunkDir);
 
     QStringList files = directory.entryList(QDir::Files);
     for (QString filename: files) {
         QStringList dims = filename.split("_");
         auto data = Util::loadBinaryFile(m_chunkDir+filename);
+  //      qDebug() << filename;
         int startx = dims[0].split("-")[0].toInt();
         int endx = dims[0].split("-")[1].toInt();
         int starty = dims[1].split("-")[0].toInt();
@@ -52,7 +54,7 @@ void NeuroGlancer::LoadAllChunks()
         int sx = endx-startx;
         int sy = endy-starty;
         int diff = sx*sy;
-        qDebug() << sx << sy << sx*sy*3 <<data.size();
+    //    qDebug() << sx << sy << sx*sy*3 <<data.size();
         int pos = 0;
         for (int j=0;j<sy;j++) {
             for (int i=0;i<sx;i++) {
@@ -63,7 +65,6 @@ void NeuroGlancer::LoadAllChunks()
         }
 
     }
-
 
 }
 

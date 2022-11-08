@@ -400,6 +400,7 @@ void MainWindow::on_btnSaveAs_clicked()
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File As"),
                                    m_nt.m_openFile,
                                    tr("Nutil (*.nut)"));
+
     if (fileName!="") {
         m_nt.Save(fileName);
         UpdateRecentList();

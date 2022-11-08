@@ -684,7 +684,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
             double val = ((rand()%1000)/1000.0-0.5) * spread;
 
 
-//#pragma omp parallel for
+            //#pragma omp parallel for
             for (int k=0;k<a->m_points.count();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
                 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
@@ -832,6 +832,8 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
     int tcount = 0;
 
     Counter cntr(m_reports.count()*items.count(),"");
+    #pragma omp parallel for
+
     for (int itm=0;itm<items.count();itm++) {
 
 
@@ -871,19 +873,11 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                 if (!ok)
                     continue;
 
-
-                //            qDebug() << "FOUND";
-                /*            if (processes[itm]->m_areas.contains(*a)) {
-                qDebug() << "FOUND " << i;
-            }
-*/
-
-                //            if (cnt!=0) o+=",";
                 QVector3D invCenter = InvProject(a->m_center,a,0, &transform);
 
                 QVector<QVector<QVector3D>> list;
                 list.resize(omp_get_max_threads());
-//#pragma omp parallel for
+                //#pragma omp parallel for
 
                 for (int k=0;k<a->m_points.count();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
                     //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
@@ -896,7 +890,16 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                     QVector3D v = InvProject(a->m_points[k],a,spread, invCenter, &alt, &transform);
 
 
-                    list[omp_get_thread_num()].append(v);
+                    if (cnt2!=0) data+=",\n";
+                    //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
+                    data+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
+                    //                o+=",\n";
+                    //              o+=QString::number(alt.x())+ ","+QString::number(alt.y())+","+QString::number(alt.z());
+
+                    cnt2++;
+
+
+//                    list[omp_get_thread_num()].append(v);
                     /*
                 if (cnt2!=0) data+=",\n";
 //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
@@ -906,46 +909,39 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                 cnt2++;*/
                 }
 
-                for (auto& l:list) {
+/*                for (auto& l:list) {
                     for (auto& v:l) {
                         //                v=v*a->m_mat;
-                        if (cnt2!=0) data+=",\n";
-                        //                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
-                        data+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
-                        //                o+=",\n";
-                        //              o+=QString::number(alt.x())+ ","+QString::number(alt.y())+","+QString::number(alt.z());
-
-                        cnt2++;
                     }
 
                 }
+*/
+
+                //                qDebug() << data;
 
 
-//                qDebug() << data;
 
 
 
+            }
+            o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(cnt2)+",";
+            o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename.trimmed().simplified()+"\",";
+            o+="\"triplets\":[";
+            //        qDebug() << data;
+            o+=data;
 
+            o+="]}";
 
         }
-        o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(cnt2)+",";
-        o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename.trimmed().simplified()+"\",";
-        o+="\"triplets\":[";
-//        qDebug() << data;
-        o+=data;
-
-        o+="]}";
+        o+="\n]\n";
+        QFile file (filename+items[itm]->m_id+".json");
+        file.open(QFile::Text | QFile::WriteOnly);
+        QTextStream outstream(&file);
+        outstream << o;
+        file.close();
 
     }
-    o+="\n]\n";
-    QFile file (filename+items[itm]->m_id+".json");
-    file.open(QFile::Text | QFile::WriteOnly);
-    QTextStream outstream(&file);
-    outstream << o;
-    file.close();
-
-}
-LMessage::lMessage.Message("****** Count of pixels " + QString::number(tcount));
+    LMessage::lMessage.Message("****** Count of pixels " + QString::number(tcount));
 }
 
 

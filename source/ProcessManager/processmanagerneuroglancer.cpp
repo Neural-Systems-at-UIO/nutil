@@ -25,23 +25,20 @@ void ProcessManagerNeuroglancer::Execute()
 
     m_mainCounter = Counter(m_processes.length(),"",false);
 
+#pragma omp parallel for
     for (int i=0;i<m_processes.length();i++) {
         QSharedPointer<ProcessItem> pi = m_processItems[i];
         NeuroGlancer ng(pi->m_inFile);
         ng.LoadAllChunks();
-        qDebug() << pi->m_outFile;
+//        qDebug() << pi->m_outFile;
         ng.m_img.save(pi->m_outFile);
+        LMessage::lMessage.Message("Created png image: "+pi->m_outFile);
 
 
     }
 
 
 
-    #pragma omp parallel for
-
-    for (int i=0;i<m_processes.length();i++) {
-
-    }
     m_processFinished = true;
 
 }
