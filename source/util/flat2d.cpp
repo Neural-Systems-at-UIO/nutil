@@ -37,10 +37,11 @@ bool Flat2D::Load(QString filename)
 {
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly)) {
-        LMessage::lMessage.Error("Could not open flat file: "  + filename);
+        LMessage::lMessage.Error("Could not open segmentation file: "  + filename);
         return false;
     }
-
+    if (filename.endsWith(".seg"))
+        return LoadFromSeg(file);
 
     file.read((char*)&m_width,4);
     file.read((char*)&m_height,4);
@@ -81,6 +82,57 @@ bool Flat2D::Load(QString filename)
     return true;
 }
 
+unsigned char readbyte(QFile& file) {
+    unsigned char c = 0;
+    file.read((char*)&c, 1);
+    return c;
+}
+
+unsigned int readcode(QFile& file) {
+    unsigned char c = readbyte(file);
+    return c & 128 ? (c & 127) | (readcode(file) << 7) : c;
+}
+
+bool Flat2D::LoadFromSeg(QFile& file) {
+    if (QString(file.read(8)) != "SegRLEv1") {
+        LMessage::lMessage.Error("Unsupported segmentation file: "  + file.fileName());
+        return false;
+    }
+    int namelen = readcode(file);
+    m_atlas = file.read(namelen);
+    unsigned int codecount = readcode(file);
+    bool bytemode = codecount <= 256;
+    QScopedArrayPointer<unsigned int> codes(new unsigned int[codecount]);
+    for (unsigned int i = 0; i < codecount; i++)
+        codes[i] = readcode(file);
+    m_width = readcode(file);
+    m_height = readcode(file);
+    unsigned int wh = m_width * m_height;
+    m_data_i = new unsigned int[wh];
+    m_bpp = 4;
+    unsigned int pos = 0;
+    while(pos<wh) {
+        unsigned int label = bytemode ? readbyte(file) : readcode(file);
+        if (label >= codecount) {
+            LMessage::lMessage.Error("Error decoding segmentation file: "  + file.fileName());
+            return false;
+        }
+        label = codes[label];
+        unsigned int count = readcode(file) + 1;
+        if (pos + count > wh) {
+            LMessage::lMessage.Error("Error decoding segmentation file: "  + file.fileName());
+            return false;
+        }
+        for (unsigned int i = pos; i < pos + count; i++)
+            m_data_i[i] = label;
+        pos += count;
+    }
+    if (!file.atEnd()) {
+        LMessage::lMessage.Error("Surplus data found in segmentation file: "  + file.fileName());
+        return false;
+    }
+    return true;
+}
 
 Flat2D::Flat2D()
 {
