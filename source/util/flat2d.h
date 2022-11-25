@@ -36,6 +36,7 @@ public:
     unsigned short *m_data_s = nullptr;
 //    unsigned char *m_data_b = nullptr;
     QByteArray m_data_b;
+    QString m_atlas; // Present in .seg only
 
     unsigned int m_width, m_height;
     unsigned char m_bpp;
@@ -43,6 +44,7 @@ public:
     bool m_newFormat = false;
 
     bool Load(QString filename);
+    bool LoadFromSeg(QFile& file);
 
 //    void CreateFake(QString filename, int w, int h,short val);
 
