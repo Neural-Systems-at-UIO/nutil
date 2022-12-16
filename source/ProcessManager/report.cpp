@@ -584,7 +584,7 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
 
 // Create coordinate files in json format
 
-void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread)
+/*void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread)
 {
 
     QString o;
@@ -604,13 +604,19 @@ void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilPro
 
             QVector3D invCenter = InvProject(a->m_center,a,0,&transform);
 
-            for (int k=0;k<a->m_points.count();k+=(a->m_points.count()/xyzSize)+1) {
-                /*                QPointF& p =a->m_points[k];
-                //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
-                QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
-                v=v*a->m_mat;*/
+
+            QVector<QPointF> points = a->m_points;
+            int xyz = (a->m_points.count()/xyzSize)+1;
+            if (singlePoint) {
+                points.clear();
+                points.append(a->m_center);
+                xyzSize = 1;
+                xyz = 1;
+            }
+
+
                 QVector3D alt;
-                QVector3D v = InvProject(a->m_points[k],a,spread, invCenter,&alt, &transform);
+                QVector3D v = InvProject(points[k],a,spread, invCenter,&alt, &transform);
                 o +=QString::number(v.x()) + ",";
                 o +=QString::number(v.y()) + ",";
                 o +=QString::number(v.z()) + "\n";
@@ -629,9 +635,9 @@ void Reports::Create3DSummary(QString filename , QVector<QSharedPointer<NutilPro
     outstream << o;
     file.close();
 }
+*/
 
-
-void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread, QString atlasType)
+void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread, QString atlasType, bool singlePoint)
 {
 
     QString o;
@@ -684,12 +690,20 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
             double val = ((rand()%1000)/1000.0-0.5) * spread;
 
 
+            QVector<QPointF> points = a->m_points;
+            if (singlePoint) {
+                points.clear();
+                points.append(a->m_center);
+                xyzSize = 1;
+            }
+
+
             //#pragma omp parallel for
-            for (int k=0;k<a->m_points.count();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
+            for (int k=0;k<points.count();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
                 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
                 QVector3D alt;
-                QVector3D v = InvProject(a->m_points[(int)k],a,spread,invCenter, &alt, &transform);
+                QVector3D v = InvProject(points[(int)k],a,spread,invCenter, &alt, &transform);
                 /*               QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);*/
@@ -819,7 +833,7 @@ QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D in
 
 // Create coordinate_slice json files
 
-void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread)
+void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilProcess>> processes, QVector<QSharedPointer<ProcessItem>> items, float xyzSize, double spread, bool singlePoint)
 {
 
 
@@ -879,7 +893,16 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                 list.resize(omp_get_max_threads());
                 //#pragma omp parallel for
 
-                for (int k=0;k<a->m_points.count();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
+                QVector<QPointF> points = a->m_points;
+                if (singlePoint) {
+                    points.clear();
+                    points.append(a->m_center);
+                    xyzSize = 1;
+                }
+
+
+
+                for (int k=0;k<points.size();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
                     //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                     tcount++;
                     /*                QPointF& p =a->m_points[k];
@@ -887,7 +910,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;*/
                     QVector3D alt;
-                    QVector3D v = InvProject(a->m_points[k],a,spread, invCenter, &alt, &transform);
+                    QVector3D v = InvProject(points[k],a,spread, invCenter, &alt, &transform);
 
 
                     if (cnt2!=0) data+=",\n";

@@ -103,11 +103,25 @@ void Nauto::Execute()
 
     if (m_pm->Build(m_data)) {
 
+
+#ifdef __APPLE__
+
+
+        LMessage::lMessage.Log("Executing...");
+        m_pm->Execute();
+
+
+#else
+
         // Verify memory limits
         float memRequired = m_pm->CalculateRamNeededInGB();
         float totalMemory = Util::getAmountOfInstalledMemory();
         float freeMemory = Util::getFreeRam();
+//        if (freeMemory<0.01) freeMemory
         float total = memRequired/freeMemory;
+
+
+
         LMessage::lMessage.Message("Required memory: " + QString::number(memRequired)+" GB. Free memory : "+QString::number(freeMemory)+ " GB from a total of "+QString::number(totalMemory) +" GB installed ("+(QString::number((int)(total*100))) +" %) usage");
         if (total>0.9 && total<=1.0)
             LMessage::lMessage.Message("Warning! You are close to exceeding maximum memory usage. Consider lowering the number of threads.");
@@ -117,6 +131,9 @@ void Nauto::Execute()
             LMessage::lMessage.Log("Executing...");
             m_pm->Execute();
         }
+
+
+#endif
     }
     else
         m_status = Status::Idle;

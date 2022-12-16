@@ -160,11 +160,16 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
             if (m_dataType==QUINT) {
 
                 QString inFlatFull = Util::findFileInDirectory(name,m_atlasDir,"flat","");
-                if (inFlatFull=="") {
-                    LMessage::lMessage.Error("Error: Could not find FLAT files that contains: " + name + ".");
+                QString inSegFull = Util::findFileInDirectory(name,m_atlasDir,"seg","");
+                if (inFlatFull == "" && inSegFull == "") {
+                    LMessage::lMessage.Error("Error: Could not find FLAT/SEG files that contains: " + name + ".");
                     m_processItems.clear();
                     return false;
                 }
+//                qDebug() << inSegFull;
+                // Prioritise seg files
+                if (inSegFull!="")
+                    inFlatFull = inSegFull;
             }
             //            if (m_dataType=="none") {
             //              inFlatFull =  Util::RemoveFinalFiletype(inFileFull)+".flatfake";
@@ -289,6 +294,8 @@ void ProcessManagerPCounter::Execute()
         if (Data::data.abort)
             continue;
 
+//        qDebug() << omp_get_thread_num() << omp_get_thread_num();
+
         //        qDebug() << "Pcounter: " << pi->m_inFile;
 
         QMatrix4x4 mat(m_processItems[i]->m_xmlData.toMatrix());
@@ -341,6 +348,9 @@ void ProcessManagerPCounter::Execute()
             m_processes[i]->m_infoText = "Anchoring areas";
             // Find atlas file:
             QString atlasFile = Util::findFileInDirectory(pi->m_id,m_atlasDir,"flat","");
+            QString atlasFileSeg = Util::findFileInDirectory(pi->m_id,m_atlasDir,"seg","");
+            if (atlasFileSeg!="")
+                atlasFile = atlasFileSeg;
 
             if (atlasFile=="" && m_dataType == QUINT) {
                 LMessage::lMessage.Error("Could not find any atlas flat files!");
@@ -509,7 +519,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
     m_files = data->Get("files").trimmed().simplified().split(",");
-
+    m_coordinates_single_point = data->Get("coordinate_single_point").toLower()=="yes"?1:0;
     m_pixelCutoff = data->Get("object_min_size").toFloat();
     //    m_pixelCutoffMax = data->Get("object_max_size").toFloat();
     m_pixelCutoffMax = 100000; // NOT USED!
@@ -681,14 +691,14 @@ void ProcessManagerPCounter::BuildReports()
     EndTimer("Reports");
     StartTimer();
     if (m_output3DPoints=="all") {
-        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread,m_labelType);
-        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread);
+        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread,m_labelType, m_coordinates_single_point);
+        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread, m_coordinates_single_point);
     }
     if (m_output3DPoints=="summary") {
-        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread, m_labelType);
+        reports.Create3DSummaryJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_combined.json", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread, m_labelType, m_coordinates_single_point);
     }
     if (m_output3DPoints=="slices") {
-        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread);
+        reports.Create3DSliceJson(m_outputDir + QDir::separator() + m_coordinateDirectory + QDir::separator()+m_prefix+"3D_slice_", m_processes, m_processItems, m_xyzScale,m_coordinateRandomSpread, m_coordinates_single_point);
     }
     EndTimer("3D coordinates");
     //  m_infoText = "Creating 3D point cloud";

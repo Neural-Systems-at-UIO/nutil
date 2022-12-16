@@ -67,6 +67,7 @@ macx {
         LIBS += -L$$PWD/lib/   $$PWD/lib/libxlnt-arm.dylib
         QMAKE_CXXFLAGS+= -I/opt/homebrew/opt/libomp/include
         LIBS+= -L/opt/homebrew/opt/libomp/lib
+        LIBS += -lomp
 
     }
     contains(ARCH, x86_64) |contains(ARCH, amd64):  {
@@ -142,6 +143,7 @@ SOURCES += main.cpp \
     source/ProcessManager/processmanagertiffcreator.cpp \
     source/LBook/lbookcsv.cpp \
     source/LBook/lbookfactory.cpp \
+    source/util/slasher.cpp \
     source/util/spline.cpp \
     source/util/updater.cpp \
     source/util/util.cpp \
@@ -205,6 +207,7 @@ HEADERS += \
     source/ProcessManager/processmanagertiffcreator.h \
     source/LBook/lbookcsv.h \
     source/LBook/lbookfactory.h \
+    source/util/slasher.h \
     source/util/spline.h \
     source/util/updater.h \
     source/util/util.h \

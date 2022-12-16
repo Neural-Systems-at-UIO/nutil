@@ -69,6 +69,7 @@ public:
     int m_pixelCutoff;
     int m_pixelCutoffMax;
     float m_areaScale = 1;
+    bool m_coordinates_single_point = false;
 
     float m_niftiSize;
     float m_xyzScale = 1.0;
