@@ -4,8 +4,7 @@
 Quantifier generates several reports, including CustomRegion reports. These contain quantifications for broader regions. The broad regions are compilations of reference atlas regions and may either be user-defined ("Custom") or the default regions included in the Nutil software ("Default"). 
 
 .. tip::
-   The QCAlign software has a viewer for exploring the reference atlas hierarchy and can be used to create a custom region file (hierarchy sheet in TXT format) that is compatible with Nutil: see `here <https://qcalign.readthedocs.io/en/latest/hierarchy.html#creating-a-customized-hierarchy>`_.
-
+   The `QCAlign software <https://quint-workflow.readthedocs.io/en/latest/QCAlign.html>`_ has a viewer for exploring the reference atlas hierarchy, and can be used to create a custom region file (hierarchy sheet in TXT format) that is compatible with Nutil.
 
 **CustomRegion reports**
 -----------------------

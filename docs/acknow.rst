@@ -1,7 +1,7 @@
 **Conditions of use**
 ----------------------------------
 
-Nutil is an integral part of the QUINT workflow, and is developed by the Neural Systems Laboratory at the Institute of Basic Medical Sciences, University of Oslo, Norway. 
+Nutil is an integral part of the `QUINT workflow <https://quint-workflow.readthedocs.io/en/latest/index.html>`_, and is developed by the Neural Systems Laboratory at the Institute of Basic Medical Sciences, University of Oslo, Norway. 
 
 **Authors**: Nicolaas E Groeneboom, Sharon C. Yates, Maja A. Puchades, Jan G. Bjaalie. 
 
