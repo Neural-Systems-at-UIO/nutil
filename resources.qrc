@@ -81,5 +81,6 @@
         <file>Resources/CustomRegions/CustomRegionRat_v3_v2.xlsx</file>
         <file>Resources/CustomRegions/CustomRegionRat_v4.xlsx</file>
         <file>Resources/text/neuroglancer.txt</file>
+        <file>Resources/text/volumiser.txt</file>
     </qresource>
 </RCC>

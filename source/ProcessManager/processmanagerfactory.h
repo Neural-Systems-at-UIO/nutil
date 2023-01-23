@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "source/ProcessManager/processmanagertiffcreator.h"
 #include "source/ProcessManager/processmanagerresize.h"
 #include "source/ProcessManager/processmanagerneuroglancer.h"
+#include "source/ProcessManager/processmanagervolumiser.h"
 
 class ProcessManagerFactory {
 public:
@@ -46,6 +47,8 @@ public:
             return new ProcessManagerResize();
         if (pm_type.toLower() == "neuroglancer")
             return new ProcessManagerNeuroglancer();
+        if (pm_type.toLower() == "volumiser")
+            return new ProcessManagerVolumiser();
 
         return nullptr;
     }

@@ -19,6 +19,7 @@ NutilTemplate::NutilTemplate()
 void NutilTemplate::LoadTemplate(QString fileName)
 {
     QFile file(fileName);
+    qDebug() << "Loading "<<fileName;
     if (!QFile::exists(fileName)) {
         qDebug() << "Could not load template: "<<fileName;
         return;
@@ -227,7 +228,13 @@ void NutilTemplate::Populate(Ui::MainWindow* ui, bool sendSignal)
 
         bool breakHere = false;
 
+
+
         for (int i=0;i<nti->m_depID.count();i++) {
+            if (!m_items.contains(nti->m_depID[i])) {
+                qDebug() << "LEUAT ERROR: missing dependency in template file for value " + nti->m_depID[i];
+                exit(1);
+            }
             if (m_items[nti->m_depID[i]]->m_value != nti->m_depVal[i])
                 breakHere = true;
         }

@@ -27,7 +27,7 @@ ICON = nutil.png
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to cewxQQQ3                                                                                                                                                 know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS USE_LIBTIFF
+DEFINES += QT_DEPRECATED_WARNINGS USE_LIBTIFF #NO_OMP
 
 win32-msvc*{
     QMAKE_CXXFLAGS += -openmp -Zc:twoPhase-
@@ -39,10 +39,11 @@ win32-msvc*{
 macx {
     LIBS += -lomp
 
+QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
+QMAKE_CXXFLAGS += -Ofast
+
     contains(ARCH, x86_64) |contains(ARCH, amd64): {
 
-        QMAKE_CXXFLAGS += -Xpreprocessor -fopenmp -I/usr/local/include
-        QMAKE_CXXFLAGS += -Ofast
         INCLUDEPATH += /usr/local/include/
         LIBS += -L/usr/local/lib/
         LIBS += -ltiff
@@ -65,9 +66,16 @@ macx {
         LIBS += -ltiff
         # XLNT
         LIBS += -L$$PWD/lib/   $$PWD/lib/libxlnt-arm.dylib
+
+
+        # OMP
         QMAKE_CXXFLAGS+= -I/opt/homebrew/opt/libomp/include
         LIBS+= -L/opt/homebrew/opt/libomp/lib
-        LIBS += -lomp
+        # libomp 13
+        #QMAKE_CXXFLAGS+= -I/opt/homebrew/opt/libomp/include
+        #LIBS+= -L/opt/homebrew/opt/libomp/lib
+        #LIBS += -lomp
+
 
     }
     contains(ARCH, x86_64) |contains(ARCH, amd64):  {
@@ -95,6 +103,7 @@ SOURCES += main.cpp \
     source/ProcessManager/processmanagerneuroglancer.cpp \
     source/ProcessManager/processmanagerng.cpp \
     source/ProcessManager/processmanagerresize.cpp \
+    source/ProcessManager/processmanagervolumiser.cpp \
     source/Validator/nutilvalidator.cpp \
     source/data.cpp \
     source/dialoggeneratedata.cpp \
@@ -156,6 +165,7 @@ HEADERS += \
     source/ProcessManager/processmanagerneuroglancer.h \
     source/ProcessManager/processmanagerng.h \
     source/ProcessManager/processmanagerresize.h \
+    source/ProcessManager/processmanagervolumiser.h \
     source/Validator/nutilvalidator.h \
     source/data.h \
     source/dialoggeneratedata.h \

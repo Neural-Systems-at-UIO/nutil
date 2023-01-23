@@ -1,11 +1,14 @@
 
 rm -rf nutil
 mkdir nutil
-cp -r ../../Release/Nutil.app nutil/
+cp -r ../../../NutilRelease/Nutil.app nutil/
 cd nutil/Nutil.app
-~/Qt/5.15.0/clang_64/bin/macdeployqt .
+~/Qt/6.4.2/macos/bin/macdeployqt .
+rm Contents/Frameworks/libtiff.5.dylib
+#cp /opt/homebrew/opt/libomp/lib/libomp.dylib nutil/Nutil.app/Contents/Frameworks
+rm Contents/Frameworks/libomp.dylib
 cd ../../
 rm nutil.tar.gz
 cp  -R ../source/* nutil
-tar -cf nutil.tar nutil
-gzip nutil.tar
+hdiutil create -volname Nutil -srcfolder nutil/ -ov -format UDZO nutil_0.8.1.dmg
+

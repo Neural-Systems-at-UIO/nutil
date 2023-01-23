@@ -10,7 +10,7 @@
 
 
 
-float MainWindow::Version = 0.408;
+float MainWindow::Version = 0.801;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,6 +31,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lblMain->setText("NeSys Utilities BETA " + QString::number(Version) +"\nFor internal use only.");
 #else
     QString v = "Development version";
+
+#ifdef __APPLE__
+    v = "m1 ARM experimental version "+QString::number(Version);
+#endif
+
     if (QFile::exists("version.txt"))
         v = Util::loadTextFile("version.txt");
     else {
@@ -39,6 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lblMain->setText("NeSys Utilities " + v);
     Data::data.version = v;
 #endif
+
+
 
 //    ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
  //   QPixmap pixmap = QPixmap ("://my_image.png");

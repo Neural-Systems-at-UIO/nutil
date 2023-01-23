@@ -9,12 +9,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "source/util/util.h"
-#ifndef TARGET_OS_MAC
 #include <omp.h>
-#else
-#include <omp.h>
-//#include "/usr/local/opt/libomp/include/omp.h"
-#endif
 #include "source/util/counter.h"
 #include "source/nauto.h"
 //#include <tiffio.h>

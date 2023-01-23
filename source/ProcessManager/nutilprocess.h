@@ -24,12 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QString>
 #include <QDebug>
-#ifndef TARGET_OS_MAC
 #include <omp.h>
-#else
-//#include "/usr/local/opt/libomp/include/omp.h"
-#include <omp.h>
-#endif
 #include "source/util/counter.h"
 #include "source/ltiff/ltiff.h"
 #include "source/util/util.h"
@@ -57,6 +52,9 @@ public:
     bool GenerateThumbnail(QString inFile, QString outFile, float thumbnailSize);
     bool AutoAdjustImageLevels(QString inFile, QString outFile);
 
+
+
+    bool Generate3DDataFromImage(QString inFile, QString outData);
 
     void ClearAreaPixels();
     void ReleasePCounter();

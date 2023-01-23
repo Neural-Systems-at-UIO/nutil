@@ -156,8 +156,11 @@ int main(int argc, char *argv[])
 //  Q_IMPORT_PLUGIN( QTiffPlugin );
 //    qputenv("QT_DEBUG_PLUGINS", QByteArray("1"));
   //          TestBigTiff();
-
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
     QImageReader::setAllocationLimit(4096);
+#endif
+
+
 
     if (argc == 1)  {
         QApplication a(argc, argv);

@@ -65,6 +65,11 @@
      <string>Neuroglancer</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>Volumiser</string>
+    </property>
+   </item>
   </widget>
   <widget class="QPushButton" name="btnOK">
    <property name="geometry">
