@@ -20,7 +20,7 @@ It is also possible to change the default separator on your computer by changing
 
 * It is not usually necessary to enter a Pixel Scale in Nutil. This is because the regional loads are ratios (no. of pixels corresponding to your objects divided by no. of pixels representing the region), which means that they are not affected by the pixel scale. If the goal is to measure regional loads (%) or no. of objects per region, then leave the Pixel Scale blank. 
 
-* If you need the "real" size of your objects or regions, multiply the pixel counts in the reports by the area represented by each pixel in the segmentated images (pixel scale is an area, your example in um2). As long as all the segmented images have the same pixel scale, the pixel scale can be entered in Nutil and this calculation will be performed automatically. **Note** that it is the pixel scale of the segmentations that counts here, not the pixel scale of the images used for atlas registration! 
+* If you need the "real" size of your objects or regions, multiply the pixel counts in the reports by the area represented by each pixel in the segmentated images (pixel scale is an area, for example in um2). As long as all the segmented images have the same pixel scale, the pixel scale can be entered in Nutil and this calculation will be performed automatically. **Note** that it is the pixel scale of the segmentations that counts here, not the pixel scale of the images used for atlas registration! 
 
 **How do I calculate the Pixel Scale of images that have been downscaled?**
 --------------------------------------------------------------------------
