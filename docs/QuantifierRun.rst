@@ -36,6 +36,9 @@
 |    Unique ID format         |    _sXXX…                             |
 +-----------------------------+---------------------------------------+
 
+.. tip::
+   See the FAQ for more information on the Pixel Scale.
+
 **Python plots**
 -----------------
 
