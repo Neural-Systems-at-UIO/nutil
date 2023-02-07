@@ -105,10 +105,10 @@ void Nifti::Normalize(float array[], int len)
 
 void Nifti::SetRGBPixel(const QVector3D &p, QColor color)
 {
-    if (BytesPerPixel!=3 || header.datatype!=128 ) {
+/*    if (BytesPerPixel!=3 || header.datatype!=128 ) {
         qDebug() << "Nifti: cannot use SetRGBPixel on non-rgb nifti file";
     }
-
+*/
     if (p.x()>=size.x() || p.x()<0) {
 //        qDebug() << "Nifti::SetRGBPixel out of bounds:"  << p;
         return;
@@ -131,12 +131,14 @@ void Nifti::SetRGBPixel(const QVector3D &p, QColor color)
     int j = p.y();
     int k = p.z();
 
-    long idx = (i*size.z() * size.y() + j * size.z() + k);
+    long idx = (k*size.z() * size.y() + i * size.z() + j);
 
-    if (idx<0 || idx>=rawData.size()) {
+    if (idx<0 || idx>=rawData_size) {
         qDebug() << "Nifti::SetRGBPixel out of bounds:" << idx << p;
         return;
     }
+//    qDebug() <<idx << color.red();
+//       rawData [idx] = color.red();
     AddColor(idx, color);
 /*    rawData [3 * idx + 0] = color.red();
     rawData [3 * idx + 1] = color.green();
@@ -155,19 +157,19 @@ void Nifti::Load(QString filename)
     dataType = getDataType ((int)header.datatype);
     BytesPerPixel = header.bitpix / 8;
 
-    /*        if (VerifyFeature ()) {
-                Allocate ();
-                //Debug.Log ("File size should be " + (BytesPerPixel * size.x * size.y * size.z) / 1024 + " mb");
-                fs.Read (rawData, 0, (int)(size.x * size.y * size.z * BytesPerPixel));
-        } else
-                Debug.Log ("ERROR: File type " + dataType + " not yet supported aargh");
 
-        fs.Close ();
-*/
+
+    Allocate();
+    qDebug() << rawData_size << header.dim[1];
+    qDebug() << header.datatype;
+    qDebug() << "BPP " << BytesPerPixel;
+    f.read((char*)rawData,rawData_size);
 }
 
 void Nifti::Save(QString filename)
 {
+    if (QFile::exists(filename))
+        QFile::remove(filename);
     QFile file(filename);
     file.open(QFile::WriteOnly);
 
@@ -181,22 +183,17 @@ void Nifti::Save(QString filename)
     header.qoffset_y=1;
     header.qoffset_z=1;
 
-
-
-
-
-
-
+    qDebug() << "SAVING "<<header.dim[2];
     header.pixdim[0]=3;
-    header.pixdim[1]=0.039;
-    header.pixdim[2]=0.039;
-    header.pixdim[3]=0.039;
+    header.pixdim[1]=1;
+    header.pixdim[2]=1;
+    header.pixdim[3]=1;
 //    header.vox_offset
 
     file.write(reinterpret_cast<char*>(&header),sizeof(NiftiHeader));
     //qDebug() << "Regular : " << header.regular;
     //qDebug() << "Header size: " << sizeof(NiftiHeader);
-    file.write(rawData);
+    file.write((char*)rawData,rawData_size);
   //  qDebug() << " : " << header.regular;
 
 //    qDebug() << "Dim info:" << QString::number(((uchar*)(&header))[39]);
@@ -208,15 +205,15 @@ float Nifti::getValueAtIndex(ulong idx)
 {
     float val = 0;
     if (dataType == DataType::DT_RGB)
-        val = (rawData.at(3 * idx + 0) + rawData.at(3 * idx + 0) + rawData.at(3 * idx + 0)) / 3.0;
+        val = (rawData[3 * idx + 0] + rawData[3 * idx + 0] + rawData[3 * idx + 0]) / 3.0;
 
     if (dataType == DataType::DT_UINT16)
-        val = (ushort)(((rawData.at(2 * idx + 1)) << 8) | (rawData.at(2 * idx + 0)));
+        val = (ushort)(((rawData[2 * idx + 1]) << 8) | (rawData[2 * idx + 0]));
 
     if (dataType == DataType::DT_FLOAT)
     {
         for (ulong l = 0; l < 4; l++)
-            floatArray[l] = rawData.at(4 * idx + l);
+            floatArray[l] = rawData[(4 * idx + l)];
 
         val = *((float*)floatArray);
         //            val = BitConverter.ToSingle(floatArray, 0);
@@ -225,7 +222,7 @@ float Nifti::getValueAtIndex(ulong idx)
 
     if (dataType == DataType::DT_SIGNED_SHORT)
     {
-        val = (short)(((rawData.at(2 * idx + 1)) << 8) | (rawData.at(2 * idx + 0)));
+        val = (short)(((rawData[(2 * idx + 1)]) << 8) | (rawData[(2 * idx + 0)]));
 
     }
     return val;
@@ -247,12 +244,32 @@ QVector3D Nifti::getBounds()
 
 void Nifti::AddColor(long idx, QColor c)
 {
-    int r = std::min(rawData [(int)(3 * idx + 0)]+c.red(), 255);
-    int g = std::min(rawData [(int)(3 * idx + 1)]+c.green(), 255);
-    int b = std::min(rawData [(int)(3 * idx + 2)]+c.blue(), 255);
-    rawData [int(3 * idx + 0)] = r;
-    rawData [int(3 * idx + 1)] = g;
-    rawData [int(3 * idx + 2)] = b;
+       if (BytesPerPixel==3 || header.datatype==128 ) {
+/*           int r = std::min(rawData [(int)(3 * idx + 0)]+c.red(), 255);
+           int g = std::min(rawData [(int)(3 * idx + 1)]+c.green(), 255);
+           int b = std::min(rawData [(int)(3 * idx + 2)]+c.blue(), 255);*/
+           int r = c.red();
+           int g = c.green();
+           int b = c.blue();
+           rawData [int(3 * idx + 0)] = r;
+           rawData [int(3 * idx + 1)] = g;
+           rawData [int(3 * idx + 2)] = b;
+        }
+       if (BytesPerPixel==4) {
+           int r = c.red();
+           int g = c.green();
+           int b = c.blue();
+           rawData [int(4 * idx + 0)] = r;
+           rawData [int(4 * idx + 1)] = g;
+           rawData [int(4 * idx + 2)] = b;
+        }
+       if (BytesPerPixel==1 || header.datatype==2 ) {
+           int r = (c.red()+c.green()+c.blue())/3;
+           rawData [int(idx + 0)] = r;
+//           rawData [int(3 * idx + 1)] = g;
+  //         rawData [int(3 * idx + 2)] = b;
+        }
+
 
 }
 
@@ -264,6 +281,9 @@ void Nifti::Create(QVector3D dim, Nifti::DataType type, int bpp)
     header.dim[2] = dim.y();
     header.dim[3] = dim.z();
     header.dim[4] = 1;
+    header.dim[5] = 1;
+    header.dim[6] = 1;
+    header.dim[7] = 1;
 
     header.pixdim[0]=1;
     header.pixdim[1]=1;
@@ -273,7 +293,9 @@ void Nifti::Create(QVector3D dim, Nifti::DataType type, int bpp)
     header.bitpix = bpp;
 //    qDebug() << "Nifti header type: " <<header.datatype << header.bitpix;
     BytesPerPixel = header.bitpix / 8;
-
+    header.intent_p1=0;
+    header.intent_p2=0;
+    header.intent_p3=0;
 
 
     Allocate();
@@ -284,8 +306,16 @@ void Nifti::Allocate()
     size.setX(header.dim [1]);
     size.setY(header.dim [2]);
     size.setZ(header.dim [3]);
-    long totalSize = (long)(size.x() * size.y() * size.z() * BytesPerPixel);
-    rawData.resize(totalSize);
+    rawData_size = (long)(size.x() * size.y() * size.z() * BytesPerPixel);
+
+
+
+
+    if (rawData!=nullptr)
+        delete[] rawData;
+    rawData = new uchar[rawData_size];
+    for (ulong i=0;i<rawData_size;i++)
+        rawData[i]=0;
 }
 
 Nifti::Nifti(QString filename, QString path)

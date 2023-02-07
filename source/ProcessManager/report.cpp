@@ -752,7 +752,6 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
 {
     Nifti n;
     n.Create(QVector3D(size,size,size),Nifti::DataType::DT_RGB, 24);
-    n.rawData.fill(0);
     LMessage::lMessage.Log("Creating nifti ..");
 
     int k=0;
@@ -903,6 +902,8 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
 
 
                 for (int k=0;k<points.size();k+=(int)xyzSize) { //(a->m_points.count()/xyzSize)+1) {
+//                    if (rand()%1000>998)
+  //                      qDebug() << points[k] << a->m_width;
                     //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                     tcount++;
                     /*                QPointF& p =a->m_points[k];
@@ -921,27 +922,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
 
                     cnt2++;
 
-
-//                    list[omp_get_thread_num()].append(v);
-                    /*
-                if (cnt2!=0) data+=",\n";
-//                o+="\"triplets\":[" +QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z())+"]}";
-                data+=QString::number(v.x())+ ","+QString::number(v.y())+","+QString::number(v.z());
-
-
-                cnt2++;*/
                 }
-
-/*                for (auto& l:list) {
-                    for (auto& v:l) {
-                        //                v=v*a->m_mat;
-                    }
-
-                }
-*/
-
-                //                qDebug() << data;
-
 
 
 

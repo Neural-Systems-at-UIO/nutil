@@ -66,7 +66,12 @@ void XMLAnchor::Load(QString file)
                 if (xml.name()==QString("series")) {
                     //continue;
                     QXmlStreamAttributes attributes = xml.attributes();
-                    m_atlas = attributes.value("target").toString().split(".").first();
+                    m_atlas = attributes.value("target").toString().split(" ").first();
+                    QStringList lst = attributes.value("target-resolution").toString().split(" ");
+                    m_target_resolution.setX( lst[0].toInt());
+                    m_target_resolution.setY( lst[1].toInt());
+                    m_target_resolution.setZ( lst[2].toInt());
+
 //                    qDebug() << "ATlas is : "<<m_atlas<<attributes.value("target").toString();
                 }
                 if(xml.name() == QString("slice")) {

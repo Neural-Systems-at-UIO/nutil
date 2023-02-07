@@ -1,6 +1,8 @@
 type; 0 ;; Type ;  string; Volumiser
 name; 0 ;; Name of project ; string;
 #analysis_type ; 0; ; Analysis type ;list; QUINT; QUINT
+sections; 0 ;  ;Colour sections; number; 16
+palette ; 0; ; Colour palette ;list; default, plasma; default
 quantifier_input_dir; 0 ;; Segmentation folder; directory;
 quantifier_atlas_dir; 0 ;  ; Brain atlas map folder; directory;
 label_file; 0 ;  ;Reference atlas; list; Allen Mouse Brain 2015,Allen Mouse Brain 2017, WHS Atlas Rat v2, WHS Atlas Rat v3,WHS Atlas Rat v4, Custom; Allen Mouse Brain 2015

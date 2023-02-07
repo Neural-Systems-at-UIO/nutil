@@ -44,14 +44,16 @@ public:
      char  regular;       /*!< ++UNUSED++            */  /* char regular;        */
      char  dim_info;      /*!< MRI slice ordering.   */  /* char hkey_un0;       */
 
+        // 40
                                           /*--- was image_dimension substruct ---*/
      short dim[8];        /*!< Data array dimensions.*/  /* short dim[8];        */
+     // 48
      float intent_p1 ;    /*!< 1st intent parameter. */  /* short unused8;       */
                                                          /* short unused9;       */
      float intent_p2 ;    /*!< 2nd intent parameter. */  /* short unused10;      */
                                                          /* short unused11;      */
      float intent_p3 ;    /*!< 3rd intent parameter. */  /* short unused12;      */
-                                                         /* short unused13;      */
+      // 64                                                   /* short unused13;      */
      short intent_code ;  /*!< NIFTI_INTENT_* code.  */  /* short unused14;      */
      short datatype;      /*!< Defines data type!    */  /* short datatype;      */
      short bitpix;        /*!< Number bits/voxel.    */  /* short bitpix;        */
@@ -122,7 +124,8 @@ public:
     int BytesPerPixel = 0;
     //    QMap<int, Label> indexedColors = new Dictionary<int, Label> ();
     NiftiHeader header;
-    QByteArray rawData;
+    uchar* rawData = nullptr;
+    long rawData_size;
     bool hasIndexing = false;
     QVector3D size = QVector3D (1, 1, 1);
     uchar floatArray[4];
@@ -131,6 +134,13 @@ public:
     Nifti (QString filename, QString path);
     Nifti(QVector3D s) {
         size = s;
+    }
+    ~Nifti() {
+        if (rawData!=nullptr)
+                delete[] rawData;
+
+        rawData = nullptr;
+
     }
 
 

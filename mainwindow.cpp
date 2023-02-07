@@ -8,8 +8,6 @@
 
 
 
-
-
 float MainWindow::Version = 0.801;
 
 MainWindow::MainWindow(QWidget *parent) :
