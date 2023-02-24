@@ -5,7 +5,8 @@ echo "Qmake.."
 qmake Nutil.pro 
 echo "Compiling.."
 dir D:\a\nutil\Qt\Tools\QtCreator /s
-dir .
+dir D:\a\nutil\ /s
+REM dir .
 REM jom.exe -f Makefile.Release
 D:\a\nutil\Qt\Tools\QtCreator\bin\jom\jom.exe -f Makefile.Release
 REM D:\a\nutol\Qt\Tools\QtCreator\bin\jom\jom.exe -f Makefile.Release
