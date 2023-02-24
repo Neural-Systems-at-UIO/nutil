@@ -4,8 +4,8 @@ call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliar
 echo "Qmake.."
 qmake Nutil.pro 
 echo "Compiling.."
-dir D:\a\nutil\Qt\Tools\QtCreator /s
-dir D:\a\nutil\ /s
+REM dir D:\a\nutil\Qt\Tools\QtCreator /s
+REM dir D:\a\nutil\ /s
 REM dir .
 REM jom.exe -f Makefile.Release
 D:\a\nutil\Qt\Tools\QtCreator\bin\jom\jom.exe -f Makefile.Release

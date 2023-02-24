@@ -287,7 +287,7 @@ bool NutilProcess::Generate3DDataFromImage(QString inFile, QString outData)
     o+="]}";
 
 
-
+    return true;
 }
 
 
