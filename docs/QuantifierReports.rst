@@ -13,11 +13,11 @@ Quantifier generates several reports, including CustomRegion reports. These cont
 
 More information on the default regions are found in the CustomRegion files in the Nutil software package, located in the CustomRegion folder. The “default” option is a complete brain analysis, which means it includes all the reference atlas regions compiled into broader regions. For example, for the Allen Mouse Brain Atlas v3,2017, the custom regions are; the cortex; fiber tracts; hippocampus; olfactory regions; hypothalamus; regions in the striatum and pallidum; midbrain - hindbrain - and medulla; thalamus; cerebellum; and ventricular system. 
 
-2. Alternatively, generate CustomRegion reports based on your own compilations of reference atlas regions. Select "custom" and navigate to the relevant TXT or XLSX file. 
+2. Alternatively, generate CustomRegion reports based on your own compilations of reference atlas regions. Select "custom" and navigate to the relevant CSV or XLSX file. 
 
 There are two options for generating this file:
 
-* Use the QCAlign software (hierarchy sheet in TXT format). 
+* Use the QCAlign software (hierarchy sheet in CSV format). 
 * Defined your own regions using the CustomRegionsTemplate.xlsx provided in the CustomRegion folder of the Nutil package. Fill in the template exactly as shown below:
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image12.png
