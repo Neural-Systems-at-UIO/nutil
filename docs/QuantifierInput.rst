@@ -5,17 +5,17 @@
 -------------------------------
 
 .. tip::
-   It is recommended to change the names of the images to comply with the QUINT file `naming convention <https://quint-workflow.readthedocs.io/en/latest/Requirements.html#quint-naming-convention>`_ as the first step of the `QUINT workflow <https://quint-workflow.readthedocs.io/en/latest/index.html>`_. 
+   Change the names of the images to comply with the QUINT file `naming convention <https://quint-workflow.readthedocs.io/en/latest/Requirements.html#quint-naming-convention>`_ as the first step of the `QUINT workflow <https://quint-workflow.readthedocs.io/en/latest/index.html>`_. 
 
-   By using images that follow the naming convention for QuickNII, VisuAlign and ilastik, the output files from these software will also comply with the naming convention, and are thereby directly compatible with **Quantifier**.
+   By using images that follow the naming convention in QuickNII, VisuAlign and ilastik, the output files from these software will also comply with the naming convention, and are thereby directly compatible with **Quantifier**.
 
-* The file name of the segmentation and the atlas map that corresponds to a particular section must contain the same unique ID: they should follow the _sXXX naming convention, with XXX representing the section number (not restricted to three digits). 
+* The file name of the segmentation and the atlas map corresponding to a particular section must contain the same unique ID. They should follow the _sXXX naming convention, with XXX representing the section number (not restricted to three digits).  
 
-* The section number should reflect the serial order and spacing of the sections as this is a requirement for QuickNII. For example, _s02, _s06, _s10 for every 4th section starting with section 2. 
+* The section number should reflect the serial order and spacing of the sections, this is a requirement for QuickNII. For example, _s02, _s06, _s10 for every 4th section starting with section 2. 
 
-* The unique IDs must also be present in the XML or JSON file from QuickNII or VisuAlign containing the registration information (check this by opening with Notepad). This happens automatically as long as the images registered with QuickNII contain the unique IDs in the file name.
+* The XML or JSON file from QuickNII or VisuAlign must contain the unique IDs (check this by opening with Notepad). This happens automatically as long as the images registered in QuickNII contain the unique IDs in the file name.
 
-* **Quantifier** also supports user-defined IDs using regular expressions (RegExp). This means that it is possible to bypass the _sXXX naming convention. While this is not recommended, it is useful in some cases. For more information see the “Help” button in the Nutil GUI or contact User Support.  
+* **Quantifier** also supports user-defined IDs using regular expressions (RegExp). This means that it is possible to bypass the _sXXX naming convention. While this is not recommended, it is useful in some cases. For more information see the “Help” button in the Nutil interface or contact User Support.  
 
 **Examples that comply with the naming convention:** 
 
@@ -23,9 +23,13 @@ Histological image: tg2345_MMSH_s001.png.
 Segmentation image: tg2345_MMSH_s001_segmentation.png. 
 Atlas map: tg2345_MMSH_s001_nl.flat
 
-It is fine to include a string of letters and numbers followed by the unique ID. As Quantifier scans and detects the "_s" part of the name, the file name should not contain additional "_s"., for example: tg2345_MMSH_ss_s001.png. 
 
+.. Warning::
+   Do not include periods (".") or spaces (" ") within the file names. This will not work.  
+   
+   As Quantifier scans and detects the "_s" part of the name, the file name should not contain additional "_s"., for example: tg2345_MMSH_ss_s001.png. 
 
+   
 **Preparing the Segmentations**
 ------------------------------------
  
