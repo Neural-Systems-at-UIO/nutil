@@ -31,9 +31,8 @@ This means what it says: Nutil can't find the relevant anchoring information in 
 .. warning::
    WARNING: Unrecognised atlas map in the anchor file. Might be a potential problem, please make sure the atlas is correct! 
    
-* Automatic atlas recognisition was implemented in Nutil v0.8.0. This means that Nutil selects the atlas version based on the information in the .xml or .json file, rather than relying on the information entered by the user in the Nutil GUI. This works well for the latest versions of QuickNII and VisuAlign. 
-* This warning will come up if older versionsof QuickNII or VisuAlign are used, or a new atlas is used that has not been implemented in Nutil. This is not usually a problem as Nutil will use the information entered in the GUI by the user. If in doubt, open the .json file to check the atlas version. 
-* Consider using the latest version of QuickNII or VisuAlign.  
+* Automatic atlas recognition was implemented in Nutil v0.8.0. This means that Nutil selects the atlas version based on the information in the .xml or .json file, rather than relying on the atlas selected by the user in the Nutil interface. This works for the AMBA CCF for the latest versions of QuickNII and VisuAlign, but is not implemented correctly for the rat brain. 
+* This warning will come up if older versions of QuickNII are used, or if the WHS atlas is selected. This is not a problem as Nutil will instead use the atlas selected by the user in the Nutil interface. If in doubt, open the .json file to check the atlas version. 
 
 
 Transform
