@@ -859,6 +859,12 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
     }
+    if (labelType == "Kim Mouse 2019") {
+        m_labelFile = ":Resources/labels/KimMouse_2019.label";
+   //     if (data->Get("custom_region_type").toLower()=="default")
+   //         m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
+
+    }
     if (labelType == "WHS Atlas Rat v2") {
         m_labelFile = ":Resources/labels/WHS_Atlas_Rat_Brain_v2.label";
         if (data->Get("custom_region_type").toLower()=="default")

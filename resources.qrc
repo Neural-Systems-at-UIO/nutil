@@ -82,5 +82,6 @@
         <file>Resources/CustomRegions/CustomRegionRat_v4.xlsx</file>
         <file>Resources/text/neuroglancer.txt</file>
         <file>Resources/text/volumiser.txt</file>
+        <file>Resources/text/help/quantifier/coordinate_single_point.rtf</file>
     </qresource>
 </RCC>
