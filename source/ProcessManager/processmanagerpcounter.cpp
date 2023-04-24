@@ -460,7 +460,12 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     if (m_maskDir == "/")
         m_maskDir = m_inputDir;
 
+    //data->Save(data->m_openFile);
+
     m_outputDir = data->Get("quantifier_output_dir");
+    QString copyFilename =m_outputDir + "/"+(data->m_openFile.split("/").last().split("\\").last());
+    qDebug() << copyFilename;
+    data->Save(copyFilename);
     if (m_outputDir.trimmed()=="") {
         LMessage::lMessage.Error("Error: output directory not specified. ");
         Data::data.abort = true;
