@@ -3,7 +3,7 @@ name; 0 ;; Name of project ; string;
 analysis_type ; 0; ; Analysis type ;list; QUINT; QUINT
 quantifier_input_dir; 0 ;; Segmentation folder; directory;
 quantifier_atlas_dir; 0 ; analysis_type=QUINT ; Brain atlas map folder; directory;
-label_file; 0 ; analysis_type=QUINT ;Reference atlas; list; Allen Mouse Brain 2015,Allen Mouse Brain 2017, WHS Atlas Rat v2, WHS Atlas Rat v3,WHS Atlas Rat v4, Custom; Allen Mouse Brain 2015
+label_file; 0 ; analysis_type=QUINT ;Reference atlas; list; Allen Mouse Brain 2015,Allen Mouse Brain 2017, Kim Mouse 2019, WHS Atlas Rat v2, WHS Atlas Rat v3,WHS Atlas Rat v4, Custom; Allen Mouse Brain 2015
 custom_label_file; 0 ; label_file=Custom ;Custom reference atlas; file;
 xml_anchor_file; 0 ; analysis_type=QUINT; XML or JSON anchoring file; file;
 quantifier_output_dir; 0 ;; Output folder; directory;
@@ -22,7 +22,7 @@ output_report_type; 1; ;Output report type; list; CSV, HTML; CSV
 custom_region_type; 1; analysis_type=QUINT; Customised reports; list; Default, Custom; Default
 custom_region_file; 1; custom_region_type=Custom,analysis_type=QUINT ; Custom report file;  file;
 coordinate_extraction; 1; analysis_type=QUINT;Coordinate extraction;list; All, None, Slices, Summary; All
-coordinate_single_point; 1; ;Output single central point instead of all points; list; Yes, No; No
+coordinate_single_point; 1; ;Single central point instead of all points; list; Yes, No; No
 #coordinate_random_distortion; 1; analysis_type=QUINT;Coordinate random distortion;number; 0
 pixel_density; 1; analysis_type=QUINT;Point cloud density ; number; 1
 #nifti_size; 1; analysis_type=QUINT;Nifti size ; list; 0,64,128,256,512; 0
