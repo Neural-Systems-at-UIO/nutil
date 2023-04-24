@@ -60,7 +60,9 @@ public:
         {"WHS_Rat_v2_39um", "WHS Atlas Rat v2"},
         {"WHS_Rat_v3_39um", "WHS Atlas Rat v3"},
         {"WHS_Rat_v4_39um", "WHS Atlas Rat v4"},
-                                   };
+        {"WHS_Rat_v4_39um", "WHS Atlas Rat v4"},
+        {"SHARON FIX THIS", "Kim Mouse 2019"},
+        };
 
 
     QString m_reportDirectory = "Reports";

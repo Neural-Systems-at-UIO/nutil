@@ -83,5 +83,6 @@
         <file>Resources/text/neuroglancer.txt</file>
         <file>Resources/text/volumiser.txt</file>
         <file>Resources/text/help/quantifier/coordinate_single_point.rtf</file>
+        <file>Resources/labels/KimMouse_2019.label</file>
     </qresource>
 </RCC>

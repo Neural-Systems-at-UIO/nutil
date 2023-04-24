@@ -748,7 +748,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
         o+="]}";
 
     }
-
+    ApplyCoordinateMetaData(o);
     o+="\n]\n";
     //    o+="}";
     QFile file (filename);
@@ -819,6 +819,11 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
 
     n.Save(filename);
     qDebug() << "done.";
+}
+
+void Reports::ApplyCoordinateMetaData(QString &s)
+{
+
 }
 
 QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint, CoordinateTransform* transform)
@@ -950,6 +955,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
             o+="]}";
 
         }
+        ApplyCoordinateMetaData(o);
         o+="\n]\n";
         QFile file (filename+items[itm]->m_id+".json");
         file.open(QFile::Text | QFile::WriteOnly);
