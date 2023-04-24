@@ -4,10 +4,9 @@ mkdir nutil
 cp -r ../../../NutilRelease/Nutil.app nutil/
 cd nutil/Nutil.app
 ~/Qt/6.4.2/macos/bin/macdeployqt .
-#rm Contents/Frameworks/libtiff.5.dylib
+rm Contents/Frameworks/libtiff.5.dylib
 rm Contents/Frameworks/libomp.dylib
 cp /opt/homebrew/opt/libomp/lib/libomp.dylib Contents/Frameworks
-cp /opt/homebrew/lib/libtiff.5.dylib Contents/Frameworks
 cd ../../
 rm nutil.tar.gz
 cp  -R ../source/* nutil

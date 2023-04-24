@@ -217,7 +217,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         }
         for (int j=i+1;j<m_processItems.count();j++) {
             if (m_processItems[j]->m_reportName.toLower()==m_processItems[i]->m_reportName.toLower()) {
-                LMessage::lMessage.Error("Error: Report must have unique names for : " + m_processItems[i]->m_reportName);
+                LMessage::lMessage.Error("Error: Report must have unique names for : " + m_processItems[i]->m_reportName+". Potential solution: Please make sure that the input segmentation folder and the input atlas folders are placed separately. ");
                 return false;
 
             }
@@ -730,6 +730,8 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
             QStringList ids;// = QString::fromWCharArray(m_sheet->readStr(i,3)).split(',');
             bool done = false;
             int j=i+3;
+            // First, test for the number *Above*
+
             while (!done) {
                 long num = m_sheet->readNum(j,x);
                 QString s = QString::number(num);
@@ -740,7 +742,7 @@ void ProcessManagerPCounter::GenerateReports(QSharedPointer<LSheet> m_sheet)
                 j++;
             }
 
-
+           // qDebug() << excelName << ids;
             reports.m_reports.push_back(Report(excelName, ids,reportColor));
 
 //            LMessage::lMessage.Message("Found report: <font color=\"" + reportColor.name()+"\">" +excelName+"</font> ( " + QString::number(ids.count()) + " ids )");

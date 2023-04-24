@@ -57,6 +57,9 @@ public:
         {"WHS_SD_Rat_v2_39um", "WHS Atlas Rat v2"},
         {"WHS_SD_Rat_v3_39um", "WHS Atlas Rat v3"},
         {"WHS_SD_Rat_v4_39um", "WHS Atlas Rat v4"},
+        {"WHS_Rat_v2_39um", "WHS Atlas Rat v2"},
+        {"WHS_Rat_v3_39um", "WHS Atlas Rat v3"},
+        {"WHS_Rat_v4_39um", "WHS Atlas Rat v4"},
                                    };
 
 

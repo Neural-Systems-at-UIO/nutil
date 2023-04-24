@@ -65,7 +65,7 @@ jobs:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         release_name: Release ${{ steps.tag_version.outputs.new_tag }}
         body: |
-          Automated Release by GitHub Action CI
+          Beta version of Nutil. Features might not be tested or incomplete.
         draft: false
         prerelease: true
     - name: Rename file

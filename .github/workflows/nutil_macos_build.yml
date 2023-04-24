@@ -35,7 +35,7 @@ jobs:
       uses: jurplel/install-qt-action@v2 
       with:
         version: '6.0.1'
-        tools: 'tools_ifw,4.0.0,qt.tools.ifw.40 tools_qtcreator,7.0.2,qt.tools.qtcreator'
+        tools: 'tools_ifw,4.0.0,qt.tools.ifw.40 tools_qtcreator,9.0.0,qt.tools.qtcreator'
     - name: Write version file
       run: "echo ${{ steps.tag_version.outputs.new_tag }}>version.txt"
       shell: cmd
@@ -43,16 +43,14 @@ jobs:
 
 
     - name: Compile
-      run : "Publish\\windows_ci\\windows_build.cmd"
-    - name: Build_app
-      run : "Publish\\windows_ci\\build_dir.cmd"
-    - name: Nutil_validator
-      run : "Publish\\windows_ci\\validator.cmd"
-    - name: Zipping  
-      uses: papeloto/action-zip@v1
-      with:
-        files: nutil 
-        dest: nutil_win.zip
+      run : "Publish/publish_mac/publish_ci.sh"
+#    - name: Nutil_validator
+#      run : "Publish\\windows_ci\\validator.cmd"
+#    - name: Zipping  
+#      uses: papeloto/action-zip@v1
+#      with:
+#        files: nutil 
+#        dest: nutil_win.zip
           
 
     - name: Create Release
@@ -64,19 +62,19 @@ jobs:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         release_name: Release ${{ steps.tag_version.outputs.new_tag }}
         body: |
-          Automated Release by GitHub Action CI
+          Macos version of Nutil. 
         draft: false
         prerelease: true
     - name: Rename file
-      run: "mv nutil_win.zip nutil_win_${{ steps.tag_version.outputs.new_tag }}.zip"      
-    - name: Upload Release Asset (x64)
+      run: "mv nutil_macos.dmg nutil_macos_${{ steps.tag_version.outputs.new_tag }}.dmg"      
+    - name: Upload Release Asset (x64) macos
       id: upload-release-asset-x64
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./nutil_win_${{ steps.tag_version.outputs.new_tag }}.zip
-        asset_name: nutil_win_${{ steps.tag_version.outputs.new_tag }}.zip
-        asset_content_type: application/zip
+        asset_path: ./nutil_macos_${{ steps.tag_version.outputs.new_tag }}.dmg
+        asset_name: nutil_macos_${{ steps.tag_version.outputs.new_tag }}.dmg
+        asset_content_type: application/dmg
 

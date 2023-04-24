@@ -21,6 +21,7 @@ void DialogSettings::ToIni()
     m_settings->setString("fill_method", ui->cmbFillMethod->currentText());
     m_settings->setString("color_theme", ui->cmbThemes->currentText());
     m_settings->setFloat("csv_separator", (ui->chkUSSep->isChecked()==true)?1:0);
+    m_settings->setString("custom_separator", ui->leCustomSep->text());
     m_settings->setString("python_path",ui->lePython->text());
 
 }
@@ -31,6 +32,8 @@ void DialogSettings::FromIni()
     ui->cmbThemes->setCurrentText(m_settings->getString("color_theme"));
     ui->chkUSSep->setChecked(m_settings->getdouble("csv_separator")==1.0);
     ui->lePython->setText(m_settings->getString("python_path"));
+
+    ui->leCustomSep->setText(m_settings->getString("custom_separator"));
 }
 
 void DialogSettings::on_pushButton_clicked()

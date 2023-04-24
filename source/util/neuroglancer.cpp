@@ -32,7 +32,6 @@ void NeuroGlancer::Open(QString directory)
     LMessage::lMessage.Message("Image size (" + QString::number(m_size.x()) + "," +QString::number(m_chunkSize.y())+")");
     m_chunkDir = directory + scales["key"].toString()+"/";
 
-
 }
 
 void NeuroGlancer::LoadAllChunks()

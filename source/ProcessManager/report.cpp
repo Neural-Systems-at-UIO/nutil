@@ -439,8 +439,12 @@ void Reports::CreateCustomRegions(QString filename, QVector<QSharedPointer<Nutil
                 //              regionArea+=a.m_area;
 
                 if (a.atlasLabel!=nullptr) {
-
-
+/*                    if (507==a.atlasLabel->index) {
+                        qDebug() << "CreateCustomRegions found ID: " <<a.atlasLabel->index << a.atlasLabel->name;
+ //                       qDebug() << r.m_IDs;
+                       qDebug() << r.m_IDs.contains(507);
+                    }
+*/
                     if (r.m_IDs.contains(a.atlasLabel->index)) {
                         cnt++;
                         totalPixelArea+=a.m_pixelArea;
@@ -680,7 +684,16 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
         cnt++;
         QVector<QVector<QVector3D>> list;
         list.resize(omp_get_max_threads());
+//        QMap<QSharedPointer<XMLData*, CoordinateTransform>> tlist;
+
         for (Area* a: m_reports[i].m_areasOfInterest) {
+  /*          auto transform = nullptr;
+            if (tlist[a->m_xmlData]!=nullptr)
+                transform = tlist[a->m_xmlData];
+            else {
+                transform =QSharedPointer<(*a->m_xmlData);
+
+            }*/
             CoordinateTransform transform(*a->m_xmlData);
             //            if (cnt!=0) o+=",";
             a->CalculateStatistics();
