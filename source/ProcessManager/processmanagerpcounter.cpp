@@ -464,7 +464,6 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_outputDir = data->Get("quantifier_output_dir");
     QString copyFilename =m_outputDir + "/"+(data->m_openFile.split("/").last().split("\\").last());
-    qDebug() << copyFilename;
     data->Save(copyFilename);
     if (m_outputDir.trimmed()=="") {
         LMessage::lMessage.Error("Error: output directory not specified. ");
@@ -524,8 +523,10 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
 
 
+
     m_files = data->Get("files").trimmed().simplified().split(",");
     m_coordinates_single_point = data->Get("coordinate_single_point").toLower()=="yes"?1:0;
+    reports.m_area_type = m_coordinates_single_point==1?"single_point":"area";
     m_pixelCutoff = data->Get("object_min_size").toFloat();
     //    m_pixelCutoffMax = data->Get("object_max_size").toFloat();
     m_pixelCutoffMax = 100000; // NOT USED!
@@ -534,6 +535,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
 
     m_outputRegionNumbers = data->Get("output_region_id").toLower()=="no"?false:true;
 
+    reports.m_nutil_version = Data::data.version;
 
     Data::data.m_hasAreaSplitting = m_areaSplitting;
     if (m_dataType==QUINT)
@@ -653,6 +655,7 @@ if (m_dataType==NONE) {
 
     if (m_dataType == QUINT) {
         QString labelType = data->Get("label_file");
+        reports.m_atlas = labelType;
 
         if (labelType == "WHS Atlas Rat v4") {
             LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.</font>");

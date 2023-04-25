@@ -823,7 +823,11 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
 
 void Reports::ApplyCoordinateMetaData(QString &s)
 {
-
+/*    s+="\n,{\"metadata\" : {\n";
+    s+="\t\"atlas:\" : \""+m_atlas+"\",\n";
+    s+="\t\"area_type:\" : \""+m_area_type+"\",\n";
+    s+="\t\"nutil_version:\" : \""+m_nutil_version+"\"\n";
+    s+="}}\n";*/
 }
 
 QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint, CoordinateTransform* transform)

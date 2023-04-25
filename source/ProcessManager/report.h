@@ -47,6 +47,7 @@ public:
     double m_regionPixelArea = 0;
     double m_regionArea = 0;
 
+
     Report() {}
     Report(QString filename, QStringList& ids, QColor c) {
         m_filename = filename;
@@ -76,6 +77,7 @@ public:
     QString m_filename;
     QVector<Report> m_reports;
     QVector<QVector<long>> getList();
+    QString m_atlas, m_area_type, m_nutil_version;
 
     void Calculate(AtlasLabels* atlasLabels);
     void CreateBook(QString filename, QString type);
