@@ -28,6 +28,7 @@ QuickMask is a simple tool for generating masks that are compatible with the Nut
 There are two versions of QMask. They work in the same way.
 
 **QuickMask:** generates masks that reflect the linear registration performed with QuickNII. 
+
 **QuickMask-NL:** generates masks that reflect the nonlinear adjustments applied with VisuAlign.
 
 1. Open the QuickMask tool.
