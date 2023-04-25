@@ -3,10 +3,10 @@
 
 The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This is particularly useful for investigating expression differences in the right and left hemisphere, as a mask can be applied to differentiate the two sides.  
 
-* Create binary masks (black and white) in PNG format with an application such as NIH ImageJ, Adobe Photoshop or GIMP. These should have the same proportions as the segmentations but are typically smaller in size.
+* Create binary masks (black and white) in PNG format with an application such as QuickMask, NIH ImageJ, Adobe Photoshop or GIMP. These should have the same proportions as the segmentations but are typically smaller in size. 
 
 .. note::
-   **QuickMask** is a desktop tool for automatically generating masks to differentiate the right and left hemisphere based on the QuickNII or VisuAlign registration. Peliminary versions of QuickMask tool are available for download on the respective NITRC pages for the tools. Contact user support for the user manual.  
+   **QuickMask** is a desktop tool for automatically generating masks to differentiate the right and left hemisphere based on a QuickNII or VisuAlign registration. Peliminary versions of the QuickMask tool are available for download on the respective NITRC pages for the tools (QuickMaskNL generates masks that reflect the nonlinear deformations applied with VisuAlign).
 
 * To use the mask feature, select “yes”. This brings up a “custom mask folder” and “Custom mask colour” option.  
 * Name these with the unique ID for the section and a “_mask” extension. File name example: Bxb_hgt_s002_mask 
@@ -24,3 +24,5 @@ The mask feature is optional. It allows the application of masks to define which
 .. |image16| image:: cfad7c6d57444e3b93185b655ab922e0/media/image10.png
    :width: 3.58in
    :height: 2.57in
+   
+   
