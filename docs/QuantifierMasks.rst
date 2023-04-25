@@ -19,7 +19,7 @@ The mask feature is optional. It allows the application of masks to define which
 
 
 QuickMask
------------
+~~~~~~~~~~
 
 QuickMask is a simple tool for generating masks that are compatible with the Nutil software.
 
