@@ -23,6 +23,24 @@ The mask feature is optional. It allows the application of masks to define which
 QuickMask
 -----------
 
+QuickMask is a simple tool for generating masks that are compatible with the Nutil software. Masks can be used to differentiate labelling in the left and right hemisphere, or to define areas to exclude from the analysis (for example, in the case of hemibrain sections). 
+
+There are two versions of QMask. They work in the same way.
+
+**QuickMask:** generates masks that reflect the linear registration performed with QuickNII. 
+**QuickMask-NL:** generates masks that reflect the nonlinear adjustments applied with VisuAlign.
+
+1. Open the QuickMask tool.
+2. Use the “pick JSON” button to navigate to the QuickNII JSON or VisuAlign JSON for your image series (the file that contains the registration information). 
+3. For left-right hemisphere masks, enter the following X, Y and Z coordinated in QuickMaskNL. 
+
+Top left: 227, 32.2, 292.8. 
+Top right: 227, 367.9, 291.8
+Bottom left: 227, 34.5, 48.7 
+
+Alternatively, enter the following coordinate string in the box at the bottom of the interface: 227 32.2 292.8 227 367.9 291.8 227 34.5 48.7
+4.	Use the “Destination” button to navigate to the folder where you want your masks to be saved.
+5.	Press Go. The masks are automatically generated for all the section images in the series. The masks have the original image file name with a _mask extension. 
 
 .. |image16| image:: cfad7c6d57444e3b93185b655ab922e0/media/image10.png
    :width: 3.58in
