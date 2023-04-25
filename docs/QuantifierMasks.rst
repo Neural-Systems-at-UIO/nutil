@@ -40,6 +40,7 @@ Top right: 227, 367.9, 291.8
 Bottom left: 227, 34.5, 48.7 
 
 Alternatively, enter the following coordinate string in the box at the bottom of the interface: 227 32.2 292.8 227 367.9 291.8 227 34.5 48.7
+
 4.	Use the “Destination” button to navigate to the folder where you want your masks to be saved.
 5.	Press Go. The masks are automatically generated for all the section images in the series. The masks have the original image file name with a _mask extension. 
 
