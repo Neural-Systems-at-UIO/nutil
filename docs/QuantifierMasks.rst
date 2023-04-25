@@ -25,11 +25,11 @@ QuickMask
 
 QuickMask is a simple tool for generating masks that are compatible with the Nutil software. Masks can be used to differentiate labelling in the left and right hemisphere, or to define areas to exclude from the analysis (for example, in the case of hemibrain sections). 
 
-There are two versions of QMask. They work in the same way.
+There are two versions of QuickMask. They work in the same way.
 
-**QuickMask:** generates masks that reflect the linear registration performed with QuickNII. 
+**QuickMask:** generates masks that reflect the linear registration performed with QuickNII (download on the nitrc page for QuickNII). 
 
-**QuickMask-NL:** generates masks that reflect the nonlinear adjustments applied with VisuAlign.
+**QuickMask-NL:** generates masks that reflect the nonlinear adjustments applied with VisuAlign (download on the nitrc page for VisuAlign).
 
 1. Open the QuickMask tool.
 2. Use the “pick JSON” button to navigate to the QuickNII JSON or VisuAlign JSON for your image series (the file that contains the registration information). 
