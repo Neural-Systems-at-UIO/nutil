@@ -19,10 +19,15 @@ The mask feature is optional. It allows the application of masks to define which
 | |image16| |
 +-----------+
 
-|
+
+QuickMask
+-----------
+
 
 .. |image16| image:: cfad7c6d57444e3b93185b655ab922e0/media/image10.png
    :width: 3.58in
    :height: 2.57in
+   
+   
    
    
