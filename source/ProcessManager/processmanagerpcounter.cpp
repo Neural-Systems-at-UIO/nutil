@@ -45,7 +45,7 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
             //qDebug() << "*** ATLAS: " +m_xmlAnchor->m_atlas;
             if (!atlasQuickniiMap.contains(m_xmlAnchor->m_atlas)) {
                 // Unknown anchoring data?
-                LMessage::lMessage.Message("<font color=\"#FF7000\">Warning: unrecognized atlas '"+m_xmlAnchor->m_atlas+"' in the .json anchor file. Nutil will instead be using ... SHARON FIX</font>");
+                LMessage::lMessage.Message("<font color=\"#FF7000\">Warning: unrecognized atlas '"+m_xmlAnchor->m_atlas+"' in the .json anchor file. Nutil will instead use the selected atlas.</font>");
 
             }
             else {
@@ -868,7 +868,7 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
     }
-    if (labelType == "Kim Mouse 2019") {
+    if (labelType == "Kim Unified Mouse 2019") {
         m_labelFile = ":Resources/labels/KimMouse_2019.label";
 //        if (data->Get("custom_region_type").toLower()=="default")
   //          m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";

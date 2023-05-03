@@ -1,20 +1,20 @@
 <h2>Unique ID</h2>
-Select the unique ID format for your dataset.
+Select the format of the unique ID used for your dataset.
 <hr>
-<h3>File name requirement</h3>
+<h3>Naming requirement</h3>
 The file names of the segmentations and atlas maps that correspond to a particular section must contain a unique ID.
 The recommended ID format is "_sXXX", with XXX representing the section number. The section number should reflect the serial
 order and spacing of the sections (e.g. _s002, _s006, _s010 for every 4th section, starting with section 2). The IDs must match those
-in the XML file and in the mask file names (masks are optional).
+in the JSON/XML file and in the mask file names (masks are optional).
 
 <h3>Dropdown menu options</h3>
 
 <h4>1. _sXXX</h4>
-_sXXX is the optimal ID format for both QuickNII and Nutil Quantifier. We therefore recommend changing the files names
-as the first step in the QUINT workflow (with Nutil Transform).</p>
+_sXXX is the default ID format for both QuickNII and Nutil Quantifier. We recommend changing the files names
+as the first step in the QUINT workflow.</p>
 
 <h4>2. user</h4>
-<p>For datasets with other ID formats, select "user" and type the regular expression (regexp) for the ID in the "other ID format" box. e.g.</p>
+<p>For datasets with other ID formats, select "user" and type a Regular Expression (RegExp) that defines your ID in the "other ID format" box. e.g.</p>
 <br>
 _XXX  : _[0-9]*</li><br>
 _XXX. : _[0-9][0-9][0-9].</li><br>

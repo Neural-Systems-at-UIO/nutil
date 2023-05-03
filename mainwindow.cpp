@@ -465,6 +465,6 @@ void MainWindow::on_actionNutil_Duplicator_triggered()
 
 void MainWindow::on_btnUserdocs_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://nutil.readthedocs.io/en/latest/", QUrl::TolerantMode));
+    QDesktopServices::openUrl(QUrl("https://quint-workflow.readthedocs.io/en/latest/", QUrl::TolerantMode));
 }
 

@@ -61,7 +61,7 @@ public:
         {"WHS_Rat_v3_39um", "WHS Atlas Rat v3"},
         {"WHS_Rat_v4_39um", "WHS Atlas Rat v4"},
         {"WHS_Rat_v4_39um", "WHS Atlas Rat v4"},
-        {"SHARON FIX THIS", "Kim Mouse 2019"},
+        {"Kim_UnifiedMouse_v1_20x100um", "Kim Unified Mouse 2019"},
         };
 
 
