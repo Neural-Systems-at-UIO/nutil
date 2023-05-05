@@ -1,5 +1,6 @@
 #include "coordinatetransform.h"
 #include "source/IO/xmlanchor.h"
+#include "source/util/lmessage.h"
 #include <array>
 
 CoordinateTransform::CoordinateTransform(XMLData &data) {
@@ -24,8 +25,13 @@ CoordinateTransform::CoordinateTransform(XMLData &data) {
     m_triangles[1].addedges(edges.get());
     m_triangles[1].addedges(edges.get());
     edges[3] = 2;
+    QSet<quint64> filter;
     for(auto &&marker : markers) {
         auto x{marker[2]}, y{marker[3]};
+        auto code = (((quint64)x) << 32) + (quint64)y;
+        if(filter.contains(code))
+            continue;
+        filter.insert(code);
         auto found = false;
         for(auto &&triangle : m_triangles)
             if (triangle.intriangle(x, y)) {
@@ -66,6 +72,10 @@ QVector3D CoordinateTransform::NonLinear(QVector2D img_coords){
         if (triangle.transform(img_coords[0], img_coords[1]))
             return Linear(img_coords);
 
+    LMessage::lMessage.Error("Triangulation failure, please file a bug report including:");
+    LMessage::lMessage.Error("- VisuAlign JSON file");
+    LMessage::lMessage.Error("- Section name: " + m_xmlData->m_filename);
+    LMessage::lMessage.Error("- Coordinates " + QString::number(img_coords[0]) + "," + QString::number(img_coords[1]));
     return QVector3D();
 }
 
@@ -125,6 +135,8 @@ bool CoordinateTransform::Triangle::intriangle(float x, float y) {
 bool CoordinateTransform::Triangle::transform(float &x, float &y) {
     float row[]{x, y, 1};
     auto uv1 = decomp.rowmul(row);
+    // this fix works too, but now broken triangles are filtered out earlier
+    // if(isnan(uv1[0]) || isnan(uv1[1]) || uv1[0]<0 || uv1[0]>1 || uv1[1]<0 || uv1[1]>1 || uv1[0]+uv1[1]>1)
     if(uv1[0]<0 || uv1[0]>1 || uv1[1]<0 || uv1[1]>1 || uv1[0]+uv1[1]>1)
         return false;
     x = ax + abx*uv1[0] + acx*uv1[1];
