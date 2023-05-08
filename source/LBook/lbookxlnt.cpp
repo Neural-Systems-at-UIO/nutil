@@ -4,6 +4,7 @@
 
 void LBookXlnt::Load(QString filename)
 {
+    qDebug() << QFile::exists(filename) <<filename;
      m_book.load(filename.toStdString());
 }
 
