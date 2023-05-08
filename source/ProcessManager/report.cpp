@@ -684,20 +684,21 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
         cnt++;
         QVector<QVector<QVector3D>> list;
         list.resize(omp_get_max_threads());
-//        QMap<QSharedPointer<XMLData*, CoordinateTransform>> tlist;
+        QMap<XMLData *, QSharedPointer<CoordinateTransform>> tlist;
 
         for (Area* a: m_reports[i].m_areasOfInterest) {
-  /*          auto transform = nullptr;
-            if (tlist[a->m_xmlData]!=nullptr)
+            auto transform = QSharedPointer<CoordinateTransform>(nullptr);
+            if (tlist.contains(a->m_xmlData))
                 transform = tlist[a->m_xmlData];
             else {
-                transform =QSharedPointer<(*a->m_xmlData);
+                transform = QSharedPointer<CoordinateTransform>(new CoordinateTransform(*a->m_xmlData));
+                tlist[a->m_xmlData] = transform;
 
-            }*/
-            CoordinateTransform transform(*a->m_xmlData);
+            }
+ //           CoordinateTransform transform(*a->m_xmlData);
             //            if (cnt!=0) o+=",";
             a->CalculateStatistics();
-            QVector3D invCenter = InvProject(a->m_center,a,0,&transform);
+            QVector3D invCenter = InvProject(a->m_center,a,0,transform.get());
             //        qDebug() << "CENTER "<< a->m_center;
 
             double val = ((rand()%1000)/1000.0-0.5) * spread;
@@ -716,7 +717,7 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
                 //                for (int k=0;k<a->m_points.count();k+=1) { //(a->m_points.count()/xyzSize)+1) {
                 tcount++;
                 QVector3D alt;
-                QVector3D v = InvProject(points[(int)k],a,spread,invCenter, &alt, &transform);
+                QVector3D v = InvProject(points[(int)k],a,spread,invCenter, &alt, transform.get());
                 /*               QPointF& p =a->m_points[(int)k];
                 //QVector3D v(1,p.x()/a->m_width,p.y()/a->m_height);
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);*/
@@ -878,6 +879,9 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
         int cnt=0;
         int k=0;
 
+        QMap<XMLData *, QSharedPointer<CoordinateTransform>> tlist;
+
+
 
         for (int i=0;i<m_reports.count();i++) {
 
@@ -899,7 +903,16 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
             QString data = "";
             for (Area* a: m_reports[i].m_areasOfInterest)
             {
-                CoordinateTransform transform(*a->m_xmlData);
+//                CoordinateTransform transform(*a->m_xmlData);
+                auto transform = QSharedPointer<CoordinateTransform>(nullptr);
+                if (tlist.contains(a->m_xmlData))
+                    transform = tlist[a->m_xmlData];
+                else {
+                    transform = QSharedPointer<CoordinateTransform>(new CoordinateTransform(*a->m_xmlData));
+                    tlist[a->m_xmlData] = transform;
+                }
+
+
                 bool ok = false;
                 for (int ka = 0;ka<processes[itm]->m_areas.count();ka++) {
                     if (a==&processes[itm]->m_areas[ka])
@@ -908,7 +921,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                 if (!ok)
                     continue;
 
-                QVector3D invCenter = InvProject(a->m_center,a,0, &transform);
+                QVector3D invCenter = InvProject(a->m_center,a,0, transform.get());
 
                 QVector<QVector<QVector3D>> list;
                 list.resize(omp_get_max_threads());
@@ -933,7 +946,7 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
                 QVector3D v(p.x()/a->m_width,p.y()/a->m_height,1);
                 v=v*a->m_mat;*/
                     QVector3D alt;
-                    QVector3D v = InvProject(points[k],a,spread, invCenter, &alt, &transform);
+                    QVector3D v = InvProject(points[k],a,spread, invCenter, &alt, transform.get());
 
 
                     if (cnt2!=0) data+=",\n";

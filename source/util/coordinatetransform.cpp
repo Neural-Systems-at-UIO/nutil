@@ -76,7 +76,7 @@ QVector3D CoordinateTransform::NonLinear(QVector2D img_coords){
     LMessage::lMessage.Error("- VisuAlign JSON file");
     LMessage::lMessage.Error("- Section name: " + m_xmlData->m_filename);
     LMessage::lMessage.Error("- Coordinates " + QString::number(img_coords[0]) + "," + QString::number(img_coords[1]));
-    return QVector3D();
+    return QVector3D(0,0,0);
 }
 
 QVector3D CoordinateTransform::getProjection(QVector3D& v)
