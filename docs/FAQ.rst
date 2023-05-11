@@ -1,12 +1,17 @@
 **FAQ**
 =======
 
-**I can't open the application - "Windows protected your PC"**
+**I can't open the application: "Windows protected your PC"**
 ----------------------------------------------------
 
 "Windows protected your PC, Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk".'
 
 To fix this, right click on the Nutil.cmd > Properties > General > check "unblock" under Security. 
+
+**Nutil shuts down during a run and/or generates corrupt files**
+----------------------------------------------------
+
+Nutil will either shut down or create corrupt files if it loses connection with the images while running. To prevent this, install the Nutil software locally (on the C: drive) and apply to images installed locally where possible. In many cases, Nutil can also be applied from the C:drive to files located elsewhere (for example, a remove drive). However, if you have problems with crashing and corrupt files, try saving the input images locally in the same location as the Nutil software. 
 
 **There are no object counts in the reports (N/A)?**
 ----------------------------------------------------
