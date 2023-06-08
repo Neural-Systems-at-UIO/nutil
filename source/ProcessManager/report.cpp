@@ -677,7 +677,9 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
         for (int j=0;j<m_reports[i].m_areasOfInterest.count();j++)
             count+=m_reports[i].m_areasOfInterest[j]->m_points.count();
         if (cnt!=0) o+=",\n";
-        o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number((int)(count/xyzSize))+",";
+        o+="{\n";
+        ApplyCoordinateMetaData(o);
+        o+="\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number((int)(count/xyzSize))+",";
         o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename.trimmed().simplified()+ "\",";
         o+="\"triplets\":[";
         int cnt2=0;
@@ -749,7 +751,6 @@ void Reports::Create3DSummaryJson(QString filename , QVector<QSharedPointer<Nuti
         o+="]}";
 
     }
-    ApplyCoordinateMetaData(o);
     o+="\n]\n";
     //    o+="}";
     QFile file (filename);
@@ -824,11 +825,11 @@ void Reports::CreateNifti(QString filename, QVector<QSharedPointer<NutilProcess>
 
 void Reports::ApplyCoordinateMetaData(QString &s)
 {
-/*    s+="\n,{\"metadata\" : {\n";
+    s+="\"metadata\" : {\n";
     s+="\t\"atlas:\" : \""+m_atlas+"\",\n";
     s+="\t\"area_type:\" : \""+m_area_type+"\",\n";
     s+="\t\"nutil_version:\" : \""+m_nutil_version+"\"\n";
-    s+="}}\n";*/
+    s+="},\n";
 }
 
 QVector3D Reports::InvProject(QPointF p, Area* a, double rndSpread, QVector3D invCenter, QVector3D* altPoint, CoordinateTransform* transform)
@@ -963,7 +964,9 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
 
 
             }
-            o+="{\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(cnt2)+",";
+            o+="{\n";
+            ApplyCoordinateMetaData(o);
+            o+="\"idx\":"+QString::number(cnt)+",\"count\":"+QString::number(cnt2)+",";
             o+="\"r\":" + QString::number(c.red()) + ",\"g\":" + QString::number(c.green()) + ",\"b\":" + QString::number(c.blue()) + ",\"name\":\""+ m_reports[i].m_filename.trimmed().simplified()+"\",";
             o+="\"triplets\":[";
             //        qDebug() << data;
@@ -972,7 +975,6 @@ void Reports::Create3DSliceJson(QString filename , QVector<QSharedPointer<NutilP
             o+="]}";
 
         }
-        ApplyCoordinateMetaData(o);
         o+="\n]\n";
         QFile file (filename+items[itm]->m_id+".json");
         file.open(QFile::Text | QFile::WriteOnly);
