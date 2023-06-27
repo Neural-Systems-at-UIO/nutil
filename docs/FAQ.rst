@@ -39,7 +39,7 @@ It is also possible to change the default separator on your computer by changing
 
 To do this, you need the pixel width of your original images in "real life" terms, for example, pixel width = 0.4 um (this depends on the microscope settings and is usually provided by the scanner). You also need to know the resize factor that was used to downscale the images prior to segmentation, for example, 0.5. The pixel width in the downscaled images can be calculated as follows: original width / resize factor, for example, 0.4 / 0.5 = 0.8 um. To calculate the pixel scale of your downscaled images, square this number. This converts it to an area, for example, 0.8 x 0.8 = 0.64 um2. 
 
-**The QUINT coordinate output does not match the Allen CCFv3 coordinate system. What's going on?**
+**The QUINT coordinates do not match the Allen CCFv3. What's going on?**
 ----------------------------------------------------------------------------------------------------
 
 This is true and is confusing. The coordinates from QuickNII and the QUINT workflow follow Right-Anterior-Superior orientation and are expressed in voxels. 
@@ -56,7 +56,7 @@ The `Allen CCFv3 <http://help.brain-map.org/display/mousebrain/API>`_ follows a 
 
 A converter is provided `here <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
 
-**The QUINT coordinate output does not match the WHS coordinate system. What going on?**
+**The QUINT coordinates do not match the WHS coordinate system. What going on?**
 ---------------------------------------------------------------------------------------------
 
 The `WHS rat brain atlas <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ uses the same axis order and orientation as QuickNII, only translation of origin, and scaling have to be applied. WHS origin is at 244, 623, 248 voxel coordinates, and everything has to be converted to mm, where the atlas resolution is 0.0390625 mm (isotropic). 
