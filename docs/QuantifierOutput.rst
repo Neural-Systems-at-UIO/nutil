@@ -73,7 +73,8 @@ By switching “ON” the “display object IDs in image file and reports”, a 
 **Coordinates**  
 ----------------
 
-* JSON files containing point clouds with coordinates following a Right-Anterior-Superior (RAS) orientation and expressed in voxels. These can be directly viewed with the MeshView Atlas Viewer. For more information on the coordinate system and how to convert to Allen CCFv3 and Waxholm Space coordinates, see `here <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_.
+* JSON files containing point clouds with the coordinates following a Right-Anterior-Superior (RAS) orientation and expressed in voxels. These can be directly viewed with the MeshView Atlas Viewer. 
+* For more information on the coordinate system and how to convert to Allen CCFv3 and Waxholm Space coordinates, see `here <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_.
 * Links to Meshview are available `here <https://quint-workflow.readthedocs.io/en/latest/Meshview.html>`_
 * Online converters are provided `here <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
 
