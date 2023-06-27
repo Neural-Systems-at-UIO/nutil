@@ -42,7 +42,7 @@ To do this, you need the pixel width of your original images in "real life" term
 **The QUINT coordinates do not match the Allen CCFv3. What's going on?**
 ----------------------------------------------------------------------------------------------------
 
-This is true and confusing but is easy to solve as we provide a `converter <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
+This is true and confusing, but is easy to solve as we provide a `converter <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
 
 The coordinates from QuickNII and the QUINT workflow follow Right-Anterior-Superior orientation and are expressed in voxels. 
 
