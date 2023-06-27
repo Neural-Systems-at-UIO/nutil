@@ -44,7 +44,7 @@ To do this, you need the pixel width of your original images in "real life" term
 
 This is true and confusing, but is easy to solve as we provide a `converter <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
 
-The coordinates from QuickNII and the QUINT workflow follow Right-Anterior-Superior orientation and are expressed in voxels. 
+The coordinates from `QuickNII and the QUINT workflow <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ follow Right-Anterior-Superior orientation and are expressed in voxels. 
 
 * First axis (x) starts from the left side of the volume, and points towards the right
 * Second axis (y) starts from the backmost position in the volume, and points towards the front
