@@ -42,7 +42,9 @@ To do this, you need the pixel width of your original images in "real life" term
 **The QUINT coordinates do not match the Allen CCFv3. What's going on?**
 ----------------------------------------------------------------------------------------------------
 
-This is true and is confusing. The coordinates from QuickNII and the QUINT workflow follow Right-Anterior-Superior orientation and are expressed in voxels. 
+This is true and confusing but is easy to solve as we provide a `converter <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
+
+The coordinates from QuickNII and the QUINT workflow follow Right-Anterior-Superior orientation and are expressed in voxels. 
 
 * First axis (x) starts from the left side of the volume, and points towards the right
 * Second axis (y) starts from the backmost position in the volume, and points towards the front
@@ -53,8 +55,6 @@ The `Allen CCFv3 <http://help.brain-map.org/display/mousebrain/API>`_ follows a 
 * Reordering coordinates: [x,y,z]RAS,vox => [y,z,x]ASR,vox
 * Flipping posterior-anterior and inferior-superior axes: [x,y,z]RAS,vox => [527-y,319-z,x]PIR,vox
 * Multiplying the components with 25: [x,y,z]RAS,vox => [(527-y)*25,(319-z)*25,x*25]PIR,μm 
-
-A converter is provided `here <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
 
 **The QUINT coordinates do not match the WHS coordinate system. What going on?**
 ---------------------------------------------------------------------------------------------
