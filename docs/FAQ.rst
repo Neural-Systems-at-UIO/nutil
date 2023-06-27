@@ -42,7 +42,7 @@ To do this, you need the pixel width of your original images in "real life" term
 **The QUINT coordinates do not match the Allen CCFv3. What's going on?**
 ----------------------------------------------------------------------------------------------------
 
-This is true and confusing, but is easy to solve as we provide a `converter <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
+This is true and confusing, but is easy to solve as we provide a `converter <https://www.nesys.uio.no/QuickNII/Q2ABA.html>`_.
 
 The coordinates from `QuickNII and the QUINT workflow <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ follow Right-Anterior-Superior orientation and are expressed in voxels. 
 
@@ -61,7 +61,7 @@ The `Allen CCFv3 <http://help.brain-map.org/display/mousebrain/API>`_ follows a 
 
 The `WHS rat brain atlas <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ uses the same axis order and orientation as QuickNII, only translation of origin, and scaling have to be applied. WHS origin is at 244, 623, 248 voxel coordinates, and everything has to be converted to mm, where the atlas resolution is 0.0390625 mm (isotropic). 
 
-A converter is provided `here <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
+A converter is provided `here <https://www.nesys.uio.no/QuickNII/Q2WHSRat.html>`_.
 
 
 
