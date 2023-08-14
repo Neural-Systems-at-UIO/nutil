@@ -30,8 +30,8 @@ For each report, interpret the results as follows:
 
 The main results are:
 
-* Load. This refers to the % regional load (% coverage of the region). Use this with object splitting switched ON (object splitting OFF may invalidate the % load).  
-* Count. This is a count of segmented objects that fall within the region. Use this for small objects only, with object splitting switched OFF (object splitting ON may invalidate the counts).
+* Load. This refers to the regional load or area fraction. Use this with object splitting switched ON (object splitting OFF may invalidate the % load).  
+* Count. This is a count of segmented objects that fall within the region. Use this for small objects only with the object splitting switched OFF (object splitting ON may invalidate the counts).
 
 See `Object splitting explained. <https://nutil.readthedocs.io/en/latest/QuantifierOS.html>`_
 
@@ -73,8 +73,10 @@ By switching “ON” the “display object IDs in image file and reports”, a 
 **Coordinates**  
 ----------------
 
-* JSON files containing point clouds that can be visualised with the MeshView Atlas Viewer. 
-* Links to Meshview are available `here. <https://quint-workflow.readthedocs.io/en/latest/Meshview.html>`_
+* JSON files containing point clouds with the coordinates following a Right-Anterior-Superior (RAS) orientation and expressed in voxels. These can be directly viewed with the MeshView Atlas Viewer. 
+* For more information on the coordinate system and how to convert to Allen CCFv3 and Waxholm Space coordinates, see `here <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_.
+* Links to Meshview are available `here <https://quint-workflow.readthedocs.io/en/latest/Meshview.html>`_
+* Online converters are provided `here <https://quicknii.readthedocs.io/en/latest/coordinates.html>`_.
 
 .. warning::
    The coordinates generated with Nutil version 0.8 reflect both the linear and nonlinear transformation applied with QuickNII and VisuAlign. Nutil version 0.4 - 0.7 are based on the linear transformation only and do not take into account the nonlinear transformation.   

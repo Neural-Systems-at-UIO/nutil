@@ -3,9 +3,9 @@
 
 In Quantifier, users must specify whether to turn “object splitting” ON or OFF. 
 
-With object splitting switched ON, segmented objects that overlap atlas regions are divided into parts, with the individual object pixels assigned their precise regional location. This ensures accurate regional % load measurements (load is the percentage of the region occupied by objects: the % coverage), but invalidates the object counts as some objects will be split and counted more than once.  
+With object splitting switched ON, segmented objects that overlap atlas regions are divided into parts, with the individual object pixels assigned their precise regional location. This ensures accurate regional % load measurements (load is the percentage of the region occupied by objects: the % coverage or area fraction). This  invalidates the object counts as some objects will be split and counted more than once which means that N/A appears in the reports.  
 
-With object splitting switched OFF, the object counts are valid, but the load measurements may be incorrect since objects that overlap region boundaries will be assigned to one of the regions at random, potentially skewing the regional load calculations. This is especially true if objects are large, since a large object that overlaps many regions (e.g. 1000 pixels) may be assigned to a small region (e.g. 100 pixels) giving false load output (1000% load in this case).
+With object splitting switched OFF, object counts are correct, but the load measurements may be incorrect since objects that overlap region boundaries will be assigned to one of the regions only, potentially skewing the regional load calculations. This is especially true if objects are large, since a large object that overlaps many regions (e.g. 1000 pixels) may be assigned to a small region (e.g. 100 pixels) giving false load output (1000% load in this case).
 
 .. note::
    **Recommendation:** 
