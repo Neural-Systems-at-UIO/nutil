@@ -152,7 +152,8 @@ public:
     QVector<int> m_currentTileX, m_currentTileY;
     short m_samplesPerPixel, m_bitsPerSample, m_photo, m_config, m_compression;
 
-    const QString m_compressionTypes[11] = {"not specified", "none", "CCITT RLE", "CCITT G3", "CCITT G4", "LZW", "JPEG", "JPEG New Style", "Deflate (adobe)", "9","10"};
+//    const QString m_compressionTypes[11] = {"not specified", "none", "CCITT RLE", "CCITT G3", "CCITT G4", "LZW", "JPEG", "JPEG New Style", "Deflate (adobe)", "9","10"};
+    const QString m_compressionTypes[11] = {"not specified", "none", "CCITT RLE", "CCITT G3", "CCITT G4", "LZW", "NONE", "JPEG", "Deflate (adobe)", "9","10"};
 
     static const int max_thread_num = 32;
 
