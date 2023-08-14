@@ -141,7 +141,6 @@ public:
 class LTiff
 {
 public:
-
     QString m_filename;
     uint32 m_width, m_height;
     uint32 m_tileWidth, m_tileHeight;
