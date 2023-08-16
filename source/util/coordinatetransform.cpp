@@ -126,14 +126,14 @@ CoordinateTransform::Triangle::Triangle(int a, int b, int c, QVector<QVector4D> 
     r2den = d2(Ax*den, Ay*den, Mdenx, Mdeny);
 }
 
-bool CoordinateTransform::Triangle::intriangle(float x, float y) {
-    float row[]{x, y, 1};
+bool CoordinateTransform::Triangle::intriangle(double x, double y) {
+    double row[]{x, y, 1};
     auto uv1 = decomp.rowmul(row);
     return !(uv1[0]<0 || uv1[0]>1 || uv1[1]<0 || uv1[1]>1 || uv1[0]+uv1[1]>1);
 }
 
 bool CoordinateTransform::Triangle::transform(float &x, float &y) {
-    float row[]{x, y, 1};
+    double row[]{x, y, 1};
     auto uv1 = decomp.rowmul(row);
     // this fix works too, but now broken triangles are filtered out earlier
     // if(isnan(uv1[0]) || isnan(uv1[1]) || uv1[0]<0 || uv1[0]>1 || uv1[1]<0 || uv1[1]>1 || uv1[0]+uv1[1]>1)
@@ -145,7 +145,7 @@ bool CoordinateTransform::Triangle::transform(float &x, float &y) {
 }
 
 CoordinateTransform::Matrix3x3 CoordinateTransform::Matrix3x3::inverse(){
-    float det = m[0][0] * (m[1][1]*m[2][2] - m[2][1]*m[1][2])
+    double det = m[0][0] * (m[1][1]*m[2][2] - m[2][1]*m[1][2])
               - m[0][1] * (m[1][0]*m[2][2] - m[1][2]*m[2][0])
               + m[0][2] * (m[1][0]*m[2][1] - m[1][1]*m[2][0]);
 //    if (det == 0) {
@@ -156,8 +156,8 @@ CoordinateTransform::Matrix3x3 CoordinateTransform::Matrix3x3::inverse(){
                 (m[1][2]*m[2][0] - m[1][0]*m[2][2]) / det, (m[0][0]*m[2][2] - m[0][2]*m[2][0]) / det, (m[1][0]*m[0][2] - m[0][0]*m[1][2]) / det,
                 (m[1][0]*m[2][1] - m[2][0]*m[1][1]) / det, (m[2][0]*m[0][1] - m[0][0]*m[2][1]) / det, (m[0][0]*m[1][1] - m[1][0]*m[0][1]) / det);
 }
-std::array<float, 3> CoordinateTransform::Matrix3x3::rowmul(float row[3]){
-    std::array<float,3> ret{};
+std::array<double, 3> CoordinateTransform::Matrix3x3::rowmul(double row[3]){
+    std::array<double,3> ret{};
     for(int i = 0; i < 3; i++)
         for(int j = 0; j < 3; j++)
             ret[i] += row[j]*m[j][i];
