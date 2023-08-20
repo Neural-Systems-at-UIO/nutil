@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+
 //    ui->lblNewt->setPixmap(QPixmap ("://images/Resources/newt.png"));
  //   QPixmap pixmap = QPixmap ("://my_image.png");
 
