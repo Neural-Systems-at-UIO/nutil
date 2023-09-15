@@ -82,6 +82,7 @@ void CheckVersion() {
         exit(1);
     }
 
+
     else qDebug() << "No new version. Continuing.";
 }
 
