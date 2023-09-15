@@ -81,6 +81,7 @@ void CheckVersion() {
         u.FetchNewVersion();
         exit(1);
     }
+
     else qDebug() << "No new version. Continuing.";
 }
 
