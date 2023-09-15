@@ -90,6 +90,7 @@ void ApplyPalette(QString value, QApplication& a) {
     if (value.toLower()=="dark")
         setDarkPalette(a);
     else
+
     if (value.toLower()=="blue")
         setSharonPalette(a,0.7,0.8,1.0);
     else
