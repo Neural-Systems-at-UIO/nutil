@@ -86,6 +86,7 @@ void CheckVersion() {
 }
 
 
+
 void ApplyPalette(QString value, QApplication& a) {
     if (value.toLower()=="dark")
         setDarkPalette(a);
