@@ -1,10 +1,10 @@
 **Introduction**
 ----------------
 
-**Nutil** simplifies the pre-and-post processing of images of histological sections from mouse and rat brain. It is a standalone application and requires no coding experience to execute. It is an integral part of the QUINT workflow: 
+**Nutil** simplifies the pre-and-post processing of images of sections from mouse and rat brain. It is a standalone application and requires no coding experience to execute. It is an integral part of the QUINT workflow. 
 
 .. tip::   
-   Visit `EBRAINS <https://ebrains.eu/service/quint/>`_ for more information about QUINT. Find full `user documentation <https://quint-workflow.readthedocs.io>`_ here. 
+   Visit `EBRAINS <https://ebrains.eu/service/quint/>`_ for more information about QUINT. Find `user documentation <https://quint-workflow.readthedocs.io>`_ here. 
    
 **Nutil** supports four operations: 
 
