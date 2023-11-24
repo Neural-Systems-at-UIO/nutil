@@ -1,7 +1,7 @@
 **Technical information**
 -------------------------
 
-Nutil is written as a stand-alone Windows 64-bit application written in Qt C++, which enables the full usage of both memory and processor cores. Nutil can be downloaded and compiled from the github page. When performing batch processes, Nutil will utilise all cores available on the system.  
+Nutil is written as a stand-alone Windows 64-bit application written in Qt C++, which enables the full usage of both memory and processor cores. Nutil can be downloaded and compiled from the Github page. When performing batch processes, Nutil will utilise all cores available on the system.  
 
 The external libraries that are used in Nutil are: 
  
