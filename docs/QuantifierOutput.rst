@@ -43,7 +43,7 @@ See `Object splitting explained. <https://nutil.readthedocs.io/en/latest/Quantif
 RefAtlasRegion reports contain quantifications per atlas-region based on the finest level of granularity of the atlas. There is one report for the whole series (all sections combined) and one per section.
 
 .. note::
-   The Allen Mouse Brain Reference Atlas includes regions that are not actually delineated in the atlas. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any pixels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels). They should be excluded from analysis.  
+   **The CCFv3 atlas** includes regions that are not delineated in the atlas volume. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any voxels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels). Exclude them from your analysis.  
 
    The **Clear Label** ID covers objects that fall outside of the atlas maps
 
