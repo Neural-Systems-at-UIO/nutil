@@ -826,7 +826,7 @@ void ProcessManagerPCounter::SaveCustomReportColors(QSharedPointer<LSheet> sheet
     QString txt ="";
     bool done = false;
     int x = 1;
-    txt+="name\t\colour\n";
+    txt+="name\tcolour\n";
   //  qDebug() << "here";
     while (!done) {
         QString name = sheet->readStr(0,x).trimmed();
