@@ -10,7 +10,7 @@ To use masks:
 * The masks must be named with the unique ID for the section with a “_mask” extension. File name example: Bxb_hgt_s002_mask.
 
 .. tip::
-   **QuickMask** and **QuickMaskNL** are desktop tools that allow you to automatically create hemisphere masks that correspond to your sections based on an atlas-registration using QuickNII or VisuAlign respectively. Peliminary versions are available for download on the NITRC page for QuickNII (QuickMask) and VisuAlign (QuickMaskNL). 
+   **QuickMask** and **QuickMaskNL** are desktop tools that allow you to automatically create hemisphere masks that correspond to your sections based on an atlas-registration using QuickNII or VisuAlign. Peliminary versions are available for download on the NITRC page for QuickNII (QuickMask) and VisuAlign (QuickMaskNL). 
 
 In Nutil:
 
