@@ -1,9 +1,11 @@
 **Custom masks explained**
 ===========================
 
-The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This feature is useful for investigating expression differences in the right and left hemisphere as masks can be applied to differentiate the two sides. It is also useful for defining areas to exclude from the analysis (for example, in the case of hemibrain sections).   
+The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This feature is useful for investigating expression differences in the right and left hemisphere as masks can be applied to differentiate the two sides. It is also useful for defining areas to exclude from the analysis (for example, in the case of hemibrain sections). 
 
-* Create binary masks (black and white images) in PNG format with an application such as NIH ImageJ, Adobe Photoshop or GIMP. For hemibrain masks, use QuickMask (instructions below). 
+To use masks:
+
+* Create binary masks that correspond to your sections with an application such as NIH ImageJ, Adobe Photoshop or GIMP (these are black and white images in PNG format). For hemibrain masks, use QuickMask (instructions below). 
 * The masks should have the same proportions as the segmentations but are typically smaller in size. 
 * The masks must be named with the unique ID for the section with a “_mask” extension. File name example: Bxb_hgt_s002_mask.
 
