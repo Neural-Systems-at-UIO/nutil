@@ -1,15 +1,18 @@
 **Custom masks explained**
 ===========================
 
-The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This is useful for investigating expression differences in the right and left hemisphere as a mask can be applied to differentiate the two sides. It is also useful for defining areas to exclude from the analysis (for example, in the case of hemibrain sections).   
+The mask feature is optional. It allows the application of masks to define which parts of the sections to include in the analysis. The mask is applied in addition to, and not instead of, the reference atlas maps. This feature is useful for investigating expression differences in the right and left hemisphere as masks can be applied to differentiate the two sides. It is also useful for defining areas to exclude from the analysis (for example, in the case of hemibrain sections).   
 
-* Create binary masks (black and white) in PNG format with an application such as QuickMask, NIH ImageJ, Adobe Photoshop or GIMP. These should have the same proportions as the segmentations but are typically smaller in size. 
+* Create binary masks (black and white images) in PNG format with an application such as NIH ImageJ, Adobe Photoshop or GIMP. For hemibrain masks, use QuickMask (instructions below). 
+* The masks should have the same proportions as the segmentations but are typically smaller in size. 
+* The masks must be named with the unique ID for the section with a “_mask” extension. File name example: Bxb_hgt_s002_mask.
 
-.. note::
-   **QuickMask** is a desktop tool for automatically generating masks to differentiate the right and left hemisphere based on a QuickNII or VisuAlign registration. Peliminary versions of the QuickMask tool are available for download on the respective NITRC pages for the tools.
+.. tip::
+   **QuickMask** and **QuickMaskNL** are desktop tools that allow you to automatically create hemisphere masks that correspond to your sections based on an atlas-registration using QuickNII or VisuAlign respectively. Peliminary versions are available for download on the NITRC page for QuickNII (QuickMask) and VisuAlign (QuickMaskNL). 
+
+In Nutil:
 
 * To use the mask feature, select “yes”. This brings up a “custom mask folder” and “Custom mask colour” option.  
-* Name these with the unique ID for the section and a “_mask” extension. File name example: Bxb_hgt_s002_mask 
 * Navigate to this folder containing the masks.  
 * Click on the field for the “Custom mask colour”. Select the colour in the mask that corresponds to the ROI to include in the analysis. For example, for an analysis of the left hand side of an image with the mask shown here, specify black (RGB code: 0,0,0). 
 
@@ -18,7 +21,7 @@ The mask feature is optional. It allows the application of masks to define which
 +-----------+
 
 
-QuickMask application
+QuickMask
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 QuickMask is a simple tool for generating masks that are compatible with the Nutil software.
