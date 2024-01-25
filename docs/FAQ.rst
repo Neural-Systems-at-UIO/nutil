@@ -65,7 +65,7 @@ The `Allen CCFv3 <http://help.brain-map.org/display/mousebrain/API>`_ follows a 
 * Flipping posterior-anterior and inferior-superior axes: [x,y,z]RAS,vox => [527-y,319-z,x]PIR,vox
 * Multiplying the components with 25: [x,y,z]RAS,vox => [(527-y)*25,(319-z)*25,x*25]PIR,μm 
 
-**The QUINT coordinates do not match the WHS coordinate system. What going on?**
+**Quantifier: The QUINT coordinates do not match the WHS coordinate system. What going on?**
 ---------------------------------------------------------------------------------------------
 
 The `WHS rat brain atlas <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ uses the same axis order and orientation as QuickNII: only translation of origin, and scaling have to be applied. WHS origin is at 244, 623, 248 voxel coordinates, and everything has to be converted to mm, where the atlas resolution is 0.0390625 mm (isotropic). 
