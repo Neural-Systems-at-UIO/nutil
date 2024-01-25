@@ -15,12 +15,14 @@ Nutil will either shut down or create corrupt files if it loses connection with 
 
 Nutil will also shut down if it encounters an unexpected error. While we have done our best to add informative error messages, if it encounters an error we have not anticipated, it will automatically shut down. 
 
-**Transform:  **
---------------------
+**Transform: I get the error "Maximum TIFF file size exceeded", what do I do?**
+--------------------------------------------------------------------------------
+Older versions of Nutil (v0.4.0 - v0.8.0) do not support BigTIFF images (TIFFs exceeding 4 GB). This means that transformation will fail if your images exceed 4 GB either at their original size or during transformation (e.g. rotation may temporarily increase size since the images are filled with pixels to keep them rectangular). If your images are large (almost 4 GB), use "JPEG compression" to reduce the chance of errors.
 
+BigTIFF support has now been implemented in Nutilv1.0.0.
 
 **Quantifier: There are no object counts in the reports (N/A)?**
-----------------------------------------------------
+----------------------------------------------------------------
 
 This is usually because Object Splitting is turned "on", which means that each object pixel is assigned to its correct anatomical location. This gives correct percentage coverage per regioon, but invalidates the counts as objects that cross region boundaries are split into two or more objects. Therefore the object count: N/A. To get object counts, turn object splitting "off". This means that each object is assigned to one region only, giving accurate counts per regions. 
 
@@ -29,7 +31,9 @@ See for more info: https://nutil.readthedocs.io/en/latest/QuantifierOS.html
 **Quantifier: The reports (CSV) don't open correctly in Microsoft Excel**
 -------------------------------------------------
 
-Different countries have different conventions regarding file separators. The CSV files from Nutil have semi-colon (;) delimiters (this is the default delimiter in the Norwegian version of Microsoft Excel). However, comma (,) is the default separator in the US, UK and some European countries, which means that the CSV files will not open automatically in MicroSoft Excel. To open the CSV in Excel, open Excel, go to "Data" > "From Text" > select the report to open > select "Delimiter" > select "semicolon". 
+Different countries have different conventions regarding file separators. Output files (CSV) from Nutil have semi-colon delimiters (;) since this is the default delimiter in the Norwegian version of Microsoft Excel. However, comma (,) is the default separator in the US, UK and some European countries, which means that the CSV files will not open automatically in Microsoft Excel in these countries. 
+
+To open the CSV in Excel, open Excel, go to "Data" > "From Text" > select the report to open > select "Delimiter" > select "semicolon". 
 
 It is also possible to change the default separator on your computer by changing the regional settings. Start > Control Panel > Regional and Language Options > Additional Settings > List Separator- enter a semicolon (;). This can then be changed back to comma (,) when you have finished your analysis. 
 
