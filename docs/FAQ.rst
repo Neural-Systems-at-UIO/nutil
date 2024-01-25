@@ -72,5 +72,12 @@ The `WHS rat brain atlas <https://www.nitrc.org/plugins/mwiki/index.php?title=qu
 
 A converter is provided `here <https://www.nesys.uio.no/QuickNII/Q2WHSRat.html>`_.
 
+Quantifier: How do the QUINT coordinates for mouse (Allen CCFv3) relate to Bregma?
+---------------------------------------------------------------------------------------
+For the mouse, the QUINT workflow uses the Allen CCFv3 as the reference atlas. The CCF was created from brains out-of-skull that have been registered to create an average volume. Bregma location is not recorded, so it is not possible to directly convert to stereotaxic coordinates. However, it is possible to estimate the position of Bregma. See the following posts on the Allen Brain Map community forum:
+
+https://community.brain-map.org/t/why-doesnt-the-3d-mouse-brain-atlas-have-bregma-coordinates/158
+https://community.brain-map.org/t/how-to-transform-ccf-x-y-z-coordinates-into-stereotactic-coordinates/1858
+
 
 
