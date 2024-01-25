@@ -19,7 +19,7 @@ Nutil will also shut down if it encounters an unexpected error. While we have do
 --------------------------------------------------------------------------------
 Older versions of Nutil (v0.4.0 - v0.8.0) do not support BigTIFF images (TIFFs exceeding 4 GB). This means that transformation will fail if your images exceed 4 GB either at their original size or during transformation (e.g. rotation may temporarily increase size since the images are filled with pixels to keep them rectangular). If your images are large (almost 4 GB), use "JPEG compression" to reduce the chance of errors.
 
-BigTIFF support has now been implemented in Nutilv1.0.0.
+BigTIFF support is implemented in Nutilv1.0.0.
 
 **Quantifier: There are no object counts in the reports (N/A)?**
 ----------------------------------------------------------------
