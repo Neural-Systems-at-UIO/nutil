@@ -15,7 +15,7 @@ Nutil will either shut down or create corrupt files if it loses connection with 
 
 Nutil will also shut down if it encounters an unexpected error. While we have done our best to add informative error messages, if it encounters an error we have not anticipated, it will automatically shut down. 
 
-**Transform: I get the error "Maximum TIFF file size exceeded", what do I do?**
+**Transform: "Maximum TIFF file size exceeded", what do I do?**
 --------------------------------------------------------------------------------
 Older versions of Nutil (v0.4.0 - v0.8.0) do not support BigTIFF images (TIFFs exceeding 4 GB). This means that transformation will fail if your images exceed 4 GB either at their original size or during transformation (e.g. rotation may temporarily increase size since the images are filled with pixels to keep them rectangular). If your images are large (almost 4 GB), use "JPEG compression" to reduce the chance of errors.
 
