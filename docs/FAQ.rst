@@ -40,27 +40,26 @@ It is also possible to change the default separator on your computer by changing
 **Quantifier: I don't understand what to enter for the Pixel Scale?**
 ---------------------------------------------------------
 
-* It is not usually necessary to enter a Pixel Scale in Nutil. This is because the regional loads are ratios (no. of pixels corresponding to your objects divided by no. of pixels representing the region), which means that they are not affected by the pixel scale. If the goal is to measure regional loads or no. of objects per region, then leave the Pixel Scale blank. 
-
-* If you need the "real" size of your objects or regions, multiply the pixel counts in the reports by the area represented by each pixel in the segmentated images (pixel scale is an area, for example in um2). As long as all the segmented images have the same pixel scale, the pixel scale can be entered in Nutil and this calculation will be performed automatically. **Note** that it is the pixel scale of the segmentations that counts here, not the pixel scale of the images used for atlas registration! 
+* It is not usually necessary to enter a Pixel Scale in Nutil. This is because the regional loads are ratios, which means that they are not affected by the pixel scale (no. of pixels representing your objects divided by the no. of pixels representing the region). If the goal is to measure regional loads or no. of objects per region, then leave the Pixel Scale blank. 
+* If you need the "real-life" size of your objects or regions, multiply the pixel counts in the reports by the area (e.g. in um2) represented by each pixel in the segmentations. As long as all the segmented images have the same scale, the pixel scale can be entered in Nutil and this calculation will be performed automatically. It is the pixel scale of the segmentations that counts here, not the pixel scale of the images used for atlas registration! 
 
 **Quantifier: How do I calculate the Pixel Scale of images that have been downscaled?**
 --------------------------------------------------------------------------
 
-To do this, you need the pixel width of your original images in "real life" terms, for example, pixel width = 0.4 um (this depends on the microscope settings and is usually provided by the scanner). You also need to know the resize factor that was used to downscale the images prior to segmentation, for example, 0.5. The pixel width in the downscaled images can be calculated as follows: original width / resize factor, for example, 0.4 / 0.5 = 0.8 um. To calculate the pixel scale of your downscaled images, square this number. This converts it to an area, for example, 0.8 x 0.8 = 0.64 um2. 
+To do this, you need the pixel width of your original images in "real-life" terms, for example, pixel width = 0.4 um (this depends on the microscope settings and is usually provided by the scanner). You also need to know the resize factor that was used to downscale the images prior to segmentation, for example, 0.5. The pixel width in the downscaled images can be calculated as follows: original width / resize factor, for example, 0.4 / 0.5 = 0.8 um. To calculate the pixel scale of your downscaled images, square this number. This converts it to an area, for example, 0.8 x 0.8 = 0.64 um2. 
 
 **Quantifier: The QUINT coordinates do not match Allen Common Coordinate Framework coordinates. What's going on?**
 -------------------------------------------------------------------------------------------------------------------
 
 This is true, but is easy to solve as we provide a `converter <https://www.nesys.uio.no/QuickNII/Q2ABA.html>`_.
 
-The coordinates from `QuickNII and the QUINT workflow <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ follow Right-Anterior-Superior orientation and are expressed in voxels. 
+The coordinates from `QuickNII and QUINT <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ follow a Right-Anterior-Superior orientation and are expressed in voxels (this matches the Nifti standard). 
 
 * First axis (x) starts from the left side of the volume, and points towards the right
 * Second axis (y) starts from the backmost position in the volume, and points towards the front
 * Third axis (z) starts from the bottom of the volume and points towards the top
 
-The `Allen CCFv3 <http://help.brain-map.org/display/mousebrain/API>`_ follows a Posterior-Inferior-Right axis directions, and the values are expressed in μm . This necessitates a three-step transformation:
+The `Allen CCFv3 <http://help.brain-map.org/display/mousebrain/API>`_ follows a Posterior-Inferior-Right axis directions, and the values are expressed in μm. This necessitates a three-step transformation:
 
 * Reordering coordinates: [x,y,z]RAS,vox => [y,z,x]ASR,vox
 * Flipping posterior-anterior and inferior-superior axes: [x,y,z]RAS,vox => [527-y,319-z,x]PIR,vox
@@ -69,7 +68,7 @@ The `Allen CCFv3 <http://help.brain-map.org/display/mousebrain/API>`_ follows a 
 **The QUINT coordinates do not match the WHS coordinate system. What going on?**
 ---------------------------------------------------------------------------------------------
 
-The `WHS rat brain atlas <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ uses the same axis order and orientation as QuickNII, only translation of origin, and scaling have to be applied. WHS origin is at 244, 623, 248 voxel coordinates, and everything has to be converted to mm, where the atlas resolution is 0.0390625 mm (isotropic). 
+The `WHS rat brain atlas <https://www.nitrc.org/plugins/mwiki/index.php?title=quicknii:Coordinate_systems>`_ uses the same axis order and orientation as QuickNII: only translation of origin, and scaling have to be applied. WHS origin is at 244, 623, 248 voxel coordinates, and everything has to be converted to mm, where the atlas resolution is 0.0390625 mm (isotropic). 
 
 A converter is provided `here <https://www.nesys.uio.no/QuickNII/Q2WHSRat.html>`_.
 
