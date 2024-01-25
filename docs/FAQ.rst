@@ -2,14 +2,14 @@
 =======
 
 **I can't open the application. "Windows protected your PC"**
-----------------------------------------------------
+---------------------------------------------------------------
 
 "Windows protected your PC, Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk".'
 
 To fix this, right click on the Nutil.cmd > Properties > General > check "unblock" under Security. 
 
 **Nutil shuts down during a run and/or generates corrupt files**
-----------------------------------------------------
+---------------------------------------------------------------
 
 Nutil will either shut down or create corrupt files if it loses connection with the images while running. To prevent this, install Nutil locally (on the C:drive) and apply Nutil to images that are stored locally (on the C:drive). Nutil can also be applied from the C:drive to files stored elsewhere (for example, on a remove drive). However, if you have problems with crashing and corrupt files, try saving the input images in the same location as the Nutil software. 
 
@@ -24,12 +24,12 @@ BigTIFF support is implemented in Nutilv1.0.0.
 **Quantifier: There are no object counts in the reports (N/A)?**
 ----------------------------------------------------------------
 
-This is usually because Object Splitting is turned "on", which means that each object pixel is assigned to its precise anatomical location. This gives correct percentage coverage per regioon, but invalidates the counts as objects that cross region boundaries are split into two or more objects. Therefore the object count: N/A. To get object counts, turn object splitting "off". This means that each object is assigned to one region only, giving accurate counts per regions. 
+This is usually because Object Splitting is turned "on", which means that each object pixel is assigned to its precise anatomical location. This gives correct regional coverage, but invalidates the counts as objects that overlap region boundaries are split into two or more objects (giving object count: N/A). To get precise object counts, turn object splitting "off". This means that each object is assigned to one region only, giving reliable counts per regions (objects that overlap many regions will be assigned to one at random). 
 
 See for more info: https://nutil.readthedocs.io/en/latest/QuantifierOS.html
 
 **Quantifier: The reports (CSV) don't open correctly in Microsoft Excel**
--------------------------------------------------
+-----------------------------------------------------------------------------
 
 Different countries have different conventions regarding file separators. Output files (CSV) from Nutil have semi-colon delimiters (;) since this is the default delimiter in the Norwegian version of Microsoft Excel. However, comma (,) is the default separator in the US, UK and some European countries, which means that the CSV files will not open automatically in Microsoft Excel in these countries. 
 
