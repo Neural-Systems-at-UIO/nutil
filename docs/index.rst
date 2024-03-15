@@ -24,7 +24,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    
 .. toctree::
    :caption: Quantifier operation
-   :numbered:
+   :numbered: 1
    :maxdepth: 3
    
    QuantifierIntro
