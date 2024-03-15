@@ -37,19 +37,24 @@ See `Object splitting explained. <https://nutil.readthedocs.io/en/latest/Quantif
 
 
 
-**RefAtlasRegion report**
+**RefAtlasRegion reports**
 ----------------------------
    
-RefAtlasRegion reports contain quantifications per atlas-region based on the finest level of granularity of the atlas. There is one report for the whole series (all sections combined) and one per section.
+CSV files listing quantifications per atlas-region at the finest level of granularity of the reference atlas. 
 
 .. note::
-   **The CCFv3 atlas** includes regions that are not delineated in the atlas volume. These regions are either big regions that have been delineated into smaller regions and so are not assigned to any voxels in the reference atlas, or are smaller regions that are not delineated. In the reports, these regions have no results (zero for region pixels and for object pixels). Exclude them from your analysis.  
+   Reference atlases are organised in systematic hierarchies that group related regions. This means that "parent" structures (e.g. cortical plate) are subdivided into "child" structures (e.g. isocortex, olfactory areas, hippocampal formation), which are then further subdivided into "child" structures, etc. While the reports list all the regions in the reference atlas, they only report results for regions assigned to voxels in the atlas volume. This means that many regions give no results (zero for region pixels and object pixels). These regions are either larger parent structures that have been delineated into smaller regions and so are not assigned to any voxels in the atlas volume, or are smaller regions that have not been delineated yet (may come in future atlas releases). Exclude these from your analysis. 
+   
+   For some regions, results are given at a coarser levels of atlas granularity as well as for a finer level of atlas granularity. This happens if a "parent" structure (e.g. thalamus) has been subdivided into "child" regions (e.g. thalamic nuclei), but some voxels remain unassigned to a "child" region and remain with the "parent" structure. In this case, results can be reported as "thalamus, unassigned". 
 
-   The **Clear Label** ID covers objects that fall outside of the atlas maps
+.. note::
+   The **Clear Label** ID covers objects that fall outside of the atlas volume. 
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
     :width: 5.88611in
     :height: 2.86512in
+
+
  
 **CustomRegion report**
 ------------------------
