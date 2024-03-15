@@ -49,7 +49,7 @@ Example
     :height: 2.86512in
 
 .. tip::
-   Understanding reference atlas regions
+   **Understanding reference atlas regions**
 
    Reference atlases are organised in systematic hierarchies that group related regions. This means that "parent" structures (e.g. cortical plate) are subdivided into "child" structures (e.g. isocortex, olfactory areas, hippocampal formation), which are further subdivided into "child" structures (e.g. hippocampal cell layers), etc. While the reports list all the region names in the reference atlas hierarchy, results are only reported for regions assigned to voxels in the atlas volume. This means that many regions report no results. These regions are either "parent" structures that have been delineated into smaller regions and are no longer assigned to voxels in the atlas volume, or "child" structures that have not been delineated yet (may come in future atlas releases). Regions with no results should be excluded from your analysis.
    
