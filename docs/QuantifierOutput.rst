@@ -40,21 +40,20 @@ See `Object splitting explained. <https://nutil.readthedocs.io/en/latest/Quantif
 **RefAtlasRegion reports**
 ----------------------------
    
-CSV files listing quantifications per atlas-region for each region assigned to voxels in the reference atlas volume. A report is provided per section and for the whole series combined.  
+CSV files listing quantifications per atlas-region for each region assigned to voxels in the reference atlas volume. There is a report per section and a report for the whole series combined.
 
-.. note::   
-   Reference atlases are organised in systematic hierarchies that group related regions. This means that "parent" structures (e.g. cortical plate) are subdivided into "child" structures (e.g. isocortex, olfactory areas, hippocampal formation), which are further subdivided into "child" structures (e.g. hippocampal cell layers), etc. While the reports list all the region names in the reference atlas hierarchy, results are only reported for regions assigned to voxels in the atlas volume. This means that many regions report no results. These regions are either "parent" structures that have been delineated into smaller regions and are no longer assigned to voxels in the atlas volume, or "child" structures that have not been delineated yet (may come in future atlas releases). Regions with no results should be excluded from your analysis.
-   
-   For some regions, results are given at a coarser level of atlas granularity (e.g. thalamus) as well as for finer levels of atlas granularity (e.g. subthalamic nuclei). This happens if the "parent" region has been subdivided into "child" regions, but some voxels remain unassigned and remain with the "parent" structure. Results reported for these "parent" regions (e.g. thalamus) correspond to "parent region, unassigned voxels" (e.g. thalamus, unassigned), not to the whole parent structure. To get usable results for a "parent" structure (e.g. thalamus), use the custom region feature in Nutil. This allows you to combine reference atlas regions into your own customised regions. As most "parent regions, unassigned" correspond to very small volumes (sometimes only a few voxels), results from these regions can either be removed from the analysis, or reported as "parent region, unassigned". 
-
-.. note::
-   The **Clear Label** ID covers objects that fall outside of the atlas volume. 
+Example
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image13.png
     :width: 5.88611in
     :height: 2.86512in
 
+Reference atlases are organised in systematic hierarchies that group related regions. This means that "parent" structures (e.g. cortical plate) are subdivided into "child" structures (e.g. isocortex, olfactory areas, hippocampal formation), which are further subdivided into "child" structures (e.g. hippocampal cell layers), etc. While the reports list all the region names in the reference atlas hierarchy, results are only reported for regions assigned to voxels in the atlas volume. This means that many regions report no results. These regions are either "parent" structures that have been delineated into smaller regions and are no longer assigned to voxels in the atlas volume, or "child" structures that have not been delineated yet (may come in future atlas releases). Regions with no results should be excluded from your analysis.
+   
+   For some regions, results are given at a coarser level of atlas granularity (e.g. thalamus) as well as for finer levels of atlas granularity (e.g. subthalamic nuclei). This happens if the "parent" region has been subdivided into "child" regions, but some voxels remain unassigned and remain with the "parent" structure. Results reported for these "parent" regions (e.g. thalamus) correspond to "parent region, unassigned voxels" (e.g. thalamus, unassigned), not to the whole parent structure. To get usable results for a "parent" structure (e.g. thalamus), use the custom region feature in Nutil. This allows you to combine reference atlas regions into your own customised regions. As most "parent regions, unassigned" correspond to small volumes (sometimes only a few voxels), results from these regions can either be removed from the analysis, or reported as "parent region, unassigned". 
 
+.. note::
+   The **Clear Label** ID covers objects that fall outside of the atlas volume. 
  
 **CustomRegion report**
 ------------------------
