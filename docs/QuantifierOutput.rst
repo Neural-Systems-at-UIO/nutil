@@ -57,7 +57,7 @@ Example
    
    For some regions, results may be given at a coarser level as well as for finer levels of the atlas hierarchy (e.g. thalamus and for thalamic subregions). This happens if a "parent" region has been subdivided into subregions, but some voxels are unassigned, instead remaining with the "parent" structure. Results reported for these "parent" regions (e.g. thalamus) correspond to "parent region, unassigned voxels", not to the whole parent structure.As most "parent regions, unassigned" correspond to small volumes (sometimes only a few voxels), results from these regions should be removed from your analysis or reported as "parent region, unassigned". 
 
-    To get usable results for a "parent" structure (e.g. thalamus), use the custom region feature in Nutil. This allows you to combine reference atlas regions into your own customised regions. 
+   To get usable results for a "parent" structure (e.g. thalamus), use the custom region feature in Nutil. This allows you to combine reference atlas regions into your own customised regions. 
 
 .. note::
    The **Clear Label** ID covers objects that fall outside of the atlas volume. 
