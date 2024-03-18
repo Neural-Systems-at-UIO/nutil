@@ -40,7 +40,7 @@ See `Object splitting explained. <https://nutil.readthedocs.io/en/latest/Quantif
 **RefAtlasRegion reports**
 ----------------------------
    
-CSV files listing quantifications per atlas-region for each region assigned to voxels in the reference atlas volume. There is a report per section and a report for the whole series combined.
+CSV files listing quantifications per atlas-region for each region assigned voxels in the reference atlas volume. There is a report per section and a report for all sections combined (whole series).
 
 Example
 
@@ -53,7 +53,7 @@ Example
 
    Reference atlases are organised in systematic hierarchies that group related regions. This means that "parent" structures (e.g. cortical plate) are subdivided into "child" structures (e.g. isocortex, olfactory areas, hippocampal formation), which are further subdivided into "child" structures (e.g. hippocampal cell layers), etc. 
 
-   While the reports list all the region names included in the reference atlas hierarchy, results are only given for region names assigned to voxels in the atlas volume. This means that many regions report no results. These regions are either "parent" structures that have been delineated into smaller regions and so are no longer assigned to voxels in the atlas volume, or "child" structures that have not been delineated yet (may come in future atlas releases). Regions with no results should be excluded from your analysis.
+   While the reports list all the region names included in the reference atlas hierarchy, results are only given for regions assigned to voxels in the atlas volume. This means that many regions report no results. These regions are either "parent" structures that have been delineated into smaller regions and so are no longer assigned to voxels in the volume, or "child" structures that have not been delineated yet (may come in future atlas releases). Regions with no results should be excluded from your analysis.
    
    For some regions, results may be given at coarser levels as well as for finer levels of the atlas hierarchy (e.g. thalamus and for thalamic subregions). This happens if a "parent" region has been subdivided into subregions, but some voxels are unassigned, instead remaining with the "parent" structure. Results reported for these "parent" regions (e.g. thalamus) correspond to "parent region, unassigned voxels", not to the whole parent structure. As most "parent regions, unassigned" correspond to small volumes (sometimes only a few voxels), results from these regions should be removed from your analysis or reported as "parent region, unassigned". 
 
