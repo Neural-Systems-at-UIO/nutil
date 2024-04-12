@@ -51,7 +51,7 @@ Example
 .. tip::
    **Understanding reference atlas regions**
 
-   Reference atlas regions are organised in systematic hierarchies that group related regions. For example, a "root" structure (whole brain) is subdivided into "parent" structures (e.g. cortical plate), which is subdivided into "child" structures (e.g. isocortex, olfactory areas, hippocampal formation), which are further subdivided into detailed "child" structures (e.g. hippocampal cell layers). There can be many levels of granularity, with the region names at the finest levels of granularity predominately assigned to voxels in the atlas volume.  
+   Reference atlas regions are organised in systematic hierarchies that group related regions. For example, the whole brain "root" structure is subdivided into "parent" structures (e.g. cortical plate), which is subdivided into "child" structures (e.g. isocortex, olfactory areas, hippocampal formation), which are further subdivided into detailed "child" structures (e.g. hippocampal cell layers). There can be many levels of granularity, with the region names at the finest levels of granularity predominately assigned to voxels in the atlas volume.  
 
    While the reports list all the regions in the reference atlas hierarchy, Nutil only gives results for regions assigned voxels in the atlas volume. This means that many regions give no results. These regions are either "parent" structures that have been delineated into smaller regions and so are no longer assigned voxels in the volume, or "child" structures that have not been delineated yet (may come in future atlas releases). Regions with no results should be excluded from analysis.
    
