@@ -891,6 +891,12 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegionRat_v4.xlsx";
        //LMessage::lMessage.Message("Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.");
-    }
 
+    }
+    if (labelType == "Developmental Mouse Brain Atlas (DeMBA)") {
+        m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
+        if (data->Get("custom_region_type").toLower()=="default")
+            m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
+
+    }
 }
