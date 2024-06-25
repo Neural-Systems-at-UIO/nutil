@@ -22,9 +22,4 @@ Release/dialoggeneratedata.obj
 Release/data.obj
 Release/buffer2d.obj
 Release/atlaslabel.obj
-ui_dialoggeneratedata.h
-ui_dialoghelp.h
-ui_dialognewfile.h
-ui_dialogsettings.h
-ui_dialogtiff.h
-ui_mainwindow.h
+
