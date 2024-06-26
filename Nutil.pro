@@ -310,6 +310,7 @@ linux*{
 #DEPENDPATH += $$PWD/lib/libxl-3.8.1.0/include_cpp
 
 DISTFILES += \
+    Resources/Nutil_logo_black.png \
     Resources/text/quantifier.txt \
     Resources/text/tiffcreator.txt
 

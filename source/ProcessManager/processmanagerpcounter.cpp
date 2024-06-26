@@ -33,7 +33,7 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
         m_xmlAnchor = AnchorFactory::Load(m_anchorFile);
     //        m_xmlAnchor.Load(m_anchorFile);
     else {
-        LMessage::lMessage.Message("Could not find anchor file: " + m_anchorFile + ". Please specify in the input xml file!" );
+        LMessage::lMessage.Message("Could not find anchor file: " + m_anchorFile + ". Please specify in the input .JSON file!" );
         Data::data.abort = true;
     }
 
@@ -45,14 +45,14 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
             //qDebug() << "*** ATLAS: " +m_xmlAnchor->m_atlas;
             if (!atlasQuickniiMap.contains(m_xmlAnchor->m_atlas)) {
                 // Unknown anchoring data?
-                LMessage::lMessage.Message("<font color=\"#FF7000\">Warning: unrecognized atlas '"+m_xmlAnchor->m_atlas+"' in the .json anchor file. Nutil will instead use the selected atlas.</font>");
+                LMessage::lMessage.Message("<font color=\"#FF7000\">Warning: unrecognized atlas '"+m_xmlAnchor->m_atlas+"' in the .JSON anchor file. Nutil will use the selected atlas.</font>");
 
             }
             else {
                 if (atlasQuickniiMap[m_xmlAnchor->m_atlas]!=labelType) {
 
-//                    LMessage::lMessage.Message("<font color=\"#FF0000\">Error: Atlas map specified in the anchor file not the same as specified in nutil. Please make sure that these are identical types. ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
-                    LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: Atlas map specified in the anchor file not the same as specified in nutil. Overriding with the specified type: ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
+//                    LMessage::lMessage.Message("<font color=\"#FF0000\">Error: Atlas specified in the .JSON anchor file not the same as specified in Nutil. Please make sure that these are identical types. ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
+                    LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: Atlas specified in the .JSON anchor file not the same as specified in Nutil. Overriding with the specified type: ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
                     //Data::data.abort = true;
                     m_overrideLabelFile = atlasQuickniiMap[m_xmlAnchor->m_atlas];
                     // Make sure values are set
@@ -91,7 +91,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         LoadXML(data);
 
     if (m_pixelCutoffMax<=m_pixelCutoff) {
-        LMessage::lMessage.Error("Error: max pixel cutoff cannot be lower than lower pixel cutoff.");
+        LMessage::lMessage.Error("Error: maximum pixel cutoff cannot be lower than minimum pixel cutoff.");
         m_processItems.clear();
         return false;
 
@@ -227,7 +227,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 
     if (m_processItems.count()==0) {
-        LMessage::lMessage.Error("Error: You need to specify at least one input file. Press the help button for instructions, Nutil is currently searching for files that contain the following regular expression format: '"+m_regexp + "'. Please make sure that this format matches the IDs in your input files.");
+        LMessage::lMessage.Error("Error: You need to specify at least one input file. Press the help button for instructions, Nutil is searching for files that contain the following regular expression format: '"+m_regexp + "'. Please make sure that this matches the format of the IDs in your input files.");
 
     }
 
@@ -244,7 +244,7 @@ void ProcessManagerPCounter::Execute()
     if (m_dataType==QUINT) {
         m_labels.Load(m_labelFile);
         if (m_labels.atlases.count()==0) {
-            LMessage::lMessage.Error("Incorrect label file. Please check parameters in excel sheet.");
+            LMessage::lMessage.Error("Incorrect label file. Please check the parameters in Excel sheet.");
             return;
         }
         Data::data.m_isQuickNII = true;
@@ -354,7 +354,7 @@ void ProcessManagerPCounter::Execute()
                 atlasFile = atlasFileSeg;
 
             if (atlasFile=="" && m_dataType == QUINT) {
-                LMessage::lMessage.Error("Could not find any atlas flat files!");
+                LMessage::lMessage.Error("Could not find any atlas .FLAT files!");
                 Data::data.abort = true;
             }
             //        if (Data::data.abort)
@@ -466,7 +466,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
     QString copyFilename =m_outputDir + "/"+(data->m_openFile.split("/").last().split("\\").last());
     data->Save(copyFilename);
     if (m_outputDir.trimmed()=="") {
-        LMessage::lMessage.Error("Error: output directory not specified. ");
+        LMessage::lMessage.Error("Error: an output directory is not specified. ");
         Data::data.abort = true;
         return;
 
@@ -590,13 +590,13 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         LBook* sbook = nullptr;
   //      if (m_customRegionType=="custom" || m_customRegionType=="default") {
             if (!QFile::exists(m_reportSheetName)) {
-                LMessage::lMessage.Error("You need to specify a custom region report in the input settings.");
+                LMessage::lMessage.Error("You need to specify a custom region file in the input settings.");
                 Data::data.abort = true;
                 return;
             }
 
             if (!m_reportSheetName.toLower().endsWith(".xlsx") && !m_reportSheetName.toLower().endsWith(".txt")) {
-                LMessage::lMessage.Error("Error: custom region file must be xlsx");
+                LMessage::lMessage.Error("Error: the custom region file must be in .XLSX format");
                 Data::data.abort = true;
                 return;
             }
@@ -636,7 +636,7 @@ void ProcessManagerPCounter::ReadHeader(NutilTemplate* data)
         SaveCustomReportColors(reportSheet,m_outputDir+"/custom_report_colors.csv");
 
     if (reportSheet == nullptr) {
-        LMessage::lMessage.Error("Error: could not find any report sheet in the excel file!");
+        LMessage::lMessage.Error("Error: could not find any report sheet in the Excel file!");
         Data::data.abort = true;
         return;
     }
@@ -855,7 +855,7 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
         m_labelFile = data->Get("custom_label_file");
         //m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
         if (data->Get("custom_region_type").toLower()!="custom") {
-            LMessage::lMessage.Message("Warning: you are using a custom label file without a custom report file.");
+            LMessage::lMessage.Message("Warning: you have used a custom atlas without a custom region file.");
         }
     }
     if (labelType == "Allen Mouse Brain 2015") {
@@ -870,8 +870,8 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
     }
     if (labelType == "Kim Unified Mouse 2019") {
         m_labelFile = ":Resources/labels/KimMouse_2019.label";
-//        if (data->Get("custom_region_type").toLower()=="default")
-  //          m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
+        if (data->Get("custom_region_type").toLower()=="default")
+            m_reportSheetName = ":Resources/CustomRegions/CustomRegion_Kim_Unified_Mouse.xlsx";
 
     }
     if (labelType == "WHS Atlas Rat v2") {

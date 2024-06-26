@@ -50,7 +50,6 @@
         <file>Resources/text/help/transform/name.rtf</file>
         <file>Resources/text/help/quantifier/analysis_type.rtf</file>
         <file>Resources/text/help/transform/type.rtf</file>
-        <file>Resources/Nutil_logo_black.png</file>
         <file>Resources/text/help/resize/name.rtf</file>
         <file>Resources/text/help/resize/resize_input_dir.rtf</file>
         <file>Resources/text/help/resize/resize_output_compression.rtf</file>
@@ -85,6 +84,9 @@
         <file>Resources/text/help/quantifier/coordinate_single_point.rtf</file>
         <file>Resources/labels/KimMouse_2019.label</file>
         <file>Resources/labels/AllenMouseBrain_Atlas_CCF_2022.label</file>
+        <file>Resources/CustomRegions/CustomRegion_Kim_Unified_Mouse.xlsx</file>
+        <file>Resources/Logos_BlackWhite_Nutil_slices.jpg</file>
+        <file>Resources/Nutil_logo_black.png</file>
         <file>Resources/images/Nutil_logo_black.png</file>
     </qresource>
 </RCC>
