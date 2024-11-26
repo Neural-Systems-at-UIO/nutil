@@ -28,7 +28,7 @@ This is usually because Object Splitting is turned "on", which means that each o
 
 See for more info: https://nutil.readthedocs.io/en/latest/QuantifierOS.html
 
-**Quantifier: The reports (CSV) don't open correctly in Microsoft Excel**
+**Quantifier: The CSV reports don't open correctly in Microsoft Excel**
 -----------------------------------------------------------------------------
 
 Different countries have different conventions regarding file separators. CSV files from Nutil have semi-colon delimiters (;) as this is the default delimiter in the Norwegian version of Microsoft Excel. However, comma (,) is the default separator in the US, UK and some European countries, which means that the CSV files will not open automatically in Microsoft Excel in these countries. 
