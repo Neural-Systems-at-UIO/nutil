@@ -31,9 +31,9 @@ See for more info: https://nutil.readthedocs.io/en/latest/QuantifierOS.html
 **Quantifier: The reports (CSV) don't open correctly in Microsoft Excel**
 -----------------------------------------------------------------------------
 
-Different countries have different conventions regarding file separators. Output files (CSV) from Nutil have semi-colon delimiters (;) since this is the default delimiter in the Norwegian version of Microsoft Excel. However, comma (,) is the default separator in the US, UK and some European countries, which means that the CSV files will not open automatically in Microsoft Excel in these countries. 
+Different countries have different conventions regarding file separators. CSV files from Nutil have semi-colon delimiters (;) as this is the default delimiter in the Norwegian version of Microsoft Excel. However, comma (,) is the default separator in the US, UK and some European countries, which means that the CSV files will not open automatically in Microsoft Excel in these countries. 
 
-To open the CSV in Excel, open Excel, go to "Data" > "From Text" > select the report to open > select "Delimiter" > select "semicolon". 
+To open CSV files in Excel, open Excel, go to "Data" > "From Text" > select the report to open > select "Delimiter" > select "semicolon". 
 
 It is also possible to change the default separator on your computer by changing the regional settings. Start > Control Panel > Regional and Language Options > Additional Settings > List Separator- enter a semicolon (;). This can then be changed back to comma (,) when you have finished your analysis. 
 
