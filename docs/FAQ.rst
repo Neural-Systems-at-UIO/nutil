@@ -24,7 +24,7 @@ BigTIFF support is implemented in Nutilv1.0.0.
 **Quantifier: There are no object counts in the reports (N/A)?**
 ----------------------------------------------------------------
 
-This is usually because Object Splitting is turned "on", which means that each object pixel is assigned to its precise anatomical location. This gives correct regional coverage, but invalidates the counts as objects that overlap region boundaries are split into two or more objects (giving object count: N/A). To get precise object counts, turn object splitting "off". This means that each object is assigned to one region only, giving reliable counts per regions (objects that overlap many regions will be assigned to one at random). 
+This is usually because Object Splitting is turned on in Nutil (Object splitting = YES), which means that each object pixel is assigned to its precise anatomical location. This gives correct regional loads (area fraction), but invalidates the object counts as objects overlapping two or more regions will be artificially split into two or more objects (giving object count: N/A). To get precise object counts, turn object splitting off (Object splitting = NO). This means that each object is assigned to one region only, giving reliable counts per regions. Note that objects overlapping many regions will be assigned to one of the regions at random. 
 
 See for more info: https://nutil.readthedocs.io/en/latest/QuantifierOS.html
 
