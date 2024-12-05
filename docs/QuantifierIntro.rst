@@ -3,13 +3,13 @@
 
 **Nutil Quantifier** is an integral part of the `QUINT workflow <https://quint-workflow.readthedocs.io>`_. It supports the quantification of labelled features in histological image series from mouse and rat brain using a reference atlas. The following atlases are supported:
 
-* Allen Mouse Brain Atlas, Common Coordinate Framework version 3 (CCFv3), delineations from 2015
-* Allen Mouse Brain Atlas, Common Coordinate Framework version 3 (CCFv3), delineations from 2017
-* Waxholm Atlas of the Spraque Dawley Rat (WHS), version 2, 3 and 4
-* Kim Unified Adult Mouse Brain Atlas version 1 (2019) (integrated in Nutil v1)
-* Developmental Mouse Brain Atlas for ages P4-P56 (DeMBA), using Allen CCFv3 delineations from 2017 (integrated in Nutil v1)
-* Developmental Mouse Brain Atlas for ages P4-P56 (DeMBA), using Kim Lab developmental delineations (KimLabDev CCFv001) (integrated in Nutil v1)
-* Other atlases can be used in Nutil via the custom atlas feature as long as they are implemented in QuickNII/VisuAlign
+* Allen Mouse Brain Atlas, Common Coordinate Framework version 3 (CCFv3), delineations from 2015.
+* Allen Mouse Brain Atlas, Common Coordinate Framework version 3 (CCFv3), delineations from 2017.
+* Waxholm Atlas of the Spraque Dawley Rat (WHS), version 2, 3 and 4.
+* Kim Unified Adult Mouse Brain Atlas version 1 (2019) (integrated in Nutil v1).
+* Developmental Mouse Brain Atlas for ages P4-P56 (DeMBA), using Allen CCFv3 delineations from 2017 (integrated in Nutil v1).
+* Developmental Mouse Brain Atlas for ages P4-P56 (DeMBA), using Kim Lab developmental delineations (KimLabDev CCFv001) (integrated in Nutil v1).
+* Other atlases can be used in Nutil via the custom atlas feature as long as they are implemented in QuickNII/VisuAlign.
 
 .. Warning::
    QUINT does not allow quantification without the use of an atlas or for regions that fall outside of the reference atlas.  
