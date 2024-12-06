@@ -57,10 +57,10 @@ public:
     {
         DialogNewFile->setWindowTitle(QCoreApplication::translate("DialogNewFile", "Create new file", nullptr));
         btnClose->setText(QCoreApplication::translate("DialogNewFile", "Cancel", nullptr));
-        cmbNew->setItemText(1, QCoreApplication::translate("DialogNewFile", "Transform (corrupt, use Nutil v0.8.0)", nullptr));
+    //v    cmbNew->setItemText(1, QCoreApplication::translate("DialogNewFile", "Transform (corrupt, use Nutil v0.8.0)", nullptr));
         cmbNew->setItemText(0, QCoreApplication::translate("DialogNewFile", "Quantifier", nullptr));
-        cmbNew->setItemText(2, QCoreApplication::translate("DialogNewFile", "TiffCreator", nullptr));
-        cmbNew->setItemText(3, QCoreApplication::translate("DialogNewFile", "Resize", nullptr));
+    //    cmbNew->setItemText(2, QCoreApplication::translate("DialogNewFile", "TiffCreator", nullptr));
+    //    cmbNew->setItemText(3, QCoreApplication::translate("DialogNewFile", "Resize", nullptr));
     //    cmbNew->setItemText(4, QCoreApplication::translate("DialogNewFile", "Neuroglancer", nullptr));
     //    cmbNew->setItemText(5, QCoreApplication::translate("DialogNewFile", "Volumiser", nullptr));
         btnOK->setText(QCoreApplication::translate("DialogNewFile", "Ok", nullptr));
