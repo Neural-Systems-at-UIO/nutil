@@ -81,7 +81,7 @@ public:
     QLineEdit *leProcessors;
     QLabel *label;
     QPushButton *btnOpenFolder;
-    QPushButton *btnTiffEdit;
+    // QPushButton *btnTiffEdit;
     QHBoxLayout *horizontalLayout_4;
     QLabel *lblElapsedTime;
     QMenuBar *menubar;
@@ -324,10 +324,10 @@ public:
 
         horizontalLayout_2->addWidget(btnOpenFolder);
 
-        btnTiffEdit = new QPushButton(centralwidget);
-        btnTiffEdit->setObjectName("btnTiffEdit");
+        //btnTiffEdit = new QPushButton(centralwidget);
+        //btnTiffEdit->setObjectName("btnTiffEdit");
 
-        horizontalLayout_2->addWidget(btnTiffEdit);
+        //horizontalLayout_2->addWidget(btnTiffEdit);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
@@ -500,7 +500,7 @@ public:
         btnUserdocs->setText(QCoreApplication::translate("MainWindow", "User documentation", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "# threads", nullptr));
         btnOpenFolder->setText(QCoreApplication::translate("MainWindow", "Open folder", nullptr));
-        btnTiffEdit->setText(QCoreApplication::translate("MainWindow", "TIFF Editor", nullptr));
+        // btnTiffEdit->setText(QCoreApplication::translate("MainWindow", "TIFF Editor", nullptr));
         lblElapsedTime->setText(QCoreApplication::translate("MainWindow", "Elapsed time:", nullptr));
         menuTest->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuJadda->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
