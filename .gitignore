@@ -23,3 +23,6 @@ Release/data.obj
 Release/buffer2d.obj
 Release/atlaslabel.obj
 
+# Visual Studio build folders after install
+**/obj/
+**/bin/
