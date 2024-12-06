@@ -42,32 +42,7 @@
    </property>
    <item>
     <property name="text">
-     <string>Transform</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
      <string>Quantifier</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>TiffCreator</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Resize</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Neuroglancer</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Volumiser</string>
     </property>
    </item>
   </widget>

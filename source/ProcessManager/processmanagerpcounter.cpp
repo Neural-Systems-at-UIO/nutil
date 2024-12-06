@@ -858,17 +858,17 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
             LMessage::lMessage.Message("Warning: you have used a custom atlas without a custom region file.");
         }
     }
-    if (labelType == "Allen Mouse Brain 2015") {
+    if (labelType == "Allen Mouse Brain Atlas (2015)") {
         m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
     }
-    if (labelType == "Allen Mouse Brain 2017") {
+    if (labelType == "Allen Mouse Brain Atlas (2017)") {
         m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
     }
-    if (labelType == "Kim Unified Mouse 2019") {
+    if (labelType == "Kim Unified Adult Mouse Brain Atlas (2019)") {
         m_labelFile = ":Resources/labels/KimMouse_2019.label";
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegion_Kim_Unified_Mouse.xlsx";
@@ -893,10 +893,16 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
        //LMessage::lMessage.Message("Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.");
 
     }
-    if (labelType == "Developmental Mouse Brain Atlas (DeMBA)") {
+    if (labelType == "Developmental Mouse Brain Atlas (Allen CCFv3 2017)") {
         m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
+
+    }
+    if (labelType == "Developmental Mouse Brain Atlas (KimLabDevCCFv001)") {
+        m_labelFile = ":Resources/labels/KimLabDevCCFv001.label";
+        if (data->Get("custom_region_type").toLower()=="default")
+            m_reportSheetName = ":Resources/CustomRegions/CustomRegions_KimLabDevCCFv001.xlsx";
 
     }
 }

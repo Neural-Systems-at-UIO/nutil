@@ -88,5 +88,7 @@
         <file>Resources/Logos_BlackWhite_Nutil_slices.jpg</file>
         <file>Resources/Nutil_logo_black.png</file>
         <file>Resources/images/Nutil_logo_black.png</file>
+        <file>Resources/CustomRegions/CustomRegions_KimLabDevCCFv001.xlsx</file>
+        <file>Resources/labels/KimLabDevCCFv001.label</file>
     </qresource>
 </RCC>

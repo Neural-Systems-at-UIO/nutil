@@ -444,13 +444,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="btnTiffEdit">
-        <property name="text">
-         <string>TIFF Editor</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
     <item>
