@@ -52,8 +52,8 @@ public:
 
 
     QMap<QString, QString> atlasQuickniiMap{
-        {"ABA_Mouse_CCFv3_2015_25um", "Allen Mouse Brain 2015"},
-        {"ABA_Mouse_CCFv3_2017_25um", "Allen Mouse Brain 2017"},
+        {"ABA_Mouse_CCFv3_2015_25um", "Allen Mouse Brain Atlas CCFv3 (2015)"},
+        {"ABA_Mouse_CCFv3_2017_25um", "Allen Mouse Brain Atlas CCFv3 (2017)"},
         {"WHS_SD_Rat_v2_39um", "WHS Atlas Rat v2"},
         {"WHS_SD_Rat_v3_39um", "WHS Atlas Rat v3"},
         {"WHS_SD_Rat_v4_39um", "WHS Atlas Rat v4"},
@@ -61,7 +61,7 @@ public:
         {"WHS_Rat_v3_39um", "WHS Atlas Rat v3"},
         {"WHS_Rat_v4_39um", "WHS Atlas Rat v4"},
         {"WHS_Rat_v4_39um", "WHS Atlas Rat v4"},
-        {"Kim_UnifiedMouse_v1_20x100um", "Kim Unified Mouse 2019"},
+        {"Kim_UnifiedMouse_v1_20x100um", "Kim Unified Adult Mouse Brain Atlas (2019)"},
         };
 
 

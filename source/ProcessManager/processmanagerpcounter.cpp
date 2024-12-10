@@ -51,8 +51,8 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
             else {
                 if (atlasQuickniiMap[m_xmlAnchor->m_atlas]!=labelType) {
 
-//                    LMessage::lMessage.Message("<font color=\"#FF0000\">Error: Atlas specified in the .JSON anchor file not the same as specified in Nutil. Please make sure that these are identical types. ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
-                    LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: Atlas specified in the .JSON anchor file not the same as specified in Nutil. Overriding with the specified type: ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the xml anchor file vs '"+labelType +"' in Nutil)</font>");
+//                    LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: Atlas specified in the .JSON anchor file not the same as specified in Nutil. Check that these are the same (if you are using DeMBA, this is not a problem). ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the JSON file vs '"+labelType +"' in Nutil)</font>");
+                    LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: Atlas specified in the .JSON anchor file not the same as specified in Nutil. Overriding with the specified type: ('"+ atlasQuickniiMap[m_xmlAnchor->m_atlas]+"' from the JSON file vs '"+labelType +"' in Nutil)</font>");
                     //Data::data.abort = true;
                     m_overrideLabelFile = atlasQuickniiMap[m_xmlAnchor->m_atlas];
                     // Make sure values are set
@@ -218,7 +218,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         }
         for (int j=i+1;j<m_processItems.count();j++) {
             if (m_processItems[j]->m_reportName.toLower()==m_processItems[i]->m_reportName.toLower()) {
-                LMessage::lMessage.Error("Error: Report must have unique names for : " + m_processItems[i]->m_reportName+". Potential solution: Please make sure that the input segmentation folder and the input atlas folders are placed separately. ");
+                LMessage::lMessage.Error("Error: Report must have unique identifiers for : " + m_processItems[i]->m_reportName+". ");
                 return false;
 
             }
@@ -658,7 +658,8 @@ if (m_dataType==NONE) {
         reports.m_atlas = labelType;
 
         if (labelType == "WHS Atlas Rat v4") {
-            LMessage::lMessage.Message("<font color=\"#FF0000\">Warning: the implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.</font>");
+            LMessage::lMessage.Message("<font color=\"#FF0000\"Note: The implementation of WHSv4 in Nutil Quantifier has not been thoroughly tested.</font>");
+
         }
     }
 
@@ -778,7 +779,7 @@ void ProcessManagerPCounter::GeneratePythonPlots()
     if (Data::data.m_settings!=nullptr)
        python = Data::data.m_settings->getString("python_path");
     if (!QFile::exists(python)) {
-        LMessage::lMessage.Message("Python path not set, so plots will not be generated. Please set the correct path to your python executable, and make sure you have installed the python packages 'matplotlib', 'numpy' and 'pandas'.");
+        LMessage::lMessage.Message("Python path not set, plots will not be generated. To set up, install Python with 'matplotlib', 'numpy' and 'pandas', then set the path to your Python executable. There are known issues with the plotting feature: for most users it is not recommended to set this up.");
         return;
     }
     StartTimer();
@@ -858,12 +859,12 @@ void ProcessManagerPCounter::setupLabelFiles(NutilTemplate* data)
             LMessage::lMessage.Message("Warning: you have used a custom atlas without a custom region file.");
         }
     }
-    if (labelType == "Allen Mouse Brain Atlas (2015)") {
+    if (labelType == "Allen Mouse Brain Atlas CCFv3 (2015)") {
         m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2015.label";
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2015.xlsx";
     }
-    if (labelType == "Allen Mouse Brain Atlas (2017)") {
+    if (labelType == "Allen Mouse Brain Atlas CCFv3 (2017)") {
         m_labelFile = ":Resources/labels/AllenMouseBrain_Atlas_CCF_2017.label";
         if (data->Get("custom_region_type").toLower()=="default")
             m_reportSheetName = ":Resources/CustomRegions/CustomRegionMouse_2017.xlsx";
