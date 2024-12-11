@@ -45,7 +45,7 @@ void ProcessManagerPCounter::LoadXML(NutilTemplate* data)
             //qDebug() << "*** ATLAS: " +m_xmlAnchor->m_atlas;
             if (!atlasQuickniiMap.contains(m_xmlAnchor->m_atlas)) {
                 // Unknown anchoring data?
-                LMessage::lMessage.Message("<font color=\"#FF7000\">Warning: unrecognized atlas '"+m_xmlAnchor->m_atlas+"' in the .JSON registration file. Nutil will use the selected atlas.</font>");
+                LMessage::lMessage.Message("<font color=\"#FF7000\">Warning: unrecognized atlas '"+m_xmlAnchor->m_atlas+"' in the .JSON registration file (Note: for DeMBA this is expected). Nutil will use the selected atlas.</font>");
 
             }
             else {
@@ -218,7 +218,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
         }
         for (int j=i+1;j<m_processItems.count();j++) {
             if (m_processItems[j]->m_reportName.toLower()==m_processItems[i]->m_reportName.toLower()) {
-                LMessage::lMessage.Error("Error: Report must have unique identifiers for : " + m_processItems[i]->m_reportName+". ");
+                LMessage::lMessage.Error("Error: Issue with files with unique identifier: " + m_processItems[i]->m_reportName+". Please check these files. ");
                 return false;
 
             }
@@ -227,7 +227,7 @@ bool ProcessManagerPCounter::Build(NutilTemplate* data)
 
 
     if (m_processItems.count()==0) {
-        LMessage::lMessage.Error("Error: You need to specify at least one input file. Press the help button for instructions, Nutil is searching for files that contain the following regular expression format: '"+m_regexp + "'. Please make sure that this matches the format of the IDs in your input files.");
+        LMessage::lMessage.Error("Error: You need to specify input files for at least one section (a registration file, corresponding atlas map and a segmentation file). As Nutil recognises these files and matches them up using the unique IDs in regular expression format: '"+m_regexp + "', please make sure this matches the IDs in your input files. This error usually occurs due to issues with the file naming.");
 
     }
 
