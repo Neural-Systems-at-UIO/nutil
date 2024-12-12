@@ -34,9 +34,9 @@ public:
         btnClose->setGeometry(QRect(330, 140, 80, 21));
         cmbNew = new QComboBox(DialogNewFile);
         cmbNew->addItem(QString());
-        cmbNew->addItem(QString());
-        cmbNew->addItem(QString());
-        cmbNew->addItem(QString());
+    //    cmbNew->addItem(QString());
+    //    cmbNew->addItem(QString());
+    //    cmbNew->addItem(QString());
     //    cmbNew->addItem(QString());
     //    cmbNew->addItem(QString());
         cmbNew->setObjectName("cmbNew");
