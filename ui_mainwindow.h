@@ -70,7 +70,6 @@ public:
     QGridLayout *gridLayout_3;
     QTextBrowser *txtInfo;
     QTextBrowser *txtError;
-    QWidget *Output;
     QWidget *tab_3;
     QGridLayout *gridLayout_2;
     QTextBrowser *txtAbout;
@@ -264,9 +263,6 @@ public:
         gridLayout_3->setRowStretch(0, 2);
         gridLayout_3->setRowStretch(1, 1);
         tabMain->addTab(tab, QString());
-        Output = new QWidget();
-        Output->setObjectName("Output");
-        tabMain->addTab(Output, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName("tab_3");
         gridLayout_2 = new QGridLayout(tab_3);
@@ -425,7 +421,6 @@ public:
         btnSave->setText(QCoreApplication::translate("MainWindow", "Save", nullptr));
         tabMain->setTabText(tabMain->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Operation", nullptr));
         tabMain->setTabText(tabMain->indexOf(tab), QCoreApplication::translate("MainWindow", "Process output", nullptr));
-        tabMain->setTabText(tabMain->indexOf(Output), QCoreApplication::translate("MainWindow", "Output", nullptr));
         txtAbout->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -488,7 +483,7 @@ public:
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:"
                         "12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2';\">  </span><img src=\":/Resources/Nutil_logo_black.png\" /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2';\">  </span></p>\n"
 "<p dir='rtl' style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2';\"><br /></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2';\"><br /></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2';\"><br /></p>\n"

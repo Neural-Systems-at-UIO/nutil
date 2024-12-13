@@ -19,8 +19,8 @@ DEFINES += IGNORE_DOWNLOAD
 
 
 
-win32:RC_ICONS += nutil.ico
-ICON = nutil.png
+win32:RC_ICONS += nutil_logo.ico
+ICON = nutil_logo.png
 
 
 # The following define makes your compiler emit warnings if you use
