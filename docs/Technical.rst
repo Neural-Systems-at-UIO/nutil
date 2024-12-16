@@ -42,7 +42,7 @@ https://www.nitrc.org/projects/nutil/
 
 * **QUINT workflow:** Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, HartlageRübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. https://doi.org/10.3389/fninf.2019.00075.
 
-**How to cite the reference atlases used in the tool**
+**Citation of the reference atlases used in the tool**
 
 * **Allen Mouse Brain Atlas Common Coordinate Framework version 3**: Wang et al. (2020). The Allen Mouse Brain Common Coordinate Framework: A 3D Reference Atlas. Cell. See the Allen institute `citation policy <https://alleninstitute.org/citation-policy/>`_.
 
