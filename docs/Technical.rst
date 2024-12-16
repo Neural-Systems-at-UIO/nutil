@@ -44,15 +44,15 @@ https://www.nitrc.org/projects/nutil/
 
 **How to cite the reference atlases used in the tool**
 
-* **Allen Mouse Brain Atlas Common Coordinate Framework version 3**: Wang et al. (2020). The Allen Mouse Brain Common Coordinate Framework: A 3D Reference Atlas. Cell. See the `citation policy <https://alleninstitute.org/citation-policy/>`_ from the Allen Intitute for more information. 
+* **Allen Mouse Brain Atlas Common Coordinate Framework version 3**: Wang et al. (2020). The Allen Mouse Brain Common Coordinate Framework: A 3D Reference Atlas. Cell. See the Allen institute `citation policy <https://alleninstitute.org/citation-policy/>`_.
 
-* **Waxholm Space atlas of the Sprague Dawley rat brain version 2 , 3 and 4:** Please refer to the atlas using RRID:SCR_017124, specify the atlas version(s) used, and cite the most recent publication. Kleven et al (2023). Waxholm Space atlas of the rat brain: a 3D atlas supporting data analysis and integration. Nat Methods. If your work makes use of previous atlas versions, or brain region descriptions detailed in earlier publications, please also cite the corresponding publication:
+* **Waxholm Space atlas of the Sprague Dawley rat brain version 2 , 3 and 4:** Please refer to the atlas using RRID:SCR_017124, specify the atlas version(s) used, and cite the most recent publication (see the `citation policy. <https://www.nitrc.org/citation/?group_id=1081>`_). If your work makes use of previous atlas versions, or brain region descriptions detailed in earlier publications, please also cite the corresponding publication.
+  * WHS version 4: Kleven et al. (2023) Waxholm Space atlas of the rat brain: a 3D atlas supporting data analysis and integration. Nat Methods.
+  * WHS version 3: Osen etl al. (2019) Waxholm Space atlas of the rat brain auditory system: Three-dimensional delineations based on structural and diffusion tensor magnetic resonance imaging. NeuroImage 199, 38-56. 
+  * WHS version 2: Kjonigsen et al. (2015) Waxholm Space atlas of the rat brain hippocampal region: Three-dimensional delineations based on magnetic resonance and diffusion tensor imaging. NeuroImage 108, 441-449. 
+  * WHS version 1: Papp et al. (2014) Waxholm Space atlas of the Sprague Dawley rat brain. NeuroImage 97, 374-386.
 
-  * Version 1: Papp EA, Leergaard TB, Calabrese E, Johnson GA, Bjaalie JG (2014) Waxholm Space atlas of the Sprague Dawley rat brain. NeuroImage 97, 374-386. DOI: 10.1016/j.neuroimage.2014.04.001
-  * Version 2: Kjonigsen LJ, Lillehaug S, Bjaalie JG, Witter MP, Leergaard TB (2015) Waxholm Space atlas of the rat brain hippocampal region: Three-dimensional delineations based on magnetic resonance and diffusion tensor imaging. NeuroImage 108, 441-449. DOI: 10.1016/j.neuroimage.2014.12.080
-  * Version 3: Osen KK, Imad J, Wennberg AE, Papp EA, Leergaard TB (2019) Waxholm Space atlas of the rat brain auditory system: Three-dimensional delineations based on structural and diffusion tensor magnetic resonance imaging. NeuroImage 199, 38-56. DOI: 10.1016/j.neuroimage.2019.05.016
-
-For reuse of the Waxholm Space atlas of the Sprague Dawley rat brain, see the `citation policy. <https://www.nitrc.org/citation/?group_id=1081>`_
+* **Kim Unified Adult Mouse Brain Atlas**: * Wang et al. (2020). The Allen Mouse Brain Common Coordinate Framework: A 3D Reference Atlas. Cell.
 
 * **Developmental Mouse Brain Atlas**. We encourage researchers who use DeMBA to cite both the dataset and publication presenting DeMBA, and to specify the age of any template(s) used and the version of any segmentation(s) used.
 
