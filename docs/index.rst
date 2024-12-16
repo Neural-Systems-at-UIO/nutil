@@ -7,7 +7,6 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
 
    introduction
    Technical
-   acknow
    release
    testing
    NutilCmd
