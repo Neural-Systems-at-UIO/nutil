@@ -17,7 +17,7 @@ Nutil can be executed on either a server, desktop or laptop computer. It will em
 
 **Download**: https://www.nitrc.org/projects/nutil/ 
 
-* Download as a zip archive file, save on the C:drive of your computer, extracted and run by double click on "Nutil.cmd". 
+Download as a zip archive file, save on the C:drive of your computer, extracted and run by double click on "Nutil.cmd". 
 
 **Conditions of use**
 ~~~~~~~~~~~~~~~~~~~~~~~~
