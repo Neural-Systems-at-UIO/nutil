@@ -1,20 +1,8 @@
 **Installation and citation**
 ------------------------------
-
-**System Requirements**
-~~~~~~~~~~~~~~~~~~~~~~~~
-- Nutil can be executed on either a server, desktop or laptop computer. 
-- It will employ all the cores available on the system. 
-- While there are no specific hardware limitations, the processing time is dependent on the system’s compute power. The more cores and memory available, the faster the operations will be performed. Running Nutil on a single-core laptop is also possible.
-- Nutil version 0.8.0 and above has an automatic plotting feature. This will work if Python is installed on the computer with the Python.exe selected in Nutil through: File –> Settings. It is also necessary to install the following Python packages on your computer: numpy, pandas and matplotlib. 
-
-**Technical information**
-
-Nutil is written as a stand-alone Windows 64-bit application written in Qt C++, which enables the full usage of both memory and processor cores. When performing batch processes, Nutil will utilise all cores available on the system.  
-
-The external libraries that are used in Nutil are: 
-* Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/) 
-* LibXLNT for excel file IO (https://github.com/tfussell/xlnt/) 
+Nutil is written as a stand-alone Windows 64-bit application written in Qt C++. The external libraries that are used in Nutil are: 
+ * Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/) 
+ * LibXLNT for excel file IO (https://github.com/tfussell/xlnt/) 
 
 **TiffCreator**: TiffCreator produces tiled TIFF files from JPEG, PNG and standard TIFF images, and employs the support of multiple CPUs for efficient, parallelised operations. 
 
@@ -22,12 +10,14 @@ The external libraries that are used in Nutil are:
 
 **Quantifier**: Quantifier identifies individual binary objects in a PNG file, while matching these to output from QuickNII. The method first finds and sorts areas by using a standard pixel filler routine. Afterwards, a random area pixel is chosen as the look-up in the binary QuickNII label slice for this particular image. When all areas have been assigned a label ID, multiple selections of predefined area IDs are assembled (ID list from the excel input file), and finally output reports are assembled and written to disk (in xlsl format). In addition, original ilastik .png files with colour/ID coding added to underlying atlas slice data are assembled and saved to the output folder.
 
-**Download**
+**System Requirements**
+~~~~~~~~~~~~~~~~~~~~~~~~
+* Nutil can be executed on either a server, desktop or laptop computer. It will employ all the cores available on the system. While there are no specific hardware limitations, the processing time is dependent on the system’s compute power. The more cores and memory available, the faster the operations will be performed. Running Nutil on a single-core laptop is also possible.
 
-https://www.nitrc.org/projects/nutil/ 
+* **Download**: https://www.nitrc.org/projects/nutil/ 
 
-- Download as a zip archive file, save on the C:drive of your computer, extracted and run by double click on "Nutil.cmd". 
-- No installation executable is necessary, and the directory can be moved around the file system as required. Settings data are stored in the local program folder.
+ * Download as a zip archive file, save on the C:drive of your computer, extracted and run by double click on "Nutil.cmd". 
+ * No installation executable is necessary, and the directory can be moved around the file system as required. Settings data are stored in the local program folder.
 
 **Conditions of use**
 ~~~~~~~~~~~~~~~~~~~~~~~~
