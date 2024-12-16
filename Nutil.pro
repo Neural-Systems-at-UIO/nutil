@@ -19,7 +19,7 @@ DEFINES += IGNORE_DOWNLOAD
 
 
 
-win32:RC_ICONS += nutil_logo.ico
+win32:RC_ICONS += nutil_logo_simple.ico
 ICON = nutil_logo.png
 
 
