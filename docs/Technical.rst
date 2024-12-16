@@ -1,9 +1,9 @@
 **Installation and citation**
 ------------------------------
+**Technical information**
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nutil is written as a stand-alone Windows 64-bit application written in Qt C++. The external libraries that are used in Nutil are: 
- * Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/) 
- * LibXLNT for excel file IO (https://github.com/tfussell/xlnt/) 
+Nutil is written as a stand-alone Windows 64-bit application written in Qt C++. The external libraries that are used in Nutil are Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/) and LibXLNT for excel file IO (https://github.com/tfussell/xlnt/).
 
 **TiffCreator**: TiffCreator produces tiled TIFF files from JPEG, PNG and standard TIFF images, and employs the support of multiple CPUs for efficient, parallelised operations. 
 
