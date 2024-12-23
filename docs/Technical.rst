@@ -33,7 +33,7 @@ Download as a zip archive file, save on the C:drive of your computer, extracted 
 
 * **QUINT workflow:** Yates SC, Groeneboom NE, Coello C, Lichtenthaler SF, Kuhn P-H, Demuth H-U, HartlageRübsamen M, Roßner S, Leergaard T, Kreshuk A, Puchades MA and Bjaalie JG (2019) QUINT: Workflow for Quantification and Spatial Analysis of Features in Histological Images From Rodent Brain. Front. Neuroinform. 13:75. https://doi.org/10.3389/fninf.2019.00075.
 
-**Citation of the reference atlases used in Nutil**
+**Citation of the reference atlases in Nutil**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Allen Mouse Brain Atlas Common Coordinate Framework version 3** 
