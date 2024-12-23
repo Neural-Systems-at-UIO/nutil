@@ -40,9 +40,10 @@ Download as a zip archive file, save on the C:drive of your computer, extracted 
 
 Wang et al. (2020). The Allen Mouse Brain Common Coordinate Framework: A 3D Reference Atlas. Cell. See the Allen institute `citation policy <https://alleninstitute.org/citation-policy/>`_.
 
-**Waxholm Space atlas of the Sprague Dawley rat brain:** 
+**Waxholm Space atlas of the Sprague Dawley rat brain** 
 
 Please refer to the atlas using RRID:SCR_017124, specify the atlas version(s) used, and cite the most recent publication (see the `citation policy. <https://www.nitrc.org/citation/?group_id=1081>`_). If your work makes use of previous atlas versions, or brain region descriptions detailed in earlier publications, please also cite the corresponding publication.
+
   * WHS version 4: Kleven et al. (2023) Waxholm Space atlas of the rat brain: a 3D atlas supporting data analysis and integration. Nat Methods.
   * WHS version 3: Osen etl al. (2019) Waxholm Space atlas of the rat brain auditory system: Three-dimensional delineations based on structural and diffusion tensor magnetic resonance imaging. NeuroImage 199, 38-56. 
   * WHS version 2: Kjonigsen et al. (2015) Waxholm Space atlas of the rat brain hippocampal region: Three-dimensional delineations based on magnetic resonance and diffusion tensor imaging. NeuroImage 108, 441-449. 
