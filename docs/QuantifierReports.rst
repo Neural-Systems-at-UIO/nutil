@@ -13,12 +13,12 @@ Quantifier generates several reports including "Custom Region" reports. These co
 
 More information on the default regions are found in the CustomRegion files provided in the Nutil software package, located in the CustomRegion folder. The “default” option is a complete brain analysis, which means it includes all the reference atlas regions compiled into broader regions. For the Allen Mouse Brain Atlas CCFv3 (2017) the custom regions are: cortex; fiber tracts; hippocampus; olfactory regions; hypothalamus; regions in the striatum and pallidum; midbrain - hindbrain - and medulla; thalamus; cerebellum; and ventricular system. 
 
-2. Alternatively, generate CustomRegion reports based on your own region definitions. First create a file defininig your regions (cvs or xlsx format), select "custom" and then navigate to the relevant file. 
+2. Alternatively, generate CustomRegion reports based on your own region definitions (define maximum 128 regions). First create a file defining your regions (cvs or xlsx format), select "custom" and then navigate to the relevant file. 
 
 There are two options for generating this file:
 
-* Use the QCAlign software (hierarchy sheet in csv format). 
-* Defined your own regions using the CustomRegionsTemplate.xlsx provided in the CustomRegion folder of the Nutil package. Fill in the template exactly as shown below:
+* Use the QCAlign software (hierarchy sheet in CSV format). 
+* Define your own regions using the CustomRegionsTemplate.xlsx provided in the CustomRegion folder of the Nutil package. Fill in the template exactly as shown below:
 
 .. image:: cfad7c6d57444e3b93185b655ab922e0/media/image12.png
    :width: 4.80278in
@@ -43,8 +43,10 @@ The default .xlsx may be used as a guide for filling out the template.
 **Coordinate output**
 --------------------------------
 
-The coordinates extracted by Nutil are assigned region names corresponding to the customised region defined in Nutil (either the "default" or "custom regions). To assign your
+The coordinates extracted by Nutil are assigned region names corresponding to the custom regions defined in Nutil. To assign your own region names (and not the "default" regions), use the "custom" region feature described above. Note that it is possible to define a maximum of 128 custom regions (if the Excel sheet contains more than 128 custom regions, only the first 128 will be used). 
 
+.. warning::
+   QCAlign may generate custom region files with more that 128 regions. 
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
    :width: 6.30139in
