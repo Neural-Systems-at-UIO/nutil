@@ -43,10 +43,11 @@ The default .xlsx may be used as a guide for filling out the template.
 **Coordinate output**
 --------------------------------
 
-The coordinates extracted by Nutil are assigned region names corresponding to the custom regions defined in Nutil. To assign your own region names (and not the "default" regions), use the "custom" region feature described above. Note that it is possible to define a maximum of 128 custom regions (if the Excel sheet contains more than 128 custom regions, only the first 128 will be used). 
+The coordinates extracted by Nutil are assigned region names corresponding to the custom regions defined in Nutil. To assign your own regions (and not the "default" regions), use the "custom" region feature described above. 
 
-.. warning::
-   QCAlign may generate custom region files with more that 128 regions. 
+.. warning:: 
+   It is possible to define a maximum of 128 custom regions (if the Excel sheet contains more than 128 custom regions, only the first 128 will be used). Note that QCAlign may generate custom region files with more than 128 regions. 
+
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
    :width: 6.30139in
