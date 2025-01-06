@@ -1,4 +1,4 @@
-**Customised regions explained**
+**Custom regions explained**
 ======================================
 
 Quantifier generates several reports including "Custom Region" reports. These contain quantifications for broader regions. The regions are compilations of reference atlas regions and may either be user-defined ("Custom") or the default regions included in the Nutil software ("Default"). These regions ("Custom" or "Default") are also assigned to the coordinates extracted by Nutil (coordinate output).    
