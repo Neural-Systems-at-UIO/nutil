@@ -2,17 +2,16 @@
 --------------------------
 **Nutil v1 (Quantifier only)**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This will be officially released on NITRC soon (available as a pre-release on the Nutil Github). 
 
-It is a major release of Nutil Quantifier with several new atlases and new features. 
+This is a major release of Nutil Quantifier with several new atlases and new features. It will be officially released on NITRC soon (available as a pre-release on the Nutil Github). 
 
 * The Transform, Resize and TiffCreator features in Nutil have been removed from this version (use Nutil v0.8.0).  
-* It incorporates the Kim Unified Adult Mouse Brain Atlas, and the Developmental Mouse Brain Atlas (DeMBA) with Allen CCFv3 or Kim Lab developmental delineations. 
+* It incorporates several new atlases: the Kim Unified Adult Mouse Brain Atlas, and the Developmental Mouse Brain Atlas (DeMBA) with Allen CCFv3 or Kim Lab developmental delineations. 
 * Option to extract coordinates corresponding to the centroids of objects ("centroids instead of all points").
 * For clarity, The object splitting feature has been renamed "counts or area fraction?".
 * Improved error messaging. 
 * Updates to the help text in the Nutil GUI. 
-* GUI improvements (new logo, updated citation info, redundant functionality removed, etc). 
+* GUI improvements (e.g. new logo, updated citation info, redundant functionality removed). 
 
 **Nutil v0.8.0** 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
