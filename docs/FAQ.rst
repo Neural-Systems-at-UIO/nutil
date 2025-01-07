@@ -84,4 +84,8 @@ Quantifier: How do I assign reference atlas regions to the coordinates extracted
 -------------------------------------------------------------------------------------------------------------------------------
 In the coordinate output from Nutil (JSON format), the coordinates are grouped by parent region (e.g. cortex, hippocampus). These parent regions are the default regions built into the Nutil software. To group the coordinate according to your own regions-of-interest, use the `custom region feature <https://nutil.readthedocs.io/en/latest/QuantifierReports.html>`_ in Nutil. As the custom region feature is limited to maximum 128 regions, for atlases such as the Allen CCFv3 which contains >600 regions, it is not possible to assign each reference atlas region individually in the same analysis. However, as a workaround, it is possible to inspect the reference atlas reports to establish reference atlas regions that contain objects, and to restrict the custom regions to this selection. 
 
+Quantifier: Is it possible to extract coordinates corresponding to the the centroid of my features-of-interest? 
+----------------------------------------------------------------------------------------------------------------
+Yes, this feature is available in Nutil version 1 (available as a pre-release on the Nutil Github, it will be released officially on NITRC soon). 
+
 
