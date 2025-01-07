@@ -5,17 +5,17 @@
 -------------------------------
 
 .. tip::
-   Change the names of the images to comply with the QUINT file `naming convention <https://quint-workflow.readthedocs.io/en/latest/Requirements.html#quint-naming-convention>`_ as the first step of the `QUINT workflow <https://quint-workflow.readthedocs.io/en/latest/index.html>`_. 
+   Change the names of the images to comply with the QUINT `naming convention <https://quint-workflow.readthedocs.io/en/latest/Requirements.html#quint-naming-convention>`_ as the first step of the `QUINT workflow <https://quint-workflow.readthedocs.io/en/latest/index.html>`_. 
 
-   By using images that follow the naming convention in QuickNII, VisuAlign and ilastik, the output files from these software will also comply with the naming convention, and are thereby directly compatible with **Quantifier**.
+   By using images that follow the naming convention in *QuickNII*, *VisuAlign* and *ilastik*, the output files from these software will also comply with the naming convention, and are thereby directly compatible with **Quantifier**.
 
 * The file name of the segmentation and the atlas map corresponding to a particular section must contain the same unique ID. They should follow the _sXXX naming convention, with XXX representing the section number (not restricted to three digits).  
 
-* The section number should reflect the serial order and spacing of the sections, this is a requirement for QuickNII. For example, _s02, _s06, _s10 for every 4th section starting with section 2. 
+* The section number should reflect the serial order and spacing of the sections, this is a requirement for *QuickNII*. For example, _s02, _s06, _s10 for every 4th section starting with section 2. 
 
-* The XML or JSON file from QuickNII or VisuAlign must contain the unique IDs (check this by opening with Notepad). This happens automatically as long as the images registered in QuickNII contain the unique IDs in the file name.
+* The JSON file from *QuickNII* or *VisuAlign* must also contain the unique IDs (check this by opening with Notepad). This happens automatically as long as the images registered in *QuickNII* contain the unique IDs in the file name.
 
-* **Quantifier** also supports user-defined IDs using regular expressions (RegExp). This means that it is possible to bypass the _sXXX naming convention. While this is not recommended, it is useful in some cases. For more information see the “Help” button in the Nutil interface or contact User Support.  
+* *Nutil* Quantifier supports user-defined IDs using regular expressions (RegExp). While not recommended, it can be used in some cases for bypassing the _sXXX naming convention. For more information see the “Help” button in the Nutil interface or contact User Support.  
 
 **Examples that comply with the naming convention:** 
 
@@ -45,17 +45,17 @@ Any image analysis software may be used to generate the segmentations as long as
   
 2. **Image proportions:** Must have the same proportions as the images used to generate the atlas maps. 
 
-   They do not have the same proportions as the actual atlas maps as QuickNII alters the proportions slightly. 
+   They do not have the same proportions as the actual atlas maps as *QuickNII* alters the proportions slightly. 
 
 3. **Image size:** 
 
 .. Note::
-While Nutil supports segmentations up to 32767 x 32767 pixels (as long as there is enough memory installed on the computer: restriction of Qt: QImage class), we do not recommend running Quantifier on images larger than approximately 10000 x 10000 pixels. Downscale the images as much as possible before segmenting them. 
+While *Nutil* supports segmentations up to 32767 x 32767 pixels (as long as there is enough memory installed on the computer: restriction of Qt: QImage class), we do not recommend running Quantifier on images larger than approximately 10000 x 10000 pixels. Downscale the images as much as possible before segmenting them. 
 
 They do not need to be the same size as the images used to generate the atlas maps and are typically larger in size. It is recommended to downscale the images prior to segmentation. This has several advantages: 
 
 * It improves the quality of the segmentation as it removes noise from the image, and makes them more compatible with the machine learning algorithms used by ilasti. 
-* It speeds up Nutil analysis and prevent crashes due to insufficient memory. 
+* It speeds up *Nutil* analysis and prevent crashes due to insufficient memory. 
 
 The aim is to downscale the images as much as possible but without losing information from the images that is actually important. The optimal scaling factor is determined by trial and error and should be applied consistenty to all the images in the series. 
 
@@ -73,7 +73,7 @@ The aim is to downscale the images as much as possible but without losing inform
 **Preparing the Atlas Maps** 
 --------------------------------
  
-The atlas maps are generated with `QuickNII <https://quicknii.readthedocs.io/en/latest/>`_, which applies linear registration of the sections to the atlas, or with `VisuAlign <https://visualign.readthedocs.io/en/latest/>`_ that applies nonlinear refinement to an existing QuickNII registration. The VisuAlign atlas maps are thereby more accurate than the QuickNII atlas maps, but also take more time to generate. The atlas maps are customised to match the cutting plane and proportions of the brain sections. 
+The atlas maps are generated with `QuickNII <https://quicknii.readthedocs.io/en/latest/>`_, which applies linear registration of the sections to the atlas, or with `VisuAlign <https://visualign.readthedocs.io/en/latest/>`_ that applies nonlinear refinement to an existing QuickNII registration. The VisuAlign atlas maps are thereby more accurate than the *QuickNII* atlas maps, but also take more time to generate. The atlas maps are customised to match the cutting plane and proportions of the brain sections. 
 
 File format: The atlas maps are in .FLAT format and cannot be viewed directly. The image below shows the information contained in an atlas map, but is not the .FLAT file itself.
 
@@ -82,10 +82,10 @@ File format: The atlas maps are in .FLAT format and cannot be viewed directly. T
 +----------+
 
 
-**Preparing the XML or JSON file**
+**Preparing the JSON file**
 -------------------------------------
  
-Either the XML or JSON file from `QuickNII <https://quint-workflow.readthedocs.io/en/latest/QuickNII.html>`_, `DeepSlice <https://quint-workflow.readthedocs.io/en/latest/DeepSlice.html>`_ or `VisuAlign <https://quint-workflow.readthedocs.io/en/latest/VisuAlign.html>`_ may be used here.
+Either the JSON file from `QuickNII <https://quint-workflow.readthedocs.io/en/latest/QuickNII.html>`_, `DeepSlice <https://quint-workflow.readthedocs.io/en/latest/DeepSlice.html>`_ or `VisuAlign <https://quint-workflow.readthedocs.io/en/latest/VisuAlign.html>`_ may be used here. However, it is important to use the JSON file that matches the atlas maps. 
 
 
 
