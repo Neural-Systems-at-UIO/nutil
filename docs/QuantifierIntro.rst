@@ -23,9 +23,9 @@ Watch our video tutorial:
 
 **Quantifier requires the following input files:**
 
-1. A JSON file with registration info to a reference brain atlas (generated with the QuickNII or VisuAlign software).
-2. Atlas maps in .FLAT format corresponding to the JSON file (generated in QuickNII or VisuAlign using the JSON file).
-3. Segmentation images in .PNG format with the features to be quantified displayed with a unique RGB colour code (indexed 8-bit PNG format) (generated with ilastik, ImageJ or another image analysis software).
+1. A JSON file with registration info to a reference brain atlas (generated with the *QuickNII* or *VisuAlign* software).
+2. Atlas maps in .FLAT format corresponding to the JSON file (generated in *QuickNII* or *VisuAlign* using the JSON file).
+3. Segmentation images in .PNG format with the features to be quantified displayed with a unique RGB colour code (indexed 8-bit PNG format) (generated with *ilastik*, *ImageJ* or another image analysis software).
 
 **It generates the following results:**
 
@@ -34,6 +34,6 @@ Watch our video tutorial:
 3. Images with the segmentations superimposed on the atlas maps (.PNG format).
 4. Point clouds for visualising the extracted features in the MeshView Atlas Viewer (.JSON format). 
 
-As the QUINT workflow requires the use of several software (QuickNII, VisuAlign, a software for image segmentation and Nutil), this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the results. 
+As the QUINT workflow requires the use of several software (*QuickNII*, *VisuAlign*, a software for image segmentation and *Nutil*), this section is split into several parts with information on how to prepare the input files, how to run Quantifier, and how to interpret the results. 
 
 
