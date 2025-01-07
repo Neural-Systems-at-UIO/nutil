@@ -80,7 +80,7 @@ https://community.brain-map.org/t/why-doesnt-the-3d-mouse-brain-atlas-have-bregm
 
 https://community.brain-map.org/t/how-to-transform-ccf-x-y-z-coordinates-into-stereotactic-coordinates/1858
 
-**Quantifier: How do I assign reference atlas regions to the coordinates extracted by Nutil? 
+Quantifier: How do I assign reference atlas regions to the coordinates extracted by Nutil? 
 -------------------------------------------------------------------------------------------------------------------------------
 In the coordinate output from Nutil (JSON format), the coordinates are grouped by parent region (e.g. cortex, hippocampus). These parent regions are the default regions built into the Nutil software. To group the coordinate according to your own regions-of-interest, use the `custom region feature <https://nutil.readthedocs.io/en/latest/QuantifierReports.html>`_ in Nutil. As the custom region feature is limited to maximum 128 regions, for atlases such as the Allen CCFv3 which contains >600 regions, it is not possible to assign each reference atlas region individually in the same analysis. However, as a workaround, it is possible to inspect the reference atlas reports to establish reference atlas regions that contain objects, and to restrict the custom regions to this selection. 
 
