@@ -65,7 +65,7 @@ The aim is to downscale the images as much as possible but without losing inform
 
     `Ilastik: <http://ilastik.org/download.html>`_ We recommend the Pixel and Object Classification workflows in the ilastik software to generate the segmentations, with the Glasbey lookup table applied with FIJI to visualise the output. See `here <https://quint-workflow.readthedocs.io/en/latest/Ilastik.html>`_ for instructions.
 
-    `QuPath: <https://qupath.github.io/QuPath>`_ is an alternative that can be used to generate the segmentations. In some cases QuPath may perform better than ilastik.
+    `QuPath: <https://qupath.github.io/>`_ is an alternative that can be used to generate the segmentations. In some cases QuPath may perform better than ilastik.
 
     `FIJI ImageJ: <https://imagej.net/software/fiji/>`_ Fiji is also useful for generating segmentations. 
 
