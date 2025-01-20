@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     else {
         Util::SaveTextFile("version.txt",v);
     }
-    ui->lblMain->setText("NeSys Utilities " + v);
+    ui->lblMain->setText("NeSys Utilities v1.1.0");
     Data::data.version = v.trimmed();
 #endif
 
