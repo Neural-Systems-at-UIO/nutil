@@ -6,12 +6,12 @@
 +----------+
 1. Create three new folders: for example, “Segmentations”, “Atlas_maps” and “Output”. Transfer the segmentations to the "Segmentations" folder, the atlas maps to the "Atlas_maps" folder. Leave the "Output" folder empty. 
 2. To begin, click “New”. Enter a name for your project. 
-3. Press the “browse” buttons and navigate to the folders containing the segmentations, the atlas maps and the output folder, and to the XML or JSON file containing the registration information.  
-4. Select the reference atlas used in QuickNII and VisuAlign.
+3. Press the “browse” buttons and navigate to the folders containing the segmentations, the atlas maps and the output folder, and to the JSON file containing the registration information.  
+4. Select the reference atlas used in QuickNII and VisuAlign (Nutil also supports custom atlases, see the FAQ).
 5. Fill in the rest of the form. The software includes “Help” buttons with more information for each parameter.
-6. The “advanced settings” reveals more settings: this gives flexibility for customised analysis. For example, minimum object size cut-off, option to generate customised reports and to apply masks. If nothing is changed in the advanced settings, the default settings shown below are applied.
+6. “Advanced settings” reveals more settings: this gives flexibility for customised analysis. For example, apply a minimum object size cut-off, generate reports for your own custom regions (compilations of reference atlas IDs) and to apply masks. If nothing is changed in the advanced settings, the default settings shown below are used.
 7. Press “Save as”. This saves a copy of the settings in a simple text file in .NUT format. This is useful for future reference, and may be reloaded into Nutil via the “load” button (for example, to repeat the analysis on a new set of images). 
-8. Nutil automatically detects the number of core processors (threads) available on the computer (8 in the example). To ensure adequate processing power, choose at least one less than the total available (6 or 7 here) and press “Start”. Wait until the process is complete: this may take minutes to hours depending on the number of sections and size of the segmentations. If your images are very large and Nutil crashes, select fewer cores.  
+8. Nutil automatically detects the number of core processors (threads) available on the computer (8 in the example). To ensure adequate processing power, choose at least one less than the total available (6 or 7 here) and press “Start”. Wait until the process is complete: this may take minutes or hours depending on the number of sections and size of the segmentations. If your images are very large and Nutil crashes, select fewer cores.  
 9. The output files are automatically saved in the specified output folder. 
 
 
@@ -43,7 +43,7 @@
 -----------------
 
 .. tip::
-   Nutil v0.8.0 has a new automatic plotting feature. The Python scripts are included as part of the Nutil package. 
+   Nutil v0.8.0 has an automatic plotting feature. The Python scripts are included as part of the Nutil package. 
    
 THe plotting feature will work if Python is installed on the computer, with the Python.exe selected in Nutil through: File --> Settings. It is also necessary to install the following Python packages on your computer: numpy, pandas and matplotlib.
 
