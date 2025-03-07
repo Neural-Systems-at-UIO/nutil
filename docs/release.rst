@@ -1,9 +1,9 @@
 **Release notes**
 --------------------------
-**Nutil v1 (Quantifier only)**
+**Nutil v1.1 (Quantifier only)**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is a major release of Nutil Quantifier with several new atlases and new features. It will be officially released on NITRC soon (available as a pre-release on the Nutil Github). 
+This is a major release of Nutil Quantifier with several new atlases and new features.
 
 * The Transform, Resize and TiffCreator features in Nutil have been removed from this version (use Nutil v0.8.0).  
 * It incorporates several new atlases: the Kim Unified Adult Mouse Brain Atlas, and the Developmental Mouse Brain Atlas (DeMBA) with Allen CCFv3 or Kim Lab developmental delineations. 
