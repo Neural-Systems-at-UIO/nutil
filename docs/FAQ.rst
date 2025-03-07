@@ -88,7 +88,7 @@ In the coordinate output from Nutil (JSON format), the coordinates are grouped b
 ----------------------------------------------------------------------------------------------------------------
 Yes, this feature is available in Nutil version 1 (available as a pre-release on the Nutil Github, it will be released officially on NITRC soon). 
 
-**Quantifier: Can I use my own atlas in Nutil**
+**Quantifier: Can I use my own atlas in Nutil?**
 ---------------------------------------------
 Yes. Technically, it is possible to use your own atlas in Nutil using the "custom atlas" feaure. For this select reference atlas: "custom" and navigate to the .label file corresponding to your atlas (see the "labels" folder in the Nutil package for examples). You will also need a matching "custom region" file in XLSX format. However, in practice your atlas must first be integrated in the QuickNII and VisuAlign software (with a .matching label file). This is difficult to do without input from us. If you are interested in integrating your atlas in our tools, get in touch with us via EBRAINS support, we have some capacity to integrate new atlases as part of co-development projects.  
 
