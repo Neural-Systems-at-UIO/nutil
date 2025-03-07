@@ -72,7 +72,7 @@ The `WHS rat brain atlas <https://www.nitrc.org/plugins/mwiki/index.php?title=qu
 
 A converter is provided `here <https://www.nesys.uio.no/QuickNII/Q2WHSRat.html>`_.
 
-Quantifier: How do the QUINT coordinates for mouse (Allen CCFv3) relate to Bregma?
+**Quantifier: How do the QUINT coordinates for mouse (Allen CCFv3) relate to Bregma?**
 ---------------------------------------------------------------------------------------
 For the mouse, the QUINT workflow uses the Allen CCFv3 as the reference atlas. The CCF was created from brains out-of-skull that have been registered to create an average volume. Bregma location is not recorded, so it is not possible to directly convert to stereotaxic coordinates. However, it is possible to estimate the position of Bregma. See the following posts on the Allen Brain Map community forum:
 
@@ -80,12 +80,16 @@ https://community.brain-map.org/t/why-doesnt-the-3d-mouse-brain-atlas-have-bregm
 
 https://community.brain-map.org/t/how-to-transform-ccf-x-y-z-coordinates-into-stereotactic-coordinates/1858
 
-Quantifier: How do I assign reference atlas regions to the coordinates extracted by Nutil? 
+**Quantifier: How do I assign reference atlas regions to the coordinates extracted by Nutil?** 
 -------------------------------------------------------------------------------------------------------------------------------
 In the coordinate output from Nutil (JSON format), the coordinates are grouped by parent region (e.g. cortex, hippocampus). These parent regions are the default regions built into the Nutil software. To group the coordinate according to your own regions-of-interest, use the `custom region feature <https://nutil.readthedocs.io/en/latest/QuantifierReports.html>`_ in Nutil. As the custom region feature is limited to maximum 128 regions, for atlases such as the Allen CCFv3 which contains >600 regions, it is not possible to assign each reference atlas region individually in the same analysis. However, as a workaround, it is possible to inspect the reference atlas reports to establish reference atlas regions that contain objects, and to restrict the custom regions to this selection. 
 
-Quantifier: Is it possible to extract coordinates corresponding to the the centroid of my features-of-interest? 
+**Quantifier: Is it possible to extract coordinates corresponding to the the centroid of my features-of-interest?**
 ----------------------------------------------------------------------------------------------------------------
 Yes, this feature is available in Nutil version 1 (available as a pre-release on the Nutil Github, it will be released officially on NITRC soon). 
+
+**Quantifier: Can I use my own atlas in Nutil**
+---------------------------------------------
+Yes. Technically, it is possible to use your own atlas in Nutil using the "custom atlas" feaure. For this select reference atlas: "custom" and navigate to the .label file corresponding to your atlas (see the "labels" folder in the Nutil package for examples). You will also need a matching "custom region" file in XLSX format. However, in practice your atlas must first be integrated in the QuickNII and VisuAlign software (with a .matching label file). This is difficult to do without input from us. If you are interested in integrating your atlas in our tools, get in touch with us via EBRAINS support, we have some capacity to integrate new atlases as part of co-development projects.  
 
 
