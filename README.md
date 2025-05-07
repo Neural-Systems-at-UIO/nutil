@@ -36,7 +36,7 @@ or ./Nutil to use the GUI
 
 
 # Acknowledgements
-Nutil is an integral part of the QUINT workflow and is developed by the Neural Systems Laboratory at the Institute of Basic Medical Sciences, University of Oslo, Norway. Nutil was developed with support from the EBRAINS infrastructure, and funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Framework Partnership Agreement No. 650003 (HBP FPA).
+Nutil is an integral part of the QUINT workflow and is developed by the Neural Systems Laboratory at the Institute of Basic Medical Sciences, University of Oslo, Norway. Nutil was developed with support from the EBRAINS infrastructure, and funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under the Framework Partnership Agreement No. 650003 (HBP FPA) and the European Union’s Horizon Europe Programme for Research Infrastructures Grant Agreement No. 101147319 (EBRAINS 2.0).
 
 # Authors
 Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Gergely Csucs and Jan G Bjaalie. 
@@ -44,6 +44,12 @@ Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Gergely Csucs and Jan G 
 # Licence
 - Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 - GNU General Public License v3
+- 
+# Download
+- https://www.nitrc.org/projects/nutil/
+
+# Current version
+v1.1
 
 # Cite
 Groeneboom NE, Yates SC, Puchades MA and Bjaalie JG (2020) Nutil: A Pre- and Post-processing Toolbox for Histological Rodent Brain Section Images. Front. Neuroinform. 14:37. doi: 10.3389/fninf.2020.00037
