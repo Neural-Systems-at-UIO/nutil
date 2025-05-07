@@ -44,7 +44,7 @@ Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Gergely Csucs and Jan G 
 # Licence
 - Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 - GNU General Public License v3
-- 
+  
 # Download
 - https://www.nitrc.org/projects/nutil/
 
