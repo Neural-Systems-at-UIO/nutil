@@ -60,6 +60,7 @@
     ],
     "releaseNotes": "Major Nutil release. This version contains Nutil Quantifier only (Transform has been removed, it will not be supported in future versions).\n\nSupported atlases:\n\n-Allen Mouse Brain Atlas Common Coordinate Framework version 3 (CCFv3) (delineations from 2017 or 2015).\n-Waxholm Atlas of the Spraque Dawley Rat (WHS) (version 2, 3 and 4).\n-Kim Unified Adult Mouse Brain Atlas (version 1, 2019).\n-Developmental Mouse Brain Atlas for ages P4-P56 (DeMBA) with Allen CCFv3 delineations from 2017.\n-Developmental Mouse Brain Atlas for ages P4-P56 (DeMBA) with Kim Lab developmental delineations (KimLabDev CCFv001).\n\nChange log:\n\n-Atlas hierarchy and custom region files are included for all the listed atlases.\n-The \"object_splitting\" feature in Nutil has been renamed to \"Counts or Area Fraction\". The terminology has changed but the calculations are the same as before. To replicate \"Object_splitting\" = no, select \"Counts\". To replicate \"Object_splitting = yes, select \"Area Fraction\".\n-Improved error messaging.\n",
     "version": "1.1",
+    "licence": "GPL-3.0 license",
     "funding": "H2020-EU FPA 650003 (HBP FPA) and HORIZON-INFRA (EBRAINS 2.0) 101147319",
     "referencePublication": "https://doi.org/10.3389/fninf.2020.00037"
 }
