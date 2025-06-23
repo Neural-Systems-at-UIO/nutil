@@ -1,20 +1,24 @@
 **Object splitting explained**
 ================================
 
-In Quantifier, users must specify whether to turn “object splitting” ON or OFF. 
+In Quantifier, users must specify whether to turn “object splitting” ON or OFF. In Nutil v1.1.0 "object splitting" has been renamed "Area fraction or Counts".
 
-With object splitting switched ON, segmented objects that overlap atlas regions are divided into parts, with the individual object pixels assigned their precise regional location. This ensures accurate regional % load measurements (load is the percentage of the region occupied by objects: the % coverage or area fraction). This  invalidates the object counts as some objects will be split and counted more than once which means that N/A appears in the reports.  
+Area fraction: With object splitting switched "ON", segmented objects that overlap atlas regions are divided into parts, with the individual object pixels assigned their precise regional location. This ensures accurate regional area fraction measurements. This invalidates the object counts as some objects will be split and counted more than once which means that N/A appears for counts in the reports. There is a known issue with selection of "area fraction" in Nutil v1.1.0 (see warning below). 
 
-With object splitting switched OFF, object counts are correct, but the load measurements may be incorrect since objects that overlap region boundaries will be assigned to one of the regions only, potentially skewing the regional load calculations. This is especially true if objects are large, since a large object that overlaps many regions (e.g. 1000 pixels) may be assigned to a small region (e.g. 100 pixels) giving false load output (1000% load in this case).
+Counts: With object splitting switched "OFF", object counts are correct, but the load measurements may be incorrect since objects that overlap region boundaries will be assigned to one of the regions only, potentially skewing the regional area fraction calculations. This is especially true if objects are large, since a large object that overlaps many regions (e.g. 1000 pixels) may be assigned to a small region (e.g. 100 pixels) giving false area fraction output (1000% load in this case).
 
 .. note::
    **Recommendation:** 
 
-   Select NO for small objects to get accurate object counts, e.g. cells.  
+   Select Counts/NO for small objects to get accurate object counts, e.g. cells.  
 
-   Select YES for large objects that overlap atlas regions, e.g. connectivity data, or densely packed cells or features. This gives precise % load output. 
+   Select Area fraction/YES for large objects that overlap atlas regions, e.g. connectivity data, or densely packed cells or features. This gives precise area fraction output. 
 
    See the object splitting help button in Nutil for an example image.  
+
+.. warning::
+
+  There is a known issue with selection of "counts" or "area fraction" in Nutil v1.1.0. This means that even when "area fraction" is selected, it will perform the calculations as if "counts" were selected. In other words, it is not possible to achieve correct "area fraction" calculations for objects that overlap several atlas regions for Nutil v1.1.0. If you need this functionality, please use Nutil v0.8.0. For objects that do not overlap atlas regions, the "Counts" setting will calculate correct regional area fractions.   
 
 
 .. |image1| image:: cfad7c6d57444e3b93185b655ab922e0/media/image2.png
