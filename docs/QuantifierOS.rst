@@ -1,5 +1,5 @@
-**Object splitting explained**
-================================
+**Object splitting explained (Area fraction or counts)**
+=========================================================
 
 In Quantifier, users must specify whether to turn “object splitting” ON or OFF. In Nutil v1.1.0 "object splitting" has been renamed "Area fraction or Counts".
 
