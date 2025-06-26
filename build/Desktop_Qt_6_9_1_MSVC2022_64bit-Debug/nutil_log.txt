@@ -1,0 +1,2 @@
+
+LOG: Type of operation: Quantifier
