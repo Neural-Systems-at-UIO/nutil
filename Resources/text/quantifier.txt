@@ -9,7 +9,7 @@ xml_anchor_file; 0 ; analysis_type=QUINT; Registration file (JSON); file;
 quantifier_output_dir; 0 ;; Output folder; directory;
 output_report; 0 ;;Output reports; list; All, None; All
 extraction_color ; 0; ; Object colour ; color ; 255,0,0,255
-object_splitting; 0; analysis_type=QUINT;Object splitting; list; Yes, No; Yes
+object_splitting; 0; analysis_type=QUINT;Counts or Area Fraction?; list; Area Fraction, Counts; Yes
 object_min_size; 1; ;Minimum object size; number; 1
 #object_max_size; 1; ;Maximum object size; number; 100000
 global_pixel_scale; 1; ;Pixel scale (area per pixel); number; 1
