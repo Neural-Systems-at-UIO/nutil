@@ -15,7 +15,7 @@ jobs:
 
 
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
     if: "contains(github.event.head_commit.message, 'nightly')"
     steps:
 
@@ -31,10 +31,15 @@ jobs:
     - uses: papeloto/action-zip@v1
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
     - name: Install Qt
       uses: jurplel/install-qt-action@v2 
       with:
         version: '6.0.1'
+        setup-python: false
   #      tools: 'tools_ifw,4.0.0,qt.tools.ifw.40 tools_qtcreator,7.0.2,qt.tools.qtcreator'
         tools: 'tools_ifw,4.0.0,qt.tools.ifw.40 tools_qtcreator,9.0.0,qt.tools.qtcreator'
     - name: Write version file
