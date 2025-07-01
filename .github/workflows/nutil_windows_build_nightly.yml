@@ -1,95 +1,83 @@
 name: C/C++ CI
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
+    branches: [ master ]
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-  BUILD_CONFIGURATION: Release
-  # Ensure we use the correct Python version
-  PYTHONIOENCODING: utf-8
+  BUILD_CONFIGURATION: Release    
 jobs:
+
+
   build:
-    runs-on: windows-2019 # This could be switched in the future to build easier
+    runs-on: windows-2019
     if: "contains(github.event.head_commit.message, 'nightly')"
     steps:
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v5.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/checkout@v4
-      - uses: papeloto/action-zip@v1
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
+
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v5.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}      
+
+
+    - uses: actions/checkout@v2
+    - uses: papeloto/action-zip@v1
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2 
+      with:
+        version: '6.0.1'
+  #      tools: 'tools_ifw,4.0.0,qt.tools.ifw.40 tools_qtcreator,7.0.2,qt.tools.qtcreator'
+        tools: 'tools_ifw,4.0.0,qt.tools.ifw.40 tools_qtcreator,9.0.0,qt.tools.qtcreator'
+    - name: Write version file
+      run: "echo ${{ steps.tag_version.outputs.new_tag }}>version.txt"
+      shell: cmd
+
+
+
+    - name: Compile
+      run : "Publish\\windows_ci\\windows_build.cmd"
+    - name: Build_app
+      run : "Publish\\windows_ci\\build_dir.cmd"
+#    - name: Nutil_validator
+#      run : "Publish\\windows_ci\\validator.cmd"
+    - name: Zipping  
+      uses: papeloto/action-zip@v1
+      with:
+        files: nutil 
+        dest: nutil_win_nightly.zip
           
-      - name: Upgrade pip and install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install --upgrade setuptools wheel
-          python -m pip install --prefer-binary matplotlib numpy pandas
-        shell: cmd
-        
-      - name: Verify Python version
-        run: |
-          python --version
-          python -c "import sys; print('Python executable:', sys.executable)"
-        shell: cmd
-        
-      - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v1
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v2
-        with:
-          version: "6.0.1"
-          #      tools: 'tools_ifw,4.0.0,qt.tools.ifw.40 tools_qtcreator,7.0.2,qt.tools.qtcreator'
-          tools: "tools_ifw,4.0.0,qt.tools.ifw.40 tools_qtcreator,9.0.0,qt.tools.qtcreator"
-      - name: Write version file
-        run: "echo ${{ steps.tag_version.outputs.new_tag }}>version.txt"
-        shell: cmd
 
-      - name: Compile
-        run: "Publish\\windows_ci\\windows_build.cmd"
-      - name: Build_app
-        run: "Publish\\windows_ci\\build_dir.cmd"
-      #    - name: Nutil_validator
-      #      run : "Publish\\windows_ci\\validator.cmd"
-      - name: Zipping
-        uses: papeloto/action-zip@v1
-        with:
-          files: nutil
-          dest: nutil_win_nightly.zip
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+        body: |
+          Beta version of Nutil. Features might not be tested or incomplete.
+        draft: false
+        prerelease: true
+    - name: Rename file
+      run: "mv nutil_win_nightly.zip nutil_win_nightly_${{ steps.tag_version.outputs.new_tag }}.zip"      
+    - name: Upload Release Asset (x64)
+      id: upload-release-asset-x64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./nutil_win_nightly_${{ steps.tag_version.outputs.new_tag }}.zip
+        asset_name: nutil_win_nightly_${{ steps.tag_version.outputs.new_tag }}.zip
+        asset_content_type: application/zip
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: |
-            Beta version of Nutil. Features might not be tested or incomplete.
-          draft: false
-          prerelease: true
-      - name: Rename file
-        run: "mv nutil_win_nightly.zip nutil_win_nightly_${{ steps.tag_version.outputs.new_tag }}.zip"
-      - name: Upload Release Asset (x64)
-        id: upload-release-asset-x64
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./nutil_win_nightly_${{ steps.tag_version.outputs.new_tag }}.zip
-          asset_name: nutil_win_nightly_${{ steps.tag_version.outputs.new_tag }}.zip
-          asset_content_type: application/zip
