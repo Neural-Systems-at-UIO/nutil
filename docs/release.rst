@@ -3,15 +3,19 @@
 **Nutil v1.1 (Quantifier only)**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is a major release of Nutil Quantifier with several new atlases and new features.
-
-* The Transform, Resize and TiffCreator features in Nutil have been removed from this version (use Nutil v0.8.0).  
-* It incorporates several new atlases: the Kim Unified Adult Mouse Brain Atlas, and the Developmental Mouse Brain Atlas (DeMBA) with Allen CCFv3 or Kim Lab developmental delineations. 
+This is a major release of Nutil Quantifier with new atlases and new features.
+ 
+* It incorporates new atlases: 1. Kim Unified Adult Mouse Brain Atlas, 2. Developmental Mouse Brain Atlas (DeMBA) with Allen CCFv3 or Kim Lab developmental delineations. 
 * Option to extract coordinates corresponding to the centroids of objects ("centroids instead of all points").
-* For clarity, The object splitting feature has been renamed "counts or area fraction?".
+* The object splitting feature has been renamed "counts or area fraction" (there is a bug with this feature, see warning below).
 * Improved error messaging. 
 * Updates to the help text in the Nutil GUI. 
 * GUI improvements (e.g. new logo, updated citation info, redundant functionality removed). 
+* The Transform, Resize and TiffCreator features in Nutil have been removed from this version (use Nutil v0.8.0). 
+
+.. warning::
+
+There is a known issue with selection of "counts" or "area fraction" in Nutil v1.1.0. This means that even when "area fraction" is selected, it will perform the calculations as if "counts" were selected. In other words, it is not possible to achieve correct "area fraction" calculations for objects that overlap several atlas regions. If you need this functionality, please use Nutil v0.8.0. For objects that do not overlap atlas regions, the "counts" setting will calculate correct "area fraction".   
 
 **Nutil v0.8.0** 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
