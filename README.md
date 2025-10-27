@@ -1,7 +1,7 @@
 # Nutil
-Nutil aims to simplify and streamline the mechanism of pre-and-post processing 2D brain imaging data from mouse and rat. It is an integral part of the QUINT workflow for regional quantification of labelled objects such as cells in histological imaging data. 
+Nutil is a desktop application that aims to simplify and streamline the mechanism of pre-and-post processing 2D brain imaging data from mouse and rat. It is an integral part of the QUINT workflow for regional quantification of labelled objects such as cells in histological imaging data. 
 
-Nutil is a desktop application written in C++ using standard Qt libraries, and is optimised for parallel operations on multiple CPUs. Nutil does not require any installation, and does not currently utilise any GPU extensions. The external libraries that are used in Nutil are: 
+Nutil is written in C++ using standard Qt libraries, and is optimised for parallel operations on multiple CPUs. Nutil does not utilise GPU extensions. The external libraries that are used in Nutil are: 
 - Libtiff for fast and efficient TIFF file handling (http://www.libtiff.org/)
 - LibXLNT for Excel file I/O (https://github.com/tfussell/xlnt/)
 
@@ -29,14 +29,12 @@ You can now run Nutil from the command line / bash scripts by simply running
 ./Nutil myProject.nut 8
 or ./Nutil to use the GUI
 
-# Developer
-Nicolaas E Groeneboom
-
 # Documentation
 https://nutil.readthedocs.io
 
-# Authors
-Nicolaas E Groeneboom, Sharon C Yates, Maja A Puchades, Gergely Csucs and Jan G Bjaalie. 
+# Contributors
+Programming: Nicolaas E Groeneboom
+Conception, design, validation: Sharon C Yates, Maja A Puchades, Gergely Csucs and Jan G Bjaalie. 
 
 # Licence
 - Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
