@@ -32,6 +32,10 @@ or ./Nutil to use the GUI
 # Download
 https://www.nitrc.org/projects/nutil
 
+# Latest stable version
+Nutil v0.8
+Nutil v1.1 can be used, but has a known bug (see release notes).
+
 # Documentation
 https://nutil.readthedocs.io
 
@@ -42,10 +46,6 @@ Conception, design, validation: Sharon C Yates, Maja A Puchades, Gergely Csucs a
 # Licence
 - Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 - GNU General Public License v3
-
-# Latest stable version
-Nutil v0.8
-Nutil v1.1 can be used, but has a known bug (see release notes).
 
 # Citation
 * Nutil has RRID:SCR_017183
