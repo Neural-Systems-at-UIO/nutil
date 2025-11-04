@@ -29,6 +29,9 @@ You can now run Nutil from the command line / bash scripts by simply running
 ./Nutil myProject.nut 8
 or ./Nutil to use the GUI
 
+# Download
+https://www.nitrc.org/projects/nutil
+
 # Documentation
 https://nutil.readthedocs.io
 
@@ -39,9 +42,6 @@ Conception, design, validation: Sharon C Yates, Maja A Puchades, Gergely Csucs a
 # Licence
 - Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 - GNU General Public License v3
-
-# Download
-https://www.nitrc.org/projects/nutil
 
 # Latest stable version
 Nutil v0.8
