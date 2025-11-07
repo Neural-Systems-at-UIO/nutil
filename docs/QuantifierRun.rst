@@ -39,6 +39,12 @@
 .. tip::
    See the FAQ for more information on the Pixel Scale.
 
+**How to use a custom atlas in Nutil**
+------------------------------------------
+
+
+
+
 **Python plots**
 -----------------
 
