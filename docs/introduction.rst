@@ -1,5 +1,5 @@
 **What is Nutil?**
-----------------
+====================
 
 **Nutil** is a standalone desktop application that simplifies the pre-and-post processing of histological brain section images from mouse and rat. It can be used to pre-process images in preparation for analysis (TiffCreator, Transform, Resize), and is used as part of the `QUINT workflow <https://quint-workflow.readthedocs.io>`_ for analysis of brain section image series using a reference brain atlas (Quantifier).
 
