@@ -31,7 +31,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    QuantifierMasks
    QuantifierReports
    QuantifierOutput
-   QuantifierOS
+   testing
    
 
 
