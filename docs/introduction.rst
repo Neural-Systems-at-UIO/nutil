@@ -1,14 +1,14 @@
 **What is Nutil?**
 ====================
 
-**Nutil** is a standalone desktop application for analysis of histological brain section images from mouse and rat as part of the `QUINT workflow <https://quint-workflow.readthedocs.io>`_. It can be used to prepare images for analysis (TiffCreator, Transform, Resize) and to perform brain-wide quantification using a reference brain atlas (Quantifier).
+**Nutil** is a standalone desktop application for analysis of histological brain section images from mouse and rat using the `QUINT workflow <https://quint-workflow.readthedocs.io>`_. It can be used to prepare images for analysis (TiffCreator, Transform, Resize) and to perform brain-wide quantification using a reference brain atlas (Quantifier).
 
-Nutil allows four key operations:
+**Nutil** allows four key operations:
 
 1. **TiffCreator**: convert JPEG, PNG and normal TIFF images to tiled TIFF format.
 2. **Transform**: rename, rotate, resize and compile thumbnails of large tiled TIFF images (typical microscopy output format).
 3. **Resize**: for resizing JPEG/PNG images with output in PNG format.
-4. **Quantifier**: used as part of the for `QUINT workflow <https://quint-workflow.readthedocs.io>`_ for the batch extraction, quantification and spatial analysis of labelling in mouse or rat brain sections using a reference brain atlas.
+4. **Quantifier**: used as part of the `QUINT workflow <https://quint-workflow.readthedocs.io>`_ for the batch extraction, quantification and spatial analysis of labelling in mouse or rat brain sections using a reference brain atlas.
 
 .. tip::   
    Visit `EBRAINS <https://ebrains.eu/service/quint/>`_ for more information about QUINT.
