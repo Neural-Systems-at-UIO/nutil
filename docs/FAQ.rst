@@ -11,9 +11,23 @@ To fix this, right click on the Nutil.cmd > Properties > General > check "unbloc
 **Nutil shuts down during a run and/or generates corrupt files**
 ---------------------------------------------------------------
 
-Nutil will either shut down or create corrupt files if it loses connection with the images while running. To prevent this, install Nutil locally (on the C:drive) and apply Nutil to images that are stored locally (on the C:drive). Nutil can also be applied from the C:drive to files stored elsewhere (for example, on a remove drive). However, if you have problems with crashing and corrupt files, try saving the input images in the same location as the Nutil software. 
+Nutil will either shut down or create corrupt files if it loses connection with the images while running. To prevent this, install Nutil locally (on the C:drive) and apply Nutil to images that are stored locally (on the C:drive). Nutil can also be applied from the C:drive to files stored elsewhere (for example, on a remove drive). However, if you have problems with crashing and corrupt files, try saving the input images in the same location as the Nutil software. Nutil will also shut down if it encounters an unexpected error. While we have done our best to add informative error messages, if it encounters an error we have not anticipated, it will automatically shut down. 
 
-Nutil will also shut down if it encounters an unexpected error. While we have done our best to add informative error messages, if it encounters an error we have not anticipated, it will automatically shut down. 
+**Can I run Nutil via the command line for batch processing?**
+-----------------------------------------------------------------
+
+Yes, Nutil can be run as a command line tool for batch processing. This is particularly useful if you have large numbers of series and want to automate the analysis process. It allows you to initiate batch processing of many image series using .NUT files that have been set up in advance. The batch processing script is called "process_folder.bat" and is located within the Nutil software in the following location::
+
+  Nutil\program\process_folder.bat
+
+* Set up a unique .NUT file for each image series and save them in a folder.
+* Navigate to the process_folder.bat file in the Nutil software using the command line. 
+* Enter the path to the folder containing the .NUT files, and type the no. of core processors (threads) to use for the analysis.
+
+Windows example:: 
+
+  C:\nutil\program>process_folder.bat   Z:\HBP_Analytics\Nutil_data\batch   4
+
 
 **Transform: "Maximum TIFF file size exceeded", what do I do?**
 --------------------------------------------------------------------------------
@@ -49,7 +63,7 @@ It is also possible to change the default separator on your computer by changing
 To do this, you need the pixel width of your original images in "real-life" terms, for example, pixel width = 0.4 um (this depends on the microscope settings and is usually provided by the scanner). You also need to know the resize factor that was used to downscale the images prior to segmentation, for example, 0.5. The pixel width in the downscaled images can be calculated as follows: original width / resize factor, for example, 0.4 / 0.5 = 0.8 um. To calculate the pixel scale of your downscaled images, square this number. This converts it to an area, for example, 0.8 x 0.8 = 0.64 um2. 
 
 **Quantifier: The QUINT coordinates do not match Allen Common Coordinate Framework coordinates. What's going on?**
--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 
 This is true, but is easy to solve as we provide a `converter <https://www.nesys.uio.no/QuickNII/Q2ABA.html>`_.
 
@@ -91,5 +105,50 @@ Yes, this feature is available in Nutil version 1 (available as a pre-release on
 **Quantifier: Can I use my own atlas in Nutil?**
 ---------------------------------------------
 Yes. Technically, it is possible to use your own atlas in Nutil using the "custom atlas" feaure. For this select reference atlas: "custom" and navigate to the .label file corresponding to your atlas (see the "labels" folder in the Nutil package for examples). You will also need a matching "custom region" file in XLSX format. However, in practice your atlas must first be integrated in the QuickNII and VisuAlign software (with a .matching label file). This is difficult to do without input from us. If you are interested in integrating your atlas in our tools, get in touch with us via EBRAINS support, we have some capacity to integrate new atlases as part of co-development projects.  
+
+**Some of the Quantifier warnings and error messages are confusing. What do they mean?
+----------------------------------------------------------------------------------------
+
+.. warning::
+   WARNING: Some of the area matrices were not initialized.
+
+* The JSON or XML file contains info about sections that are not included in the analysis: for example, if you run an analysis for a few sections only. 
+* This is not a problem, the analysis will generate correct results, but alerts you to missing sections in case this was not intended. 
+
+
+.. warning::
+   WARNING: Could not find data in .xml or .json file for slice '_s001', so 3D data will be incorrect. Please make sure that there exists a corresponding field in the xml or json file!
+   
+This means what it says: Nutil can't find the relevant anchoring information in the .json file. This can happen for a number of reasons.
+
+* The slice is missing in the .json file. Open the .json file in a text editor such as notebook and check.
+* The slice is missing anchoring information. This happens if it has not been registered to the reference atlas in QuickNII or VisuAlign. Sometimes it happens because the registration info has not been saved in QuickNII for the slice (remember to confirm the registration!).
+* The default ID format is selected in Nutil Quantifier (_sXXX), but the slice ID does not match this format. In this case, switch to "user" defined ID and define the ID using RegEx. It is also possible that the RegEx is incorrect: make sure it correspond to the ID.   
+* The slice ID does not match the ID in the corresponding segmentation and atlas map. In this case, the IDs have to be revised so that they match across the board. We recommend using the _sXXX format.  
+
+.. warning::
+   ERROR: Could not find FLAT files that contains: _001.
+   
+* This means that there is a discrepancy in the atlasmaps and segmentation: Nutil will fail to run if there is a discrepancy. 
+* To fix this, either add the FLAT file for the missing section or remove the segmentation with this ID from the segmentation directory. 
+
+.. warning::
+   WARNING: Unrecognised atlas map in the anchor file. Might be a potential problem, please make sure the atlas is correct! 
+   
+* Automatic atlas recognition was implemented in Nutil v0.8.0. This means that Nutil selects the atlas version based on the information in the .xml or .json file, rather than relying on the atlas selected by the user in the Nutil interface. This works for the AMBA CCF for the latest versions of QuickNII and VisuAlign, but is not implemented correctly for the rat brain. 
+* This warning will come up if older versions of QuickNII are used, or if the WHS atlas is selected. This is not a problem as Nutil will instead use the atlas selected by the user in the Nutil interface. If in doubt, open the .json file to check the atlas version. 
+
+**What does the Transform warning mean?
+-----------------------------------------
+
+.. warning::
+   TIFFAppendtoStrip: Maximum TIFF file size exceeded.
+   
+* Nutil cannot transform or generate images that are larger than 4 GB: this warning means the images exceed this limit. 
+* This may happen even if the images do not exceed 4 GB since rotation adds extra space to the image corners to retain the rectangular shape of the image. 
+* If the original images are below 4GB but you get this warning, select JPEG compression. This will reduce the size of the images that are generated. 
+
+  
+
 
 

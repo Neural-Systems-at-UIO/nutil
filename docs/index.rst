@@ -7,10 +7,8 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
 
    introduction
    Technical
-   release
-   testing
-   NutilCmd
    support
+   FAQ
    
 .. toctree::
    :caption: Pre-processing operations
@@ -33,8 +31,7 @@ Nutil: Neuroscience Image Processing and Analysis Utilities
    QuantifierMasks
    QuantifierReports
    QuantifierOutput
-   warnings
-   FAQ
+   QuantifierOS
    
 
 

@@ -1,20 +1,14 @@
 **What is Nutil?**
 ====================
 
-**Nutil** is a standalone desktop application that simplifies the pre-and-post processing of histological brain section images from mouse and rat. It can be used to pre-process images in preparation for analysis (TiffCreator, Transform, Resize), and is used as part of the `QUINT workflow <https://quint-workflow.readthedocs.io>`_ for analysis of brain section image series using a reference brain atlas (Quantifier).
+**Nutil** is a standalone desktop application for analysis of histological brain section images from mouse and rat as part of the `QUINT workflow <https://quint-workflow.readthedocs.io>`_. It can be used to prepare images for analysis (TiffCreator, Transform, Resize) and to perform brain-wide quantification using a reference brain atlas (Quantifier).
 
 Nutil allows four key operations:
-
-Prepare histological images for analysis using:
 
 1. **TiffCreator**: convert JPEG, PNG and normal TIFF images to tiled TIFF format.
 2. **Transform**: rename, rotate, resize and compile thumbnails of large tiled TIFF images (typical microscopy output format).
 3. **Resize**: for resizing JPEG/PNG images with output in PNG format.
-
-As part of the QUINT workflow, use a reference brain atlas to perform brain-wide quantification using:
-
-4. **Quantifier**: for the batch extraction, quantification and spatial analysis of labelling in mouse or rat brain sections using a reference brain atas (for example, immunohistochemical labelling).
-
+4. **Quantifier**: used as part of the for `QUINT workflow <https://quint-workflow.readthedocs.io>`_ for the batch extraction, quantification and spatial analysis of labelling in mouse or rat brain sections using a reference brain atlas.
 
 .. tip::   
    Visit `EBRAINS <https://ebrains.eu/service/quint/>`_ for more information about QUINT.
@@ -23,7 +17,7 @@ As part of the QUINT workflow, use a reference brain atlas to perform brain-wide
 **Which atlases are supported?**
 ---------------------------------
 
-Nutil supports analysis using Quantifier as part of the QUINT workflow using the following atlases: 
+Nutil supports analysis using the following brain atlases: 
 
 * Allen Mouse Brain Atlas Common Coordinate Framework version 3 (CCFv3) (delineations from 2017 or 2015).
 
@@ -46,15 +40,16 @@ Nutil supports analysis using Quantifier as part of the QUINT workflow using the
 **What is the output of Nutil?**
 ---------------------------------
 
-The output of the pre-processing operations (TiffCreator, Transform and Resize) are images in TIFF or PNG format. 
+**TiffCreator**: TiffCreator produces tiled TIFF files from JPEG, PNG and standard TIFF images. 
 
-The output of the Quantifier operation as part of the QUINT workflow are as follows: 
+**Transform**: Transform enables rotations, scaling and thumbnail compilation of large tiff files (currently up to 4GB) with output in tiff format.
+
+**Quantifier**: Quantifier identifies individual objects in a segmented PNG file, while matching these to output from QuickNII/VisuAlign. The method first finds and sorts objects by using a standard pixel filler routine. Afterwards, a random object pixel is chosen as the look-up in the binary QuickNII/VisuAlign atlas slice for this particular image. When all objects have been assigned a region ID, multiple selections of predefined objects IDs are assembled, and finally output reports are created and written to disk. The output are as follows:
 
 1. Reports with counts and area fraction per reference atlas region (.CSV format).
 2. Reports with counts and area fraction per custom atlas region (custom regions are compilations of reference atlas regions) (.CSV format)
 3. Images with the segmentations superimposed on the atlas maps (.PNG format).
 4. Point clouds for visualising the extracted features using the 3D MeshView Atlas Viewer (.JSON format).
-
 
 **Learn more**
 ----------------
