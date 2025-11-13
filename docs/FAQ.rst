@@ -106,8 +106,10 @@ Yes, this feature is available in Nutil version 1 (available as a pre-release on
 ---------------------------------------------
 Yes. Technically, it is possible to use your own atlas in Nutil using the "custom atlas" feaure. For this select reference atlas: "custom" and navigate to the .label file corresponding to your atlas (see the "labels" folder in the Nutil package for examples). You will also need a matching "custom region" file in XLSX format. However, in practice your atlas must first be integrated in the QuickNII and VisuAlign software (with a .matching label file). This is difficult to do without input from us. If you are interested in integrating your atlas in our tools, get in touch with us via EBRAINS support, we have some capacity to integrate new atlases as part of co-development projects.  
 
-**Some of the Quantifier warnings and error messages are confusing. What do they mean?
+Warnings and error messages are confusing. What do they mean?
 ----------------------------------------------------------------------------------------
+
+**Quantifier**:
 
 .. warning::
    WARNING: Some of the area matrices were not initialized.
@@ -138,8 +140,7 @@ This means what it says: Nutil can't find the relevant anchoring information in 
 * Automatic atlas recognition was implemented in Nutil v0.8.0. This means that Nutil selects the atlas version based on the information in the .xml or .json file, rather than relying on the atlas selected by the user in the Nutil interface. This works for the AMBA CCF for the latest versions of QuickNII and VisuAlign, but is not implemented correctly for the rat brain. 
 * This warning will come up if older versions of QuickNII are used, or if the WHS atlas is selected. This is not a problem as Nutil will instead use the atlas selected by the user in the Nutil interface. If in doubt, open the .json file to check the atlas version. 
 
-**What does the Transform warning mean?
------------------------------------------
+**Transform**
 
 .. warning::
    TIFFAppendtoStrip: Maximum TIFF file size exceeded.
