@@ -7,7 +7,7 @@
 1. Create three new folders: for example, “Segmentations”, “Atlas_maps” and “Output”. Transfer the segmentations to the "Segmentations" folder, the atlas maps to the "Atlas_maps" folder. Leave the "Output" folder empty. 
 2. To begin, click “New”. Enter a name for your project. 
 3. Press the “browse” buttons and navigate to the folders containing the segmentations, the atlas maps and the output folder, and to the JSON file containing the registration information.  
-4. Select the reference atlas used in QuickNII and VisuAlign (Nutil also supports custom atlases, see the FAQ).
+4. Select the reference atlas to use for the analysis. This is the reference atlas that was used in QuickNII and VisuAlign for registering your sections e.g. Allen Mouse Brain Atlas CCFv3, 2017. Nutil also supports use of a custom reference atlas as long as the atlas is also available in QuickNII and VisuAlign (contact us to request integration of your atlas in these tools). See below for how to use a custom atlas in Nutil. 
 5. Fill in the rest of the form. The software includes “Help” buttons with more information for each parameter.
 6. “Advanced settings” reveals more settings: this gives flexibility for customised analysis. For example, apply a minimum object size cut-off, generate reports for your own custom regions (compilations of reference atlas IDs) and to apply masks. If nothing is changed in the advanced settings, the default settings shown below are used.
 7. Press “Save as”. This saves a copy of the settings in a simple text file in .NUT format. This is useful for future reference, and may be reloaded into Nutil via the “load” button (for example, to repeat the analysis on a new set of images). 
@@ -42,8 +42,11 @@
 **How to use a custom atlas in Nutil**
 ------------------------------------------
 
+Nutil has several atlases built into the software (e.g. Allen Mouse Brain Atlas and the Waxholm atlas of the Sprague Dawley rat). For reference atlases that are available in the QuickNII and VisuAlign software but are not integrated in the Nutil software, it is possible to use these atlases in Nutil using the custom atlas feature. To do this: 
 
-
+1. Select "Custom" for Reference Atlas in Nutil Quantifier. This reveals a new field - Custom reference atlas. 
+2. For Custom reference atlas, navigate to the .LABEL file for your custom atlas. This is the same .LABEL file used in QuickNII and VisuAlign to define the region IDs and region names.  
+3. Run the analysis as normal. 
 
 **Python plots**
 -----------------
