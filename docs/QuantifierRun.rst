@@ -7,7 +7,11 @@
 1. Create three new folders: for example, “Segmentations”, “Atlas_maps” and “Output”. Transfer the segmentations to the "Segmentations" folder, the atlas maps to the "Atlas_maps" folder. Leave the "Output" folder empty. 
 2. To begin, click “New”. Enter a name for your project. 
 3. Press the “browse” buttons and navigate to the folders containing the segmentations, the atlas maps and the output folder, and to the JSON file containing the registration information.  
-4. Select the reference atlas to use for the analysis. This is the reference atlas that was used in QuickNII and VisuAlign for registering your sections e.g. Allen Mouse Brain Atlas CCFv3, 2017. Nutil also supports use of a custom reference atlas as long as the atlas is also available in QuickNII and VisuAlign (contact us to request integration of your atlas in these tools). See below for how to use a custom atlas in Nutil. 
+4. Select the reference atlas to use for the analysis. This is the reference atlas that was used in QuickNII and VisuAlign for registering your sections e.g. Allen Mouse Brain Atlas CCFv3, 2017. 
+
+.. tip::
+   Nutil also supports use of a custom reference atlas as long as the atlas is available in QuickNII and VisuAlign (contact user support to request integration of your atlas in these tools). See below for how to use a custom atlas in Nutil. 
+
 5. Fill in the rest of the form. The software includes “Help” buttons with more information for each parameter.
 6. “Advanced settings” reveals more settings: this gives flexibility for customised analysis. For example, apply a minimum object size cut-off, generate reports for your own custom regions (compilations of reference atlas IDs) and to apply masks. If nothing is changed in the advanced settings, the default settings shown below are used.
 7. Press “Save as”. This saves a copy of the settings in a simple text file in .NUT format. This is useful for future reference, and may be reloaded into Nutil via the “load” button (for example, to repeat the analysis on a new set of images). 
