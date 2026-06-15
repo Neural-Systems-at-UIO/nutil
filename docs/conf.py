@@ -62,3 +62,11 @@ html_theme_options = {
     'logo_only': True,
     'display_version': False
 }
+
+html_context = {
+    'display_github': True,
+    'github_user': 'Neural-Systems-at-UIO',
+    'github_repo': 'nutil',
+    'github_version': 'master',
+    'conf_py_path': '/docs/',
+}
